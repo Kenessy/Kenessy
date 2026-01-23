@@ -1,4 +1,4 @@
-# Daniel Kenessy — VRAXION / INSTNCT 🧠🌀
+# Daniel Kenessy — VRAXION / INSTNCT 
 
 Slovakia-based builder and theorist. I like hard problems where the “shape” of the solution matters as much as the code.
 
