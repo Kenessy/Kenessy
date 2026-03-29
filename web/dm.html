@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AE — Conductor's Booth</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dm">
+
+  <div class="dm-layout">
+
+    <!-- Left: Scene + Choices -->
+    <aside class="dm-left">
+      <div class="dm-block">
+        <div class="block-title">SCENE</div>
+        <input id="sTitle" class="dm-input" placeholder="Title">
+        <textarea id="sDesc" class="dm-textarea" rows="3" placeholder="Description..."></textarea>
+        <input id="sImg" class="dm-input" placeholder="Image URL (optional)">
+        <button onclick="setScene()">Set Scene</button>
+      </div>
+
+      <div class="dm-block">
+        <div class="block-title">CHOICES</div>
+        <input id="c1" class="dm-input" placeholder="Option A">
+        <input id="c2" class="dm-input" placeholder="Option B">
+        <input id="c3" class="dm-input" placeholder="Option C (optional)">
+        <div class="row">
+          <button onclick="openChoices()">Open Vote</button>
+          <button class="danger" onclick="closeChoices()">Close</button>
+        </div>
+        <div id="voteResults"></div>
+        <button class="secondary" onclick="resolveChoices()">Resolve →</button>
+      </div>
+
+      <div class="dm-block">
+        <div class="block-title">DM DICE</div>
+        <div class="dice-grid">
+          <button onclick="dmRoll(4)">d4</button>
+          <button onclick="dmRoll(6)">d6</button>
+          <button onclick="dmRoll(8)">d8</button>
+          <button onclick="dmRoll(10)">d10</button>
+          <button onclick="dmRoll(12)">d12</button>
+          <button onclick="dmRoll(20)">d20</button>
+        </div>
+        <label><input type="checkbox" id="hidden"> Hidden roll</label>
+      </div>
+    </aside>
+
+    <!-- Center: Preview + Roll Log -->
+    <main class="dm-center">
+      <div class="preview">
+        <div id="prevBg" class="preview-bg"></div>
+        <div class="preview-text">
+          <h3 id="prevTitle"></h3>
+          <p id="prevDesc"></p>
+        </div>
+      </div>
+      <div class="dm-block">
+        <div class="block-title">ROLL LOG</div>
+        <div id="dmLogEntries" class="log-entries"></div>
+      </div>
+    </main>
+
+    <!-- Right: Combat + Players -->
+    <aside class="dm-right">
+      <div class="dm-block">
+        <div class="block-title">COMBAT <span id="roundBadge" class="badge">Round 1</span></div>
+        <div class="row">
+          <button onclick="toggleCombat()">Start Combat</button>
+          <button class="secondary" onclick="nextTurn()">Next →</button>
+        </div>
+        <div class="row">
+          <input id="cName" class="dm-input-sm" placeholder="Name">
+          <input id="cInit" class="dm-input-xs" type="number" placeholder="Init">
+          <input id="cHP" class="dm-input-xs" type="number" placeholder="HP">
+          <button onclick="addCombatant()">+</button>
+        </div>
+        <div id="initList" class="init-list"></div>
+        <button class="danger" onclick="clearCombat()">Clear</button>
+      </div>
+
+      <div class="dm-block">
+        <div class="block-title">PLAYERS</div>
+        <div id="playerList"></div>
+      </div>
+
+      <div class="dm-block">
+        <div class="block-title">NOTES</div>
+        <textarea id="dmNotes" class="dm-textarea" rows="5" placeholder="Secret notes (local only)..."></textarea>
+      </div>
+    </aside>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/dice.js"></script>
+  <script>
+    const SESSION = sessionStorage.getItem('ae_session');
+    if (!SESSION) location.href = 'index.html';
+    DB.initSession(SESSION);
+
+    // Live preview
+    DB.on(`sessions/${SESSION}/scene`, s => {
+      if (!s) return;
+      document.getElementById('prevTitle').textContent = s.title || '';
+      document.getElementById('prevDesc').textContent = s.description || '';
+      document.getElementById('prevBg').style.backgroundImage = s.image ? `url(${s.image})` : '';
+    });
+
+    DB.on(`sessions/${SESSION}/choices`, choices => {
+      const el = document.getElementById('voteResults');
+      if (!choices || !choices.length) { el.innerHTML = ''; return; }
+      el.innerHTML = choices.map(c => {
+        const voters = Object.keys(c.votes || {});
+        return `<div class="vote-row"><b>${c.text}</b> — ${voters.length} vote(s)${voters.length ? ': ' + voters.join(', ') : ''}</div>`;
+      }).join('');
+    });
+
+    DB.on(`sessions/${SESSION}/rollLog`, log => {
+      if (!log) return;
+      document.getElementById('dmLogEntries').innerHTML = [...log].reverse().slice(0, 20).map(e =>
+        `<div class="log-entry"><b>${e.player}</b> ${e.label}: <span>${e.result}</span></div>`
+      ).join('');
+    });
+
+    DB.on(`sessions/${SESSION}/players`, players => {
+      if (!players) return;
+      document.getElementById('playerList').innerHTML = Object.entries(players).map(([name, p]) =>
+        `<div class="player-row">${name} — ${p.hp}/${p.hpMax} HP
+          <input type="number" value="${p.hp}" min="0" max="${p.hpMax}" style="width:50px"
+            onchange="DB.set('sessions/${SESSION}/players/${name}/hp', +this.value)">
+        </div>`
+      ).join('');
+    });
+
+    DB.on(`sessions/${SESSION}/combat`, combat => {
+      if (!combat) return;
+      document.getElementById('roundBadge').textContent = `Round ${combat.round || 1}`;
+      const list = combat.initiative || [];
+      document.getElementById('initList').innerHTML = list.map((c, i) => {
+        const active = i === combat.currentTurn && combat.active;
+        return `<div class="init-row ${active ? 'active' : ''}">
+          <span>[${c.initiative}]</span> <b>${c.name}</b>
+          <span>${c.hp}/${c.hpMax} HP</span>
+          <button onclick="hpChange('${c._id}', -1)">−</button>
+          <button onclick="hpChange('${c._id}', 1)">+</button>
+        </div>`;
+      }).join('');
+    });
+
+    function setScene() {
+      DB.set(`sessions/${SESSION}/scene`, {
+        title: document.getElementById('sTitle').value.trim(),
+        description: document.getElementById('sDesc').value.trim(),
+        image: document.getElementById('sImg').value.trim(),
+      });
+    }
+
+    function openChoices() {
+      const choices = ['c1','c2','c3'].map((id, i) => ({
+        id: String(i+1),
+        text: document.getElementById(id).value.trim(),
+        votes: {}
+      })).filter(c => c.text);
+      if (choices.length < 2) { alert('At least 2 options needed.'); return; }
+      DB.set(`sessions/${SESSION}/choices`, choices);
+    }
+
+    function closeChoices() {
+      DB.set(`sessions/${SESSION}/choices`, []);
+    }
+
+    function resolveChoices() {
+      const choices = DB.get(`sessions/${SESSION}/choices`) || [];
+      if (!choices.length) return;
+      const counts = choices.map(c => ({ ...c, n: Object.keys(c.votes||{}).length }));
+      const max = Math.max(...counts.map(c => c.n));
+      const winners = counts.filter(c => c.n === max);
+      if (winners.length === 1) {
+        alert(`Winner: "${winners[0].text}"`);
+      } else {
+        const rolls = winners.map(w => ({ ...w, roll: Dice.roll(20) }));
+        const top = rolls.reduce((a, b) => a.roll >= b.roll ? a : b);
+        alert(`Tiebreaker d20! ${rolls.map(r => `"${r.text}": ${r.roll}`).join(' vs ')}\n→ "${top.text}"`);
+        DB.push(`sessions/${SESSION}/rollLog`, { player: 'DM (Tiebreaker)', label: 'd20', result: top.roll, timestamp: Date.now() });
+      }
+      closeChoices();
+    }
+
+    function dmRoll(sides) {
+      const result = Dice.roll(sides);
+      if (document.getElementById('hidden').checked) {
+        alert(`[Hidden] d${sides}: ${result}`);
+      } else {
+        DB.push(`sessions/${SESSION}/rollLog`, { player: 'DM', label: `d${sides}`, result, timestamp: Date.now() });
+      }
+    }
+
+    // Combat
+    function toggleCombat() {
+      const c = DB.get(`sessions/${SESSION}/combat`) || {};
+      DB.set(`sessions/${SESSION}/combat/active`, !c.active);
+    }
+
+    function addCombatant() {
+      const name = document.getElementById('cName').value.trim();
+      const init = parseInt(document.getElementById('cInit').value) || 0;
+      const hp = parseInt(document.getElementById('cHP').value) || 10;
+      if (!name) return;
+      const c = DB.get(`sessions/${SESSION}/combat`) || { active: false, round: 1, initiative: [], currentTurn: 0 };
+      const list = [...(c.initiative || []), { name, initiative: init, hp, hpMax: hp, _id: Date.now().toString(36) }];
+      list.sort((a, b) => b.initiative - a.initiative);
+      DB.set(`sessions/${SESSION}/combat/initiative`, list);
+      ['cName','cInit','cHP'].forEach(id => document.getElementById(id).value = '');
+    }
+
+    function nextTurn() {
+      const c = DB.get(`sessions/${SESSION}/combat`) || {};
+      const list = c.initiative || [];
+      if (!list.length) return;
+      const next = ((c.currentTurn || 0) + 1) % list.length;
+      DB.set(`sessions/${SESSION}/combat/currentTurn`, next);
+      if (next === 0) DB.set(`sessions/${SESSION}/combat/round`, (c.round || 1) + 1);
+    }
+
+    function hpChange(id, delta) {
+      const c = DB.get(`sessions/${SESSION}/combat`) || {};
+      const list = (c.initiative || []).map(x =>
+        x._id === id ? { ...x, hp: Math.max(0, x.hp + delta) } : x
+      );
+      DB.set(`sessions/${SESSION}/combat/initiative`, list);
+    }
+
+    function clearCombat() {
+      DB.set(`sessions/${SESSION}/combat`, { active: false, round: 1, initiative: [], currentTurn: 0 });
+    }
+  </script>
+</body>
+</html>

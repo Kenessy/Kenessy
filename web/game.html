@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AE — Game</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="game">
+
+  <div id="sceneBg" class="scene-bg"></div>
+
+  <header class="game-header">
+    <span id="sessionLabel" class="badge"></span>
+    <div id="playerRoster" class="roster"></div>
+    <button onclick="toggle('dicePanel')">Dice</button>
+  </header>
+
+  <div class="scene-overlay">
+    <h2 id="sceneTitle"></h2>
+    <p id="sceneDesc"></p>
+  </div>
+
+  <div id="choicePanel" class="choices hidden">
+    <div id="choiceList"></div>
+  </div>
+
+  <div id="dicePanel" class="panel hidden">
+    <div class="panel-header">Dice Roller <button onclick="toggle('dicePanel')">×</button></div>
+    <div class="dice-grid">
+      <button onclick="roll(4)">d4</button>
+      <button onclick="roll(6)">d6</button>
+      <button onclick="roll(8)">d8</button>
+      <button onclick="roll(10)">d10</button>
+      <button onclick="roll(12)">d12</button>
+      <button class="d20" onclick="roll(20)">d20</button>
+      <button onclick="roll(100)">d%</button>
+    </div>
+    <div class="adv-row">
+      <button onclick="rollAdv(true)">Advantage</button>
+      <button onclick="rollAdv(false)">Disadvantage</button>
+    </div>
+    <div id="diceResult" class="dice-result"></div>
+  </div>
+
+  <div id="rollLog" class="roll-log">
+    <div class="log-title">Roll Log</div>
+    <div id="logEntries"></div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/dice.js"></script>
+  <script>
+    const ME = sessionStorage.getItem('ae_name');
+    const SESSION = sessionStorage.getItem('ae_session');
+    if (!SESSION) location.href = 'index.html';
+
+    document.getElementById('sessionLabel').textContent = SESSION;
+    DB.initSession(SESSION);
+    DB.set(`sessions/${SESSION}/players/${ME}`, { name: ME, hp: 20, hpMax: 20, joined: Date.now() });
+
+    DB.on(`sessions/${SESSION}/scene`, s => {
+      if (!s) return;
+      const bg = document.getElementById('sceneBg');
+      bg.style.backgroundImage = s.image ? `url(${s.image})` : '';
+      document.getElementById('sceneTitle').textContent = s.title || '';
+      document.getElementById('sceneDesc').textContent = s.description || '';
+    });
+
+    DB.on(`sessions/${SESSION}/choices`, choices => {
+      const panel = document.getElementById('choicePanel');
+      const list = document.getElementById('choiceList');
+      if (!choices || !choices.length) { panel.classList.add('hidden'); return; }
+      panel.classList.remove('hidden');
+      list.innerHTML = choices.map(c => {
+        const count = Object.keys(c.votes || {}).length;
+        const mine = (c.votes || {})[ME];
+        return `<button class="choice-btn ${mine ? 'voted' : ''}" onclick="vote('${c.id}')">${c.text} ${count ? '(' + count + ')' : ''}</button>`;
+      }).join('');
+    });
+
+    DB.on(`sessions/${SESSION}/rollLog`, log => {
+      if (!log) return;
+      document.getElementById('logEntries').innerHTML = [...log].reverse().slice(0, 20).map(e =>
+        `<div class="log-entry"><b>${e.player}</b> ${e.label}: <span>${e.result}</span></div>`
+      ).join('');
+    });
+
+    DB.on(`sessions/${SESSION}/players`, players => {
+      if (!players) return;
+      document.getElementById('playerRoster').innerHTML = Object.values(players).map(p =>
+        `<span class="roster-player ${p.name === ME ? 'me' : ''}">${p.name} ${p.hp}HP</span>`
+      ).join('');
+    });
+
+    function vote(choiceId) {
+      const choices = DB.get(`sessions/${SESSION}/choices`) || [];
+      DB.set(`sessions/${SESSION}/choices`, choices.map(c => {
+        const votes = { ...(c.votes || {}) };
+        if (c.id === choiceId) votes[ME] = true;
+        else delete votes[ME];
+        return { ...c, votes };
+      }));
+    }
+
+    function roll(sides) {
+      const result = Dice.roll(sides);
+      DB.push(`sessions/${SESSION}/rollLog`, { player: ME, label: `d${sides}`, result, timestamp: Date.now() });
+      const el = document.getElementById('diceResult');
+      el.textContent = `d${sides}: ${result}`;
+      el.className = 'dice-result flash';
+      setTimeout(() => el.className = 'dice-result', 600);
+    }
+
+    function rollAdv(adv) {
+      const r = adv ? Dice.advantage() : Dice.disadvantage();
+      DB.push(`sessions/${SESSION}/rollLog`, { player: ME, label: `d20 (${adv ? 'adv' : 'dis'}) [${r.a},${r.b}]`, result: r.result, timestamp: Date.now() });
+      const el = document.getElementById('diceResult');
+      el.textContent = `${r.a}, ${r.b} → ${r.result}`;
+      el.className = 'dice-result flash';
+      setTimeout(() => el.className = 'dice-result', 600);
+    }
+
+    function toggle(id) {
+      document.getElementById(id).classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
