@@ -1,71 +1,29 @@
-# Daniel Kenessy — VRAXION / INSTNCT 
+# GameMaker Manual
 
-Slovakia-based builder and theorist. I like hard problems where the “shape” of the solution matters as much as the code.
+Welcome to the source of the GameMaker manual. [View other languages here](https://github.com/topics/gm-manual).
 
-I’m strongest at **intuition → formalization**: I’ll often start with a visual/mechanical mental model (“this feels right”), then grind it into something testable (plots, ablations, invariants, failure cases).  
-I’m **not** a strong programmer yet — and I’m direct about that, because I’d rather ship reality than perform confidence.
+This manual is made using Adobe RoboHelp 2022.0.346. It is recommended to use RoboHelp to modify the manual.
 
----
+You can open the project file in RoboHelp, contained in [/Manual/GMS2_Manual.rhpj](/Manual/GMS2_Manual.rhpj).
 
-## What I’m building 🔧
+The second recommended way is to edit the HTML files directly, which are placed within [/Manual/contents](/Manual/contents).
 
-### **VRAXION**
-A research + engineering track aimed at **making intelligence cheaper, smaller, and more deployable** — not as a gimmicky chatbot, but as a practical extension of cognition that can run closer to the edge (phones, robots, embedded systems, probes).
+⚠️ If you use a program that modifies the HTML file beyond the content changes you wanted to make, your PRs will be rejected.
 
-### **INSTNCT** (current flagship artifact)
-A memory/recurrence architecture exploration focused on:
-- stable long-horizon state transport (no “teleporting” across seams)
-- pointer-driven memory traversal
-- turning weird edge-case intuition into measurable, reproducible behavior
+### Please be careful when editing the manual.
 
-> **Important boundary:** Anything about “self-awareness / theory of thought / terminal lucidity” is treated as **hypothesis** (framed with falsifiable predictions), not proof or medical neuroscience.
+:hand: Be aware of the writing and formatting styles used within the existing text, and make sure your additions/changes are consistent with them.
 
-Repo: **https://github.com/Kenessy/VRAXION**
+:wrench: For making your changes, it is recommended that you make a fork, clone it and edit locally where you can test your HTML in your browser.
 
----
+:white_check_mark: Once you are done, push your changes to your fork on GitHub and create a pull request.
 
-## How I think (in one paragraph) 🧩
-I’m drawn to systems that behave like physics: continuity, invariants, stable transport, and well-defined failure modes.  
-I care more about **what breaks** than what “sounds good.” If a mechanism can’t survive adversarial tests, it doesn’t deserve mythology.
+### Important
 
----
+1. Use of this manual source is not intended for end users (e.g. downloading this repository and reading the HTML files for use with GameMaker). This is only a source from which the final manual is built, which is available on [the manual website](https://manual.gamemaker.io) and for download through the IDE (when using the offline manual option in Preferences -> General -> Help).
 
-## Current bottlenecks (I’m actively looking) 🚧
+2. Do not make changes to `<span data-keyref>` contents, these are RoboHelp variables and contents of these span tags should not be manually edited in the HTML files. The correct contents are inserted by RoboHelp when the manual is built (taken from the Manual/variable/Default.var file).
 
-### 1) A senior Python/ML systems engineer
-Someone who can:
-- read a rough research prototype and harden it without killing the idea
-- iterate fast, keep experiments reproducible, and leave a trail of evidence
-- handle pragmatic engineering (tests, refactors, profiling, GPU stability, CI)
+3. If you need to change such an item, refer to the Manual/variable/Default.var file and modify the contents of a variable there (like fixing a link for a data type).
 
-### 2) Legal / IP / licensing partner
-Someone who can:
-- set up clean **commercial licensing** while preserving non-extractive public research use
-- help me avoid mistakes (trademark basics, contributor policy, NDAs, contracts)
-- keep us safe from obvious traps while staying realistic
-
-> If we go beyond what’s already public, I’m happy to use a **mutual NDA** for non-public details. (Public info stays public.)
-
----
-
-## Partnership style 🤝
-I’m not hiring employees right now. I’m looking for **real collaboration**:
-- shared upside (structured fairly)
-- small team, high trust, high focus
-- measurable milestones (no perpetual “vision-only” mode)
-
-If you’re the kind of person who likes building **weird-but-real** systems and tightening them until they’re undeniable, we’ll work well together.
-
----
-
-## Support / sponsorship ❤️
-If you want to help this exist without turning it into a corporate extraction machine, GitHub Sponsors is enabled on my profile.
-
-I’m trying to push capability toward **merit + accountability**, not just capital.  
-The goal is tools that make competence cheaper — for humans, and for whatever comes next.
-
----
-
-## Contact 📬
-- Best entry: open an issue/discussion in the repo (VRAXION) with what you can do + what you want to build.
-- If you prefer private contact, message me on GitHub first and we’ll move to email.
+4. Similarly, contents of `<span data-conref>` tags cannot be edited directly as they are snippets inserted when the manual is built. These are taken from Manual/contents/assets/snippets/.
