@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/compile-ink.mjs",
+    "prebuild": "node scripts/compile-ink.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "ink:compile": "node scripts/compile-ink.mjs"
   },
   "dependencies": {
     "howler": "^2.2.4",
@@ -24,7 +27,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
-    "inklecate": "^1.8.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
