@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Apocalypse Express // Devlog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --bg-dark: #0b1120;
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --line-color: #334155;
+            --accent-green: #10b981; --accent-blue: #0ea5e9; --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899; --accent-red: #ef4444; --accent-orange: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
+                linear-gradient(90deg, #1e293b 1px, transparent 1px),
+                linear-gradient(#1e293b 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        h1, h2, h3, h4, .tech-font { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; }
+
+        /* --- COMPONENT CLASSES (Token Efficiency & Layout Integrity) --- */
+        
+        /* Timeline Spacing */
+        .timeline-line { position: absolute; left: 2rem; top: 0; bottom: 0; width: 2px; z-index: 0; }
+        .timeline-node { position: absolute; left: 2rem; top: 2rem; transform: translateX(-50%); width: 1rem; height: 1rem; border-radius: 9999px; background: #0f172a; border: 2px solid; z-index: 10; }
+        .time-code { position: absolute; left: -0.5rem; top: 2rem; transform: translateY(-50%); text-align: right; width: 4rem; font-family: 'Rajdhani', monospace; line-height: 1; display: none; }
+        @media (min-width: 768px) { 
+            .timeline-line { left: 4rem; } 
+            .timeline-node { left: 4rem; } 
+            .time-code { display: block; }
+        }
+
+        /* Ticket Containers */
+        .ticket-base { background: var(--card-bg); border: 1px solid rgba(148, 163, 184, 0.1); backdrop-filter: blur(8px); border-radius: 0.5rem; position: relative; overflow: hidden; width: 100%; transition: border-color 0.2s; }
+        
+        /* BADGE ANCHOR: Fixed Top-Right to prevent clipping */
+        .tag-badge { 
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            font-size: 0.65rem; 
+            padding: 4px 12px; 
+            border-radius: 0 0 0 8px; 
+            color: white; 
+            font-weight: 800; 
+            letter-spacing: 0.05em;
+            z-index: 20;
+            border-top: 0;
+            border-right: 0;
+            box-shadow: -2px 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        /* Status Borders */
+        .status-locked { border-left: 4px solid var(--accent-green); border-color: rgba(16, 185, 129, 0.3); }
+        .status-logic { border-left: 4px solid var(--accent-blue); border-color: rgba(14, 165, 233, 0.3); }
+        .status-visual { border-left: 4px solid var(--accent-pink); border-color: rgba(236, 72, 153, 0.3); }
+        .status-active { border-left: 4px solid var(--accent-blue); background: rgba(14, 165, 233, 0.05); border-color: rgba(14, 165, 233, 0.5); }
+        .status-future { border: 1px dashed rgba(100, 116, 139, 0.3); opacity: 0.7; }
+        .status-research { border-left: 4px solid var(--accent-orange); background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.4); }
+        .status-hotfix { border-left: 4px solid var(--accent-red); background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.5); }
+
+        /* TICKET HEADER: Vertical Stack + Padding Safety Zone */
+        .ticket-header {
+            position: relative;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1rem 1.5rem;
+            padding-right: 6rem; /* Critical: Prevents text overlap with badge */
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.25rem;
+            min-height: 4.5rem;
+        }
+
+        /* Typography */
+        .header-main { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.1; word-break: break-word; }
+        .code-snippet { font-family: 'Courier New', monospace; font-size: 0.7rem; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px; color: #94a3b8; display: inline-block; border: 1px solid rgba(255,255,255,0.05); }
+
+        /* GML Visual Blocks */
+        .gm-block { background: #1e293b; border: 1px solid #334155; padding: 6px 10px; border-radius: 4px; color: #cbd5e1; display: flex; align-items: center; gap: 8px; position: relative; font-family: sans-serif; font-size: 11px; margin-bottom: 4px; overflow-x: auto; }
+        .gm-block::before { content: ''; width: 6px; height: 6px; background: currentColor; border-radius: 2px; flex-shrink: 0; }
+        .gm-c-blue { border-left: 3px solid #60a5fa; color: #60a5fa; }
+        .gm-c-green { border-left: 3px solid #4ade80; color: #4ade80; }
+        .gm-c-pink { border-left: 3px solid #f472b6; color: #f472b6; }
+        .gm-c-yellow { border-left: 3px solid #facc15; color: #facc15; }
+        .gm-c-orange { border-left: 3px solid #fb923c; color: #fb923c; }
+        .gm-c-red { border-left: 3px solid #ef4444; color: #ef4444; }
+    </style>
+</head>
+<body class="p-0 min-h-screen">
+
+    <!-- ================================================================================== -->
+    <!-- PROJECT MANIFEST & AI PRIME DIRECTIVE -->
+    <!-- ================================================================================== -->
+    <div class="bg-slate-900 border-b border-red-900/50 p-6 border-l-4 border-l-red-600 mb-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- IDENTITY BLOCK -->
+            <div>
+                <div class="flex items-center gap-2 text-red-500 mb-3">
+                    <i class="fas fa-fingerprint animate-pulse"></i>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase">PROJECT IDENTITY</span>
+                </div>
+                <ul class="text-[11px] text-slate-300 space-y-2 font-mono">
+                    <li><strong class="text-white">NAME:</strong> "Apocalypse Express"</li>
+                    <li><strong class="text-white">GENRE:</strong> D&D Slow-Sync RPG (Tabletop Sim).</li>
+                    <li><strong class="text-white">ENGINE:</strong> GameMaker (GML Visual/Code).</li>
+                    <li><strong class="text-white">RESOLUTION:</strong> <span class="text-red-400 font-bold">640x360px</span> (Strict Pixel Art).</li>
+                    <li><strong class="text-white">PIPELINE:</strong> AI Gen &rarr; Aseprite &rarr; GM (Non-Artist Team).</li>
+                </ul>
+            </div>
+
+            <!-- AI RULES OF ENGAGEMENT -->
+            <div>
+                <div class="flex items-center gap-2 text-red-500 mb-3">
+                    <i class="fas fa-gavel"></i>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase">AI PROTOCOLS (MANDATORY)</span>
+                </div>
+                <ul class="text-[11px] text-slate-400 space-y-2 font-mono">
+                    <li><strong class="text-red-500">[1] IMMUTABLE HISTORY:</strong> NEVER delete/modify completed tickets.</li>
+                    <li><strong class="text-red-500">[2] DEFINITION OF DONE:</strong> Log tickets ONLY when feature is 100% verified.</li>
+                    <li><strong class="text-red-500">[3] TEACHER MODE:</strong> Explain "Why" and "How". User is learning GM.</li>
+                    <li><strong class="text-red-500">[4] ATOMICITY:</strong> 1 Ticket = 1 Feature. No micro-commits.</li>
+                    <li><strong class="text-red-500">[5] STABILITY:</strong> Use the CSS classes below. Do not invent new styles.</li>
+                    <li><strong class="text-red-500">[6] VISUAL SYNTAX:</strong> In GML Visual "Function" box, <strong>delete () brackets</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI CONTEXT BRIDGE -->
+    <div class="ai-terminal p-4 md:p-8 mb-12 relative overflow-hidden border-t border-slate-800">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+        
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-2 text-blue-500 mb-2">
+                    <i class="fas fa-check-double text-sm animate-pulse"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase">System Protocol // PHASE_COMPLETE</span>
+                </div>
+                <h2 class="text-white text-xl md:text-2xl font-bold mb-2 tracking-tight">Project Context Bridge</h2>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    UI Polish complete. Dynamic text coloring responding to hover states. Menu system visual fidelity achieved.
+                </p>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="bg-slate-900/50 rounded border border-slate-700/50 p-3 hover:border-blue-500/50 transition-colors group cursor-pointer relative">
+                    <div class="absolute -top-2 -right-2 bg-slate-800 text-xs text-slate-400 px-2 py-0.5 rounded border border-slate-700 group-hover:text-blue-400 group-hover:border-blue-500 transition-colors uppercase">Data Block</div>
+                    <p class="ai-terminal-code text-xs text-slate-300 leading-relaxed select-all">
+                        <span class="text-green-500">>> UI:</span> RESPONSIVE<br>
+                        <span class="text-blue-400">>> PALETTE:</span> INK & PARCHMENT<br>
+                        <span class="text-purple-400">>> NEXT:</span> CAMERA SYSTEM<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN TIMELINE CONTAINER -->
+    <div class="max-w-6xl mx-auto relative px-4 md:px-0 pb-20">
+        
+        <!-- HEADER -->
+        <header class="text-center mb-16 pl-16 md:pl-24 relative z-10 text-left">
+            <div class="inline-block px-3 py-1 rounded bg-slate-800 border border-slate-700 mb-2">
+                <span class="text-[10px] font-bold text-sky-400 tracking-widest uppercase">Build 0.5.3 // Active Session</span>
+            </div>
+            <h1 class="text-5xl font-bold text-white tracking-tight uppercase header-main">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Devlog</span> Repository
+            </h1>
+        </header>
+
+        <!-- SPINE -->
+        <div class="timeline-line bg-gradient-to-b from-emerald-500 via-blue-500 to-indigo-500"></div>
+
+        <!-- ========================== -->
+        <!-- PHASE 1: COMPLETED HISTORY -->
+        <!-- ========================== -->
+        
+        <!-- FOUNDATION -->
+        <div class="relative pl-12 md:pl-24 mb-8">
+            <div class="timeline-node border-emerald-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date">DEC 30</div><div class="time-hour">10:23 AM</div></div>
+            
+            <div class="ticket-base status-locked">
+                <div class="tag-badge bg-emerald-900 border border-emerald-500/50">PHASE 1</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Foundation & Assets</h3>
+                    <span class="code-snippet text-emerald-400">TKT-001 - TKT-006</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-emerald-500"></i> 640x360 Grid & Resolution Set.</li>
+                        <li><i class="fas fa-check text-emerald-500"></i> Basic Sprites (Buttons 9-Slice).</li>
+                        <li><i class="fas fa-check text-emerald-500"></i> Room Navigation Setup.</li>
+                        <li><i class="fas fa-check text-emerald-500"></i> <code>fnt_menu</code> Asset Implementation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGIC -->
+        <div class="relative pl-12 md:pl-24 mb-8">
+            <div class="timeline-node border-cyan-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date">JAN 01</div><div class="time-hour">02:45 PM</div></div>
+            
+            <div class="ticket-base status-logic">
+                <div class="tag-badge bg-cyan-900 border border-cyan-500/50">PHASE 4</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Menu Logic</h3>
+                    <span class="code-snippet text-cyan-400">TKT-007</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-cyan-500"></i> Variable-Driven Buttons.</li>
+                        <li><i class="fas fa-check text-cyan-500"></i> Play/Quit Routing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISUALS (HOTFIXED) -->
+        <div class="relative pl-12 md:pl-24 mb-8">
+            <div class="timeline-node border-pink-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date text-pink-400">JAN 03</div><div class="time-hour">06:12 PM</div></div>
+            
+            <div class="ticket-base status-visual">
+                <div class="tag-badge bg-pink-900 border border-pink-500/50">HOTFIXED</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Rendering & Typography</h3>
+                    <span class="code-snippet text-pink-400">TKT-008 - TKT-010</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-pink-500"></i> Asset Swap (Corrupt Cache Bypass).</li>
+                        <li><i class="fas fa-check text-pink-500"></i> Draw Event Overlay Implementation.</li>
+                        <li><i class="fas fa-check text-pink-500"></i> Pixel Perfect Alignment (Size 16).</li>
+                        <li><i class="fas fa-check text-pink-500"></i> Ghost Cache Exorcised.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISPLAY SYSTEM -->
+        <div class="relative pl-12 md:pl-24 mb-8">
+            <div class="timeline-node border-orange-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date text-orange-400">JAN 03</div><div class="time-hour">08:50 PM</div></div>
+            
+            <div class="ticket-base status-research">
+                <div class="tag-badge bg-orange-900 border border-orange-500/50">SYSTEM</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Display & Resolution</h3>
+                    <span class="code-snippet text-orange-400">TKT-012b</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-orange-500"></i> <code>obj_display_manager</code> implemented.</li>
+                        <li><i class="fas fa-check text-orange-500"></i> Resolution locked to 640x360.</li>
+                        <li><i class="fas fa-check text-orange-500"></i> Fullscreen scaling (No Blur).</li>
+                        <li><i class="fas fa-check text-orange-500"></i> <strong class="text-red-400">Resolved:</strong> GML Visual Syntax Error.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI POLISH (NEWLY COMPLETED) -->
+        <div class="relative pl-12 md:pl-24 mb-8">
+            <div class="timeline-node border-blue-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date text-blue-400">JAN 03</div><div class="time-hour">10:30 PM</div></div>
+            
+            <div class="ticket-base status-active border-l-4 border-l-blue-500">
+                <div class="tag-badge bg-blue-900 border border-blue-500/50">POLISH</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Dynamic Typography</h3>
+                    <span class="code-snippet text-blue-400">TKT-012c</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-blue-500"></i> Palette Extracted (Ink/Parchment).</li>
+                        <li><i class="fas fa-check text-blue-500"></i> Native Mouse Events Implemented.</li>
+                        <li><i class="fas fa-check text-blue-500"></i> Draw Logic Order Verified.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- UI POLISH (BUG FIXES) -->
+        <div class="relative pl-12 md:pl-24 mb-16">
+            <div class="timeline-node border-red-500 bg-slate-900"></div>
+            <div class="time-code"><div class="time-date text-red-400">JAN 03</div><div class="time-hour">10:45 PM</div></div>
+            
+            <div class="ticket-base status-hotfix">
+                <div class="tag-badge bg-red-900 border border-red-500/50">HOTFIX</div>
+                <div class="ticket-header">
+                    <h3 class="text-lg text-white font-bold header-main">Crash Fixes</h3>
+                    <span class="code-snippet text-red-400">TKT-012d/f</span>
+                </div>
+                <div class="ticket-body">
+                    <ul class="ticket-manifest grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-400">
+                        <li><i class="fas fa-check text-red-500"></i> Variable Type Mismatch Resolved.</li>
+                        <li><i class="fas fa-check text-red-500"></i> <code>image_speed</code> Logic Refactored.</li>
+                        <li><i class="fas fa-check text-red-500"></i> Syntax Errors (Assignment) Fixed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================== -->
+        <!-- PHASE 5: ACTIVE WORKBENCH -->
+        <!-- ========================== -->
+        <div class="relative pl-12 md:pl-24 mb-12">
+            <div class="timeline-node border-red-500 bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.8)]"></div>
+            <div class="time-code"><div class="time-date text-red-400">NOW</div><div class="time-hour animate-pulse">URGENT</div></div>
+
+            <!-- HOTFIX TICKET: SYNTAX ERROR -->
+            <div class="ticket-base status-hotfix p-6 md:p-8">
+                <div class="flex justify-between items-start mb-6 border-b border-red-500/20 pb-4 relative">
+                    <div class="flex flex-col gap-1 w-3/4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-red-400 font-mono font-bold tracking-widest uppercase">SYNTAX_ERROR // TKT-012f</span>
+                            <span class="text-[9px] bg-red-900/50 text-red-300 px-1 rounded border border-red-500/30 animate-pulse">COMPILER FAIL</span>
+                        </div>
+                        <h3 class="text-3xl text-white font-bold uppercase mt-1 header-main leading-none">Assignment Operator Expected</h3>
+                    </div>
+                    <i class="fas fa-crosshairs text-4xl text-red-500 opacity-80"></i>
+                </div>
+                
+                <p class="text-sm text-slate-300 mb-6 font-mono border-l-4 border-red-500 pl-4 py-1 bg-red-900/10">
+                    <span class="text-red-400 font-bold">ERROR:</span> <code class="text-xs">draw_text(..., + string(button_text));</code><br>
+                    <span class="text-slate-400 text-xs">The logic failure was mine (sorry!), but the syntax error is caused by a stray <strong class="text-white">+</strong> sign in your Draw Value block.</span>
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Diagnosis -->
+                    <div class="p-4 bg-slate-900/60 rounded border border-slate-700 h-full">
+                        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider border-b border-slate-700 pb-2">1. The Stray Plus Sign</h4>
+                        <div class="text-[10px] text-slate-300 space-y-3">
+                            <div class="bg-red-900/20 p-2 rounded border border-red-500/30 font-mono">
+                                <span class="text-red-400 font-bold block mb-1">❌ Your Code Snippet:</span>
+                                draw_text(x + 0, y + 0, <span class="bg-red-500/50 text-white px-1"> + </span> string(button_text));
+                            </div>
+                            
+                            <p>This <strong class="text-red-400">+</strong> is illegal syntax here. It typically happens if you accidentally typed it into the Caption or Value field.</p>
+                        </div>
+                    </div>
+
+                    <!-- The Fix -->
+                    <div class="p-4 bg-slate-900/60 rounded border border-red-500 h-full shadow-[0_0_10px_rgba(239,68,68,0.1)]">
+                        <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-wider border-b border-red-500 pb-2">2. Target Lock: Draw Value Block</h4>
+                        <ol class="list-decimal list-inside text-[10px] text-slate-300 space-y-2 mb-3">
+                            <li>Open <strong>Draw Event</strong> &rarr; Scroll to the bottom.</li>
+                            <li>Open the <strong>Draw Value</strong> block.</li>
+                            <li><strong>Check Caption Field:</strong> Ensure it is empty.</li>
+                            <li><strong>Check Value Field:</strong> Ensure it is ONLY <code>button_text</code>.</li>
+                        </ol>
+                        <div class="bg-black/40 p-2 rounded border border-slate-700 mt-2 text-[9px] font-mono text-slate-400">
+                            <span class="text-red-500 font-bold block mb-1">❌ BAD VALUE:</span>
+                            <span class="text-red-300">+ string(button_text)</span>
+                            
+                            <div class="my-2 border-t border-slate-700"></div>
+                            
+                            <span class="text-green-500 font-bold block mb-1">✅ GOOD VALUE:</span>
+                            <span class="text-green-300">button_text</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROADMAP -->
+        <div class="pl-12 md:pl-24">
+            <div class="text-xs font-bold text-slate-500 tracking-widest uppercase mb-4 pl-2">UPCOMING MILESTONES</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-50 hover:opacity-100 transition-opacity duration-300">
+                <div class="ticket-base status-future p-4 text-center">
+                    <div class="tag-badge bg-slate-700 border-none">TKT-012a</div>
+                    <i class="fas fa-video text-slate-300 mb-2"></i>
+                    <div class="text-[10px] font-bold text-slate-300 uppercase">Camera Follow</div>
+                </div>
+                <div class="ticket-base status-future p-4 text-center">
+                    <div class="tag-badge bg-slate-700 border-none">TKT-013</div>
+                    <i class="fas fa-shield-alt text-slate-300 mb-2"></i>
+                    <div class="text-[10px] font-bold text-slate-300 uppercase">Combat Logic</div>
+                </div>
+                <div class="ticket-base status-future p-4 text-center">
+                    <div class="tag-badge bg-slate-700 border-none">TKT-014</div>
+                    <i class="fas fa-save text-slate-300 mb-2"></i>
+                    <div class="text-[10px] font-bold text-slate-300 uppercase">Persistence</div>
+                </div>
+                <div class="ticket-base status-future p-4 text-center">
+                    <div class="tag-badge bg-slate-700 border-none">TKT-015</div>
+                    <i class="fas fa-bug text-slate-300 mb-2"></i>
+                    <div class="text-[10px] font-bold text-slate-300 uppercase">Polish</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

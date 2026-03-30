@@ -1,0 +1,270 @@
+{
+  "main": {
+    "id": "f26d743e05597a4c",
+    "type": "split",
+    "children": [
+      {
+        "id": "3665abe146384e31",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f7a75667a5435142",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "The Null Meridian/(Canvas) Ideas brainstorming.canvas",
+                "viewState": {
+                  "x": 106,
+                  "y": -213,
+                  "zoom": 0
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "(Canvas) Ideas brainstorming"
+            }
+          },
+          {
+            "id": "a2aa959419cb66f2",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.5"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.5"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9fd0936d1d46519c",
+    "type": "split",
+    "children": [
+      {
+        "id": "3eb4e79785d7b7df",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "42c3763fc56f2932",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "46504de7f25b5680",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#CARD",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "757d9a5f0ce861e9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 635.5
+  },
+  "right": {
+    "id": "e905e6d4bc2293db",
+    "type": "split",
+    "children": [
+      {
+        "id": "0fd89784cf3866d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7dc18944bd6a74ce",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Rules Library/Rules/(Rule) 2. Skills & Postures ✔️.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for (Rule) 2. Skills & Postures ✔️"
+            }
+          },
+          {
+            "id": "8464ddefa6a8fd4f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Rules Library/Rules/(Rule) 2. Skills & Postures ✔️.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from (Rule) 2. Skills & Postures ✔️"
+            }
+          },
+          {
+            "id": "16dbeb0a45696789",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "1954e666f2305f76",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Rules Library/Rules/(Rule) 2. Skills & Postures ✔️.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of (Rule) 2. Skills & Postures ✔️"
+            }
+          },
+          {
+            "id": "2a103c91084789a3",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {
+                "file": "Campaign Resources/Races/Inheritor Human.md"
+              },
+              "icon": "lucide-file-signature",
+              "title": "Footnotes"
+            }
+          },
+          {
+            "id": "f29f3f8185482693",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "a2aa959419cb66f2",
+  "lastOpenFiles": [
+    "MAIN CAMPAIGN FLOWCHART.canvas",
+    "GEMINI.md",
+    "Artstyle.md",
+    "The Null Meridian/(Canvas) Ideas brainstorming.canvas",
+    "WEBSITE/README.md",
+    "AE_CC_Master_Obsidian_LATEST.md",
+    "ae_sim_dashboard_thawage_v2_zones (1).md",
+    "Brainstorming, Drafts and ideas/Game Data/Chapter I/(Stanza) 01 Null Meridian/(Scene) A1 Null Medirian Prelude.md",
+    "AE - Campaign Resources/Rules/(Rule) 2. Skills & Postures.md",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/injuries/gear_drop_safe_spill_decision.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/injuries/minors_to_major_timing.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/ops/interruptions_apply_to.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/ops/reserve_active_definition.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/ops/interruptions_scope.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/ops/reserve_print_time_scope.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/ops/reserve_concurrency_reason.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/tpk/auto_start/trigger.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/tpk/auto_start/mandatory.bit",
+    "WEBSITE/_campaign_ai/bits/rules/revival/print/train/tpk/auto_start/enabled.bit",
+    "WEBSITE/_campaign_ai/text/README.md",
+    "WEBSITE/_campaign_ai/bits/README.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.optional.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.hellstatic.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.injuries.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.tpk.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.ops.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.costs.md",
+    "WEBSITE/_campaign_ai/entities/rule.index.md",
+    "WEBSITE/_campaign_ai/entities/rule.revival-lucifer-quantum-print.md",
+    "ae_sim_dashboard_thawage_v1.md",
+    "PromptSmith_Quickstart.md",
+    "Brainstorming, Drafts and ideas/Game Data/Rules Library/Canvases/(Canvas) Standard Apocalypse Express Ruleset.canvas",
+    "AE - Campaign Resources/Assets/Diagrams/(Diagram) Drone Scans ladder — levels, learning, time, costs.png",
+    "Brainstorming, Drafts and ideas/Game Data/Chapter I/(Stanza) 02 Chapel of the Second Dawn/(Scene) B2 Chapel of the Second Dawn.md",
+    "Brainstorming, Drafts and ideas/Game Data/Chapter I/(Stanza) 02 Chapel of the Second Dawn/(Scene) B1 Chapel of Second Chances.md",
+    "AE - Campaign Resources/Procedures & Subsystems/(Procedure) Rarities.md",
+    "AE - Campaign Resources/Procedures & Subsystems/(Procedure) Item categories.md",
+    "AE - Campaign Resources/Procedures & Subsystems/(Procedure) Stillpoint.md",
+    "AE - Campaign Resources/Assets/Items & Roll Tables/Stanza 2/(Roll Table) 1 Camp Supplies/SUP-CS1-001-W Beltline Grit-Mix.md",
+    "AE - Campaign Resources/Assets/Triad Code Assets/(Graph) Triad Focus Codes.png",
+    "AE - Campaign Resources/Assets/Triad Code Assets/(Graph) Triad Validation Flow.png",
+    "AE - Campaign Resources/Assets/Art/Icons/Currency Icons/(Icon) LEV - Red Ticket.png",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Purpose/Purpose_Setup.webp",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Purpose/Purpose_Introj.webp",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Purpose/Purpose_Core.webp",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Purpose/Purpose_Climax.webp",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Purpose/Purpose_Aftermath.webp",
+    "AE - Campaign Resources/Assets/Art/Icons/Scene block icons/Rules/Rules_Tutorial.webp",
+    "AE - Campaign Resources/Direct Game Used Assets/Game Data/Rules Library/Canvases/(Canvas) Standard Apocalypse Express Ruleset.canvas",
+    "AE - Campaign Resources/Assets/Diagrams/(Diagram) Master Roll Pipeline.canvas",
+    "AE - Campaign Resources/Assets/Diagrams/(Diagram) Offsets.canvas",
+    "AE - Campaign Resources/Assets/Diagrams/(Diagram) HS example & Override focus.canvas",
+    "The Null Meridian/The Null Meridian.canvas",
+    "Campaign Resources/Direct Game Used Assets/Game Data/Rules Library/Canvases/(Canvas) Standard Apocalypse Express Ruleset.canvas",
+    "Campaign Resources/Direct Game Used Assets/Assets/Diagrams/(Diagram) Master Roll Pipeline.canvas"
+  ]
+}
