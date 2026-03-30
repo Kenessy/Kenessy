@@ -1,29 +1,39 @@
-# GameMaker Manual
+# Apocalypse Express
 
-Welcome to the source of the GameMaker manual. [View other languages here](https://github.com/topics/gm-manual).
+A cinematic, industrial-arcane narrative RPG about dead souls, infernal railways, frozen time, and a second life purchased on Lucifer's schedule.
 
-This manual is made using Adobe RoboHelp 2022.0.346. It is recommended to use RoboHelp to modify the manual.
+**[→ View the project site](https://kenessy.github.io/Kenessy/)**
 
-You can open the project file in RoboHelp, contained in [/Manual/GMS2_Manual.rhpj](/Manual/GMS2_Manual.rhpj).
+---
 
-The second recommended way is to edit the HTML files directly, which are placed within [/Manual/contents](/Manual/contents).
+## What is this
 
-⚠️ If you use a program that modifies the HTML file beyond the content changes you wanted to make, your PRs will be rejected.
+Apocalypse Express is a tabletop RPG campaign built on a D&D 5e (2014) foundation with its own rule systems layered on top. Players begin as dead souls in the Null Meridian, board the infernal Red Line, sign Lucifer's contract in the Sundown Saloon, and wake in a broken Earth trapped inside a paused double apocalypse.
 
-### Please be careful when editing the manual.
+## Repository structure
 
-:hand: Be aware of the writing and formatting styles used within the existing text, and make sure your additions/changes are consistent with them.
+| Folder | Contents |
+|---|---|
+| `Database/` | Full rule system, scenes, procedures, and systems (Obsidian vault) |
+| `Database/Compiled/` | Player Rulebook, GM Operations Manual, Setting Bible |
+| `Database/20_Rules/` | All rules modules (Revival, Triad Codes, Chaos Drift, etc.) |
+| `Database/40_Scenes/` | Scene scripts (A1–B2 and beyond) |
+| `docs/` | GitHub Pages source — the public-facing project site |
+| `Site/` | Dev devlog (GameMaker build tracker) |
+| `Assets/` | Graphs, canvas diagrams |
 
-:wrench: For making your changes, it is recommended that you make a fork, clone it and edit locally where you can test your HTML in your browser.
+## Key systems
 
-:white_check_mark: Once you are done, push your changes to your fork on GitHub and create a pull request.
+- **Triad Codes** — core resolution mechanic
+- **Chaos Drift (CDR)** — escalating entropy tracker
+- **Revival** — Train-only resurrection, bodies printed damaged
+- **Soul Indices** — Boiler / Crown / Maw / Mirror ancestry system
+- **Body Tags** — [FLESH] / [STEEL] mechanical tags across all systems
+- **Roll State Priority** — structured action economy
 
-### Important
+## Links
 
-1. Use of this manual source is not intended for end users (e.g. downloading this repository and reading the HTML files for use with GameMaker). This is only a source from which the final manual is built, which is available on [the manual website](https://manual.gamemaker.io) and for download through the IDE (when using the offline manual option in Preferences -> General -> Help).
-
-2. Do not make changes to `<span data-keyref>` contents, these are RoboHelp variables and contents of these span tags should not be manually edited in the HTML files. The correct contents are inserted by RoboHelp when the manual is built (taken from the Manual/variable/Default.var file).
-
-3. If you need to change such an item, refer to the Manual/variable/Default.var file and modify the contents of a variable there (like fixing a link for a data type).
-
-4. Similarly, contents of `<span data-conref>` tags cannot be edited directly as they are snippets inserted when the manual is built. These are taken from Manual/contents/assets/snippets/.
+- [Project site (GitHub Pages)](https://kenessy.github.io/Kenessy/)
+- [Database](https://github.com/Kenessy/Kenessy/tree/Apocalypse-Express-DnD-Game/Database)
+- [Player Rulebook](https://github.com/Kenessy/Kenessy/blob/Apocalypse-Express-DnD-Game/Database/Compiled/Player%20Rulebook.md)
+- [GM Operations Manual](https://github.com/Kenessy/Kenessy/blob/Apocalypse-Express-DnD-Game/Database/Compiled/GM%20Operations%20Manual.md)
