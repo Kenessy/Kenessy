@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apocalypse Express</title>
+  <meta name="description" content="Apocalypse Express is a cinematic industrial-arcane narrative RPG about dead souls, infernal railways, frozen time, and a second life bought on Lucifer's schedule.">
+  <style>
+    :root {
+      --bg:#05040a; --surface:#0b0e16; --surface2:#171b27; --line:#2a163f;
+      --violet:#4c2b70; --gold:#c99c5a; --text:#f8f5f0; --muted:#b8b0c6; --info:#28bdd8;
+      --radius:22px; --max:1120px; --shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; font-family:Inter,system-ui,sans-serif; color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(76,43,112,.28), transparent 34%),
+        radial-gradient(circle at 82% 16%, rgba(201,156,90,.14), transparent 24%),
+        linear-gradient(180deg, #09070f 0%, #05040a 60%, #09060d 100%);
+    }
+    a { color:inherit; }
+    .wrap { width:min(calc(100% - 32px), var(--max)); margin:0 auto; }
+    .hero { padding:82px 0 38px; }
+    .eyebrow {
+      display:inline-block; padding:8px 12px; border-radius:999px; font-size:12px; letter-spacing:.18em;
+      text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,156,90,.35); background:rgba(11,14,22,.55);
+    }
+    h1 { font-size:clamp(44px,8vw,88px); line-height:.94; letter-spacing:-.04em; margin:18px 0 14px; }
+    h2 { font-size:clamp(26px,4vw,42px); line-height:1; letter-spacing:-.03em; margin:0 0 12px; }
+    h3 { margin:0 0 10px; font-size:22px; letter-spacing:-.02em; }
+    p, li { color:var(--muted); line-height:1.7; }
+    .subtitle { max-width:760px; font-size:clamp(17px,2vw,22px); margin:0 0 24px; }
+    .grid-hero, .grid-3, .grid-2 { display:grid; gap:18px; }
+    .grid-hero { grid-template-columns:1.2fr .8fr; align-items:stretch; }
+    .grid-3 { grid-template-columns:repeat(3,1fr); }
+    .grid-2 { grid-template-columns:repeat(2,1fr); }
+    .panel {
+      background:linear-gradient(180deg, rgba(11,14,22,.88), rgba(23,27,39,.9)); border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
+    }
+    .card { padding:22px; }
+    .cta { display:flex; flex-wrap:wrap; gap:14px; margin-top:26px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:14px 18px;
+      border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(11,14,22,.7);
+    }
+    .btn.primary { background:linear-gradient(135deg, rgba(76,43,112,.92), rgba(201,156,90,.26)); border-color:rgba(201,156,90,.42); }
+    .mini-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px; }
+    .mini { padding:14px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.05); }
+    .mini strong { display:block; color:var(--gold); margin-bottom:6px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; }
+    .section { padding:18px 0 8px; }
+    .placeholder {
+      min-height:280px; padding:22px; display:flex; flex-direction:column; justify-content:end;
+      background:linear-gradient(180deg, rgba(5,4,10,.2), rgba(5,4,10,.92)), radial-gradient(circle at 50% 18%, rgba(163,139,207,.18), transparent 28%), linear-gradient(135deg, rgba(42,22,63,.9), rgba(23,27,39,.95));
+    }
+    .path { display:block; margin-top:12px; color:var(--info); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+    .footer { padding:42px 0 64px; }
+    .footer .panel { padding:18px 20px; }
+    code { color:#f0d8b1; }
+    @media (max-width: 980px) { .grid-hero, .grid-3, .grid-2 { grid-template-columns:1fr; } .hero { padding-top:64px; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap grid-hero">
+      <section>
+        <span class="eyebrow">Apocalypse Express</span>
+        <h1>Ride the end of the world.</h1>
+        <p class="subtitle">A cinematic, industrial-arcane narrative RPG about dead souls, infernal railways, frozen time, and a second life purchased on Lucifer's schedule.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/Kenessy/Kenessy/tree/Apocalypse-Express-DnD-Game/Database">Open the Database</a>
+          <a class="btn" href="https://github.com/Kenessy/Kenessy/tree/Apocalypse-Express-DnD-Game">View the branch</a>
+        </div>
+      </section>
+      <aside class="panel card">
+        <span class="eyebrow" style="color:var(--info); border-color:rgba(40,189,216,.28)">Current identity</span>
+        <div class="mini-grid">
+          <div class="mini"><strong>Format</strong>Narrative-first campaign play with selective tactical combat.</div>
+          <div class="mini"><strong>Tone</strong>Melancholic, infernal, procedural, and quietly cruel.</div>
+          <div class="mini"><strong>Core image</strong>A train that moves while the world remains frozen.</div>
+          <div class="mini"><strong>Entry fantasy</strong>Sign the pact, wake in a printed body, steal the Train.</div>
+        </div>
+        <p style="margin-top:16px">This Pages site is plain HTML and ready for future generated art. Drop image files into <code>docs/assets/img/</code> and wire them in later.</p>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="wrap">
+        <h2>What it is</h2>
+        <p>Players begin as dead souls in the Null Meridian, board the infernal Red Line, sign Lucifer's contract in the Sundown Saloon, and wake in a broken Earth trapped inside a paused double apocalypse.</p>
+        <div class="grid-3">
+          <article class="panel card"><h3>Scene-first play</h3><p>Shared visual scenes, sensory framing, and hard narrative choices land before mechanical density.</p></article>
+          <article class="panel card"><h3>Infernal bureaucracy</h3><p>Golden Tickets, inspectors, etiquette pamphlets, and contracts turn Hell into a transport system instead of generic fire-and-brimstone noise.</p></article>
+          <article class="panel card"><h3>Second life with cost</h3><p>Revival is rough, bodies are printed damaged, and the mission is not free heroism. It is a bargain.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Visual slots</h2>
+        <p>These are ready-made placeholders for future generated images and promo stills.</p>
+        <div class="grid-2">
+          <article class="panel placeholder"><h3>Null Meridian / first wake-up</h3><p>Dead souls on the platform, wrong gravity, red line at the edge.</p><span class="path">docs/assets/img/hero-null-meridian.jpg</span></article>
+          <article class="panel placeholder"><h3>Apocalypse Express arrival</h3><p>Twin red rails, impossible boarding, infernal mass in motion.</p><span class="path">docs/assets/img/scene-train-arrival.jpg</span></article>
+          <article class="panel placeholder"><h3>Lucifer in the Sundown Saloon</h3><p>Old-money calm, polished bar light, the sales pitch at the brink.</p><span class="path">docs/assets/img/scene-lucifer-saloon.jpg</span></article>
+          <article class="panel placeholder"><h3>Chapel of the Second Dawn</h3><p>Printed bodies, work-lights, broken stone, and the first route out.</p><span class="path">docs/assets/img/scene-second-dawn.jpg</span></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="panel">
+        <strong style="display:block; color:var(--gold); margin-bottom:8px">Next step</strong>
+        <p style="margin:0">In GitHub Pages settings, set the publishing source to the <code>Apocalypse-Express-DnD-Game</code> branch and the <code>/docs</code> folder.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
