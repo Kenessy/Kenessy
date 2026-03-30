@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scene A1 — Null Meridian Prelude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04030a;
+      --surface: #0a0d15;
+      --text: #d4cfc6;
+      --text-bright: #f0ece4;
+      --muted: #6b6478;
+      --red-glow: #6b1a1a;
+      --red-line: #8b2020;
+      --violet: #4c2b70;
+      --gold: #c99c5a;
+      --cold: #3a4a6b;
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── AMBIENT BACKGROUND ─── */
+    .ambient {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      transition: opacity 2s;
+    }
+    .ambient::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 50% 80%, rgba(107, 26, 26, .12), transparent),
+        radial-gradient(ellipse 30% 30% at 50% 50%, rgba(76, 43, 112, .06), transparent);
+      animation: pulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes pulse {
+      0% { opacity: .6; }
+      100% { opacity: 1; }
+    }
+
+    /* ─── MAIN CONTAINER ─── */
+    .scene {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    /* ─── SCENE HEADER ─── */
+    .scene-header {
+      text-align: center;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(107, 26, 26, .2);
+      margin-bottom: 48px;
+    }
+    .scene-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 12px;
+    }
+    .scene-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 700; letter-spacing: -.02em;
+      color: var(--text-bright);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .scene-subtitle {
+      font-size: 18px; font-style: italic;
+      color: var(--muted); line-height: 1.5;
+    }
+    .system-off {
+      display: inline-block; margin-top: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--red-line); padding: 4px 14px;
+      border: 1px solid rgba(139, 32, 32, .3);
+      border-radius: 999px;
+    }
+
+    /* ─── TEXT BLOCKS ─── */
+    .narration {
+      font-size: 20px; line-height: 1.8;
+      margin-bottom: 32px;
+      opacity: 0; transform: translateY(12px);
+      animation: fadeIn 1.2s ease forwards;
+    }
+    .narration.delay-1 { animation-delay: .3s; }
+    .narration.delay-2 { animation-delay: .8s; }
+    .narration.delay-3 { animation-delay: 1.4s; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .narration em { color: var(--gold); font-style: italic; }
+    .narration strong { color: var(--text-bright); font-weight: 400; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      text-align: center; padding: 32px 0; color: var(--muted);
+      font-size: 14px; letter-spacing: .4em;
+    }
+
+    /* ─── CHOICES ─── */
+    .choices {
+      display: flex; flex-direction: column; gap: 10px;
+      margin: 24px 0 40px;
+      opacity: 0; animation: fadeIn 1s ease forwards;
+    }
+    .choices.delay-long { animation-delay: 2s; }
+
+    .choice-btn {
+      display: block; width: 100%;
+      padding: 16px 20px;
+      background: rgba(10, 13, 21, .8);
+      border: 1px solid rgba(255,255,255,.06);
+      border-left: 3px solid var(--red-line);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 17px; line-height: 1.5;
+      cursor: pointer;
+      transition: all .3s;
+      text-align: left;
+    }
+    .choice-btn:hover {
+      background: rgba(107, 26, 26, .1);
+      border-left-color: var(--gold);
+      color: var(--text-bright);
+      transform: translateX(4px);
+    }
+    .choice-btn:active { transform: translateX(2px); }
+
+    .choice-btn .choice-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 4px;
+    }
+
+    /* ─── RESPONSE BLOCKS ─── */
+    .response {
+      padding: 24px;
+      margin: 24px 0 32px;
+      background: rgba(76, 43, 112, .06);
+      border-left: 2px solid rgba(76, 43, 112, .3);
+      border-radius: 0 8px 8px 0;
+      font-size: 18px; line-height: 1.8;
+    }
+    .response em { color: var(--gold); }
+
+    /* ─── EMOTION PICK ─── */
+    .emotion-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+      margin: 24px 0 40px;
+    }
+    .emotion-btn {
+      padding: 18px 16px; text-align: center;
+      background: rgba(10, 13, 21, .8);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 10px;
+      cursor: pointer; transition: all .3s;
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 16px;
+    }
+    .emotion-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201, 156, 90, .06);
+      color: var(--text-bright);
+    }
+    .emotion-btn .emotion-word {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px; font-weight: 600;
+      display: block; margin-bottom: 4px;
+      color: var(--text-bright);
+    }
+
+    /* ─── CONTINUE PROMPT ─── */
+    .continue-prompt {
+      text-align: center; padding: 40px 0;
+    }
+    .continue-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--violet), rgba(201,156,90,.2));
+      border: 1px solid rgba(201,156,90,.3);
+      color: var(--text-bright);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: all .3s;
+      text-decoration: none;
+    }
+    .continue-btn:hover {
+      box-shadow: 0 4px 24px rgba(76,43,112,.4);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HIDDEN BLOCKS ─── */
+    .hidden { display: none; }
+
+    /* ─── RED LINE ANIMATION ─── */
+    .red-line-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 2px; z-index: 100;
+      background: linear-gradient(90deg,
+        transparent,
+        var(--red-line),
+        rgba(139, 32, 32, .6),
+        var(--red-line),
+        transparent
+      );
+      animation: lineShift 6s ease-in-out infinite;
+    }
+    @keyframes lineShift {
+      0%, 100% { opacity: .4; }
+      50% { opacity: .8; }
+    }
+
+    /* ─── FADE-IN FOR DYNAMIC BLOCKS ─── */
+    .fade-enter {
+      opacity: 0; transform: translateY(12px);
+      animation: fadeIn 1s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient"></div>
+  <div class="red-line-bar"></div>
+
+  <main class="scene" id="scene">
+
+    <!-- HEADER -->
+    <header class="scene-header">
+      <p class="scene-tag">Act A &middot; Scene 1</p>
+      <h1 class="scene-title">Null Meridian</h1>
+      <p class="scene-subtitle">You are dead. You know this because everything is wrong.</p>
+      <span class="system-off">System OFF &mdash; No rules, no dice, no danger</span>
+    </header>
+
+    <!-- BLOCK A1.1 — WAKE UP -->
+    <div id="block-wake">
+      <p class="narration delay-1">
+        Cold nothing gives way to stone under your hands.
+      </p>
+      <p class="narration delay-2">
+        A circular platform hangs in open dark, its edge traced by a <em>dull red glow</em>. Around you, a few blurred shapes shudder and drag themselves upright, bodies half-formed, as if something is still deciding what you're all supposed to be.
+      </p>
+      <p class="narration delay-3">
+        You have no heartbeat. No breath. No skin you can trust. But you have <strong>weight</strong>, and the floor is solid and cool beneath you.
+      </p>
+
+      <div class="divider">&#9670; &#9670; &#9670;</div>
+
+      <!-- FIRST CHOICE -->
+      <div class="choices delay-long" id="choices-first">
+        <p style="color: var(--muted); font-size: 14px; font-family: 'Rajdhani', sans-serif; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px;">What do you do first?</p>
+
+        <button class="choice-btn" onclick="showBlock('resp-look-self', 'choices-first')">
+          <span class="choice-label">Look</span>
+          You look down at your own hands.
+        </button>
+
+        <button class="choice-btn" onclick="showBlock('resp-look-around', 'choices-first')">
+          <span class="choice-label">Observe</span>
+          You scan the platform and the darkness beyond.
+        </button>
+
+        <button class="choice-btn" onclick="showBlock('resp-call-out', 'choices-first')">
+          <span class="choice-label">Speak</span>
+          You open your mouth and call into the void.
+        </button>
+
+        <button class="choice-btn" onclick="showBlock('resp-edge', 'choices-first')">
+          <span class="choice-label">Move</span>
+          You stand and walk toward the red-lit edge.
+        </button>
+      </div>
+    </div>
+
+    <!-- RESPONSES: FIRST CHOICE -->
+
+    <div id="resp-look-self" class="hidden">
+      <div class="response fade-enter">
+        Your outline <em>flickers</em>. For a heartbeat you see fingers — real, detailed, yours — and then they blur into shadow again, cycling through two or three versions of a hand you almost recognise. When you focus on what you want to be, the form leans that way, then collapses back to smoke.
+      </div>
+      <p class="narration fade-enter" style="animation-delay:.4s">You are a soul, not a body. Identity is still in flux. Whatever you were, it hasn't been decided yet.</p>
+      <div id="after-first-placeholder"></div>
+    </div>
+
+    <div id="resp-look-around" class="hidden">
+      <div class="response fade-enter">
+        The platform is rough stone or concrete — circular, maybe thirty feet across, no railings. Beyond the rim: <em>nothing</em>. A featureless dark that swallows distance. The thin red line at the edge doesn't behave like light or metal. It just <em>is</em>. If you stare long enough into the void, you almost see twin red lines in the distance, like rails. Then you blink, and they're gone.
+      </div>
+      <p class="narration fade-enter" style="animation-delay:.4s">There is structure out there. Something is counting. Something is turning. But it isn't reachable yet.</p>
+      <div id="after-first-placeholder"></div>
+    </div>
+
+    <div id="resp-call-out" class="hidden">
+      <div class="response fade-enter">
+        Your voice rings out — too clean, too clear, every syllable sharp in the emptiness. The words travel into the dark and come back as a <em>soft, delayed echo</em> from no direction you can point to. No answer. But after a few calls, the distant mechanical rhythm — that slow <em>clack-clack-clack</em> underneath everything — tightens, as if noticing.
+      </div>
+      <p class="narration fade-enter" style="animation-delay:.4s">Contact with the void is one-way. But when you speak to the other shapes on the platform, voices sound normal. Conversation between you is real.</p>
+      <div id="after-first-placeholder"></div>
+    </div>
+
+    <div id="resp-edge" class="hidden">
+      <div class="response fade-enter">
+        Each step toward the rim feels like pushing through <em>invisible resistance</em>. The edge seems both near and far. You push through — step off — and there's a single lurch of falling into cold dark. Your stomach drops. Then your foot hits stone again, right where you started. From the outside, the others saw you <em>blink</em> from edge to centre. No fall. No gap.
+      </div>
+      <p class="narration fade-enter" style="animation-delay:.4s">You cannot leave. Space is looped around the platform. This place is a cage dressed as a waiting room.</p>
+      <div id="after-first-placeholder"></div>
+    </div>
+
+    <!-- SECOND WAVE — MEMORY / EMOTION -->
+    <div id="block-memory" class="hidden">
+      <div class="divider fade-enter">&#9670; &#9670; &#9670;</div>
+
+      <p class="narration fade-enter" style="animation-delay:.3s">
+        Something stirs beneath the blankness. Not a memory — memories are gone, rubbed off like text from a wet page. But there's a <em>residue</em>. An emotional shape left behind by whatever ended you.
+      </p>
+
+      <p class="narration fade-enter" style="animation-delay:.8s">
+        At the end, you remember feeling mostly...
+      </p>
+
+      <div class="emotion-grid fade-enter" style="animation-delay:1.2s" id="emotion-pick">
+        <button class="emotion-btn" onclick="pickEmotion('angry')">
+          <span class="emotion-word">Angry</span>
+          A hot wire of unfinished business.
+        </button>
+        <button class="emotion-btn" onclick="pickEmotion('exhausted')">
+          <span class="emotion-word">Exhausted</span>
+          Relief and collapse in equal measure.
+        </button>
+        <button class="emotion-btn" onclick="pickEmotion('resigned')">
+          <span class="emotion-word">Resigned</span>
+          You saw it coming. You let it.
+        </button>
+        <button class="emotion-btn" onclick="pickEmotion('hopeful')">
+          <span class="emotion-word">Hopeful</span>
+          It wasn't supposed to end. Not yet.
+        </button>
+      </div>
+    </div>
+
+    <!-- EMOTION RESPONSES -->
+    <div id="resp-angry" class="hidden">
+      <div class="response fade-enter">
+        The anger flares like a pilot light — small, steady, refusing to go out. You don't remember <em>who</em> or <em>what</em>, but the shape of violence lingers. Something was taken. Something was unfinished. Your shadow-form tightens, edges sharpening for a heartbeat before blurring back.
+      </div>
+    </div>
+    <div id="resp-exhausted" class="hidden">
+      <div class="response fade-enter">
+        A bone-deep weariness that has nothing to do with bones. You carried something too heavy for too long, and when you finally set it down, you set yourself down with it. Your shadow-form sags, loose and undefined, as if it's forgotten what tension feels like.
+      </div>
+    </div>
+    <div id="resp-resigned" class="hidden">
+      <div class="response fade-enter">
+        A quiet knowing. The end didn't surprise you. Maybe you even arranged it. Your shadow-form is still — unnervingly still — as if it accepted this shape long before arriving here. The absence of panic is its own kind of horror.
+      </div>
+    </div>
+    <div id="resp-hopeful" class="hidden">
+      <div class="response fade-enter">
+        A stubborn warmth, absurd given the circumstances. You died mid-sentence, mid-reach, mid-promise. Your shadow-form keeps <em>leaning forward</em>, straining toward something that isn't on this platform. Not yet.
+      </div>
+    </div>
+
+    <!-- FINAL BEAT — SOMETHING IS COMING -->
+    <div id="block-finale" class="hidden">
+      <div class="divider fade-enter">&#9670; &#9670; &#9670;</div>
+
+      <p class="narration fade-enter" style="animation-delay:.3s">
+        Time passes. Or doesn't. You can't tell anymore.
+      </p>
+      <p class="narration fade-enter" style="animation-delay:1s">
+        The mechanical rhythm beneath the silence <em>changes</em>. Tighter. Closer. The red line at the platform's rim brightens — just slightly — and for the first time since waking, the darkness out there has <em>direction</em>.
+      </p>
+      <p class="narration fade-enter" style="animation-delay:1.8s">
+        Something is coming down the line.
+      </p>
+      <p class="narration fade-enter" style="animation-delay:2.6s; color: var(--muted); font-style: italic;">
+        And it's on schedule.
+      </p>
+
+      <div class="continue-prompt fade-enter" style="animation-delay:3.4s">
+        <a class="continue-btn" href="index.html">
+          Continue to Scene A2 &rarr;
+        </a>
+        <p style="color: var(--muted); font-size: 13px; margin-top: 16px; font-family: 'Rajdhani', sans-serif; letter-spacing: .06em;">
+          SCENE A2 &mdash; OBELISK, CLOCK & POSTCARDS &mdash; COMING SOON
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ─── SCENE ENGINE (minimal draft) ───
+
+    function showBlock(responseId, hideId) {
+      // Hide the choice set
+      const choiceEl = document.getElementById(hideId);
+      if (choiceEl) choiceEl.classList.add('hidden');
+
+      // Show the response
+      const resp = document.getElementById(responseId);
+      if (resp) {
+        resp.classList.remove('hidden');
+        resp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // After a delay, show the memory/emotion block
+      setTimeout(() => {
+        const memBlock = document.getElementById('block-memory');
+        if (memBlock && memBlock.classList.contains('hidden')) {
+          memBlock.classList.remove('hidden');
+          memBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 2000);
+    }
+
+    function pickEmotion(emotion) {
+      // Hide emotion grid
+      const grid = document.getElementById('emotion-pick');
+      if (grid) grid.classList.add('hidden');
+
+      // Show emotion response
+      const resp = document.getElementById('resp-' + emotion);
+      if (resp) {
+        resp.classList.remove('hidden');
+        resp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // After a delay, show the finale
+      setTimeout(() => {
+        const finale = document.getElementById('block-finale');
+        if (finale) {
+          finale.classList.remove('hidden');
+          finale.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 2400);
+    }
+  </script>
+
+</body>
+</html>
