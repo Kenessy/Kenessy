@@ -1,17 +1,11 @@
 # Database — Procedures
 
 ## Procedures / talents / scene operators
-- [[(Procedure) Apocalyptic Shift]]
-- [[(Procedure) Aspects of Chaos]]
-- [[(Procedure) Devil's Mercy]]
-- [[(Procedure) Harmony Attunement]]
-- [[(Procedure) Immediate Action Zone]]
-- [[(Procedure) Item categories]]
-- [[(Procedure) Rarities]]
-- [[(Procedure) Stillpoint]]
-
-## Use this section for
-- runtime procedures
-- special subsystem interactions
-- talent-like rule modules
-- operator-facing scene handling
+- [[Database/30_Procedures/(Procedure) Apocalyptic Shift]]
+- [[Database/30_Procedures/(Procedure) Aspects of Chaos]]
+- [[Database/30_Procedures/(Procedure) Devil's Mercy]]
+- [[Database/30_Procedures/(Procedure) Harmony Attunement]]
+- [[Database/30_Procedures/(Procedure) Immediate Action Zone]]
+- [[Database/30_Procedures/(Procedure) Item categories]]
+- [[Database/30_Procedures/(Procedure) Rarities]]
+- [[Database/30_Procedures/(Procedure) Stillpoint]]
