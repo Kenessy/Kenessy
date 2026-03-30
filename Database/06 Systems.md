@@ -1,16 +1,9 @@
 # Database — Systems
 
 ## System design notes
-- [[(System) AE music plan]]
-- [[(System) DC check template system]]
-- [[(System) Item System]]
-- [[(System) Loot Categories & Mats]]
-- [[(System) Scene TAG system]]
-- [[Ancestry Layer - Soul Indices + Body Tags v2]]
-
-## Use this section for
-- deeper subsystem design
-- templates and reusable structures
-- tagging logic
-- item and loot pipeline thinking
-- longer-term systemic expansion
+- [[Database/50_Systems/(System) AE music plan]]
+- [[Database/50_Systems/(System) DC check template system]]
+- [[Database/50_Systems/(System) Item System]]
+- [[Database/50_Systems/(System) Loot Categories & Mats]]
+- [[Database/50_Systems/(System) Scene TAG system]]
+- [[Database/50_Systems/Ancestry Layer - Soul Indices + Body Tags v2]]

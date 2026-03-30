@@ -1,6 +1,6 @@
 # Database — Master Index
 
-Use this as the **main hub** for the Apocalypse Express knowledge base.
+Use this as the main navigation hub for Apocalypse Express.
 
 ## Core navigation
 - [[Database/01 Start Here]]
@@ -11,17 +11,14 @@ Use this as the **main hub** for the Apocalypse Express knowledge base.
 - [[Database/06 Systems]]
 - [[Database/07 References & Archives]]
 
-## What belongs in Database
-- worldbuilding and design docs
-- rules, procedures, systems, indexes
-- scene writing and campaign structure
-- archive/reference material
-
-## What stays outside for now
-- runtime files
-- configs
-- art assets
-- html shell files
-
-## Next cleanup pass
-After we confirm this taxonomy feels right in practice, the next pass can physically migrate the original scattered notes into matching Database subfolders.
+## Canonical folders
+- [[Database/10_Guides/README]]
+- [[Database/20_Rules/README]]
+- [[Database/30_Procedures/README]]
+- [[Database/40_Scenes/README]]
+- [[Database/50_Systems/README]]
+- [[Database/60_References/README]]
+- [[Database/90_Archive/README]]
+- [[Database/Compiled/Player Rulebook]]
+- [[Database/Compiled/GM Operations Manual]]
+- [[Database/Compiled/Setting Bible]]

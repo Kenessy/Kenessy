@@ -1,15 +1,8 @@
 # Vault Config
 
-This folder is reserved for Obsidian or workspace-level configuration files.
+Obsidian/vault workspace configuration files.
 
-## Intended contents
+Key files:
 - `app.json`
 - `appearance.json`
-- `bookmarks.json`
-- `community-plugins.json`
-- `core-plugins.json`
-- `graph.json`
 - `workspace.json`
-
-## Why this is separate
-Workspace and vault configuration should not be mixed into the main gameplay knowledge hierarchy.

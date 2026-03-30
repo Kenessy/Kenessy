@@ -1,19 +1,18 @@
 # Database — References & Archives
 
+## References
+- [[Database/60_References/(Reference) 5e Baseline (SRD 5.1)]]
+- [[Database/60_References/(Index) Triad Codes — Quick Index]]
+- [[Database/60_References/ZeusDocs_keywords.json]]
+- [[Database/60_References/ZeusDocs_tags.json]]
+
 ## Archive bundles
-- [[Diagrams.rar]]
-- [[Items & Roll Tables.rar]]
+- [[Database/90_Archive/Diagrams.rar]]
+- [[Database/90_Archive/Items & Roll Tables.rar]]
 
-## Structural / generated metadata
-- [[ZeusDocs_keywords.json]]
-- [[ZeusDocs_tags.json]]
-
-## Visual support files worth knowing exist
-- [[(Canvas) Ideas brainstorming.canvas]]
-- [[(Canvas) Standard Apocalypse Express Ruleset.canvas]]
-- [[(Graph) Triad Anatomy.png]]
-- [[(Graph) Triad Focus Codes.png]]
-- [[(Graph) Triad Validation Flow.png]]
-
-## Note
-This section is for files that support the project as reference, archive, or tooling material, but are not the first stop for runtime gameplay logic.
+## Visual support assets
+- [[Assets/Canvas/(Canvas) Ideas brainstorming.canvas]]
+- [[Assets/Canvas/(Canvas) Standard Apocalypse Express Ruleset.canvas]]
+- [[Assets/Graphs/(Graph) Triad Anatomy.png]]
+- [[Assets/Graphs/(Graph) Triad Focus Codes.png]]
+- [[Assets/Graphs/(Graph) Triad Validation Flow.png]]

@@ -1,19 +1,19 @@
 # Apocalypse Express Database
 
-This folder is the central knowledge hub for the **Apocalypse Express** branch.
+This folder is the canonical knowledge base for the **Apocalypse Express** project.
 
-## Purpose
-- provide one stable place to return to for design knowledge
-- separate **knowledge / archive / design** material from runtime-facing files
-- make later cleanup safer before any destructive moves
+## Structure
+- `00_Hub/` (reserved for future hub material)
+- `10_Guides/`
+- `20_Rules/`
+- `30_Procedures/`
+- `40_Scenes/`
+- `50_Systems/`
+- `60_References/`
+- `90_Archive/`
+- `Compiled/`
 
-## Current policy
-This is a **non-destructive first pass**.
-- root files remain where they are for now
-- the Database folder becomes the canonical navigation layer
-- once the taxonomy is stable, the next pass can physically migrate files
-
-## Use this folder first
+## Primary navigation
 - `00 Master Index.md`
 - `01 Start Here.md`
 - `02 Guides.md`
@@ -23,10 +23,9 @@ This is a **non-destructive first pass**.
 - `06 Systems.md`
 - `07 References & Archives.md`
 
-## Runtime-facing files left outside Database on purpose
-- `index.html`
-- UI / Obsidian config json files
-- art assets and images
-- app shell files
-
-This keeps the knowledge base centralized without breaking existing references too early.
+## Boundary
+- gameplay knowledge belongs in `Database/`
+- visual support assets belong in `Assets/`
+- scripts/build helpers belong in `Tools/`
+- web shell belongs in `Site/`
+- Obsidian/vault config belongs in `Vault_Config/`
