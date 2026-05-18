@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PLATER Game Reports</title>
+  <style>
+    :root {
+      --bg: #05070a;
+      --ink: #eef8ff;
+      --muted: rgba(238, 248, 255, 0.62);
+      --cyan: #00e5ff;
+      --orange: #ff7a00;
+      --shadow: rgba(0, 0, 0, 0.58);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--bg); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: start center;
+      padding: 30px 14px;
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(90deg, rgba(0, 229, 255, 0.05) 0 1px, transparent 1px 88px),
+        repeating-linear-gradient(0deg, rgba(255, 122, 0, 0.045) 0 1px, transparent 1px 72px),
+        linear-gradient(180deg, #030405, #070a0d 48%, #030405);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(100%, 980px);
+      display: grid;
+      gap: 18px;
+    }
+
+    header {
+      display: grid;
+      gap: 10px;
+      border-bottom: 3px solid rgba(238, 248, 255, 0.12);
+      padding-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--orange);
+      font-size: clamp(46px, 8vw, 96px);
+      line-height: 0.86;
+      font-weight: 1000;
+      text-transform: uppercase;
+      text-shadow: 6px 6px 0 #000;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 780;
+    }
+
+    .report {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      border: 5px solid var(--ink);
+      background:
+        repeating-linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0 2px, transparent 2px 44px),
+        #060708;
+      box-shadow:
+        12px 12px 0 var(--orange),
+        -6px -6px 0 var(--cyan),
+        0 28px 80px var(--shadow);
+      padding: 22px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .kicker {
+      color: var(--cyan);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 8px 0 10px;
+      color: var(--ink);
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 0.95;
+      font-weight: 1000;
+      text-transform: uppercase;
+      text-shadow: 4px 4px 0 #000;
+    }
+
+    .score {
+      display: grid;
+      place-items: center;
+      min-width: 118px;
+      min-height: 118px;
+      border: 4px solid var(--cyan);
+      background: rgba(0, 0, 0, 0.42);
+      box-shadow: 6px 6px 0 var(--orange);
+      color: var(--orange);
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 1000;
+      text-shadow: 4px 4px 0 #000;
+    }
+
+    @media (max-width: 680px) {
+      .report { grid-template-columns: 1fr; }
+      .score { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>PLATER Reports</h1>
+      <p>Canon game verdicts, axis evidence, verdict logic, and full lossless evidence files.</p>
+    </header>
+
+    <a class="report" href="games/metro-2033-redux/">
+      <div>
+        <div class="kicker">Metro 2033 Redux</div>
+        <h2>PLATER T2 Verdict Canon</h2>
+        <p>Worth playing. A masterfully paced vertical slice, built from cinematic setpieces and staged like interactive theatre.</p>
+      </div>
+      <div class="score">86%</div>
+    </a>
+  </main>
+</body>
+</html>
