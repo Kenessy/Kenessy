@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apocalypse Express — Ride the End of the World</title>
+  <meta name="description" content="A cinematic industrial-arcane narrative RPG. Dead souls. Infernal railways. Frozen time. A second life on Lucifer's schedule.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05040a;
+      --surface: #0b0e16;
+      --surface2: #131825;
+      --line: #2a163f;
+      --violet: #4c2b70;
+      --violet-glow: rgba(76, 43, 112, .4);
+      --gold: #c99c5a;
+      --gold-dim: rgba(201, 156, 90, .15);
+      --ember: #e8522a;
+      --text: #f0ece4;
+      --muted: #9e96ab;
+      --info: #28bdd8;
+      --radius: 16px;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand { font-family: 'Rajdhani', sans-serif; }
+
+    .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+    a { color: var(--gold); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--text); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: rgba(5, 4, 10, .75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 18px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+    .nav-links { display: flex; gap: 28px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 20%, var(--violet-glow), transparent),
+        radial-gradient(ellipse 40% 30% at 30% 60%, rgba(232, 82, 42, .08), transparent),
+        radial-gradient(ellipse 40% 30% at 70% 70%, var(--gold-dim), transparent);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block; padding: 6px 16px; border-radius: 999px;
+      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,156,90,.3);
+      background: rgba(11,14,22,.6); margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(48px, 10vw, 96px);
+      line-height: .92; letter-spacing: -.04em;
+      margin-bottom: 20px;
+    }
+    h1 .accent { color: var(--gold); }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted); max-width: 600px; margin: 0 auto 36px;
+    }
+    .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 999px; font-size: 14px;
+      font-weight: 600; letter-spacing: .03em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.08); transition: all .25s;
+      cursor: pointer; text-decoration: none; color: var(--text);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet), rgba(201,156,90,.35));
+      border-color: rgba(201,156,90,.4);
+      box-shadow: 0 4px 24px rgba(76,43,112,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 4px 32px rgba(201,156,90,.35); transform: translateY(-1px); }
+    .btn-ghost { background: rgba(255,255,255,.04); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); }
+
+    /* ─── DIVIDER RAIL ─── */
+    .rail {
+      padding: 48px 0;
+      text-align: center;
+      position: relative;
+    }
+    .rail::before {
+      content: '';
+      position: absolute; top: 50%; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), rgba(201,156,90,.3), var(--line), transparent);
+    }
+    .rail-icon {
+      position: relative; z-index: 1;
+      display: inline-block; padding: 0 24px; background: var(--bg);
+      color: var(--gold); font-size: 20px; letter-spacing: .3em;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 80px 0; }
+    .section-label {
+      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1; letter-spacing: -.03em; margin-bottom: 16px;
+    }
+    .section-desc { color: var(--muted); max-width: 640px; margin-bottom: 40px; }
+
+    /* ─── CARDS ─── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    .card {
+      background: linear-gradient(180deg, var(--surface), var(--surface2));
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color .3s, transform .3s;
+    }
+    .card:hover { border-color: rgba(201,156,90,.2); transform: translateY(-2px); }
+    .card h3 {
+      font-size: 20px; letter-spacing: -.01em; margin-bottom: 8px;
+    }
+    .card p { color: var(--muted); font-size: 14px; }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 10px; margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .card-icon.violet { background: rgba(76,43,112,.3); color: #b794f4; }
+    .card-icon.gold { background: rgba(201,156,90,.15); color: var(--gold); }
+    .card-icon.ember { background: rgba(232,82,42,.15); color: var(--ember); }
+    .card-icon.info { background: rgba(40,189,216,.12); color: var(--info); }
+
+    /* ─── SCENE PREVIEW ─── */
+    .scene-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .scene-card:hover { border-color: rgba(201,156,90,.2); }
+    .scene-visual {
+      height: 180px;
+      display: flex; align-items: flex-end; padding: 20px;
+      position: relative;
+    }
+    .scene-visual::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, var(--surface) 100%);
+    }
+    .sv-null { background: radial-gradient(circle at 50% 30%, rgba(76,43,112,.4), var(--surface)); }
+    .sv-train { background: radial-gradient(circle at 40% 50%, rgba(232,82,42,.25), var(--surface)); }
+    .sv-saloon { background: radial-gradient(circle at 60% 40%, rgba(201,156,90,.3), var(--surface)); }
+    .sv-chapel { background: radial-gradient(circle at 50% 60%, rgba(40,189,216,.2), var(--surface)); }
+    .scene-body { padding: 20px 24px 24px; }
+    .scene-tag {
+      font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .scene-body h3 { font-size: 18px; margin-bottom: 6px; }
+    .scene-body p { font-size: 13px; color: var(--muted); }
+
+    /* ─── SYSTEMS STRIP ─── */
+    .sys-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .sys-item {
+      text-align: center; padding: 24px 16px;
+      border: 1px solid rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: border-color .3s;
+    }
+    .sys-item:hover { border-color: rgba(201,156,90,.2); }
+    .sys-val {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1;
+    }
+    .sys-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ─── QUOTE BANNER ─── */
+    .quote-banner {
+      padding: 64px 0;
+      text-align: center;
+    }
+    .quote-banner blockquote {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      color: var(--muted);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .quote-banner blockquote em { color: var(--gold); font-style: normal; }
+
+    /* ─── CTA BOTTOM ─── */
+    .cta-bottom {
+      padding: 80px 0 100px;
+      text-align: center;
+    }
+    .cta-bottom h2 { margin-bottom: 12px; }
+    .cta-bottom p { color: var(--muted); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,.04);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .grid-3, .grid-2, .sys-strip { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding: 130px 0 60px; }
+      section { padding: 48px 0; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .sys-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="wrap">
+      <span class="brand">Apocalypse Express</span>
+      <div class="nav-links">
+        <a href="#world">World</a>
+        <a href="#systems">Systems</a>
+        <a href="#scenes">Scenes</a>
+        <a href="../plater-game-reports/">PLATER</a>
+        <a href="#play">Play</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-content">
+      <span class="eyebrow">D&D 5e &middot; Narrative RPG &middot; Web-Playable</span>
+      <h1>Ride the <span class="accent">end</span> of the world.</h1>
+      <p class="hero-sub">Dead souls board an infernal train, sign Lucifer's contract, and wake in printed bodies on a frozen Earth trapped in a paused double apocalypse.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#play">Start Playing</a>
+        <a class="btn btn-ghost" href="#world">Explore the World</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- RAIL -->
+  <div class="rail"><span class="rail-icon">&#9670; &#9670; &#9670;</span></div>
+
+  <!-- WORLD -->
+  <section id="world">
+    <div class="wrap">
+      <p class="section-label">The World</p>
+      <h2>A train that moves while<br>the world stays frozen.</h2>
+      <p class="section-desc">Earth stopped mid-apocalypse. Time sheared. Civilizations froze in place. Now Lucifer's Red Line cuts through the stillness, delivering printed souls with borrowed bodies and a debt to repay.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon violet">&#9830;</div>
+          <h3>The Null Meridian</h3>
+          <p>A liminal waiting room for the dead. No gravity. No sound. Just the faint red glow of rails at the edge of nothing.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon ember">&#9670;</div>
+          <h3>The Infernal Red Line</h3>
+          <p>Lucifer's impossible train. Golden Tickets, inspectors, etiquette pamphlets. Hell isn't fire and brimstone &mdash; it's bureaucracy on rails.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon gold">&#9733;</div>
+          <h3>Drowntown Basin</h3>
+          <p>A flooded wetland city. Six color-coded zones from safe havens to EMP-blasted synth districts. Your first mission starts here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-banner">
+    <div class="wrap">
+      <blockquote>&ldquo;Sign the pact. Wake in a <em>printed body</em>. Steal the Train.&rdquo;</blockquote>
+    </div>
+  </div>
+
+  <!-- SYSTEMS -->
+  <section id="systems">
+    <div class="wrap">
+      <p class="section-label">Game Systems</p>
+      <h2>D&D 5e core, reimagined.</h2>
+      <p class="section-desc">Built on a familiar 5e foundation with layered custom systems. Revival has cost. Chaos escalates. Every choice leaves a mark on your printed body.</p>
+
+      <div class="sys-strip">
+        <div class="sys-item">
+          <div class="sys-val">12</div>
+          <div class="sys-label">Custom Skills</div>
+        </div>
+        <div class="sys-item">
+          <div class="sys-val">4</div>
+          <div class="sys-label">Soul Indices</div>
+        </div>
+        <div class="sys-item">
+          <div class="sys-val">100</div>
+          <div class="sys-label">Chaos Drift Scale</div>
+        </div>
+        <div class="sys-item">
+          <div class="sys-val">6</div>
+          <div class="sys-label">Campaign Zones</div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 24px;">
+        <div class="card">
+          <div class="card-icon ember">&#9763;</div>
+          <h3>Revival</h3>
+          <p>No magic resurrection. The Train prints new bodies. Sparkplug or Reserve mode. Soul Debt accumulates. Injuries stack. Hellstatic looms.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon violet">&#9762;</div>
+          <h3>Chaos Drift</h3>
+          <p>Per-zone entropy meter from 0 to 100. Rest in dangerous territory and watch the Chaos climb. Baseline, Strain, Crisis, Break.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon info">&#9878;</div>
+          <h3>Soul Indices</h3>
+          <p>Boiler, Crown, Maw, or Mirror. Your soul's architecture shapes how you think, fight, and break. Choose your ancestry layer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENES -->
+  <section id="scenes">
+    <div class="wrap">
+      <p class="section-label">Campaign</p>
+      <h2>Scene-first play.</h2>
+      <p class="section-desc">Every session opens with a cinematic frame. Sensory detail before dice. Atmosphere before mechanics. Here's where the story begins.</p>
+
+      <div class="grid-2">
+        <div class="scene-card">
+          <div class="scene-visual sv-null"></div>
+          <div class="scene-body">
+            <p class="scene-tag">Act A &middot; Scene 1</p>
+            <h3>Null Meridian Prelude</h3>
+            <p>You're dead. You know this because everything is wrong. No gravity, no sound, and a red glow at the edge of nothing.</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-visual sv-train"></div>
+          <div class="scene-body">
+            <p class="scene-tag">Act A &middot; Scene 3</p>
+            <h3>Train Arrival & Boarding</h3>
+            <p>Twin red rails stretch into void. The Express arrives. Impossible mass. Infernal engineering. Your ticket is waiting.</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-visual sv-saloon"></div>
+          <div class="scene-body">
+            <p class="scene-tag">Act A &middot; Scene 5</p>
+            <h3>The Sundown Saloon</h3>
+            <p>Old-money calm. Polished bar light. Lucifer sits across from you with a contract and a smile. The sales pitch of eternity.</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-visual sv-chapel"></div>
+          <div class="scene-body">
+            <p class="scene-tag">Act B &middot; Scene 1</p>
+            <h3>Chapel of Second Chances</h3>
+            <p>Your printed body aches. Work-lights buzz. Broken stone surrounds you. This is your second life. Don't waste it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAIL -->
+  <div class="rail"><span class="rail-icon">&#9670; &#9670; &#9670;</span></div>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-bottom" id="play">
+    <div class="wrap">
+      <p class="section-label">Ready?</p>
+      <h2>Board the Express.</h2>
+      <p>The first scene is waiting. No prep needed. Just you and the Null Meridian.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://github.com/Kenessy/Kenessy/tree/Apocalypse-Express-DnD-Game/Database">Open the Database</a>
+        <a class="btn btn-ghost" href="https://github.com/Kenessy/Kenessy/blob/Apocalypse-Express-DnD-Game/Database/Compiled/Player%20Rulebook.md">Player Rulebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <p>Apocalypse Express &middot; Built on D&D 5e (2014) &middot; <a href="../plater-game-reports/">PLATER Reports</a> &middot; <a href="https://github.com/Kenessy/Kenessy">GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
