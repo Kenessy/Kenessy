@@ -130,6 +130,7 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('font-size:var(--scr-type-main-score-title)'), 'main score title is not using the shared type preset');
   assert(report.text.includes('FIELD NOTE'), 'hero identity rail label is missing');
   assert(report.text.includes('.scr-inspect-metrics'), 'flat INSPECT metrics CSS is missing');
+  assert(report.text.includes('.scr-inspect-meter'), 'INSPECT meter lane CSS is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -201,6 +202,8 @@ async function auditViewport(browser, base, buildId, viewport) {
     const inspectMetrics = [...document.querySelectorAll('.scr-inspect-metric')];
     const inspectMetricStyles = inspectMetrics.map((el) => getComputedStyle(el));
     const inspectMetricRects = inspectMetrics.map(rectFor);
+    const inspectMeters = [...document.querySelectorAll('.scr-inspect-meter.scr-score-meter-box.scr-signal-block')];
+    const inspectMeterRects = inspectMeters.map(rectFor);
     const inspectMetricBorderWidth = inspectMetricStyles.reduce((max, style) => Math.max(
       max,
       Number.parseFloat(style.borderTopWidth) || 0,
@@ -214,13 +217,15 @@ async function auditViewport(browser, base, buildId, viewport) {
       axis: document.querySelectorAll('.scr-d20-wrap.scr-score-meter-box.scr-signal-block').length,
       arc: document.querySelectorAll('.scr-evidence-marker.scr-score-meter-box.scr-signal-block').length,
       inspectMetrics: inspectMetrics.length,
-      inspectMeters: document.querySelectorAll('.scr-inspect-meter.scr-score-meter-box.scr-signal-block').length,
+      inspectMeters: inspectMeters.length,
       inspectPanels: document.querySelectorAll('.scr-inspect-panel').length,
       inspectHeroRows: document.querySelectorAll('.scr-hero-inspect-row').length,
       inspectInScorePanel: document.querySelectorAll('.scr-score-panel .scr-inspect-panel').length,
       inspectInCopy: document.querySelectorAll('.scr-hero-copy .scr-inspect-panel').length,
       inspectAfterHero: shellSections[0]?.classList.contains('scr-hero') && shellSections[1] === inspectSection,
       inspectMetricNames: inspectMetrics.map((el) => (el.querySelector('.scr-inspect-name')?.textContent || '').trim()).join('|'),
+      inspectMeterValues: inspectMeters.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim()).join('|'),
+      inspectMeterMinHeight: inspectMeterRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
       inspectMetricBorderWidth,
       inspectMetricBoxShadow: inspectMetricStyles.some((style) => style.boxShadow && style.boxShadow !== 'none'),
       inspectMetricMaxRight: inspectMetricRects.reduce((max, rect) => Math.max(max, rect.right), 0),
@@ -293,8 +298,9 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.scoreNavOverlap, `${viewport.name} navigation overlaps score panel`);
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
-  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 0 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 22, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.inspectMeterValues === '10|8|2|5|6|4|1' && metrics.signalBlocks.inspectMeterMinHeight >= 100, `${viewport.name} INSPECT meter lanes missing ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricBorderWidth === 0 && !metrics.signalBlocks.inspectMetricBoxShadow, `${viewport.name} INSPECT metrics still look like cards ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricMaxRight <= viewport.width + 1, `${viewport.name} INSPECT metrics overflow viewport ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.mainScoreTitleSize >= 13 && metrics.signalBlocks.mainScoreTitleWeight >= 900, `${viewport.name} main score title is too small/light ${JSON.stringify(metrics.signalBlocks)}`);

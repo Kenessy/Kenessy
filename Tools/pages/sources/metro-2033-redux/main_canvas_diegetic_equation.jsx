@@ -299,12 +299,15 @@ function InspectFit() {
 }
 
 function InspectFitMetric({ row }) {
+  const activeRows = Math.max(0, Math.min(20, Math.round(row.score * 2)));
+
   return (
     <article className="scr-inspect-metric" style={{ '--tone': row.color }}>
-      <div className="scr-inspect-letter">{row.letter}</div>
-      <div className="scr-inspect-name">{row.name}</div>
-      <div className="scr-inspect-score">{row.score}</div>
-      <div className="scr-inspect-fit">{row.score}/10 fit</div>
+      <div className="scr-inspect-headline">
+        <div className="scr-inspect-letter">{row.letter}</div>
+        <div className="scr-inspect-name">{row.name}</div>
+      </div>
+      <SignalMeterBlock className="scr-inspect-meter" value={row.score} color={row.color} activeRows={activeRows} />
     </article>
   );
 }
@@ -718,13 +721,14 @@ const TEMPLATE_CSS = `
 .scr-main-score-meter .scr-meter-screen::after{box-shadow:inset 0 0 0 1px rgba(255,208,128,.055),inset 0 0 34px rgba(73,38,0,.48)}
 .scr-main-score-rank{top:calc(50% + 2.2rem);color:#2d1600;text-shadow:0 1px 0 rgba(255,224,170,.26),0 0 16px rgba(255,179,71,.26)}
 .scr-inspect-metrics{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.65rem;min-width:0}
-.scr-inspect-metric{min-width:0;min-height:126px;display:grid;align-content:center;justify-items:center;gap:.2rem;border:0;background:transparent;box-shadow:none;padding:.45rem;text-align:center;color:var(--tone)}
+.scr-inspect-metric{min-width:0;display:grid;align-content:start;justify-items:stretch;gap:.42rem;border:0;background:transparent;box-shadow:none;padding:.25rem;text-align:center;color:var(--tone)}
+.scr-inspect-headline{display:grid;align-content:end;justify-items:center;gap:.12rem;min-height:2.75rem}
 .scr-inspect-letter{font-size:1.95rem;font-weight:1000;line-height:1;color:var(--tone);text-shadow:0 0 12px color-mix(in srgb,var(--tone) 42%,transparent)}
 .scr-inspect-name{max-width:100%;color:var(--tone);font-size:var(--scr-type-tile-label);font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scr-inspect-score{color:#d9c9a3;font-size:4rem;font-weight:1000;line-height:.88;letter-spacing:0;text-shadow:0 2px 0 #000,0 0 16px color-mix(in srgb,var(--tone) 34%,transparent)}
-.scr-inspect-fit{color:color-mix(in srgb,var(--tone) 72%,#8592a5);font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
+.scr-inspect-meter{width:100%;min-height:134px;flex:none}
+.scr-inspect-meter .scr-tile-value{font-size:3.3rem}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}.scr-inspect-metric{min-height:116px;padding:.35rem}.scr-inspect-score{font-size:3.25rem}.scr-inspect-letter{font-size:1.45rem}}
+@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem .35rem}.scr-inspect-metric{padding:.25rem}.scr-inspect-headline{min-height:2.35rem}.scr-inspect-meter{min-height:116px}.scr-inspect-meter .scr-tile-value{font-size:2.9rem}.scr-inspect-letter{font-size:1.45rem}}
 `;
