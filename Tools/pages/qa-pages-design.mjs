@@ -128,6 +128,7 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('--scr-type-main-score-title'), 'report CSS is missing shared type size presets');
   assert(report.text.includes('--scr-type-main-score-rank'), 'report CSS is missing main score rank size preset');
   assert(report.text.includes('font-size:var(--scr-type-main-score-title)'), 'main score title is not using the shared type preset');
+  assert(report.text.includes('FIELD NOTE'), 'hero identity rail label is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -188,6 +189,12 @@ async function auditViewport(browser, base, buildId, viewport) {
     const mainScoreTitleStyle = mainScoreTitle ? getComputedStyle(mainScoreTitle) : null;
     const mainScoreRank = document.querySelector('.scr-main-score-rank');
     const mainScoreRankStyle = mainScoreRank ? getComputedStyle(mainScoreRank) : null;
+    const mainScoreValue = document.querySelector('.scr-main-score-meter .scr-tile-value');
+    const mainScoreValueStyle = mainScoreValue ? getComputedStyle(mainScoreValue) : null;
+    const identity = document.querySelector('.scr-identity');
+    const identityStyle = identity ? getComputedStyle(identity) : null;
+    const identityRailStyle = identity ? getComputedStyle(identity, '::before') : null;
+    const identityLabelStyle = identity ? getComputedStyle(identity, '::after') : null;
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -196,7 +203,8 @@ async function auditViewport(browser, base, buildId, viewport) {
       inspect: document.querySelectorAll('.scr-inspect-meter.scr-score-meter-box.scr-signal-block').length,
       inspectInScorePanel: document.querySelectorAll('.scr-score-panel .scr-inspect-panel').length,
       inspectInCopy: document.querySelectorAll('.scr-hero-copy .scr-inspect-panel').length,
-      inspectFullRow: Boolean(document.querySelector('.scr-hero-grid > .scr-hero-inspect-row .scr-inspect-panel')),
+      inspectFullRow: Boolean(document.querySelector('.scr-hero > .scr-hero-inspect-row .scr-inspect-panel')),
+      inspectOutsideHeroGrid: !document.querySelector('.scr-hero-grid > .scr-hero-inspect-row'),
       scoreGrade: document.querySelectorAll('.scr-score-panel-grade').length,
       scoreHeader: document.querySelectorAll('.scr-score-panel-head').length,
       scoreFoot: document.querySelectorAll('.scr-score-panel-foot').length,
@@ -205,9 +213,13 @@ async function auditViewport(browser, base, buildId, viewport) {
       mainScoreTitleWeight: mainScoreTitleStyle ? Number.parseInt(mainScoreTitleStyle.fontWeight, 10) : 0,
       mainScoreRank: (mainScoreRank?.textContent || '').trim(),
       mainScoreRankSize: mainScoreRankStyle ? Number.parseFloat(mainScoreRankStyle.fontSize) : 0,
+      mainScoreValueSize: mainScoreValueStyle ? Number.parseFloat(mainScoreValueStyle.fontSize) : 0,
       mainScoreKicker: document.querySelectorAll('.scr-main-score-meter .scr-signal-kicker').length,
       mainScoreNote: document.querySelectorAll('.scr-main-score-meter .scr-signal-note').length,
-      meterScreens: document.querySelectorAll('.scr-score-meter-box.scr-signal-block .scr-meter-screen').length
+      meterScreens: document.querySelectorAll('.scr-score-meter-box.scr-signal-block .scr-meter-screen').length,
+      identitySize: identityStyle ? Number.parseFloat(identityStyle.fontSize) : 0,
+      identityRailWidth: identityRailStyle ? Number.parseFloat(identityRailStyle.width) : 0,
+      identityLabel: identityLabelStyle ? String(identityLabelStyle.content || '').replaceAll('"', '') : ''
     };
     const siteLinks = document.querySelector('.site-links');
     const floatingSiteLinks = siteLinks ? getComputedStyle(siteLinks).position === 'fixed' && isVisible(siteLinks) : false;
@@ -262,9 +274,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.scoreNavOverlap, `${viewport.name} navigation overlaps score panel`);
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
-  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspect === 7 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectFullRow && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspect === 7 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectFullRow && metrics.signalBlocks.inspectOutsideHeroGrid && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.mainScoreTitleSize >= 13 && metrics.signalBlocks.mainScoreTitleWeight >= 900, `${viewport.name} main score title is too small/light ${JSON.stringify(metrics.signalBlocks)}`);
-  assert(metrics.signalBlocks.mainScoreRankSize >= 45, `${viewport.name} main score rank is too small ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.mainScoreRankSize >= metrics.signalBlocks.mainScoreValueSize * 0.82, `${viewport.name} main score rank is too small next to the value ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.identitySize >= 15.5 && metrics.signalBlocks.identityRailWidth >= 3, `${viewport.name} identity quote rail/text sizing mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.scoreStartsBeforeFold, `${viewport.name} score panel starts too late in the first viewport`);
   assert(viewport.width < 1120 || metrics.scoreFullyVisible, `${viewport.name} score panel is not fully framed in first viewport`);
   assert(viewport.width < 1120 || metrics.nextSectionHint, `${viewport.name} does not show the next section cue in the first viewport`);
