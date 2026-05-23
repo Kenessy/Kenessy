@@ -63,15 +63,11 @@ html,body,#root{min-height:100%;margin:0;background:#05060a;color:#e7ecf3;font-f
 body{overflow-x:hidden}
 .fallback{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(900px 500px at 20% 0,rgba(17,250,203,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,138,31,.10),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a)}
 .fallback-card{width:min(820px,calc(100% - 32px));border:1px solid #1e2733;background:#0d1117;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}
-.fallback small{color:#11facb;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}
-.fallback h1{margin:10px 0 0;color:#d9c9a3;font-size:clamp(32px,7vw,64px);line-height:.92;text-transform:uppercase}
+.fallback small{color:#11facb;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:0}
+.fallback h1{margin:10px 0 0;color:#d9c9a3;font-size:3.2rem;line-height:.92;text-transform:uppercase}
 .fallback p{color:#b8a982;line-height:1.7}
 .fallback ul{margin:18px 0 0;padding-left:20px;color:#8592a5;line-height:1.7}
-.fallback a,.site-links a{color:#ffb347}
-.site-links{position:fixed;right:12px;bottom:12px;z-index:90;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:min(420px,calc(100vw - 24px));font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}
-.site-links a{border:1px solid #2a3444;background:rgba(5,6,10,.82);backdrop-filter:blur(12px);padding:8px 10px;text-decoration:none}
-.site-links a:focus-visible{outline:2px solid #11facb;outline-offset:2px}
-@media(max-width:560px){.site-links{position:static;padding:12px;background:#05060a}.site-links a{flex:1;text-align:center}}
+.fallback a{color:#ffb347}
 `;
 }
 
@@ -123,11 +119,6 @@ ${appCss}
 <body>
 <noscript><p class="fallback-card">JavaScript is disabled. A static fallback report is shown below.</p></noscript>
 <div id="root">${fallbackReport(buildId)}</div>
-<nav class="site-links" aria-label="Site links">
-  <a href="../../../">Project</a>
-  <a href="../../">Reports</a>
-  <a href="${githubUrl}">GitHub</a>
-</nav>
 <script type="module" src="./${bundleName}?v=${buildId}"></script>
 </body>
 </html>
@@ -155,7 +146,7 @@ function rootHtml(buildId) {
 <meta property="og:url" content="${reportUrl}?v=${buildId}">
 <meta http-equiv="refresh" content="0; url=${target}">
 <style>
-:root{--bg:#05060a;--panel:#0d1117;--line:#1e2733;--bone:#d9c9a3;--muted:#8592a5;--amber:#ff8a1f;--mint:#11facb;--danger:#ff2d1f}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 20% 0,rgba(17,250,203,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,138,31,.10),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a);color:#e7ecf3;font-family:Inter,system-ui,Segoe UI,sans-serif}.card{width:min(720px,calc(100% - 32px));border:1px solid var(--line);background:rgba(13,17,23,.94);padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}.k{color:var(--mint);font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}h1{margin:10px 0 0;color:var(--bone);font-size:clamp(32px,7vw,64px);line-height:.92;text-transform:uppercase}p{color:var(--muted);line-height:1.7}a{display:inline-flex;margin-top:14px;border:1px solid var(--amber);color:#ffb347;text-decoration:none;padding:10px 14px;font-weight:1000;text-transform:uppercase;letter-spacing:.14em;font-size:11px}.bar{height:4px;margin-top:18px;background:linear-gradient(90deg,var(--mint),var(--amber),var(--danger))}
+:root{--bg:#05060a;--panel:#0d1117;--line:#1e2733;--bone:#d9c9a3;--muted:#8592a5;--amber:#ff8a1f;--mint:#11facb;--danger:#ff2d1f}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 20% 0,rgba(17,250,203,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,138,31,.10),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a);color:#e7ecf3;font-family:Inter,system-ui,Segoe UI,sans-serif}.card{width:min(720px,calc(100% - 32px));border:1px solid var(--line);background:rgba(13,17,23,.94);padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}.k{color:var(--mint);font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:0}h1{margin:10px 0 0;color:var(--bone);font-size:3.2rem;line-height:.92;text-transform:uppercase}p{color:var(--muted);line-height:1.7}a{display:inline-flex;margin-top:14px;border:1px solid var(--amber);color:#ffb347;text-decoration:none;padding:10px 14px;font-weight:1000;text-transform:uppercase;letter-spacing:0;font-size:11px}.bar{height:4px;margin-top:18px;background:linear-gradient(90deg,var(--mint),var(--amber),var(--danger))}
 </style>
 <script>window.location.replace('${target}');</script>
 </head>
@@ -184,7 +175,7 @@ function reportsIndexHtml(buildId) {
 <meta name="description" content="Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.">
 <meta name="theme-color" content="#05070a">
 <style>
-:root{--bg:#05070a;--ink:#eef8ff;--muted:rgba(238,248,255,.62);--cyan:#00e5ff;--orange:#ff7a00;--green:#16ffc1}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:start center;padding:30px 14px;color:var(--ink);background:repeating-linear-gradient(90deg,rgba(0,229,255,.05) 0 1px,transparent 1px 88px),linear-gradient(180deg,#030405,#070a0d 48%,#030405);font-family:Inter,system-ui,Segoe UI,sans-serif}main{width:min(100%,980px);display:grid;gap:18px}header{display:grid;gap:10px;border-bottom:3px solid rgba(238,248,255,.12);padding-bottom:18px}h1{margin:0;color:var(--orange);font-size:clamp(46px,8vw,96px);line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000}p{margin:0;color:var(--muted);font-size:15px;line-height:1.45;font-weight:780}.report{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;border:5px solid var(--ink);background:#060708;box-shadow:12px 12px 0 var(--orange),-6px -6px 0 var(--cyan),0 28px 80px #000;padding:22px;color:inherit;text-decoration:none}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}h2{margin:8px 0 10px;color:var(--ink);font-size:clamp(28px,4vw,48px);line-height:.95;font-weight:1000;text-transform:uppercase;text-shadow:4px 4px 0 #000}.score{display:grid;place-items:center;min-width:118px;min-height:118px;border:4px solid var(--cyan);background:#0006;box-shadow:6px 6px 0 var(--orange);color:var(--orange);font-size:42px;font-weight:1000;text-shadow:4px 4px 0 #000}.mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mini span{border:2px solid var(--cyan);padding:6px 8px;font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted)}.mini .good{border-color:var(--green);color:var(--green)}@media(max-width:680px){.report{grid-template-columns:1fr}.score{justify-self:start}}
+:root{--bg:#05070a;--ink:#eef8ff;--muted:rgba(238,248,255,.62);--cyan:#00e5ff;--orange:#ff7a00;--green:#16ffc1}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:start center;padding:30px 14px;color:var(--ink);background:repeating-linear-gradient(90deg,rgba(0,229,255,.05) 0 1px,transparent 1px 88px),linear-gradient(180deg,#030405,#070a0d 48%,#030405);font-family:Inter,system-ui,Segoe UI,sans-serif}main{width:min(100%,980px);display:grid;gap:18px}header{display:grid;gap:10px;border-bottom:3px solid rgba(238,248,255,.12);padding-bottom:18px}h1{margin:0;color:var(--orange);font-size:3.4rem;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000}p{margin:0;color:var(--muted);font-size:15px;line-height:1.45;font-weight:780}.report{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;border:5px solid var(--ink);background:#060708;box-shadow:12px 12px 0 var(--orange),-6px -6px 0 var(--cyan),0 28px 80px #000;padding:22px;color:inherit;text-decoration:none}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}h2{margin:8px 0 10px;color:var(--ink);font-size:2.4rem;line-height:.95;font-weight:1000;text-transform:uppercase;text-shadow:4px 4px 0 #000}.score{display:grid;place-items:center;min-width:118px;min-height:118px;border:4px solid var(--cyan);background:#0006;box-shadow:6px 6px 0 var(--orange);color:var(--orange);font-size:42px;font-weight:1000;text-shadow:4px 4px 0 #000}.mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mini span{border:2px solid var(--cyan);padding:6px 8px;font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted)}.mini .good{border-color:var(--green);color:var(--green)}@media(max-width:680px){.report{grid-template-columns:1fr}.score{justify-self:start}}
 </style>
 </head>
 <body>
@@ -227,7 +218,7 @@ function notFoundHtml(buildId) {
 <link rel="icon" href="data:,">
 <meta name="robots" content="noindex">
 <style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060a;color:#e7ecf3;font-family:Inter,system-ui,Segoe UI,sans-serif}.card{width:min(680px,calc(100% - 32px));border:1px solid #1e2733;background:#0d1117;padding:28px}h1{margin:0;color:#d9c9a3;font-size:clamp(36px,8vw,72px);text-transform:uppercase}p{color:#8592a5;line-height:1.7}a{color:#ffb347;font-weight:900}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060a;color:#e7ecf3;font-family:Inter,system-ui,Segoe UI,sans-serif}.card{width:min(680px,calc(100% - 32px));border:1px solid #1e2733;background:#0d1117;padding:28px}h1{margin:0;color:#d9c9a3;font-size:3.2rem;text-transform:uppercase}p{color:#8592a5;line-height:1.7}a{color:#ffb347;font-weight:900}
 </style>
 </head>
 <body>
