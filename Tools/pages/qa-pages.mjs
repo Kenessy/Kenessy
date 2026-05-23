@@ -1,0 +1,299 @@
+import { createServer } from 'node:http';
+import { execFileSync } from 'node:child_process';
+import { readFile, stat } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright';
+
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, '../..');
+const docsRoot = path.join(repoRoot, 'docs');
+const mode = process.argv.includes('--live') ? 'live' : 'local';
+const liveBase = 'https://kenessy.github.io/Kenessy/';
+const reportPath = 'plater-game-reports/games/metro-2033-redux/';
+const bundleName = 'main_canvas_diegetic_equation.bundle.js';
+const sourceName = 'main_canvas_diegetic_equation.jsx';
+const expectedLiveReportUrl = new URL(reportPath, liveBase).toString();
+
+function checkpoint(message) {
+  console.log(`[qa:pages:${mode}] ${new Date().toISOString()} ${message}`);
+}
+
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
+function gitStatus() {
+  return execFileSync('git', ['-C', repoRoot, 'status', '--porcelain'], { encoding: 'utf8' });
+}
+
+function contentType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  if (ext === '.html') return 'text/html; charset=utf-8';
+  if (ext === '.js') return 'application/javascript; charset=utf-8';
+  if (ext === '.xml') return 'application/xml; charset=utf-8';
+  if (ext === '.txt') return 'text/plain; charset=utf-8';
+  return 'application/octet-stream';
+}
+
+async function fileExists(filePath) {
+  try {
+    await stat(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function startServer() {
+  const server = createServer(async (req, res) => {
+    try {
+      const requestUrl = new URL(req.url || '/', 'http://127.0.0.1');
+      let pathname = decodeURIComponent(requestUrl.pathname);
+      if (pathname.endsWith('/')) pathname += 'index.html';
+      const candidate = path.resolve(docsRoot, `.${pathname}`);
+      const relativeCandidate = path.relative(docsRoot, candidate);
+      if (relativeCandidate.startsWith('..') || path.isAbsolute(relativeCandidate)) {
+        res.writeHead(403);
+        res.end('Forbidden');
+        return;
+      }
+      if (await fileExists(candidate)) {
+        res.writeHead(200, { 'content-type': contentType(candidate), 'cache-control': 'no-store' });
+        res.end(await readFile(candidate));
+        return;
+      }
+      const notFound = path.join(docsRoot, '404.html');
+      res.writeHead(404, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' });
+      res.end(await readFile(notFound));
+    } catch (error) {
+      res.writeHead(500, { 'content-type': 'text/plain; charset=utf-8' });
+      res.end(error.stack || error.message);
+    }
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  const address = server.address();
+  return { server, base: `http://127.0.0.1:${address.port}/` };
+}
+
+async function fetchText(url, expectedStatus = 200) {
+  const response = await fetch(url, { cache: 'no-store' });
+  const text = await response.text();
+  assert(response.status === expectedStatus, `${url} returned ${response.status}, expected ${expectedStatus}`);
+  return { response, text };
+}
+
+function url(base, relativePath = '') {
+  return new URL(relativePath, base).toString();
+}
+
+function extractBuildId(html) {
+  const match = html.match(/name="build-id" content="([^"]+)"/);
+  assert(match, 'build-id meta tag missing');
+  return match[1];
+}
+
+async function launchBrowser() {
+  const attempts = [
+    { headless: true },
+    { headless: true, channel: 'msedge' },
+    { headless: true, channel: 'chrome' }
+  ];
+  let lastError;
+  for (const options of attempts) {
+    try {
+      return await chromium.launch(options);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError;
+}
+
+async function auditHttpSurface(base) {
+  checkpoint('checking HTTP surface');
+  const root = await fetchText(url(base));
+  const buildId = extractBuildId(root.text);
+  assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root redirect does not reference current build id');
+
+  const reports = await fetchText(url(base, 'plater-game-reports/'));
+  assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
+
+  const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
+  assert(report.text.includes(`${bundleName}?v=${buildId}`), 'report HTML does not load versioned bundle');
+  assert(report.text.includes('<noscript>'), 'report HTML is missing noscript fallback');
+  assert(/atmosphere-first survival FPS/i.test(report.text), 'report fallback summary is missing meaningful content');
+  assert(!report.text.includes('https://esm.sh/'), 'report still depends on esm.sh import map');
+  assert(!report.text.includes('type="importmap"'), 'report still includes an import map');
+
+  const bundle = await fetchText(url(base, `${reportPath}${bundleName}?v=${buildId}`));
+  assert(bundle.text.includes('createRoot'), 'bundle does not include React render entry');
+  assert(bundle.text.includes('Metro 2033 Redux') && bundle.text.includes('Developer diagnostics'), 'bundle does not include Metro report content');
+  assert(!/\bfrom\s*["']react/.test(bundle.text), 'bundle still imports React externally');
+  assert(!bundle.text.includes('https://esm.sh/'), 'bundle still references esm.sh');
+
+  const robots = await fetchText(url(base, 'robots.txt'));
+  assert(robots.text.includes('Sitemap:'), 'robots.txt missing sitemap reference');
+
+  const sitemap = await fetchText(url(base, 'sitemap.xml'));
+  assert(sitemap.text.includes(expectedLiveReportUrl), 'sitemap missing live report URL');
+
+  await fetchText(url(base, 'missing-page-for-qa.html'), 404);
+  await fetchText(url(base, `${reportPath}${sourceName}`), 404);
+  checkpoint(`HTTP surface ok build=${buildId}`);
+  return buildId;
+}
+
+async function auditViewports(browser, base, buildId) {
+  checkpoint('checking browser viewports');
+  const viewports = [
+    { name: 'mobile-360', width: 360, height: 740 },
+    { name: 'mobile-390', width: 390, height: 844 },
+    { name: 'tablet-768', width: 768, height: 1024 },
+    { name: 'desktop-1280', width: 1280, height: 720 },
+    { name: 'desktop-1920', width: 1920, height: 1080 }
+  ];
+
+  for (const viewport of viewports) {
+    checkpoint(`viewport ${viewport.name}`);
+    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, deviceScaleFactor: 1 });
+    const page = await context.newPage();
+    const consoleErrors = [];
+    const pageErrors = [];
+    const failedRequests = [];
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+    page.on('requestfailed', (request) => failedRequests.push(`${request.url()} ${request.failure()?.errorText || ''}`));
+    const response = await page.goto(`${url(base)}?qa=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+    await page.waitForTimeout(1200);
+    assert(response?.status() === 200, `${viewport.name} root returned ${response?.status()}`);
+    const metrics = await page.evaluate(() => {
+      const root = document.documentElement;
+      const visible = [...document.querySelectorAll('*')].filter((el) => {
+        const rect = el.getBoundingClientRect();
+        const style = getComputedStyle(el);
+        return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+      });
+      const meaningfulOverflow = visible.filter((el) => {
+        const rect = el.getBoundingClientRect();
+        const className = String(el.className);
+        if (/scr-keyword-glow|scr-score-panel-glare/.test(className)) return false;
+        return rect.right > window.innerWidth + 1 || rect.left < -1;
+      }).slice(0, 5).map((el) => ({ tag: el.tagName, className: String(el.className), text: (el.textContent || '').trim().slice(0, 80) }));
+      return {
+        finalUrl: location.href,
+        title: document.title,
+        hasRoot: Boolean(document.querySelector('.scr-root')),
+        diagnostics: document.body.textContent.includes('15/15 checks passing'),
+        h1: document.querySelector('h1')?.textContent.trim(),
+        horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
+        rootWidth: root.scrollWidth,
+        clientWidth: root.clientWidth,
+        meaningfulOverflow,
+        summaryCount: document.querySelectorAll('summary').length,
+        links: document.querySelectorAll('a').length,
+        bodyPrefix: document.body.textContent.trim().replace(/\s+/g, ' ').slice(0, 120)
+      };
+    });
+    assert(metrics.finalUrl.includes(`${reportPath}?v=${buildId}`), `${viewport.name} did not land on versioned report`);
+    assert(metrics.hasRoot, `${viewport.name} did not render React root`);
+    assert(metrics.diagnostics, `${viewport.name} missing 15/15 diagnostics`);
+    assert(metrics.h1 === 'Metro 2033 Redux', `${viewport.name} unexpected h1 ${metrics.h1}`);
+    assert(!metrics.horizontalOverflow, `${viewport.name} has horizontal overflow ${metrics.rootWidth}/${metrics.clientWidth}`);
+    assert(metrics.meaningfulOverflow.length === 0, `${viewport.name} has meaningful offscreen elements ${JSON.stringify(metrics.meaningfulOverflow)}`);
+    assert(metrics.summaryCount >= 2, `${viewport.name} expected details summaries`);
+    assert(metrics.links >= 3, `${viewport.name} expected visible navigation links`);
+    assert(!metrics.bodyPrefix.startsWith('.scr-root'), `${viewport.name} body text starts with runtime CSS`);
+    assert(consoleErrors.length === 0, `${viewport.name} console errors: ${consoleErrors.join(' | ')}`);
+    assert(pageErrors.length === 0, `${viewport.name} page errors: ${pageErrors.join(' | ')}`);
+    assert(failedRequests.length === 0, `${viewport.name} failed requests: ${failedRequests.join(' | ')}`);
+
+    const summaryCount = await page.locator('summary').count();
+    assert(summaryCount >= 2, `${viewport.name} expected summaries to be clickable`);
+    await page.locator('summary').first().click();
+    await page.waitForTimeout(200);
+    const openDetails = await page.evaluate(() => [...document.querySelectorAll('details')].filter((detail) => detail.open).length);
+    assert(openDetails >= 1, `${viewport.name} details did not open`);
+    await context.close();
+  }
+  checkpoint('browser viewports ok');
+}
+
+async function auditFailureModes(browser, base, buildId) {
+  checkpoint('checking failure modes');
+  const reportUrl = url(base, `${reportPath}?v=${buildId}`);
+
+  const noJsContext = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const noJsPage = await noJsContext.newPage();
+  const noJsResponse = await noJsPage.goto(`${reportUrl}&qa=nojs`, { waitUntil: 'load', timeout: 30000 });
+  assert(noJsResponse?.status() === 200, `no-JS page returned ${noJsResponse?.status()}`);
+  const noJs = await noJsPage.evaluate(() => ({
+    hasNoscript: Boolean(document.querySelector('noscript')),
+    hasReportContent: /Atmosphere-first survival FPS|Static fallback|Strong, caveated buy/.test(document.body.textContent),
+    text: document.body.textContent.trim().replace(/\s+/g, ' ').slice(0, 200)
+  }));
+  assert(noJs.hasNoscript, 'no-JS mode missing noscript element');
+  assert(noJs.hasReportContent, `no-JS mode lacks meaningful fallback: ${noJs.text}`);
+  await noJsContext.close();
+
+  const blockedContext = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const blockedPage = await blockedContext.newPage();
+  const errors = [];
+  blockedPage.on('console', (msg) => {
+    if (msg.type() === 'error') errors.push(msg.text());
+  });
+  await blockedPage.route('https://esm.sh/**', (route) => route.abort());
+  const blockedResponse = await blockedPage.goto(`${reportUrl}&qa=cdn-block`, { waitUntil: 'load', timeout: 30000 });
+  await blockedPage.waitForTimeout(1000);
+  assert(blockedResponse?.status() === 200, `CDN-block page returned ${blockedResponse?.status()}`);
+  const blocked = await blockedPage.evaluate(() => ({
+    hasRoot: Boolean(document.querySelector('.scr-root')),
+    diagnostics: document.body.textContent.includes('15/15 checks passing')
+  }));
+  assert(blocked.hasRoot && blocked.diagnostics, 'blocking esm.sh should not affect local runtime bundle');
+  assert(errors.length === 0, `CDN-block mode produced console errors: ${errors.join(' | ')}`);
+  await blockedContext.close();
+
+  checkpoint('failure modes ok');
+}
+
+async function main() {
+  checkpoint('start');
+  const beforeStatus = gitStatus();
+  let serverHandle;
+  let base = liveBase;
+  if (mode === 'local') {
+    serverHandle = await startServer();
+    base = serverHandle.base;
+    checkpoint(`local server ${base}`);
+  }
+
+  try {
+    const buildId = await auditHttpSurface(base);
+    const browser = await launchBrowser();
+    try {
+      await auditViewports(browser, base, buildId);
+      await auditFailureModes(browser, base, buildId);
+    } finally {
+      await browser.close();
+    }
+
+    const afterStatus = gitStatus();
+    assert(afterStatus === beforeStatus, 'QA changed git working tree state');
+    checkpoint('all checks passed');
+  } finally {
+    if (serverHandle) {
+      await new Promise((resolve) => serverHandle.server.close(resolve));
+      checkpoint('local server stopped');
+    }
+  }
+}
+
+main().catch((error) => {
+  console.error(`[qa:pages:${mode}] failed: ${error.stack || error.message}`);
+  process.exit(1);
+});
