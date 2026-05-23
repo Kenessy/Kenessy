@@ -61,13 +61,13 @@ const FIT_VERDICTS = [
 ];
 
 const INSPECT_FIT = [
-  { letter: 'I', name: 'Immersion', score: 10, color: COLORS.atmosphereIndigo, hint: 'World presence' },
-  { letter: 'N', name: 'Narrative', score: 8, color: COLORS.engagementPink, hint: 'Story pull' },
-  { letter: 'S', name: 'Systems', score: 2, color: COLORS.lime, hint: 'Buildcraft' },
-  { letter: 'P', name: 'Performance', score: 5, color: COLORS.technicalBlue, hint: 'Skill play' },
-  { letter: 'E', name: 'Exploration', score: 6, color: COLORS.retroMint, hint: 'Route curiosity' },
-  { letter: 'C', name: 'Comfort', score: 4, color: COLORS.loopAmber, hint: 'Low friction' },
-  { letter: 'T', name: 'Teamplay', score: 1, color: COLORS.danger, hint: 'Social layer' },
+  { letter: 'I', name: 'Immersion', score: 10, color: COLORS.atmosphereIndigo, hint: 'World presence', player: 'Wants to feel inside a hostile place.' },
+  { letter: 'N', name: 'Narrative', score: 8, color: COLORS.engagementPink, hint: 'Story pull', player: 'Likes dialogue, scenes, and authored stakes.' },
+  { letter: 'S', name: 'Systems', score: 2, color: COLORS.lime, hint: 'Buildcraft', player: 'Needs builds, loot depth, or sandbox knobs.' },
+  { letter: 'P', name: 'Performance', score: 5, color: COLORS.technicalBlue, hint: 'Skill play', player: 'Chases crisp combat mastery and clean input.' },
+  { letter: 'E', name: 'Exploration', score: 6, color: COLORS.retroMint, hint: 'Route curiosity', player: 'Checks corners, side paths, and hidden supplies.' },
+  { letter: 'C', name: 'Comfort', score: 4, color: COLORS.loopAmber, hint: 'Low friction', player: 'Wants smooth pacing and low old-FPS friction.' },
+  { letter: 'T', name: 'Teamplay', score: 1, color: COLORS.danger, hint: 'Social layer', player: 'Looks for co-op, PvP, or shared-session play.' },
 ];
 
 const ALERT_DEFINITIONS = [
@@ -308,6 +308,7 @@ function InspectFitMetric({ row }) {
         <div className="scr-inspect-name">{row.name}</div>
       </div>
       <SignalMeterBlock className="scr-inspect-meter" value={row.score} color={row.color} activeRows={activeRows} />
+      <div className="scr-inspect-player">{row.player}</div>
     </article>
   );
 }
@@ -727,8 +728,9 @@ const TEMPLATE_CSS = `
 .scr-inspect-name{max-width:100%;color:var(--tone);font-size:var(--scr-type-tile-label);font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .scr-inspect-meter{width:100%;min-height:134px;flex:none}
 .scr-inspect-meter .scr-tile-value{font-size:3.3rem}
+.scr-inspect-player{min-height:3.15rem;color:#9aa7b8;font-size:.72rem;font-weight:760;line-height:1.32;text-wrap:balance}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem .35rem}.scr-inspect-metric{padding:.25rem}.scr-inspect-headline{min-height:2.35rem}.scr-inspect-meter{min-height:116px}.scr-inspect-meter .scr-tile-value{font-size:2.9rem}.scr-inspect-letter{font-size:1.45rem}}
+@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem .35rem}.scr-inspect-metric{padding:.25rem}.scr-inspect-headline{min-height:2.35rem}.scr-inspect-meter{min-height:116px}.scr-inspect-meter .scr-tile-value{font-size:2.9rem}.scr-inspect-letter{font-size:1.45rem}.scr-inspect-player{min-height:3.35rem;font-size:.68rem;line-height:1.3}}
 `;
