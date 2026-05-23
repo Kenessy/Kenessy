@@ -187,7 +187,8 @@ async function auditViewport(browser, base, buildId, viewport) {
       arc: document.querySelectorAll('.scr-evidence-marker.scr-score-meter-box.scr-signal-block').length,
       inspect: document.querySelectorAll('.scr-inspect-meter.scr-score-meter-box.scr-signal-block').length,
       inspectInScorePanel: document.querySelectorAll('.scr-score-panel .scr-inspect-panel').length,
-      inspectAfterIdentity: Boolean(document.querySelector('.scr-hero-copy .scr-identity + .scr-inspect-panel')),
+      inspectInCopy: document.querySelectorAll('.scr-hero-copy .scr-inspect-panel').length,
+      inspectFullRow: Boolean(document.querySelector('.scr-hero-grid > .scr-hero-inspect-row .scr-inspect-panel')),
       meterScreens: document.querySelectorAll('.scr-score-meter-box.scr-signal-block .scr-meter-screen').length
     };
     const siteLinks = document.querySelector('.site-links');
@@ -243,7 +244,7 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.scoreNavOverlap, `${viewport.name} navigation overlaps score panel`);
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
-  assert(metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspect === 7 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectAfterIdentity && metrics.signalBlocks.meterScreens === 28, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspect === 7 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectFullRow && metrics.signalBlocks.meterScreens === 28, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.scoreStartsBeforeFold, `${viewport.name} score panel starts too late in the first viewport`);
   assert(viewport.width < 1120 || metrics.scoreFullyVisible, `${viewport.name} score panel is not fully framed in first viewport`);
   assert(viewport.width < 1120 || metrics.nextSectionHint, `${viewport.name} does not show the next section cue in the first viewport`);
