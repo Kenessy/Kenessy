@@ -182,9 +182,10 @@ async function auditViewport(browser, base, buildId, viewport) {
     const verdictStripRect = verdictStrip ? rectFor(verdictStrip) : null;
     const verdictStripText = (verdictStrip?.textContent || '').replace(/\s+/g, ' ').trim();
     const signalBlocks = {
-      score: document.querySelectorAll('.scr-score-meter-box.scr-signal-block').length,
-      axis: document.querySelectorAll('.scr-d20-wrap.scr-signal-block').length,
-      arc: document.querySelectorAll('.scr-evidence-marker.scr-signal-block').length
+      score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
+      axis: document.querySelectorAll('.scr-d20-wrap.scr-score-meter-box.scr-signal-block').length,
+      arc: document.querySelectorAll('.scr-evidence-marker.scr-score-meter-box.scr-signal-block').length,
+      meterScreens: document.querySelectorAll('.scr-score-meter-box.scr-signal-block .scr-meter-screen').length
     };
     const siteLinks = document.querySelector('.site-links');
     const floatingSiteLinks = siteLinks ? getComputedStyle(siteLinks).position === 'fixed' && isVisible(siteLinks) : false;
@@ -239,7 +240,7 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.scoreNavOverlap, `${viewport.name} navigation overlaps score panel`);
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
-  assert(metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9, `${viewport.name} signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.meterScreens === 21, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.scoreStartsBeforeFold, `${viewport.name} score panel starts too late in the first viewport`);
   assert(viewport.width < 1120 || metrics.scoreFullyVisible, `${viewport.name} score panel is not fully framed in first viewport`);
   assert(viewport.width < 1120 || metrics.nextSectionHint, `${viewport.name} does not show the next section cue in the first viewport`);
