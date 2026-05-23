@@ -123,6 +123,7 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');
   assert(!/\.site-links\{position:fixed/i.test(report.text), 'report still has floating nav overlay CSS');
   assert(report.text.includes('.scr-hud-links a'), 'report CSS is missing HUD link styling');
+  assert(report.text.includes('.scr-hero-verdict-strip>div'), 'hero verdict strip is missing base cell styling');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -170,8 +171,15 @@ async function auditViewport(browser, base, buildId, viewport) {
     const hudLinks = [...document.querySelectorAll('.scr-hud-links a')].filter(isVisible).map((el) => rectFor(el));
     const score = document.querySelector('.scr-score-panel');
     const scoreRect = score ? rectFor(score) : null;
+    const hero = document.querySelector('.scr-hero');
+    const heroRect = hero ? rectFor(hero) : null;
+    const firstContentSection = document.querySelector('.scr-shell > section:nth-of-type(2)');
+    const firstContentRect = firstContentSection ? rectFor(firstContentSection) : null;
     const h1 = document.querySelector('.scr-hero h1');
     const h1Rect = h1 ? rectFor(h1) : null;
+    const verdictStrip = document.querySelector('.scr-hero-verdict-strip');
+    const verdictStripRect = verdictStrip ? rectFor(verdictStrip) : null;
+    const verdictStripText = (verdictStrip?.textContent || '').replace(/\s+/g, ' ').trim();
     const siteLinks = document.querySelector('.site-links');
     const floatingSiteLinks = siteLinks ? getComputedStyle(siteLinks).position === 'fixed' && isVisible(siteLinks) : false;
     const scoreNavOverlap = scoreRect ? hudLinks.some((rect) => {
@@ -195,8 +203,15 @@ async function auditViewport(browser, base, buildId, viewport) {
       negativeTracking,
       floatingSiteLinks,
       scoreNavOverlap,
+      scoreFullyVisible: scoreRect ? scoreRect.top >= 0 && scoreRect.bottom <= window.innerHeight : false,
+      scoreStartsBeforeFold: scoreRect ? scoreRect.top < window.innerHeight * 0.86 : false,
+      nextSectionHint: firstContentRect ? firstContentRect.top <= window.innerHeight - 16 : false,
       scoreRect,
+      heroRect,
+      firstContentRect,
       h1Rect,
+      verdictStripRect,
+      verdictStripText,
       minParagraphSize,
       screenshotPath: null
     };
@@ -216,7 +231,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.floatingSiteLinks, `${viewport.name} still has floating site links`);
   assert(!metrics.scoreNavOverlap, `${viewport.name} navigation overlaps score panel`);
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
-  assert(viewport.width < 1120 || (metrics.scoreRect && metrics.scoreRect.top < viewport.height && metrics.scoreRect.right <= viewport.width + 1), `${viewport.name} score panel is not framed in first viewport`);
+  assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
+  assert(metrics.scoreStartsBeforeFold, `${viewport.name} score panel starts too late in the first viewport`);
+  assert(viewport.width < 1120 || metrics.scoreFullyVisible, `${viewport.name} score panel is not fully framed in first viewport`);
+  assert(viewport.width < 1120 || metrics.nextSectionHint, `${viewport.name} does not show the next section cue in the first viewport`);
   assert(metrics.minParagraphSize >= 13, `${viewport.name} paragraph text too small: ${metrics.minParagraphSize}`);
   assert(consoleErrors.length === 0, `${viewport.name} console errors: ${consoleErrors.join(' | ')}`);
   assert(failedRequests.length === 0, `${viewport.name} failed requests: ${failedRequests.join(' | ')}`);
