@@ -1,0 +1,792 @@
+// ../../tmp/metro-pages-entry.jsx
+import { createRoot } from "react-dom/client";
+
+// docs/plater-game-reports/games/metro-2033-redux/main_canvas_diegetic_equation.jsx
+import { useEffect, useMemo, useState } from "react";
+import { jsx, jsxs } from "react/jsx-runtime";
+var COLORS = {
+  bg: "#05060a",
+  panel: "#0d1117",
+  panel2: "#11161f",
+  line: "#1e2733",
+  line2: "#2a3444",
+  bone: "#d9c9a3",
+  bone2: "#b8a982",
+  ink: "#e7ecf3",
+  muted: "#8592a5",
+  dim: "#5a6678",
+  amber: "#ff8a1f",
+  loopAmber: "#FFB000",
+  amber2: "#ffb347",
+  red2: "#ff6a5a",
+  engagementPink: "#ff005d",
+  danger: "#ff2d1f",
+  cyan: "#5ddcff",
+  atmosphereIndigo: "#7C6DFF",
+  green: "#7cff6b",
+  retroMint: "#11FACB",
+  technicalBlue: "#2B7FFF",
+  violet: "#c056ff",
+  lime: "#b6f505"
+};
+var REVIEW = {
+  game: "Metro 2033 Redux",
+  framework: "Cinematic Action-Horror FPS",
+  lens: "ALERTED Field Report",
+  score: 86,
+  scoreVerdict: "Strong \xB7 Caveated Buy",
+  reviewStatus: "Complete",
+  evidenceBase: "Full run / veteran memory",
+  confidence: "High, caveated",
+  spoilerPolicy: "Layered policy",
+  verdictRisk: "Ending reconstructed",
+  rawScore: 90,
+  friction: -4,
+  rank: "A",
+  action: "Buy if atmosphere-first survival FPS fits you",
+  confidenceScore: 88,
+  mainPull: "Atmosphere / world pressure",
+  mainDrag: "Limited agency",
+  mainRisk: "Old-FPS monster friction",
+  nextTest: "Clean Tower capture / alternate ending route",
+  evidenceProtocol: "Full run \xB7 veteran memory \xB7 9 evidence arcs \xB7 ending reconstructed \xB7 friction disclosed",
+  snapshotNote: "Lens-specific review: cinematic survival-horror FPS, not a universal sandbox verdict",
+  oneLineIdentity: "Metro 2033 Redux is a linear survival-horror FPS about crossing a living underground world, built around resource pressure and authored escalation, best for atmosphere-first players, but limited by bounded agency and old-FPS monster friction.",
+  thesis: "Dense, authored, atmosphere-first action horror. Metro is not about escaping darkness into truth. It is about learning that darkness is uncertainty, light is exposure, and seeing more does not always mean understanding more."
+};
+var FIT_VERDICTS = [
+  { label: "Buy if", value: "Atmosphere-first survival FPS", text: "You want authored pressure, dense world texture, horror pacing, and resource tension.", tone: COLORS.green },
+  { label: "Works if", value: "Linear narrative-FPS player", text: "You accept bounded agency because pacing, cohesion, and survival pressure matter more than open-ended route authorship.", tone: COLORS.cyan },
+  { label: "Skip if", value: "Sandbox / RPG-agency first", text: "You need open systems, build freedom, broad route authorship, or player-made solutions as the main reward.", tone: COLORS.amber }
+];
+var INSPECT_FIT = [
+  { letter: "I", name: "Immersion", score: 10, color: COLORS.atmosphereIndigo, hint: "World presence" },
+  { letter: "N", name: "Narrative", score: 8, color: COLORS.engagementPink, hint: "Story pull" },
+  { letter: "S", name: "Systems", score: 2, color: COLORS.lime, hint: "Buildcraft" },
+  { letter: "P", name: "Performance", score: 5, color: COLORS.technicalBlue, hint: "Skill play" },
+  { letter: "E", name: "Exploration", score: 6, color: COLORS.retroMint, hint: "Route curiosity" },
+  { letter: "C", name: "Comfort", score: 4, color: COLORS.loopAmber, hint: "Low friction" },
+  { letter: "T", name: "Teamplay", score: 1, color: COLORS.danger, hint: "Social layer" }
+];
+var ALERT_DEFINITIONS = [
+  { letter: "A", name: "Atmosphere", micro: "World pressure", color: COLORS.atmosphereIndigo, definition: "Mood, sensory density, world texture, environmental pressure, and emotional pull." },
+  { letter: "L", name: "Loop", micro: "Play engine", color: COLORS.loopAmber, definition: "The repeated play pattern and whether those actions stay satisfying." },
+  { letter: "E", name: "Engagement", micro: "Forward pull", color: COLORS.engagementPink, definition: "Motivation, pacing, variety, progression, fatigue resistance, and desire to continue." },
+  { letter: "R", name: "Readability", micro: "Fair clarity", color: COLORS.retroMint, definition: "Fairness, clarity, feedback, telegraphing, route legibility, and rule communication." },
+  { letter: "T", name: "Technical", micro: "Product state", color: COLORS.technicalBlue, definition: "Stability, performance, settings, platform support, setup friction, and modern play condition." },
+  { letter: "E", name: "Extra", micro: "Lens modifier", color: COLORS.lime, definition: "A contextual modifier for important fit limits that should affect score without becoming a universal main axis." },
+  { letter: "D", name: "Danger", micro: "Risk pool", color: COLORS.danger, definition: "Concrete problems, edge cases, roughness, and warning items that stay visible instead of hidden inside broad praise." }
+];
+var AXES = [
+  { name: "Atmosphere", letter: "A", score: 20, grade: "Phenomenal", color: COLORS.atmosphereIndigo, descriptor: "World pressure", text: "Lived-in stations, gunfire-lit frontlines, lighter-lit stealth routes, ghost-haunted tunnels, surface exposure, and industrial decay make Metro feel dense, hostile, and inhabited. Light rarely means safety; it usually means exposure, and the only thing scarier than an abandoned station is one that is not abandoned." },
+  { name: "Loop", letter: "L", score: 17, grade: "Excellent", color: COLORS.loopAmber, descriptor: "Play engine", text: "Metro's loop is curated survival economy rather than a loot treadmill: scavenge bullets, filters, pneumatic pressure, hidden stashes, and route knowledge, then spend those advantages pushing through firefights, stealth routes, surface air, and mutant pressure." },
+  { name: "Engagement", letter: "E", score: 17, grade: "Excellent", color: COLORS.engagementPink, descriptor: "Forward pull", text: "Metro stays engaging not by offering endless paths, but by making each authored space feel worth crossing. Quiet station life, tunnel runs, surface exposure, stealth routes, faction fronts, horror gates, dead machinery, and the final climb keep changing the kind of pressure." },
+  { name: "Readability", letter: "R", score: 17, grade: "Excellent", color: COLORS.retroMint, descriptor: "Fair clarity", text: "Metro is readable where its human and survival layers are strongest: headshots, stealth routes, filters, masks, light exposure, and resource pressure usually communicate their rules clearly. The ceiling drops around monsters and retrofitted stealth systems." },
+  { name: "Technical", letter: "T", score: 19, grade: "Excellent+", color: COLORS.technicalBlue, descriptor: "Product state", text: "Redux is the right way to play Metro 2033: stable, complete, modernized, and rebuilt away from the rougher original release. The local Tower/FOV capture issue is small, but it belongs inside the technical score rather than being hidden in the friction ledger." }
+];
+var MODIFIERS = [
+  { name: "Extra", letter: "E", value: -3, maxLoss: 10, label: "Limited Agency", descriptor: "Agency modifier", color: COLORS.lime, type: "Context modifier", text: "Strong direction, but limited route authorship and systemic freedom. Not a bug, this is a player-fit ceiling: negative for sandbox authorship seekers, neutral or positive for players who want authored pressure." },
+  { name: "Danger", letter: "D", value: -1, maxLoss: 10, label: "Residual Friction", descriptor: "Risk/friction pool", color: COLORS.danger, type: "Risk pool", text: "Four small, evidence-backed roughness deductions remain after the main axis scores. Each item below sums into this subtotal." }
+];
+var FRICTION_ITEMS = [
+  { name: "Librarian Pathing Ambiguity", value: -0.25, severity: "Minor issue", evidence: "Behavior-rule inconsistency", color: COLORS.amber2, text: "The stare-and-retreat rule exists, but pathing can still send a non-hostile Librarian toward the player and make the rule look mechanically inconsistent." },
+  { name: "Demon Grab / Drop Weirdness", value: -0.25, severity: "Minor issue", evidence: "Aerial pathing edge case", color: COLORS.amber, text: "Demon attacks can feel unclear when grab-and-drop behavior interacts with inaccessible rooftops or awkward movement zones." },
+  { name: "Retrofitted Stealth Affordances", value: -0.25, severity: "Minor roughness", evidence: "Redux retrofit roughness", color: COLORS.amber, text: "Bulbs, fires, and electrical boxes improve stealth readability, but they feel less foundational and less consistently authored than in Last Light." },
+  { name: "Point-Blank Hit Evasion", value: -0.25, severity: "Minor issue", evidence: "Monster hit-response oddity", color: COLORS.red2, text: "Close-range mutants, especially Nosalises, can appear to sidestep or slip past point-blank shots in ways that make shotgun and close combat feedback feel mechanically unreliable." }
+];
+var INSIGHTS = [
+  { title: "Darkness as Possibility", label: "Spoiler-light thesis", color: COLORS.atmosphereIndigo, text: "Metro's darkness is not just danger. It is a superposition of threat, shelter, reward, story, and nothing at all." },
+  { title: "Light as Exposure", label: "Spoiler-light thesis", color: COLORS.amber, text: "Light in Metro does not simply reveal the world. It collapses uncertainty. Visibility becomes exposure, exposure demands a reaction, and that reaction is often violence." },
+  { title: "Sight Is Not Understanding", label: "Spoiler-light thesis", color: COLORS.retroMint, text: "Visibility in Metro is both gameplay and story logic. Shadows are not only where danger hides, they are also a protective curtain that lets separate worlds exist beside each other." },
+  { title: "The Final Climb", label: "Spoiler-light thesis", color: COLORS.violet, text: "The final climb completes Metro\u2019s visibility arc without turning it into simple enlightenment. Artyom moves upward from tunnels into a vantage point where he can finally judge." }
+];
+var AUDIT_CHECKS = [
+  { label: "Lens Honesty", title: "Actual use-case is named", tone: COLORS.retroMint, text: "The report judges Metro as cinematic survival-horror FPS, not sandbox RPG, MMO, or buildcraft game." },
+  { label: "Comfort Bias", title: "Atmosphere does not erase friction", tone: COLORS.loopAmber, text: "The strongest axis is allowed to shine, but E and D still remove points from the final score." },
+  { label: "Friction Blindness", title: "Problems stay itemized", tone: COLORS.danger, text: "Monster feedback, pathing ambiguity, retrofit stealth roughness, and local capture caveats remain visible." },
+  { label: "Audience Confusion", title: "Fit is separated from quality", tone: COLORS.cyan, text: "The buy advice explicitly separates players who want authored pressure from players who need open systems." },
+  { label: "Sampling Bias", title: "Full-route evidence base", tone: COLORS.atmosphereIndigo, text: "The verdict is based on a full remembered route, not a single unusually strong early segment." },
+  { label: "Falsifier", title: "What would move the score", tone: COLORS.engagementPink, text: "Cleaner monster readability, stronger route authorship, or repeated technical problems would move the final score." },
+  { label: "Spectacle Bias", title: "Mood is not treated as enough", tone: COLORS.violet, text: "The report separates atmospheric power from loop, readability, and agency so the mood does not hide shallow or rough parts." },
+  { label: "Patch Volatility", title: "Stable old build, low volatility", tone: COLORS.technicalBlue, text: "Metro 2033 Redux is not a live-service target, so patch volatility is low, but local PC capture quirks are still disclosed." }
+];
+var EVIDENCE_ARCS = [
+  { id: "01", title: "Exhibition \u2192 Riga \u2192 Bourbon Deal", spoiler: "light", color: COLORS.atmosphereIndigo, observation: "Exhibition opens not as a safe home, but as a home under siege. Lamps, beds, workers, sick rooms, and Hunter\u2019s return make the station feel lived-in before the threat breaks through.", proof: "The first tunnel performs Metro\u2019s core trick: human noise fades into dripping water, distant howls, warning lights, black shadows, anomaly logic, and Dark One vision.", caveat: "The route is guided, the early economy is shallow, and replay knowledge softens discovery.", impact: "Atmosphere \xB7 Engagement \xB7 Readability" },
+  { id: "02", title: "Bourbon / Lost Tunnels / Bridge", spoiler: "light", color: COLORS.loopAmber, observation: "Bourbon is a strange, damaged guide who tries to stay fair while remaining self-interested and compromised.", proof: "The Bourbon arc proves that Metro\u2019s exploration is curated rather than empty. Side paths hide real rewards and almost every detour has purpose.", caveat: "Normal difficulty softens attrition, and Khan\u2019s arrival can feel convenient until later arcs justify him.", impact: "Loop \xB7 Atmosphere \xB7 Readability" },
+  { id: "03", title: "Market \u2192 Dead City \u2192 Khan", spoiler: "light", color: COLORS.retroMint, observation: "Market makes the surface feel like an expedition before the gate opens. Dead City turns open sky into exposure, poison air, demons, traps, hidden rooms, and memory.", proof: "The surface is not freedom. It is exposure, preparation, vertical threat, and memory. Bourbon\u2019s capture closes his role through consequence.", caveat: "Dead City navigation can be ambiguous, and demon pressure can annoy.", impact: "Atmosphere \xB7 Engagement \xB7 Unique Insight" },
+  { id: "04", title: "Khan\u2019s Rules \u2192 Cursed Station", spoiler: "light", color: COLORS.violet, observation: "Khan turns the unseen layer into something readable. He recognizes the dead, prays to let them pass, and warns Artyom not to touch silhouettes.", proof: "Darkness is not only danger, it is hidden rule-space. The right answer can be to wait, listen, stay still, or let a neutral force pass.", caveat: "Some ritual logic remains abstract, and Cursed Station\u2019s mutant waves can feel spammy.", impact: "Unique Insight \xB7 Readability \xB7 Atmosphere" },
+  { id: "05", title: "Armory \u2192 Frontline", spoiler: "light", color: COLORS.engagementPink, observation: "Armory moves quickly into human surveillance. The station warns that the Reds are watching, then turns Artyom into a fugitive.", proof: "Frontline proves linearity does not mean empty agency. Interrogation, pipes, traps, lower routes, gas-mask pressure, and night vision all matter.", caveat: "Andrew\u2019s rescue is convenient, and the VSV buy is veteran optimization rather than required identity shift.", impact: "Agency Limit \xB7 Readability \xB7 Engagement" },
+  { id: "06", title: "Depot \u2192 Defense \u2192 Outpost \u2192 Black Station", spoiler: "light", color: COLORS.cyan, observation: "This midgame stretch rotates pressure formats without letting the route feel empty.", proof: "Outpost gives the surface a purpose, Black Station mirrors Frontline with cleaner stealth, and Defense re-compresses threat into station life.", caveat: "The ally sacrifice has limited weight because the character is introduced briefly.", impact: "Engagement \xB7 Loop \xB7 Readability" },
+  { id: "07", title: "Polis \u2192 Library \u2192 Archives", spoiler: "medium", color: COLORS.technicalBlue, observation: "Polis lands as a bright, wealthy, prestigious capital, which makes institutional refusal sharper.", proof: "The Library turns political failure into physical trial. The Librarian rule is memorable: do not fight, do not run, keep watching.", caveat: "Polis is more grand set-piece than explorable capital, and Librarian pathing can produce awkward edge cases.", impact: "Readability \xB7 D Friction \xB7 Atmosphere" },
+  { id: "08", title: "Sparta \u2192 D6", spoiler: "medium", color: COLORS.lime, observation: "Sparta functions as true final staging. The Rangers turn the route into an operation.", proof: "D6 turns myth into a hidden Pandora\u2019s box. Generators, doors, flamethrowers, anomalies, reactors, biomass, and buried hardware make solution feel earned.", caveat: "Sending Artyom forward repeatedly is half player logic and half strange story logic.", impact: "Engagement \xB7 Atmosphere \xB7 Technical" },
+  { id: "09", title: "Tower \u2192 Ending Reconstruction", spoiler: "heavy", color: COLORS.danger, observation: "Tower closes the route as a vertical push above the world that shaped him.", proof: "The final act completes the visibility thesis. Artyom can act decisively against something he still does not fully understand.", caveat: "The direct Ethereal/Tower vision capture was blocked by local FOV/config/render issues, so the interpretation is disclosed as reconstructed.", impact: "Unique Insight \xB7 Engagement \xB7 Atmosphere" }
+];
+function AlertedMetroReviewTemplate() {
+  const progress = useScrollProgress();
+  const dataChecks = useMemo(() => runStaticReviewChecks(), []);
+  const smokeTests = useMemo(() => runDeveloperSmokeTests(dataChecks), [dataChecks]);
+  return /* @__PURE__ */ jsxs("main", { className: "scr-root", children: [
+    /* @__PURE__ */ jsx(TemplateCSS, {}),
+    /* @__PURE__ */ jsx(BackgroundField, {}),
+    /* @__PURE__ */ jsx(Hud, { progress }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-shell", children: [
+      /* @__PURE__ */ jsx(Hero, {}),
+      /* @__PURE__ */ jsx(AudienceFit, {}),
+      /* @__PURE__ */ jsx(ScoreAnatomy, { dataChecks }),
+      /* @__PURE__ */ jsx(FieldNote, {}),
+      /* @__PURE__ */ jsx(AxisDiagnosis, {}),
+      /* @__PURE__ */ jsx(CorrectionLedger, { dataChecks }),
+      /* @__PURE__ */ jsx(InsightModule, {}),
+      /* @__PURE__ */ jsx(AdversarialAudit, {}),
+      /* @__PURE__ */ jsx(EvidenceBoard, {}),
+      /* @__PURE__ */ jsx(DeveloperDiagnostics, { tests: smokeTests }),
+      /* @__PURE__ */ jsx("footer", { className: "scr-footer", children: "ALERTED Review Engine \xB7 Metro 2033 Redux \xB7 Release Candidate Template \xB7 2026" })
+    ] })
+  ] });
+}
+function TemplateCSS() {
+  return /* @__PURE__ */ jsx("style", { children: TEMPLATE_CSS });
+}
+function BackgroundField() {
+  return /* @__PURE__ */ jsx("div", { className: "scr-bg", "aria-hidden": "true" });
+}
+function Hud({ progress }) {
+  return /* @__PURE__ */ jsx("div", { className: "scr-hud", children: /* @__PURE__ */ jsxs("div", { className: "scr-hud-inner", children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-hud-title", children: [
+      /* @__PURE__ */ jsx("span", { className: "scr-pulse" }),
+      "ALERTED // Review Engine"
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-hud-links", children: [
+      /* @__PURE__ */ jsx("span", { children: "Build RC.86" }),
+      /* @__PURE__ */ jsx("span", { className: "hot", children: "\u25CF Dossier live" }),
+      /* @__PURE__ */ jsx("span", { children: "Template locked" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-progress", children: [
+      /* @__PURE__ */ jsxs("span", { children: [
+        String(Math.round(progress * 100)).padStart(2, "0"),
+        "%"
+      ] }),
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("i", { style: { transform: `scaleX(${progress})` } }) })
+    ] })
+  ] }) });
+}
+function Hero() {
+  return /* @__PURE__ */ jsx("section", { className: "scr-hero", children: /* @__PURE__ */ jsxs("div", { className: "scr-hero-grid", children: [
+    /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("div", { className: "scr-kicker", children: [
+        "Field Report \xB7 ",
+        REVIEW.framework
+      ] }),
+      /* @__PURE__ */ jsxs("h1", { children: [
+        "Metro ",
+        /* @__PURE__ */ jsx("span", { children: "2033 Redux" })
+      ] }),
+      /* @__PURE__ */ jsx("p", { className: "scr-identity", children: REVIEW.oneLineIdentity }),
+      /* @__PURE__ */ jsx(HeroMetaRail, {}),
+      /* @__PURE__ */ jsx(HeroVerdictStrip, {}),
+      /* @__PURE__ */ jsx(AlertLegend, {})
+    ] }),
+    /* @__PURE__ */ jsx(DiegeticVerdict, {})
+  ] }) });
+}
+function HeroMetaRail() {
+  const meta = [
+    ["Status", REVIEW.reviewStatus],
+    ["Evidence", REVIEW.evidenceBase],
+    ["Confidence", REVIEW.confidence],
+    ["Spoilers", REVIEW.spoilerPolicy],
+    ["Risk", REVIEW.verdictRisk]
+  ];
+  return /* @__PURE__ */ jsx("div", { className: "scr-meta-rail", children: meta.map(([label, value]) => /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx("small", { children: label }),
+    /* @__PURE__ */ jsx("b", { children: value })
+  ] }, label)) });
+}
+function HeroVerdictStrip() {
+  const items = [
+    { label: "Action", value: REVIEW.action, tone: COLORS.loopAmber },
+    { label: "Confidence", value: `${REVIEW.confidence} \xB7 ${REVIEW.confidenceScore}/100`, tone: COLORS.retroMint },
+    { label: "Main pull", value: REVIEW.mainPull, tone: COLORS.atmosphereIndigo },
+    { label: "Main drag", value: REVIEW.mainDrag, tone: COLORS.lime },
+    { label: "Risk", value: REVIEW.mainRisk, tone: COLORS.danger },
+    { label: "Next test", value: REVIEW.nextTest, tone: COLORS.technicalBlue }
+  ];
+  return /* @__PURE__ */ jsx("div", { className: "scr-hero-verdict-strip", children: items.map((item) => /* @__PURE__ */ jsxs("div", { style: { "--tone": item.tone }, children: [
+    /* @__PURE__ */ jsx("small", { children: item.label }),
+    /* @__PURE__ */ jsx("b", { children: item.value })
+  ] }, item.label)) });
+}
+function AlertLegend() {
+  return /* @__PURE__ */ jsxs("details", { className: "scr-legend", children: [
+    /* @__PURE__ */ jsx("summary", { children: "Open ALERTED tutorial - what the axes and modifiers measure" }),
+    /* @__PURE__ */ jsx("div", { children: ALERT_DEFINITIONS.map((item) => /* @__PURE__ */ jsxs("article", { children: [
+      /* @__PURE__ */ jsx("b", { style: { color: item.color }, children: item.letter }),
+      /* @__PURE__ */ jsx("h3", { children: item.name }),
+      /* @__PURE__ */ jsx("small", { style: { color: item.color }, children: item.micro }),
+      /* @__PURE__ */ jsx("p", { children: item.definition })
+    ] }, `${item.letter}-${item.name}`)) })
+  ] });
+}
+function DiegeticVerdict() {
+  return /* @__PURE__ */ jsx("aside", { className: "scr-verdict scr-verdict-simple", children: /* @__PURE__ */ jsxs("div", { className: "scr-score-panel", children: [
+    /* @__PURE__ */ jsx("div", { className: "scr-score-panel-glare" }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-score-panel-head", children: [
+      /* @__PURE__ */ jsx("span", { children: "Final Score" }),
+      /* @__PURE__ */ jsx("b", { children: "ALERTED" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-score-panel-main", children: [
+      /* @__PURE__ */ jsx("div", { className: "scr-score-panel-number", children: REVIEW.score }),
+      /* @__PURE__ */ jsx("div", { className: "scr-score-panel-grade", children: REVIEW.rank })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-score-panel-foot", children: [
+      /* @__PURE__ */ jsx("span", { children: REVIEW.scoreVerdict }),
+      /* @__PURE__ */ jsxs("small", { children: [
+        REVIEW.rawScore,
+        " raw \xB7 ",
+        REVIEW.friction,
+        " ED"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx(InspectFitPanel, { rows: INSPECT_FIT })
+  ] }) });
+}
+function InspectFitPanel({ rows }) {
+  return /* @__PURE__ */ jsxs("div", { className: "scr-inspect-panel", children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-inspect-head", children: [
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx("small", { children: "Taste Inspect" }),
+        /* @__PURE__ */ jsx("b", { children: "Player Fit" })
+      ] }),
+      /* @__PURE__ */ jsx("span", { children: rows.map((row) => /* @__PURE__ */ jsx("i", { style: { color: row.color }, children: row.letter }, row.letter)) })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "scr-inspect-list", children: rows.map((row) => /* @__PURE__ */ jsx(InspectFitRow, { row }, row.name)) })
+  ] });
+}
+function InspectFitRow({ row }) {
+  return /* @__PURE__ */ jsxs("div", { className: "scr-inspect-row", style: { "--tone": row.color, "--fill": `${row.score / 10 * 100}%` }, children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-inspect-label", children: [
+      /* @__PURE__ */ jsx("span", { children: row.letter }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx("b", { children: row.name }),
+        /* @__PURE__ */ jsx("small", { children: row.hint })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "scr-inspect-bar", children: /* @__PURE__ */ jsx("i", {}) }),
+    /* @__PURE__ */ jsx("strong", { children: row.score })
+  ] });
+}
+function AudienceFit() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "01", kicker: "Audience Fit", title: "Who the", emphasis: "86", desc: "The score is not universal. Match the player type first, then read the verdict." }),
+    /* @__PURE__ */ jsx("div", { className: "scr-fit-grid", children: FIT_VERDICTS.map((item) => /* @__PURE__ */ jsxs("article", { className: "scr-fit-card", style: { "--tone": item.tone }, children: [
+      /* @__PURE__ */ jsx("small", { children: item.label }),
+      /* @__PURE__ */ jsx("h3", { children: item.value }),
+      /* @__PURE__ */ jsx("p", { children: item.text })
+    ] }, item.label)) }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-thesis", children: [
+      /* @__PURE__ */ jsx("small", { children: "Core Thesis" }),
+      /* @__PURE__ */ jsx("p", { children: REVIEW.thesis })
+    ] })
+  ] });
+}
+function ScoreAnatomy({ dataChecks }) {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "02", kicker: "Score Anatomy", title: "ALERTED", emphasis: "Score Strip", desc: "Five main axes score the core review. Extra handles fit limits. Danger keeps concrete risks visible." }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-score-strip", children: [
+      AXES.map((axis) => /* @__PURE__ */ jsx(ScoreTile, { item: axis, mode: "positive" }, axis.name)),
+      MODIFIERS.map((mod) => /* @__PURE__ */ jsx(ScoreTile, { item: mod, mode: "negative" }, mod.name))
+    ] }),
+    /* @__PURE__ */ jsx(DiegeticEquation, { dataChecks })
+  ] });
+}
+function ScoreTile({ item, mode }) {
+  const negative = mode === "negative";
+  const value = negative ? Math.abs(item.value) : item.score;
+  const activeRows = Math.max(0, Math.min(20, Math.round(value)));
+  const boundary = getMeterBoundaryPercent({ fillFrom: negative ? "top" : "bottom", activeRows });
+  const tonePair = getMeterTonePair(item.color, item.name === "Danger");
+  const brightClip = negative ? `inset(0 0 ${100 - boundary}% 0)` : `inset(${boundary}% 0 0 0)`;
+  const darkClip = negative ? `inset(${boundary}% 0 0 0)` : `inset(0 0 ${100 - boundary}% 0)`;
+  return /* @__PURE__ */ jsxs("article", { className: "scr-score-tile", style: { "--tone": item.color, "--off": inactiveMeterRow(item.color, item.name === "Danger") }, children: [
+    /* @__PURE__ */ jsx(ScoreTileHeader, { item }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-score-meter-box", children: [
+      /* @__PURE__ */ jsx(MeterRows, { color: item.color, activeRows, fillFrom: negative ? "top" : "bottom", danger: item.name === "Danger" }),
+      /* @__PURE__ */ jsx("div", { className: "scr-tile-edge top" }),
+      /* @__PURE__ */ jsx("div", { className: "scr-tile-edge bottom" }),
+      /* @__PURE__ */ jsx(ScoreTileNumber, { value: item.score ?? item.value, style: { clipPath: darkClip, ...meterTextStyle(tonePair, "dark") } }),
+      /* @__PURE__ */ jsx(ScoreTileNumber, { value: item.score ?? item.value, style: { clipPath: brightClip, ...meterTextStyle(tonePair, "bright") } })
+    ] }),
+    /* @__PURE__ */ jsx(ScoreTileGrade, { item })
+  ] });
+}
+function ScoreTileHeader({ item }) {
+  return /* @__PURE__ */ jsxs("div", { className: "scr-tile-outside-head", style: { color: item.color }, children: [
+    /* @__PURE__ */ jsx("div", { className: "scr-tile-letter", children: item.letter }),
+    /* @__PURE__ */ jsx("div", { className: "scr-tile-name", children: item.name }),
+    /* @__PURE__ */ jsx("div", { className: "scr-tile-desc", children: item.descriptor })
+  ] });
+}
+function ScoreTileNumber({ value, style }) {
+  return /* @__PURE__ */ jsx("div", { className: "scr-tile-number-layer", style, children: /* @__PURE__ */ jsx("div", { className: "scr-tile-value", children: value }) });
+}
+function ScoreTileGrade({ item }) {
+  return /* @__PURE__ */ jsx("div", { className: "scr-tile-outside-grade", style: { color: item.color }, children: item.grade ?? (item.name === "Extra" ? "Design limit" : "Traceable") });
+}
+function MeterRows({ color, activeRows, fillFrom, danger }) {
+  const percent = `${Math.max(0, Math.min(100, activeRows / 20 * 100))}%`;
+  const activeColor = danger ? COLORS.danger : color;
+  const inactiveColor = inactiveMeterRow(color, danger);
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: "scr-meter-screen",
+      style: { "--meter-fill": percent, "--meter-color": activeColor, "--meter-off": inactiveColor },
+      children: /* @__PURE__ */ jsx("div", { className: `scr-solid-meter-fill ${fillFrom === "top" ? "from-top" : "from-bottom"}` })
+    }
+  );
+}
+function DiegeticEquation({ dataChecks }) {
+  const deduction = Math.abs(dataChecks.correctionTotal);
+  return /* @__PURE__ */ jsxs("div", { className: "scr-score-terminal", children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-terminal-head", children: [
+      /* @__PURE__ */ jsx("b", { children: "Score Calculator" }),
+      /* @__PURE__ */ jsxs("span", { children: [
+        "LCD equation \xB7 ",
+        dataChecks.mathPass ? "LOCKED" : "CHECK"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-lcd", children: [
+      /* @__PURE__ */ jsx(LCDPixelBackdrop, {}),
+      /* @__PURE__ */ jsxs("div", { className: "scr-lcd-top", children: [
+        /* @__PURE__ */ jsx("span", { children: "ALERTED SUM BUS" }),
+        /* @__PURE__ */ jsxs("span", { children: [
+          dataChecks.rawTotal,
+          " - ",
+          deduction,
+          " = ",
+          REVIEW.score
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "scr-lcd-equation", children: [
+        /* @__PURE__ */ jsx(LCDNumber, { value: dataChecks.rawTotal, color: COLORS.atmosphereIndigo }),
+        /* @__PURE__ */ jsx(LCDOperator, { symbol: "\u2212", color: COLORS.danger }),
+        /* @__PURE__ */ jsx(LCDNumber, { value: deduction, color: COLORS.danger }),
+        /* @__PURE__ */ jsx(LCDOperator, { symbol: "=", color: COLORS.loopAmber }),
+        /* @__PURE__ */ jsx(LCDNumber, { value: REVIEW.score, color: COLORS.loopAmber, large: true })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "scr-lcd-foot", children: [
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("span", { style: { color: COLORS.atmosphereIndigo }, children: dataChecks.rawTotal }),
+          " axis subtotal"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("span", { style: { color: COLORS.danger }, children: deduction }),
+          " ED deduction"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("span", { style: { color: COLORS.loopAmber }, children: REVIEW.score }),
+          " final public score"
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function LCDPixelBackdrop() {
+  return /* @__PURE__ */ jsx("div", { className: "scr-lcd-bg", children: Array.from({ length: 12 }, (_, i) => /* @__PURE__ */ jsx("i", {}, i)) });
+}
+function LCDNumber({ value, color, large = false }) {
+  return /* @__PURE__ */ jsx("div", { className: `scr-lcd-number ${large ? "large" : ""}`, style: { "--tone": color }, children: /* @__PURE__ */ jsx("span", { children: value }) });
+}
+function LCDOperator({ symbol, color }) {
+  return /* @__PURE__ */ jsx("div", { className: "scr-lcd-operator", style: { "--tone": color }, children: symbol });
+}
+function FieldNote() {
+  const applies = ["Atmospheric", "Survival FPS", "Story-rich", "Novel-rooted", "Curated exploration", "Resource pressure", "Memorable companions", "Cohesive world"];
+  const rejects = ["MMO", "Sandbox", "Open-world RPG", "Buildcraft", "Power fantasy", "Loot treadmill", "Checklist exploration", "Comfort stealth"];
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "03", kicker: "Reviewer Note", title: "Short", emphasis: "Human Verdict", desc: "What the numbers do not say: why Metro stays with you long after you put it down." }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-note-grid", children: [
+      /* @__PURE__ */ jsx("div", { className: "scr-paper-wrap", children: /* @__PURE__ */ jsxs("article", { className: "scr-paper", children: [
+        /* @__PURE__ */ jsx("i", { className: "scr-paper-staple" }),
+        /* @__PURE__ */ jsxs("div", { className: "scr-paper-head", children: [
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("small", { children: "Recovered Field Note" }),
+            /* @__PURE__ */ jsx("h3", { children: "Human Verdict" })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "scr-paper-stamp", children: [
+            "Metro 2033 Redux",
+            /* @__PURE__ */ jsx("br", {}),
+            "ALERTED / 03"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "scr-paper-body", children: [
+          /* @__PURE__ */ jsxs("p", { children: [
+            /* @__PURE__ */ jsx("span", { className: "scr-dropcap", children: "M" }),
+            "etro does not rely on any single ingredient being exceptional on its own. It works because the final stew has a bitter, smoky, nostalgic taste that none of those ingredients could create alone."
+          ] }),
+          /* @__PURE__ */ jsx("p", { children: "The world shifts around Artyom as he moves through it: warmly lit inhabited stations, half-abandoned service tunnels, sudden muzzle flashes cutting through the dark, and the bright surface with its poisonous air and irradiated ruins." }),
+          /* @__PURE__ */ jsx("p", { children: "What stays with you is all of it together: a tale about human fear, the unknown, and the ascent from the deepest dark of the Metro to the roof of the world." })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsx(KeywordPanel, { applies, rejects })
+    ] })
+  ] });
+}
+function KeywordPanel({ applies, rejects }) {
+  return /* @__PURE__ */ jsxs("aside", { className: "scr-keyword-panel", children: [
+    /* @__PURE__ */ jsx("div", { className: "scr-keyword-glow" }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-keyword-head", children: [
+      /* @__PURE__ */ jsx("small", { children: "Reader Keywords" }),
+      /* @__PURE__ */ jsx("h3", { children: "Quick Fit Tags" }),
+      /* @__PURE__ */ jsx("p", { children: "Fast public scan: what this review says the game is, and what it is not." })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-keyword-hero", children: [
+      /* @__PURE__ */ jsx("span", { children: "Primary flavor" }),
+      /* @__PURE__ */ jsx("b", { children: "Atmospheric Survival FPS" })
+    ] }),
+    /* @__PURE__ */ jsx(KeywordGroup, { title: "Applies", tags: applies, tone: COLORS.green }),
+    /* @__PURE__ */ jsx(KeywordGroup, { title: "Does not apply", tags: rejects, tone: COLORS.red2, negative: true })
+  ] });
+}
+function KeywordGroup({ title, tags, tone, negative = false }) {
+  return /* @__PURE__ */ jsxs("div", { className: "scr-keyword-group", style: { "--tone": tone }, children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-keyword-group-title", children: [
+      /* @__PURE__ */ jsx("h4", { children: title }),
+      /* @__PURE__ */ jsxs("span", { children: [
+        tags.length,
+        " tags"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "scr-keyword-cloud", children: tags.map((tag, index) => /* @__PURE__ */ jsx(KeywordPill, { tag, negative, featured: !negative && index < 3 }, tag)) })
+  ] });
+}
+function KeywordPill({ tag, negative, featured }) {
+  const className = `${negative ? "negative" : ""} ${featured ? "featured" : ""}`.trim();
+  return /* @__PURE__ */ jsxs("span", { className, children: [
+    negative ? "\xD7" : "\u2713",
+    " ",
+    tag
+  ] });
+}
+function AxisDiagnosis() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "04", kicker: "Tier 1", title: "ALERT", emphasis: "Axis Diagnosis", desc: "Five diagnosis rows. Each axis gets its own d20 roll, segment bar, and written reasoning." }),
+    /* @__PURE__ */ jsx("div", { className: "scr-axis-list", children: AXES.map((axis) => /* @__PURE__ */ jsx(AxisRow, { axis }, axis.name)) })
+  ] });
+}
+function AxisRow({ axis }) {
+  return /* @__PURE__ */ jsxs("article", { className: "scr-axis-row", style: { "--tone": axis.color }, children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-axis-title", children: [
+      /* @__PURE__ */ jsx("small", { children: "ALERT Axis" }),
+      /* @__PURE__ */ jsx("h3", { children: axis.name }),
+      /* @__PURE__ */ jsxs("span", { children: [
+        axis.grade,
+        " \xB7 ",
+        axis.score,
+        "/20"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-axis-body", children: [
+      /* @__PURE__ */ jsx(SegmentBar, { value: axis.score, color: axis.color }),
+      /* @__PURE__ */ jsx("p", { children: axis.text })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "scr-d20-wrap", children: /* @__PURE__ */ jsx("div", { className: "scr-d20", children: axis.score }) })
+  ] });
+}
+function SegmentBar({ value, color }) {
+  return /* @__PURE__ */ jsx("div", { className: "scr-segments", children: Array.from({ length: 20 }, (_, i) => /* @__PURE__ */ jsx("i", { style: i < value ? { backgroundColor: color, boxShadow: `0 0 8px ${color}99` } : {} }, i)) });
+}
+function CorrectionLedger({ dataChecks }) {
+  const extra = MODIFIERS.find((item) => item.name === "Extra");
+  const danger = MODIFIERS.find((item) => item.name === "Danger");
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(
+      SectionHead,
+      {
+        num: "05",
+        kicker: "Correction Ledger",
+        title: "Modifier",
+        emphasis: "Risk Split",
+        desc: "Extra is a contextual fit modifier. Danger is the concrete friction pool. They both subtract, but they do not mean the same thing."
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { className: "scr-correction-split", children: [
+      /* @__PURE__ */ jsxs("article", { className: "scr-extra-panel", style: { "--tone": extra.color }, children: [
+        /* @__PURE__ */ jsxs("div", { className: "scr-extra-panel-top", children: [
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("small", { children: "E \xB7 Extra Modifier" }),
+            /* @__PURE__ */ jsx("h3", { children: extra.name })
+          ] }),
+          /* @__PURE__ */ jsx("b", { children: formatSigned(extra.value) })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "scr-extra-main", children: [
+          /* @__PURE__ */ jsx("span", { children: extra.label }),
+          /* @__PURE__ */ jsx("p", { children: extra.text })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "scr-extra-footer", children: [
+          /* @__PURE__ */ jsx("strong", { children: "Context cap" }),
+          /* @__PURE__ */ jsx("em", { children: "Not a bug \xB7 not danger \xB7 audience-fit deduction" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: "scr-danger-panel", children: /* @__PURE__ */ jsxs("div", { className: "scr-ledger", children: [
+        /* @__PURE__ */ jsxs("div", { className: "scr-ledger-head", children: [
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("small", { children: "D \xB7 Danger Pool" }),
+            /* @__PURE__ */ jsx("h3", { children: "Danger Total" })
+          ] }),
+          /* @__PURE__ */ jsx("b", { children: formatSigned(danger.value) })
+        ] }),
+        /* @__PURE__ */ jsx(LedgerRow, { item: { ...danger, id: "MOD \xB7 02 \xB7 DANGER POOL" } }),
+        FRICTION_ITEMS.map((item, i) => /* @__PURE__ */ jsx(LedgerRow, { item: { ...item, id: `FRICTION \xB7 0${i + 1}`, label: `${item.severity} \xB7 ${item.evidence}` }, small: true }, item.name)),
+        /* @__PURE__ */ jsxs("div", { className: "scr-ledger-check", children: [
+          "Row check: ",
+          dataChecks.residualPass ? "pass" : "mismatch",
+          " \xB7 residual subtotal ",
+          formatSigned(danger.value)
+        ] })
+      ] }) })
+    ] })
+  ] });
+}
+function LedgerRow({ item, small = false }) {
+  const className = `scr-ledger-row ${small ? "scr-ledger-subrow" : item.name === "Danger" ? "scr-ledger-parent" : ""}`.trim();
+  return /* @__PURE__ */ jsxs("article", { className, style: { "--tone": item.color }, children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-ledger-title", children: [
+      /* @__PURE__ */ jsx("small", { children: item.id }),
+      /* @__PURE__ */ jsx("h4", { children: item.name }),
+      /* @__PURE__ */ jsx("span", { children: item.label })
+    ] }),
+    /* @__PURE__ */ jsx("p", { children: item.text }),
+    /* @__PURE__ */ jsxs("div", { className: "scr-ledger-value", children: [
+      /* @__PURE__ */ jsx("b", { children: formatSigned(item.value) }),
+      /* @__PURE__ */ jsx("small", { children: small ? "Sub-component" : item.name === "Extra" ? "Limit" : "Parent total" })
+    ] })
+  ] });
+}
+function InsightModule() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "06", kicker: "Unique Insight Module", title: "Light,", emphasis: "Exposure, Judgment", desc: "Spoiler-light theses. Metro\u2019s darkness is not only danger, it is a superposition of possibilities that light collapses." }),
+    /* @__PURE__ */ jsx("div", { className: "scr-insight-grid", children: INSIGHTS.map((row) => /* @__PURE__ */ jsxs("article", { className: "scr-insight", style: { "--tone": row.color }, children: [
+      /* @__PURE__ */ jsx("small", { children: row.label }),
+      /* @__PURE__ */ jsx("h3", { children: row.title }),
+      /* @__PURE__ */ jsx("p", { children: row.text })
+    ] }, row.title)) })
+  ] });
+}
+function AdversarialAudit() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(SectionHead, { num: "07", kicker: "Adversarial Audit", title: "Trust", emphasis: "Layer", desc: "Public-facing stress tests that keep the verdict honest, lens-specific, and falsifiable." }),
+    /* @__PURE__ */ jsx("div", { className: "scr-audit-grid", children: AUDIT_CHECKS.map((check) => /* @__PURE__ */ jsxs("article", { className: "scr-audit-card", style: { "--tone": check.tone }, children: [
+      /* @__PURE__ */ jsx("small", { children: check.label }),
+      /* @__PURE__ */ jsx("h3", { children: check.title }),
+      /* @__PURE__ */ jsx("p", { children: check.text })
+    ] }, check.title)) })
+  ] });
+}
+function EvidenceBoard() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx(
+      SectionHead,
+      {
+        num: "08",
+        kicker: "Evidence Board",
+        title: "Dossier",
+        emphasis: "Arc Rail",
+        desc: "Reconstructed playthrough archive. Each arc separates observation, interpretation, caveat, and axis impact without hiding the structure in accordions."
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "scr-evidence-board", children: EVIDENCE_ARCS.map((arc) => /* @__PURE__ */ jsx(EvidenceCard, { arc }, arc.id)) }),
+    /* @__PURE__ */ jsx(EvidenceProtocol, {})
+  ] });
+}
+function EvidenceProtocol() {
+  const protocol = [
+    { label: "Evidence", value: REVIEW.evidenceProtocol, tone: COLORS.retroMint },
+    { label: "Snapshot note", value: REVIEW.snapshotNote, tone: COLORS.loopAmber },
+    { label: "Known caveat", value: REVIEW.verdictRisk, tone: COLORS.danger },
+    { label: "Falsifier", value: "Cleaner monsters, stronger route authorship, or repeated technical issues would move the score.", tone: COLORS.engagementPink }
+  ];
+  return /* @__PURE__ */ jsxs("div", { className: "scr-evidence-protocol", children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-evidence-protocol-head", children: [
+      /* @__PURE__ */ jsx("small", { children: "Evidence Protocol" }),
+      /* @__PURE__ */ jsx("b", { children: "Trust footer" })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "scr-evidence-protocol-grid", children: protocol.map((item) => /* @__PURE__ */ jsxs("div", { style: { "--tone": item.tone }, children: [
+      /* @__PURE__ */ jsx("small", { children: item.label }),
+      /* @__PURE__ */ jsx("p", { children: item.value })
+    ] }, item.label)) })
+  ] });
+}
+function EvidenceCard({ arc }) {
+  const spoilerClass = arc.spoiler === "heavy" ? "scr-spoiler-heavy" : arc.spoiler === "medium" ? "scr-spoiler-medium" : "";
+  return /* @__PURE__ */ jsxs("article", { className: "scr-evidence-card", style: { "--tone": arc.color }, children: [
+    /* @__PURE__ */ jsxs("div", { className: "scr-evidence-marker", children: [
+      /* @__PURE__ */ jsx("span", { children: "ARC" }),
+      /* @__PURE__ */ jsx("b", { children: arc.id })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("div", { className: "scr-evidence-title-row", children: [
+        /* @__PURE__ */ jsx("h3", { children: arc.title }),
+        /* @__PURE__ */ jsxs("span", { className: `scr-spoiler ${spoilerClass}`, children: [
+          "Spoiler-",
+          arc.spoiler
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "scr-evidence-cells", children: [
+        /* @__PURE__ */ jsx(EvidenceCell, { label: "Clean observation", text: arc.observation }),
+        /* @__PURE__ */ jsx(EvidenceCell, { label: "What it proves", text: arc.proof }),
+        /* @__PURE__ */ jsx(EvidenceCell, { label: "Caveat", text: arc.caveat, muted: true })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "scr-evidence-impact", children: [
+        "\u25B8 Axis impact \xB7 ",
+        arc.impact
+      ] })
+    ] })
+  ] });
+}
+function EvidenceCell({ label, text, muted = false }) {
+  return /* @__PURE__ */ jsxs("div", { className: muted ? "muted" : "", children: [
+    /* @__PURE__ */ jsx("small", { children: label }),
+    /* @__PURE__ */ jsx("p", { children: text })
+  ] });
+}
+function DeveloperDiagnostics({ tests }) {
+  const passCount = tests.filter((test) => test.pass).length;
+  return /* @__PURE__ */ jsx("section", { className: "scr-dev-section", children: /* @__PURE__ */ jsxs("details", { className: "scr-dev-details", children: [
+    /* @__PURE__ */ jsxs("summary", { children: [
+      /* @__PURE__ */ jsx("span", { children: "Developer diagnostics" }),
+      /* @__PURE__ */ jsxs("b", { children: [
+        passCount,
+        "/",
+        tests.length,
+        " checks passing"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("p", { className: "scr-dev-note", children: "Internal checks stay collapsed by default so the public report remains clean." }),
+    /* @__PURE__ */ jsx("div", { className: "scr-dev-grid", children: tests.map((test) => /* @__PURE__ */ jsxs("article", { className: test.pass ? "" : "fail", children: [
+      /* @__PURE__ */ jsx("small", { children: test.pass ? "PASS" : "FAIL" }),
+      /* @__PURE__ */ jsx("h3", { children: test.name }),
+      /* @__PURE__ */ jsx("p", { children: test.detail })
+    ] }, test.name)) })
+  ] }) });
+}
+function SectionHead({ num, kicker, title, emphasis, desc }) {
+  return /* @__PURE__ */ jsxs("div", { className: "scr-section-head", children: [
+    /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("small", { children: [
+        num,
+        " \xB7 ",
+        kicker
+      ] }),
+      /* @__PURE__ */ jsxs("h2", { children: [
+        title,
+        " ",
+        /* @__PURE__ */ jsx("span", { children: emphasis })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("p", { children: desc })
+  ] });
+}
+function runStaticReviewChecks() {
+  const rawTotal = AXES.reduce((sum, axis) => sum + axis.score, 0);
+  const correctionTotal = MODIFIERS.reduce((sum, item) => sum + item.value, 0);
+  const residualTotal = FRICTION_ITEMS.reduce((sum, item) => sum + item.value, 0);
+  return {
+    rawTotal,
+    correctionTotal,
+    residualTotal,
+    mathPass: rawTotal + correctionTotal === REVIEW.score && rawTotal === REVIEW.rawScore && correctionTotal === REVIEW.friction,
+    residualPass: Math.abs(residualTotal - MODIFIERS[1].value) < 1e-3,
+    arcCountPass: EVIDENCE_ARCS.length === 9,
+    alertDefinitionPass: ALERT_DEFINITIONS.length === 7,
+    acronymPass: ALERT_DEFINITIONS.map((item) => item.letter).join("") === "ALERTED",
+    modifierPass: MODIFIERS.map((item) => item.name).join("|") === "Extra|Danger",
+    modifierSeparationPass: Boolean(MODIFIERS.find((item) => item.name === "Extra")) && Boolean(MODIFIERS.find((item) => item.name === "Danger")),
+    scoreRangePass: AXES.every((axis) => axis.score >= 0 && axis.score <= 20),
+    solidMeterPass: AXES.length + MODIFIERS.length === 7,
+    inspectFitPass: INSPECT_FIT.length === 7 && INSPECT_FIT.map((item) => item.letter).join("") === "INSPECT",
+    scoreTileHeaderPass: AXES.every((axis) => Boolean(axis.descriptor && axis.letter && axis.grade)),
+    equationDisplayPass: REVIEW.rawScore === 90 && Math.abs(REVIEW.friction) === 4 && REVIEW.score === 86,
+    publicVerdictFieldsPass: Boolean(REVIEW.action && REVIEW.mainPull && REVIEW.mainDrag && REVIEW.mainRisk && REVIEW.nextTest),
+    auditCoveragePass: ["Lens Honesty", "Comfort Bias", "Sampling Bias", "Spectacle Bias", "Friction Blindness", "Patch Volatility", "Audience Confusion", "Falsifier"].every((label) => AUDIT_CHECKS.some((check) => check.label === label)),
+    evidenceProtocolPass: Boolean(REVIEW.evidenceProtocol && REVIEW.snapshotNote && REVIEW.verdictRisk)
+  };
+}
+function runDeveloperSmokeTests(d) {
+  return [
+    { name: "Score math", pass: d.mathPass, detail: `${d.rawTotal} - ${Math.abs(d.correctionTotal)} = 86` },
+    { name: "Public verdict fields", pass: d.publicVerdictFieldsPass, detail: "Expected action, confidence, pull, drag, risk, and next test" },
+    { name: "Adversarial audit coverage", pass: d.auditCoveragePass, detail: "Expected 8 public stress checks" },
+    { name: "Evidence protocol footer", pass: d.evidenceProtocolPass, detail: "Expected evidence protocol and snapshot note" },
+    { name: "D residual subtotal", pass: d.residualPass, detail: `${d.residualTotal} matches Danger` },
+    { name: "Evidence arc count", pass: d.arcCountPass, detail: "Expected 9 evidence arcs" },
+    { name: "ALERTED definition count", pass: d.alertDefinitionPass, detail: "Expected 7 definitions" },
+    { name: "ALERTED acronym", pass: d.acronymPass, detail: "Expected A/L/E/R/T/E/D" },
+    { name: "Modifier naming", pass: d.modifierPass, detail: "Expected Extra and Danger" },
+    { name: "Modifier separation", pass: d.modifierSeparationPass, detail: "Expected Extra and Danger to render as separate concepts" },
+    { name: "Axis score range", pass: d.scoreRangePass, detail: "All main axes must be 0 to 20" },
+    { name: "Solid loading meter coverage", pass: d.solidMeterPass, detail: "Expected 7 ALERTED score tiles using solid loading bars" },
+    { name: "Score tile label split", pass: d.scoreTileHeaderPass, detail: "Expected top label / center number / bottom grade layout" },
+    { name: "INSPECT fit meter", pass: d.inspectFitPass, detail: "Expected I/N/S/P/E/C/T taste profile rows" },
+    { name: "Diegetic equation display", pass: d.equationDisplayPass, detail: "Expected 90 - 4 = 86 display values" }
+  ];
+}
+function useScrollProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const root2 = document.documentElement;
+      const max = root2.scrollHeight - root2.clientHeight;
+      setProgress(max > 0 ? Math.min(1, Math.max(0, root2.scrollTop / max)) : 0);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  return progress;
+}
+function getMeterBoundaryPercent({ fillFrom, activeRows }) {
+  const rows = Math.max(0, Math.min(20, Math.round(activeRows)));
+  return fillFrom === "top" ? rows / 20 * 100 : (20 - rows) / 20 * 100;
+}
+function meterTextStyle(pair, zone) {
+  if (zone === "bright") {
+    return { color: pair.onBright, WebkitTextStroke: `.5px ${pair.lightEdge}`, textShadow: `0 1px 0 ${pair.lightEdge}, 0 0 5px rgba(255,255,255,.10)` };
+  }
+  return { color: pair.onDark, WebkitTextStroke: `.5px ${pair.darkEdge}`, textShadow: `0 2px 0 #000, 0 0 8px ${pair.glow}` };
+}
+function getMeterTonePair(color, danger = false) {
+  if (danger) return { onBright: "#3a0506", onDark: "#ff6a5a", lightEdge: "rgba(255,190,175,.20)", darkEdge: "rgba(60,0,0,.78)", glow: "rgba(255,45,31,.48)" };
+  if (color === COLORS.atmosphereIndigo) return { onBright: "#151036", onDark: "#DDD8FF", lightEdge: "rgba(232,228,255,.18)", darkEdge: "rgba(17,12,54,.82)", glow: "rgba(124,109,255,.38)" };
+  if (color === COLORS.retroMint) return { onBright: "#05342F", onDark: "#C6FFF2", lightEdge: "rgba(220,255,247,.18)", darkEdge: "rgba(0,40,36,.78)", glow: "rgba(17,250,203,.38)" };
+  if (color === COLORS.loopAmber) return { onBright: "#332000", onDark: "#FFE3A1", lightEdge: "rgba(255,228,170,.20)", darkEdge: "rgba(51,32,0,.82)", glow: "rgba(255,176,0,.38)" };
+  if (color === COLORS.technicalBlue) return { onBright: "#08204A", onDark: "#D7E5FF", lightEdge: "rgba(220,232,255,.18)", darkEdge: "rgba(4,18,58,.78)", glow: "rgba(43,127,255,.38)" };
+  if (color === COLORS.engagementPink) return { onBright: "#3A0015", onDark: "#FFC2D8", lightEdge: "rgba(255,210,226,.18)", darkEdge: "rgba(58,0,21,.82)", glow: "rgba(255,0,93,.42)" };
+  if (color === COLORS.lime) return { onBright: "#232f00", onDark: "#edff8a", lightEdge: "rgba(245,255,170,.20)", darkEdge: "rgba(28,38,0,.82)", glow: "rgba(182,245,5,.38)" };
+  return { onBright: "#071019", onDark: "#e7ecf3", lightEdge: "rgba(255,255,255,.16)", darkEdge: "rgba(0,0,0,.78)", glow: "rgba(231,236,243,.30)" };
+}
+function inactiveMeterRow(color, danger) {
+  if (danger) return "#210304";
+  if (color === COLORS.atmosphereIndigo) return "#17143A";
+  if (color === COLORS.retroMint) return "#0A4A43";
+  if (color === COLORS.loopAmber) return "#3A2304";
+  if (color === COLORS.technicalBlue) return "#0B234D";
+  if (color === COLORS.engagementPink) return "#3A041A";
+  if (color === COLORS.lime) return "#263300";
+  return "#101621";
+}
+function formatSigned(value) {
+  return Number.isInteger(value) ? String(value) : Number(value).toFixed(2);
+}
+var TEMPLATE_CSS = `
+.scr-root{min-height:100vh;overflow-x:hidden;max-width:100vw;background:#05060a;color:#e7ecf3;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,sans-serif}.scr-root *{box-sizing:border-box}.scr-root p,.scr-root h1,.scr-root h2,.scr-root h3,.scr-root h4,.scr-root small,.scr-root b,.scr-root span,.scr-root div{overflow-wrap:break-word}.scr-bg{pointer-events:none;position:fixed;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 15% -10%,rgba(255,138,31,.12),transparent 60%),radial-gradient(1000px 700px at 110% 20%,rgba(93,220,255,.08),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a)}.scr-shell{width:min(1400px,calc(100% - 24px));margin:0 auto;display:grid;gap:1.5rem;padding:1rem 0 2.5rem}.scr-hud{position:sticky;top:0;z-index:50;border-bottom:1px solid #1e2733;background:rgba(5,6,10,.82);backdrop-filter:blur(16px)}.scr-hud-inner{width:min(1400px,calc(100% - 24px));margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.55rem 0;color:#8592a5;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.16em}.scr-hud-title{display:flex;align-items:center;gap:.75rem;color:#d9c9a3}.scr-pulse{width:.65rem;height:.65rem;border-radius:999px;background:#ff2d1f;box-shadow:0 0 12px #ff2d1f;animation:scrPulse 1.2s infinite}.scr-hud-links{display:none;gap:.5rem;flex-wrap:wrap}.scr-hud-links span{border:1px solid #2a3444;background:rgba(255,255,255,.02);padding:.3rem .5rem}.scr-hud-links .hot{color:#ffb347;border-color:#ff8a1f}.scr-progress{margin-left:auto;display:none;align-items:center;gap:.7rem;min-width:220px}.scr-progress div{height:3px;flex:1;overflow:hidden;background:#1e2733}.scr-progress i{display:block;height:100%;transform-origin:left;background:linear-gradient(90deg,#ff8a1f,#ff2d1f);transition:transform .15s}.scr-hero{position:relative;min-height:640px;overflow:hidden;border:1px solid #1e2733;background:#000}.scr-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 55% 40%,rgba(255,138,31,.18),transparent 60%),radial-gradient(800px 450px at 20% 75%,rgba(93,220,255,.16),transparent 55%),linear-gradient(115deg,rgba(5,6,10,.92),rgba(5,6,10,.72) 42%,rgba(5,6,10,.95))}.scr-hero::after{content:"";position:absolute;inset:0;opacity:.15;background-image:linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:80px 80px}.scr-hero-grid{position:relative;z-index:1;display:grid;gap:1.75rem;padding:clamp(1.75rem,5vw,3.5rem);min-width:0}.scr-kicker{display:flex;align-items:center;gap:.75rem;color:#ffb347;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.24em}.scr-kicker::before{content:"";height:1px;width:42px;background:#ff8a1f}.scr-hero h1{margin:1.5rem 0 0;color:#d9c9a3;font-size:clamp(3.4rem,12vw,8.75rem);line-height:.80;text-transform:uppercase;letter-spacing:-.065em;font-weight:1000;-webkit-text-stroke:1px rgba(217,201,163,.20);text-shadow:5px 5px 0 #000,0 0 34px rgba(255,138,31,.16),0 8px 48px rgba(0,0,0,.92)}.scr-hero h1 span{display:block;color:#ff8a1f;-webkit-text-stroke:1px rgba(255,179,71,.18);text-shadow:5px 5px 0 #000,0 0 30px rgba(255,138,31,.24),0 8px 48px rgba(0,0,0,.92)}.scr-identity{margin-top:1.5rem;max-width:700px;color:#b8a982;font-size:1rem;line-height:1.7}.scr-meta-rail{margin-top:2rem;display:grid;min-width:0;border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10)}.scr-meta-rail div{padding:.8rem .9rem;border-bottom:1px solid rgba(255,255,255,.10);min-width:0}.scr-meta-rail small{display:block;color:#8592a5;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.2em}.scr-meta-rail b{display:block;margin-top:.35rem;color:#d9c9a3;font-size:.75rem}.scr-legend{margin-top:1.25rem;border:1px dashed #2a3444;background:rgba(255,255,255,.015);padding:1rem}.scr-legend summary{cursor:pointer;list-style:none;color:#5ddcff;font-size:.7rem;font-weight:1000;text-transform:uppercase;letter-spacing:.2em}.scr-legend summary::-webkit-details-marker{display:none}.scr-legend>div{margin-top:1rem;display:grid;gap:.75rem;min-width:0}.scr-legend article{border:1px solid #1e2733;background:#0d1117;padding:.8rem;min-width:0}.scr-legend b{display:block;font-size:2.35rem;line-height:1}.scr-legend h3{margin:.25rem 0 0;color:#d9c9a3;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em}.scr-legend small{display:block;margin-top:.25rem;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em}.scr-legend p{margin:.5rem 0 0;color:#8592a5;font-size:.75rem;line-height:1.45}.scr-shell>section{overflow:hidden;border:1px solid #1e2733;background:#0d1117;padding:clamp(1.25rem,3vw,1.75rem)}.scr-section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem;border-bottom:1px solid #1e2733;padding-bottom:1.1rem;margin-bottom:1.5rem}.scr-section-head small{display:block;color:#ff8a1f;font-size:.75rem;font-weight:1000;text-transform:uppercase;letter-spacing:.24em}.scr-section-head h2{margin:.25rem 0 0;color:#d9c9a3;font-size:clamp(2rem,7vw,3rem);line-height:1;text-transform:uppercase}.scr-section-head h2 span{color:#ff8a1f}.scr-section-head p{margin:0;max-width:580px;color:#8592a5;font-size:.9rem;line-height:1.55}.scr-verdict-simple{display:grid;place-items:center;min-height:520px}.scr-score-panel{position:relative;isolation:isolate;width:min(360px,100%);min-height:500px;overflow:hidden;border:1px solid rgba(255,179,71,.78);background:linear-gradient(145deg,#ffb347 0%,#ff8a1f 26%,#ff6b0b 58%,#8f2d08 100%);box-shadow:0 0 0 1px rgba(255,138,31,.18),0 28px 80px rgba(0,0,0,.62),0 0 60px rgba(255,122,0,.18),inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -70px 110px rgba(54,12,0,.34);display:flex;flex-direction:column;justify-content:space-between;padding:1.35rem;text-align:center}.scr-score-panel::before{content:"";pointer-events:none;position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,0,0,.18) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.10) 1px,transparent 1px);background-size:28px 100%,100% 26px;opacity:.18}.scr-score-panel::after{content:"";pointer-events:none;position:absolute;inset:.65rem;border:1px solid rgba(42,14,2,.42);box-shadow:inset 0 0 0 1px rgba(255,225,170,.14)}.scr-score-panel-glare{pointer-events:none;position:absolute;inset:-18%;background:linear-gradient(118deg,transparent 0 28%,rgba(255,255,255,.28) 38%,rgba(255,255,255,.08) 46%,transparent 61%);opacity:.48;mix-blend-mode:screen}.scr-score-panel-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(43,13,0,.34);padding-bottom:.9rem}.scr-score-panel-head span{color:#321100;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-score-panel-head b{border:1px solid rgba(54,18,0,.42);background:rgba(255,255,255,.10);color:#2b0d00;padding:.32rem .5rem;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.16em}.scr-score-panel-main{position:relative;z-index:1;display:grid;place-items:center;gap:.25rem}.scr-score-panel-number{color:#170700;font-size:clamp(9rem,22vw,13.5rem);font-weight:1000;line-height:.76;letter-spacing:-.09em;text-shadow:0 1px 0 rgba(255,230,180,.22),0 10px 34px rgba(0,0,0,.30)}.scr-score-panel-grade{color:#2a0d00;font-size:clamp(3.2rem,8vw,5.2rem);font-weight:1000;line-height:.85;letter-spacing:-.06em;text-transform:uppercase;text-shadow:0 1px 0 rgba(255,230,180,.20)}.scr-score-panel-foot{position:relative;z-index:1;border-top:1px solid rgba(43,13,0,.34);padding-top:.9rem}.scr-score-panel-foot span{display:block;color:#2b0d00;font-size:.82rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-score-panel-foot small{display:block;margin-top:.38rem;color:rgba(43,13,0,.76);font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-inspect-panel{position:relative;z-index:1;margin-top:1rem;border-top:1px solid rgba(43,13,0,.34);padding-top:1rem;text-align:left}.scr-inspect-head{display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem}.scr-inspect-head small{display:block;color:rgba(43,13,0,.78);font-family:ui-monospace,Menlo,monospace;font-size:.54rem;font-weight:1000;text-transform:uppercase;letter-spacing:.18em}.scr-inspect-head b{display:block;margin-top:.12rem;color:#2b0d00;font-size:.72rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-inspect-head span{display:flex;gap:.28rem;font-size:.86rem;font-weight:1000;line-height:1}.scr-inspect-head span i{font-style:normal;text-shadow:0 1px 0 rgba(0,0,0,.34),0 0 8px currentColor}.scr-inspect-list{display:grid;gap:.42rem;margin-top:.8rem}.scr-inspect-row{display:grid;grid-template-columns:minmax(92px,120px) 1fr 1.35rem;gap:.52rem;align-items:center}.scr-inspect-label{display:flex;align-items:center;gap:.42rem;min-width:0}.scr-inspect-label>span{display:grid;place-items:center;flex:0 0 auto;width:1.12rem;height:1.12rem;border:1px solid color-mix(in srgb,var(--tone) 56%,rgba(43,13,0,.18));background:rgba(255,255,255,.13);color:#1c0800;font-size:.62rem;font-weight:1000;line-height:1}.scr-inspect-label div{min-width:0}.scr-inspect-label b{display:block;color:#2b0d00;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scr-inspect-label small{display:block;margin-top:.04rem;color:rgba(43,13,0,.62);font-family:ui-monospace,Menlo,monospace;font-size:.48rem;font-weight:1000;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scr-inspect-bar{position:relative;height:.48rem;overflow:hidden;border:1px solid rgba(43,13,0,.24);background:rgba(43,13,0,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}.scr-inspect-bar i{display:block;width:var(--fill);height:100%;background:linear-gradient(90deg,color-mix(in srgb,var(--tone) 45%,#ffb347),var(--tone));box-shadow:0 0 10px color-mix(in srgb,var(--tone) 34%,transparent)}.scr-inspect-row strong{color:#2b0d00;font-family:ui-monospace,Menlo,monospace;font-size:.72rem;font-weight:1000;text-align:right}.scr-fit-grid{display:grid;min-width:0;border:1px solid #1e2733;background:#0d1117}.scr-fit-card{position:relative;border-bottom:1px solid #1e2733;border-left:3px solid var(--tone);padding:1.25rem;min-width:0}.scr-fit-card:last-child{border-bottom:0}.scr-fit-card small{color:var(--tone);font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-fit-card h3{margin:.5rem 0 0;color:#d9c9a3;font-size:1.4rem;line-height:1.12;text-transform:uppercase}.scr-fit-card p{color:#8592a5;font-size:.9rem;line-height:1.55}.scr-thesis{margin-top:1.25rem;border-left:4px solid #ff8a1f;background:linear-gradient(90deg,rgba(255,138,31,.10),transparent);padding:1.5rem}.scr-thesis small{color:#ffb347;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.28em}.scr-thesis p{margin:.75rem 0 0;color:#d9c9a3;font-size:clamp(1.15rem,4vw,1.55rem);line-height:1.35;text-transform:uppercase;font-weight:700}.scr-score-strip{display:grid;min-width:0;border:1px solid #1e2733;background:#0d1117}.scr-score-tile{position:relative;isolation:isolate;min-height:250px;overflow:hidden;border-bottom:1px solid #1e2733;background:#0d1117;text-align:center;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tone) 20%,transparent),inset 0 0 26px color-mix(in srgb,var(--tone) 8%,transparent);display:flex;flex-direction:column;gap:.65rem;padding:.85rem}.scr-score-meter-box{position:relative;flex:1;min-height:142px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 35%,#1e2733);background:#050b12;box-shadow:inset 0 0 18px color-mix(in srgb,var(--tone) 8%,transparent),0 0 10px color-mix(in srgb,var(--tone) 5%,transparent)}.scr-meter-screen{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,color-mix(in srgb,var(--meter-off) 72%,#05060a),#05060a);box-shadow:inset 0 0 24px color-mix(in srgb,var(--tone) 8%,transparent);overflow:hidden}.scr-meter-screen::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(118deg,transparent 0 32%,rgba(255,255,255,.12) 43%,rgba(255,255,255,.035) 52%,transparent 66%),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:100% 100%,100% 14px;opacity:.7}.scr-meter-screen::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 0 34px rgba(0,0,0,.52)}.scr-solid-meter-fill{position:absolute;left:0;right:0;z-index:0;height:var(--meter-fill);background:linear-gradient(180deg,color-mix(in srgb,var(--meter-color) 74%,#ffffff),var(--meter-color) 42%,color-mix(in srgb,var(--meter-color) 72%,#05060a));box-shadow:0 0 22px color-mix(in srgb,var(--meter-color) 38%,transparent),inset 0 1px 0 rgba(255,255,255,.20),inset 0 -18px 32px rgba(0,0,0,.22)}.scr-solid-meter-fill.from-bottom{bottom:0}.scr-solid-meter-fill.from-top{top:0}.scr-tile-edge{position:absolute;left:.75rem;right:.75rem;height:1px;z-index:1;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tone) 58%,transparent),transparent)}.scr-tile-edge.top{top:.75rem}.scr-tile-edge.bottom{bottom:.75rem}.scr-tile-number-layer{pointer-events:none;position:absolute;inset:0;z-index:2;text-align:center}.scr-tile-outside-head{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.18rem;min-height:3.55rem;text-align:center;line-height:1.06;opacity:.92;filter:saturate(.86) brightness(1.04)}.scr-tile-outside-grade{position:relative;z-index:4;min-height:1.35rem;text-align:center;font-size:clamp(.6rem,.68vw,.76rem);font-weight:1000;text-transform:uppercase;letter-spacing:.16em;opacity:.78;filter:saturate(.86) brightness(1.04);white-space:normal;text-wrap:balance}.scr-tile-fixed-head,.scr-tile-fixed-grade{display:none}.scr-tile-letter{font-size:2rem;line-height:1;font-weight:1000;opacity:.98}.scr-tile-name{max-width:100%;font-size:clamp(.52rem,.65vw,.62rem);font-weight:1000;text-transform:uppercase;letter-spacing:.16em;white-space:normal;text-wrap:balance;opacity:.92}.scr-tile-desc{max-width:100%;font-family:ui-monospace,Menlo,monospace;font-size:clamp(.5rem,.58vw,.57rem);font-weight:1000;text-transform:uppercase;letter-spacing:.08em;white-space:normal;text-wrap:balance;opacity:.68}.scr-tile-value{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(3.25rem,5vw,4.2rem);line-height:1;font-weight:1000;letter-spacing:-.04em}.scr-score-terminal{position:relative;margin-top:1.25rem;overflow:hidden;border:1px solid #6b3d22;background:#090c11;padding:1rem;box-shadow:0 22px 60px rgba(0,0,0,.55);clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%)}.scr-score-terminal::before{content:"";position:absolute;inset:0;opacity:.35;background:radial-gradient(900px 220px at 14% 0%,rgba(255,176,0,.12),transparent 62%),radial-gradient(700px 260px at 88% 100%,rgba(124,109,255,.10),transparent 62%)}.scr-terminal-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:.75rem;border-bottom:1px solid #2a3444;padding-bottom:.75rem}.scr-terminal-head b{color:#ffb347;font-size:.64rem;font-weight:1000;text-transform:uppercase;letter-spacing:.24em}.scr-terminal-head span{color:#8592a5;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-lcd{position:relative;z-index:1;margin-top:.75rem;overflow:hidden;border:1px solid #31404a;background:#081015;padding:.75rem;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 0 38px rgba(0,0,0,.75)}.scr-lcd::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,rgba(17,250,203,.08),transparent 54%),linear-gradient(180deg,rgba(255,255,255,.03),transparent 42%,rgba(0,0,0,.24))}.scr-lcd-bg{pointer-events:none;position:absolute;inset:0;z-index:0;display:grid;gap:2px;grid-template-rows:repeat(12,1fr);padding:6px;opacity:.55}.scr-lcd-bg i{background:#0b1a1f;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}.scr-lcd-top{position:relative;z-index:1;display:flex;flex-direction:column;gap:.35rem;border-bottom:1px solid #24323b;padding-bottom:.5rem;color:#6f7f87;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.18em}.scr-lcd-equation{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(.35rem,1.2vw,.8rem);min-height:92px;margin:1rem 0}.scr-lcd-number,.scr-lcd-operator{position:relative;display:grid;place-items:center;border:1px solid #26343c;background:rgba(2,7,10,.70);color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-weight:1000;line-height:1;box-shadow:inset 0 0 18px color-mix(in srgb,var(--tone) 8%,transparent),0 0 22px color-mix(in srgb,var(--tone) 8%,transparent);text-shadow:0 0 14px color-mix(in srgb,var(--tone) 53%,transparent),3px 3px 0 #000}.scr-lcd-number{min-width:auto;padding:.5rem .75rem;font-size:clamp(2.9rem,12vw,4.25rem);letter-spacing:-.08em}.scr-lcd-number.large{font-size:clamp(3.2rem,13vw,4.75rem)}.scr-lcd-number::before{content:"";position:absolute;inset:4px;opacity:.20;background-image:linear-gradient(0deg,currentColor 1px,transparent 1px);background-size:100% 8px}.scr-lcd-number span{position:relative;z-index:1}.scr-lcd-operator{width:3rem;height:3rem;font-size:2.2rem}.scr-lcd-foot{position:relative;z-index:1;display:grid;gap:.5rem;border-top:1px solid #24323b;padding-top:.55rem;color:#8592a5;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-note-grid{display:grid;align-items:stretch;min-width:0;border:1px solid #1e2733;overflow:hidden}.scr-paper-wrap{position:relative;display:flex;align-items:stretch;padding:0;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.20),transparent 18%),radial-gradient(circle at 86% 78%,rgba(90,49,20,.09),transparent 24%),linear-gradient(180deg,#e8d5ad,#d7bd88)}.scr-paper-wrap::before{content:"";pointer-events:none;position:absolute;inset:0;opacity:.16;background-image:linear-gradient(0deg,rgba(67,40,18,.22) 1px,transparent 1px);background-size:100% 28px}.scr-paper{position:relative;flex:1;width:100%;max-width:none;margin:0;transform:none;overflow:hidden;border:0;padding:clamp(1.25rem,4vw,2rem);color:#23170d;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.14),transparent 18%),radial-gradient(circle at 86% 78%,rgba(90,49,20,.07),transparent 24%),linear-gradient(180deg,#e8d5ad,#d7bd88);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 0 42px rgba(70,38,14,.10)}.scr-paper::before{content:"";pointer-events:none;position:absolute;inset:0;opacity:.12;background-image:linear-gradient(0deg,rgba(67,40,18,.22) 1px,transparent 1px);background-size:100% 28px}.scr-paper-staple{position:absolute;left:0;top:2.5rem;width:.5rem;height:2.2rem;background:rgba(108,39,27,.80);box-shadow:0 0 12px rgba(255,45,31,.18)}.scr-paper-head{position:relative;display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;min-width:0;border-bottom:1px solid rgba(123,103,72,.55);padding-bottom:1rem;margin-bottom:1.2rem}.scr-paper small{color:#6b2e1e;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.24em}.scr-paper h3{margin:.3rem 0 0;color:#2b1a0c;font-size:clamp(1.7rem,5vw,2rem);line-height:1;text-transform:uppercase}.scr-paper-stamp{flex:0 0 auto;border:1px solid rgba(123,103,72,.50);background:rgba(234,217,184,.55);color:#6b4a2a;padding:.5rem .75rem;text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}.scr-paper-body{position:relative}.scr-paper p{margin:0 0 1rem;color:#2e2113;font-size:1rem;line-height:1.8}.scr-dropcap{float:left;padding:.25rem .45rem 0 0;color:#ff8a1f;font-size:3.2rem;font-weight:1000;line-height:.8}.scr-keyword-panel{position:relative;overflow:hidden;background:linear-gradient(180deg,#0a1118,#070b10);padding:clamp(1rem,3vw,1.35rem);border-left:1px solid #1e2733;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}.scr-keyword-glow{pointer-events:none;position:absolute;inset:-20%;background:radial-gradient(440px 240px at 12% 8%,rgba(17,250,203,.12),transparent 64%),radial-gradient(360px 260px at 94% 90%,rgba(255,106,90,.10),transparent 66%)}.scr-keyword-head{position:relative;border-bottom:1px solid #1e2733;padding-bottom:1rem}.scr-keyword-head small{display:block;color:#11facb;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-keyword-head h3{margin:.25rem 0 0;color:#d9c9a3;font-size:clamp(1.55rem,5vw,1.9rem);line-height:1;text-transform:uppercase}.scr-keyword-head p{margin:.65rem 0 0;color:#8592a5;font-size:.84rem;line-height:1.5}.scr-keyword-hero{position:relative;margin-top:1rem;border:1px solid rgba(255,176,0,.34);background:linear-gradient(135deg,rgba(255,176,0,.10),rgba(255,138,31,.035));padding:.95rem;box-shadow:inset 0 0 24px rgba(255,176,0,.04)}.scr-keyword-hero span{display:block;color:#ffb347;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.18em}.scr-keyword-hero b{display:block;margin-top:.3rem;color:#d9c9a3;font-size:1.08rem;line-height:1.12;text-transform:uppercase}.scr-keyword-group{position:relative;margin-top:1rem;border:1px solid color-mix(in srgb,var(--tone) 42%,#1e2733);background:rgba(0,0,0,.22);padding:.9rem}.scr-keyword-group-title{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}.scr-keyword-group-title h4{margin:0;color:var(--tone);font-size:.72rem;font-weight:1000;text-transform:uppercase;letter-spacing:.2em}.scr-keyword-group-title span{color:#5a6678;font-family:ui-monospace,Menlo,monospace;font-size:.55rem;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}.scr-keyword-cloud{display:flex;flex-wrap:wrap;gap:.45rem}.scr-keyword-cloud span{border:1px solid color-mix(in srgb,var(--tone) 70%,transparent);background:color-mix(in srgb,var(--tone) 8%,transparent);color:var(--tone);padding:.34rem .5rem;font-family:ui-monospace,Menlo,monospace;font-size:.6rem;font-weight:850;line-height:1.2;text-transform:uppercase;letter-spacing:.035em;box-shadow:0 0 12px color-mix(in srgb,var(--tone) 10%,transparent);transition:transform .16s,background .16s}.scr-keyword-cloud span:hover{transform:translateY(-1px);background:color-mix(in srgb,var(--tone) 13%,transparent)}.scr-keyword-cloud span.featured{background:color-mix(in srgb,var(--tone) 15%,transparent);box-shadow:0 0 16px color-mix(in srgb,var(--tone) 18%,transparent)}.scr-keyword-cloud span.negative{text-decoration:line-through;opacity:.78}.scr-axis-list{display:grid;gap:.8rem}.scr-axis-row{display:grid;min-width:0;border:1px solid #1e2733;background:#0d1117;transition:background .16s,transform .16s}.scr-axis-row:hover{background:#11161f;transform:translateY(-1px)}.scr-axis-title{position:relative;border-bottom:1px solid #1e2733;padding:1.35rem}.scr-axis-title::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone)}.scr-axis-title small{color:#8592a5;font-size:.64rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-axis-title h3{margin:.55rem 0 0;color:var(--tone);font-size:clamp(1.55rem,3.2vw,2rem);line-height:1;text-transform:uppercase;white-space:nowrap;letter-spacing:-.045em}.scr-axis-title span{display:block;margin-top:.65rem;color:#b8a982;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;text-transform:uppercase;white-space:nowrap}.scr-axis-body{padding:1.35rem;min-width:0}.scr-axis-body p{margin:1rem 0 0;color:#b8a982;font-size:.92rem;line-height:1.75;max-width:78ch}.scr-segments{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:3px}.scr-segments i{height:6px;background:#1e2733}.scr-d20-wrap{position:relative;overflow:hidden;display:grid;place-items:center;border-top:1px solid #1e2733;background:var(--tone);padding:0;min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -32px 60px rgba(0,0,0,.20),0 0 22px color-mix(in srgb,var(--tone) 16%,transparent)}.scr-d20-wrap::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.20),transparent 38%,rgba(0,0,0,.16)),linear-gradient(0deg,rgba(5,6,10,.12) 1px,transparent 1px);background-size:100% 100%,100% 14px;opacity:.85}.scr-d20{position:relative;z-index:1;width:100%;height:100%;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent;border:0;box-shadow:none;clip-path:none;color:#05060a;text-shadow:0 1px 0 rgba(255,255,255,.24);font-size:2.35rem;font-weight:1000}.scr-d20::after{content:'/20';display:block;margin-top:.28rem;color:rgba(5,6,10,.66);font-family:ui-monospace,Menlo,monospace;font-size:.55rem;font-weight:1000;letter-spacing:.08em;text-transform:uppercase}.scr-ledger{border:1px solid #ff2d1f;background:#0d1117}.scr-ledger-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid #1e2733;background:linear-gradient(90deg,rgba(255,45,31,.10),transparent);padding:1.35rem}.scr-ledger-head small{color:#ff6a5a;font-size:.64rem;font-weight:1000;text-transform:uppercase;letter-spacing:.28em}.scr-ledger-head h3{margin:.35rem 0 0;color:#d9c9a3;font-size:1.9rem;text-transform:uppercase}.scr-ledger-head b{color:#ff6a5a;font-size:3rem;line-height:1}.scr-ledger-row{display:grid;min-width:0;border-top:1px solid #1e2733}.scr-ledger-title{position:relative;border-bottom:1px solid #1e2733;padding:1.15rem}.scr-ledger-title::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone)}.scr-ledger-title small{color:#5a6678;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;text-transform:uppercase}.scr-ledger-title h4{margin:.45rem 0 0;color:var(--tone);font-size:1.35rem;line-height:1.1;text-transform:uppercase}.scr-ledger-title span{display:block;margin-top:.5rem;color:#8592a5;font-size:.68rem;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}.scr-ledger-row p{margin:0;padding:1.15rem;color:#b8a982;font-size:.92rem;line-height:1.7}.scr-ledger-value{display:grid;place-items:center;gap:.25rem;border-top:1px solid #1e2733;background:rgba(0,0,0,.30);padding:1rem;text-align:center}.scr-ledger-value b{color:#ff6a5a;font-size:2.2rem;line-height:1}.scr-ledger-value small{color:#8592a5;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.16em}.scr-ledger-check{border-top:1px solid #1e2733;padding:.85rem 1rem;color:#7cff6b;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em}.scr-insight-grid,.scr-audit-grid{display:grid;min-width:0;gap:.9rem}.scr-insight,.scr-audit-card{position:relative;overflow:hidden;min-width:0;min-height:100%;border:1px solid var(--tone);background:#0d1117;padding:1.35rem}.scr-insight::before,.scr-audit-card::before{content:"";position:absolute;right:-2.2rem;top:-2.2rem;width:8rem;height:8rem;border-radius:999px;background:var(--tone);opacity:.08}.scr-insight small,.scr-audit-card small{position:relative;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.2em}.scr-insight h3,.scr-audit-card h3{position:relative;margin:.7rem 0 0;color:#d9c9a3;font-size:1.55rem;line-height:1.05;text-transform:uppercase}.scr-audit-card h3{color:var(--tone);font-size:1.15rem}.scr-insight p,.scr-audit-card p{position:relative;margin:.85rem 0 0;color:#b8a982;font-size:.92rem;line-height:1.7}.scr-evidence-board{position:relative;display:grid;gap:1rem}.scr-evidence-card{position:relative;display:grid;min-width:0;gap:.75rem;border:1px solid #1e2733;background:linear-gradient(180deg,rgba(13,17,23,.98),rgba(5,9,15,.98));padding:1rem;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tone) 12%,transparent);grid-template-columns:minmax(92px,120px) 1fr}.scr-evidence-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone)}.scr-evidence-marker{position:relative;isolation:isolate;display:grid;place-items:center;align-content:center;gap:.35rem;min-height:100%;padding:.9rem;border:1px solid color-mix(in srgb,var(--tone) 48%,#1e2733);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 18%,#05060a),rgba(0,0,0,.18));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tone) 14%,transparent),inset 0 -22px 34px rgba(0,0,0,.22)}.scr-evidence-marker::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:100% 12px;opacity:.8}.scr-evidence-marker span{font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em;color:color-mix(in srgb,var(--tone) 70%,#8592a5);font-family:ui-monospace,Menlo,monospace;writing-mode:horizontal-tb!important;transform:none!important}.scr-evidence-marker b{display:block;width:auto;height:auto;border:0;background:transparent;color:var(--tone);font-size:clamp(2.8rem,5vw,4.5rem);line-height:.82;font-weight:1000;letter-spacing:-.08em;text-shadow:0 2px 0 #000,0 0 18px color-mix(in srgb,var(--tone) 34%,transparent)}.scr-evidence-title-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem}.scr-evidence-title-row h3{margin:0;min-width:0;flex:1 1 280px;color:#d9c9a3;font-size:clamp(1.2rem,3vw,1.65rem);line-height:1.1;text-transform:uppercase}.scr-spoiler{flex:0 0 auto;border:1px solid #2a3444;color:#8592a5;padding:.25rem .45rem;font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}.scr-spoiler-medium{border-color:#ff8a1f;color:#ffb347}.scr-spoiler-heavy{border-color:#ff2d1f;color:#ff6a5a}.scr-evidence-cells{margin-top:.8rem;display:grid;align-items:stretch;min-width:0;gap:.75rem}.scr-evidence-cells>div{min-width:0;border:1px solid #1e2733;background:rgba(0,0,0,.24);padding:.95rem}.scr-evidence-cells>div.muted{background:rgba(255,255,255,.018)}.scr-evidence-cells small{color:var(--tone);font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-evidence-cells p{margin:.5rem 0 0;color:#b8a982;font-size:.9rem;line-height:1.6}.scr-evidence-impact{margin-top:.75rem;border-top:1px dashed #1e2733;padding-top:.65rem;color:#ff8a1f;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;letter-spacing:.08em}.scr-evidence-protocol{margin-top:1rem;border:1px solid #2a3444;background:linear-gradient(180deg,rgba(13,17,23,.94),rgba(5,9,15,.94));padding:1rem;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}.scr-evidence-protocol-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;border-bottom:1px solid #1e2733;padding-bottom:.75rem}.scr-evidence-protocol-head small{display:block;color:#11facb;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}.scr-evidence-protocol-head b{color:#d9c9a3;font-size:.82rem;text-transform:uppercase;letter-spacing:.14em}.scr-evidence-protocol-grid{display:grid;gap:.75rem;margin-top:.85rem}.scr-evidence-protocol-grid div{border:1px solid color-mix(in srgb,var(--tone) 38%,#1e2733);background:color-mix(in srgb,var(--tone) 6%,transparent);padding:.8rem}.scr-evidence-protocol-grid small{display:block;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.56rem;font-weight:1000;text-transform:uppercase;letter-spacing:.16em}.scr-evidence-protocol-grid p{margin:.38rem 0 0;color:#b8a982;font-size:.84rem;line-height:1.55}.scr-dev-section{padding:0!important;background:transparent!important;border:0!important}.scr-dev-details{border:1px dashed #2a3444;background:rgba(13,17,23,.72);padding:1rem}.scr-dev-details summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;color:#8592a5;font-size:.72rem;font-weight:1000;text-transform:uppercase;letter-spacing:.16em}.scr-dev-details summary b{color:#7cff6b}.scr-dev-note{color:#8592a5;font-size:.85rem}.scr-dev-grid{display:grid;min-width:0;gap:.75rem;margin-top:1rem}.scr-dev-grid article{min-width:0;border:1px solid #1e2733;background:rgba(0,0,0,.25);padding:.9rem}.scr-dev-grid article small{color:#7cff6b;font-size:.68rem;font-weight:1000;text-transform:uppercase;letter-spacing:.18em}.scr-dev-grid article.fail small{color:#ff6a5a}.scr-dev-grid h3{margin:.45rem 0 0;color:#d9c9a3;font-size:1rem;text-transform:uppercase}.scr-dev-grid p{color:#8592a5;font-family:ui-monospace,Menlo,monospace;font-size:.68rem;text-transform:uppercase}.scr-footer{overflow-wrap:anywhere;border-top:1px solid #1e2733;padding:2rem 1rem;text-align:center;color:#5a6678;font-size:.68rem;font-weight:1000;text-transform:uppercase;letter-spacing:.22em}@keyframes scrPulse{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1.08)}}@media (min-width:560px){.scr-shell{width:min(1400px,calc(100% - 32px));padding-top:1.5rem;gap:1.75rem}.scr-meta-rail{grid-template-columns:repeat(5,1fr)}.scr-meta-rail div{border-bottom:0;border-right:1px solid rgba(255,255,255,.10)}.scr-meta-rail div:last-child{border-right:0}.scr-lcd-top,.scr-lcd-foot{grid-template-columns:repeat(3,1fr)}.scr-lcd-top{flex-direction:row;justify-content:space-between}.scr-dev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:760px){.scr-hud-links,.scr-progress{display:flex}.scr-fit-grid{grid-template-columns:repeat(3,1fr)}.scr-fit-card{border-bottom:0;border-right:1px solid #1e2733}.scr-fit-card:last-child{border-right:0}.scr-score-strip{grid-template-columns:repeat(2,1fr)}.scr-score-tile:nth-child(odd){border-right:1px solid #1e2733}.scr-note-grid{grid-template-columns:1.35fr .85fr}.scr-paper-wrap{border-right:1px solid #1e2733}.scr-keyword-panel{border-left:0}.scr-axis-row,.scr-ledger-row{grid-template-columns:minmax(300px,340px) minmax(0,1fr) minmax(96px,118px)}.scr-axis-title,.scr-ledger-title{border-right:1px solid #1e2733;border-bottom:0}.scr-d20-wrap,.scr-ledger-value{border-top:0;border-left:1px solid #1e2733}.scr-insight-grid,.scr-audit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.scr-evidence-card{grid-template-columns:minmax(118px,150px) 1fr}.scr-evidence-marker{min-height:100%}.scr-evidence-cells{grid-template-columns:repeat(3,1fr)}.scr-hero-verdict-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.scr-evidence-protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:980px){.scr-correction-split{grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr)}.scr-extra-panel{min-height:100%}}@media (min-width:1120px){.scr-hero-grid{grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr)}.scr-score-strip{grid-template-columns:repeat(7,1fr)}.scr-score-tile{min-height:290px;border-bottom:0;border-right:1px solid #1e2733}.scr-score-tile:last-child{border-right:0}.scr-score-meter-box{min-height:158px}.scr-audit-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.scr-dev-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.scr-evidence-cells>div{display:flex;flex-direction:column}.scr-evidence-cells p{flex:1}.scr-evidence-protocol-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (max-width:760px){.scr-shell{width:min(100% - 18px,1400px);gap:1.15rem}.scr-shell>section{padding:1rem}.scr-hud-inner{font-size:.55rem}.scr-hero{min-height:auto}.scr-hero-grid{padding:1.25rem}.scr-hero h1{font-size:clamp(3rem,15vw,5rem)}.scr-identity{font-size:.92rem}.scr-meta-rail div{padding:.7rem}.scr-hero-verdict-strip{grid-template-columns:1fr}.scr-hero-verdict-strip b{font-size:.68rem}.scr-verdict-simple{min-height:auto}.scr-score-panel{min-height:390px}.scr-score-panel-number{font-size:clamp(7.5rem,34vw,10rem)}.scr-score-panel-grade{font-size:clamp(2.8rem,15vw,4rem)}.scr-inspect-row{grid-template-columns:minmax(82px,104px) 1fr 1.25rem;gap:.42rem}.scr-inspect-label b{font-size:.56rem}.scr-inspect-label small{display:none}.scr-inspect-row strong{font-size:.66rem}.scr-section-head{gap:.9rem}.scr-section-head h2{font-size:clamp(1.8rem,10vw,2.65rem)}.scr-section-head p{font-size:.84rem}.scr-score-tile{min-height:245px;padding:.7rem}.scr-score-meter-box{min-height:128px}.scr-tile-letter{font-size:1.55rem}.scr-tile-value{font-size:3.35rem}.scr-tile-outside-head{min-height:3.2rem}.scr-lcd-number{font-size:clamp(2.25rem,14vw,3.3rem);padding:.42rem .55rem}.scr-lcd-number.large{font-size:clamp(2.7rem,15vw,3.75rem)}.scr-lcd-operator{width:2.45rem;height:2.45rem;font-size:1.8rem}.scr-lcd-foot{font-size:.54rem}.scr-paper-wrap{border-right:0}.scr-paper{padding:clamp(1.2rem,5vw,1.6rem)}.scr-paper-head{display:grid}.scr-paper-stamp{justify-self:start;text-align:left}.scr-keyword-panel{border-left:0;border-top:1px solid #1e2733}.scr-keyword-cloud span{font-size:.55rem}.scr-keyword-hero b{font-size:.95rem}.scr-axis-title h3{white-space:normal;letter-spacing:-.035em;font-size:clamp(1.45rem,9vw,2rem)}.scr-axis-title span{white-space:normal}.scr-d20-wrap{min-height:72px}.scr-d20{width:100%;min-height:72px;font-size:2rem}.scr-extra-panel-top h3{font-size:1.65rem}.scr-extra-panel-top b{font-size:2.4rem}.scr-danger-panel .scr-ledger-parent::before{position:static;display:block;padding:.65rem 1rem 0}.scr-danger-panel .scr-ledger-subrow{margin-left:.5rem}.scr-danger-panel .scr-ledger-subrow::before{left:-.5rem;width:.5rem}.scr-danger-panel .scr-ledger-check{margin-left:.5rem}.scr-evidence-card{grid-template-columns:1fr;padding:.9rem}.scr-evidence-marker{display:flex;justify-content:flex-start;min-height:auto;padding:.75rem}.scr-evidence-marker b{font-size:2rem}.scr-evidence-marker span{font-size:.58rem}.scr-evidence-title-row{align-items:flex-start}.scr-spoiler{font-size:.52rem}.scr-evidence-protocol-head{display:grid}.scr-dev-details summary{display:grid;gap:.4rem}}@media (max-width:390px){.scr-paper-stamp{display:none}.scr-tile-value{font-size:3.7rem}}
+`;
+
+// ../../tmp/metro-pages-entry.jsx
+import { jsx as jsx2 } from "react/jsx-runtime";
+var root = document.getElementById("root");
+createRoot(root).render(/* @__PURE__ */ jsx2(AlertedMetroReviewTemplate, {}));
