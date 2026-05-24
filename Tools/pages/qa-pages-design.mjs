@@ -209,6 +209,10 @@ async function auditViewport(browser, base, buildId, viewport) {
     const fitSignalBeforeStyles = fitSignals.map((el) => getComputedStyle(el, '::before'));
     const fitSignalAfterStyles = fitSignals.map((el) => getComputedStyle(el, '::after'));
     const fitSignalLabelStyles = fitSignals.map((el) => getComputedStyle(el.querySelector('small')));
+    const metaChips = [...document.querySelectorAll('.scr-meta-rail .scr-meta-chip')];
+    const metaChipRects = metaChips.map(rectFor);
+    const metaChipStyles = metaChips.map((el) => getComputedStyle(el));
+    const metaChipLabelStyles = metaChips.map((el) => getComputedStyle(el.querySelector('small')));
     const mainScoreTitle = document.querySelector('.scr-main-score-title');
     const mainScoreTitleStyle = mainScoreTitle ? getComputedStyle(mainScoreTitle) : null;
     const mainScoreRank = document.querySelector('.scr-main-score-rank');
@@ -355,6 +359,19 @@ async function auditViewport(browser, base, buildId, viewport) {
         maxGlareOpacity: fitSignalBeforeStyles.reduce((max, style) => Math.max(max, Number.parseFloat(style.opacity) || 0), 0),
         staleCards: document.querySelectorAll('.scr-fit-card').length
       },
+      metaChips: {
+        count: metaChips.length,
+        labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
+        values: metaChips.map((el) => (el.querySelector('b')?.textContent || '').trim()).join('|'),
+        minHeight: metaChipRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        maxRight: metaChipRects.reduce((max, rect) => Math.max(max, rect.right), 0),
+        maxLeftOverflow: metaChipRects.reduce((min, rect) => Math.min(min, rect.left), Infinity),
+        hasCapsuleRadius: metaChipStyles.every((style) => Number.parseFloat(style.borderTopLeftRadius) >= 18),
+        hasGlassGradient: metaChipStyles.every((style) => style.backgroundImage.includes('gradient')),
+        hasToneBorder: metaChipStyles.every((style) => Number.parseFloat(style.borderTopWidth) >= 1),
+        labelMinSize: metaChipLabelStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        labelHasCapsule: metaChipLabelStyles.every((style) => Number.parseFloat(style.borderTopLeftRadius) >= 10 && Number.parseFloat(style.borderTopWidth) >= 1)
+      },
       inspectHeader: {
         kicker: (inspectHead?.querySelector('small')?.textContent || '').trim(),
         title: (inspectHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
@@ -388,6 +405,8 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere-first survival FPS') && metrics.fitSignals.copy.includes('authored pressure'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(!/(FPSYou|playerYou|firstYou)/.test(metrics.fitSignals.text), `${viewport.name} audience fit signal text is semantically concatenated ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && metrics.fitSignals.labelMinSize >= 11 && metrics.fitSignals.labelMinWeight >= 900 && metrics.fitSignals.labelHasBottomRule && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.metaChips.count === 5 && metrics.metaChips.labels === 'Status|Evidence|Confidence|Spoilers|Risk' && metrics.metaChips.values === 'Complete|Full run / veteran memory|High, caveated|Layered policy|Ending reconstructed', `${viewport.name} meta chip content mismatch ${JSON.stringify(metrics.metaChips)}`);
+  assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelHasCapsule && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
   assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);

@@ -210,16 +210,21 @@ function HeroContext() {
 
 function HeroMetaRail() {
   const meta = [
-    ['Status', REVIEW.reviewStatus],
-    ['Evidence', REVIEW.evidenceBase],
-    ['Confidence', REVIEW.confidence],
-    ['Spoilers', REVIEW.spoilerPolicy],
-    ['Risk', REVIEW.verdictRisk],
+    { label: 'Status', value: REVIEW.reviewStatus, tone: COLORS.green },
+    { label: 'Evidence', value: REVIEW.evidenceBase, tone: COLORS.retroMint },
+    { label: 'Confidence', value: REVIEW.confidence, tone: COLORS.loopAmber },
+    { label: 'Spoilers', value: REVIEW.spoilerPolicy, tone: COLORS.atmosphereIndigo },
+    { label: 'Risk', value: REVIEW.verdictRisk, tone: COLORS.danger },
   ];
 
   return (
-    <div className="scr-meta-rail">
-      {meta.map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}
+    <div className="scr-meta-rail" role="list" aria-label="Report metadata">
+      {meta.map((item) => (
+        <div className="scr-meta-chip" role="listitem" key={item.label} style={{ '--tone': item.tone }}>
+          <small>{item.label}</small>
+          <b>{item.value}</b>
+        </div>
+      ))}
     </div>
   );
 }
@@ -732,6 +737,7 @@ const TEMPLATE_CSS = `
 .scr-main-score-meter .scr-meter-screen{background:linear-gradient(180deg,color-mix(in srgb,var(--meter-off) 86%,#120a02),#140b02)}
 .scr-main-score-meter .scr-meter-screen::after{box-shadow:inset 0 0 0 1px rgba(255,208,128,.055),inset 0 0 34px rgba(73,38,0,.48)}
 .scr-main-score-rank{top:calc(50% + 2.2rem);color:#2d1600;text-shadow:0 1px 0 rgba(255,224,170,.26),0 0 16px rgba(255,179,71,.26)}
+.scr-meta-rail{display:flex;flex-wrap:wrap;align-items:center;gap:.58rem;border:0;padding:.08rem 0}.scr-meta-rail .scr-meta-chip{position:relative;isolation:isolate;display:inline-flex;flex:1 1 12rem;align-items:center;gap:.52rem;max-width:100%;min-width:0;min-height:2.55rem;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 46%,#2a3444);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 13%,#121821),rgba(8,12,18,.96) 58%,color-mix(in srgb,var(--tone) 6%,#05070b));box-shadow:inset 0 1px 0 rgba(255,255,255,.055),inset 0 -14px 24px rgba(0,0,0,.22),0 10px 24px rgba(0,0,0,.20);padding:.38rem .78rem .38rem .46rem}.scr-meta-chip::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(255,255,255,.08),transparent 36%,rgba(255,255,255,.025) 68%,transparent);opacity:.34}.scr-meta-chip small{display:inline-flex;align-items:center;justify-content:center;min-height:1.38rem;border:1px solid color-mix(in srgb,var(--tone) 64%,transparent);border-radius:999px;background:color-mix(in srgb,var(--tone) 16%,transparent);padding:.24rem .44rem;color:var(--tone);font-size:.64rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000}.scr-meta-chip b{display:block;min-width:0;margin-top:0;color:#decfa8;font-size:.82rem;font-weight:950;line-height:1.15;text-wrap:balance;text-shadow:0 1px 0 #000}
 .scr-inspect-metrics{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:start;gap:1rem .78rem;min-width:0}
 .scr-inspect-metric{min-width:0;display:grid;align-content:start;justify-items:stretch;gap:.58rem;border:0;background:transparent;box-shadow:none;padding:.18rem .1rem;text-align:center;color:var(--tone)}
 .scr-inspect-headline{display:grid;align-content:end;justify-items:center;gap:.16rem;min-height:3.05rem}
