@@ -6,7 +6,9 @@
     "qa:pages:local": "node Tools/pages/qa-pages.mjs --local",
     "qa:pages:live": "node Tools/pages/qa-pages.mjs --live",
     "qa:pages:design:local": "node Tools/pages/qa-pages-design.mjs --local",
-    "qa:pages:design:live": "node Tools/pages/qa-pages-design.mjs --live"
+    "qa:pages:design:live": "node Tools/pages/qa-pages-design.mjs --live",
+    "qa:pages:stress:local": "node Tools/pages/qa-pages-stress.mjs --local",
+    "qa:pages:stress:live": "node Tools/pages/qa-pages-stress.mjs --live"
   },
   "devDependencies": {
     "esbuild": "0.28.0",
