@@ -202,13 +202,21 @@ async function auditViewport(browser, base, buildId, viewport) {
     const textSignalStyles = textSignals.map((el) => getComputedStyle(el));
     const textSignalBeforeStyles = textSignals.map((el) => getComputedStyle(el, '::before'));
     const textSignalAfterStyles = textSignals.map((el) => getComputedStyle(el, '::after'));
-    const textSignalLabelStyles = textSignals.map((el) => getComputedStyle(el.querySelector('small')));
+    const textSignalLabels = textSignals.map((el) => el.querySelector('small')).filter(Boolean);
+    const textSignalMains = textSignals.map((el) => el.querySelector('.scr-text-signal-main')).filter(Boolean);
+    const textSignalLabelStyles = textSignalLabels.map((el) => getComputedStyle(el));
+    const textSignalLabelRects = textSignalLabels.map(rectFor);
+    const textSignalMainRects = textSignalMains.map(rectFor);
     const fitSignals = [...document.querySelectorAll('.scr-fit-grid .scr-fit-signal')];
     const fitSignalRects = fitSignals.map(rectFor);
     const fitSignalStyles = fitSignals.map((el) => getComputedStyle(el));
     const fitSignalBeforeStyles = fitSignals.map((el) => getComputedStyle(el, '::before'));
     const fitSignalAfterStyles = fitSignals.map((el) => getComputedStyle(el, '::after'));
-    const fitSignalLabelStyles = fitSignals.map((el) => getComputedStyle(el.querySelector('small')));
+    const fitSignalLabels = fitSignals.map((el) => el.querySelector('small')).filter(Boolean);
+    const fitSignalMains = fitSignals.map((el) => el.querySelector('.scr-text-signal-main')).filter(Boolean);
+    const fitSignalLabelStyles = fitSignalLabels.map((el) => getComputedStyle(el));
+    const fitSignalLabelRects = fitSignalLabels.map(rectFor);
+    const fitSignalMainRects = fitSignalMains.map(rectFor);
     const metaChips = [...document.querySelectorAll('.scr-meta-rail .scr-meta-chip')];
     const metaChipRects = metaChips.map(rectFor);
     const metaChipStyles = metaChips.map((el) => getComputedStyle(el));
@@ -336,8 +344,11 @@ async function auditViewport(browser, base, buildId, viewport) {
         labelMinSize: textSignalLabelStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
         labelMinWeight: textSignalLabelStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
         labelHasBottomRule: textSignalLabelStyles.every((style) => Number.parseFloat(style.borderBottomWidth) >= 1),
+        labelTopLeft: textSignalLabelRects.every((rect, index) => rect.top - textSignalRects[index].top <= 24 && rect.left - textSignalRects[index].left <= 24),
+        mainCentered: textSignalMainRects.every((rect, index) => Math.abs((rect.left + rect.width / 2) - (textSignalRects[index].left + textSignalRects[index].width / 2)) <= 14 && Math.abs((rect.top + rect.height / 2) - (textSignalRects[index].top + textSignalRects[index].height / 2)) <= 18),
         hasFill: textSignals.some((el) => Boolean(el.querySelector('.scr-text-signal-fill'))),
         hasGradient: textSignalStyles.every((style) => style.backgroundImage.includes('gradient')),
+        hasOpposingGradient: textSignalStyles.every((style) => style.backgroundImage.includes('315deg')),
         maxGlareOpacity: textSignalBeforeStyles.reduce((max, style) => Math.max(max, Number.parseFloat(style.opacity) || 0), 0)
       },
       fitSignals: {
@@ -355,8 +366,11 @@ async function auditViewport(browser, base, buildId, viewport) {
         labelMinSize: fitSignalLabelStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
         labelMinWeight: fitSignalLabelStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
         labelHasBottomRule: fitSignalLabelStyles.every((style) => Number.parseFloat(style.borderBottomWidth) >= 1),
+        labelTopLeft: fitSignalLabelRects.every((rect, index) => rect.top - fitSignalRects[index].top <= 24 && rect.left - fitSignalRects[index].left <= 24),
+        mainCentered: fitSignalMainRects.every((rect, index) => Math.abs((rect.left + rect.width / 2) - (fitSignalRects[index].left + fitSignalRects[index].width / 2)) <= 14 && Math.abs((rect.top + rect.height / 2) - (fitSignalRects[index].top + fitSignalRects[index].height / 2)) <= 22),
         hasFill: fitSignals.some((el) => Boolean(el.querySelector('.scr-text-signal-fill'))),
         hasGradient: fitSignalStyles.every((style) => style.backgroundImage.includes('gradient')),
+        hasOpposingGradient: fitSignalStyles.every((style) => style.backgroundImage.includes('315deg')),
         maxGlareOpacity: fitSignalBeforeStyles.reduce((max, style) => Math.max(max, Number.parseFloat(style.opacity) || 0), 0),
         staleCards: document.querySelectorAll('.scr-fit-card').length
       },
@@ -409,10 +423,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionReview)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
   assert(metrics.textSignals.count === 6 && metrics.textSignals.labels === 'Action|Confidence|Main pull|Main drag|Risk|Review state' && metrics.textSignals.values.includes('Buy if atmosphere-first survival FPS fits you') && metrics.textSignals.values.includes('Max / replay-verified · 100/100') && metrics.textSignals.values.includes('Finalized / no active test'), `${viewport.name} hero text signal content mismatch ${JSON.stringify(metrics.textSignals)}`);
-  assert(metrics.textSignals.minHeight >= 90 && metrics.textSignals.hasBorder && !metrics.textSignals.hasAccent && !metrics.textSignals.hasInnerFrame && !metrics.textSignals.labelHasFrame && metrics.textSignals.labelMinSize >= 11 && metrics.textSignals.labelMinWeight >= 900 && metrics.textSignals.labelHasBottomRule && !metrics.textSignals.hasFill && metrics.textSignals.hasGradient && metrics.textSignals.maxGlareOpacity <= 0.4 && metrics.textSignals.maxRight <= viewport.width + 1, `${viewport.name} hero text signal layout mismatch ${JSON.stringify(metrics.textSignals)}`);
+  assert(metrics.textSignals.minHeight >= 100 && metrics.textSignals.hasBorder && !metrics.textSignals.hasAccent && !metrics.textSignals.hasInnerFrame && !metrics.textSignals.labelHasFrame && metrics.textSignals.labelMinSize >= 12 && metrics.textSignals.labelMinWeight >= 900 && metrics.textSignals.labelHasBottomRule && metrics.textSignals.labelTopLeft && metrics.textSignals.mainCentered && !metrics.textSignals.hasFill && metrics.textSignals.hasGradient && metrics.textSignals.hasOpposingGradient && metrics.textSignals.maxGlareOpacity <= 0.4 && metrics.textSignals.maxRight <= viewport.width + 1, `${viewport.name} hero text signal layout mismatch ${JSON.stringify(metrics.textSignals)}`);
   assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere-first survival FPS') && metrics.fitSignals.copy.includes('authored pressure'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(!/(FPSYou|playerYou|firstYou)/.test(metrics.fitSignals.text), `${viewport.name} audience fit signal text is semantically concatenated ${JSON.stringify(metrics.fitSignals)}`);
-  assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && metrics.fitSignals.labelMinSize >= 11 && metrics.fitSignals.labelMinWeight >= 900 && metrics.fitSignals.labelHasBottomRule && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && metrics.fitSignals.labelMinSize >= 12 && metrics.fitSignals.labelMinWeight >= 900 && metrics.fitSignals.labelHasBottomRule && metrics.fitSignals.labelTopLeft && metrics.fitSignals.mainCentered && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.hasOpposingGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
