@@ -328,6 +328,24 @@ async function auditViewport(browser, base, buildId, viewport) {
       Number.parseFloat(style.borderBottomWidth) || 0,
       Number.parseFloat(style.borderLeftWidth) || 0
     ), 0);
+    const axisSection = document.querySelector('.scr-axis-diagnosis');
+    const axisHead = axisSection?.querySelector('.scr-section-head');
+    const axisHeadDesc = axisHead?.querySelector('p');
+    const axisHeadDescStyle = axisHeadDesc ? getComputedStyle(axisHeadDesc) : null;
+    const axisRows = [...document.querySelectorAll('.scr-axis-diagnosis .scr-axis-row')];
+    const axisRowStyles = axisRows.map((el) => getComputedStyle(el));
+    const axisRowRects = axisRows.map(rectFor);
+    const axisTitleLabels = axisRows.map((el) => (el.querySelector('.scr-axis-title small')?.textContent || '').trim());
+    const axisTitleNames = axisRows.map((el) => (el.querySelector('.scr-axis-title h3')?.textContent || '').trim());
+    const axisTitleGrades = axisRows.map((el) => (el.querySelector('.scr-axis-title span')?.textContent || '').trim());
+    const axisTitleNameStyles = axisRows.map((el) => getComputedStyle(el.querySelector('.scr-axis-title h3')));
+    const axisBodyText = axisRows.map((el) => el.querySelector('.scr-axis-body p')).filter(Boolean);
+    const axisBodyTextStyles = axisBodyText.map((el) => getComputedStyle(el));
+    const axisSegmentCells = [...document.querySelectorAll('.scr-axis-diagnosis .scr-segments i')];
+    const axisSegmentCellStyles = axisSegmentCells.map((el) => getComputedStyle(el));
+    const axisMeters = [...document.querySelectorAll('.scr-axis-diagnosis .scr-d20-wrap.scr-score-meter-box.scr-signal-block')];
+    const axisMeterRects = axisMeters.map(rectFor);
+    const axisMeterValues = axisMeters.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim());
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -526,6 +544,30 @@ async function auditViewport(browser, base, buildId, viewport) {
         pillHasLineThrough: keywordPillStyles.some((style) => style.textDecorationLine.includes('line-through')),
         maxRight: Math.max(keywordPanelRect?.right || 0, keywordPillRects.reduce((max, rect) => Math.max(max, rect.right), 0))
       },
+      axisDiagnosis: {
+        exists: Boolean(axisSection),
+        kicker: (axisHead?.querySelector('small')?.textContent || '').trim(),
+        title: (axisHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (axisHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: axisHeadDescStyle ? Number.parseFloat(axisHeadDescStyle.fontSize) : 0,
+        descColor: axisHeadDescStyle?.color || '',
+        rowCount: axisRows.length,
+        labels: axisTitleLabels.join('|'),
+        names: axisTitleNames.join('|'),
+        grades: axisTitleGrades.join('|'),
+        rowHasGradient: axisRowStyles.every((style) => style.backgroundImage.includes('gradient')),
+        titleMinSize: axisTitleNameStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        bodyMinSize: axisBodyTextStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        bodyMinWeight: axisBodyTextStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
+        segmentMinHeight: axisSegmentCellStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.height) || Infinity), Infinity),
+        segmentMinRadius: axisSegmentCellStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.borderTopLeftRadius) || Infinity), Infinity),
+        meterCount: axisMeters.length,
+        meterValues: axisMeterValues.join('|'),
+        meterKickers: document.querySelectorAll('.scr-axis-diagnosis .scr-d20-wrap .scr-signal-kicker').length,
+        meterNotes: document.querySelectorAll('.scr-axis-diagnosis .scr-d20-wrap .scr-signal-note').length,
+        meterText: axisMeters.map((el) => (el.textContent || '').replace(/\s+/g, ' ').trim()).join('|'),
+        maxRight: Math.max(axisRowRects.reduce((max, rect) => Math.max(max, rect.right), 0), axisMeterRects.reduce((max, rect) => Math.max(max, rect.right), 0))
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -590,6 +632,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.reviewerNote.keywordTitle === 'Fit Tags' && metrics.reviewerNote.keywordDesc.includes('score is not promising') && metrics.reviewerNote.keywordDescSize >= 14.5 && metrics.reviewerNote.primaryText === 'Primary Fit Atmospheric Survival FPS' && metrics.reviewerNote.primaryHasGradient && metrics.reviewerNote.groupTitles === 'Matches|Not the pitch', `${viewport.name} reviewer keyword panel content mismatch ${JSON.stringify(metrics.reviewerNote)}`);
   assert(metrics.reviewerNote.oldDecorNodes === 0 && !metrics.reviewerNote.staleCountText && metrics.reviewerNote.pillCount === 16 && metrics.reviewerNote.positiveCount === 8 && metrics.reviewerNote.negativeCount === 8 && !/[✓×]/.test(metrics.reviewerNote.pillText) && metrics.reviewerNote.pillText.includes('Story rich') && metrics.reviewerNote.pillText.includes('Open world RPG'), `${viewport.name} reviewer keyword capsule content mismatch ${JSON.stringify(metrics.reviewerNote)}`);
   assert(metrics.reviewerNote.pillMinHeight >= 30 && metrics.reviewerNote.pillMinFont >= 12 && metrics.reviewerNote.pillMinRadius >= 16 && metrics.reviewerNote.pillHasGradient && !metrics.reviewerNote.pillHasLineThrough && metrics.reviewerNote.maxRight <= viewport.width + 1, `${viewport.name} reviewer keyword capsules are too small/old-style/overflowing ${JSON.stringify(metrics.reviewerNote)}`);
+  assert(metrics.axisDiagnosis.exists && metrics.axisDiagnosis.kicker === '05 · Tier 1' && metrics.axisDiagnosis.title === 'ALERT Axis Diagnosis' && metrics.axisDiagnosis.desc.includes('readable proof') && metrics.axisDiagnosis.descSize >= 15.5 && metrics.axisDiagnosis.descColor !== 'rgb(133, 146, 165)', `${viewport.name} axis diagnosis heading/copy mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
+  assert(metrics.axisDiagnosis.rowCount === 5 && metrics.axisDiagnosis.labels === 'A · World pressure|L · Play engine|E · Forward pull|R · Fair clarity|T · Product state' && metrics.axisDiagnosis.names === 'Atmosphere|Loop|Engagement|Readability|Technical' && metrics.axisDiagnosis.grades === 'Phenomenal|Excellent|Excellent|Excellent|Excellent+', `${viewport.name} axis diagnosis row content mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
+  assert(metrics.axisDiagnosis.rowHasGradient && metrics.axisDiagnosis.titleMinSize >= 26 && metrics.axisDiagnosis.bodyMinSize >= 14.5 && metrics.axisDiagnosis.bodyMinWeight >= 600 && metrics.axisDiagnosis.segmentMinHeight >= 8 && metrics.axisDiagnosis.segmentMinRadius >= 4, `${viewport.name} axis diagnosis row polish mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
+  assert(metrics.axisDiagnosis.meterCount === 5 && metrics.axisDiagnosis.meterValues === '20|17|17|17|19' && metrics.axisDiagnosis.meterKickers === 0 && metrics.axisDiagnosis.meterNotes === 0 && !/(Axis|\/20)/i.test(metrics.axisDiagnosis.meterText) && metrics.axisDiagnosis.maxRight <= viewport.width + 1, `${viewport.name} axis diagnosis meter clutter/overflow mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
