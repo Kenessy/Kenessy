@@ -126,6 +126,7 @@ async function auditHttp(base) {
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
+  assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`main_canvas_diegetic_equation.bundle.js?v=${buildId}`), 'report bundle URL is not versioned with current build id');
@@ -176,6 +177,7 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
   assert(initial.sectionTitles.join('|') === 'Workbench|Projects|Game reviews|Interests', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
   assert(initial.hasReportLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
+  assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);
   assert(initial.linkCount >= 7, `${viewport.name} homepage expected links`);
   assert(initial.smallInteractive.length === 0, `${viewport.name} homepage small tap targets ${JSON.stringify(initial.smallInteractive)}`);
   assert(!initial.badText, `${viewport.name} homepage bad placeholder text ${initial.badText}`);
@@ -358,6 +360,7 @@ async function collectHomeMetrics(page, buildId) {
       })
       .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
     const heroImage = document.querySelector('.hero-panel img');
+    const reviewSplash = document.querySelector('.review-media img');
     const hrefs = [...document.querySelectorAll('a[href]')].map((el) => el.href);
     return {
       finalUrl: location.href,
@@ -370,6 +373,7 @@ async function collectHomeMetrics(page, buildId) {
       hasReportsLink: hrefs.some((href) => href.includes('plater-game-reports/')),
       hasApocalypseLink: hrefs.some((href) => href.includes('apocalypse-express/')),
       imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+      reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,

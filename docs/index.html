@@ -182,17 +182,45 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
 .project-stat span{margin-top:8px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
 .review-card{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 144px;
-  gap:20px;
+  grid-template-columns:minmax(320px,.95fr) minmax(0,1fr) 132px;
+  gap:0;
   align-items:stretch;
+  padding:0;
+  overflow:hidden;
+}
+.review-media{
+  position:relative;
+  min-height:242px;
+  border-right:1px solid var(--line);
+  background:#07090d;
+}
+.review-media img{
+  width:100%;
+  height:100%;
+  min-height:242px;
+  object-fit:cover;
+  object-position:center;
+}
+.review-media::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent 58%,rgba(7,9,13,.40));
+  pointer-events:none;
+}
+.review-copy{
+  display:grid;
+  align-content:center;
+  padding:20px;
 }
 .score-box{
   border:1px solid rgba(255,138,31,.46);
   background:linear-gradient(145deg,rgba(255,138,31,.16),rgba(7,9,13,.88));
-  min-height:144px;
+  min-height:calc(100% - 36px);
   display:grid;
   place-items:center;
   color:var(--bone);
+  margin:18px 18px 18px 0;
 }
 .score-box span{display:block;text-align:center;color:var(--amber);font-size:58px;line-height:.86;font-weight:1000}
 .score-box small{display:block;margin-top:9px;color:var(--bone);font-size:34px;line-height:1;font-weight:1000}
@@ -207,11 +235,14 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
   .nav-links{justify-content:flex-start}
   .hero{padding-top:42px}
   .hero-grid,.section-head,.project-grid,.project-card.featured,.review-card{grid-template-columns:1fr}
+  .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .review-media img{aspect-ratio:16/9;min-height:0}
+  .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
   .interest-grid{grid-template-columns:1fr}
   h1{font-size:48px}
   h2{font-size:32px}
-  .score-box{justify-self:start;width:168px}
+  .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
 }
 @media(max-width:480px){
   .wrap{width:min(calc(100% - 28px),var(--max))}
@@ -306,6 +337,9 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
         <p>This is where the Metro Redux report lives now, and where future reviews can slot in without turning the homepage into a redirect.</p>
       </div>
       <a class="review-card" href="plater-game-reports/games/metro-2033-redux/?v=5a07ad9ffa0a">
+        <span class="review-media" aria-hidden="true">
+          <img src="assets/img/metro-2033-redux-review-splash.png" width="1600" height="900" alt="">
+        </span>
         <div class="review-copy">
           <div class="tag-row"><span class="tag cyan">ALERTED report</span><span class="tag green">Published</span></div>
           <h3>Metro 2033 Redux</h3>

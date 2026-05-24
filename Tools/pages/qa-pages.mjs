@@ -125,9 +125,11 @@ async function auditHttpSurface(base) {
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
   assert(root.text.includes('assets/img/triad-validation-flow.png'), 'root homepage project visual missing');
+  assert(root.text.includes('assets/img/metro-2033-redux-review-splash.png'), 'root homepage Metro review splash missing');
   assert(root.text.includes('<link rel="canonical" href="https://kenessy.github.io/Kenessy/">'), 'root canonical metadata missing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'root still contains redirect behavior');
   await fetchText(url(base, 'assets/img/triad-validation-flow.png'));
+  await fetchText(url(base, 'assets/img/metro-2033-redux-review-splash.png'));
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
@@ -198,6 +200,7 @@ async function auditViewports(browser, base, buildId) {
         .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 60) }));
       const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
       const heroImage = document.querySelector('.hero-panel img');
+      const reviewSplash = document.querySelector('.review-media img');
       return {
         title: document.title,
         hasHomeRoot: Boolean(document.querySelector('.home-root')),
@@ -205,6 +208,7 @@ async function auditViewports(browser, base, buildId) {
         hasReportLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes(currentReportPath)),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
         imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+        reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
         horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
         rootWidth: root.scrollWidth,
         clientWidth: root.clientWidth,
@@ -219,6 +223,7 @@ async function auditViewports(browser, base, buildId) {
     assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
+    assert(homeMetrics.reviewSplashComplete, `${viewport.name} homepage Metro review splash did not load`);
     assert(!homeMetrics.horizontalOverflow, `${viewport.name} homepage overflow ${homeMetrics.rootWidth}/${homeMetrics.clientWidth}`);
     assert(homeMetrics.linkCount >= 7, `${viewport.name} homepage expected navigation links`);
     assert(!homeMetrics.badText, `${viewport.name} homepage has placeholder text`);
