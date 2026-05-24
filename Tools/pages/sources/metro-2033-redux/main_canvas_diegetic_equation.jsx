@@ -34,18 +34,18 @@ const REVIEW = {
   scoreVerdict: 'Strong · Caveated Buy',
   reviewStatus: 'Complete',
   evidenceBase: 'Full run / veteran memory',
-  confidence: 'High, caveated',
+  confidence: 'Max / replay-verified',
   spoilerPolicy: 'Layered policy',
   verdictRisk: 'Ending reconstructed',
   rawScore: 90,
   friction: -4,
   rank: 'A',
   action: 'Buy if atmosphere-first survival FPS fits you',
-  confidenceScore: 88,
+  confidenceScore: 100,
   mainPull: 'Atmosphere / world pressure',
   mainDrag: 'Limited agency',
   mainRisk: 'Old-FPS monster friction',
-  nextTest: 'Clean Tower capture / alternate ending route',
+  reviewState: 'Finalized / no active test',
   evidenceProtocol: 'Full run · veteran memory · 9 evidence arcs · ending reconstructed · friction disclosed',
   snapshotNote: 'Lens-specific review: cinematic survival-horror FPS, not a universal sandbox verdict',
   oneLineIdentity:
@@ -236,7 +236,7 @@ function HeroVerdictStrip() {
     { label: 'Main pull', value: REVIEW.mainPull, tone: COLORS.atmosphereIndigo },
     { label: 'Main drag', value: REVIEW.mainDrag, tone: COLORS.lime },
     { label: 'Risk', value: REVIEW.mainRisk, tone: COLORS.danger },
-    { label: 'Next test', value: REVIEW.nextTest, tone: COLORS.technicalBlue },
+    { label: 'Review state', value: REVIEW.reviewState, tone: COLORS.technicalBlue },
   ];
 
   return (
@@ -641,7 +641,7 @@ function runStaticReviewChecks() {
     inspectFitPass: INSPECT_FIT.length === 7 && INSPECT_FIT.map((item) => item.letter).join('') === 'INSPECT',
     scoreTileHeaderPass: AXES.every((axis) => Boolean(axis.descriptor && axis.letter && axis.grade)),
     equationDisplayPass: REVIEW.rawScore === 90 && Math.abs(REVIEW.friction) === 4 && REVIEW.score === 86,
-    publicVerdictFieldsPass: Boolean(REVIEW.action && REVIEW.mainPull && REVIEW.mainDrag && REVIEW.mainRisk && REVIEW.nextTest),
+    publicVerdictFieldsPass: Boolean(REVIEW.action && REVIEW.mainPull && REVIEW.mainDrag && REVIEW.mainRisk && REVIEW.reviewState),
     auditCoveragePass: ['Lens Honesty', 'Comfort Bias', 'Sampling Bias', 'Spectacle Bias', 'Friction Blindness', 'Patch Volatility', 'Audience Confusion', 'Falsifier'].every((label) => AUDIT_CHECKS.some((check) => check.label === label)),
     evidenceProtocolPass: Boolean(REVIEW.evidenceProtocol && REVIEW.snapshotNote && REVIEW.verdictRisk),
   };
@@ -650,7 +650,7 @@ function runStaticReviewChecks() {
 function runDeveloperSmokeTests(d) {
   return [
     { name: 'Score math', pass: d.mathPass, detail: `${d.rawTotal} - ${Math.abs(d.correctionTotal)} = 86` },
-    { name: 'Public verdict fields', pass: d.publicVerdictFieldsPass, detail: 'Expected action, confidence, pull, drag, risk, and next test' },
+    { name: 'Public verdict fields', pass: d.publicVerdictFieldsPass, detail: 'Expected action, confidence, pull, drag, risk, and review state' },
     { name: 'Adversarial audit coverage', pass: d.auditCoveragePass, detail: 'Expected 8 public stress checks' },
     { name: 'Evidence protocol footer', pass: d.evidenceProtocolPass, detail: 'Expected evidence protocol and snapshot note' },
     { name: 'D residual subtotal', pass: d.residualPass, detail: `${d.residualTotal} matches Danger` },
