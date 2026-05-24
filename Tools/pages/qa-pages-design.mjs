@@ -123,8 +123,11 @@ async function auditDesignArtifacts(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('.home-root'), 'portfolio homepage CSS is missing');
+  assert(root.text.includes('.operator-panel'), 'portfolio homepage operator panel styling is missing');
+  assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
+  assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');

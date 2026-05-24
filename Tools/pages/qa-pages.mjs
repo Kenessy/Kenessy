@@ -121,7 +121,9 @@ async function auditHttpSurface(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
-  assert(root.text.includes('Kenessy builds weird systems'), 'root homepage hero copy missing');
+  assert(root.text.includes('I find the hidden failure before it becomes obvious.'), 'root homepage hero copy missing');
+  assert(root.text.includes('CEO readout'), 'root homepage operator panel missing');
+  assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
   assert(root.text.includes('assets/img/triad-validation-flow.png'), 'root homepage project visual missing');
@@ -199,7 +201,7 @@ async function auditViewports(browser, base, buildId) {
         })
         .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 60) }));
       const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
-      const heroImage = document.querySelector('.hero-panel img');
+      const proofImage = document.querySelector('.proof-card img');
       const reviewSplash = document.querySelector('.review-media img');
       return {
         title: document.title,
@@ -207,7 +209,7 @@ async function auditViewports(browser, base, buildId) {
         h1: document.querySelector('h1')?.textContent.trim(),
         hasReportLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes(currentReportPath)),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
-        imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+        imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
         reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
         horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
         rootWidth: root.scrollWidth,
@@ -219,7 +221,7 @@ async function auditViewports(browser, base, buildId) {
     }, reportPath);
     assert(homeMetrics.title.includes('Kenessy'), `${viewport.name} homepage title missing Kenessy`);
     assert(homeMetrics.hasHomeRoot, `${viewport.name} homepage root missing`);
-    assert(homeMetrics.h1 === 'Kenessy builds weird systems until they become readable.', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
+    assert(homeMetrics.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
     assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);

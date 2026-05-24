@@ -3,33 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kenessy - Portfolio, Projects, Game Reviews</title>
+<title>Kenessy - Systems Design, Adversarial QA, Game Critique</title>
 <link rel="icon" href="data:,">
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/">
-<meta name="description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
+<meta name="description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
 <meta name="theme-color" content="#07090d">
 <meta name="build-id" content="5a07ad9ffa0a">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kenessy - Portfolio, Projects, Game Reviews">
-<meta property="og:description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
+<meta property="og:title" content="Kenessy - Systems Design, Adversarial QA, Game Critique">
+<meta property="og:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
 <meta property="og:url" content="https://kenessy.github.io/Kenessy/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kenessy - Portfolio, Projects, Game Reviews">
-<meta name="twitter:description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
+<meta name="twitter:title" content="Kenessy - Systems Design, Adversarial QA, Game Critique">
+<meta name="twitter:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
 <style>
 :root{
   --bg:#07090d;
-  --panel:#0d1218;
-  --panel-2:#121822;
-  --line:#26313e;
-  --line-soft:rgba(218,229,241,.12);
-  --text:#edf4f6;
+  --ink:#edf4f6;
   --bone:#dec99d;
-  --muted:#98a8b8;
-  --amber:#ff8a1f;
+  --bone-2:#c9b77f;
+  --muted:#9fb0be;
+  --faint:#667888;
+  --panel:#0c1118;
+  --panel-2:#111923;
+  --panel-3:#16202b;
+  --line:#263544;
+  --line-2:#354758;
+  --orange:#ff8a1f;
   --cyan:#13d4e8;
   --green:#35e07b;
-  --red:#ff4a3d;
+  --red:#ff3b2f;
   --violet:#8d78ff;
   --max:1180px;
 }
@@ -39,31 +42,34 @@ body{
   margin:0;
   min-height:100vh;
   overflow-x:hidden;
-  color:var(--text);
+  color:var(--ink);
   background:
-    linear-gradient(90deg,rgba(19,212,232,.04) 1px,transparent 1px),
-    linear-gradient(180deg,rgba(255,138,31,.05) 0,transparent 360px),
-    linear-gradient(180deg,#07090d 0,#0a0d12 48%,#07090d 100%);
-  background-size:86px 100%,100% 100%,100% 100%;
+    linear-gradient(90deg,rgba(19,212,232,.045) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(255,138,31,.08) 0,transparent 360px),
+    linear-gradient(180deg,#07090d 0,#0a0f15 42%,#07090d 100%);
+  background-size:92px 100%,100% 100%,100% 100%;
   font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p{margin:0}
 .home-root{min-height:100vh}
 .wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
+section{scroll-margin-top:92px}
 .site-nav{
   position:sticky;
   top:0;
   z-index:20;
-  border-bottom:1px solid rgba(218,229,241,.10);
-  background:rgba(7,9,13,.88);
+  border-bottom:1px solid rgba(218,229,241,.11);
+  background:rgba(7,9,13,.90);
   backdrop-filter:blur(14px);
 }
-.site-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:62px}
-.brand{min-height:36px;display:inline-flex;align-items:center;font-size:15px;font-weight:1000;text-transform:uppercase;color:var(--bone)}
+.site-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px}
+.brand{min-height:38px;display:inline-flex;align-items:center;color:var(--bone);font-size:15px;font-weight:1000;text-transform:uppercase}
+.brand::before{content:'';width:9px;height:9px;margin-right:10px;background:var(--orange);box-shadow:13px 0 0 var(--cyan),26px 0 0 var(--red)}
 .nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .nav-links a{
-  min-height:36px;
+  min-height:38px;
   display:inline-flex;
   align-items:center;
   padding:8px 10px;
@@ -73,89 +79,129 @@ img{display:block;max-width:100%;height:auto}
   font-weight:900;
   text-transform:uppercase;
 }
-.nav-links a:hover,.nav-links a:focus-visible{border-color:var(--line);color:var(--text);outline:0}
-.hero{padding:68px 0 42px;border-bottom:1px solid var(--line-soft)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:34px;align-items:center}
-.eyebrow{margin:0 0 14px;color:var(--cyan);font-size:12px;font-weight:1000;text-transform:uppercase}
-h1,h2,h3,p{margin:0}
+.nav-links a:hover,.nav-links a:focus-visible{border-color:var(--line-2);color:var(--ink);outline:0}
+.hero{
+  position:relative;
+  padding:62px 0 44px;
+  border-bottom:1px solid rgba(218,229,241,.12);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(115deg,rgba(255,138,31,.08),transparent 32%),
+    linear-gradient(245deg,rgba(19,212,232,.09),transparent 30%);
+  pointer-events:none;
+}
+.hero-stage{position:relative;display:grid;grid-template-columns:minmax(0,1.03fr) minmax(360px,.97fr);gap:30px;align-items:stretch}
+.hero-copy{display:grid;align-content:center;min-height:560px}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:1000;text-transform:uppercase}
 h1{
+  margin-top:14px;
+  max-width:750px;
   color:var(--bone);
-  font-size:64px;
-  line-height:.92;
+  font-size:68px;
+  line-height:.88;
   font-weight:1000;
   text-transform:uppercase;
-  max-width:760px;
 }
 .hero-lede{
-  margin-top:20px;
-  max-width:690px;
-  color:#c8b98e;
-  font-size:19px;
-  line-height:1.55;
-  font-weight:760;
+  max-width:710px;
+  margin-top:22px;
+  color:#d6c793;
+  font-size:20px;
+  line-height:1.48;
+  font-weight:780;
 }
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .button{
-  min-height:44px;
+  min-height:46px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  border:1px solid var(--line);
-  background:linear-gradient(135deg,rgba(255,138,31,.20),rgba(19,212,232,.05) 62%,rgba(13,18,24,.92));
-  padding:11px 14px;
-  color:var(--text);
+  border:1px solid var(--line-2);
+  background:linear-gradient(135deg,rgba(255,138,31,.24),rgba(19,212,232,.06) 58%,rgba(12,17,24,.94));
+  padding:12px 15px;
+  color:var(--ink);
   font-size:12px;
   font-weight:1000;
   text-transform:uppercase;
 }
-.button.secondary{background:rgba(13,18,24,.75);color:var(--muted)}
-.hero-panel{
+.button.secondary{background:rgba(12,17,24,.78);color:var(--muted)}
+.button:hover,.button:focus-visible{outline:0;border-color:var(--orange);color:#fff}
+.operator-panel{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(18,24,34,.96),rgba(8,11,15,.96));
+  background:
+    linear-gradient(145deg,rgba(22,32,43,.96),rgba(7,9,13,.98)),
+    #0b1016;
+  box-shadow:0 30px 90px rgba(0,0,0,.42);
   overflow:hidden;
-  box-shadow:0 26px 80px rgba(0,0,0,.34);
 }
-.hero-panel img{
-  width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  background:#0b1017;
+.panel-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;border-bottom:1px solid var(--line);padding:18px}
+.panel-top small,.module-kicker{display:block;color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
+.panel-top strong{display:block;margin-top:6px;color:var(--bone);font-size:24px;line-height:1.02;text-transform:uppercase}
+.build-chip{border:1px solid rgba(255,138,31,.44);color:#ffb347;padding:7px 9px;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
+.hire-read{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
   border-bottom:1px solid var(--line);
 }
-.panel-caption{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:end;padding:16px}
-.panel-caption small{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
-.panel-caption strong{display:block;margin-top:5px;color:var(--bone);font-size:17px}
-.build-chip{border:1px solid rgba(255,138,31,.42);color:#ffb347;padding:7px 9px;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
-.section{padding:38px 0;border-bottom:1px solid var(--line-soft)}
-.section-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,.75fr);gap:28px;align-items:end;margin-bottom:20px}
-.kicker{color:var(--amber);font-size:12px;font-weight:1000;text-transform:uppercase}
-h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1000;text-transform:uppercase}
-.section-head p{color:#b7c4d1;font-size:16px;line-height:1.55;font-weight:680}
+.hire-cell{min-height:138px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px;background:rgba(7,9,13,.28)}
+.hire-cell:nth-child(2n){border-right:0}
+.hire-cell:nth-last-child(-n+2){border-bottom:0}
+.hire-cell b{display:block;color:var(--orange);font-size:12px;text-transform:uppercase}
+.hire-cell span{display:block;margin-top:13px;color:var(--ink);font-size:22px;line-height:1.08;font-weight:1000}
+.hire-cell small{display:block;margin-top:9px;color:var(--muted);line-height:1.42;font-weight:700}
+.proof-line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:18px}
+.proof-line p{color:var(--muted);font-size:14px;line-height:1.5;font-weight:700}
+.proof-line b{color:var(--green)}
+.status-dot{width:74px;height:74px;display:grid;place-items:center;border:1px solid rgba(53,224,123,.45);color:var(--green);font-size:26px;font-weight:1000;background:rgba(53,224,123,.08)}
+.section{padding:40px 0;border-bottom:1px solid rgba(218,229,241,.12)}
+.section-head{display:grid;grid-template-columns:minmax(0,.88fr) minmax(290px,.72fr);gap:28px;align-items:end;margin-bottom:20px}
+.kicker{color:var(--orange);font-size:12px;font-weight:1000;text-transform:uppercase}
+h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1000;text-transform:uppercase}
+.section-head p{color:#b7c6d3;font-size:16px;line-height:1.55;font-weight:700}
 .signal-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .signal{
-  min-height:118px;
+  position:relative;
+  min-height:142px;
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(18,24,34,.96),rgba(8,11,15,.98));
-  padding:15px;
+  background:linear-gradient(145deg,rgba(17,25,35,.96),rgba(8,11,15,.98));
+  padding:16px;
+  overflow:hidden;
 }
+.signal::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--orange),var(--red));opacity:.78}
 .signal b{display:block;color:var(--cyan);font-size:12px;text-transform:uppercase}
-.signal span{display:block;margin-top:16px;color:var(--text);font-size:22px;line-height:1.08;font-weight:1000}
+.signal span{display:block;margin-top:17px;color:var(--ink);font-size:23px;line-height:1.04;font-weight:1000}
 .signal small{display:block;margin-top:10px;color:var(--muted);line-height:1.45;font-weight:720}
-.project-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.project-card,.review-card,.interest-card{
+.proof-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:14px}
+.proof-card,.project-card,.review-card,.hire-card{
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(18,24,34,.92),rgba(9,12,17,.96));
-  padding:18px;
+  background:linear-gradient(145deg,rgba(18,26,36,.93),rgba(9,12,17,.97));
 }
-.project-card.featured{display:grid;grid-template-columns:minmax(0,1fr) 178px;gap:18px;align-items:stretch}
-.project-card h3,.review-copy h3,.interest-card h3{
-  color:var(--text);
-  font-size:25px;
-  line-height:1.05;
+.proof-card{padding:0;overflow:hidden}
+.proof-card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0b1017;border-bottom:1px solid var(--line)}
+.proof-card-body{padding:18px}
+.proof-card h3,.project-card h3,.review-copy h3,.hire-card h3{
+  color:var(--ink);
+  font-size:27px;
+  line-height:1.03;
   font-weight:1000;
   text-transform:uppercase;
 }
-.project-card p,.review-copy p,.interest-card p{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55;font-weight:650}
+.proof-card p,.project-card p,.review-copy p,.hire-card p{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55;font-weight:680}
+.proof-stack{display:grid;gap:10px}
+.proof-mini{border:1px solid var(--line);background:rgba(12,17,24,.76);padding:16px}
+.proof-mini b{display:block;color:var(--orange);font-size:12px;text-transform:uppercase}
+.proof-mini span{display:block;margin-top:10px;color:var(--ink);font-size:20px;line-height:1.12;font-weight:1000}
+.proof-mini small{display:block;margin-top:8px;color:var(--muted);font-weight:700;line-height:1.42}
+.project-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.project-card{padding:18px}
+.project-card.featured{display:grid;grid-template-columns:minmax(0,1fr) 178px;gap:18px;align-items:stretch}
 .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .tag{
   border:1px solid var(--line);
@@ -178,11 +224,11 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
   padding:14px;
   min-width:0;
 }
-.project-stat strong{color:var(--cyan);font-size:38px;line-height:.9;font-weight:1000}
-.project-stat span{margin-top:8px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
+.project-stat strong{color:var(--cyan);font-size:42px;line-height:.9;font-weight:1000}
+.project-stat span{margin-top:9px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
 .review-card{
   display:grid;
-  grid-template-columns:minmax(320px,.95fr) minmax(0,1fr) 132px;
+  grid-template-columns:minmax(340px,.96fr) minmax(0,1fr) 132px;
   gap:0;
   align-items:stretch;
   padding:0;
@@ -190,67 +236,66 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
 }
 .review-media{
   position:relative;
-  min-height:242px;
+  min-height:252px;
   border-right:1px solid var(--line);
   background:#07090d;
 }
 .review-media img{
   width:100%;
   height:100%;
-  min-height:242px;
+  min-height:252px;
   object-fit:cover;
   object-position:center;
 }
-.review-media::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,transparent 58%,rgba(7,9,13,.40));
-  pointer-events:none;
-}
-.review-copy{
-  display:grid;
-  align-content:center;
-  padding:20px;
-}
+.review-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 58%,rgba(7,9,13,.42));pointer-events:none}
+.review-copy{display:grid;align-content:center;padding:20px}
 .score-box{
-  border:1px solid rgba(255,138,31,.46);
-  background:linear-gradient(145deg,rgba(255,138,31,.16),rgba(7,9,13,.88));
+  border:1px solid rgba(255,138,31,.48);
+  background:linear-gradient(145deg,rgba(255,138,31,.18),rgba(7,9,13,.88));
   min-height:calc(100% - 36px);
   display:grid;
   place-items:center;
   color:var(--bone);
   margin:18px 18px 18px 0;
 }
-.score-box span{display:block;text-align:center;color:var(--amber);font-size:58px;line-height:.86;font-weight:1000}
+.score-box span{display:block;text-align:center;color:var(--orange);font-size:60px;line-height:.86;font-weight:1000}
 .score-box small{display:block;margin-top:9px;color:var(--bone);font-size:34px;line-height:1;font-weight:1000}
-.review-link{margin-top:18px}
-.review-link a{color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
-.interest-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.review-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
+.hire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.hire-card{padding:18px;min-height:188px}
+.hire-card strong{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(19,212,232,.36);padding:6px 8px;color:#7fe9f3;font-size:11px;text-transform:uppercase}
 .footer{padding:28px 0 38px;color:var(--muted);font-size:13px}
 .footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .footer a{min-height:32px;display:inline-flex;align-items:center;color:#ffb347;font-weight:900}
-@media(max-width:860px){
-  .site-nav .wrap{align-items:flex-start;flex-direction:column;padding:12px 0}
-  .nav-links{justify-content:flex-start}
-  .hero{padding-top:42px}
-  .hero-grid,.section-head,.project-grid,.project-card.featured,.review-card{grid-template-columns:1fr}
+@media(max-width:960px){
+  .hero-stage,.section-head,.proof-grid,.project-grid,.project-card.featured,.review-card{grid-template-columns:1fr}
+  .hero-copy{min-height:auto}
+  .operator-panel{min-height:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .review-media img{aspect-ratio:16/9;min-height:0}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
-  .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .interest-grid{grid-template-columns:1fr}
-  h1{font-size:48px}
-  h2{font-size:32px}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
+  .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hire-grid{grid-template-columns:1fr}
+  h1{font-size:52px}
 }
-@media(max-width:480px){
+@media(max-width:560px){
   .wrap{width:min(calc(100% - 28px),var(--max))}
-  h1{font-size:38px}
+  section{scroll-margin-top:104px}
+  .site-nav .wrap{align-items:flex-start;flex-direction:column;gap:9px;padding:10px 0}
+  .nav-links{width:100%;justify-content:space-between;gap:4px;flex-wrap:nowrap}
+  .nav-links a{min-height:32px;padding:6px 5px;font-size:10px}
+  .brand{min-height:28px}
+  .hero{padding-top:38px}
+  h1{font-size:39px}
+  h2{font-size:34px}
   .hero-lede{font-size:17px}
+  .hire-read{grid-template-columns:1fr}
+  .hire-cell{border-right:0}
+  .hire-cell:nth-last-child(2){border-bottom:1px solid var(--line)}
   .signal-row{grid-template-columns:1fr}
-  .panel-caption{grid-template-columns:1fr}
-  .build-chip{justify-self:start}
+  .panel-top,.proof-line{grid-template-columns:1fr}
+  .build-chip,.status-dot{justify-self:start}
 }
 </style>
 </head>
@@ -259,56 +304,90 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
   <div class="wrap">
     <a class="brand" href="./">Kenessy</a>
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#work">Work</a>
+      <a href="#signal">Signal</a>
+      <a href="#proof">Proof</a>
+      <a href="#artifacts">Artifacts</a>
       <a href="#reviews">Reviews</a>
-      <a href="#interests">Interests</a>
       <a href="https://github.com/Kenessy/Kenessy">GitHub</a>
     </nav>
   </div>
 </header>
 <main class="home-root">
   <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Portfolio hub / systems, stories, reviews</p>
-        <h1>Kenessy builds weird systems until they become readable.</h1>
-        <p class="hero-lede">A personal index for game critique, tabletop RPG design, visual systems, adversarial QA loops, AI-assisted tooling, and creative experiments that need both taste and pressure-testing.</p>
+    <div class="wrap hero-stage">
+      <div class="hero-copy">
+        <p class="eyebrow">Pattern breaker / systems reader / adversarial builder</p>
+        <h1>I find the hidden failure before it becomes obvious.</h1>
+        <p class="hero-lede">I build strange systems, then pressure-test them until the logic, taste, and proof are visible. Useful when the brief is messy, the edge cases matter, and the obvious answer is probably not enough.</p>
         <div class="hero-actions">
-          <a class="button" href="#reviews">Open game reviews</a>
-          <a class="button secondary" href="apocalypse-express/">View Apocalypse Express</a>
-          <a class="button secondary" href="https://github.com/Kenessy/Kenessy">GitHub repository</a>
+          <a class="button" href="#hire">Why hire this profile</a>
+          <a class="button secondary" href="#reviews">Open game reviews</a>
+          <a class="button secondary" href="https://github.com/Kenessy/Kenessy">Inspect the repo</a>
         </div>
       </div>
-      <figure class="hero-panel">
-        <img src="assets/img/triad-validation-flow.png" alt="Triad validation flow diagram from the Apocalypse Express design vault">
-        <figcaption class="panel-caption">
-          <span><small>Current source of truth</small><strong>Design vault, reports, and public Pages builds in one repository.</strong></span>
+      <aside class="operator-panel" aria-label="Operator dossier">
+        <div class="panel-top">
+          <span><small>CEO readout</small><strong>High-agency operator for ambiguous systems.</strong></span>
           <span class="build-chip">Build 5a07ad9ffa0a</span>
-        </figcaption>
-      </figure>
+        </div>
+        <div class="hire-read">
+          <div class="hire-cell"><b>Sees</b><span>Hidden failure modes</span><small>Not just what works. What breaks when real people touch it.</small></div>
+          <div class="hire-cell"><b>Builds</b><span>Readable proof</span><small>Interfaces, reports, and tests that make reasoning visible.</small></div>
+          <div class="hire-cell"><b>Moves</b><span>Fast with receipts</span><small>Local build, live QA, screenshots, and deploy state stay connected.</small></div>
+          <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
+        </div>
+        <div class="proof-line">
+          <p><b>Current public artifact:</b> portfolio root, Metro review, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <span class="status-dot">OK</span>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <section class="section" id="work">
+  <section class="section" id="signal">
     <div class="wrap">
       <div class="section-head">
-        <div><p class="kicker">What lives here</p><h2>Workbench</h2></div>
-        <p>The homepage is the front door. Individual projects can stay opinionated, but this page keeps the map simple: what I make, what I test, and where the public artifacts are.</p>
+        <div><p class="kicker">What you hire for</p><h2>Signal Stack</h2></div>
+        <p>The value is not only making things. It is noticing the subtle wrongness, turning it into structure, and proving the fix under pressure.</p>
       </div>
       <div class="signal-row">
-        <div class="signal"><b>01 / Design</b><span>RPG systems</span><small>Rules, procedures, scene structure, and playable constraints.</small></div>
-        <div class="signal"><b>02 / Critique</b><span>Game reviews</span><small>Verdicts backed by score anatomy, player-fit notes, and evidence rails.</small></div>
-        <div class="signal"><b>03 / QA</b><span>Adversarial checks</span><small>Local and live tests that try to falsify the page before publishing.</small></div>
-        <div class="signal"><b>04 / Tools</b><span>AI workflows</span><small>Canvas-to-site builds, repo automation, and polished visual interfaces.</small></div>
+        <div class="signal"><b>01 / Sensemaking</b><span>Turns noise into map</span><small>Messy ideas become axes, constraints, systems, and next actions.</small></div>
+        <div class="signal"><b>02 / Taste</b><span>Knows when it feels off</span><small>Design decisions are judged visually, functionally, and emotionally.</small></div>
+        <div class="signal"><b>03 / Adversarial QA</b><span>Tries to disprove the work</span><small>Viewport, fallback, link, public build, and failure-mode checks are part of the craft.</small></div>
+        <div class="signal"><b>04 / Shipping</b><span>Pushes the clean version</span><small>Repo source, generated output, and live Pages stay synchronized.</small></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="projects">
+  <section class="section" id="proof">
     <div class="wrap">
       <div class="section-head">
-        <div><p class="kicker">Main creative track</p><h2>Projects</h2></div>
-        <p>Long-form creative systems with enough structure to survive iteration. This section will grow as the portfolio expands.</p>
+        <div><p class="kicker">Evidence over vibes</p><h2>Proof Surface</h2></div>
+        <p>If the work claims to be robust, it should expose how it was reasoned about. The portfolio itself is a small product surface with tests behind it.</p>
+      </div>
+      <div class="proof-grid">
+        <a class="proof-card" href="apocalypse-express/">
+          <img src="assets/img/triad-validation-flow.png" alt="Triad validation flow diagram from the Apocalypse Express design vault">
+          <div class="proof-card-body">
+            <div class="tag-row"><span class="tag cyan">System map</span><span class="tag amber">Source of truth</span></div>
+            <h3>Structured imagination</h3>
+            <p>Apocalypse Express is not only lore. It is rules, scenes, procedures, diagrams, and a design vault built to survive iteration.</p>
+          </div>
+        </a>
+        <div class="proof-stack">
+          <div class="proof-mini"><b>Public build discipline</b><span>Generated Pages artifacts</span><small>The homepage, reports, sitemap, and fallbacks are produced by repo tooling.</small></div>
+          <div class="proof-mini"><b>Adversarial checks</b><span>Local and live QA loops</span><small>Root, report, assets, no-JS, blocked CDN, links, console errors, and overflow get checked.</small></div>
+          <div class="proof-mini"><b>Communication layer</b><span>Readable decision trails</span><small>Review cards, score strips, ledgers, and diagnosis sections show why something is true.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="artifacts">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Selected artifacts</p><h2>Field Work</h2></div>
+        <p>Different outputs, same operating mode: make the invisible structure visible, then make it durable enough to ship.</p>
       </div>
       <div class="project-grid">
         <a class="project-card featured" href="apocalypse-express/">
@@ -323,7 +402,7 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
         <a class="project-card" href="plater-game-reports/">
           <div class="tag-row"><span class="tag green">Public artifacts</span><span class="tag">Reports</span></div>
           <h3>Plater Game Reports</h3>
-          <p>A review format for games where taste-fit, score logic, caveats, and trust evidence are shown instead of hidden behind a single number.</p>
+          <p>A review format where taste-fit, score logic, caveats, and trust evidence are shown instead of hidden behind a single number.</p>
           <div class="tag-row"><span class="tag cyan">ALERTED axes</span><span class="tag amber">Evidence rails</span></div>
         </a>
       </div>
@@ -333,8 +412,8 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
   <section class="section" id="reviews">
     <div class="wrap">
       <div class="section-head">
-        <div><p class="kicker">Review section</p><h2>Game reviews</h2></div>
-        <p>This is where the Metro Redux report lives now, and where future reviews can slot in without turning the homepage into a redirect.</p>
+        <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
+        <p>The Metro report is the current flagship: not just a verdict, but an inspectable argument with player-fit, score logic, caveats, and trust evidence.</p>
       </div>
       <a class="review-card" href="plater-game-reports/games/metro-2033-redux/?v=5a07ad9ffa0a">
         <span class="review-media" aria-hidden="true">
@@ -345,23 +424,23 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
           <h3>Metro 2033 Redux</h3>
           <p>Atmosphere-first survival FPS verdict with player-fit lanes, score strip, correction ledger, spoiler-light judgment, trust layer, and dossier evidence arc.</p>
           <div class="tag-row"><span class="tag">Atmosphere</span><span class="tag">Linear FPS</span><span class="tag">Survival horror</span><span class="tag amber">Caveated buy</span></div>
-          <div class="review-link"><span>Open current build</span></div>
+          <div class="review-link">Open current build</div>
         </div>
         <div class="score-box" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
       </a>
     </div>
   </section>
 
-  <section class="section" id="interests">
+  <section class="section" id="hire">
     <div class="wrap">
       <div class="section-head">
-        <div><p class="kicker">Personal gravity</p><h2>Interests</h2></div>
-        <p>Not a resume wall. More like the useful coordinates: the recurring themes that explain why the projects look the way they do.</p>
+        <div><p class="kicker">Hiring readout</p><h2>Why This Profile</h2></div>
+        <p>A useful hire for work where taste, systems thinking, product sense, and stubborn verification have to exist in the same person.</p>
       </div>
-      <div class="interest-grid">
-        <div class="interest-card"><h3>Systems that teach themselves</h3><p>Rules, interfaces, and review formats where the structure reveals the reasoning without needing a manual next to it.</p></div>
-        <div class="interest-card"><h3>Atmosphere with mechanics</h3><p>Games and worlds where mood is not just dressing, but pressure, friction, pacing, and player behavior.</p></div>
-        <div class="interest-card"><h3>Adversarial polish</h3><p>Iterating with tests that actively look for bad states: overflow, weak fallbacks, unclear evidence, and broken public builds.</p></div>
+      <div class="hire-grid">
+        <div class="hire-card"><strong>Use me for</strong><h3>Ambiguous product surfaces</h3><p>When the work has too many moving parts and needs someone to find the real shape fast.</p></div>
+        <div class="hire-card"><strong>Use me for</strong><h3>Adversarial polish</h3><p>When good-looking is not enough and the page, flow, or artifact has to survive hostile checks.</p></div>
+        <div class="hire-card"><strong>Use me for</strong><h3>Unusual creative systems</h3><p>When the thing is hard to explain because it is new, hybrid, or outside the default playbook.</p></div>
       </div>
     </div>
   </section>

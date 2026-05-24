@@ -172,9 +172,9 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
 
   const initial = await collectHomeMetrics(page, buildId);
   assert(initial.hasHomeRoot, `${viewport.name} homepage root missing`);
-  assert(initial.h1 === 'Kenessy builds weird systems until they become readable.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
+  assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
-  assert(initial.sectionTitles.join('|') === 'Workbench|Projects|Game reviews|Interests', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
+  assert(initial.sectionTitles.join('|') === 'Signal Stack|Proof Surface|Field Work|Game Reviews|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
   assert(initial.hasReportLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
   assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);
@@ -359,7 +359,7 @@ async function collectHomeMetrics(page, buildId) {
         return rect.width < 32 || rect.height < 28;
       })
       .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
-    const heroImage = document.querySelector('.hero-panel img');
+    const proofImage = document.querySelector('.proof-card img');
     const reviewSplash = document.querySelector('.review-media img');
     const hrefs = [...document.querySelectorAll('a[href]')].map((el) => el.href);
     return {
@@ -372,7 +372,7 @@ async function collectHomeMetrics(page, buildId) {
       hasReportLink: hrefs.some((href) => href.includes('plater-game-reports/games/metro-2033-redux/')),
       hasReportsLink: hrefs.some((href) => href.includes('plater-game-reports/')),
       hasApocalypseLink: hrefs.some((href) => href.includes('apocalypse-express/')),
-      imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+      imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
       reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       scrollWidth: document.documentElement.scrollWidth,
