@@ -469,12 +469,12 @@ function ScoreEquationOperator({ symbol }) {
 }
 
 function FieldNote() {
-  const applies = ['Atmospheric', 'Survival FPS', 'Story-rich', 'Novel-rooted', 'Curated exploration', 'Resource pressure', 'Memorable companions', 'Cohesive world'];
-  const rejects = ['MMO', 'Sandbox', 'Open-world RPG', 'Buildcraft', 'Power fantasy', 'Loot treadmill', 'Checklist exploration', 'Comfort stealth'];
+  const applies = ['Atmospheric', 'Survival FPS', 'Story rich', 'Novel rooted', 'Curated exploration', 'Resource pressure', 'Memorable companions', 'Cohesive world'];
+  const rejects = ['MMO', 'Sandbox', 'Open world RPG', 'Buildcraft', 'Power fantasy', 'Loot treadmill', 'Checklist exploration', 'Comfort stealth'];
 
   return (
-    <section>
-      <SectionHead num="04" kicker="Reviewer Note" title="Short" emphasis="Human Verdict" desc="What the numbers do not say: why Metro stays with you long after you put it down." />
+    <section className="scr-reviewer-note">
+      <SectionHead num="04" kicker="Reviewer Note" title="Short" emphasis="Human Verdict" desc="Why the 86 matters beyond the math: Metro stays with you through pressure, warmth, dread, and the climb out of the dark." />
       <div className="scr-note-grid">
         <div className="scr-paper-wrap"><article className="scr-paper"><i className="scr-paper-staple" /><div className="scr-paper-head"><div><small>Recovered Field Note</small><h3>Human Verdict</h3></div><div className="scr-paper-stamp">Metro 2033 Redux<br />ALERTED / 03</div></div><div className="scr-paper-body"><p><span className="scr-dropcap">M</span>etro does not rely on any single ingredient being exceptional on its own. It works because the final stew has a bitter, smoky, nostalgic taste that none of those ingredients could create alone.</p><p>The world shifts around Artyom as he moves through it: warmly lit inhabited stations, half-abandoned service tunnels, sudden muzzle flashes cutting through the dark, and the bright surface with its poisonous air and irradiated ruins.</p><p>What stays with you is all of it together: a tale about human fear, the unknown, and the ascent from the deepest dark of the Metro to the roof of the world.</p></div></article></div>
         <KeywordPanel applies={applies} rejects={rejects} />
@@ -486,22 +486,21 @@ function FieldNote() {
 function KeywordPanel({ applies, rejects }) {
   return (
     <aside className="scr-keyword-panel">
-      <div className="scr-keyword-glow" />
-      <div className="scr-keyword-head"><small>Reader Keywords</small><h3>Quick Fit Tags</h3><p>Fast public scan: what this review says the game is, and what it is not.</p></div>
-      <div className="scr-keyword-hero"><span>Primary flavor</span><b>Atmospheric Survival FPS</b></div>
-      <KeywordGroup title="Applies" tags={applies} tone={COLORS.green} />
-      <KeywordGroup title="Does not apply" tags={rejects} tone={COLORS.red2} negative />
+      <div className="scr-keyword-head"><small>Reader Tags</small><h3>Fit Tags</h3><p>Fast scan of what Metro is selling, and what this score is not promising.</p></div>
+      <div className="scr-keyword-primary"><span>Primary Fit</span> <b>Atmospheric Survival FPS</b></div>
+      <KeywordGroup title="Matches" tags={applies} tone={COLORS.green} />
+      <KeywordGroup title="Not the pitch" tags={rejects} tone={COLORS.red2} negative />
     </aside>
   );
 }
 
 function KeywordGroup({ title, tags, tone, negative = false }) {
-  return <div className="scr-keyword-group" style={{ '--tone': tone }}><div className="scr-keyword-group-title"><h4>{title}</h4><span>{tags.length} tags</span></div><div className="scr-keyword-cloud">{tags.map((tag, index) => <KeywordPill key={tag} tag={tag} negative={negative} featured={!negative && index < 3} />)}</div></div>;
+  return <div className="scr-keyword-group" style={{ '--tone': tone }}><div className="scr-keyword-group-title"><h4>{title}</h4></div><div className="scr-keyword-cloud">{tags.map((tag, index) => <KeywordPill key={tag} tag={tag} negative={negative} featured={!negative && index < 3} />)}</div></div>;
 }
 
 function KeywordPill({ tag, negative, featured }) {
   const className = `${negative ? 'negative' : ''} ${featured ? 'featured' : ''}`.trim();
-  return <span className={className}>{negative ? '×' : '✓'} {tag}</span>;
+  return <span className={className}>{tag}</span>;
 }
 
 function AxisDiagnosis() {
@@ -808,6 +807,24 @@ const TEMPLATE_CSS = `
 .scr-score-calc-term.final .scr-score-calc-value{font-size:5.35rem;color:#ffb000}
 .scr-score-calc-op{display:grid;place-items:center;color:#d9c9a3;font-size:2.25rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 14px rgba(255,179,71,.18)}
 .scr-score-calc-note{margin:.85rem 0 0;color:#b8a982;font-size:.94rem;font-weight:650;line-height:1.55;text-align:center}
+.scr-reviewer-note .scr-section-head p{max-width:680px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-reviewer-note .scr-keyword-panel{background:linear-gradient(135deg,rgba(17,250,203,.055),rgba(7,10,15,.96) 40%,rgba(7,10,15,.98));box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+.scr-reviewer-note .scr-keyword-glow,.scr-reviewer-note .scr-keyword-hero,.scr-reviewer-note .scr-keyword-group-title span{display:none}
+.scr-reviewer-note .scr-keyword-head{border-bottom:1px solid #1e2733;padding-bottom:1rem}
+.scr-reviewer-note .scr-keyword-head small{color:#11facb;font-size:.72rem;font-weight:1000;line-height:1}
+.scr-reviewer-note .scr-keyword-head h3{margin:.35rem 0 0;font-size:1.9rem;line-height:1}
+.scr-reviewer-note .scr-keyword-head p{margin:.7rem 0 0;color:#cdbc92;font-size:.96rem;font-weight:650;line-height:1.52}
+.scr-keyword-primary{position:relative;overflow:hidden;margin-top:1rem;border:1px solid rgba(255,176,0,.42);background:linear-gradient(135deg,rgba(255,176,0,.16),rgba(255,138,31,.045) 44%,rgba(255,255,255,.018));padding:1rem;box-shadow:inset 0 0 28px rgba(255,176,0,.035)}
+.scr-keyword-primary::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb347,#ff8a1f)}
+.scr-keyword-primary span{display:block;color:#ffb347;font-family:ui-monospace,Menlo,monospace;font-size:.72rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
+.scr-keyword-primary b{display:block;margin-top:.45rem;color:#d9c9a3;font-size:1.22rem;font-weight:1000;line-height:1.12;text-transform:uppercase;text-wrap:balance}
+.scr-reviewer-note .scr-keyword-group{margin-top:1rem;border:0;background:transparent;padding:0}
+.scr-reviewer-note .scr-keyword-group-title{display:flex;align-items:center;gap:.75rem;margin-bottom:.65rem}
+.scr-reviewer-note .scr-keyword-group-title h4{color:var(--tone);font-size:.86rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 20%,transparent)}
+.scr-reviewer-note .scr-keyword-cloud{gap:.5rem}
+.scr-reviewer-note .scr-keyword-cloud span{display:inline-flex;align-items:center;min-height:2.05rem;border:1px solid color-mix(in srgb,var(--tone) 48%,#2a3444);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 18%,transparent),rgba(255,255,255,.018) 44%,rgba(255,255,255,.006));color:color-mix(in srgb,var(--tone) 84%,#f4e5bd);padding:.42rem .68rem;font-size:.76rem;font-weight:900;line-height:1.18;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 0 16px color-mix(in srgb,var(--tone) 8%,transparent)}
+.scr-reviewer-note .scr-keyword-cloud span.featured{border-color:color-mix(in srgb,var(--tone) 70%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 24%,transparent),rgba(255,255,255,.025) 46%,rgba(255,255,255,.008));box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 18px color-mix(in srgb,var(--tone) 12%,transparent)}
+.scr-reviewer-note .scr-keyword-cloud span.negative{opacity:.9;color:color-mix(in srgb,var(--tone) 78%,#d9c9a3);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 14%,transparent),rgba(255,255,255,.014) 48%,rgba(255,255,255,.004))}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}

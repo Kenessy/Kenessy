@@ -146,6 +146,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-score-anatomy .scr-score-strip{border:0'), 'score strip outer border removal is missing');
   assert(report.text.includes('.scr-score-calculator'), 'simplified score calculator styling is missing');
   assert(report.text.includes('.scr-score-calc-equation'), 'simplified score calculator equation styling is missing');
+  assert(report.text.includes('.scr-reviewer-note .scr-section-head p'), 'reviewer note header paragraph emphasis styling is missing');
+  assert(report.text.includes('.scr-keyword-primary'), 'reviewer keyword primary tag styling is missing');
+  assert(report.text.includes('.scr-reviewer-note .scr-keyword-cloud span'), 'reviewer keyword capsule styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -268,6 +271,23 @@ async function auditViewport(browser, base, buildId, viewport) {
     const scoreCalcValueStyles = scoreCalcValues.map((el) => getComputedStyle(el));
     const scoreCalcNote = scoreCalculator?.querySelector('.scr-score-calc-note');
     const scoreCalcNoteStyle = scoreCalcNote ? getComputedStyle(scoreCalcNote) : null;
+    const reviewerNote = document.querySelector('.scr-reviewer-note');
+    const reviewerHead = reviewerNote?.querySelector('.scr-section-head');
+    const reviewerDesc = reviewerHead?.querySelector('p');
+    const reviewerDescStyle = reviewerDesc ? getComputedStyle(reviewerDesc) : null;
+    const keywordPanel = reviewerNote?.querySelector('.scr-keyword-panel');
+    const keywordPanelRect = keywordPanel ? rectFor(keywordPanel) : null;
+    const keywordHead = keywordPanel?.querySelector('.scr-keyword-head');
+    const keywordHeadDesc = keywordHead?.querySelector('p');
+    const keywordHeadDescStyle = keywordHeadDesc ? getComputedStyle(keywordHeadDesc) : null;
+    const keywordPrimary = keywordPanel?.querySelector('.scr-keyword-primary');
+    const keywordPrimaryStyle = keywordPrimary ? getComputedStyle(keywordPrimary) : null;
+    const keywordGroups = [...(keywordPanel?.querySelectorAll('.scr-keyword-group') || [])];
+    const keywordPills = [...(keywordPanel?.querySelectorAll('.scr-keyword-cloud span') || [])];
+    const keywordPillRects = keywordPills.map(rectFor);
+    const keywordPillStyles = keywordPills.map((el) => getComputedStyle(el));
+    const keywordPositivePills = keywordPills.filter((el) => !el.classList.contains('negative'));
+    const keywordNegativePills = keywordPills.filter((el) => el.classList.contains('negative'));
     const scoreStripBorderMax = scoreStripStyle ? Math.max(
       Number.parseFloat(scoreStripStyle.borderTopWidth) || 0,
       Number.parseFloat(scoreStripStyle.borderRightWidth) || 0,
@@ -480,6 +500,32 @@ async function auditViewport(browser, base, buildId, viewport) {
         beforeDisplay: scoreCalculatorBeforeStyle?.display || '',
         maxRight: Math.max(rectFor(scoreCalculator).right, scoreCalcTermRects.reduce((max, rect) => Math.max(max, rect.right), 0))
       },
+      reviewerNote: {
+        exists: Boolean(reviewerNote),
+        kicker: (reviewerHead?.querySelector('small')?.textContent || '').trim(),
+        title: (reviewerHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (reviewerDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: reviewerDescStyle ? Number.parseFloat(reviewerDescStyle.fontSize) : 0,
+        descColor: reviewerDescStyle?.color || '',
+        keywordTitle: (keywordHead?.querySelector('h3')?.textContent || '').trim(),
+        keywordDesc: (keywordHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        keywordDescSize: keywordHeadDescStyle ? Number.parseFloat(keywordHeadDescStyle.fontSize) : 0,
+        primaryText: (keywordPrimary?.textContent || '').replace(/\s+/g, ' ').trim(),
+        primaryHasGradient: keywordPrimaryStyle ? keywordPrimaryStyle.backgroundImage.includes('gradient') : false,
+        groupTitles: keywordGroups.map((el) => (el.querySelector('h4')?.textContent || '').trim()).join('|'),
+        oldDecorNodes: keywordPanel?.querySelectorAll('.scr-keyword-glow, .scr-keyword-hero, .scr-keyword-group-title span').length || 0,
+        staleCountText: /\b\d+\s+tags\b/i.test(keywordPanel?.textContent || ''),
+        pillCount: keywordPills.length,
+        positiveCount: keywordPositivePills.length,
+        negativeCount: keywordNegativePills.length,
+        pillText: keywordPills.map((el) => (el.textContent || '').trim()).join('|'),
+        pillMinHeight: keywordPillRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        pillMinFont: keywordPillStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        pillMinRadius: keywordPillStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.borderTopLeftRadius) || Infinity), Infinity),
+        pillHasGradient: keywordPillStyles.every((style) => style.backgroundImage.includes('gradient')),
+        pillHasLineThrough: keywordPillStyles.some((style) => style.textDecorationLine.includes('line-through')),
+        maxRight: Math.max(keywordPanelRect?.right || 0, keywordPillRects.reduce((max, rect) => Math.max(max, rect.right), 0))
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -540,6 +586,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.scoreAnatomy.tileCount === 7 && metrics.scoreAnatomy.stripBorderMax === 0 && metrics.scoreAnatomy.stripBackgroundColor === 'rgba(0, 0, 0, 0)' && metrics.scoreAnatomy.stripBackgroundImage === 'none' && metrics.scoreAnatomy.stripGap >= 10 && metrics.scoreAnatomy.tileBorderMax === 0 && !metrics.scoreAnatomy.tileHasBoxShadow && metrics.scoreAnatomy.tileBackgroundsTransparent && metrics.scoreAnatomy.tileMaxRight <= viewport.width + 1, `${viewport.name} score strip still has secondary wrapper/card chrome ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.scoreCalculator.exists && metrics.scoreCalculator.title === 'Score Calculator' && metrics.scoreCalculator.termCount === 3 && metrics.scoreCalculator.labels === 'Axes|Fit / Risk|Final Score' && metrics.scoreCalculator.values === '90|4|86' && metrics.scoreCalculator.operators === '−|=' && metrics.scoreCalculator.noteText.includes('five core axes') && metrics.scoreCalculator.noteText.includes('public score is 86'), `${viewport.name} simplified score calculator content mismatch ${JSON.stringify(metrics.scoreCalculator)}`);
   assert(metrics.scoreCalculator.oldLcdNodes === 0 && !metrics.scoreCalculator.staleText && metrics.scoreCalculator.labelMinSize >= 11 && metrics.scoreCalculator.valueMinSize >= 54 && metrics.scoreCalculator.noteSize >= 14 && metrics.scoreCalculator.clipPath === 'none' && metrics.scoreCalculator.boxShadow === 'none' && metrics.scoreCalculator.beforeDisplay === 'none' && metrics.scoreCalculator.maxRight <= viewport.width + 1, `${viewport.name} score calculator still has LCD/decor clutter or overflow ${JSON.stringify(metrics.scoreCalculator)}`);
+  assert(metrics.reviewerNote.exists && metrics.reviewerNote.kicker === '04 · Reviewer Note' && metrics.reviewerNote.title === 'Short Human Verdict' && metrics.reviewerNote.desc.includes('beyond the math') && metrics.reviewerNote.descSize >= 15.5 && metrics.reviewerNote.descColor !== 'rgb(133, 146, 165)', `${viewport.name} reviewer note heading/copy mismatch ${JSON.stringify(metrics.reviewerNote)}`);
+  assert(metrics.reviewerNote.keywordTitle === 'Fit Tags' && metrics.reviewerNote.keywordDesc.includes('score is not promising') && metrics.reviewerNote.keywordDescSize >= 14.5 && metrics.reviewerNote.primaryText === 'Primary Fit Atmospheric Survival FPS' && metrics.reviewerNote.primaryHasGradient && metrics.reviewerNote.groupTitles === 'Matches|Not the pitch', `${viewport.name} reviewer keyword panel content mismatch ${JSON.stringify(metrics.reviewerNote)}`);
+  assert(metrics.reviewerNote.oldDecorNodes === 0 && !metrics.reviewerNote.staleCountText && metrics.reviewerNote.pillCount === 16 && metrics.reviewerNote.positiveCount === 8 && metrics.reviewerNote.negativeCount === 8 && !/[✓×]/.test(metrics.reviewerNote.pillText) && metrics.reviewerNote.pillText.includes('Story rich') && metrics.reviewerNote.pillText.includes('Open world RPG'), `${viewport.name} reviewer keyword capsule content mismatch ${JSON.stringify(metrics.reviewerNote)}`);
+  assert(metrics.reviewerNote.pillMinHeight >= 30 && metrics.reviewerNote.pillMinFont >= 12 && metrics.reviewerNote.pillMinRadius >= 16 && metrics.reviewerNote.pillHasGradient && !metrics.reviewerNote.pillHasLineThrough && metrics.reviewerNote.maxRight <= viewport.width + 1, `${viewport.name} reviewer keyword capsules are too small/old-style/overflowing ${JSON.stringify(metrics.reviewerNote)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
