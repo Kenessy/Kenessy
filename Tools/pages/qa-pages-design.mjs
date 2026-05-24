@@ -229,7 +229,16 @@ async function auditViewport(browser, base, buildId, viewport) {
     const inspectMetricRects = inspectMetrics.map(rectFor);
     const inspectMeters = [...document.querySelectorAll('.scr-inspect-meter.scr-score-meter-box.scr-signal-block')];
     const inspectMeterRects = inspectMeters.map(rectFor);
+    const inspectMeterValues = inspectMeters.map((el) => el.querySelector('.scr-tile-value')).filter(Boolean);
+    const inspectMeterValueStyles = inspectMeterValues.map((el) => getComputedStyle(el));
+    const inspectNames = inspectMetrics.map((el) => el.querySelector('.scr-inspect-name')).filter(Boolean);
     const inspectPlayers = [...document.querySelectorAll('.scr-inspect-player')];
+    const inspectPlayerRects = inspectPlayers.map(rectFor);
+    const inspectPlayerStyles = inspectPlayers.map((el) => getComputedStyle(el));
+    const inspectPlayerLines = inspectPlayers.map((el, index) => {
+      const lineHeight = Number.parseFloat(inspectPlayerStyles[index]?.lineHeight) || Number.parseFloat(inspectPlayerStyles[index]?.fontSize) || 1;
+      return inspectPlayerRects[index] ? inspectPlayerRects[index].height / lineHeight : 0;
+    });
     const inspectMetricBorderWidth = inspectMetricStyles.reduce((max, style) => Math.max(
       max,
       Number.parseFloat(style.borderTopWidth) || 0,
@@ -252,8 +261,12 @@ async function auditViewport(browser, base, buildId, viewport) {
       inspectMetricNames: inspectMetrics.map((el) => (el.querySelector('.scr-inspect-name')?.textContent || '').trim()).join('|'),
       inspectMeterValues: inspectMeters.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim()).join('|'),
       inspectMeterMinHeight: inspectMeterRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+      inspectMeterValueColors: inspectMeterValueStyles.map((style) => style.color).join('|'),
       inspectPlayers: inspectPlayers.length,
       inspectPlayerText: inspectPlayers.map((el) => (el.textContent || '').trim()).join('|'),
+      inspectPlayerMaxLines: inspectPlayerLines.reduce((max, lines) => Math.max(max, lines), 0),
+      inspectPlayerMinHeight: inspectPlayerRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+      inspectNameClipped: inspectNames.some((el) => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1),
       inspectMetricBorderWidth,
       inspectMetricBoxShadow: inspectMetricStyles.some((style) => style.boxShadow && style.boxShadow !== 'none'),
       inspectMetricMaxRight: inspectMetricRects.reduce((max, rect) => Math.max(max, rect.right), 0),
@@ -372,8 +385,12 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
   assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);
-  assert(metrics.signalBlocks.inspectMeterValues === '10|8|2|5|6|4|1' && metrics.signalBlocks.inspectMeterMinHeight >= 100, `${viewport.name} INSPECT meter lanes missing ${JSON.stringify(metrics.signalBlocks)}`);
+  const expectedInspectMeterHeight = viewport.width < 760 ? 124 : viewport.width < 1120 ? 144 : 154;
+  const inspectValueColors = metrics.signalBlocks.inspectMeterValueColors.split('|');
+  assert(metrics.signalBlocks.inspectMeterValues === '10|8|2|5|6|4|1' && metrics.signalBlocks.inspectMeterMinHeight >= expectedInspectMeterHeight, `${viewport.name} INSPECT meter lanes too cramped/missing ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(/rgb\(255,\s*(45|106),\s*(31|90)\)/.test(inspectValueColors[6] || ''), `${viewport.name} Teamplay INSPECT value is not danger-red ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectPlayerText === 'Wants to feel inside a hostile place.|Likes dialogue, scenes, and authored stakes.|Needs builds, loot depth, or sandbox knobs.|Chases crisp combat mastery and clean input.|Checks corners, side paths, and hidden supplies.|Wants smooth pacing and low old-FPS friction.|Looks for co-op, PvP, or shared-session play.', `${viewport.name} INSPECT player type copy mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(!metrics.signalBlocks.inspectNameClipped && metrics.signalBlocks.inspectPlayerMaxLines <= 4.25 && metrics.signalBlocks.inspectPlayerMinHeight >= 44, `${viewport.name} INSPECT labels/player copy are clipped or over-compressed ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricBorderWidth === 0 && !metrics.signalBlocks.inspectMetricBoxShadow, `${viewport.name} INSPECT metrics still look like cards ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricMaxRight <= viewport.width + 1, `${viewport.name} INSPECT metrics overflow viewport ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.mainScoreTitleSize >= 13 && metrics.signalBlocks.mainScoreTitleWeight >= 900, `${viewport.name} main score title is too small/light ${JSON.stringify(metrics.signalBlocks)}`);
