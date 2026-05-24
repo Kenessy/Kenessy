@@ -352,14 +352,26 @@ function AudienceFit() {
 
 function ScoreAnatomy({ dataChecks }) {
   return (
-    <section>
-      <SectionHead num="03" kicker="Score Anatomy" title="ALERTED" emphasis="Score Strip" desc="Five main axes score the core review. Extra handles fit limits. Danger keeps concrete risks visible." />
+    <section className="scr-score-anatomy">
+      <SectionHead num="03" kicker="Score Anatomy" title={<AlertedWordmark />} emphasis="Score Strip" desc="Five main axes score the core review. Extra handles fit limits. Danger keeps concrete risks visible." />
       <div className="scr-score-strip">
         {AXES.map((axis) => <ScoreTile key={axis.name} item={axis} mode="positive" />)}
         {MODIFIERS.map((mod) => <ScoreTile key={mod.name} item={mod} mode="negative" />)}
       </div>
       <DiegeticEquation dataChecks={dataChecks} />
     </section>
+  );
+}
+
+function AlertedWordmark() {
+  return (
+    <span className="scr-alerted-word" aria-label="ALERTED">
+      {ALERT_DEFINITIONS.map((item, index) => (
+        <span className="scr-alerted-letter" style={{ '--tone': item.color }} key={`${item.letter}-${index}`}>
+          {item.letter}
+        </span>
+      ))}
+    </span>
   );
 }
 
@@ -774,8 +786,14 @@ const TEMPLATE_CSS = `
 .scr-fit-thesis::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb347,#ff8a1f)}
 .scr-fit-thesis small{position:relative;color:#ffb347;font-size:.78rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
 .scr-fit-thesis p{position:relative;margin:.55rem 0 0;max-width:86ch;color:#d9c9a3;font-size:1rem;font-weight:760;line-height:1.55;text-transform:none}
+.scr-score-anatomy .scr-section-head p{max-width:680px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-alerted-word{display:inline-flex;align-items:baseline;gap:.015em;white-space:nowrap}
+.scr-alerted-letter{display:inline-block;color:var(--tone);text-shadow:0 1px 0 #000,0 0 18px color-mix(in srgb,var(--tone) 32%,transparent)}
+.scr-section-head h2 .scr-alerted-letter{color:var(--tone)}
+.scr-score-anatomy .scr-score-strip{border:0;background:transparent;gap:.72rem}
+.scr-score-anatomy .scr-score-tile{border:0;background:transparent;box-shadow:none;padding:.05rem 0 .15rem}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}
-@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p{font-size:.98rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}}
+@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p,.scr-score-anatomy .scr-section-head p{font-size:.98rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}}
 `;

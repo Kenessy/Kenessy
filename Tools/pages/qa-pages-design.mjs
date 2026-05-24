@@ -141,6 +141,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-inspect-metrics'), 'flat INSPECT metrics CSS is missing');
   assert(report.text.includes('.scr-inspect-meter'), 'INSPECT meter lane CSS is missing');
   assert(report.text.includes('.scr-inspect-player'), 'INSPECT player type copy CSS is missing');
+  assert(report.text.includes('.scr-score-anatomy .scr-section-head p'), 'score anatomy header paragraph emphasis styling is missing');
+  assert(report.text.includes('.scr-alerted-word'), 'colored ALERTED wordmark styling is missing');
+  assert(report.text.includes('.scr-score-anatomy .scr-score-strip{border:0'), 'score strip outer border removal is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -240,6 +243,30 @@ async function auditViewport(browser, base, buildId, viewport) {
     const identityStyle = identity ? getComputedStyle(identity) : null;
     const identityRailStyle = identity ? getComputedStyle(identity, '::before') : null;
     const identityLabelStyle = identity ? getComputedStyle(identity, '::after') : null;
+    const scoreAnatomySection = document.querySelector('.scr-score-anatomy');
+    const scoreAnatomyHead = scoreAnatomySection?.querySelector('.scr-section-head');
+    const scoreAnatomyHeadDesc = scoreAnatomyHead?.querySelector('p');
+    const scoreAnatomyHeadDescStyle = scoreAnatomyHeadDesc ? getComputedStyle(scoreAnatomyHeadDesc) : null;
+    const alertedLetters = [...document.querySelectorAll('.scr-score-anatomy .scr-alerted-letter')];
+    const alertedLetterStyles = alertedLetters.map((el) => getComputedStyle(el));
+    const scoreStrip = document.querySelector('.scr-score-anatomy .scr-score-strip');
+    const scoreStripStyle = scoreStrip ? getComputedStyle(scoreStrip) : null;
+    const scoreTiles = [...document.querySelectorAll('.scr-score-anatomy .scr-score-tile')];
+    const scoreTileRects = scoreTiles.map(rectFor);
+    const scoreTileStyles = scoreTiles.map((el) => getComputedStyle(el));
+    const scoreStripBorderMax = scoreStripStyle ? Math.max(
+      Number.parseFloat(scoreStripStyle.borderTopWidth) || 0,
+      Number.parseFloat(scoreStripStyle.borderRightWidth) || 0,
+      Number.parseFloat(scoreStripStyle.borderBottomWidth) || 0,
+      Number.parseFloat(scoreStripStyle.borderLeftWidth) || 0
+    ) : Infinity;
+    const scoreTileBorderMax = scoreTileStyles.reduce((max, style) => Math.max(
+      max,
+      Number.parseFloat(style.borderTopWidth) || 0,
+      Number.parseFloat(style.borderRightWidth) || 0,
+      Number.parseFloat(style.borderBottomWidth) || 0,
+      Number.parseFloat(style.borderLeftWidth) || 0
+    ), 0);
     const shellSections = [...document.querySelectorAll('.scr-shell > section')];
     const inspectSection = document.querySelector('.scr-inspect-section');
     const inspectHead = inspectSection?.querySelector('.scr-section-head');
@@ -399,6 +426,27 @@ async function auditViewport(browser, base, buildId, viewport) {
         thesisBorderLeft: audienceThesisStyle ? Number.parseFloat(audienceThesisStyle.borderLeftWidth) : 0,
         thesisHasGradient: audienceThesisStyle ? audienceThesisStyle.backgroundImage.includes('gradient') : false
       },
+      scoreAnatomy: {
+        exists: Boolean(scoreAnatomySection),
+        kicker: (scoreAnatomyHead?.querySelector('small')?.textContent || '').trim(),
+        title: (scoreAnatomyHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (scoreAnatomyHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: scoreAnatomyHeadDescStyle ? Number.parseFloat(scoreAnatomyHeadDescStyle.fontSize) : 0,
+        descColor: scoreAnatomyHeadDescStyle?.color || '',
+        alertedText: alertedLetters.map((el) => (el.textContent || '').trim()).join(''),
+        alertedCount: alertedLetters.length,
+        alertedColors: alertedLetterStyles.map((style) => style.color).join('|'),
+        alertedUniqueColors: new Set(alertedLetterStyles.map((style) => style.color)).size,
+        stripBorderMax: scoreStripBorderMax,
+        stripBackgroundColor: scoreStripStyle?.backgroundColor || '',
+        stripBackgroundImage: scoreStripStyle?.backgroundImage || '',
+        stripGap: scoreStripStyle ? Number.parseFloat(scoreStripStyle.gap) : 0,
+        tileCount: scoreTiles.length,
+        tileBorderMax: scoreTileBorderMax,
+        tileHasBoxShadow: scoreTileStyles.some((style) => style.boxShadow && style.boxShadow !== 'none'),
+        tileBackgroundsTransparent: scoreTileStyles.every((style) => style.backgroundColor === 'rgba(0, 0, 0, 0)' || style.backgroundColor === 'transparent'),
+        tileMaxRight: scoreTileRects.reduce((max, rect) => Math.max(max, rect.right), 0)
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -454,6 +502,9 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && metrics.fitSignals.labelMinSize >= 13 && metrics.fitSignals.labelMinWeight >= 900 && metrics.fitSignals.labelMaxBorder === 0 && metrics.fitSignals.labelTopLeft && metrics.fitSignals.mainCentered && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.hasOpposingGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.audienceFit.exists && metrics.audienceFit.kicker === '02 · Audience Fit' && metrics.audienceFit.title === 'Who Is This 86 For?' && metrics.audienceFit.desc.includes('fit filter') && metrics.audienceFit.descSize >= 15.5 && metrics.audienceFit.descColor !== 'rgb(133, 146, 165)' && !metrics.audienceFit.staleWho86, `${viewport.name} audience fit heading/copy mismatch ${JSON.stringify(metrics.audienceFit)}`);
   assert(metrics.audienceFit.thesisLabel === 'Verdict Thesis' && metrics.audienceFit.thesisText.includes('atmosphere-first players') && metrics.audienceFit.thesisText.includes('not a sandbox or co-op promise') && !metrics.audienceFit.staleCoreThesis && metrics.audienceFit.thesisTransform === 'none' && metrics.audienceFit.thesisSize >= 15 && metrics.audienceFit.thesisLineHeight >= 22 && metrics.audienceFit.thesisBorderLeft === 0 && metrics.audienceFit.thesisHasGradient, `${viewport.name} audience fit thesis mismatch ${JSON.stringify(metrics.audienceFit)}`);
+  assert(metrics.scoreAnatomy.exists && metrics.scoreAnatomy.kicker === '03 · Score Anatomy' && metrics.scoreAnatomy.title === 'ALERTED Score Strip' && metrics.scoreAnatomy.desc.includes('Five main axes') && metrics.scoreAnatomy.descSize >= 15.5 && metrics.scoreAnatomy.descColor !== 'rgb(133, 146, 165)', `${viewport.name} score anatomy heading/copy mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
+  assert(metrics.scoreAnatomy.alertedText === 'ALERTED' && metrics.scoreAnatomy.alertedCount === 7 && metrics.scoreAnatomy.alertedUniqueColors >= 6 && /rgb\(124,\s*109,\s*255\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*176,\s*0\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*45,\s*31\)/.test(metrics.scoreAnatomy.alertedColors), `${viewport.name} ALERTED wordmark color mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
+  assert(metrics.scoreAnatomy.tileCount === 7 && metrics.scoreAnatomy.stripBorderMax === 0 && metrics.scoreAnatomy.stripBackgroundColor === 'rgba(0, 0, 0, 0)' && metrics.scoreAnatomy.stripBackgroundImage === 'none' && metrics.scoreAnatomy.stripGap >= 10 && metrics.scoreAnatomy.tileBorderMax === 0 && !metrics.scoreAnatomy.tileHasBoxShadow && metrics.scoreAnatomy.tileBackgroundsTransparent && metrics.scoreAnatomy.tileMaxRight <= viewport.width + 1, `${viewport.name} score strip still has secondary wrapper/card chrome ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
