@@ -251,7 +251,6 @@ function TextSignalBlock({ item, className = '' }) {
 
   return (
     <article className={classes} style={{ '--tone': item.tone }}>
-      <div className="scr-text-signal-accent" aria-hidden="true" />
       <div className="scr-text-signal-content">
         <small>{item.label} </small>
         <b>{item.value}</b>
@@ -742,13 +741,11 @@ const TEMPLATE_CSS = `
 .scr-inspect-meter .scr-tile-value{font-size:3.3rem}
 .scr-inspect-player{min-height:3.15rem;color:#9aa7b8;font-size:.72rem;font-weight:760;line-height:1.32;text-wrap:balance}
 .scr-hero-verdict-strip{align-items:stretch;gap:.72rem}
-.scr-text-signal{position:relative;isolation:isolate;min-width:0;min-height:94px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 36%,#2a3444);background:radial-gradient(180px 120px at 10% 0%,color-mix(in srgb,var(--tone) 14%,transparent),transparent 72%),linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.018) 34%,rgba(0,0,0,.18) 100%),linear-gradient(180deg,#121821,#070b11 70%,#05070b);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.025),0 14px 34px rgba(0,0,0,.28),0 0 22px color-mix(in srgb,var(--tone) 8%,transparent);display:grid;align-content:center;padding:.9rem .95rem}
-.scr-text-signal::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(118deg,transparent 0 24%,rgba(255,255,255,.11) 36%,rgba(255,255,255,.026) 48%,transparent 66%),linear-gradient(0deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:100% 100%,100% 16px;opacity:.62}
-.scr-text-signal::after{content:"";position:absolute;inset:.5rem;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.045);box-shadow:inset 0 0 22px rgba(255,255,255,.018),inset 0 -24px 30px rgba(0,0,0,.18)}
-.scr-text-signal-accent{position:absolute;left:.52rem;right:.52rem;top:.52rem;z-index:2;height:2px;background:linear-gradient(90deg,var(--tone),color-mix(in srgb,var(--tone) 38%,transparent),transparent);box-shadow:0 0 14px color-mix(in srgb,var(--tone) 36%,transparent)}
-.scr-text-signal-content{position:relative;z-index:3;display:grid;gap:.36rem;min-width:0}
-.scr-text-signal small{display:inline-flex;width:max-content;max-width:100%;align-items:center;border:1px solid color-mix(in srgb,var(--tone) 34%,transparent);background:color-mix(in srgb,var(--tone) 9%,transparent);padding:.24rem .42rem;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.56rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 10px color-mix(in srgb,var(--tone) 30%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-.scr-text-signal b{display:block;color:#decfa8;font-size:.88rem;font-weight:1000;line-height:1.15;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 14px rgba(217,201,163,.10)}
+.scr-text-signal{position:relative;isolation:isolate;min-width:0;min-height:94px;overflow:hidden;border:1px solid transparent;background:linear-gradient(148deg,rgba(18,24,33,.96),rgba(9,13,19,.98) 58%,rgba(5,7,11,.99)) padding-box,linear-gradient(135deg,color-mix(in srgb,var(--tone) 74%,#d9c9a3),color-mix(in srgb,var(--tone) 32%,#2a3444) 18%,#26313f 46%,#151b25 100%) border-box;box-shadow:0 14px 32px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.045);display:grid;align-content:center;padding:.9rem .95rem}
+.scr-text-signal::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.035),transparent 34%),linear-gradient(180deg,transparent,rgba(0,0,0,.14));opacity:.32}
+.scr-text-signal-content{position:relative;z-index:1;display:grid;gap:.36rem;min-width:0}
+.scr-text-signal small{display:block;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.56rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000}
+.scr-text-signal b{display:block;color:#decfa8;font-size:.88rem;font-weight:1000;line-height:1.15;text-wrap:balance;text-shadow:0 1px 0 #000}
 .scr-fit-grid{border:0;background:transparent;gap:.75rem}
 .scr-fit-signal{min-height:218px;padding:1.18rem;align-content:end}
 .scr-fit-signal .scr-text-signal-content{gap:.72rem}
