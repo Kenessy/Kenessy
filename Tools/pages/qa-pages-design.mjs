@@ -91,6 +91,10 @@ function url(base, relativePath = '') {
   return new URL(relativePath, base).toString();
 }
 
+function metroReportUrl(base, buildId) {
+  return url(base, `${reportPath}?v=${buildId}`);
+}
+
 function extractBuildId(html) {
   const match = html.match(/name="build-id" content="([^"]+)"/);
   assert(match, 'build-id meta tag missing');
@@ -118,6 +122,12 @@ async function auditDesignArtifacts(base) {
   await checkpoint('checking design artifact CSS');
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
+  assert(root.text.includes('.home-root'), 'portfolio homepage CSS is missing');
+  assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
+  assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
+  assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');
+  assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
+  assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');
@@ -177,9 +187,9 @@ async function auditViewport(browser, base, buildId, viewport) {
   });
   page.on('requestfailed', (request) => failedRequests.push(`${request.url()} ${request.failure()?.errorText || ''}`));
 
-  const response = await page.goto(`${url(base)}?design=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+  const response = await page.goto(`${metroReportUrl(base, buildId)}&design=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
   await page.waitForTimeout(1200);
-  assert(response?.status() === 200, `${viewport.name} root returned ${response?.status()}`);
+  assert(response?.status() === 200, `${viewport.name} report returned ${response?.status()}`);
 
   const screenshotPath = path.join(outputDir, `${mode}-${viewport.name}.png`);
   await page.screenshot({ path: screenshotPath, fullPage: false });

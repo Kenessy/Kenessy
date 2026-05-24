@@ -1,4 +1,5 @@
 import { build } from 'esbuild';
+import { portfolioHomeHtml } from './site-home.mjs';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -23,6 +24,7 @@ const siteBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const reportUrl = new URL(reportPath, siteBase).toString();
 const reportsUrl = new URL('plater-game-reports/', siteBase).toString();
+const apocalypseUrl = new URL('apocalypse-express/', siteBase).toString();
 const githubUrl = 'https://github.com/Kenessy/Kenessy';
 
 function sha256(text) {
@@ -126,41 +128,14 @@ ${appCss}
 }
 
 function rootHtml(buildId) {
-  const target = `${reportPath}?v=${buildId}`;
-  const title = 'Metro 2033 Redux - ALERTED Field Report';
-  const description = 'Redirects to the current Metro 2033 Redux ALERTED field report build.';
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title}</title>
-<link rel="icon" href="data:,">
-<link rel="canonical" href="${reportUrl}">
-<meta name="description" content="${description}">
-<meta name="theme-color" content="#05060a">
-<meta name="build-id" content="${buildId}">
-<meta property="og:type" content="website">
-<meta property="og:title" content="${title}">
-<meta property="og:description" content="${description}">
-<meta property="og:url" content="${reportUrl}?v=${buildId}">
-<meta http-equiv="refresh" content="0; url=${target}">
-<style>
-:root{--bg:#05060a;--panel:#0d1117;--line:#1e2733;--bone:#d9c9a3;--muted:#8592a5;--amber:#ff8a1f;--mint:#11facb;--danger:#ff2d1f}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 500px at 20% 0,rgba(17,250,203,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,138,31,.10),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a);color:#e7ecf3;font-family:Inter,system-ui,Segoe UI,sans-serif}.card{width:min(720px,calc(100% - 32px));border:1px solid var(--line);background:rgba(13,17,23,.94);padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}.k{color:var(--mint);font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:0}h1{margin:10px 0 0;color:var(--bone);font-size:3.2rem;line-height:.92;text-transform:uppercase}p{color:var(--muted);line-height:1.7}a{display:inline-flex;margin-top:14px;border:1px solid var(--amber);color:#ffb347;text-decoration:none;padding:10px 14px;font-weight:1000;text-transform:uppercase;letter-spacing:0;font-size:11px}.bar{height:4px;margin-top:18px;background:linear-gradient(90deg,var(--mint),var(--amber),var(--danger))}
-</style>
-<script>window.location.replace('${target}');</script>
-</head>
-<body>
-<main class="card">
-<div class="k">ALERTED root redirect - BUILD ${buildId}</div>
-<h1>Metro 2033 Redux Field Report</h1>
-<p>The root docs index forwards to the current canonical Canvas build.</p>
-<a href="${target}">Open report</a>
-<div class="bar"></div>
-</main>
-</body>
-</html>
-`;
+  return portfolioHomeHtml({
+    buildId,
+    siteBase,
+    reportPath,
+    reportsPath: 'plater-game-reports/',
+    apocalypsePath: 'apocalypse-express/',
+    githubUrl
+  });
 }
 
 function reportsIndexHtml(buildId) {
@@ -180,7 +155,7 @@ function reportsIndexHtml(buildId) {
 </head>
 <body>
 <main>
-<header><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
+<header><p><a href="../">Kenessy home</a></p><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
 <a class="report" href="games/metro-2033-redux/?v=${buildId}"><div><div class="kicker">Metro 2033 Redux</div><h2>ALERTED Field Report</h2><p>Worth playing. Atmosphere-first, linear, cohesive action horror with bounded agency and visible caveats.</p><div class="mini"><span>A Atmosphere</span><span>L Loop</span><span>E Engagement</span><span>R Readability</span><span>T Technical</span><span class="good">86 / A</span></div></div><div class="score">86</div></a>
 </main>
 </body>
@@ -196,7 +171,7 @@ Sitemap: ${new URL('sitemap.xml', siteBase).toString()}
 }
 
 function sitemapXml(buildDate) {
-  const urls = [siteBase, reportsUrl, reportUrl];
+  const urls = [siteBase, reportsUrl, reportUrl, apocalypseUrl];
   const items = urls.map((url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${buildDate}</lastmod>

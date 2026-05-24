@@ -89,6 +89,10 @@ function url(base, relativePath = '') {
   return new URL(relativePath, base).toString();
 }
 
+function metroReportUrl(base, buildId) {
+  return url(base, `${reportPath}?v=${buildId}`);
+}
+
 function extractBuildId(html) {
   const match = html.match(/name="build-id" content="([^"]+)"/);
   assert(match, 'build-id meta tag missing');
@@ -116,10 +120,18 @@ async function auditHttpSurface(base) {
   checkpoint('checking HTTP surface');
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
-  assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root redirect does not reference current build id');
+  assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
+  assert(root.text.includes('Kenessy builds weird systems'), 'root homepage hero copy missing');
+  assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
+  assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
+  assert(root.text.includes('assets/img/triad-validation-flow.png'), 'root homepage project visual missing');
+  assert(root.text.includes('<link rel="canonical" href="https://kenessy.github.io/Kenessy/">'), 'root canonical metadata missing');
+  assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'root still contains redirect behavior');
+  await fetchText(url(base, 'assets/img/triad-validation-flow.png'));
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
+  assert(reports.text.includes('../'), 'reports index does not link back to homepage');
 
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`${bundleName}?v=${buildId}`), 'report HTML does not load versioned bundle');
@@ -168,9 +180,53 @@ async function auditViewports(browser, base, buildId) {
     });
     page.on('pageerror', (error) => pageErrors.push(error.message));
     page.on('requestfailed', (request) => failedRequests.push(`${request.url()} ${request.failure()?.errorText || ''}`));
-    const response = await page.goto(`${url(base)}?qa=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+    const homeResponse = await page.goto(`${url(base)}?qa-home=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+    await page.waitForTimeout(700);
+    assert(homeResponse?.status() === 200, `${viewport.name} homepage returned ${homeResponse?.status()}`);
+    const homeMetrics = await page.evaluate((currentReportPath) => {
+      const root = document.documentElement;
+      const visible = [...document.querySelectorAll('a,button,summary')].filter((el) => {
+        const rect = el.getBoundingClientRect();
+        const style = getComputedStyle(el);
+        return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+      });
+      const smallInteractive = visible
+        .filter((el) => {
+          const rect = el.getBoundingClientRect();
+          return rect.width < 32 || rect.height < 28;
+        })
+        .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 60) }));
+      const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
+      const heroImage = document.querySelector('.hero-panel img');
+      return {
+        title: document.title,
+        hasHomeRoot: Boolean(document.querySelector('.home-root')),
+        h1: document.querySelector('h1')?.textContent.trim(),
+        hasReportLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes(currentReportPath)),
+        hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
+        imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+        horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
+        rootWidth: root.scrollWidth,
+        clientWidth: root.clientWidth,
+        linkCount: document.querySelectorAll('a').length,
+        badText: /\b(undefined|NaN|\[object Object\])\b/i.test(bodyText),
+        smallInteractive
+      };
+    }, reportPath);
+    assert(homeMetrics.title.includes('Kenessy'), `${viewport.name} homepage title missing Kenessy`);
+    assert(homeMetrics.hasHomeRoot, `${viewport.name} homepage root missing`);
+    assert(homeMetrics.h1 === 'Kenessy builds weird systems until they become readable.', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
+    assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
+    assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
+    assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
+    assert(!homeMetrics.horizontalOverflow, `${viewport.name} homepage overflow ${homeMetrics.rootWidth}/${homeMetrics.clientWidth}`);
+    assert(homeMetrics.linkCount >= 7, `${viewport.name} homepage expected navigation links`);
+    assert(!homeMetrics.badText, `${viewport.name} homepage has placeholder text`);
+    assert(homeMetrics.smallInteractive.length === 0, `${viewport.name} homepage small tap targets ${JSON.stringify(homeMetrics.smallInteractive)}`);
+
+    const response = await page.goto(`${metroReportUrl(base, buildId)}&qa=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
     await page.waitForTimeout(1200);
-    assert(response?.status() === 200, `${viewport.name} root returned ${response?.status()}`);
+    assert(response?.status() === 200, `${viewport.name} report returned ${response?.status()}`);
     const metrics = await page.evaluate(() => {
       const root = document.documentElement;
       const visible = [...document.querySelectorAll('*')].filter((el) => {
@@ -199,7 +255,7 @@ async function auditViewports(browser, base, buildId) {
         bodyPrefix: document.body.textContent.trim().replace(/\s+/g, ' ').slice(0, 120)
       };
     });
-    assert(metrics.finalUrl.includes(`${reportPath}?v=${buildId}`), `${viewport.name} did not land on versioned report`);
+    assert(metrics.finalUrl.includes(`${reportPath}?v=${buildId}`), `${viewport.name} did not load versioned report`);
     assert(metrics.hasRoot, `${viewport.name} did not render React root`);
     assert(metrics.diagnostics, `${viewport.name} missing 15/15 diagnostics`);
     assert(metrics.h1 === 'Metro 2033 Redux', `${viewport.name} unexpected h1 ${metrics.h1}`);

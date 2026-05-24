@@ -91,6 +91,10 @@ function url(base, relativePath = '') {
   return new URL(relativePath, base).toString();
 }
 
+function metroReportUrl(base, buildId) {
+  return url(base, `${reportPath}?v=${buildId}`);
+}
+
 function extractBuildId(html) {
   const match = html.match(/name="build-id" content="([^"]+)"/);
   assert(match, 'build-id meta tag missing');
@@ -118,6 +122,11 @@ async function auditHttp(base) {
   await checkpoint('checking versioned HTTP entrypoints');
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
+  assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
+  assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
+  assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
+  assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
+  assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`main_canvas_diegetic_equation.bundle.js?v=${buildId}`), 'report bundle URL is not versioned with current build id');
   assert(report.text.includes('<link rel="canonical"'), 'report canonical metadata missing');
@@ -126,6 +135,88 @@ async function auditHttp(base) {
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
+}
+
+async function auditHomeViewport(browser, base, buildId, viewport) {
+  await checkpoint(`homepage viewport ${viewport.name} start`, viewport);
+  const baseOrigin = new URL(base).origin;
+  const context = await browser.newContext({
+    viewport: { width: viewport.width, height: viewport.height },
+    deviceScaleFactor: viewport.deviceScaleFactor || 1,
+    isMobile: Boolean(viewport.isMobile),
+    hasTouch: Boolean(viewport.isMobile),
+    reducedMotion: 'reduce'
+  });
+  const page = await context.newPage();
+  const consoleErrors = [];
+  const pageErrors = [];
+  const failedRequests = [];
+  const badResponses = [];
+  const loadedOrigins = new Set();
+
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  page.on('requestfailed', (request) => failedRequests.push(`${request.url()} ${request.failure()?.errorText || ''}`));
+  page.on('response', (response) => {
+    const responseUrl = response.url();
+    loadedOrigins.add(new URL(responseUrl).origin);
+    if (response.status() >= 400) badResponses.push(`${response.status()} ${responseUrl}`);
+  });
+
+  const response = await page.goto(`${url(base)}?stress-home=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+  await page.waitForTimeout(900);
+  assert(response?.status() === 200, `${viewport.name} homepage returned ${response?.status()}`);
+
+  const initial = await collectHomeMetrics(page, buildId);
+  assert(initial.hasHomeRoot, `${viewport.name} homepage root missing`);
+  assert(initial.h1 === 'Kenessy builds weird systems until they become readable.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
+  assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
+  assert(initial.sectionTitles.join('|') === 'Workbench|Projects|Game reviews|Interests', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
+  assert(initial.hasReportLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
+  assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
+  assert(initial.linkCount >= 7, `${viewport.name} homepage expected links`);
+  assert(initial.smallInteractive.length === 0, `${viewport.name} homepage small tap targets ${JSON.stringify(initial.smallInteractive)}`);
+  assert(!initial.badText, `${viewport.name} homepage bad placeholder text ${initial.badText}`);
+  await auditInternalLinks(base, initial.hrefs);
+
+  const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  const step = Math.max(240, Math.floor(viewport.height * 0.82));
+  const positions = [];
+  for (let y = 0; y < scrollHeight; y += step) positions.push(y);
+  positions.push(Math.max(0, scrollHeight - viewport.height));
+  const uniquePositions = [...new Set(positions)].sort((a, b) => a - b);
+
+  for (const [index, y] of uniquePositions.entries()) {
+    await page.evaluate((nextY) => window.scrollTo(0, nextY), y);
+    await page.waitForTimeout(70);
+    const metrics = await collectHomeMetrics(page, buildId);
+    runState.viewports.push({ viewport: `home-${viewport.name}`, scrollIndex: index, y, metrics });
+    assert(!metrics.horizontalOverflow, `${viewport.name} homepage y=${y} horizontal overflow ${metrics.scrollWidth}/${metrics.clientWidth}`);
+    assert(metrics.meaningfulOverflow.length === 0, `${viewport.name} homepage y=${y} offscreen elements ${JSON.stringify(metrics.meaningfulOverflow)}`);
+    assert(!metrics.badText, `${viewport.name} homepage y=${y} bad placeholder text ${metrics.badText}`);
+    await checkpoint(`homepage viewport ${viewport.name} scroll ${index + 1}/${uniquePositions.length}`, {
+      y,
+      scrollHeight,
+      overflow: metrics.horizontalOverflow
+    });
+  }
+
+  await page.screenshot({
+    path: path.join(outputDir, `${mode}-homepage-${viewport.name}-full.png`),
+    fullPage: true
+  });
+
+  const unexpectedOrigins = [...loadedOrigins].filter((origin) => origin !== baseOrigin);
+  assert(unexpectedOrigins.length === 0, `${viewport.name} homepage loaded unexpected origins ${unexpectedOrigins.join(', ')}`);
+  assert(badResponses.length === 0, `${viewport.name} homepage HTTP error responses ${badResponses.join(' | ')}`);
+  assert(consoleErrors.length === 0, `${viewport.name} homepage console errors ${consoleErrors.join(' | ')}`);
+  assert(pageErrors.length === 0, `${viewport.name} homepage page errors ${pageErrors.join(' | ')}`);
+  assert(failedRequests.length === 0, `${viewport.name} homepage failed requests ${failedRequests.join(' | ')}`);
+
+  await context.close();
+  await checkpoint(`homepage viewport ${viewport.name} ok`, { scrollChecks: uniquePositions.length });
 }
 
 function expectedSections() {
@@ -183,9 +274,9 @@ async function auditViewport(browser, base, buildId, viewport) {
     if (response.status() >= 400) badResponses.push(`${response.status()} ${responseUrl}`);
   });
 
-  const response = await page.goto(`${url(base)}?stress=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+  const response = await page.goto(`${metroReportUrl(base, buildId)}&stress=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
   await page.waitForTimeout(1000);
-  assert(response?.status() === 200, `${viewport.name} root returned ${response?.status()}`);
+  assert(response?.status() === 200, `${viewport.name} report returned ${response?.status()}`);
 
   const initial = await collectMetrics(page, buildId);
   assert(initial.finalUrl.includes(`${reportPath}?v=${buildId}`), `${viewport.name} did not land on versioned report`);
@@ -236,6 +327,60 @@ async function auditViewport(browser, base, buildId, viewport) {
 
   await context.close();
   await checkpoint(`viewport ${viewport.name} ok`, { scrollChecks: uniquePositions.length });
+}
+
+async function collectHomeMetrics(page, buildId) {
+  return page.evaluate((expectedBuildId) => {
+    const rectFor = (el) => {
+      const rect = el.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+    };
+    const isVisible = (el) => {
+      const rect = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    };
+    const visible = [...document.querySelectorAll('*')].filter(isVisible);
+    const meaningfulOverflow = visible
+      .filter((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.right > window.innerWidth + 1 || rect.left < -1;
+      })
+      .slice(0, 8)
+      .map((el) => ({ tag: el.tagName, className: String(el.className), text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
+    const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
+    const badTextMatch = bodyText.match(/\b(undefined|NaN|\[object Object\])\b/i);
+    const interactive = [...document.querySelectorAll('a,button,summary')].filter(isVisible);
+    const smallInteractive = interactive
+      .filter((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.width < 32 || rect.height < 28;
+      })
+      .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
+    const heroImage = document.querySelector('.hero-panel img');
+    const hrefs = [...document.querySelectorAll('a[href]')].map((el) => el.href);
+    return {
+      finalUrl: location.href,
+      buildId: document.querySelector('meta[name="build-id"]')?.content || '',
+      expectedBuildId,
+      hasHomeRoot: Boolean(document.querySelector('.home-root')),
+      h1: document.querySelector('h1')?.textContent.trim() || '',
+      sectionTitles: [...document.querySelectorAll('.section h2')].map((el) => el.textContent.replace(/\s+/g, ' ').trim()),
+      hasReportLink: hrefs.some((href) => href.includes('plater-game-reports/games/metro-2033-redux/')),
+      hasReportsLink: hrefs.some((href) => href.includes('plater-game-reports/')),
+      hasApocalypseLink: hrefs.some((href) => href.includes('apocalypse-express/')),
+      imageComplete: Boolean(heroImage && heroImage.complete && heroImage.naturalWidth > 0),
+      horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+      meaningfulOverflow,
+      bodyPrefix: bodyText.slice(0, 140),
+      badText: badTextMatch ? badTextMatch[0] : '',
+      linkCount: document.querySelectorAll('a').length,
+      hrefs,
+      smallInteractive
+    };
+  }, buildId);
 }
 
 async function collectMetrics(page, buildId) {
@@ -362,6 +507,7 @@ async function main() {
         { name: 'wide-1920', width: 1920, height: 1080 }
       ];
       for (const viewport of viewports) {
+        await auditHomeViewport(browser, base, buildId, viewport);
         await auditViewport(browser, base, buildId, viewport);
       }
       await auditFailureModes(browser, base, buildId);

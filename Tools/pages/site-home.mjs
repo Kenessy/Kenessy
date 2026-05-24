@@ -1,21 +1,45 @@
-<!doctype html>
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+export function portfolioHomeHtml({
+  buildId,
+  siteBase,
+  reportPath,
+  reportsPath,
+  apocalypsePath,
+  githubUrl
+}) {
+  const title = 'Kenessy - Portfolio, Projects, Game Reviews';
+  const description = 'Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.';
+  const metroHref = `${reportPath}?v=${buildId}`;
+  const reportsHref = reportsPath;
+  const apocalypseHref = apocalypsePath;
+  const graphHref = 'assets/img/triad-validation-flow.png';
+  const canonical = siteBase;
+
+  return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kenessy - Portfolio, Projects, Game Reviews</title>
+<title>${escapeHtml(title)}</title>
 <link rel="icon" href="data:,">
-<link rel="canonical" href="https://kenessy.github.io/Kenessy/">
-<meta name="description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
+<link rel="canonical" href="${canonical}">
+<meta name="description" content="${escapeHtml(description)}">
 <meta name="theme-color" content="#07090d">
-<meta name="build-id" content="5a07ad9ffa0a">
+<meta name="build-id" content="${buildId}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kenessy - Portfolio, Projects, Game Reviews">
-<meta property="og:description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
-<meta property="og:url" content="https://kenessy.github.io/Kenessy/">
+<meta property="og:title" content="${escapeHtml(title)}">
+<meta property="og:description" content="${escapeHtml(description)}">
+<meta property="og:url" content="${canonical}">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kenessy - Portfolio, Projects, Game Reviews">
-<meta name="twitter:description" content="Kenessy portfolio hub for systems design, Apocalypse Express, adversarial QA tooling, game reviews, and creative experiments.">
+<meta name="twitter:title" content="${escapeHtml(title)}">
+<meta name="twitter:description" content="${escapeHtml(description)}">
 <style>
 :root{
   --bg:#07090d;
@@ -231,7 +255,7 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
       <a href="#work">Work</a>
       <a href="#reviews">Reviews</a>
       <a href="#interests">Interests</a>
-      <a href="https://github.com/Kenessy/Kenessy">GitHub</a>
+      <a href="${githubUrl}">GitHub</a>
     </nav>
   </div>
 </header>
@@ -244,15 +268,15 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
         <p class="hero-lede">A personal index for game critique, tabletop RPG design, visual systems, adversarial QA loops, AI-assisted tooling, and creative experiments that need both taste and pressure-testing.</p>
         <div class="hero-actions">
           <a class="button" href="#reviews">Open game reviews</a>
-          <a class="button secondary" href="apocalypse-express/">View Apocalypse Express</a>
-          <a class="button secondary" href="https://github.com/Kenessy/Kenessy">GitHub repository</a>
+          <a class="button secondary" href="${apocalypseHref}">View Apocalypse Express</a>
+          <a class="button secondary" href="${githubUrl}">GitHub repository</a>
         </div>
       </div>
       <figure class="hero-panel">
-        <img src="assets/img/triad-validation-flow.png" alt="Triad validation flow diagram from the Apocalypse Express design vault">
+        <img src="${graphHref}" alt="Triad validation flow diagram from the Apocalypse Express design vault">
         <figcaption class="panel-caption">
           <span><small>Current source of truth</small><strong>Design vault, reports, and public Pages builds in one repository.</strong></span>
-          <span class="build-chip">Build 5a07ad9ffa0a</span>
+          <span class="build-chip">Build ${buildId}</span>
         </figcaption>
       </figure>
     </div>
@@ -280,7 +304,7 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
         <p>Long-form creative systems with enough structure to survive iteration. This section will grow as the portfolio expands.</p>
       </div>
       <div class="project-grid">
-        <a class="project-card featured" href="apocalypse-express/">
+        <a class="project-card featured" href="${apocalypseHref}">
           <div>
             <div class="tag-row"><span class="tag amber">Tabletop RPG</span><span class="tag cyan">Industrial arcane</span></div>
             <h3>Apocalypse Express</h3>
@@ -289,7 +313,7 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
           </div>
           <div class="project-stat"><strong>AE</strong><span>Setting, rules, scenes, procedures</span></div>
         </a>
-        <a class="project-card" href="plater-game-reports/">
+        <a class="project-card" href="${reportsHref}">
           <div class="tag-row"><span class="tag green">Public artifacts</span><span class="tag">Reports</span></div>
           <h3>Plater Game Reports</h3>
           <p>A review format for games where taste-fit, score logic, caveats, and trust evidence are shown instead of hidden behind a single number.</p>
@@ -305,7 +329,7 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
         <div><p class="kicker">Review section</p><h2>Game reviews</h2></div>
         <p>This is where the Metro Redux report lives now, and where future reviews can slot in without turning the homepage into a redirect.</p>
       </div>
-      <a class="review-card" href="plater-game-reports/games/metro-2033-redux/?v=5a07ad9ffa0a">
+      <a class="review-card" href="${metroHref}">
         <div class="review-copy">
           <div class="tag-row"><span class="tag cyan">ALERTED report</span><span class="tag green">Published</span></div>
           <h3>Metro 2033 Redux</h3>
@@ -334,9 +358,11 @@ h2{margin-top:6px;color:var(--bone);font-size:38px;line-height:.98;font-weight:1
 </main>
 <footer class="footer">
   <div class="wrap">
-    <span>Kenessy Pages / Portfolio build 5a07ad9ffa0a</span>
-    <span><a href="plater-game-reports/">Reports</a> / <a href="apocalypse-express/">Apocalypse Express</a> / <a href="https://github.com/Kenessy/Kenessy">GitHub</a></span>
+    <span>Kenessy Pages / Portfolio build ${buildId}</span>
+    <span><a href="${reportsHref}">Reports</a> / <a href="${apocalypseHref}">Apocalypse Express</a> / <a href="${githubUrl}">GitHub</a></span>
   </div>
 </footer>
 </body>
 </html>
+`;
+}
