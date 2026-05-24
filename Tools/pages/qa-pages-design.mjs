@@ -155,6 +155,7 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-insight-module .scr-section-head p'), 'insight module header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-insight-board'), 'insight module board styling is missing');
   assert(report.text.includes('.scr-insight-index'), 'insight module index styling is missing');
+  assert(report.text.includes('.scr-insight-badge'), 'insight module bottom badge styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -384,10 +385,16 @@ async function auditViewport(browser, base, buildId, viewport) {
     const insightCardBeforeStyles = insightCards.map((el) => getComputedStyle(el, '::before'));
     const insightCardRects = insightCards.map(rectFor);
     const insightIndices = insightCards.map((el) => (el.querySelector('.scr-insight-index')?.textContent || '').trim());
-    const insightLabels = insightCards.map((el) => (el.querySelector('small')?.textContent || '').trim());
+    const insightLabels = insightCards.map((el) => (el.querySelector('.scr-insight-badge')?.textContent || '').trim());
     const insightTitles = insightCards.map((el) => (el.querySelector('h3')?.textContent || '').trim());
+    const insightHeadRects = insightCards.map((el) => rectFor(el.querySelector('.scr-insight-head')));
     const insightTitleStyles = insightCards.map((el) => getComputedStyle(el.querySelector('h3')));
     const insightBodyStyles = insightCards.map((el) => getComputedStyle(el.querySelector('p')));
+    const insightTitleRects = insightCards.map((el) => rectFor(el.querySelector('h3')));
+    const insightBodyRects = insightCards.map((el) => rectFor(el.querySelector('p')));
+    const insightIndexRects = insightCards.map((el) => rectFor(el.querySelector('.scr-insight-index')));
+    const insightBadgeRects = insightCards.map((el) => rectFor(el.querySelector('.scr-insight-badge')));
+    const insightBadgeStyles = insightCards.map((el) => getComputedStyle(el.querySelector('.scr-insight-badge')));
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -661,7 +668,15 @@ async function auditViewport(browser, base, buildId, viewport) {
         cardHasGradient: insightCardStyles.every((style) => style.backgroundImage.includes('gradient')),
         cardMinHeight: insightCardRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
         pseudoOrbHidden: insightCardBeforeStyles.every((style) => style.display === 'none'),
+        badgeCount: insightBadgeRects.filter((rect) => rect.width > 0 && rect.height > 0).length,
+        badgeHasGradient: insightBadgeStyles.every((style) => style.backgroundImage.includes('gradient') && style.borderTopWidth === '1px'),
+        indexInTopRight: insightIndexRects.every((rect, index) => rect.top <= insightCardRects[index].top + 24 && insightCardRects[index].right - rect.right <= 24),
+        indexSharesTitleHeader: insightIndexRects.every((rect, index) => Math.abs(rect.top - insightTitleRects[index].top) <= 4 && Math.abs(rect.top - insightHeadRects[index].top) <= 4),
+        bodyUsesFullCardWidth: insightBodyRects.every((rect, index) => rect.right >= insightCardRects[index].right - 24),
+        badgeAfterBody: insightBadgeRects.every((rect, index) => rect.top >= insightBodyRects[index].bottom - 1),
+        badgeNearBottom: insightBadgeRects.every((rect, index) => insightCardRects[index].bottom - rect.bottom <= 24),
         titleMinSize: insightTitleStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        titleMaxHeight: insightTitleRects.reduce((max, rect) => Math.max(max, rect.height), 0),
         bodyMinSize: insightBodyStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
         bodyMinWeight: insightBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
         maxRight: insightCardRects.reduce((max, rect) => Math.max(max, rect.right), 0)
@@ -741,7 +756,7 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.correctionLedger.rowLabels.includes('Behavior-rule inconsistency') && metrics.correctionLedger.rowHasGradient && metrics.correctionLedger.rowValueMinSize >= 20 && metrics.correctionLedger.checkLabel === 'Ledger balanced' && metrics.correctionLedger.checkValue === 'Residual subtotal -1' && !metrics.correctionLedger.staleText && metrics.correctionLedger.oldNodes === 0 && metrics.correctionLedger.maxRight <= viewport.width + 1, `${viewport.name} correction friction ledger polish/overflow mismatch ${JSON.stringify(metrics.correctionLedger)}`);
   assert(metrics.insightModule.exists && metrics.insightModule.kicker === '07 · Interpretive Lens' && metrics.insightModule.title === 'Light / Exposure / Judgment' && metrics.insightModule.desc.includes('darkness holds possibility') && metrics.insightModule.descSize >= 15.5 && metrics.insightModule.descColor !== 'rgb(133, 146, 165)', `${viewport.name} insight module heading/copy mismatch ${JSON.stringify(metrics.insightModule)}`);
   assert(metrics.insightModule.boardExists && metrics.insightModule.oldGridCount === 0 && metrics.insightModule.cardCount === 4 && metrics.insightModule.indices === '01|02|03|04' && metrics.insightModule.labels === 'Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis', `${viewport.name} insight module structure mismatch ${JSON.stringify(metrics.insightModule)}`);
-  assert(metrics.insightModule.titles === 'Darkness as Possibility|Light as Exposure|Sight Is Not Understanding|The Final Climb' && metrics.insightModule.cardHasGradient && metrics.insightModule.cardMinHeight >= 150 && metrics.insightModule.pseudoOrbHidden && metrics.insightModule.titleMinSize >= 24 && metrics.insightModule.bodyMinSize >= 14.3 && metrics.insightModule.bodyMinWeight >= 600 && metrics.insightModule.maxRight <= viewport.width + 1, `${viewport.name} insight module card polish/overflow mismatch ${JSON.stringify(metrics.insightModule)}`);
+  assert(metrics.insightModule.titles === 'Darkness as Possibility|Light as Exposure|Sight Is Not Understanding|The Final Climb' && metrics.insightModule.cardHasGradient && metrics.insightModule.cardMinHeight >= 150 && metrics.insightModule.pseudoOrbHidden && metrics.insightModule.badgeCount === 4 && metrics.insightModule.badgeHasGradient && metrics.insightModule.indexInTopRight && metrics.insightModule.indexSharesTitleHeader && metrics.insightModule.bodyUsesFullCardWidth && metrics.insightModule.badgeAfterBody && metrics.insightModule.badgeNearBottom && metrics.insightModule.titleMinSize >= 24 && metrics.insightModule.titleMaxHeight <= 62 && metrics.insightModule.bodyMinSize >= 14.3 && metrics.insightModule.bodyMinWeight >= 600 && metrics.insightModule.maxRight <= viewport.width + 1, `${viewport.name} insight module card polish/overflow mismatch ${JSON.stringify(metrics.insightModule)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);

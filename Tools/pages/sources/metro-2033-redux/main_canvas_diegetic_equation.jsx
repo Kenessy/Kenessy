@@ -589,8 +589,12 @@ function InsightModule() {
       <div className="scr-insight-board">
         {INSIGHTS.map((row, index) => (
           <article key={row.title} className="scr-insight" style={{ '--tone': row.color }}>
-            <div className="scr-insight-index">{String(index + 1).padStart(2, '0')}</div>
-            <div className="scr-insight-copy"><small>{row.label}</small><h3>{row.title}</h3><p>{row.text}</p></div>
+            <div className="scr-insight-head">
+              <h3>{row.title}</h3>
+              <div className="scr-insight-index">{String(index + 1).padStart(2, '0')}</div>
+            </div>
+            <p>{row.text}</p>
+            <small className="scr-insight-badge">{row.label}</small>
           </article>
         ))}
       </div>
@@ -896,16 +900,16 @@ const TEMPLATE_CSS = `
 @media (max-width:760px){.scr-correction-ledger .scr-section-head p{font-size:.98rem}.scr-correction-ledger .scr-modifier-card{grid-template-columns:1fr;min-height:0;padding:.95rem}.scr-correction-ledger .scr-modifier-meter{min-height:132px}.scr-correction-ledger .scr-modifier-meter .scr-tile-value{font-size:2.95rem}.scr-modifier-copy h3{font-size:1.9rem}.scr-modifier-copy p{font-size:.9rem}.scr-correction-ledger .scr-ledger-head{display:grid}.scr-correction-ledger .scr-ledger-head span{text-align:left}.scr-correction-ledger .scr-ledger-row{grid-template-columns:2.8rem minmax(0,1fr);gap:.7rem}.scr-correction-ledger .scr-ledger-row p{grid-column:1/-1;font-size:.86rem}.scr-correction-ledger .scr-ledger-value{grid-column:1/-1;min-height:2.8rem}.scr-correction-ledger .scr-ledger-check{border-radius:18px}}
 .scr-insight-module .scr-section-head p{max-width:700px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
 .scr-insight-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.78rem;min-width:0}
-.scr-insight-module .scr-insight{position:relative;isolation:isolate;display:grid;grid-template-rows:auto 1fr;gap:.9rem;min-width:0;min-height:284px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 46%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 10%,transparent),transparent 56%),linear-gradient(145deg,rgba(16,22,30,.96),rgba(7,10,15,.98) 58%,rgba(4,6,10,.99));box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 0 30px color-mix(in srgb,var(--tone) 7%,transparent);padding:1rem}
+.scr-insight-module .scr-insight{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:.95rem;min-width:0;min-height:284px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 46%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 10%,transparent),transparent 56%),linear-gradient(145deg,rgba(16,22,30,.96),rgba(7,10,15,.98) 58%,rgba(4,6,10,.99));box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 0 30px color-mix(in srgb,var(--tone) 7%,transparent);padding:1.05rem 1rem .95rem}
 .scr-insight-module .scr-insight::before{display:none}
 .scr-insight-module .scr-insight::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--tone),color-mix(in srgb,var(--tone) 34%,transparent));box-shadow:0 0 16px color-mix(in srgb,var(--tone) 22%,transparent)}
-.scr-insight-index{display:grid;place-items:center;width:3.1rem;height:3.1rem;border:1px solid color-mix(in srgb,var(--tone) 54%,#2a3444);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 14%,transparent),rgba(0,0,0,.22));color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.86rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 24%,transparent)}
-.scr-insight-copy{position:relative;display:grid;align-content:start;gap:.65rem;min-width:0}
-.scr-insight-module .scr-insight small{color:color-mix(in srgb,var(--tone) 80%,#d9c9a3);font-size:.72rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
-.scr-insight-module .scr-insight h3{margin:0;color:#d9c9a3;font-size:1.7rem;font-weight:1000;line-height:.98;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 14px color-mix(in srgb,var(--tone) 18%,transparent)}
+.scr-insight-head{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 1.9rem;align-items:start;gap:.45rem;min-width:0;min-height:1.9rem}
+.scr-insight-index{display:grid;place-items:center;width:1.9rem;height:1.9rem;border:1px solid color-mix(in srgb,var(--tone) 48%,#2a3444);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 10%,transparent),rgba(0,0,0,.20));color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 22%,transparent)}
+.scr-insight-module .scr-insight-badge{position:relative;align-self:flex-start;margin-top:auto;max-width:100%;border:1px solid color-mix(in srgb,var(--tone) 44%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 12%,transparent),rgba(0,0,0,.16) 58%);color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);padding:.38rem .48rem;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000}
+.scr-insight-module .scr-insight h3{margin:0;color:#d9c9a3;font-size:1.52rem;font-weight:1000;line-height:.98;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 14px color-mix(in srgb,var(--tone) 18%,transparent)}
 .scr-insight-module .scr-insight p{margin:0;color:#cdbc92;font-size:.94rem;font-weight:620;line-height:1.62}
 @media (max-width:1119px){.scr-insight-board{grid-template-columns:repeat(2,minmax(0,1fr))}.scr-insight-module .scr-insight{min-height:230px}}
-@media (max-width:760px){.scr-insight-module .scr-section-head p{font-size:.98rem}.scr-insight-board{grid-template-columns:1fr}.scr-insight-module .scr-insight{min-height:0;padding:.95rem}.scr-insight-module .scr-insight h3{font-size:1.52rem}.scr-insight-module .scr-insight p{font-size:.9rem}.scr-insight-index{width:2.85rem;height:2.85rem}}
+@media (max-width:760px){.scr-insight-module .scr-section-head p{font-size:.98rem}.scr-insight-board{grid-template-columns:1fr}.scr-insight-module .scr-insight{min-height:0;padding:.95rem}.scr-insight-module .scr-insight h3{font-size:1.52rem}.scr-insight-module .scr-insight p{font-size:.9rem}.scr-insight-head{grid-template-columns:minmax(0,1fr) 2.4rem;min-height:2.4rem;gap:.65rem}.scr-insight-index{width:2.4rem;height:2.4rem;font-size:.74rem}.scr-insight-module .scr-insight-badge{font-size:.58rem}}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}
