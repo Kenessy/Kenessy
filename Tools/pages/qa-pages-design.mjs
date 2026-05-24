@@ -152,6 +152,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-correction-ledger .scr-section-head p'), 'correction ledger header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-correction-ledger .scr-modifier-card'), 'correction modifier card styling is missing');
   assert(report.text.includes('.scr-ledger-index'), 'correction ledger index styling is missing');
+  assert(report.text.includes('.scr-insight-module .scr-section-head p'), 'insight module header paragraph emphasis styling is missing');
+  assert(report.text.includes('.scr-insight-board'), 'insight module board styling is missing');
+  assert(report.text.includes('.scr-insight-index'), 'insight module index styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -371,6 +374,20 @@ async function auditViewport(browser, base, buildId, viewport) {
     const ledgerValueStyles = ledgerRows.map((el) => getComputedStyle(el.querySelector('.scr-ledger-value b')));
     const ledgerCheck = correctionSection?.querySelector('.scr-ledger-check');
     const ledgerHead = correctionSection?.querySelector('.scr-ledger-head');
+    const insightSection = document.querySelector('.scr-insight-module');
+    const insightHead = insightSection?.querySelector('.scr-section-head');
+    const insightHeadDesc = insightHead?.querySelector('p');
+    const insightHeadDescStyle = insightHeadDesc ? getComputedStyle(insightHeadDesc) : null;
+    const insightBoard = insightSection?.querySelector('.scr-insight-board');
+    const insightCards = [...document.querySelectorAll('.scr-insight-module .scr-insight')];
+    const insightCardStyles = insightCards.map((el) => getComputedStyle(el));
+    const insightCardBeforeStyles = insightCards.map((el) => getComputedStyle(el, '::before'));
+    const insightCardRects = insightCards.map(rectFor);
+    const insightIndices = insightCards.map((el) => (el.querySelector('.scr-insight-index')?.textContent || '').trim());
+    const insightLabels = insightCards.map((el) => (el.querySelector('small')?.textContent || '').trim());
+    const insightTitles = insightCards.map((el) => (el.querySelector('h3')?.textContent || '').trim());
+    const insightTitleStyles = insightCards.map((el) => getComputedStyle(el.querySelector('h3')));
+    const insightBodyStyles = insightCards.map((el) => getComputedStyle(el.querySelector('p')));
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -628,6 +645,27 @@ async function auditViewport(browser, base, buildId, viewport) {
           ledgerRowRects.reduce((max, rect) => Math.max(max, rect.right), 0)
         )
       },
+      insightModule: {
+        exists: Boolean(insightSection),
+        kicker: (insightHead?.querySelector('small')?.textContent || '').trim(),
+        title: (insightHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (insightHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: insightHeadDescStyle ? Number.parseFloat(insightHeadDescStyle.fontSize) : 0,
+        descColor: insightHeadDescStyle?.color || '',
+        boardExists: Boolean(insightBoard),
+        oldGridCount: document.querySelectorAll('.scr-insight-grid').length,
+        cardCount: insightCards.length,
+        indices: insightIndices.join('|'),
+        labels: insightLabels.join('|'),
+        titles: insightTitles.join('|'),
+        cardHasGradient: insightCardStyles.every((style) => style.backgroundImage.includes('gradient')),
+        cardMinHeight: insightCardRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        pseudoOrbHidden: insightCardBeforeStyles.every((style) => style.display === 'none'),
+        titleMinSize: insightTitleStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        bodyMinSize: insightBodyStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        bodyMinWeight: insightBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
+        maxRight: insightCardRects.reduce((max, rect) => Math.max(max, rect.right), 0)
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -701,6 +739,9 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.correctionLedger.modifierCardHasGradient && metrics.correctionLedger.modifierCardMinHeight >= 132 && metrics.correctionLedger.modifierMeterCount === 2 && metrics.correctionLedger.modifierMeterMinHeight >= 128, `${viewport.name} correction modifier card layout mismatch ${JSON.stringify(metrics.correctionLedger)}`);
   assert(metrics.correctionLedger.ledgerHeadTitle === 'Residual Pool' && metrics.correctionLedger.ledgerHeadSummary === '4 rows sum to -1' && metrics.correctionLedger.rowCount === 4 && metrics.correctionLedger.rowNames === 'Librarian Pathing Ambiguity|Demon Grab / Drop Weirdness|Retrofitted Stealth Affordances|Point-Blank Hit Evasion' && metrics.correctionLedger.rowValues === '-0.25|-0.25|-0.25|-0.25', `${viewport.name} correction friction ledger content mismatch ${JSON.stringify(metrics.correctionLedger)}`);
   assert(metrics.correctionLedger.rowLabels.includes('Behavior-rule inconsistency') && metrics.correctionLedger.rowHasGradient && metrics.correctionLedger.rowValueMinSize >= 20 && metrics.correctionLedger.checkLabel === 'Ledger balanced' && metrics.correctionLedger.checkValue === 'Residual subtotal -1' && !metrics.correctionLedger.staleText && metrics.correctionLedger.oldNodes === 0 && metrics.correctionLedger.maxRight <= viewport.width + 1, `${viewport.name} correction friction ledger polish/overflow mismatch ${JSON.stringify(metrics.correctionLedger)}`);
+  assert(metrics.insightModule.exists && metrics.insightModule.kicker === '07 · Interpretive Lens' && metrics.insightModule.title === 'Light / Exposure / Judgment' && metrics.insightModule.desc.includes('darkness holds possibility') && metrics.insightModule.descSize >= 15.5 && metrics.insightModule.descColor !== 'rgb(133, 146, 165)', `${viewport.name} insight module heading/copy mismatch ${JSON.stringify(metrics.insightModule)}`);
+  assert(metrics.insightModule.boardExists && metrics.insightModule.oldGridCount === 0 && metrics.insightModule.cardCount === 4 && metrics.insightModule.indices === '01|02|03|04' && metrics.insightModule.labels === 'Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis', `${viewport.name} insight module structure mismatch ${JSON.stringify(metrics.insightModule)}`);
+  assert(metrics.insightModule.titles === 'Darkness as Possibility|Light as Exposure|Sight Is Not Understanding|The Final Climb' && metrics.insightModule.cardHasGradient && metrics.insightModule.cardMinHeight >= 150 && metrics.insightModule.pseudoOrbHidden && metrics.insightModule.titleMinSize >= 24 && metrics.insightModule.bodyMinSize >= 14.3 && metrics.insightModule.bodyMinWeight >= 600 && metrics.insightModule.maxRight <= viewport.width + 1, `${viewport.name} insight module card polish/overflow mismatch ${JSON.stringify(metrics.insightModule)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
