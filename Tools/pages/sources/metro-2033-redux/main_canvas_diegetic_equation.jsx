@@ -212,9 +212,8 @@ function HeroMetaRail() {
   const meta = [
     { label: 'Status', value: REVIEW.reviewStatus, tone: COLORS.green },
     { label: 'Evidence', value: REVIEW.evidenceBase, tone: COLORS.retroMint },
-    { label: 'Confidence', value: REVIEW.confidence, tone: COLORS.loopAmber },
     { label: 'Spoilers', value: REVIEW.spoilerPolicy, tone: COLORS.atmosphereIndigo },
-    { label: 'Risk', value: REVIEW.verdictRisk, tone: COLORS.danger },
+    { label: 'Ending caveat', value: REVIEW.verdictRisk, tone: COLORS.danger },
   ];
 
   return (
