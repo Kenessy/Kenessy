@@ -603,7 +603,26 @@ function InsightModule() {
 }
 
 function AdversarialAudit() {
-  return <section><SectionHead num="08" kicker="Adversarial Audit" title="Trust" emphasis="Layer" desc="Public-facing stress tests that keep the verdict honest, lens-specific, and falsifiable." /><div className="scr-audit-grid">{AUDIT_CHECKS.map((check) => <article key={check.title} className="scr-audit-card" style={{ '--tone': check.tone }}><small>{check.label}</small><h3>{check.title}</h3><p>{check.text}</p></article>)}</div></section>;
+  return (
+    <section className="scr-trust-layer">
+      <SectionHead
+        num="08"
+        kicker="Adversarial Audit"
+        title="Trust"
+        emphasis="Layer"
+        desc="Public-facing stress tests that keep the verdict honest, lens-specific, and falsifiable."
+      />
+      <div className="scr-trust-grid">
+        {AUDIT_CHECKS.map((check) => (
+          <article key={check.title} className="scr-trust-card" style={{ '--tone': check.tone }}>
+            <h3>{check.title}</h3>
+            <div className="scr-trust-copy"><p>{check.text}</p></div>
+            <small className="scr-trust-badge">{check.label}</small>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function EvidenceBoard() {
@@ -910,6 +929,16 @@ const TEMPLATE_CSS = `
 .scr-insight-module .scr-insight p{margin:0;color:#cdbc92;font-size:.94rem;font-weight:620;line-height:1.62}
 @media (max-width:1119px){.scr-insight-board{grid-template-columns:repeat(2,minmax(0,1fr))}.scr-insight-module .scr-insight{min-height:230px}}
 @media (max-width:760px){.scr-insight-module .scr-section-head p{font-size:.98rem}.scr-insight-board{grid-template-columns:1fr}.scr-insight-module .scr-insight{min-height:0;padding:.95rem}.scr-insight-module .scr-insight h3{font-size:1.52rem}.scr-insight-module .scr-insight p{font-size:.9rem}.scr-insight-head{grid-template-columns:minmax(0,1fr) 2.4rem;min-height:2.4rem;gap:.65rem}.scr-insight-index{width:2.4rem;height:2.4rem;font-size:.74rem}.scr-insight-module .scr-insight-badge{font-size:.58rem}}
+.scr-trust-layer .scr-section-head p{max-width:700px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.78rem;min-width:0}
+.scr-trust-card{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:.9rem;min-width:0;min-height:232px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 44%,#2a3444);background:linear-gradient(320deg,color-mix(in srgb,var(--tone) 9%,transparent),transparent 58%),linear-gradient(145deg,rgba(16,22,30,.96),rgba(7,10,15,.98) 60%,rgba(4,6,10,.99));box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 0 28px color-mix(in srgb,var(--tone) 6%,transparent);padding:1rem}
+.scr-trust-card::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--tone),color-mix(in srgb,var(--tone) 26%,transparent) 58%,transparent);box-shadow:0 0 16px color-mix(in srgb,var(--tone) 18%,transparent)}
+.scr-trust-card h3{position:relative;margin:0;color:#d9c9a3;font-size:1.24rem;font-weight:1000;line-height:1.02;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 13px color-mix(in srgb,var(--tone) 16%,transparent)}
+.scr-trust-copy{position:relative;flex:1;display:grid;align-content:center;min-width:0}
+.scr-trust-copy p{margin:0;color:#cdbc92;font-size:.9rem;font-weight:620;line-height:1.58}
+.scr-trust-badge{position:relative;align-self:flex-start;margin-top:auto;max-width:100%;border:1px solid color-mix(in srgb,var(--tone) 44%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 12%,transparent),rgba(0,0,0,.16) 58%);color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);padding:.38rem .48rem;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000}
+@media (max-width:1119px){.scr-trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.scr-trust-card{min-height:204px}}
+@media (max-width:760px){.scr-trust-layer .scr-section-head p{font-size:.98rem}.scr-trust-grid{grid-template-columns:1fr}.scr-trust-card{min-height:0;padding:.95rem}.scr-trust-card h3{font-size:1.15rem}.scr-trust-copy{align-content:start}.scr-trust-copy p{font-size:.9rem}.scr-trust-badge{font-size:.58rem}}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}

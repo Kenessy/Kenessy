@@ -156,6 +156,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-insight-board'), 'insight module board styling is missing');
   assert(report.text.includes('.scr-insight-index'), 'insight module index styling is missing');
   assert(report.text.includes('.scr-insight-badge'), 'insight module bottom badge styling is missing');
+  assert(report.text.includes('.scr-trust-layer .scr-section-head p'), 'trust layer header paragraph emphasis styling is missing');
+  assert(report.text.includes('.scr-trust-grid'), 'trust layer grid styling is missing');
+  assert(report.text.includes('.scr-trust-badge'), 'trust layer bottom badge styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -395,6 +398,24 @@ async function auditViewport(browser, base, buildId, viewport) {
     const insightIndexRects = insightCards.map((el) => rectFor(el.querySelector('.scr-insight-index')));
     const insightBadgeRects = insightCards.map((el) => rectFor(el.querySelector('.scr-insight-badge')));
     const insightBadgeStyles = insightCards.map((el) => getComputedStyle(el.querySelector('.scr-insight-badge')));
+    const trustSection = document.querySelector('.scr-trust-layer');
+    const trustHead = trustSection?.querySelector('.scr-section-head');
+    const trustHeadDesc = trustHead?.querySelector('p');
+    const trustHeadDescStyle = trustHeadDesc ? getComputedStyle(trustHeadDesc) : null;
+    const trustGrid = trustSection?.querySelector('.scr-trust-grid');
+    const trustCards = [...document.querySelectorAll('.scr-trust-layer .scr-trust-card')];
+    const trustCardStyles = trustCards.map((el) => getComputedStyle(el));
+    const trustCardBeforeStyles = trustCards.map((el) => getComputedStyle(el, '::before'));
+    const trustCardRects = trustCards.map(rectFor);
+    const trustTitles = trustCards.map((el) => (el.querySelector('h3')?.textContent || '').trim());
+    const trustLabels = trustCards.map((el) => (el.querySelector('.scr-trust-badge')?.textContent || '').trim());
+    const trustTitleStyles = trustCards.map((el) => getComputedStyle(el.querySelector('h3')));
+    const trustBodyStyles = trustCards.map((el) => getComputedStyle(el.querySelector('p')));
+    const trustBadgeStyles = trustCards.map((el) => getComputedStyle(el.querySelector('.scr-trust-badge')));
+    const trustTitleRects = trustCards.map((el) => rectFor(el.querySelector('h3')));
+    const trustCopyRects = trustCards.map((el) => rectFor(el.querySelector('.scr-trust-copy')));
+    const trustBodyRects = trustCards.map((el) => rectFor(el.querySelector('p')));
+    const trustBadgeRects = trustCards.map((el) => rectFor(el.querySelector('.scr-trust-badge')));
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -681,6 +702,35 @@ async function auditViewport(browser, base, buildId, viewport) {
         bodyMinWeight: insightBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
         maxRight: insightCardRects.reduce((max, rect) => Math.max(max, rect.right), 0)
       },
+      trustLayer: {
+        exists: Boolean(trustSection),
+        kicker: (trustHead?.querySelector('small')?.textContent || '').trim(),
+        title: (trustHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (trustHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: trustHeadDescStyle ? Number.parseFloat(trustHeadDescStyle.fontSize) : 0,
+        descColor: trustHeadDescStyle?.color || '',
+        gridExists: Boolean(trustGrid),
+        oldGridCount: document.querySelectorAll('.scr-audit-grid').length,
+        oldCardCount: document.querySelectorAll('.scr-audit-card').length,
+        cardCount: trustCards.length,
+        labels: trustLabels.join('|'),
+        titles: trustTitles.join('|'),
+        cardHasGradient: trustCardStyles.every((style) => style.backgroundImage.includes('gradient')),
+        cardMinHeight: trustCardRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        topRailVisible: trustCardBeforeStyles.every((style) => style.display !== 'none' && Number.parseFloat(style.height) >= 2),
+        badgeCount: trustBadgeRects.filter((rect) => rect.width > 0 && rect.height > 0).length,
+        badgeHasGradient: trustBadgeStyles.every((style) => style.backgroundImage.includes('gradient') && style.borderTopWidth === '1px'),
+        titleTopAligned: trustTitleRects.every((rect, index) => rect.top <= trustCardRects[index].top + 26),
+        copyBetweenTitleAndBadge: trustCopyRects.every((rect, index) => rect.top >= trustTitleRects[index].bottom - 1 && rect.bottom <= trustBadgeRects[index].top + 1),
+        bodyInsideCopy: trustBodyRects.every((rect, index) => rect.top >= trustCopyRects[index].top - 1 && rect.bottom <= trustCopyRects[index].bottom + 1),
+        badgeAfterBody: trustBadgeRects.every((rect, index) => rect.top >= trustBodyRects[index].bottom - 1),
+        badgeNearBottom: trustBadgeRects.every((rect, index) => trustCardRects[index].bottom - rect.bottom <= 24),
+        titleMinSize: trustTitleStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        titleMaxHeight: trustTitleRects.reduce((max, rect) => Math.max(max, rect.height), 0),
+        bodyMinSize: trustBodyStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        bodyMinWeight: trustBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
+        maxRight: trustCardRects.reduce((max, rect) => Math.max(max, rect.right), 0)
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -757,6 +807,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.insightModule.exists && metrics.insightModule.kicker === '07 · Interpretive Lens' && metrics.insightModule.title === 'Light / Exposure / Judgment' && metrics.insightModule.desc.includes('darkness holds possibility') && metrics.insightModule.descSize >= 15.5 && metrics.insightModule.descColor !== 'rgb(133, 146, 165)', `${viewport.name} insight module heading/copy mismatch ${JSON.stringify(metrics.insightModule)}`);
   assert(metrics.insightModule.boardExists && metrics.insightModule.oldGridCount === 0 && metrics.insightModule.cardCount === 4 && metrics.insightModule.indices === '01|02|03|04' && metrics.insightModule.labels === 'Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis|Spoiler-light thesis', `${viewport.name} insight module structure mismatch ${JSON.stringify(metrics.insightModule)}`);
   assert(metrics.insightModule.titles === 'Darkness as Possibility|Light as Exposure|Sight Is Not Understanding|The Final Climb' && metrics.insightModule.cardHasGradient && metrics.insightModule.cardMinHeight >= 150 && metrics.insightModule.pseudoOrbHidden && metrics.insightModule.badgeCount === 4 && metrics.insightModule.badgeHasGradient && metrics.insightModule.indexInTopRight && metrics.insightModule.indexSharesTitleHeader && metrics.insightModule.bodyUsesFullCardWidth && metrics.insightModule.badgeAfterBody && metrics.insightModule.badgeNearBottom && metrics.insightModule.titleMinSize >= 24 && metrics.insightModule.titleMaxHeight <= 62 && metrics.insightModule.bodyMinSize >= 14.3 && metrics.insightModule.bodyMinWeight >= 600 && metrics.insightModule.maxRight <= viewport.width + 1, `${viewport.name} insight module card polish/overflow mismatch ${JSON.stringify(metrics.insightModule)}`);
+  assert(metrics.trustLayer.exists && metrics.trustLayer.kicker === '08 · Adversarial Audit' && metrics.trustLayer.title === 'Trust Layer' && metrics.trustLayer.desc.includes('stress tests') && metrics.trustLayer.descSize >= 15.5 && metrics.trustLayer.descColor !== 'rgb(133, 146, 165)', `${viewport.name} trust layer heading/copy mismatch ${JSON.stringify(metrics.trustLayer)}`);
+  assert(metrics.trustLayer.gridExists && metrics.trustLayer.oldGridCount === 0 && metrics.trustLayer.oldCardCount === 0 && metrics.trustLayer.cardCount === 8 && metrics.trustLayer.labels === 'Lens Honesty|Comfort Bias|Friction Blindness|Audience Confusion|Sampling Bias|Falsifier|Spectacle Bias|Patch Volatility', `${viewport.name} trust layer structure mismatch ${JSON.stringify(metrics.trustLayer)}`);
+  assert(metrics.trustLayer.titles === 'Actual use-case is named|Atmosphere does not erase friction|Problems stay itemized|Fit is separated from quality|Full-route evidence base|What would move the score|Mood is not treated as enough|Stable old build, low volatility', `${viewport.name} trust layer title content mismatch ${JSON.stringify(metrics.trustLayer)}`);
+  assert(metrics.trustLayer.cardHasGradient && metrics.trustLayer.cardMinHeight >= 150 && metrics.trustLayer.topRailVisible && metrics.trustLayer.badgeCount === 8 && metrics.trustLayer.badgeHasGradient && metrics.trustLayer.titleTopAligned && metrics.trustLayer.copyBetweenTitleAndBadge && metrics.trustLayer.bodyInsideCopy && metrics.trustLayer.badgeAfterBody && metrics.trustLayer.badgeNearBottom && metrics.trustLayer.titleMinSize >= 18 && metrics.trustLayer.titleMaxHeight <= 62 && metrics.trustLayer.bodyMinSize >= 14 && metrics.trustLayer.bodyMinWeight >= 600 && metrics.trustLayer.maxRight <= viewport.width + 1, `${viewport.name} trust layer card polish/overflow mismatch ${JSON.stringify(metrics.trustLayer)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
