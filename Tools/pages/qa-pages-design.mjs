@@ -159,6 +159,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-trust-layer .scr-section-head p'), 'trust layer header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-trust-grid'), 'trust layer grid styling is missing');
   assert(report.text.includes('.scr-trust-badge'), 'trust layer bottom badge styling is missing');
+  assert(report.text.includes('.scr-dossier-rail .scr-evidence-card'), 'dossier arc rail card styling is missing');
+  assert(report.text.includes('.scr-dossier-rail .scr-evidence-impact b'), 'dossier arc rail impact tag styling is missing');
+  assert(report.text.includes('.scr-evidence-protocol-card'), 'dossier protocol card styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -416,6 +419,32 @@ async function auditViewport(browser, base, buildId, viewport) {
     const trustCopyRects = trustCards.map((el) => rectFor(el.querySelector('.scr-trust-copy')));
     const trustBodyRects = trustCards.map((el) => rectFor(el.querySelector('p')));
     const trustBadgeRects = trustCards.map((el) => rectFor(el.querySelector('.scr-trust-badge')));
+    const dossierSection = document.querySelector('.scr-dossier-rail');
+    const dossierHead = dossierSection?.querySelector('.scr-section-head');
+    const dossierHeadDesc = dossierHead?.querySelector('p');
+    const dossierHeadDescStyle = dossierHeadDesc ? getComputedStyle(dossierHeadDesc) : null;
+    const dossierCards = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-card')];
+    const dossierCardStyles = dossierCards.map((el) => getComputedStyle(el));
+    const dossierCardBeforeStyles = dossierCards.map((el) => getComputedStyle(el, '::before'));
+    const dossierCardRects = dossierCards.map(rectFor);
+    const dossierMarkers = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-marker.scr-score-meter-box.scr-signal-block')];
+    const dossierMarkerRects = dossierMarkers.map(rectFor);
+    const dossierMarkerValues = dossierMarkers.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim());
+    const dossierTitles = dossierCards.map((el) => (el.querySelector('.scr-evidence-title-row h3')?.textContent || '').trim());
+    const dossierTitleStyles = dossierCards.map((el) => getComputedStyle(el.querySelector('.scr-evidence-title-row h3')));
+    const dossierSpoilers = dossierCards.map((el) => (el.querySelector('.scr-spoiler')?.textContent || '').trim());
+    const dossierCells = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-cell')];
+    const dossierCellStyles = dossierCells.map((el) => getComputedStyle(el));
+    const dossierCellLabelStyles = dossierCells.map((el) => getComputedStyle(el.querySelector('small')));
+    const dossierCellBodyStyles = dossierCells.map((el) => getComputedStyle(el.querySelector('p')));
+    const dossierCellLabels = dossierCells.map((el) => (el.querySelector('small')?.textContent || '').trim());
+    const dossierImpactRows = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-impact')];
+    const dossierImpactTags = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-impact b')];
+    const dossierImpactStyles = dossierImpactTags.map((el) => getComputedStyle(el));
+    const dossierProtocol = dossierSection?.querySelector('.scr-evidence-protocol');
+    const dossierProtocolCards = [...document.querySelectorAll('.scr-dossier-rail .scr-evidence-protocol-card')];
+    const dossierProtocolCardStyles = dossierProtocolCards.map((el) => getComputedStyle(el));
+    const dossierProtocolLabels = dossierProtocolCards.map((el) => (el.querySelector('small')?.textContent || '').trim());
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
@@ -731,6 +760,42 @@ async function auditViewport(browser, base, buildId, viewport) {
         bodyMinWeight: trustBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
         maxRight: trustCardRects.reduce((max, rect) => Math.max(max, rect.right), 0)
       },
+      dossierRail: {
+        exists: Boolean(dossierSection),
+        kicker: (dossierHead?.querySelector('small')?.textContent || '').trim(),
+        title: (dossierHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (dossierHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: dossierHeadDescStyle ? Number.parseFloat(dossierHeadDescStyle.fontSize) : 0,
+        descColor: dossierHeadDescStyle?.color || '',
+        cardCount: dossierCards.length,
+        markerCount: dossierMarkers.length,
+        markerValues: dossierMarkerValues.join('|'),
+        markerMinHeight: dossierMarkerRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        titles: dossierTitles.join('|'),
+        spoilers: dossierSpoilers.join('|'),
+        cardHasGradient: dossierCardStyles.every((style) => style.backgroundImage.includes('gradient')),
+        railVisible: dossierCardBeforeStyles.every((style) => style.display !== 'none' && Number.parseFloat(style.width) >= 2),
+        cellCount: dossierCells.length,
+        cellLabels: dossierCellLabels.slice(0, 3).join('|'),
+        everyCellLabelSet: dossierCards.every((card) => [...card.querySelectorAll('.scr-evidence-cell small')].map((el) => (el.textContent || '').trim()).join('|') === 'Observation|Proof|Caveat'),
+        cellHasGradient: dossierCellStyles.every((style) => style.backgroundImage.includes('gradient')),
+        cellLabelMinSize: dossierCellLabelStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        cellBodyMinSize: dossierCellBodyStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        cellBodyMinWeight: dossierCellBodyStyles.reduce((min, style) => Math.min(min, Number.parseInt(style.fontWeight, 10) || Infinity), Infinity),
+        titleMinSize: dossierTitleStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        impactRowCount: dossierImpactRows.length,
+        impactTagCount: dossierImpactTags.length,
+        impactHasGradient: dossierImpactStyles.every((style) => style.backgroundImage.includes('gradient') && style.borderTopWidth === '1px'),
+        protocolExists: Boolean(dossierProtocol),
+        protocolCardCount: dossierProtocolCards.length,
+        protocolLabels: dossierProtocolLabels.join('|'),
+        protocolCardHasGradient: dossierProtocolCardStyles.every((style) => style.backgroundImage.includes('gradient')),
+        staleRawText: /(▸ Axis impact|Clean observation|What it proves|Trust footer)/.test(dossierSection?.textContent || ''),
+        maxRight: Math.max(
+          dossierCardRects.reduce((max, rect) => Math.max(max, rect.right), 0),
+          dossierMarkerRects.reduce((max, rect) => Math.max(max, rect.right), 0)
+        )
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -811,6 +876,11 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.trustLayer.gridExists && metrics.trustLayer.oldGridCount === 0 && metrics.trustLayer.oldCardCount === 0 && metrics.trustLayer.cardCount === 8 && metrics.trustLayer.labels === 'Lens Honesty|Comfort Bias|Friction Blindness|Audience Confusion|Sampling Bias|Falsifier|Spectacle Bias|Patch Volatility', `${viewport.name} trust layer structure mismatch ${JSON.stringify(metrics.trustLayer)}`);
   assert(metrics.trustLayer.titles === 'Actual use-case is named|Atmosphere does not erase friction|Problems stay itemized|Fit is separated from quality|Full-route evidence base|What would move the score|Mood is not treated as enough|Stable old build, low volatility', `${viewport.name} trust layer title content mismatch ${JSON.stringify(metrics.trustLayer)}`);
   assert(metrics.trustLayer.cardHasGradient && metrics.trustLayer.cardMinHeight >= 150 && metrics.trustLayer.topRailVisible && metrics.trustLayer.badgeCount === 8 && metrics.trustLayer.badgeHasGradient && metrics.trustLayer.titleTopAligned && metrics.trustLayer.copyBetweenTitleAndBadge && metrics.trustLayer.bodyInsideCopy && metrics.trustLayer.badgeAfterBody && metrics.trustLayer.badgeNearBottom && metrics.trustLayer.titleMinSize >= 18 && metrics.trustLayer.titleMaxHeight <= 62 && metrics.trustLayer.bodyMinSize >= 14 && metrics.trustLayer.bodyMinWeight >= 600 && metrics.trustLayer.maxRight <= viewport.width + 1, `${viewport.name} trust layer card polish/overflow mismatch ${JSON.stringify(metrics.trustLayer)}`);
+  assert(metrics.dossierRail.exists && metrics.dossierRail.kicker === '09 · Evidence Board' && metrics.dossierRail.title === 'Dossier Arc Rail' && metrics.dossierRail.desc.includes('Reconstructed playthrough archive') && metrics.dossierRail.descSize >= 15.5 && metrics.dossierRail.descColor !== 'rgb(133, 146, 165)', `${viewport.name} dossier rail heading/copy mismatch ${JSON.stringify(metrics.dossierRail)}`);
+  assert(metrics.dossierRail.cardCount === 9 && metrics.dossierRail.markerCount === 9 && metrics.dossierRail.markerValues === '01|02|03|04|05|06|07|08|09', `${viewport.name} dossier rail card/marker count mismatch ${JSON.stringify(metrics.dossierRail)}`);
+  assert(metrics.dossierRail.titles === 'Exhibition → Riga → Bourbon Deal|Bourbon / Lost Tunnels / Bridge|Market → Dead City → Khan|Khan’s Rules → Cursed Station|Armory → Frontline|Depot → Defense → Outpost → Black Station|Polis → Library → Archives|Sparta → D6|Tower → Ending Reconstruction', `${viewport.name} dossier rail title order mismatch ${JSON.stringify(metrics.dossierRail)}`);
+  assert(metrics.dossierRail.spoilers === 'Spoiler-light|Spoiler-light|Spoiler-light|Spoiler-light|Spoiler-light|Spoiler-light|Spoiler-medium|Spoiler-medium|Spoiler-heavy' && metrics.dossierRail.cellCount === 27 && metrics.dossierRail.cellLabels === 'Observation|Proof|Caveat' && metrics.dossierRail.everyCellLabelSet, `${viewport.name} dossier rail labels/spoilers mismatch ${JSON.stringify(metrics.dossierRail)}`);
+  assert(metrics.dossierRail.cardHasGradient && metrics.dossierRail.railVisible && metrics.dossierRail.markerMinHeight >= 80 && metrics.dossierRail.cellHasGradient && metrics.dossierRail.cellLabelMinSize >= 10 && metrics.dossierRail.cellBodyMinSize >= 13.5 && metrics.dossierRail.cellBodyMinWeight >= 600 && metrics.dossierRail.titleMinSize >= 17.5 && metrics.dossierRail.impactRowCount === 9 && metrics.dossierRail.impactTagCount === 27 && metrics.dossierRail.impactHasGradient && metrics.dossierRail.protocolExists && metrics.dossierRail.protocolCardCount === 4 && metrics.dossierRail.protocolLabels === 'Evidence|Snapshot note|Known caveat|Falsifier' && metrics.dossierRail.protocolCardHasGradient && !metrics.dossierRail.staleRawText && metrics.dossierRail.maxRight <= viewport.width + 1, `${viewport.name} dossier rail polish/overflow mismatch ${JSON.stringify(metrics.dossierRail)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);

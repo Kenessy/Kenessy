@@ -627,7 +627,7 @@ function AdversarialAudit() {
 
 function EvidenceBoard() {
   return (
-    <section>
+    <section className="scr-dossier-rail">
       <SectionHead
         num="09"
         kicker="Evidence Board"
@@ -654,15 +654,18 @@ function EvidenceProtocol() {
   return (
     <div className="scr-evidence-protocol">
       <div className="scr-evidence-protocol-head">
-        <small>Evidence Protocol</small>
-        <b>Trust footer</b>
+        <div>
+          <small>Evidence Protocol</small>
+          <b>Trust Footer</b>
+        </div>
+        <span>4 verification notes</span>
       </div>
       <div className="scr-evidence-protocol-grid">
         {protocol.map((item) => (
-          <div key={item.label} style={{ '--tone': item.tone }}>
+          <article key={item.label} className="scr-evidence-protocol-card" style={{ '--tone': item.tone }}>
             <small>{item.label}</small>
             <p>{item.value}</p>
-          </div>
+          </article>
         ))}
       </div>
     </div>
@@ -671,11 +674,36 @@ function EvidenceProtocol() {
 
 function EvidenceCard({ arc }) {
   const spoilerClass = arc.spoiler === 'heavy' ? 'scr-spoiler-heavy' : arc.spoiler === 'medium' ? 'scr-spoiler-medium' : '';
-  return <article className="scr-evidence-card" style={{ '--tone': arc.color }}><SignalMeterBlock className="scr-evidence-marker" value={arc.id} color={arc.color} activeRows={20} label="ARC" note="Dossier" /><div><div className="scr-evidence-title-row"><h3>{arc.title}</h3><span className={`scr-spoiler ${spoilerClass}`}>Spoiler-{arc.spoiler}</span></div><div className="scr-evidence-cells"><EvidenceCell label="Clean observation" text={arc.observation} /><EvidenceCell label="What it proves" text={arc.proof} /><EvidenceCell label="Caveat" text={arc.caveat} muted /></div><div className="scr-evidence-impact">▸ Axis impact · {arc.impact}</div></div></article>;
+  const impactParts = arc.impact.split(' · ');
+  return (
+    <article className="scr-evidence-card" style={{ '--tone': arc.color }}>
+      <div className="scr-evidence-rail">
+        <SignalMeterBlock className="scr-evidence-marker" value={arc.id} color={arc.color} activeRows={20} label="ARC" note="Rail" />
+      </div>
+      <div className="scr-evidence-main">
+        <div className="scr-evidence-title-row">
+          <div>
+            <small>Dossier arc {arc.id}</small>
+            <h3>{arc.title}</h3>
+          </div>
+          <span className={`scr-spoiler ${spoilerClass}`}>Spoiler-{arc.spoiler}</span>
+        </div>
+        <div className="scr-evidence-cells">
+          <EvidenceCell label="Observation" text={arc.observation} />
+          <EvidenceCell label="Proof" text={arc.proof} />
+          <EvidenceCell label="Caveat" text={arc.caveat} muted />
+        </div>
+        <div className="scr-evidence-impact">
+          <span>Axis impact</span>
+          {impactParts.map((part) => <b key={part}>{part}</b>)}
+        </div>
+      </div>
+    </article>
+  );
 }
 
 function EvidenceCell({ label, text, muted = false }) {
-  return <div className={muted ? 'muted' : ''}><small>{label}</small><p>{text}</p></div>;
+  return <div className={`scr-evidence-cell${muted ? ' muted' : ''}`}><small>{label}</small><p>{text}</p></div>;
 }
 
 function DeveloperDiagnostics({ tests }) {
@@ -943,4 +971,39 @@ const TEMPLATE_CSS = `
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}
 @media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p,.scr-score-anatomy .scr-section-head p,.scr-axis-diagnosis .scr-section-head p{font-size:.98rem}.scr-axis-diagnosis .scr-axis-body p{font-size:.92rem}.scr-axis-diagnosis .scr-d20-wrap .scr-tile-value{font-size:2.75rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}.scr-score-calc-equation{grid-template-columns:1fr;gap:.45rem}.scr-score-calc-term{min-height:104px;padding:.9rem}.scr-score-calc-label{font-size:.72rem}.scr-score-calc-value{font-size:3.55rem}.scr-score-calc-term.final .scr-score-calc-value{font-size:4.25rem}.scr-score-calc-op{min-height:1.5rem;font-size:1.8rem}.scr-score-calc-note{text-align:left;font-size:.9rem}}
+.scr-dossier-rail .scr-section-head p{max-width:700px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-dossier-rail .scr-evidence-board{display:grid;gap:.84rem;min-width:0}
+.scr-dossier-rail .scr-evidence-card{position:relative;isolation:isolate;display:grid;grid-template-columns:5.45rem minmax(0,1fr);gap:1rem;min-width:0;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 42%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 7%,transparent),transparent 58%),linear-gradient(145deg,rgba(16,22,30,.96),rgba(7,10,15,.98) 62%,rgba(4,6,10,.99));box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 0 26px color-mix(in srgb,var(--tone) 5%,transparent);padding:.95rem}
+.scr-dossier-rail .scr-evidence-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--tone),color-mix(in srgb,var(--tone) 26%,transparent));box-shadow:0 0 16px color-mix(in srgb,var(--tone) 20%,transparent)}
+.scr-evidence-rail{position:relative;display:grid;align-items:stretch;min-width:0}
+.scr-dossier-rail .scr-evidence-marker{min-height:128px;height:100%;padding:.58rem;border-color:color-mix(in srgb,var(--tone) 46%,#1e2733);box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 -18px 34px rgba(0,0,0,.30),0 0 14px color-mix(in srgb,var(--tone) 10%,transparent)}
+.scr-dossier-rail .scr-evidence-marker .scr-tile-value{font-size:2.55rem}
+.scr-dossier-rail .scr-evidence-marker .scr-signal-kicker{color:color-mix(in srgb,var(--tone) 78%,#d9c9a3);font-size:.55rem;opacity:.95;text-shadow:0 1px 0 #000}
+.scr-dossier-rail .scr-evidence-marker .scr-signal-note{color:color-mix(in srgb,var(--tone) 56%,#cdbc92);font-size:.52rem;opacity:.88;text-shadow:0 1px 0 #000}
+.scr-evidence-main{display:grid;gap:.82rem;min-width:0}
+.scr-dossier-rail .scr-evidence-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;min-width:0}
+.scr-dossier-rail .scr-evidence-title-row small{display:block;color:color-mix(in srgb,var(--tone) 78%,#d9c9a3);font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-title-row h3{margin:.35rem 0 0;color:#d9c9a3;font-size:1.28rem;font-weight:1000;line-height:1.03;text-transform:uppercase;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 14%,transparent)}
+.scr-dossier-rail .scr-spoiler{flex:0 0 auto;border:1px solid color-mix(in srgb,var(--tone) 34%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 10%,transparent),rgba(0,0,0,.14) 60%);color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);padding:.34rem .48rem;font-size:.58rem;font-weight:1000;line-height:1;text-transform:uppercase;text-shadow:0 1px 0 #000}
+.scr-dossier-rail .scr-spoiler-medium{border-color:color-mix(in srgb,#ff8a1f 52%,#2a3444);color:#ffb347}
+.scr-dossier-rail .scr-spoiler-heavy{border-color:color-mix(in srgb,#ff2d1f 52%,#2a3444);color:#ff6a5a}
+.scr-dossier-rail .scr-evidence-cells{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.62rem;margin:0;min-width:0}
+.scr-dossier-rail .scr-evidence-cell{display:grid;align-content:start;gap:.5rem;min-width:0;border:1px solid color-mix(in srgb,var(--tone) 20%,#1e2733);background:linear-gradient(145deg,color-mix(in srgb,var(--tone) 5%,transparent),rgba(0,0,0,.18) 58%,rgba(255,255,255,.006));padding:.82rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.028)}
+.scr-dossier-rail .scr-evidence-cell.muted{background:linear-gradient(145deg,color-mix(in srgb,#ff8a1f 3%,transparent),rgba(0,0,0,.20) 60%,rgba(255,255,255,.004))}
+.scr-dossier-rail .scr-evidence-cell small{color:color-mix(in srgb,var(--tone) 78%,#d9c9a3);font-family:ui-monospace,Menlo,monospace;font-size:.64rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-cell p{margin:0;color:#cdbc92;font-size:.88rem;font-weight:610;line-height:1.55}
+.scr-dossier-rail .scr-evidence-impact{display:flex;flex-wrap:wrap;align-items:center;gap:.42rem;margin:0;border:0;padding:0;color:#cdbc92;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-impact span,.scr-dossier-rail .scr-evidence-impact b{border:1px solid color-mix(in srgb,var(--tone) 34%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 9%,transparent),rgba(0,0,0,.12) 62%);padding:.34rem .46rem;color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);font-weight:1000}
+.scr-dossier-rail .scr-evidence-impact span{border-color:#2a3444;color:#8592a5;background:rgba(255,255,255,.018)}
+.scr-dossier-rail .scr-evidence-protocol{margin-top:1rem;border:1px solid color-mix(in srgb,#11facb 24%,#2a3444);background:linear-gradient(145deg,rgba(17,250,203,.045),rgba(7,10,15,.98) 58%,rgba(4,6,10,.99));padding:1rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.scr-dossier-rail .scr-evidence-protocol-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;border-bottom:1px solid #1e2733;padding-bottom:.8rem}
+.scr-dossier-rail .scr-evidence-protocol-head small{display:block;color:#11facb;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-protocol-head b{display:block;margin-top:.25rem;color:#d9c9a3;font-size:1.2rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-protocol-head span{color:#8592a5;font-family:ui-monospace,Menlo,monospace;font-size:.62rem;font-weight:1000;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-protocol-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.62rem;margin-top:.82rem;min-width:0}
+.scr-dossier-rail .scr-evidence-protocol-card{display:grid;align-content:start;gap:.48rem;min-width:0;border:1px solid color-mix(in srgb,var(--tone) 34%,#1e2733);background:linear-gradient(145deg,color-mix(in srgb,var(--tone) 7%,transparent),rgba(0,0,0,.18) 60%);padding:.78rem}
+.scr-dossier-rail .scr-evidence-protocol-card small{color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-dossier-rail .scr-evidence-protocol-card p{margin:0;color:#cdbc92;font-size:.84rem;font-weight:610;line-height:1.45}
+@media (max-width:1119px){.scr-dossier-rail .scr-evidence-card{grid-template-columns:4.8rem minmax(0,1fr);gap:.82rem}.scr-dossier-rail .scr-evidence-marker{min-height:118px}.scr-dossier-rail .scr-evidence-cells{grid-template-columns:1fr}.scr-dossier-rail .scr-evidence-protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.scr-dossier-rail .scr-section-head p{font-size:.98rem}.scr-dossier-rail .scr-evidence-card{grid-template-columns:1fr;gap:.8rem;padding:.9rem}.scr-evidence-rail{display:block}.scr-dossier-rail .scr-evidence-marker{height:auto;min-height:82px;display:flex;justify-content:flex-start;padding:.7rem}.scr-dossier-rail .scr-evidence-marker .scr-tile-value{font-size:2.1rem}.scr-dossier-rail .scr-evidence-title-row{display:grid}.scr-dossier-rail .scr-evidence-title-row h3{font-size:1.12rem}.scr-dossier-rail .scr-spoiler{justify-self:start;font-size:.52rem}.scr-dossier-rail .scr-evidence-cell{padding:.76rem}.scr-dossier-rail .scr-evidence-cell p{font-size:.86rem}.scr-dossier-rail .scr-evidence-protocol-head{display:grid}.scr-dossier-rail .scr-evidence-protocol-grid{grid-template-columns:1fr}.scr-dossier-rail .scr-evidence-protocol-card p{font-size:.82rem}}
 `;
