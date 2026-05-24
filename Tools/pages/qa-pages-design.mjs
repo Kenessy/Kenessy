@@ -217,6 +217,14 @@ async function auditViewport(browser, base, buildId, viewport) {
     const fitSignalLabelStyles = fitSignalLabels.map((el) => getComputedStyle(el));
     const fitSignalLabelRects = fitSignalLabels.map(rectFor);
     const fitSignalMainRects = fitSignalMains.map(rectFor);
+    const audienceSection = document.querySelector('.scr-audience-fit');
+    const audienceHead = audienceSection?.querySelector('.scr-section-head');
+    const audienceHeadDesc = audienceHead?.querySelector('p');
+    const audienceHeadDescStyle = audienceHeadDesc ? getComputedStyle(audienceHeadDesc) : null;
+    const audienceThesis = audienceSection?.querySelector('.scr-fit-thesis');
+    const audienceThesisStyle = audienceThesis ? getComputedStyle(audienceThesis) : null;
+    const audienceThesisText = audienceThesis?.querySelector('p');
+    const audienceThesisTextStyle = audienceThesisText ? getComputedStyle(audienceThesisText) : null;
     const metaChips = [...document.querySelectorAll('.scr-meta-rail .scr-meta-chip')];
     const metaChipRects = metaChips.map(rectFor);
     const metaChipStyles = metaChips.map((el) => getComputedStyle(el));
@@ -374,6 +382,23 @@ async function auditViewport(browser, base, buildId, viewport) {
         maxGlareOpacity: fitSignalBeforeStyles.reduce((max, style) => Math.max(max, Number.parseFloat(style.opacity) || 0), 0),
         staleCards: document.querySelectorAll('.scr-fit-card').length
       },
+      audienceFit: {
+        exists: Boolean(audienceSection),
+        kicker: (audienceHead?.querySelector('small')?.textContent || '').trim(),
+        title: (audienceHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (audienceHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: audienceHeadDescStyle ? Number.parseFloat(audienceHeadDescStyle.fontSize) : 0,
+        descColor: audienceHeadDescStyle?.color || '',
+        staleWho86: Boolean((audienceSection?.textContent || '').includes('Who the 86')),
+        staleCoreThesis: Boolean((audienceSection?.textContent || '').includes('Core Thesis')),
+        thesisLabel: (audienceThesis?.querySelector('small')?.textContent || '').trim(),
+        thesisText: (audienceThesisText?.textContent || '').replace(/\s+/g, ' ').trim(),
+        thesisTransform: audienceThesisTextStyle?.textTransform || '',
+        thesisSize: audienceThesisTextStyle ? Number.parseFloat(audienceThesisTextStyle.fontSize) : 0,
+        thesisLineHeight: audienceThesisTextStyle ? Number.parseFloat(audienceThesisTextStyle.lineHeight) : 0,
+        thesisBorderLeft: audienceThesisStyle ? Number.parseFloat(audienceThesisStyle.borderLeftWidth) : 0,
+        thesisHasGradient: audienceThesisStyle ? audienceThesisStyle.backgroundImage.includes('gradient') : false
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -424,9 +449,11 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionReview)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
   assert(metrics.textSignals.count === 6 && metrics.textSignals.labels === 'Action|Confidence|Main pull|Main drag|Risk|Review state' && metrics.textSignals.values.includes('Buy if atmosphere-first survival FPS fits you') && metrics.textSignals.values.includes('Max / replay-verified · 100/100') && metrics.textSignals.values.includes('Finalized / no active test'), `${viewport.name} hero text signal content mismatch ${JSON.stringify(metrics.textSignals)}`);
   assert(metrics.textSignals.minHeight >= 100 && metrics.textSignals.hasBorder && !metrics.textSignals.hasAccent && !metrics.textSignals.hasInnerFrame && !metrics.textSignals.labelHasFrame && metrics.textSignals.labelMinSize >= 13 && metrics.textSignals.labelMinWeight >= 900 && metrics.textSignals.labelMaxBorder === 0 && metrics.textSignals.labelTopLeft && metrics.textSignals.mainCentered && !metrics.textSignals.hasFill && metrics.textSignals.hasGradient && metrics.textSignals.hasOpposingGradient && metrics.textSignals.maxGlareOpacity <= 0.4 && metrics.textSignals.maxRight <= viewport.width + 1, `${viewport.name} hero text signal layout mismatch ${JSON.stringify(metrics.textSignals)}`);
-  assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere-first survival FPS') && metrics.fitSignals.copy.includes('authored pressure'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere first survival FPS') && metrics.fitSignals.values.includes('Sandbox agency first') && metrics.fitSignals.copy.includes('authored pressure') && metrics.fitSignals.copy.includes('co-op'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(!/(FPSYou|playerYou|firstYou)/.test(metrics.fitSignals.text), `${viewport.name} audience fit signal text is semantically concatenated ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && metrics.fitSignals.labelMinSize >= 13 && metrics.fitSignals.labelMinWeight >= 900 && metrics.fitSignals.labelMaxBorder === 0 && metrics.fitSignals.labelTopLeft && metrics.fitSignals.mainCentered && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.hasOpposingGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.audienceFit.exists && metrics.audienceFit.kicker === '02 · Audience Fit' && metrics.audienceFit.title === 'Who Is This 86 For?' && metrics.audienceFit.desc.includes('fit filter') && metrics.audienceFit.descSize >= 15.5 && metrics.audienceFit.descColor !== 'rgb(133, 146, 165)' && !metrics.audienceFit.staleWho86, `${viewport.name} audience fit heading/copy mismatch ${JSON.stringify(metrics.audienceFit)}`);
+  assert(metrics.audienceFit.thesisLabel === 'Verdict Thesis' && metrics.audienceFit.thesisText.includes('atmosphere-first players') && metrics.audienceFit.thesisText.includes('not a sandbox or co-op promise') && !metrics.audienceFit.staleCoreThesis && metrics.audienceFit.thesisTransform === 'none' && metrics.audienceFit.thesisSize >= 15 && metrics.audienceFit.thesisLineHeight >= 22 && metrics.audienceFit.thesisBorderLeft === 0 && metrics.audienceFit.thesisHasGradient, `${viewport.name} audience fit thesis mismatch ${JSON.stringify(metrics.audienceFit)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);

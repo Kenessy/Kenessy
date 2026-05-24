@@ -50,14 +50,16 @@ const REVIEW = {
   snapshotNote: 'Lens-specific review: cinematic survival-horror FPS, not a universal sandbox verdict',
   oneLineIdentity:
     'Metro 2033 Redux is a linear survival-horror FPS about crossing a living underground world, built around resource pressure and authored escalation, best for atmosphere-first players, but limited by bounded agency and old-FPS monster friction.',
+  fitThesis:
+    'The 86 is for atmosphere-first players who want authored pressure, scarce ammo, horror pacing, and a world that feels heavier than the shooting. It is not a sandbox or co-op promise.',
   thesis:
     'Dense, authored, atmosphere-first action horror. Metro is not about escaping darkness into truth. It is about learning that darkness is uncertainty, light is exposure, and seeing more does not always mean understanding more.',
 };
 
 const FIT_VERDICTS = [
-  { label: 'Buy if', value: 'Atmosphere-first survival FPS', text: 'You want authored pressure, dense world texture, horror pacing, and resource tension.', tone: COLORS.green },
-  { label: 'Works if', value: 'Linear narrative-FPS player', text: 'You accept bounded agency because pacing, cohesion, and survival pressure matter more than open-ended route authorship.', tone: COLORS.cyan },
-  { label: 'Skip if', value: 'Sandbox / RPG-agency first', text: 'You need open systems, build freedom, broad route authorship, or player-made solutions as the main reward.', tone: COLORS.amber },
+  { label: 'Buy if', value: 'Atmosphere first survival FPS', text: 'You want authored pressure, dense world texture, horror pacing, scarce ammo, and a world that matters more than raw shooting.', tone: COLORS.green },
+  { label: 'Works if', value: 'Linear story FPS player', text: 'You can accept tight authorship when pacing, survival pressure, and atmosphere are the reward.', tone: COLORS.cyan },
+  { label: 'Skip if', value: 'Sandbox agency first', text: 'You mainly want open systems, build freedom, co-op, broad route authorship, or player-made solutions.', tone: COLORS.amber },
 ];
 
 const INSPECT_FIT = [
@@ -332,12 +334,18 @@ function InspectFitMetric({ row }) {
 
 function AudienceFit() {
   return (
-    <section>
-      <SectionHead num="02" kicker="Audience Fit" title="Who the" emphasis="86" desc="The score is not universal. Match the player type first, then read the verdict." />
-      <div className="scr-fit-grid">
+    <section className="scr-audience-fit">
+      <SectionHead
+        num="02"
+        kicker="Audience Fit"
+        title="Who Is This"
+        emphasis="86 For?"
+        desc="Use the score as a fit filter, not a universal verdict: strong buy, conditional fit, or likely skip depending on what you want from a game."
+      />
+      <div className="scr-fit-grid" aria-label="Audience fit verdict gates">
         {FIT_VERDICTS.map((item) => <TextSignalBlock key={item.label} item={item} className="scr-fit-signal" />)}
       </div>
-      <div className="scr-thesis"><small>Core Thesis</small><p>{REVIEW.thesis}</p></div>
+      <div className="scr-thesis scr-fit-thesis"><small>Verdict Thesis</small><p>{REVIEW.fitThesis}</p></div>
     </section>
   );
 }
@@ -756,13 +764,18 @@ const TEMPLATE_CSS = `
 .scr-text-signal small{position:absolute;left:0;top:0;display:inline-block;max-width:100%;border:0;padding:0;color:color-mix(in srgb,var(--tone) 88%,#f4e5bd);font-size:.92rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 30%,transparent)}
 .scr-text-signal-main{display:grid;place-items:center;gap:.42rem;min-width:0;text-align:center}
 .scr-text-signal b{display:block;color:#decfa8;font-size:1rem;font-weight:1000;line-height:1.15;text-align:center;text-wrap:balance;text-shadow:0 1px 0 #000}
-.scr-fit-grid{border:0;background:transparent;gap:.75rem}
+.scr-audience-fit .scr-section-head p{max-width:680px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-fit-grid{border:0;background:transparent;gap:.85rem}
 .scr-fit-signal{min-height:218px;padding:1.18rem;align-content:start}
 .scr-fit-signal .scr-text-signal-main{gap:.72rem}
 .scr-fit-signal b{font-size:1.42rem;line-height:1.05;text-transform:uppercase}
 .scr-text-signal-copy{margin:0;color:#9aa7b8;font-size:.9rem;font-weight:650;line-height:1.55;text-wrap:balance}
+.scr-fit-thesis{position:relative;isolation:isolate;margin-top:1rem;overflow:hidden;border:1px solid #2a3444;border-left:0;background:linear-gradient(135deg,rgba(255,179,71,.08),rgba(7,10,15,.96) 42%,rgba(7,10,15,.98));padding:1.05rem 1.15rem}
+.scr-fit-thesis::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#ffb347,#ff8a1f)}
+.scr-fit-thesis small{position:relative;color:#ffb347;font-size:.78rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
+.scr-fit-thesis p{position:relative;margin:.55rem 0 0;max-width:86ch;color:#d9c9a3;font-size:1rem;font-weight:760;line-height:1.55;text-transform:none}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}
-@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}}
+@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p{font-size:.98rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}}
 `;
