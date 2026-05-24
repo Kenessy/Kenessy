@@ -132,6 +132,7 @@ async function auditDesignArtifacts(base) {
   assert(!report.text.includes('height:var(--fill)'), 'text signals still use rising fill sizing');
   assert(report.text.includes('.scr-fit-signal'), 'audience fit text signal preset is missing');
   assert(report.text.includes('.scr-text-signal-copy'), 'audience fit signal copy styling is missing');
+  assert(report.text.includes('.scr-inspect-section .scr-section-head p'), 'INSPECT header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-signal-block'), 'shared signal block styling is missing');
   assert(report.text.includes('--scr-type-main-score-title'), 'report CSS is missing shared type size presets');
   assert(report.text.includes('--scr-type-main-score-rank'), 'report CSS is missing main score rank size preset');
@@ -220,6 +221,9 @@ async function auditViewport(browser, base, buildId, viewport) {
     const identityLabelStyle = identity ? getComputedStyle(identity, '::after') : null;
     const shellSections = [...document.querySelectorAll('.scr-shell > section')];
     const inspectSection = document.querySelector('.scr-inspect-section');
+    const inspectHead = inspectSection?.querySelector('.scr-section-head');
+    const inspectHeadDesc = inspectHead?.querySelector('p');
+    const inspectHeadDescStyle = inspectHeadDesc ? getComputedStyle(inspectHeadDesc) : null;
     const inspectMetrics = [...document.querySelectorAll('.scr-inspect-metric')];
     const inspectMetricStyles = inspectMetrics.map((el) => getComputedStyle(el));
     const inspectMetricRects = inspectMetrics.map(rectFor);
@@ -332,6 +336,13 @@ async function auditViewport(browser, base, buildId, viewport) {
         maxGlareOpacity: fitSignalBeforeStyles.reduce((max, style) => Math.max(max, Number.parseFloat(style.opacity) || 0), 0),
         staleCards: document.querySelectorAll('.scr-fit-card').length
       },
+      inspectHeader: {
+        kicker: (inspectHead?.querySelector('small')?.textContent || '').trim(),
+        title: (inspectHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (inspectHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: inspectHeadDescStyle ? Number.parseFloat(inspectHeadDescStyle.fontSize) : 0,
+        descColor: inspectHeadDescStyle?.color || ''
+      },
       signalBlocks,
       minParagraphSize,
       screenshotPath: null
@@ -358,6 +369,7 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere-first survival FPS') && metrics.fitSignals.copy.includes('authored pressure'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(!/(FPSYou|playerYou|firstYou)/.test(metrics.fitSignals.text), `${viewport.name} audience fit signal text is semantically concatenated ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && !metrics.fitSignals.hasAccent && !metrics.fitSignals.hasInnerFrame && !metrics.fitSignals.labelHasFrame && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.maxGlareOpacity <= 0.4 && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
   assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMeterValues === '10|8|2|5|6|4|1' && metrics.signalBlocks.inspectMeterMinHeight >= 100, `${viewport.name} INSPECT meter lanes missing ${JSON.stringify(metrics.signalBlocks)}`);

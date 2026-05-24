@@ -297,10 +297,10 @@ function InspectFit() {
     <section className="scr-inspect-section">
       <SectionHead
         num="01"
-        kicker="Taste Inspect"
-        title="INSPECT"
-        emphasis="Player Fit"
-        desc="Not a score. This is the taste profile: immersion, narrative, systems, performance, exploration, comfort, and teamplay."
+        kicker="Player Fit Check"
+        title="Is This Game"
+        emphasis="For You?"
+        desc="A quick player-match read, not another score. Use these lanes to see whether Metro fits what you actually want from a game."
       />
       <div className="scr-inspect-metrics" aria-label="INSPECT player fit metrics">
         {INSPECT_FIT.map((row) => <InspectFitMetric key={row.name} row={row} />)}
@@ -740,6 +740,7 @@ const TEMPLATE_CSS = `
 .scr-inspect-meter{width:100%;min-height:134px;flex:none}
 .scr-inspect-meter .scr-tile-value{font-size:3.3rem}
 .scr-inspect-player{min-height:3.15rem;color:#9aa7b8;font-size:.72rem;font-weight:760;line-height:1.32;text-wrap:balance}
+.scr-inspect-section .scr-section-head p{max-width:620px;color:#cdbc92;font-size:1.06rem;font-weight:650;line-height:1.58}
 .scr-hero-verdict-strip{align-items:stretch;gap:.72rem}
 .scr-text-signal{position:relative;isolation:isolate;min-width:0;min-height:94px;overflow:hidden;border:1px solid transparent;background:linear-gradient(148deg,rgba(18,24,33,.96),rgba(9,13,19,.98) 58%,rgba(5,7,11,.99)) padding-box,linear-gradient(135deg,color-mix(in srgb,var(--tone) 74%,#d9c9a3),color-mix(in srgb,var(--tone) 32%,#2a3444) 18%,#26313f 46%,#151b25 100%) border-box;box-shadow:0 14px 32px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.045);display:grid;align-content:center;padding:.9rem .95rem}
 .scr-text-signal::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.035),transparent 34%),linear-gradient(180deg,transparent,rgba(0,0,0,.14));opacity:.32}
