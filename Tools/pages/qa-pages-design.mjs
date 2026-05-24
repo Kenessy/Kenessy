@@ -125,7 +125,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-hud-links a'), 'report CSS is missing HUD link styling');
   assert(!report.text.includes('.scr-hero-verdict-strip>div'), 'hero verdict strip still has stale div-cell styling');
   assert(report.text.includes('.scr-text-signal'), 'hero text signal block styling is missing');
-  assert(report.text.includes('.scr-text-signal-fill'), 'hero text signal fill styling is missing');
+  assert(report.text.includes('.scr-text-signal-accent'), 'text signal glass accent styling is missing');
+  assert(!report.text.includes('.scr-text-signal-fill'), 'text signals still use the numeric meter fill layer');
+  assert(!report.text.includes('height:var(--fill)'), 'text signals still use rising fill sizing');
   assert(report.text.includes('.scr-fit-signal'), 'audience fit text signal preset is missing');
   assert(report.text.includes('.scr-text-signal-copy'), 'audience fit signal copy styling is missing');
   assert(report.text.includes('.scr-signal-block'), 'shared signal block styling is missing');
@@ -298,7 +300,9 @@ async function auditViewport(browser, base, buildId, viewport) {
         minHeight: textSignalRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
         maxRight: textSignalRects.reduce((max, rect) => Math.max(max, rect.right), 0),
         hasBorder: textSignalStyles.every((style) => Number.parseFloat(style.borderTopWidth) >= 1),
-        hasFill: textSignals.every((el) => Boolean(el.querySelector('.scr-text-signal-fill')))
+        hasAccent: textSignals.every((el) => Boolean(el.querySelector('.scr-text-signal-accent'))),
+        hasFill: textSignals.some((el) => Boolean(el.querySelector('.scr-text-signal-fill'))),
+        hasGradient: textSignalStyles.every((style) => style.backgroundImage.includes('gradient'))
       },
       fitSignals: {
         count: fitSignals.length,
@@ -309,7 +313,9 @@ async function auditViewport(browser, base, buildId, viewport) {
         minHeight: fitSignalRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
         maxRight: fitSignalRects.reduce((max, rect) => Math.max(max, rect.right), 0),
         hasBorder: fitSignalStyles.every((style) => Number.parseFloat(style.borderTopWidth) >= 1),
-        hasFill: fitSignals.every((el) => Boolean(el.querySelector('.scr-text-signal-fill'))),
+        hasAccent: fitSignals.every((el) => Boolean(el.querySelector('.scr-text-signal-accent'))),
+        hasFill: fitSignals.some((el) => Boolean(el.querySelector('.scr-text-signal-fill'))),
+        hasGradient: fitSignalStyles.every((style) => style.backgroundImage.includes('gradient')),
         staleCards: document.querySelectorAll('.scr-fit-card').length
       },
       signalBlocks,
@@ -334,10 +340,10 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(!metrics.h1Rect || (metrics.h1Rect.left >= -1 && metrics.h1Rect.right <= viewport.width + 1), `${viewport.name} hero heading is clipped`);
   assert(!/(ActionBuy|youConfidence|100Main|pressureMain|agencyRisk|frictionNext)/.test(metrics.verdictStripText), `${viewport.name} verdict strip text is visually/semantically concatenated`);
   assert(metrics.textSignals.count === 6 && metrics.textSignals.labels === 'Action|Confidence|Main pull|Main drag|Risk|Next test' && metrics.textSignals.values.includes('Buy if atmosphere-first survival FPS fits you'), `${viewport.name} hero text signal content mismatch ${JSON.stringify(metrics.textSignals)}`);
-  assert(metrics.textSignals.minHeight >= 80 && metrics.textSignals.hasBorder && metrics.textSignals.hasFill && metrics.textSignals.maxRight <= viewport.width + 1, `${viewport.name} hero text signal layout mismatch ${JSON.stringify(metrics.textSignals)}`);
+  assert(metrics.textSignals.minHeight >= 80 && metrics.textSignals.hasBorder && metrics.textSignals.hasAccent && !metrics.textSignals.hasFill && metrics.textSignals.hasGradient && metrics.textSignals.maxRight <= viewport.width + 1, `${viewport.name} hero text signal layout mismatch ${JSON.stringify(metrics.textSignals)}`);
   assert(metrics.fitSignals.count === 3 && metrics.fitSignals.labels === 'Buy if|Works if|Skip if' && metrics.fitSignals.values.includes('Atmosphere-first survival FPS') && metrics.fitSignals.copy.includes('authored pressure'), `${viewport.name} audience fit signal content mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(!/(FPSYou|playerYou|firstYou)/.test(metrics.fitSignals.text), `${viewport.name} audience fit signal text is semantically concatenated ${JSON.stringify(metrics.fitSignals)}`);
-  assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && metrics.fitSignals.hasFill && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
+  assert(metrics.fitSignals.minHeight >= 180 && metrics.fitSignals.hasBorder && metrics.fitSignals.hasAccent && !metrics.fitSignals.hasFill && metrics.fitSignals.hasGradient && metrics.fitSignals.staleCards === 0 && metrics.fitSignals.maxRight <= viewport.width + 1, `${viewport.name} audience fit signal layout mismatch ${JSON.stringify(metrics.fitSignals)}`);
   assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMeterValues === '10|8|2|5|6|4|1' && metrics.signalBlocks.inspectMeterMinHeight >= 100, `${viewport.name} INSPECT meter lanes missing ${JSON.stringify(metrics.signalBlocks)}`);

@@ -226,12 +226,12 @@ function HeroMetaRail() {
 
 function HeroVerdictStrip() {
   const items = [
-    { label: 'Action', value: REVIEW.action, tone: COLORS.green, fill: 86 },
-    { label: 'Confidence', value: `${REVIEW.confidence} · ${REVIEW.confidenceScore}/100`, tone: COLORS.retroMint, fill: REVIEW.confidenceScore },
-    { label: 'Main pull', value: REVIEW.mainPull, tone: COLORS.atmosphereIndigo, fill: 76 },
-    { label: 'Main drag', value: REVIEW.mainDrag, tone: COLORS.lime, fill: 32 },
-    { label: 'Risk', value: REVIEW.mainRisk, tone: COLORS.danger, fill: 28 },
-    { label: 'Next test', value: REVIEW.nextTest, tone: COLORS.technicalBlue, fill: 44 },
+    { label: 'Action', value: REVIEW.action, tone: COLORS.green },
+    { label: 'Confidence', value: `${REVIEW.confidence} · ${REVIEW.confidenceScore}/100`, tone: COLORS.retroMint },
+    { label: 'Main pull', value: REVIEW.mainPull, tone: COLORS.atmosphereIndigo },
+    { label: 'Main drag', value: REVIEW.mainDrag, tone: COLORS.lime },
+    { label: 'Risk', value: REVIEW.mainRisk, tone: COLORS.danger },
+    { label: 'Next test', value: REVIEW.nextTest, tone: COLORS.technicalBlue },
   ];
 
   return (
@@ -246,19 +246,12 @@ function HeroVerdictStrip() {
   );
 }
 
-function fitSignalFill(label) {
-  if (label === 'Buy if') return 86;
-  if (label === 'Works if') return 68;
-  return 38;
-}
-
 function TextSignalBlock({ item, className = '' }) {
-  const fill = `${Math.max(0, Math.min(100, item.fill ?? 50))}%`;
   const classes = ['scr-text-signal', className].filter(Boolean).join(' ');
 
   return (
-    <article className={classes} style={{ '--tone': item.tone, '--fill': fill }}>
-      <div className="scr-text-signal-fill" aria-hidden="true" />
+    <article className={classes} style={{ '--tone': item.tone }}>
+      <div className="scr-text-signal-accent" aria-hidden="true" />
       <div className="scr-text-signal-content">
         <small>{item.label} </small>
         <b>{item.value}</b>
@@ -333,13 +326,11 @@ function InspectFitMetric({ row }) {
 }
 
 function AudienceFit() {
-  const fitSignals = FIT_VERDICTS.map((item) => ({ ...item, fill: fitSignalFill(item.label) }));
-
   return (
     <section>
       <SectionHead num="02" kicker="Audience Fit" title="Who the" emphasis="86" desc="The score is not universal. Match the player type first, then read the verdict." />
       <div className="scr-fit-grid">
-        {fitSignals.map((item) => <TextSignalBlock key={item.label} item={item} className="scr-fit-signal" />)}
+        {FIT_VERDICTS.map((item) => <TextSignalBlock key={item.label} item={item} className="scr-fit-signal" />)}
       </div>
       <div className="scr-thesis"><small>Core Thesis</small><p>{REVIEW.thesis}</p></div>
     </section>
@@ -751,15 +742,15 @@ const TEMPLATE_CSS = `
 .scr-inspect-meter .scr-tile-value{font-size:3.3rem}
 .scr-inspect-player{min-height:3.15rem;color:#9aa7b8;font-size:.72rem;font-weight:760;line-height:1.32;text-wrap:balance}
 .scr-hero-verdict-strip{align-items:stretch;gap:.72rem}
-.scr-text-signal{position:relative;isolation:isolate;min-width:0;min-height:92px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 52%,#1e2733);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 9%,#0d1117),#070a0f 68%,#05060a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 -24px 42px rgba(0,0,0,.32),0 0 18px color-mix(in srgb,var(--tone) 12%,transparent);display:grid;align-content:end;padding:.82rem .9rem}
-.scr-text-signal::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(118deg,transparent 0 34%,rgba(255,255,255,.11) 44%,rgba(255,255,255,.03) 53%,transparent 68%),linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:100% 100%,100% 13px;opacity:.72}
-.scr-text-signal::after{content:"";position:absolute;inset:.45rem;z-index:1;border:1px solid color-mix(in srgb,var(--tone) 26%,transparent);pointer-events:none;box-shadow:inset 0 0 24px rgba(0,0,0,.32)}
-.scr-text-signal-fill{position:absolute;left:0;right:0;bottom:0;z-index:0;height:var(--fill);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 58%,#ffffff),var(--tone) 46%,color-mix(in srgb,var(--tone) 64%,#05060a));box-shadow:0 0 22px color-mix(in srgb,var(--tone) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -20px 32px rgba(0,0,0,.25);opacity:.34}
-.scr-text-signal-content{position:relative;z-index:2;display:grid;gap:.28rem;min-width:0}
-.scr-text-signal small{display:block;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.58rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 10px color-mix(in srgb,var(--tone) 38%,transparent)}
-.scr-text-signal b{display:block;color:#d9c9a3;font-size:.88rem;font-weight:1000;line-height:1.15;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 12px rgba(217,201,163,.13)}
+.scr-text-signal{position:relative;isolation:isolate;min-width:0;min-height:94px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 36%,#2a3444);background:radial-gradient(180px 120px at 10% 0%,color-mix(in srgb,var(--tone) 14%,transparent),transparent 72%),linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.018) 34%,rgba(0,0,0,.18) 100%),linear-gradient(180deg,#121821,#070b11 70%,#05070b);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.025),0 14px 34px rgba(0,0,0,.28),0 0 22px color-mix(in srgb,var(--tone) 8%,transparent);display:grid;align-content:center;padding:.9rem .95rem}
+.scr-text-signal::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(118deg,transparent 0 24%,rgba(255,255,255,.11) 36%,rgba(255,255,255,.026) 48%,transparent 66%),linear-gradient(0deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:100% 100%,100% 16px;opacity:.62}
+.scr-text-signal::after{content:"";position:absolute;inset:.5rem;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.045);box-shadow:inset 0 0 22px rgba(255,255,255,.018),inset 0 -24px 30px rgba(0,0,0,.18)}
+.scr-text-signal-accent{position:absolute;left:.52rem;right:.52rem;top:.52rem;z-index:2;height:2px;background:linear-gradient(90deg,var(--tone),color-mix(in srgb,var(--tone) 38%,transparent),transparent);box-shadow:0 0 14px color-mix(in srgb,var(--tone) 36%,transparent)}
+.scr-text-signal-content{position:relative;z-index:3;display:grid;gap:.36rem;min-width:0}
+.scr-text-signal small{display:inline-flex;width:max-content;max-width:100%;align-items:center;border:1px solid color-mix(in srgb,var(--tone) 34%,transparent);background:color-mix(in srgb,var(--tone) 9%,transparent);padding:.24rem .42rem;color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.56rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 10px color-mix(in srgb,var(--tone) 30%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.scr-text-signal b{display:block;color:#decfa8;font-size:.88rem;font-weight:1000;line-height:1.15;text-wrap:balance;text-shadow:0 1px 0 #000,0 0 14px rgba(217,201,163,.10)}
 .scr-fit-grid{border:0;background:transparent;gap:.75rem}
-.scr-fit-signal{min-height:220px;padding:1.2rem;align-content:end}
+.scr-fit-signal{min-height:218px;padding:1.18rem;align-content:end}
 .scr-fit-signal .scr-text-signal-content{gap:.72rem}
 .scr-fit-signal b{font-size:1.42rem;line-height:1.05;text-transform:uppercase}
 .scr-text-signal-copy{margin:0;color:#9aa7b8;font-size:.9rem;font-weight:650;line-height:1.55;text-wrap:balance}
