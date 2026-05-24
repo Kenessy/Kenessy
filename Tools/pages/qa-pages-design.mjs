@@ -144,6 +144,8 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-score-anatomy .scr-section-head p'), 'score anatomy header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-alerted-word'), 'colored ALERTED wordmark styling is missing');
   assert(report.text.includes('.scr-score-anatomy .scr-score-strip{border:0'), 'score strip outer border removal is missing');
+  assert(report.text.includes('.scr-score-calculator'), 'simplified score calculator styling is missing');
+  assert(report.text.includes('.scr-score-calc-equation'), 'simplified score calculator equation styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -254,6 +256,18 @@ async function auditViewport(browser, base, buildId, viewport) {
     const scoreTiles = [...document.querySelectorAll('.scr-score-anatomy .scr-score-tile')];
     const scoreTileRects = scoreTiles.map(rectFor);
     const scoreTileStyles = scoreTiles.map((el) => getComputedStyle(el));
+    const scoreCalculator = document.querySelector('.scr-score-calculator');
+    const scoreCalculatorStyle = scoreCalculator ? getComputedStyle(scoreCalculator) : null;
+    const scoreCalculatorBeforeStyle = scoreCalculator ? getComputedStyle(scoreCalculator, '::before') : null;
+    const scoreCalcHead = scoreCalculator?.querySelector('.scr-score-calc-head');
+    const scoreCalcTerms = [...document.querySelectorAll('.scr-score-calculator .scr-score-calc-term')];
+    const scoreCalcTermRects = scoreCalcTerms.map(rectFor);
+    const scoreCalcLabels = scoreCalcTerms.map((el) => el.querySelector('.scr-score-calc-label')).filter(Boolean);
+    const scoreCalcValues = scoreCalcTerms.map((el) => el.querySelector('.scr-score-calc-value')).filter(Boolean);
+    const scoreCalcLabelStyles = scoreCalcLabels.map((el) => getComputedStyle(el));
+    const scoreCalcValueStyles = scoreCalcValues.map((el) => getComputedStyle(el));
+    const scoreCalcNote = scoreCalculator?.querySelector('.scr-score-calc-note');
+    const scoreCalcNoteStyle = scoreCalcNote ? getComputedStyle(scoreCalcNote) : null;
     const scoreStripBorderMax = scoreStripStyle ? Math.max(
       Number.parseFloat(scoreStripStyle.borderTopWidth) || 0,
       Number.parseFloat(scoreStripStyle.borderRightWidth) || 0,
@@ -447,6 +461,25 @@ async function auditViewport(browser, base, buildId, viewport) {
         tileBackgroundsTransparent: scoreTileStyles.every((style) => style.backgroundColor === 'rgba(0, 0, 0, 0)' || style.backgroundColor === 'transparent'),
         tileMaxRight: scoreTileRects.reduce((max, rect) => Math.max(max, rect.right), 0)
       },
+      scoreCalculator: {
+        exists: Boolean(scoreCalculator),
+        title: (scoreCalcHead?.textContent || '').replace(/\s+/g, ' ').trim(),
+        text: (scoreCalculator?.textContent || '').replace(/\s+/g, ' ').trim(),
+        oldLcdNodes: document.querySelectorAll('.scr-score-calculator .scr-lcd, .scr-score-calculator .scr-lcd-bg, .scr-score-calculator .scr-lcd-top, .scr-score-calculator .scr-lcd-foot, .scr-score-calculator .scr-lcd-number, .scr-score-calculator .scr-lcd-operator').length,
+        staleText: /(LCD equation|ALERTED SUM BUS|axis subtotal|ED deduction|final public score)/i.test(scoreCalculator?.textContent || ''),
+        termCount: scoreCalcTerms.length,
+        labels: scoreCalcLabels.map((el) => (el.textContent || '').trim()).join('|'),
+        values: scoreCalcValues.map((el) => (el.textContent || '').trim()).join('|'),
+        operators: [...document.querySelectorAll('.scr-score-calculator .scr-score-calc-op')].map((el) => (el.textContent || '').trim()).join('|'),
+        labelMinSize: scoreCalcLabelStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        valueMinSize: scoreCalcValueStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        noteText: (scoreCalcNote?.textContent || '').replace(/\s+/g, ' ').trim(),
+        noteSize: scoreCalcNoteStyle ? Number.parseFloat(scoreCalcNoteStyle.fontSize) : 0,
+        clipPath: scoreCalculatorStyle?.clipPath || '',
+        boxShadow: scoreCalculatorStyle?.boxShadow || '',
+        beforeDisplay: scoreCalculatorBeforeStyle?.display || '',
+        maxRight: Math.max(rectFor(scoreCalculator).right, scoreCalcTermRects.reduce((max, rect) => Math.max(max, rect.right), 0))
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -505,6 +538,8 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.scoreAnatomy.exists && metrics.scoreAnatomy.kicker === '03 · Score Anatomy' && metrics.scoreAnatomy.title === 'ALERTED Score Strip' && metrics.scoreAnatomy.desc.includes('Five main axes') && metrics.scoreAnatomy.descSize >= 15.5 && metrics.scoreAnatomy.descColor !== 'rgb(133, 146, 165)', `${viewport.name} score anatomy heading/copy mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.scoreAnatomy.alertedText === 'ALERTED' && metrics.scoreAnatomy.alertedCount === 7 && metrics.scoreAnatomy.alertedUniqueColors >= 6 && /rgb\(124,\s*109,\s*255\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*176,\s*0\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*45,\s*31\)/.test(metrics.scoreAnatomy.alertedColors), `${viewport.name} ALERTED wordmark color mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.scoreAnatomy.tileCount === 7 && metrics.scoreAnatomy.stripBorderMax === 0 && metrics.scoreAnatomy.stripBackgroundColor === 'rgba(0, 0, 0, 0)' && metrics.scoreAnatomy.stripBackgroundImage === 'none' && metrics.scoreAnatomy.stripGap >= 10 && metrics.scoreAnatomy.tileBorderMax === 0 && !metrics.scoreAnatomy.tileHasBoxShadow && metrics.scoreAnatomy.tileBackgroundsTransparent && metrics.scoreAnatomy.tileMaxRight <= viewport.width + 1, `${viewport.name} score strip still has secondary wrapper/card chrome ${JSON.stringify(metrics.scoreAnatomy)}`);
+  assert(metrics.scoreCalculator.exists && metrics.scoreCalculator.title === 'Score Calculator' && metrics.scoreCalculator.termCount === 3 && metrics.scoreCalculator.labels === 'Axes|Fit / Risk|Final Score' && metrics.scoreCalculator.values === '90|4|86' && metrics.scoreCalculator.operators === '−|=' && metrics.scoreCalculator.noteText.includes('five core axes') && metrics.scoreCalculator.noteText.includes('public score is 86'), `${viewport.name} simplified score calculator content mismatch ${JSON.stringify(metrics.scoreCalculator)}`);
+  assert(metrics.scoreCalculator.oldLcdNodes === 0 && !metrics.scoreCalculator.staleText && metrics.scoreCalculator.labelMinSize >= 11 && metrics.scoreCalculator.valueMinSize >= 54 && metrics.scoreCalculator.noteSize >= 14 && metrics.scoreCalculator.clipPath === 'none' && metrics.scoreCalculator.boxShadow === 'none' && metrics.scoreCalculator.beforeDisplay === 'none' && metrics.scoreCalculator.maxRight <= viewport.width + 1, `${viewport.name} score calculator still has LCD/decor clutter or overflow ${JSON.stringify(metrics.scoreCalculator)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);

@@ -441,28 +441,31 @@ function MeterRows({ color, activeRows, fillFrom, danger }) {
 function DiegeticEquation({ dataChecks }) {
   const deduction = Math.abs(dataChecks.correctionTotal);
   return (
-    <div className="scr-score-terminal">
-      <div className="scr-terminal-head"><b>Score Calculator</b><span>LCD equation · {dataChecks.mathPass ? 'LOCKED' : 'CHECK'}</span></div>
-      <div className="scr-lcd">
-        <LCDPixelBackdrop />
-        <div className="scr-lcd-top"><span>ALERTED SUM BUS</span><span>{dataChecks.rawTotal} - {deduction} = {REVIEW.score}</span></div>
-        <div className="scr-lcd-equation"><LCDNumber value={dataChecks.rawTotal} color={COLORS.atmosphereIndigo} /><LCDOperator symbol="−" color={COLORS.danger} /><LCDNumber value={deduction} color={COLORS.danger} /><LCDOperator symbol="=" color={COLORS.loopAmber} /><LCDNumber value={REVIEW.score} color={COLORS.loopAmber} large /></div>
-        <div className="scr-lcd-foot"><div><span style={{ color: COLORS.atmosphereIndigo }}>{dataChecks.rawTotal}</span> axis subtotal</div><div><span style={{ color: COLORS.danger }}>{deduction}</span> ED deduction</div><div><span style={{ color: COLORS.loopAmber }}>{REVIEW.score}</span> final public score</div></div>
+    <div className="scr-score-terminal scr-score-calculator" aria-label={`${dataChecks.rawTotal} minus ${deduction} equals ${REVIEW.score}`}>
+      <div className="scr-score-calc-head"><b>Score Calculator</b></div>
+      <div className="scr-score-calc-equation">
+        <ScoreEquationTerm label="Axes" value={dataChecks.rawTotal} color={COLORS.atmosphereIndigo} />
+        <ScoreEquationOperator symbol="−" />
+        <ScoreEquationTerm label="Fit / Risk" value={deduction} color={COLORS.danger} />
+        <ScoreEquationOperator symbol="=" />
+        <ScoreEquationTerm label="Final Score" value={REVIEW.score} color={COLORS.loopAmber} final />
       </div>
+      <p className="scr-score-calc-note">The five core axes land at {dataChecks.rawTotal}. Fit and risk subtract {deduction}. The public score is {REVIEW.score}.</p>
     </div>
   );
 }
 
-function LCDPixelBackdrop() {
-  return <div className="scr-lcd-bg">{Array.from({ length: 12 }, (_, i) => <i key={i} />)}</div>;
+function ScoreEquationTerm({ label, value, color, final = false }) {
+  return (
+    <div className={`scr-score-calc-term ${final ? 'final' : ''}`} style={{ '--tone': color }}>
+      <span className="scr-score-calc-label">{label}</span>
+      <b className="scr-score-calc-value">{value}</b>
+    </div>
+  );
 }
 
-function LCDNumber({ value, color, large = false }) {
-  return <div className={`scr-lcd-number ${large ? 'large' : ''}`} style={{ '--tone': color }}><span>{value}</span></div>;
-}
-
-function LCDOperator({ symbol, color }) {
-  return <div className="scr-lcd-operator" style={{ '--tone': color }}>{symbol}</div>;
+function ScoreEquationOperator({ symbol }) {
+  return <div className="scr-score-calc-op" aria-hidden="true">{symbol}</div>;
 }
 
 function FieldNote() {
@@ -792,8 +795,21 @@ const TEMPLATE_CSS = `
 .scr-section-head h2 .scr-alerted-letter{color:var(--tone)}
 .scr-score-anatomy .scr-score-strip{border:0;background:transparent;gap:.72rem}
 .scr-score-anatomy .scr-score-tile{border:0;background:transparent;box-shadow:none;padding:.05rem 0 .15rem}
+.scr-score-terminal.scr-score-calculator{margin-top:1.1rem;overflow:hidden;border:1px solid #2a3444;background:linear-gradient(135deg,rgba(255,179,71,.055),rgba(7,10,15,.96) 38%,rgba(7,10,15,.98));padding:1rem;box-shadow:none;clip-path:none}
+.scr-score-terminal.scr-score-calculator::before{display:none}
+.scr-score-calc-head{display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1e2733;padding-bottom:.85rem}
+.scr-score-calc-head b{color:#ffb347;font-size:.9rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 12px rgba(255,179,71,.24)}
+.scr-score-calc-equation{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,.8fr) auto minmax(0,1.08fr);align-items:center;gap:.75rem;margin-top:.9rem}
+.scr-score-calc-term{position:relative;isolation:isolate;display:grid;place-items:center;min-width:0;min-height:124px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 54%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 13%,transparent),transparent 56%),linear-gradient(148deg,rgba(18,24,33,.95),rgba(9,13,19,.98) 58%,rgba(5,7,11,.99));box-shadow:inset 0 0 28px color-mix(in srgb,var(--tone) 9%,transparent);padding:1.05rem;text-align:center}
+.scr-score-calc-term::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(180px 120px at 50% 78%,color-mix(in srgb,var(--tone) 13%,transparent),transparent 72%);opacity:.56}
+.scr-score-calc-term.final{min-height:138px;border-color:color-mix(in srgb,var(--tone) 72%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 18%,transparent),transparent 52%),linear-gradient(148deg,#151006,#080b10 58%,#05070b)}
+.scr-score-calc-label{position:absolute;z-index:1;left:.8rem;top:.72rem;color:color-mix(in srgb,var(--tone) 88%,#f4e5bd);font-size:.78rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 24%,transparent)}
+.scr-score-calc-value{position:relative;z-index:1;color:var(--tone);font-size:4.8rem;font-weight:1000;line-height:.84;letter-spacing:0;text-shadow:0 2px 0 #000,0 0 22px color-mix(in srgb,var(--tone) 34%,transparent)}
+.scr-score-calc-term.final .scr-score-calc-value{font-size:5.35rem;color:#ffb000}
+.scr-score-calc-op{display:grid;place-items:center;color:#d9c9a3;font-size:2.25rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 14px rgba(255,179,71,.18)}
+.scr-score-calc-note{margin:.85rem 0 0;color:#b8a982;font-size:.94rem;font-weight:650;line-height:1.55;text-align:center}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}
-@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p,.scr-score-anatomy .scr-section-head p{font-size:.98rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}}
+@media (max-width:760px){.scr-identity{font-size:.98rem;line-height:1.56;padding-left:.95rem}.scr-identity::after{display:none}.scr-hero .scr-main-score-rank{font-size:4.65rem;top:calc(50% + 2.1rem)}.scr-inspect-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .45rem}.scr-inspect-metric{padding:.18rem .08rem;gap:.5rem}.scr-inspect-headline{min-height:2.7rem}.scr-inspect-meter{min-height:128px}.scr-inspect-meter .scr-tile-value{font-size:3rem}.scr-inspect-letter{font-size:1.62rem}.scr-inspect-name{font-size:.61rem}.scr-inspect-player{max-width:17ch;min-height:3.45rem;font-size:.7rem;line-height:1.32}.scr-audience-fit .scr-section-head p,.scr-score-anatomy .scr-section-head p{font-size:.98rem}.scr-text-signal{min-height:108px;padding:.9rem .82rem}.scr-text-signal small{font-size:.82rem}.scr-text-signal b{font-size:.86rem}.scr-fit-signal{min-height:190px;padding:1rem}.scr-fit-signal b{font-size:1.14rem}.scr-text-signal-copy{font-size:.84rem}.scr-fit-thesis{padding:1rem}.scr-fit-thesis p{font-size:.96rem}.scr-score-calc-equation{grid-template-columns:1fr;gap:.45rem}.scr-score-calc-term{min-height:104px;padding:.9rem}.scr-score-calc-label{font-size:.72rem}.scr-score-calc-value{font-size:3.55rem}.scr-score-calc-term.final .scr-score-calc-value{font-size:4.25rem}.scr-score-calc-op{min-height:1.5rem;font-size:1.8rem}.scr-score-calc-note{text-align:left;font-size:.9rem}}
 `;
