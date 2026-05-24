@@ -520,41 +520,28 @@ function CorrectionLedger({ dataChecks }) {
   const danger = MODIFIERS.find((item) => item.name === 'Danger');
 
   return (
-    <section>
+    <section className="scr-correction-ledger">
       <SectionHead
         num="06"
-        kicker="Correction Ledger"
+        kicker="Score Correction"
         title="Modifier"
-        emphasis="Risk Split"
-        desc="Extra is a contextual fit modifier. Danger is the concrete friction pool. They both subtract, but they do not mean the same thing."
+        emphasis="Ledger"
+        desc="The 90-axis score becomes 86 through two separated deductions: one player-fit ceiling and one small evidence-backed risk pool."
       />
-      <div className="scr-correction-split">
-        <article className="scr-extra-panel" style={{ '--tone': extra.color }}>
-          <div className="scr-extra-panel-top">
-            <div><small>E · Extra Modifier</small><h3>{extra.name}</h3></div>
-            <b>{formatSigned(extra.value)}</b>
-          </div>
-          <div className="scr-extra-main">
-            <span>{extra.label}</span>
-            <p>{extra.text}</p>
-          </div>
-          <div className="scr-extra-footer">
-            <strong>Context cap</strong>
-            <em>Not a bug · not danger · audience-fit deduction</em>
-          </div>
-        </article>
+      <div className="scr-correction-grid">
+        <ModifierCard item={extra} eyebrow="E · Context Modifier" chips={['Context cap', 'Audience fit ceiling', 'Not a bug']} />
 
         <div className="scr-danger-panel">
-          <div className="scr-ledger">
+          <ModifierCard item={danger} eyebrow="D · Risk Pool" chips={['Concrete friction', 'Traceable rows', 'Residual total']} danger />
+          <div className="scr-ledger" style={{ '--tone': danger.color }}>
             <div className="scr-ledger-head">
-              <div><small>D · Danger Pool</small><h3>Danger Total</h3></div>
-              <b>{formatSigned(danger.value)}</b>
+              <div><small>Friction Evidence</small><h3>Residual Pool</h3></div>
+              <span>4 rows sum to {formatSigned(danger.value)}</span>
             </div>
-            <LedgerRow item={{ ...danger, id: 'MOD · 02 · DANGER POOL' }} />
             {FRICTION_ITEMS.map((item, i) => (
-              <LedgerRow key={item.name} item={{ ...item, id: `FRICTION · 0${i + 1}`, label: `${item.severity} · ${item.evidence}` }} small />
+              <LedgerRow key={item.name} item={{ ...item, id: `0${i + 1}`, label: `${item.severity} · ${item.evidence}` }} />
             ))}
-            <div className="scr-ledger-check">Row check: {dataChecks.residualPass ? 'pass' : 'mismatch'} · residual subtotal {formatSigned(danger.value)}</div>
+            <div className="scr-ledger-check"><span>{dataChecks.residualPass ? 'Ledger balanced' : 'Ledger mismatch'}</span><b>Residual subtotal {formatSigned(danger.value)}</b></div>
           </div>
         </div>
       </div>
@@ -562,13 +549,29 @@ function CorrectionLedger({ dataChecks }) {
   );
 }
 
-function LedgerRow({ item, small = false }) {
-  const className = `scr-ledger-row ${small ? 'scr-ledger-subrow' : item.name === 'Danger' ? 'scr-ledger-parent' : ''}`.trim();
+function ModifierCard({ item, eyebrow, chips, danger = false }) {
+  const activeRows = Math.max(1, Math.round(Math.abs(item.value) * 2));
   return (
-    <article className={className} style={{ '--tone': item.color }}>
-      <div className="scr-ledger-title"><small>{item.id}</small><h4>{item.name}</h4><span>{item.label}</span></div>
+    <article className={`scr-modifier-card ${danger ? 'scr-danger-summary' : 'scr-extra-panel'}`} style={{ '--tone': item.color }}>
+      <div className="scr-modifier-copy">
+        <small>{eyebrow}</small>
+        <h3>{item.name}</h3>
+        <span>{item.label}</span>
+        <p>{item.text}</p>
+        <div className="scr-modifier-chips">{chips.map((chip) => <b key={chip}>{chip}</b>)}</div>
+      </div>
+      <SignalMeterBlock className="scr-modifier-meter" value={formatSigned(item.value)} color={item.color} activeRows={activeRows} fillFrom="top" danger={danger} />
+    </article>
+  );
+}
+
+function LedgerRow({ item }) {
+  return (
+    <article className="scr-ledger-row" style={{ '--tone': item.color }}>
+      <div className="scr-ledger-index">{item.id}</div>
+      <div className="scr-ledger-title"><small>{item.label}</small><h4>{item.name}</h4></div>
       <p>{item.text}</p>
-      <div className="scr-ledger-value"><b>{formatSigned(item.value)}</b><small>{small ? 'Sub-component' : item.name === 'Extra' ? 'Limit' : 'Parent total'}</small></div>
+      <div className="scr-ledger-value"><b>{formatSigned(item.value)}</b></div>
     </article>
   );
 }
@@ -840,6 +843,39 @@ const TEMPLATE_CSS = `
 .scr-axis-diagnosis .scr-segments i{height:8px;border-radius:999px;background:#18212b}
 .scr-axis-diagnosis .scr-d20-wrap .scr-signal-kicker,.scr-axis-diagnosis .scr-d20-wrap .scr-signal-note{display:none}
 .scr-axis-diagnosis .scr-d20-wrap .scr-tile-value{font-size:3.45rem}
+.scr-correction-ledger .scr-section-head p{max-width:700px;color:#cdbc92;font-size:1.04rem;font-weight:650;line-height:1.58}
+.scr-correction-grid{display:grid;gap:1rem;min-width:0}
+.scr-correction-ledger .scr-modifier-card{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(108px,136px);align-items:stretch;gap:1rem;min-width:0;min-height:276px;overflow:hidden;border:1px solid color-mix(in srgb,var(--tone) 48%,#2a3444);background:linear-gradient(315deg,color-mix(in srgb,var(--tone) 11%,transparent),transparent 54%),linear-gradient(135deg,rgba(16,22,30,.96),rgba(7,10,15,.98) 62%,rgba(4,6,10,.99));box-shadow:inset 0 1px 0 rgba(255,255,255,.045),inset 0 0 34px color-mix(in srgb,var(--tone) 7%,transparent);padding:1.05rem}
+.scr-correction-ledger .scr-modifier-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--tone),color-mix(in srgb,var(--tone) 34%,transparent));box-shadow:0 0 18px color-mix(in srgb,var(--tone) 22%,transparent)}
+.scr-modifier-copy{position:relative;display:grid;align-content:start;gap:.62rem;min-width:0}
+.scr-modifier-copy small{color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);font-size:.76rem;font-weight:1000;line-height:1;text-transform:uppercase;letter-spacing:0}
+.scr-modifier-copy h3{margin:0;color:var(--tone);font-size:2.25rem;font-weight:1000;line-height:.92;text-transform:uppercase;text-shadow:0 1px 0 #000,0 0 18px color-mix(in srgb,var(--tone) 22%,transparent)}
+.scr-modifier-copy span{display:block;color:#d9c9a3;font-size:1rem;font-weight:1000;line-height:1.12;text-transform:uppercase}
+.scr-modifier-copy p{margin:0;color:#cdbc92;font-size:.96rem;font-weight:620;line-height:1.58}
+.scr-modifier-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.1rem}
+.scr-modifier-chips b{display:inline-flex;align-items:center;min-height:1.9rem;border:1px solid color-mix(in srgb,var(--tone) 48%,#2a3444);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 15%,transparent),rgba(255,255,255,.014) 48%,rgba(255,255,255,.004));color:color-mix(in srgb,var(--tone) 82%,#d9c9a3);padding:.36rem .58rem;font-size:.72rem;font-weight:900;line-height:1;text-transform:none}
+.scr-correction-ledger .scr-modifier-meter{min-height:100%;flex:none}
+.scr-correction-ledger .scr-modifier-meter::before{inset:.5rem;border-color:color-mix(in srgb,var(--tone) 34%,transparent)}
+.scr-correction-ledger .scr-modifier-meter .scr-tile-value{font-size:3.45rem}
+.scr-danger-panel{display:grid;gap:.85rem;min-width:0}
+.scr-correction-ledger .scr-ledger{display:grid;gap:.62rem;border:0;background:transparent}
+.scr-correction-ledger .scr-ledger-head{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;border:1px solid color-mix(in srgb,var(--tone) 38%,#2a3444);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 9%,transparent),rgba(7,10,15,.96) 50%,rgba(4,6,10,.98));padding:.95rem 1rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.scr-correction-ledger .scr-ledger-head small{color:#ff6a5a;font-size:.76rem;font-weight:1000;line-height:1}
+.scr-correction-ledger .scr-ledger-head h3{margin:.32rem 0 0;color:#d9c9a3;font-size:1.8rem;line-height:1;text-transform:uppercase}
+.scr-correction-ledger .scr-ledger-head span{color:#cdbc92;font-size:.82rem;font-weight:900;line-height:1.25;text-align:right;text-transform:uppercase}
+.scr-correction-ledger .scr-ledger-row{position:relative;display:grid;grid-template-columns:3.05rem minmax(180px,.64fr) minmax(0,1fr) minmax(78px,94px);align-items:stretch;gap:.75rem;min-width:0;border:1px solid color-mix(in srgb,var(--tone) 40%,#26313f);background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 7%,transparent),rgba(13,17,23,.97) 44%,rgba(6,9,14,.99));box-shadow:inset 0 0 0 1px rgba(255,255,255,.018);padding:.72rem}
+.scr-ledger-index{display:grid;place-items:center;border:1px solid color-mix(in srgb,var(--tone) 56%,#2a3444);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 15%,transparent),rgba(0,0,0,.18));color:var(--tone);font-family:ui-monospace,Menlo,monospace;font-size:.8rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 12px color-mix(in srgb,var(--tone) 24%,transparent)}
+.scr-correction-ledger .scr-ledger-title{display:grid;align-content:center;gap:.34rem;border:0;padding:0}
+.scr-correction-ledger .scr-ledger-title::before{display:none}
+.scr-correction-ledger .scr-ledger-title small{color:color-mix(in srgb,var(--tone) 80%,#d9c9a3);font-size:.68rem;font-weight:1000;line-height:1.2;text-transform:uppercase}
+.scr-correction-ledger .scr-ledger-title h4{margin:0;color:#d9c9a3;font-size:1.05rem;font-weight:1000;line-height:1.05;text-transform:uppercase}
+.scr-correction-ledger .scr-ledger-row p{align-self:center;margin:0;padding:0;color:#cdbc92;font-size:.89rem;font-weight:610;line-height:1.55}
+.scr-correction-ledger .scr-ledger-value{display:grid;place-items:center;border:1px solid color-mix(in srgb,var(--tone) 45%,#2a3444);background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 14%,transparent),rgba(0,0,0,.24));padding:.45rem;text-align:center}
+.scr-correction-ledger .scr-ledger-value b{color:var(--tone);font-size:1.55rem;font-weight:1000;line-height:1;text-shadow:0 1px 0 #000,0 0 14px color-mix(in srgb,var(--tone) 22%,transparent)}
+.scr-correction-ledger .scr-ledger-check{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.65rem;border:1px solid color-mix(in srgb,#7cff6b 34%,#2a3444);border-radius:999px;background:linear-gradient(135deg,rgba(124,255,107,.12),rgba(7,10,15,.96) 54%,rgba(255,255,255,.006));padding:.68rem .9rem;color:#7cff6b;font-size:.78rem;font-weight:1000;line-height:1;text-transform:uppercase}
+.scr-correction-ledger .scr-ledger-check b{color:#d9c9a3;font-size:.78rem;font-weight:1000}
+@media (min-width:980px){.scr-correction-grid{grid-template-columns:minmax(280px,.74fr) minmax(0,1.26fr)}}
+@media (max-width:760px){.scr-correction-ledger .scr-section-head p{font-size:.98rem}.scr-correction-ledger .scr-modifier-card{grid-template-columns:1fr;min-height:0;padding:.95rem}.scr-correction-ledger .scr-modifier-meter{min-height:132px}.scr-correction-ledger .scr-modifier-meter .scr-tile-value{font-size:2.95rem}.scr-modifier-copy h3{font-size:1.9rem}.scr-modifier-copy p{font-size:.9rem}.scr-correction-ledger .scr-ledger-head{display:grid}.scr-correction-ledger .scr-ledger-head span{text-align:left}.scr-correction-ledger .scr-ledger-row{grid-template-columns:2.8rem minmax(0,1fr);gap:.7rem}.scr-correction-ledger .scr-ledger-row p{grid-column:1/-1;font-size:.86rem}.scr-correction-ledger .scr-ledger-value{grid-column:1/-1;min-height:2.8rem}.scr-correction-ledger .scr-ledger-check{border-radius:18px}}
 @media (min-width:1120px){.scr-hero-grid{min-height:335px;grid-template-areas:"copy verdict";row-gap:0;padding:.5rem 2rem .75rem}.scr-hero .scr-score-panel{min-height:326px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:304px}.scr-hero .scr-main-score-rank{font-size:5.05rem;top:calc(50% + 2.18rem)}}
 @media (min-width:1120px) and (max-width:1399px){.scr-identity{max-width:690px;font-size:1.04rem;line-height:1.54}.scr-hero-grid{min-height:316px;padding:.35rem 2rem .62rem}.scr-hero .scr-score-panel{min-height:306px}.scr-hero .scr-score-panel-simple .scr-main-score-meter{min-height:284px}.scr-hero .scr-main-score-rank{font-size:4.85rem;top:calc(50% + 2.05rem)}}
 @media (max-width:1119px){.scr-hero-grid{padding-bottom:.65rem}.scr-hero .scr-main-score-rank{font-size:5rem;top:calc(50% + 2.25rem)}.scr-inspect-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem .7rem}.scr-inspect-meter{min-height:148px}}

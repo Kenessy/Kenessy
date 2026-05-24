@@ -149,6 +149,9 @@ async function auditDesignArtifacts(base) {
   assert(report.text.includes('.scr-reviewer-note .scr-section-head p'), 'reviewer note header paragraph emphasis styling is missing');
   assert(report.text.includes('.scr-keyword-primary'), 'reviewer keyword primary tag styling is missing');
   assert(report.text.includes('.scr-reviewer-note .scr-keyword-cloud span'), 'reviewer keyword capsule styling is missing');
+  assert(report.text.includes('.scr-correction-ledger .scr-section-head p'), 'correction ledger header paragraph emphasis styling is missing');
+  assert(report.text.includes('.scr-correction-ledger .scr-modifier-card'), 'correction modifier card styling is missing');
+  assert(report.text.includes('.scr-ledger-index'), 'correction ledger index styling is missing');
   await checkpoint(`design artifacts ok build=${buildId}`);
   return buildId;
 }
@@ -346,10 +349,33 @@ async function auditViewport(browser, base, buildId, viewport) {
     const axisMeters = [...document.querySelectorAll('.scr-axis-diagnosis .scr-d20-wrap.scr-score-meter-box.scr-signal-block')];
     const axisMeterRects = axisMeters.map(rectFor);
     const axisMeterValues = axisMeters.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim());
+    const correctionSection = document.querySelector('.scr-correction-ledger');
+    const correctionHead = correctionSection?.querySelector('.scr-section-head');
+    const correctionHeadDesc = correctionHead?.querySelector('p');
+    const correctionHeadDescStyle = correctionHeadDesc ? getComputedStyle(correctionHeadDesc) : null;
+    const modifierCards = [...document.querySelectorAll('.scr-correction-ledger .scr-modifier-card')];
+    const modifierCardStyles = modifierCards.map((el) => getComputedStyle(el));
+    const modifierCardRects = modifierCards.map(rectFor);
+    const modifierNames = modifierCards.map((el) => (el.querySelector('.scr-modifier-copy h3')?.textContent || '').trim());
+    const modifierLabels = modifierCards.map((el) => (el.querySelector('.scr-modifier-copy span')?.textContent || '').trim());
+    const modifierChipText = [...document.querySelectorAll('.scr-correction-ledger .scr-modifier-chips b')].map((el) => (el.textContent || '').trim()).join('|');
+    const modifierMeters = [...document.querySelectorAll('.scr-correction-ledger .scr-modifier-meter.scr-score-meter-box.scr-signal-block')];
+    const modifierMeterRects = modifierMeters.map(rectFor);
+    const modifierMeterValues = modifierMeters.map((el) => (el.querySelector('.scr-tile-value')?.textContent || '').trim());
+    const ledgerRows = [...document.querySelectorAll('.scr-correction-ledger .scr-ledger-row')];
+    const ledgerRowStyles = ledgerRows.map((el) => getComputedStyle(el));
+    const ledgerRowRects = ledgerRows.map(rectFor);
+    const ledgerNames = ledgerRows.map((el) => (el.querySelector('.scr-ledger-title h4')?.textContent || '').trim());
+    const ledgerLabels = ledgerRows.map((el) => (el.querySelector('.scr-ledger-title small')?.textContent || '').trim());
+    const ledgerValues = ledgerRows.map((el) => (el.querySelector('.scr-ledger-value b')?.textContent || '').trim());
+    const ledgerValueStyles = ledgerRows.map((el) => getComputedStyle(el.querySelector('.scr-ledger-value b')));
+    const ledgerCheck = correctionSection?.querySelector('.scr-ledger-check');
+    const ledgerHead = correctionSection?.querySelector('.scr-ledger-head');
     const signalBlocks = {
       main: document.querySelectorAll('.scr-main-score-meter.scr-score-meter-box.scr-signal-block').length,
       score: document.querySelectorAll('.scr-score-strip .scr-score-meter-box.scr-signal-block').length,
       axis: document.querySelectorAll('.scr-d20-wrap.scr-score-meter-box.scr-signal-block').length,
+      correctionMeters: modifierMeters.length,
       arc: document.querySelectorAll('.scr-evidence-marker.scr-score-meter-box.scr-signal-block').length,
       inspectMetrics: inspectMetrics.length,
       inspectMeters: inspectMeters.length,
@@ -568,6 +594,40 @@ async function auditViewport(browser, base, buildId, viewport) {
         meterText: axisMeters.map((el) => (el.textContent || '').replace(/\s+/g, ' ').trim()).join('|'),
         maxRight: Math.max(axisRowRects.reduce((max, rect) => Math.max(max, rect.right), 0), axisMeterRects.reduce((max, rect) => Math.max(max, rect.right), 0))
       },
+      correctionLedger: {
+        exists: Boolean(correctionSection),
+        kicker: (correctionHead?.querySelector('small')?.textContent || '').trim(),
+        title: (correctionHead?.querySelector('h2')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        desc: (correctionHeadDesc?.textContent || '').replace(/\s+/g, ' ').trim(),
+        descSize: correctionHeadDescStyle ? Number.parseFloat(correctionHeadDescStyle.fontSize) : 0,
+        descColor: correctionHeadDescStyle?.color || '',
+        modifierCount: modifierCards.length,
+        modifierNames: modifierNames.join('|'),
+        modifierLabels: modifierLabels.join('|'),
+        modifierValues: modifierMeterValues.join('|'),
+        modifierChipText,
+        modifierCardHasGradient: modifierCardStyles.every((style) => style.backgroundImage.includes('gradient')),
+        modifierCardMinHeight: modifierCardRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        modifierMeterCount: modifierMeters.length,
+        modifierMeterMinHeight: modifierMeterRects.reduce((min, rect) => Math.min(min, rect.height), Infinity),
+        ledgerHeadTitle: (ledgerHead?.querySelector('h3')?.textContent || '').trim(),
+        ledgerHeadSummary: (ledgerHead?.querySelector('span')?.textContent || '').replace(/\s+/g, ' ').trim(),
+        rowCount: ledgerRows.length,
+        rowNames: ledgerNames.join('|'),
+        rowLabels: ledgerLabels.join('|'),
+        rowValues: ledgerValues.join('|'),
+        rowHasGradient: ledgerRowStyles.every((style) => style.backgroundImage.includes('gradient')),
+        rowValueMinSize: ledgerValueStyles.reduce((min, style) => Math.min(min, Number.parseFloat(style.fontSize) || Infinity), Infinity),
+        checkLabel: (ledgerCheck?.querySelector('span')?.textContent || '').trim(),
+        checkValue: (ledgerCheck?.querySelector('b')?.textContent || '').trim(),
+        staleText: /(Row check|Danger Total|Parent total|Sub-component|MOD · 02)/i.test(correctionSection?.textContent || ''),
+        oldNodes: correctionSection?.querySelectorAll('.scr-extra-panel-top, .scr-extra-main, .scr-extra-footer, .scr-ledger-parent, .scr-ledger-subrow').length || 0,
+        maxRight: Math.max(
+          modifierCardRects.reduce((max, rect) => Math.max(max, rect.right), 0),
+          modifierMeterRects.reduce((max, rect) => Math.max(max, rect.right), 0),
+          ledgerRowRects.reduce((max, rect) => Math.max(max, rect.right), 0)
+        )
+      },
       metaChips: {
         count: metaChips.length,
         labels: metaChips.map((el) => (el.querySelector('small')?.textContent || '').trim()).join('|'),
@@ -636,10 +696,15 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.axisDiagnosis.rowCount === 5 && metrics.axisDiagnosis.labels === 'A · World pressure|L · Play engine|E · Forward pull|R · Fair clarity|T · Product state' && metrics.axisDiagnosis.names === 'Atmosphere|Loop|Engagement|Readability|Technical' && metrics.axisDiagnosis.grades === 'Phenomenal|Excellent|Excellent|Excellent|Excellent+', `${viewport.name} axis diagnosis row content mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
   assert(metrics.axisDiagnosis.rowHasGradient && metrics.axisDiagnosis.titleMinSize >= 26 && metrics.axisDiagnosis.bodyMinSize >= 14.5 && metrics.axisDiagnosis.bodyMinWeight >= 600 && metrics.axisDiagnosis.segmentMinHeight >= 8 && metrics.axisDiagnosis.segmentMinRadius >= 4, `${viewport.name} axis diagnosis row polish mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
   assert(metrics.axisDiagnosis.meterCount === 5 && metrics.axisDiagnosis.meterValues === '20|17|17|17|19' && metrics.axisDiagnosis.meterKickers === 0 && metrics.axisDiagnosis.meterNotes === 0 && !/(Axis|\/20)/i.test(metrics.axisDiagnosis.meterText) && metrics.axisDiagnosis.maxRight <= viewport.width + 1, `${viewport.name} axis diagnosis meter clutter/overflow mismatch ${JSON.stringify(metrics.axisDiagnosis)}`);
+  assert(metrics.correctionLedger.exists && metrics.correctionLedger.kicker === '06 · Score Correction' && metrics.correctionLedger.title === 'Modifier Ledger' && metrics.correctionLedger.desc.includes('90-axis score becomes 86') && metrics.correctionLedger.descSize >= 15.5 && metrics.correctionLedger.descColor !== 'rgb(133, 146, 165)', `${viewport.name} correction ledger heading/copy mismatch ${JSON.stringify(metrics.correctionLedger)}`);
+  assert(metrics.correctionLedger.modifierCount === 2 && metrics.correctionLedger.modifierNames === 'Extra|Danger' && metrics.correctionLedger.modifierLabels === 'Limited Agency|Residual Friction' && metrics.correctionLedger.modifierValues === '-3|-1' && metrics.correctionLedger.modifierChipText.includes('Audience fit ceiling') && metrics.correctionLedger.modifierChipText.includes('Traceable rows'), `${viewport.name} correction modifier card content mismatch ${JSON.stringify(metrics.correctionLedger)}`);
+  assert(metrics.correctionLedger.modifierCardHasGradient && metrics.correctionLedger.modifierCardMinHeight >= 132 && metrics.correctionLedger.modifierMeterCount === 2 && metrics.correctionLedger.modifierMeterMinHeight >= 128, `${viewport.name} correction modifier card layout mismatch ${JSON.stringify(metrics.correctionLedger)}`);
+  assert(metrics.correctionLedger.ledgerHeadTitle === 'Residual Pool' && metrics.correctionLedger.ledgerHeadSummary === '4 rows sum to -1' && metrics.correctionLedger.rowCount === 4 && metrics.correctionLedger.rowNames === 'Librarian Pathing Ambiguity|Demon Grab / Drop Weirdness|Retrofitted Stealth Affordances|Point-Blank Hit Evasion' && metrics.correctionLedger.rowValues === '-0.25|-0.25|-0.25|-0.25', `${viewport.name} correction friction ledger content mismatch ${JSON.stringify(metrics.correctionLedger)}`);
+  assert(metrics.correctionLedger.rowLabels.includes('Behavior-rule inconsistency') && metrics.correctionLedger.rowHasGradient && metrics.correctionLedger.rowValueMinSize >= 20 && metrics.correctionLedger.checkLabel === 'Ledger balanced' && metrics.correctionLedger.checkValue === 'Residual subtotal -1' && !metrics.correctionLedger.staleText && metrics.correctionLedger.oldNodes === 0 && metrics.correctionLedger.maxRight <= viewport.width + 1, `${viewport.name} correction friction ledger polish/overflow mismatch ${JSON.stringify(metrics.correctionLedger)}`);
   assert(metrics.metaChips.count === 4 && metrics.metaChips.labels === 'Status|Evidence|Spoilers|Ending caveat' && metrics.metaChips.values === 'Complete|Full run / veteran memory|Layered policy|Ending reconstructed' && metrics.metaChips.labelOverlapWithSignals === '', `${viewport.name} meta chip content/redundancy mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.metaChips.minHeight >= 38 && metrics.metaChips.hasCapsuleRadius && metrics.metaChips.hasGlassGradient && metrics.metaChips.hasToneBorder && metrics.metaChips.labelMinSize >= 10 && metrics.metaChips.labelMaxBorder === 0 && metrics.metaChips.labelMaxRadius === 0 && metrics.metaChips.labelHasAccentGradient && metrics.metaChips.valueHasNoFill && metrics.metaChips.maxLeftOverflow >= -1 && metrics.metaChips.maxRight <= viewport.width + 1, `${viewport.name} meta chip layout mismatch ${JSON.stringify(metrics.metaChips)}`);
   assert(metrics.inspectHeader.kicker === '01 · Player Fit Check' && metrics.inspectHeader.title === 'Is This Game For You?' && metrics.inspectHeader.desc.includes('player-match read') && metrics.inspectHeader.descSize >= 16.5 && metrics.inspectHeader.descColor !== 'rgb(133, 146, 165)', `${viewport.name} INSPECT header copy/style mismatch ${JSON.stringify(metrics.inspectHeader)}`);
-  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 29, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
+  assert(metrics.signalBlocks.main === 1 && metrics.signalBlocks.score === 7 && metrics.signalBlocks.axis === 5 && metrics.signalBlocks.correctionMeters === 2 && metrics.signalBlocks.arc === 9 && metrics.signalBlocks.inspectMetrics === 7 && metrics.signalBlocks.inspectMeters === 7 && metrics.signalBlocks.inspectPlayers === 7 && metrics.signalBlocks.inspectPanels === 0 && metrics.signalBlocks.inspectHeroRows === 0 && metrics.signalBlocks.inspectInScorePanel === 0 && metrics.signalBlocks.inspectInCopy === 0 && metrics.signalBlocks.inspectAfterHero && metrics.signalBlocks.scoreGrade === 0 && metrics.signalBlocks.scoreHeader === 0 && metrics.signalBlocks.scoreFoot === 0 && metrics.signalBlocks.mainScoreTitle === 'Final Score' && metrics.signalBlocks.mainScoreRank === 'A' && metrics.signalBlocks.mainScoreKicker === 0 && metrics.signalBlocks.mainScoreNote === 0 && metrics.signalBlocks.meterScreens === 31, `${viewport.name} score-screen signal block coverage mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   assert(metrics.signalBlocks.inspectMetricNames === 'Immersion|Narrative|Systems|Performance|Exploration|Comfort|Teamplay', `${viewport.name} INSPECT metric order mismatch ${JSON.stringify(metrics.signalBlocks)}`);
   const expectedInspectMeterHeight = viewport.width < 760 ? 124 : viewport.width < 1120 ? 144 : 154;
   const inspectValueColors = metrics.signalBlocks.inspectMeterValueColors.split('|');
