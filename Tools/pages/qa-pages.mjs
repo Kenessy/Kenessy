@@ -130,7 +130,7 @@ async function auditHttpSurface(base) {
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
   assert(root.text.includes('I find the hidden failure before it becomes obvious.'), 'root homepage hero copy missing');
-  assert(root.text.includes('CEO readout'), 'root homepage operator panel missing');
+  assert(root.text.includes('Operator readout'), 'root homepage operator panel missing');
   assert(root.text.includes('What This Is'), 'root homepage about section missing');
   assert(root.text.includes('id="work"'), 'root homepage work section missing');
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
@@ -159,9 +159,11 @@ async function auditHttpSurface(base) {
   assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
   assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report does not link panel manifest');
-  assert(quantumBreak.text.includes('Score locked'), 'Quantum Break score lock missing');
+  assert(quantumBreak.text.includes('Score locked') && quantumBreak.text.includes('Evidence Gate'), 'Quantum Break score lock missing');
   assert(quantumBreak.text.includes('Replay Notes So Far'), 'Quantum Break report live evidence section missing');
   assert(quantumBreak.text.includes('Project Promenade'), 'Quantum Break report does not surface Page 01 evidence');
+  assert(quantumBreak.text.includes('Replay Gate Matrix') && quantumBreak.text.includes('Combat feel') && quantumBreak.text.includes('Episode flow') && quantumBreak.text.includes('PC state') && quantumBreak.text.includes('Final act'), 'Quantum Break report gate matrix missing');
+  assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
   assert(!quantumBreak.text.includes('[This becomes'), 'Quantum Break report still exposes raw verdict placeholder text');
   assert(!quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed evidence placeholders');
 
@@ -179,6 +181,7 @@ async function auditHttpSurface(base) {
   const panelManifestJson = JSON.parse(panelManifest.text);
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio is not 16:9');
   assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
+  assert(Array.isArray(panelManifestJson.styleRules) && panelManifestJson.styleRules.length >= 4, 'Quantum Break panel manifest styleRules missing');
   assert(Array.isArray(panelManifestJson.slots) && panelManifestJson.slots.length >= 6, 'Quantum Break panel manifest slots missing');
   assert(panelManifestJson.slots.filter((slot) => slot.requiredForCurrentPage).length === 4, 'Quantum Break panel manifest current-page required slots mismatch');
   assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png'), 'Quantum Break panel manifest missing Page 01-D slot');

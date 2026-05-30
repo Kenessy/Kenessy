@@ -4,6 +4,12 @@ This directory is the source-of-truth handoff for generated Quantum Break journa
 
 Default format: `16:9` landscape PNG.
 
+Art direction guardrails:
+- Keep one coherent cinematic sci-fi comic style across the full page.
+- Keep silhouettes, faces, and time effects readable at small mobile widths.
+- Avoid large non-diegetic typography, logos, fake UI overlays, or captions inside the image.
+- Prefer dark university/lab mood, blue chronon light, amber emergency contrast, and clean composition.
+
 Drop generated images into `docs/assets/img/quantum-break/` using the exact filenames in `panel-manifest.json`, then run:
 
 ```powershell

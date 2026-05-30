@@ -5,6 +5,12 @@
   "assetBase": "docs/assets/img/quantum-break/",
   "publicBase": "https://kenessy.github.io/Kenessy/assets/img/quantum-break/",
   "status": "waiting-for-generated-images",
+  "styleRules": [
+    "16:9 landscape PNGs only for the current page.",
+    "Use one coherent cinematic sci-fi comic style across all panels.",
+    "Keep silhouettes and action readable; avoid over-busy time distortion.",
+    "Avoid large non-diegetic typography, logos, UI overlays, or fake captions."
+  ],
   "slots": [
     {
       "id": "page-01-a",

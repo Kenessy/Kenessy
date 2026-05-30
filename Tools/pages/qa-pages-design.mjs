@@ -128,6 +128,7 @@ async function auditDesignArtifacts(base) {
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('.home-root'), 'portfolio homepage CSS is missing');
   assert(root.text.includes('.operator-panel'), 'portfolio homepage operator panel styling is missing');
+  assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout copy is stale');
   assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
   assert(root.text.includes('.about-grid'), 'portfolio homepage about section styling is missing');
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
@@ -146,11 +147,19 @@ async function auditDesignArtifacts(base) {
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
   assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
   assert(quantumBreakJourney.text.includes('.asset-links') && quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey asset manifest styling/link is missing');
+  assert(quantumBreakJourney.text.includes('one coherent cinematic sci-fi comic style') && quantumBreakJourney.text.includes('Avoid large fake typography'), 'Quantum Break journey prompt style guardrails are missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
+  const quantumBreakReport = await fetchText(url(base, 'plater-game-reports/games/quantum-break/'));
+  assert(quantumBreakReport.text.includes('.score-panel-locked') && quantumBreakReport.text.includes('.evidence-gates') && quantumBreakReport.text.includes('.gate-card'), 'Quantum Break report evidence-gate styling is missing');
+  assert(quantumBreakReport.text.includes('.hero h1{font-size:104px}') && quantumBreakReport.text.includes('.section-head h2{font-size:44px}'), 'Quantum Break report fixed type-size overrides are missing');
+  assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');
+  assert(quantumBreakReport.text.includes('<div class="num">High</div>') && quantumBreakReport.text.includes('<div class="num">None</div>'), 'Quantum Break report provisional fit labels are missing');
+  assert(!/>--</.test(quantumBreakReport.text), 'Quantum Break report still has raw dash placeholders');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
   assert(panelManifest.text.includes('"requiredForCurrentPage": true'), 'Quantum Break panel manifest does not mark current-page required slots');
+  assert(panelManifest.text.includes('"styleRules"') && panelManifest.text.includes('coherent cinematic sci-fi comic style'), 'Quantum Break panel manifest styleRules missing');
   const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   assert(panelReadme.text.includes('npm run qa:qb-assets'), 'Quantum Break asset README does not document asset QA');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
