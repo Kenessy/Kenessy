@@ -30,14 +30,14 @@ const preyReportSourcePath = path.join(scriptDir, 'sources/prey/report.html');
 const preyJourneySourcePath = path.join(scriptDir, 'sources/prey/journey.html');
 const preyAssetManifestSourcePath = path.join(scriptDir, 'sources/prey/assets/flight-recorder-manifest.json');
 const preyAssetReadmeSourcePath = path.join(scriptDir, 'sources/prey/assets/README.md');
-const preySplashSourcePath = path.join(scriptDir, 'sources/prey/prey-review-splash.svg');
+const preySplashSourcePath = path.join(scriptDir, 'sources/prey/prey-review-splash.png');
 const quantumBreakAssetPublicDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
 const quantumBreakAssetManifestPublicPath = path.join(quantumBreakAssetPublicDir, 'panel-manifest.json');
 const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 'README.md');
 const preyAssetPublicDir = path.join(repoRoot, 'docs/assets/img/prey');
 const preyAssetManifestPublicPath = path.join(preyAssetPublicDir, 'flight-recorder-manifest.json');
 const preyAssetReadmePublicPath = path.join(preyAssetPublicDir, 'README.md');
-const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-splash.svg');
+const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-splash.png');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
 const robotsPath = path.join(repoRoot, 'docs/robots.txt');
@@ -392,7 +392,7 @@ async function main() {
   logStep(`reading source ${path.relative(repoRoot, preyAssetReadmeSourcePath)}`);
   const preyAssetReadme = await readFile(preyAssetReadmeSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, preySplashSourcePath)}`);
-  const preySplashSvg = await readFile(preySplashSourcePath, 'utf8');
+  const preySplashPng = await readFile(preySplashSourcePath);
   const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
   const preyAssetManifestJson = JSON.parse(preyAssetManifest);
   const wiredQuantumBreakJourneyHtml = await renderQuantumBreakJourneyImages(quantumBreakJourneyHtml, quantumBreakAssetManifestJson);
@@ -409,7 +409,7 @@ async function main() {
     preyJourneySourceHtml,
     preyAssetManifest,
     preyAssetReadme,
-    preySplashSvg
+    preySplashPng.toString('base64')
   ].join('\n\n/* kenessy-pages-build-input */\n\n');
   const buildId = sha256(buildHashInput).slice(0, 12);
   const preyReportHtml = preyReportSourceHtml.replaceAll('__BUILD_ID__', buildId);
@@ -460,7 +460,7 @@ async function main() {
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
     await writeFile(preyAssetManifestPublicPath, preyAssetManifest, 'utf8');
     await writeFile(preyAssetReadmePublicPath, preyAssetReadme, 'utf8');
-    await writeFile(preySplashPublicPath, preySplashSvg, 'utf8');
+    await writeFile(preySplashPublicPath, preySplashPng);
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
     await writeFile(robotsPath, robotsTxt(), 'utf8');

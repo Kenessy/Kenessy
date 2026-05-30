@@ -30,7 +30,7 @@ export function portfolioHomeHtml({
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashHref = 'assets/img/metro-2033-redux-review-splash.png';
   const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
-  const preySplashHref = 'assets/img/prey-review-splash.svg';
+  const preySplashHref = 'assets/img/prey-review-splash.png';
   const canonical = siteBase;
 
   return `<!doctype html>
@@ -613,7 +613,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         </article>
         <article class="review-card prey-card">
           <a class="review-media" href="${preyHref}" aria-label="Open Prey entry point">
-            <img src="${preySplashHref}" width="1600" height="900" alt="">
+            <img src="${preySplashHref}" width="1672" height="941" alt="">
           </a>
           <div class="review-copy">
             <div class="tag-row"><span class="tag green">Owned</span><span class="tag amber">Session 01</span><span class="tag cyan">Flight recorder ready</span></div>

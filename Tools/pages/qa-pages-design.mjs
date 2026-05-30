@@ -151,7 +151,7 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash asset is missing');
-  assert(root.text.includes('prey-review-splash.svg'), 'portfolio homepage Prey splash asset is missing');
+  assert(root.text.includes('prey-review-splash.png'), 'portfolio homepage Prey splash asset is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
@@ -197,7 +197,7 @@ async function auditDesignArtifacts(base) {
   assert(preyReport.text.includes('ALERTED entry point / Prey 2017') && preyReport.text.includes('Prey score unlock gates'), 'Prey report entry/gate copy is missing');
   assert(preyReport.text.includes('Flight recorder ready') && preyReport.text.includes('Open Recorder') && preyReport.text.includes('journey/'), 'Prey report recorder link/copy is missing');
   assert(preyReport.text.includes('.fit-grid') && preyReport.text.includes('.gate-matrix') && preyReport.text.includes('.score-strip') && preyReport.text.includes('.tag-cloud'), 'Prey report core styling is missing');
-  assert(preyReport.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey report splash asset is missing');
+  assert(preyReport.text.includes('../../../assets/img/prey-review-splash.png'), 'Prey report splash asset is missing');
   assert(!preyReport.text.includes('Do Not Start The Journal Yet') && !preyReport.text.includes('Journal not started'), 'Prey report still has stale no-journal copy');
   assert(!/font-size:clamp\([^)]*vw/i.test(preyReport.text), 'Prey report CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(preyReport.text), 'Prey report CSS has negative letter spacing');

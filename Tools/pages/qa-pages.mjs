@@ -147,7 +147,7 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('Photo evidence ready') && root.text.includes('Photo manifest'), 'root homepage Quantum Break photo handoff links missing');
   assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'root homepage Quantum Break handoff asset links missing');
   assert(root.text.includes('plater-game-reports/games/prey/') && root.text.includes('plater-game-reports/games/prey/journey/') && root.text.includes('Prey') && root.text.includes('Flight recorder ready'), 'root homepage Prey entry point/recorder missing');
-  assert(root.text.includes('assets/img/prey-review-splash.svg'), 'root homepage Prey splash missing');
+  assert(root.text.includes('assets/img/prey-review-splash.png'), 'root homepage Prey splash missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'root homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire into visible photo evidence slots'), 'root homepage Quantum Break review/journal state copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
@@ -165,7 +165,7 @@ async function auditHttpSurface(base) {
   await fetchText(url(base, 'assets/img/triad-validation-flow.png'));
   await fetchText(url(base, 'assets/img/metro-2033-redux-review-splash.png'));
   await fetchText(url(base, 'assets/img/quantum-break-review-journey-splash.svg'));
-  await fetchText(url(base, 'assets/img/prey-review-splash.svg'));
+  await fetchText(url(base, 'assets/img/prey-review-splash.png'));
   await fetchText(url(base, preyFlightRecorderManifestPath));
   await fetchText(url(base, 'assets/img/prey/README.md'));
 
@@ -203,7 +203,7 @@ async function auditHttpSurface(base) {
   assert(prey.text.includes('Flight recorder ready') && prey.text.includes('Open Recorder') && prey.text.includes('journey/'), 'Prey page should link the flight recorder');
   assert(prey.text.includes('Prey score unlock gates') && prey.text.includes('Talos I pull') && prey.text.includes('System agency') && prey.text.includes('Combat friction') && prey.text.includes('Ending trust'), 'Prey page score gates missing');
   assert(prey.text.includes('Immersive sim') && prey.text.includes('Mimic paranoia') && prey.text.includes('Falsifiers'), 'Prey page core review scope missing');
-  assert(prey.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey page local splash asset missing');
+  assert(prey.text.includes('../../../assets/img/prey-review-splash.png'), 'Prey page local splash asset missing');
   assert(!prey.text.includes('Do Not Start The Journal Yet') && !prey.text.includes('Journal not started') && !prey.text.includes('data-qb-slot'), 'Prey page has stale no-journal or Quantum Break slot copy');
   assert(!/>--</.test(prey.text), 'Prey page still exposes raw dash placeholders');
 

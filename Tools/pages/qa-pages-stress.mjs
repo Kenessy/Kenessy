@@ -148,7 +148,7 @@ async function auditHttp(base) {
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash missing');
-  assert(root.text.includes('prey-review-splash.svg'), 'portfolio homepage Prey splash missing');
+  assert(root.text.includes('prey-review-splash.png'), 'portfolio homepage Prey splash missing');
   assert(!/\.site-nav\{[^}]*position:sticky/i.test(root.text), 'portfolio homepage nav is sticky and can contaminate full-page captures');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
@@ -180,7 +180,7 @@ async function auditHttp(base) {
   const prey = await fetchText(url(base, preyPath));
   assert(prey.text.includes('ALERTED entry point / Prey 2017') && prey.text.includes('Prey score unlock gates'), 'Prey report entry/gates missing');
   assert(prey.text.includes('Flight recorder ready') && prey.text.includes('Open Recorder') && prey.text.includes('journey/'), 'Prey report recorder contract missing');
-  assert(prey.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey report local splash asset missing');
+  assert(prey.text.includes('../../../assets/img/prey-review-splash.png'), 'Prey report local splash asset missing');
   assert(!prey.text.includes('data-qb-slot') && !prey.text.includes('Do Not Start The Journal Yet') && !prey.text.includes('Journal intentionally not started'), 'Prey report has stale no-journal or Quantum Break slot copy');
   assert(!/>--</.test(prey.text), 'Prey report still exposes raw dash placeholders');
   const preyJourney = await fetchText(url(base, preyJourneyPath));
