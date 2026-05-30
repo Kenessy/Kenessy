@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/">
 <meta name="description" content="Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.">
 <meta name="theme-color" content="#07090d">
-<meta name="build-id" content="2e1c52098ff2">
+<meta name="build-id" content="ddc85c0bdacb">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kenessy - Portfolio, Systems Design, Adversarial QA">
 <meta property="og:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.">
@@ -302,11 +302,19 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .journal-media{min-height:280px;border-right:1px solid var(--line);background:linear-gradient(145deg,rgba(19,212,232,.10),rgba(141,120,255,.06));display:grid;place-items:center}
 .journal-media img{width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center}
 .journal-copy{display:grid;align-content:center;padding:22px}
+.journal-contract{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.journal-contract span{position:relative;overflow:hidden;min-height:58px;border:1px solid rgba(218,229,241,.12);background:linear-gradient(135deg,rgba(19,212,232,.065),rgba(7,9,13,.62) 58%,rgba(255,138,31,.04));padding:9px 10px;color:var(--bone);font-size:12px;line-height:1.16;font-weight:920}
+.journal-contract span::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--cyan),var(--orange));opacity:.82}
+.journal-contract b{display:block;margin-bottom:5px;color:#7fe9f3;font-size:9px;line-height:1;font-weight:1000;text-transform:uppercase}
 .journal-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}
 .journal-slot{position:relative;overflow:hidden;border:1px solid rgba(19,212,232,.34);background:linear-gradient(145deg,rgba(19,212,232,.08),rgba(7,9,13,.70));aspect-ratio:16/9;display:grid;align-content:end;padding:10px;text-align:left;text-transform:uppercase}
 .journal-slot::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),var(--orange));opacity:.86}
 .journal-slot b{position:relative;display:block;color:#7fe9f3;font-size:10px;line-height:1;font-weight:1000}
 .journal-slot span{position:relative;display:block;margin-top:5px;color:#d6c793;font-size:10px;line-height:1.16;font-weight:900}
+.journal-file-queue{display:grid;gap:7px;margin-top:10px}
+.journal-file-queue div{display:grid;grid-template-columns:82px minmax(0,1fr);gap:8px;align-items:center;border:1px solid rgba(218,229,241,.10);background:rgba(7,9,13,.50);padding:8px 9px}
+.journal-file-queue b{color:#7fe9f3;font-size:10px;line-height:1;font-weight:1000;text-transform:uppercase}
+.journal-file-queue code{min-width:0;color:#d6c793;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;line-height:1.25;font-weight:850;overflow-wrap:anywhere}
 .journal-note{margin-top:14px;border:1px solid rgba(255,138,31,.34);border-left:3px solid var(--orange);background:rgba(255,138,31,.055);padding:11px 12px;color:#d6c793;font-size:13px;line-height:1.42;font-weight:780}
 .journal-note b{color:#ffb347;text-transform:uppercase}
 .journal-asset-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -328,6 +336,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .qb-card .review-media img{aspect-ratio:1672/941}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
+  .journal-contract{grid-template-columns:1fr}
   .journal-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
   .signal-row,.lane-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hire-grid{grid-template-columns:1fr}
@@ -351,6 +360,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .lane-grid{grid-template-columns:1fr}
   .about-line{grid-template-columns:1fr}
   .journal-slots{grid-template-columns:1fr}
+  .journal-file-queue div{grid-template-columns:1fr}
   .review-status{grid-template-columns:1fr}
   .panel-top,.proof-line{grid-template-columns:1fr}
   .build-chip,.status-dot{justify-self:start}
@@ -387,7 +397,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
       <aside class="operator-panel" aria-label="Operator dossier">
         <div class="panel-top">
           <span><small>Operator readout</small><strong>High-agency operator for ambiguous systems.</strong></span>
-          <span class="build-chip">Build 2e1c52098ff2</span>
+          <span class="build-chip">Build ddc85c0bdacb</span>
         </div>
         <div class="hire-read">
           <div class="hire-cell"><b>Sees</b><span>Hidden failure modes</span><small>Not just what works. What breaks when real people touch it.</small></div>
@@ -530,7 +540,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <p>The Metro report is the current flagship. Quantum Break is staged under it as the next live draft with a separate journey page.</p>
       </div>
       <div class="review-stack">
-        <a class="review-card" href="plater-game-reports/games/metro-2033-redux/?v=2e1c52098ff2">
+        <a class="review-card" href="plater-game-reports/games/metro-2033-redux/?v=ddc85c0bdacb">
           <span class="review-media" aria-hidden="true">
             <img src="assets/img/metro-2033-redux-review-splash.png" width="1600" height="900" alt="">
           </span>
@@ -576,11 +586,22 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 image-ready</span><span class="tag green">Prompt pack ready</span></div>
           <h3>Illustrated Review Journal</h3>
           <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
+          <div class="journal-contract" aria-label="Quantum Break image contract">
+            <span><b>Canvas</b> 16:9 landscape panels</span>
+            <span><b>Page 01</b> 4 required image slots</span>
+            <span><b>Output</b> Comic-style review evidence</span>
+          </div>
           <div class="journal-slots" aria-label="Current image format recommendation">
-            <div class="journal-slot"><b>Lead</b><span>16:9 panel / place</span></div>
-            <div class="journal-slot"><b>Cause</b><span>16:9 panel / action</span></div>
-            <div class="journal-slot"><b>Proof</b><span>16:9 panel / evidence</span></div>
-            <div class="journal-slot"><b>Drag</b><span>16:9 panel / friction</span></div>
+            <div class="journal-slot"><b>Panel A</b><span>University approach</span></div>
+            <div class="journal-slot"><b>Panel B</b><span>Paul corridor</span></div>
+            <div class="journal-slot"><b>Panel C</b><span>Science primer</span></div>
+            <div class="journal-slot"><b>Panel D</b><span>Will shadow</span></div>
+          </div>
+          <div class="journal-file-queue" aria-label="Quantum Break Page 01 drop queue">
+            <div><b>01-A</b><code>qb-page-01-a-university-exterior.png</code></div>
+            <div><b>01-B</b><code>qb-page-01-b-paul-corridor.png</code></div>
+            <div><b>01-C</b><code>qb-page-01-c-science-primer.png</code></div>
+            <div><b>01-D</b><code>qb-page-01-d-will-shadow.png</code></div>
           </div>
           <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page when the generated images arrive.</div>
           <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Panel manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
@@ -606,7 +627,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 </main>
 <footer class="footer">
   <div class="wrap">
-    <span>Kenessy Pages / Portfolio build 2e1c52098ff2</span>
+    <span>Kenessy Pages / Portfolio build ddc85c0bdacb</span>
     <span><a href="plater-game-reports/">Reports</a> / <a href="apocalypse-express/">Apocalypse Express</a> / <a href="https://github.com/Kenessy/Kenessy">GitHub</a></span>
   </div>
 </footer>

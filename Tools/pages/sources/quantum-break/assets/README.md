@@ -30,7 +30,9 @@ Page 01 prompts:
 
 Next-page candidates:
 - `qb-page-02-a-airlock-threshold.png`: Jack and Paul at the machine threshold, clean tech door, the experiment still controlled but visibly about to cross into danger.
-- `qb-page-02-b-first-anomaly.png`: Time fracture beginning, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.
+- `qb-page-02-b-first-anomaly.png`: Time fracture proof after the machine escalation, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.
+- `qb-page-02-c-core-detonation.png`: Time machine core overloading and detonating, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.
+- `qb-page-02-d-frozen-will.png`: Will frozen in a time stutter while Jack reaches toward him, still room, suspended debris, first readable time-stop rescue beat.
 
 Drop generated images into `docs/assets/img/quantum-break/` using the exact filenames in `panel-manifest.json`, then run the build so the journey page auto-wires any matching manifest files:
 
