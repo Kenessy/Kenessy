@@ -153,10 +153,13 @@ async function auditHttpSurface(base) {
   assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
   assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
   assert(quantumBreak.text.includes('Score locked'), 'Quantum Break score lock missing');
+  assert(!quantumBreak.text.includes('[This becomes'), 'Quantum Break report still exposes raw verdict placeholder text');
+  assert(!quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed evidence placeholders');
 
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey route lock missing');
   assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
+  assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state the current image aspect-ratio workflow');
 
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`${bundleName}?v=${buildId}`), 'report HTML does not load versioned bundle');

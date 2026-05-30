@@ -141,8 +141,10 @@ async function auditHttp(base) {
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
+  assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
+  assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state 16:9 image workflow');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
 }
