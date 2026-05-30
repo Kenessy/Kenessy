@@ -3,6 +3,7 @@
 /docs/assets/img/*.png binary
 /docs/assets/img/**/*.png binary
 /Tools/pages/** text eol=lf
+/Tools/pages/**/*.png binary
 /package.json text eol=lf
 /package-lock.json text eol=lf
 /.gitignore text eol=lf
