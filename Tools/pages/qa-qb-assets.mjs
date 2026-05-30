@@ -7,6 +7,7 @@ const repoRoot = path.resolve(scriptDir, '../..');
 const sourceManifestPath = path.join(scriptDir, 'sources/quantum-break/assets/panel-manifest.json');
 const publicManifestPath = path.join(repoRoot, 'docs/assets/img/quantum-break/panel-manifest.json');
 const assetDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
+const journeyIndexPath = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break/journey/index.html');
 const outputDir = path.join(repoRoot, '.cache/qb-asset-qa');
 const requireCurrentPage = process.argv.includes('--require-current') || process.argv.includes('--strict');
 const requireAll = process.argv.includes('--require-all');
@@ -102,6 +103,12 @@ async function main() {
   const { filenames } = validateManifest(publicManifest);
   await checkpoint('public manifest mirrors source');
 
+  assert(await fileExists(journeyIndexPath), 'public Quantum Break journey missing; run npm run build:metro');
+  const journeyHtml = await readFile(journeyIndexPath, 'utf8');
+  assert(journeyHtml.includes('.panel-frame-ready:before{display:none}'), 'journey is missing ready-frame image CSS');
+  assert(journeyHtml.includes('The build auto-wires any matching image file into its manifest slot.'), 'journey is missing auto-wiring handoff text');
+  await checkpoint('journey page loaded for wiring audit');
+
   const entries = await readdir(assetDir, { withFileTypes: true });
   const allowedSupportFiles = new Set(['README.md', 'panel-manifest.json']);
   const unexpectedFiles = entries
@@ -115,6 +122,8 @@ async function main() {
   for (const slot of publicManifest.slots) {
     const filePath = path.join(assetDir, slot.filename);
     const exists = await fileExists(filePath);
+    const imageSrc = `../../../../assets/img/quantum-break/${slot.filename}`;
+    assert(journeyHtml.includes(`data-qb-slot="${slot.id}"`), `journey missing data slot ${slot.id}`);
     const slotResult = {
       id: slot.id,
       filename: slot.filename,
@@ -122,6 +131,8 @@ async function main() {
       exists
     };
     if (!exists) {
+      assert(!journeyHtml.includes(`data-image-file="${slot.filename}"`), `missing image ${slot.filename} is still wired in journey`);
+      assert(!journeyHtml.includes(imageSrc), `missing image ${slot.filename} still has a journey src`);
       missingCount += 1;
       runState.slots.push(slotResult);
       await checkpoint(`missing ${slot.filename}`, { requiredForCurrentPage: slot.requiredForCurrentPage });
@@ -130,6 +141,9 @@ async function main() {
       }
       continue;
     }
+
+    assert(journeyHtml.includes(`data-image-file="${slot.filename}"`), `present image ${slot.filename} is not wired in journey; run npm run build:metro`);
+    assert(journeyHtml.includes(imageSrc), `present image ${slot.filename} src missing from journey; run npm run build:metro`);
 
     const buffer = await readFile(filePath);
     const { width, height } = parsePngDimensions(buffer, slot.filename);
@@ -143,6 +157,7 @@ async function main() {
     await checkpoint(`validated ${slot.filename}`, slotResult);
   }
 
+  await checkpoint('journey wiring ok', { presentCount, missingCount });
   await checkpoint('complete', { presentCount, missingCount });
 }
 

@@ -145,9 +145,12 @@ async function auditDesignArtifacts(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
+  assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey image slot markers are missing');
+  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS is missing');
   assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
   assert(quantumBreakJourney.text.includes('.asset-links') && quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey asset manifest styling/link is missing');
   assert(quantumBreakJourney.text.includes('one coherent cinematic sci-fi comic style') && quantumBreakJourney.text.includes('Avoid large fake typography'), 'Quantum Break journey prompt style guardrails are missing');
+  assert(quantumBreakJourney.text.includes('build auto-wires any matching image file'), 'Quantum Break journey auto-wiring contract is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
   const quantumBreakReport = await fetchText(url(base, 'plater-game-reports/games/quantum-break/'));

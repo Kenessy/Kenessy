@@ -125,6 +125,8 @@ h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:
     linear-gradient(145deg,#07090d,#101923);
 }
 .panel-frame:before{content:"";position:absolute;inset:12px;border:1px dashed rgba(23,215,255,.36)}
+.panel-frame-ready:before{display:none}
+.panel-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .slot-label{position:relative;z-index:1;color:var(--muted);text-align:center;padding:18px;font-size:12px;font-weight:1000;text-transform:uppercase}
 .image-panel figcaption{padding:12px;color:#c9d9e7;font-size:13px;line-height:1.45;font-weight:760}
 .story-copy{border:1px solid var(--line);background:linear-gradient(145deg,rgba(8,12,18,.92),rgba(5,7,12,.98));padding:18px}
@@ -264,7 +266,7 @@ footer{padding:26px 0;color:var(--muted)}
         <div class="comic-board">
           <div class="comic-lead">
             <figure class="image-panel hero-panel">
-              <div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Panel A / 16:9<br>Riverport University exterior<br>protest / 4 AM arrival</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-a"><div class="slot-label">Panel A / 16:9<br>Riverport University exterior<br>protest / 4 AM arrival</div></div>
               <figcaption>Establish the place before the time fracture: cold campus, Monarch pressure, early-morning arrival, and the sense that the experiment has already escaped ordinary control.</figcaption>
             </figure>
             <div class="story-copy">
@@ -277,15 +279,15 @@ footer{padding:26px 0;color:var(--muted)}
           </div>
           <div class="panel-row">
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Panel B / 16:9<br>Paul leading Jack<br>lab corridor threshold</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-b"><div class="slot-label">Panel B / 16:9<br>Paul leading Jack<br>lab corridor threshold</div></div>
               <figcaption>Paul frames Project Promenade as a proof moment. The demonstration becomes a last attempt to prove the machine works before the institution closes around it.</figcaption>
             </figure>
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Panel C / 16:9<br>Meyer-Joyce field<br>black-hole primer</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-c"><div class="slot-label">Panel C / 16:9<br>Meyer-Joyce field<br>black-hole primer</div></div>
               <figcaption>The science primer lands as short sci-fi texture rather than a full physics lecture: enough to sell the premise, not enough to slow the scene down.</figcaption>
             </figure>
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Panel D / 16:9<br>Will Joyce shadow<br>family tension seed</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-d"><div class="slot-label">Panel D / 16:9<br>Will Joyce shadow<br>family tension seed</div></div>
               <figcaption>Will Joyce is already a ghost-presence in the scene. Paul's secrecy around Jack's visit creates tension before the machine is even activated.</figcaption>
             </figure>
           </div>
@@ -314,9 +316,9 @@ footer{padding:26px 0;color:var(--muted)}
         <p>Next update should begin when Jack and Paul enter the airlock / machine sequence and the time experiment stops being just a presentation.</p>
       </div>
       <div class="next-grid">
-        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Next 01 / 16:9<br>Airlock threshold</div></div><figcaption>Project Promenade stops being an abstract pitch and becomes a physical threshold.</figcaption></figure>
+        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-a"><div class="slot-label">Next 01 / 16:9<br>Airlock threshold</div></div><figcaption>Project Promenade stops being an abstract pitch and becomes a physical threshold.</figcaption></figure>
         <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Next 02 / 16:9<br>Machine chamber / core</div></div><figcaption>The machine should sell scale, danger, sterile confidence, and the human error about to happen.</figcaption></figure>
-        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Next 03 / 16:9<br>First time anomaly</div></div><figcaption>The first fracture image should show whether the visual identity remains readable under spectacle.</figcaption></figure>
+        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-b"><div class="slot-label">Next 03 / 16:9<br>First time anomaly</div></div><figcaption>The first fracture image should show whether the visual identity remains readable under spectacle.</figcaption></figure>
       </div>
     </div>
   </section>
@@ -335,7 +337,7 @@ footer{padding:26px 0;color:var(--muted)}
         <article class="brief-card"><small>Page 02-A</small><h3>Airlock threshold</h3><p>Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
         <article class="brief-card"><small>Page 02-B</small><h3>First anomaly</h3><p>Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing.</p><code>qb-page-02-b-first-anomaly.png</code></article>
       </div>
-      <div class="prompt-note" style="margin-top:14px"><b>Drop-in contract:</b><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact, use 16:9 PNGs, and keep one coherent cinematic sci-fi comic style across the whole page. Avoid large fake typography or UI overlays inside the images; the page itself handles captions and labels.</p></div>
+      <div class="prompt-note" style="margin-top:14px"><b>Drop-in contract:</b><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact, use 16:9 PNGs, and keep one coherent cinematic sci-fi comic style across the whole page. Avoid large fake typography or UI overlays inside the images; the page itself handles captions and labels. The build auto-wires any matching image file into its manifest slot.</p></div>
     </div>
   </section>
 </main>

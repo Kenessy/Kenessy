@@ -1,7 +1,7 @@
 import { build } from 'esbuild';
 import { portfolioHomeHtml } from './site-home.mjs';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,6 +58,19 @@ function logStep(message) {
   console.log(`[build:metro] ${new Date().toISOString()} ${message}`);
 }
 
+async function fileExists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function extractTemplateCss(source) {
   const match = source.match(/const TEMPLATE_CSS = `([\s\S]*)`;\s*$/);
   if (!match) {
@@ -71,6 +84,56 @@ function transformedSourceWithoutInlineStyle(source, cssStart) {
     .slice(0, cssStart)
     .replace(/\s*<TemplateCSS \/>\s*/m, '\n')
     .replace(/\s*function TemplateCSS\(\) {\s*return <style>{TEMPLATE_CSS}<\/style>;\s*}\s*/m, '\n');
+}
+
+function quantumBreakImageAlt(slot) {
+  return `Quantum Break journal panel: ${slot.brief}`;
+}
+
+async function renderQuantumBreakJourneyImages(html, manifest) {
+  if (!manifest || !Array.isArray(manifest.slots)) {
+    throw new Error('Quantum Break panel manifest is missing slots.');
+  }
+
+  let output = html;
+  let presentCount = 0;
+  let missingCount = 0;
+
+  for (const slot of manifest.slots) {
+    const id = String(slot.id || '');
+    const filename = String(slot.filename || '');
+    if (!id || !filename) {
+      throw new Error(`Quantum Break panel manifest has an invalid slot: ${JSON.stringify(slot)}`);
+    }
+
+    const slotMarker = `data-qb-slot="${id}"`;
+    if (!output.includes(slotMarker)) {
+      throw new Error(`Quantum Break journey missing slot marker ${id}`);
+    }
+
+    const filePath = path.join(quantumBreakAssetPublicDir, filename);
+    if (!(await fileExists(filePath))) {
+      missingCount += 1;
+      continue;
+    }
+
+    const framePattern = new RegExp(
+      `<div class="panel-frame" data-image-ratio="16:9" data-qb-slot="${escapeRegExp(id)}"><div class="slot-label">([\\s\\S]*?)<\\/div><\\/div>`
+    );
+    if (!framePattern.test(output)) {
+      throw new Error(`Quantum Break journey slot ${id} is not a placeholder frame.`);
+    }
+
+    const imageSrc = `../../../../assets/img/quantum-break/${filename}`;
+    output = output.replace(
+      framePattern,
+      `<div class="panel-frame panel-frame-ready" data-image-ratio="${escapeHtml(slot.aspectRatio || manifest.defaultAspectRatio || '16:9')}" data-qb-slot="${escapeHtml(id)}" data-image-file="${escapeHtml(filename)}"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(quantumBreakImageAlt(slot))}" loading="lazy" decoding="async"></div>`
+    );
+    presentCount += 1;
+  }
+
+  logStep(`Quantum Break journey image wiring present=${presentCount} missing=${missingCount}`);
+  return output;
 }
 
 function shellCss() {
@@ -237,6 +300,8 @@ async function main() {
   const quantumBreakAssetManifest = await readFile(quantumBreakAssetManifestSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakAssetReadmeSourcePath)}`);
   const quantumBreakAssetReadme = await readFile(quantumBreakAssetReadmeSourcePath, 'utf8');
+  const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
+  const wiredQuantumBreakJourneyHtml = await renderQuantumBreakJourneyImages(quantumBreakJourneyHtml, quantumBreakAssetManifestJson);
   const sourceHash = sha256(source);
   const buildId = sourceHash.slice(0, 12);
   const { css, cssStart } = extractTemplateCss(source);
@@ -275,7 +340,7 @@ async function main() {
     await mkdir(quantumBreakAssetPublicDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
     await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
-    await writeFile(quantumBreakJourneyIndexPath, quantumBreakJourneyHtml, 'utf8');
+    await writeFile(quantumBreakJourneyIndexPath, wiredQuantumBreakJourneyHtml, 'utf8');
     await writeFile(quantumBreakAssetManifestPublicPath, quantumBreakAssetManifest, 'utf8');
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');

@@ -177,6 +177,9 @@ async function auditHttpSurface(base) {
   assert(quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey image handoff filenames missing');
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state the current image aspect-ratio workflow');
+  assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey slot markers missing');
+  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey image-ready frame CSS missing');
+  assert(quantumBreakJourney.text.includes('build auto-wires any matching image file'), 'Quantum Break journey auto-wiring contract missing');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   const panelManifestJson = JSON.parse(panelManifest.text);
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio is not 16:9');
