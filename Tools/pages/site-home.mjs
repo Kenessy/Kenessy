@@ -14,6 +14,7 @@ export function portfolioHomeHtml({
   quantumBreakPath = 'plater-game-reports/games/quantum-break/',
   quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/',
   preyPath = 'plater-game-reports/games/prey/',
+  preyJourneyPath = 'plater-game-reports/games/prey/journey/',
   apocalypsePath,
   githubUrl
 }) {
@@ -24,6 +25,7 @@ export function portfolioHomeHtml({
   const quantumHref = quantumBreakPath;
   const quantumJourneyHref = quantumBreakJourneyPath;
   const preyHref = preyPath;
+  const preyJourneyHref = preyJourneyPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashHref = 'assets/img/metro-2033-redux-review-splash.png';
@@ -447,7 +449,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, Prey entry point, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, Prey entry point and flight recorder, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -468,7 +470,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the next owned-game entry point.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the next owned-game entry point with a pre-run flight recorder.</span></div>
         </div>
       </div>
     </div>
@@ -578,7 +580,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
-        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now added as the next owned-game entry point, without starting its journal yet.</p>
+        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now added as the next owned-game entry point with a TranStar flight recorder ready for the first run.</p>
       </div>
       <div class="review-stack">
         <a class="review-card" href="${metroHref}">
@@ -614,14 +616,14 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <img src="${preySplashHref}" width="1600" height="900" alt="">
           </a>
           <div class="review-copy">
-            <div class="tag-row"><span class="tag green">Owned</span><span class="tag amber">Next run</span><span class="tag cyan">Entry point</span></div>
+            <div class="tag-row"><span class="tag green">Owned</span><span class="tag amber">Next run</span><span class="tag cyan">Flight recorder ready</span></div>
             <h3>Prey</h3>
-            <p>TranStar incident dossier for the next review candidate: Talos I, mimic paranoia, immersive-sim agency, survival friction, proof gates, and a locked score until fresh run evidence exists.</p>
-            <div class="tag-row"><span class="tag">Immersive sim</span><span class="tag">Station horror</span><span class="tag">Systems audit</span><span class="tag amber">Journal later</span></div>
-            <div class="review-status" aria-label="Prey review publication state"><span><b>State</b> Entry point</span><span><b>Gate</b> First run pending</span><span><b>Next</b> Start notes</span></div>
-            <div class="review-sub-links"><a href="${preyHref}">Open entry</a></div>
+            <p>TranStar incident dossier for the next review candidate: Talos I, mimic paranoia, immersive-sim agency, survival friction, proof gates, and a pre-run black box recorder for evidence handoff.</p>
+            <div class="tag-row"><span class="tag">Immersive sim</span><span class="tag">Station horror</span><span class="tag">Systems audit</span><span class="tag amber">Pre-run recorder</span></div>
+            <div class="review-status" aria-label="Prey review publication state"><span><b>State</b> Entry point</span><span><b>Recorder</b> Ready</span><span><b>Next</b> Start run</span></div>
+            <div class="review-sub-links"><a href="${preyHref}">Open entry</a><a href="${preyJourneyHref}">Open recorder</a></div>
           </div>
-          <div class="score-box pending" aria-label="Prey verdict locked until first-run evidence"><b>LOCKED</b><small>Entry</small><em>No journal yet</em></div>
+          <div class="score-box pending" aria-label="Prey verdict locked until first-run evidence"><b>LOCKED</b><small>Entry</small><em>Pre-run recorder</em></div>
         </article>
       </div>
     </div>

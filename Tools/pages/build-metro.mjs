@@ -14,21 +14,29 @@ const reportDir = path.join(repoRoot, 'docs/plater-game-reports/games/metro-2033
 const quantumBreakReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break');
 const quantumBreakJourneyDir = path.join(quantumBreakReportDir, 'journey');
 const preyReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/prey');
+const preyJourneyDir = path.join(preyReportDir, 'journey');
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const bundlePath = path.join(reportDir, bundleName);
 const reportIndexPath = path.join(reportDir, 'index.html');
 const quantumBreakReportIndexPath = path.join(quantumBreakReportDir, 'index.html');
 const quantumBreakJourneyIndexPath = path.join(quantumBreakJourneyDir, 'index.html');
 const preyReportIndexPath = path.join(preyReportDir, 'index.html');
+const preyJourneyIndexPath = path.join(preyJourneyDir, 'index.html');
 const quantumBreakReportSourcePath = path.join(scriptDir, 'sources/quantum-break/report.html');
 const quantumBreakJourneySourcePath = path.join(scriptDir, 'sources/quantum-break/journey.html');
 const quantumBreakAssetManifestSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/panel-manifest.json');
 const quantumBreakAssetReadmeSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/README.md');
 const preyReportSourcePath = path.join(scriptDir, 'sources/prey/report.html');
+const preyJourneySourcePath = path.join(scriptDir, 'sources/prey/journey.html');
+const preyAssetManifestSourcePath = path.join(scriptDir, 'sources/prey/assets/flight-recorder-manifest.json');
+const preyAssetReadmeSourcePath = path.join(scriptDir, 'sources/prey/assets/README.md');
 const preySplashSourcePath = path.join(scriptDir, 'sources/prey/prey-review-splash.svg');
 const quantumBreakAssetPublicDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
 const quantumBreakAssetManifestPublicPath = path.join(quantumBreakAssetPublicDir, 'panel-manifest.json');
 const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 'README.md');
+const preyAssetPublicDir = path.join(repoRoot, 'docs/assets/img/prey');
+const preyAssetManifestPublicPath = path.join(preyAssetPublicDir, 'flight-recorder-manifest.json');
+const preyAssetReadmePublicPath = path.join(preyAssetPublicDir, 'README.md');
 const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-splash.svg');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
@@ -42,10 +50,12 @@ const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakReportPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 const preyReportPath = 'plater-game-reports/games/prey/';
+const preyJourneyPath = 'plater-game-reports/games/prey/journey/';
 const reportUrl = new URL(reportPath, siteBase).toString();
 const quantumBreakReportUrl = new URL(quantumBreakReportPath, siteBase).toString();
 const quantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, siteBase).toString();
 const preyReportUrl = new URL(preyReportPath, siteBase).toString();
+const preyJourneyUrl = new URL(preyJourneyPath, siteBase).toString();
 const reportsUrl = new URL('plater-game-reports/', siteBase).toString();
 const apocalypseUrl = new URL('apocalypse-express/', siteBase).toString();
 const githubUrl = 'https://github.com/Kenessy/Kenessy';
@@ -149,6 +159,61 @@ async function renderQuantumBreakJourneyImages(html, manifest) {
   return output;
 }
 
+function preyImageAlt(slot) {
+  return `Prey flight recorder evidence: ${slot.brief}`;
+}
+
+async function renderPreyJourneyImages(html, manifest) {
+  if (!manifest || !Array.isArray(manifest.slots)) {
+    throw new Error('Prey flight recorder manifest is missing slots.');
+  }
+
+  let output = html;
+  let presentCount = 0;
+  let missingCount = 0;
+
+  for (const slot of manifest.slots) {
+    const id = String(slot.id || '');
+    const filename = String(slot.filename || '');
+    if (!id || !filename) {
+      throw new Error(`Prey flight recorder manifest has an invalid slot: ${JSON.stringify(slot)}`);
+    }
+
+    const visibleInJourney = slot.visibleInJourney !== false;
+    const slotMarker = `data-prey-slot="${id}"`;
+    if (visibleInJourney && !output.includes(slotMarker)) {
+      throw new Error(`Prey journey missing slot marker ${id}`);
+    }
+
+    const filePath = path.join(preyAssetPublicDir, filename);
+    if (!(await fileExists(filePath))) {
+      missingCount += 1;
+      continue;
+    }
+
+    if (!visibleInJourney) {
+      continue;
+    }
+
+    const framePattern = new RegExp(
+      `<div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="${escapeRegExp(id)}"><div class="slot-placeholder">([\\s\\S]*?)<\\/div><\\/div>`
+    );
+    if (!framePattern.test(output)) {
+      throw new Error(`Prey journey slot ${id} is not a recorder evidence placeholder.`);
+    }
+
+    const imageSrc = `../../../../assets/img/prey/${filename}`;
+    output = output.replace(
+      framePattern,
+      `<div class="evidence-slot evidence-slot-ready" data-image-ratio="${escapeHtml(slot.aspectRatio || manifest.defaultAspectRatio || '16:9')}" data-prey-slot="${escapeHtml(id)}" data-image-file="${escapeHtml(filename)}"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preyImageAlt(slot))}" loading="lazy" decoding="async"></div>`
+    );
+    presentCount += 1;
+  }
+
+  logStep(`Prey journey image wiring present=${presentCount} missing=${missingCount}`);
+  return output;
+}
+
 function shellCss() {
   return `
 :root{color-scheme:dark}
@@ -227,6 +292,7 @@ function rootHtml(buildId) {
     quantumBreakPath: quantumBreakReportPath,
     quantumBreakJourneyPath,
     preyPath: preyReportPath,
+    preyJourneyPath,
     apocalypsePath: 'apocalypse-express/',
     githubUrl
   });
@@ -253,7 +319,7 @@ function reportsIndexHtml(buildId) {
 <header><p><a href="../">Kenessy home</a></p><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
 <a class="report" href="games/metro-2033-redux/?v=${buildId}"><div><div class="kicker">Metro 2033 Redux</div><h2>ALERTED Field Report</h2><p>Worth playing. Atmosphere-first, linear, cohesive action horror with bounded agency and visible caveats.</p><div class="mini"><span>A Atmosphere</span><span>L Loop</span><span>E Engagement</span><span>R Readability</span><span>T Technical</span><span class="good">86 / A</span></div></div><div class="score">86</div></a>
 <article class="report draft"><div><div class="kicker">Quantum Break</div><h2>Review Draft Shell</h2><p>Replay-ready structure for a Remedy cinematic sci-fi review, plus an illustrated journey page built from live narration.</p><div class="mini"><span>Promise</span><span>Loop</span><span>Agency</span><span>Trust</span><span>Readiness</span><span class="pending">Draft</span></div><div class="sub"><a href="games/quantum-break/">Open review</a><a href="games/quantum-break/journey/">Open journey</a></div></div><div class="score pending" aria-label="Quantum Break verdict locked until replay evidence"><span>LOCKED</span><small>Draft</small></div></article>
-<article class="report draft"><div><div class="kicker">Prey</div><h2>Entry Point</h2><p>Owned next-run candidate: a TranStar incident dossier for Talos I, mimic paranoia, immersive-sim agency, proof gates, and unscored first-run scope.</p><div class="mini"><span>Immersive sim</span><span>Talos I</span><span>Station horror</span><span>Systems audit</span><span class="pending">Unscored</span></div><div class="sub"><a href="games/prey/">Open entry</a></div></div><div class="score pending" aria-label="Prey verdict locked until first-run evidence"><span>LOCKED</span><small>Entry</small></div></article>
+<article class="report draft"><div><div class="kicker">Prey</div><h2>Flight Recorder</h2><p>Owned next-run candidate: a TranStar incident dossier for Talos I, mimic paranoia, immersive-sim agency, proof gates, and a pre-run black box recorder.</p><div class="mini"><span>Immersive sim</span><span>Talos I</span><span>Station horror</span><span>Systems audit</span><span class="pending">Recorder ready</span></div><div class="sub"><a href="games/prey/">Open entry</a><a href="games/prey/journey/">Open recorder</a></div></div><div class="score pending" aria-label="Prey verdict locked until first-run evidence"><span>LOCKED</span><small>Recorder</small></div></article>
 </main>
 </body>
 </html>
@@ -268,7 +334,7 @@ Sitemap: ${new URL('sitemap.xml', siteBase).toString()}
 }
 
 function sitemapXml(buildDate) {
-  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, preyReportUrl, apocalypseUrl];
+  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, preyReportUrl, preyJourneyUrl, apocalypseUrl];
   const items = urls.map((url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${buildDate}</lastmod>
@@ -319,10 +385,18 @@ async function main() {
   const quantumBreakAssetReadme = await readFile(quantumBreakAssetReadmeSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, preyReportSourcePath)}`);
   const preyReportSourceHtml = await readFile(preyReportSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, preyJourneySourcePath)}`);
+  const preyJourneySourceHtml = await readFile(preyJourneySourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, preyAssetManifestSourcePath)}`);
+  const preyAssetManifest = await readFile(preyAssetManifestSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, preyAssetReadmeSourcePath)}`);
+  const preyAssetReadme = await readFile(preyAssetReadmeSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, preySplashSourcePath)}`);
   const preySplashSvg = await readFile(preySplashSourcePath, 'utf8');
   const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
+  const preyAssetManifestJson = JSON.parse(preyAssetManifest);
   const wiredQuantumBreakJourneyHtml = await renderQuantumBreakJourneyImages(quantumBreakJourneyHtml, quantumBreakAssetManifestJson);
+  const wiredPreyJourneyHtml = await renderPreyJourneyImages(preyJourneySourceHtml, preyAssetManifestJson);
   const sourceHash = sha256(source);
   const buildHashInput = [
     source,
@@ -332,10 +406,14 @@ async function main() {
     quantumBreakAssetManifest,
     quantumBreakAssetReadme,
     preyReportSourceHtml,
+    preyJourneySourceHtml,
+    preyAssetManifest,
+    preyAssetReadme,
     preySplashSvg
   ].join('\n\n/* kenessy-pages-build-input */\n\n');
   const buildId = sha256(buildHashInput).slice(0, 12);
   const preyReportHtml = preyReportSourceHtml.replaceAll('__BUILD_ID__', buildId);
+  const preyJourneyHtml = wiredPreyJourneyHtml.replaceAll('__BUILD_ID__', buildId);
   const { css, cssStart } = extractTemplateCss(source);
   const transformedSource = transformedSourceWithoutInlineStyle(source, cssStart);
 
@@ -370,13 +448,18 @@ async function main() {
     await mkdir(quantumBreakReportDir, { recursive: true });
     await mkdir(quantumBreakJourneyDir, { recursive: true });
     await mkdir(preyReportDir, { recursive: true });
+    await mkdir(preyJourneyDir, { recursive: true });
     await mkdir(quantumBreakAssetPublicDir, { recursive: true });
+    await mkdir(preyAssetPublicDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
     await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
     await writeFile(quantumBreakJourneyIndexPath, wiredQuantumBreakJourneyHtml, 'utf8');
     await writeFile(preyReportIndexPath, preyReportHtml, 'utf8');
+    await writeFile(preyJourneyIndexPath, preyJourneyHtml, 'utf8');
     await writeFile(quantumBreakAssetManifestPublicPath, quantumBreakAssetManifest, 'utf8');
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
+    await writeFile(preyAssetManifestPublicPath, preyAssetManifest, 'utf8');
+    await writeFile(preyAssetReadmePublicPath, preyAssetReadme, 'utf8');
     await writeFile(preySplashPublicPath, preySplashSvg, 'utf8');
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');

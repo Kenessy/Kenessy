@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prey - TranStar Flight Recorder</title>
+<link rel="icon" href="data:,">
+<link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
+<meta name="description" content="Prey fullscreen TranStar flight recorder: a pre-run black box UI for mission scope, evidence queue, image prompts, and first-run review gates.">
+<meta name="theme-color" content="#030705">
+<meta name="build-id" content="25d6c8dcfb29">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prey - TranStar Flight Recorder">
+<meta property="og:description" content="A fullscreen Prey black box recorder for mission scope, evidence queue, and image handoff before the run starts.">
+<meta property="og:url" content="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
+<meta property="og:image" content="https://kenessy.github.io/Kenessy/assets/img/prey-review-splash.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prey - TranStar Flight Recorder">
+<meta name="twitter:description" content="Pre-run black box recorder for the Prey review journey.">
+<style>
+:root{--bg:#030705;--ink:#eef7ef;--muted:#95aaa3;--soft:#dce5d8;--paper:#e6d39f;--amber:#ffb347;--orange:#ff8a1f;--green:#58e17e;--cyan:#6ee9e0;--red:#ff5647;--line:#263b33;--line2:#3f5f53;--panel:#08100d;--panel2:#101b16}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif}
+body{background:radial-gradient(900px 520px at 74% 8%,rgba(255,179,71,.13),transparent 62%),radial-gradient(700px 440px at 12% 90%,rgba(110,233,224,.08),transparent 64%),linear-gradient(180deg,#030705,#050b09 48%,#030705)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p{margin:0}
+.recorder-app{height:100%;position:relative;overflow:hidden}
+.recorder-app:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(238,247,239,.04) 0 1px,transparent 1px 4px),linear-gradient(90deg,rgba(88,225,126,.035) 1px,transparent 1px),linear-gradient(0deg,rgba(255,179,71,.035) 1px,transparent 1px);background-size:100% 100%,92px 92px,92px 92px;opacity:.46;z-index:5}
+.recorder-topbar{position:fixed;left:0;right:0;top:0;z-index:10;border-bottom:1px solid rgba(238,247,239,.14);background:rgba(3,7,5,.86);backdrop-filter:blur(14px)}
+.topbar-inner{width:min(calc(100% - 28px),1360px);min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:inline-flex;align-items:center;gap:10px;color:var(--paper);font-size:12px;font-weight:1000;text-transform:uppercase}
+.brand:before{content:"";width:9px;height:9px;background:var(--amber);box-shadow:13px 0 0 var(--green),26px 0 0 var(--cyan)}
+.page-tabs{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+.page-tabs a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(238,247,239,.14);background:rgba(8,16,13,.72);padding:7px 9px;color:var(--muted);font-size:10px;font-weight:1000;text-transform:uppercase}
+.page-tabs a:hover,.page-tabs a:focus-visible{outline:0;border-color:rgba(255,179,71,.55);color:#ffcf83}
+.reader-track,.recorder-track{height:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain}
+.recorder-track::-webkit-scrollbar{height:10px}.recorder-track::-webkit-scrollbar-track{background:#030705}.recorder-track::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--green),var(--amber),var(--cyan))}
+.journal-page,.recorder-page{position:relative;flex:0 0 100vw;width:100vw;height:100vh;scroll-snap-align:start;overflow-y:auto;padding:82px 18px 22px}
+.recorder-page:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(88,225,126,.08),transparent 34%),linear-gradient(300deg,rgba(255,179,71,.09),transparent 36%);pointer-events:none}
+.page-shell{position:relative;z-index:1;width:min(100%,1360px);min-height:calc(100vh - 104px);margin:0 auto;display:grid;grid-template-rows:auto 1fr auto;gap:14px;border:1px solid rgba(238,247,239,.14);background:linear-gradient(145deg,rgba(8,16,13,.94),rgba(3,7,5,.97));box-shadow:0 30px 90px rgba(0,0,0,.45);overflow:hidden}
+.page-shell:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(238,247,239,.035) 1px,transparent 1px),linear-gradient(0deg,rgba(238,247,239,.028) 1px,transparent 1px);background-size:74px 74px;opacity:.52}
+.page-head,.page-foot{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:end;border-bottom:1px solid rgba(238,247,239,.12);padding:18px 20px}
+.page-foot{border-top:1px solid rgba(238,247,239,.12);border-bottom:0;align-items:center}
+.kicker,.label{color:#8ff0aa;font-size:11px;font-weight:1000;text-transform:uppercase}
+h1,.marker-title{margin-top:8px;color:var(--paper);font-size:72px;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000,0 0 30px rgba(255,179,71,.16)}
+h2{margin-top:8px;color:var(--paper);font-size:52px;line-height:.9;font-weight:1000;text-transform:uppercase}
+.head-copy{max-width:600px;color:#dfd0a8;font-size:17px;line-height:1.5;font-weight:760}
+.build-pill,.recorder-chip{border:1px solid rgba(255,179,71,.42);background:rgba(255,179,71,.07);padding:8px 10px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
+.page-grid{position:relative;z-index:1;display:grid;gap:14px;padding:0 20px 2px}
+.boot-grid{grid-template-columns:minmax(0,1fr) 360px;align-items:stretch}
+.scope-grid{grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr)}
+.queue-grid{grid-template-columns:minmax(0,1fr) minmax(360px,.72fr)}
+.handoff-grid{grid-template-columns:minmax(0,.82fr) minmax(360px,1.18fr)}
+.blackbox-page,.telemetry-card,.recorder-frame,.note-stack,.handoff-list,.prompt-card{position:relative;border:1px solid rgba(238,247,239,.13);background:linear-gradient(145deg,rgba(16,27,22,.84),rgba(5,9,7,.92));overflow:hidden}
+.blackbox-page:before,.telemetry-card:before,.recorder-frame:before,.note-stack:before,.handoff-list:before,.prompt-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--green),var(--amber),var(--cyan),transparent 84%);opacity:.84}
+.blackbox-page{min-height:430px;padding:24px;display:grid;align-content:end;background:linear-gradient(90deg,rgba(3,7,5,.98),rgba(3,7,5,.76) 42%,rgba(3,7,5,.30) 68%,rgba(3,7,5,.86)),url("../../../../assets/img/prey-review-splash.svg") center/cover no-repeat}
+.blackbox-page .label{color:#ffcf83}
+.blackbox-page h1{font-size:92px}
+.blackbox-page p{max-width:760px;margin-top:15px;color:#e7d8ad;font-size:18px;line-height:1.55;font-weight:760}
+.boot-status{display:grid;gap:10px}
+.status-line{min-height:72px;border:1px solid rgba(238,247,239,.12);background:linear-gradient(135deg,rgba(88,225,126,.08),rgba(3,7,5,.66));padding:12px}
+.status-line b{display:block;color:#8ff0aa;font-size:10px;text-transform:uppercase}
+.status-line span{display:block;margin-top:8px;color:var(--paper);font-size:18px;line-height:1.15;font-weight:1000;text-transform:uppercase}
+.telemetry-card{min-height:126px;padding:17px}
+.telemetry-card h3,.prompt-card h3,.handoff-list h3{margin-top:9px;color:var(--paper);font-size:24px;line-height:1.02;text-transform:uppercase}
+.telemetry-card p,.prompt-card p,.handoff-list p{margin-top:10px;color:#b8c9c1;font-size:14px;line-height:1.5;font-weight:700}
+.scan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.recorder-frame{min-height:100%;padding:14px}
+.evidence-slot{position:relative;aspect-ratio:16/9;border:1px solid rgba(110,233,224,.32);background:linear-gradient(135deg,rgba(110,233,224,.08),rgba(3,7,5,.82));overflow:hidden}
+.evidence-slot:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(238,247,239,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(238,247,239,.03) 1px,transparent 1px);background-size:42px 42px;opacity:.74}
+.evidence-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.evidence-slot-ready .slot-placeholder{display:none}
+.slot-placeholder{position:absolute;inset:0;display:grid;align-content:end;gap:7px;padding:14px;background:linear-gradient(180deg,rgba(3,7,5,.28),rgba(3,7,5,.88));z-index:1}
+.slot-placeholder b{color:#ffcf83;font-size:11px;text-transform:uppercase}
+.slot-placeholder span{max-width:48ch;color:#dce5d8;font-size:13px;line-height:1.34;font-weight:820}
+.frame-caption{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
+.note-stack{padding:16px;display:grid;gap:10px}
+.note{border-left:3px solid var(--amber);background:rgba(255,179,71,.045);padding:10px 12px}
+.note b{display:block;color:#ffcf83;font-size:11px;text-transform:uppercase}
+.note span{display:block;margin-top:7px;color:#dce5d8;font-size:14px;line-height:1.45;font-weight:720}
+.queue-list{display:grid;gap:10px}
+.queue-list .telemetry-card{min-height:104px}
+.handoff-list{padding:16px;display:grid;gap:10px}
+.file-row{display:grid;grid-template-columns:122px minmax(0,1fr);gap:10px;align-items:center;border:1px solid rgba(238,247,239,.10);background:rgba(3,7,5,.58);padding:9px 10px}
+.file-row b{color:#8ff0aa;font-size:10px;text-transform:uppercase}
+.file-row code{min-width:0;color:#e6d39f;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.3;font-weight:850;overflow-wrap:anywhere}
+.prompt-stack{display:grid;gap:10px}
+.prompt-card{padding:16px}
+.prompt-card code{display:block;margin-top:10px;color:#e6d39f;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.45;white-space:pre-wrap}
+.asset-links{display:flex;flex-wrap:wrap;gap:8px}
+.asset-links a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(110,233,224,.32);background:rgba(110,233,224,.05);padding:7px 9px;color:#a7f4ef;font-size:11px;font-weight:1000;text-transform:uppercase}
+.page-count{color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
+@media(max-width:980px){.page-head,.page-foot{grid-template-columns:1fr}.boot-grid,.scope-grid,.queue-grid,.handoff-grid{grid-template-columns:1fr}.blackbox-page{min-height:360px}.blackbox-page h1,h1,.marker-title{font-size:58px}h2{font-size:42px}.head-copy{font-size:16px}.scan-grid{grid-template-columns:1fr}.page-shell{min-height:calc(100vh - 104px)}}
+@media(max-width:560px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:9px 0}.page-tabs{justify-content:flex-start}.page-tabs a{min-height:31px;padding:6px 7px;font-size:9px}.journal-page,.recorder-page{padding:106px 12px 14px}.page-shell{min-height:calc(100vh - 120px)}.page-head,.page-foot,.page-grid{padding-left:14px;padding-right:14px}.blackbox-page{padding:18px;min-height:300px}.blackbox-page h1,h1,.marker-title{font-size:42px}.blackbox-page p{font-size:16px}h2{font-size:34px}.file-row{grid-template-columns:1fr}.build-pill,.recorder-chip{white-space:normal}}
+</style>
+</head>
+<body>
+<div class="recorder-app">
+  <header class="recorder-topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../">Kenessy / Prey</a>
+      <nav class="page-tabs" aria-label="Prey recorder pages">
+        <a href="#boot">Boot</a>
+        <a href="#mission">Mission Scope</a>
+        <a href="#queue">Evidence Queue</a>
+        <a href="#handoff">Image Handoff</a>
+        <a href="../../../">Reports</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="reader-track recorder-track" id="reader" aria-label="Prey TranStar flight recorder fullscreen pages">
+    <section class="journal-page recorder-page" id="boot" aria-label="Boot page">
+      <div class="page-shell">
+        <div class="page-head">
+          <div><p class="kicker">01 / Boot</p><h1>Prey Black Box</h1></div>
+          <p class="head-copy">TranStar Flight Recorder is a pre-run journal shell: no score yet, no finished verdict, just the recorder UI that will catch the first Talos I evidence cleanly.</p>
+        </div>
+        <div class="page-grid boot-grid">
+          <article class="blackbox-page">
+            <p class="label">Flight recorder ready / pre-run recorder</p>
+            <h1>TranStar<br>Flight Recorder</h1>
+            <p>V1 starts as a black box interface for the Prey run: mission scope, evidence queue, image handoff, and a strict no-finished-journal stance until real play notes arrive.</p>
+          </article>
+          <aside class="boot-status" aria-label="Recorder boot status">
+            <div class="status-line"><b>Status</b><span>Recorder ready</span></div>
+            <div class="status-line"><b>Run state</b><span>Fresh run pending</span></div>
+            <div class="status-line"><b>Score</b><span>Locked</span></div>
+            <div class="status-line"><b>Evidence</b><span>Image slots optional</span></div>
+          </aside>
+        </div>
+        <div class="page-foot">
+          <div class="asset-links"><a href="../">Open Prey entry</a><a href="../../../../">Portfolio root</a></div>
+          <span class="page-count">Page 01 / 04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="journal-page recorder-page" id="mission" aria-label="Mission scope page">
+      <div class="page-shell">
+        <div class="page-head">
+          <div><p class="kicker">02 / Mission Scope</p><h2>Talos I Intake</h2></div>
+          <p class="head-copy">The first page defines what the run must prove: station identity, player agency, spoiler discipline, and which evidence is allowed into the public journal.</p>
+        </div>
+        <div class="page-grid scope-grid">
+          <div class="scan-grid">
+            <article class="telemetry-card"><p class="label">Objective 01</p><h3>Station identity</h3><p>Record whether Talos I feels coherent, legible, dangerous, and worth learning as a place rather than a backdrop.</p></article>
+            <article class="telemetry-card"><p class="label">Objective 02</p><h3>First-run rules</h3><p>No final number from vibes. Notes must separate fresh evidence, memory, technical friction, and genre bias.</p></article>
+            <article class="telemetry-card"><p class="label">Spoiler policy</p><h3>Layered reveal</h3><p>Keep early pages readable without dumping late-game answers. Mark hard spoilers before they become public text.</p></article>
+            <article class="telemetry-card"><p class="label">Evidence gate</p><h3>Proof before verdict</h3><p>Systems, survival friction, mimic paranoia, and trust payoff need actual run receipts before scoring.</p></article>
+          </div>
+          <article class="recorder-frame" aria-label="Talos I approach evidence slot">
+            <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-02-a-talosi-approach"><div class="slot-placeholder"><b>Evidence 02-A</b><span>prey-page-02-a-talosi-approach.png / Talos I approach and station identity hook.</span></div></div>
+            <div class="frame-caption"><span>Station identity seed</span><span>16:9 PNG</span></div>
+          </article>
+        </div>
+        <div class="page-foot">
+          <div class="asset-links"><a href="../../../../assets/img/prey/flight-recorder-manifest.json">flight-recorder-manifest.json</a><a href="../../../../assets/img/prey/README.md">Prompt README</a></div>
+          <span class="page-count">Page 02 / 04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="journal-page recorder-page" id="queue" aria-label="Evidence queue page">
+      <div class="page-shell">
+        <div class="page-head">
+          <div><p class="kicker">03 / Evidence Queue</p><h2>What To Catch</h2></div>
+          <p class="head-copy">This is the pre-run recorder queue: the page says what the journal is waiting for before the finished Prey review can exist.</p>
+        </div>
+        <div class="page-grid queue-grid">
+          <div class="queue-list">
+            <article class="telemetry-card"><p class="label">Identity</p><h3>Talos I has to become a machine</h3><p>The review needs route memory, room logic, shortcuts, pressure, and a station that teaches itself over time.</p></article>
+            <article class="telemetry-card"><p class="label">Agency</p><h3>Systems must stay useful</h3><p>Tools, powers, environmental solutions, and alternate paths should feel authored by the player, not just permitted.</p></article>
+            <article class="telemetry-card"><p class="label">Paranoia</p><h3>Objects need threat value</h3><p>Mimic suspicion should sharpen attention without turning every room into slow inventory paranoia.</p></article>
+            <article class="telemetry-card"><p class="label">Friction</p><h3>Scarcity must earn itself</h3><p>Resource pressure, combat drag, and backtracking are the main falsifiers if they bury the stronger systems.</p></article>
+            <article class="telemetry-card"><p class="label">Trust payoff</p><h3>Ending must justify the test</h3><p>The final trust layer only matters if the journey earns its morality, identity, and consequence claims.</p></article>
+          </div>
+          <aside class="note-stack">
+            <article class="recorder-frame" aria-label="Mimic paranoia evidence slot">
+              <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-a-mimic-paranoia"><div class="slot-placeholder"><b>Evidence 03-A</b><span>prey-page-03-a-mimic-paranoia.png / ordinary objects staged as possible mimic threats.</span></div></div>
+              <div class="frame-caption"><span>Mimic paranoia</span><span>Prompt ready</span></div>
+            </article>
+            <article class="recorder-frame" aria-label="Crew terminal trace evidence slot">
+              <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-b-crew-terminal-trace"><div class="slot-placeholder"><b>Evidence 03-B</b><span>prey-page-03-b-crew-terminal-trace.png / abandoned crew workstation and trace evidence.</span></div></div>
+              <div class="frame-caption"><span>Crew trace</span><span>Prompt ready</span></div>
+            </article>
+          </aside>
+        </div>
+        <div class="page-foot">
+          <div class="asset-links"><a href="#handoff">Open image handoff</a><a href="../#scope">Prey proof gates</a></div>
+          <span class="page-count">Page 03 / 04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="journal-page recorder-page" id="handoff" aria-label="Image handoff page">
+      <div class="page-shell">
+        <div class="page-head">
+          <div><p class="kicker">04 / Image Handoff</p><h2>Drop Exact PNGs</h2></div>
+          <p class="head-copy">Missing images remain visible as recorder placeholders until exact filenames exist. The build auto-wires matching image files into these evidence slots.</p>
+        </div>
+        <div class="page-grid handoff-grid">
+          <article class="handoff-list">
+            <p class="label">Public asset contract</p>
+            <h3>Flight recorder manifest</h3>
+            <p>Use the filenames exactly. Put generated 16:9 PNGs into the public Prey image folder, then run the build and `npm run qa:prey-assets`.</p>
+            <div class="file-row"><b>02-A</b><code>prey-page-02-a-talosi-approach.png</code></div>
+            <div class="file-row"><b>03-A</b><code>prey-page-03-a-mimic-paranoia.png</code></div>
+            <div class="file-row"><b>03-B</b><code>prey-page-03-b-crew-terminal-trace.png</code></div>
+            <div class="asset-links"><a href="../../../../assets/img/prey/flight-recorder-manifest.json">flight-recorder-manifest.json</a><a href="../../../../assets/img/prey/README.md">README.md</a></div>
+          </article>
+          <div class="prompt-stack">
+            <article class="prompt-card"><p class="label">Shared prompt base</p><h3>TranStar recorder style</h3><p>Dark orbital-station recorder UI, amber/green/cyan telemetry, grounded environmental storytelling, no fake UI text, no captions, no logos.</p></article>
+            <article class="prompt-card"><p class="label">QA command</p><h3>Asset check</h3><code>npm run build:metro
+npm run qa:prey-assets</code></article>
+            <article class="prompt-card"><p class="label">Guardrail</p><h3>V1 is pre-run</h3><p>No real Prey gameplay notes are added yet. The recorder is ready, but the finished journal waits for actual run evidence.</p></article>
+          </div>
+        </div>
+        <div class="page-foot">
+          <div class="asset-links"><a href="../">Back to Prey entry</a><a href="../../../">Reports index</a><a href="../../../../">Portfolio root</a></div>
+          <span class="page-count">Page 04 / 04</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

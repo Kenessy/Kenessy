@@ -1,0 +1,51 @@
+{
+  "game": "Prey",
+  "status": "flight-recorder-pre-run-placeholders",
+  "promptVersion": "prey-flight-recorder-v1",
+  "defaultAspectRatio": "16:9",
+  "assetBase": "docs/assets/img/prey/",
+  "sharedPrompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Use a dark orbital station mood, amber green cyan telemetry ambience, grounded environmental storytelling, no readable fake UI text, no logos, no captions, painterly cinematic realism, clean composition readable at mobile width.",
+  "negativePrompt": "No logos, no captions, no fake UI text, no fake brand text, no watermark, no gore focus, no illegible typographic overlays, no cartoon style, no random extra limbs.",
+  "styleRules": [
+    "Use TranStar flight recorder language: dark station UI, amber/green/cyan telemetry, scanline light, and restrained black box evidence tone.",
+    "16:9 PNGs only; target at least 1600x900 for public display.",
+    "Missing images remain placeholders in the journey until exact filenames exist.",
+    "Avoid large non-diegetic typography, fake UI text, captions, logos, and watermarks.",
+    "Keep scenes readable at mobile width with one clear focal action."
+  ],
+  "slots": [
+    {
+      "id": "page-02-a-talosi-approach",
+      "page": "mission-scope",
+      "filename": "prey-page-02-a-talosi-approach.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Talos I first sight and station identity hook.",
+      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Talos I space station seen from an approach angle in orbit, crescent Earth or deep space behind it, amber green cyan telemetry ambience, ominous corporate research-station silhouette, grounded realistic scale, quiet dread, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Station dominates the center-right with empty space and orbital darkness around it; use subtle recorder glare and one clear station silhouette.",
+      "avoid": "Avoid readable logos, fake TranStar text, huge UI overlays, comic exaggeration, and busy clutter that hides the station shape."
+    },
+    {
+      "id": "page-03-a-mimic-paranoia",
+      "page": "evidence-queue",
+      "filename": "prey-page-03-a-mimic-paranoia.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Ordinary room objects staged as possible mimic threats.",
+      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Dark Talos I office or lab corner with ordinary objects arranged suspiciously, coffee mug, chair, lamp, tools, and one barely readable alien mimic distortion implied by shadow and amber/cyan station light, human-scale paranoia, no gore, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Keep one suspicious object cluster as the focal point; the room should feel quiet, observed, and unsafe without needing monster action.",
+      "avoid": "Avoid explicit readable notes or terminal text, cartoon monsters, gore focus, and over-bright horror lighting."
+    },
+    {
+      "id": "page-03-b-crew-terminal-trace",
+      "page": "evidence-queue",
+      "filename": "prey-page-03-b-crew-terminal-trace.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Crew trace workstation evidence without readable fake text.",
+      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Abandoned crew workstation inside Talos I, dark terminal glow, scattered personal objects, audio log recorder, access card shape, coffee stain, station corridor beyond, amber green cyan telemetry ambience, environmental storytelling about missing crew, no readable screen text, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Use the desk as a foreground evidence table with corridor depth behind it; let personal traces imply story rather than text.",
+      "avoid": "Avoid readable emails, fake terminal words, real-world logos, gore, and dense props that become visual noise."
+    }
+  ]
+}

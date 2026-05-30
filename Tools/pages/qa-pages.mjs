@@ -14,13 +14,16 @@ const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 const preyPath = 'plater-game-reports/games/prey/';
+const preyJourneyPath = 'plater-game-reports/games/prey/journey/';
 const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
+const preyFlightRecorderManifestPath = 'assets/img/prey/flight-recorder-manifest.json';
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const sourceName = 'main_canvas_diegetic_equation.jsx';
 const expectedLiveReportUrl = new URL(reportPath, liveBase).toString();
 const expectedLiveQuantumBreakUrl = new URL(quantumBreakPath, liveBase).toString();
 const expectedLiveQuantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, liveBase).toString();
 const expectedLivePreyUrl = new URL(preyPath, liveBase).toString();
+const expectedLivePreyJourneyUrl = new URL(preyJourneyPath, liveBase).toString();
 
 function checkpoint(message) {
   console.log(`[qa:pages:${mode}] ${new Date().toISOString()} ${message}`);
@@ -143,7 +146,7 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('class="journal-file-queue"') && root.text.includes('qb-page-02-a-airlock-threshold.png') && root.text.includes('qb-page-02-c-core-detonation.png') && root.text.includes('qb-page-02-d-frozen-will.png'), 'root homepage journal photo evidence filenames missing');
   assert(root.text.includes('Photo evidence ready') && root.text.includes('Photo manifest'), 'root homepage Quantum Break photo handoff links missing');
   assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'root homepage Quantum Break handoff asset links missing');
-  assert(root.text.includes('plater-game-reports/games/prey/') && root.text.includes('Prey') && root.text.includes('Entry point'), 'root homepage Prey entry point missing');
+  assert(root.text.includes('plater-game-reports/games/prey/') && root.text.includes('plater-game-reports/games/prey/journey/') && root.text.includes('Prey') && root.text.includes('Flight recorder ready'), 'root homepage Prey entry point/recorder missing');
   assert(root.text.includes('assets/img/prey-review-splash.svg'), 'root homepage Prey splash missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'root homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire into visible photo evidence slots'), 'root homepage Quantum Break review/journal state copy missing');
@@ -163,12 +166,14 @@ async function auditHttpSurface(base) {
   await fetchText(url(base, 'assets/img/metro-2033-redux-review-splash.png'));
   await fetchText(url(base, 'assets/img/quantum-break-review-journey-splash.svg'));
   await fetchText(url(base, 'assets/img/prey-review-splash.svg'));
+  await fetchText(url(base, preyFlightRecorderManifestPath));
+  await fetchText(url(base, 'assets/img/prey/README.md'));
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
   assert(reports.text.includes('games/quantum-break/'), 'reports index does not link Quantum Break');
   assert(reports.text.includes('games/quantum-break/journey/'), 'reports index does not link Quantum Break journey');
-  assert(reports.text.includes('games/prey/') && reports.text.includes('TranStar incident dossier'), 'reports index does not link Prey entry');
+  assert(reports.text.includes('games/prey/') && reports.text.includes('games/prey/journey/') && reports.text.includes('TranStar incident dossier'), 'reports index does not link Prey entry/recorder');
   assert(reports.text.includes('../'), 'reports index does not link back to homepage');
   assert(reports.text.includes('LOCKED') && reports.text.includes('Draft'), 'reports index Quantum Break evidence gate missing');
   assert(!/>--</.test(reports.text), 'reports index still exposes raw dash placeholders');
@@ -195,12 +200,30 @@ async function auditHttpSurface(base) {
 
   const prey = await fetchText(url(base, preyPath));
   assert(prey.text.includes('ALERTED entry point / Prey 2017'), 'Prey entry page hero missing');
-  assert(prey.text.includes('Journal not started') && prey.text.includes('Do Not Start The Journal Yet'), 'Prey page should keep journal intentionally unstarted');
+  assert(prey.text.includes('Flight recorder ready') && prey.text.includes('Open Recorder') && prey.text.includes('journey/'), 'Prey page should link the flight recorder');
   assert(prey.text.includes('Prey score unlock gates') && prey.text.includes('Talos I pull') && prey.text.includes('System agency') && prey.text.includes('Combat friction') && prey.text.includes('Ending trust'), 'Prey page score gates missing');
   assert(prey.text.includes('Immersive sim') && prey.text.includes('Mimic paranoia') && prey.text.includes('Falsifiers'), 'Prey page core review scope missing');
   assert(prey.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey page local splash asset missing');
-  assert(!prey.text.includes('journey/') && !prey.text.includes('data-qb-slot'), 'Prey page should not start a journal or reuse Quantum Break slots');
+  assert(!prey.text.includes('Do Not Start The Journal Yet') && !prey.text.includes('Journal not started') && !prey.text.includes('data-qb-slot'), 'Prey page has stale no-journal or Quantum Break slot copy');
   assert(!/>--</.test(prey.text), 'Prey page still exposes raw dash placeholders');
+
+  const preyJourney = await fetchText(url(base, preyJourneyPath));
+  assert(preyJourney.text.includes('TranStar Flight Recorder') && preyJourney.text.includes('Prey Black Box'), 'Prey journey recorder shell missing');
+  assert(preyJourney.text.includes('.recorder-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
+  assert(preyJourney.text.includes('.blackbox-page') && preyJourney.text.includes('.telemetry-card') && preyJourney.text.includes('.evidence-slot') && preyJourney.text.includes('.recorder-frame'), 'Prey journey recorder UI styling missing');
+  assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey required pages missing');
+  assert(preyJourney.text.includes('prey-page-02-a-talosi-approach.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
+  assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
+  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three visible Prey image slots');
+  assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 3, 'Prey journey should expose exactly three visible 16:9 image frames');
+  assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey should not reuse Quantum Break slot or comic grid language');
+  const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
+  const preyManifestJson = JSON.parse(preyManifest.text);
+  assert(preyManifestJson.game === 'Prey' && preyManifestJson.status === 'flight-recorder-pre-run-placeholders', 'Prey flight recorder manifest metadata mismatch');
+  assert(preyManifestJson.defaultAspectRatio === '16:9' && Array.isArray(preyManifestJson.slots) && preyManifestJson.slots.length === 3, 'Prey flight recorder manifest slot contract mismatch');
+  assert(preyManifest.text.includes('prey-page-02-a-talosi-approach.png') && preyManifest.text.includes('prey-page-03-a-mimic-paranoia.png') && preyManifest.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey manifest missing expected filenames');
+  const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
+  assert(preyReadme.text.includes('Prey Flight Recorder Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README missing QA workflow');
 
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together scrapbook reader'), 'Quantum Break journey fullscreen scrapbook reader copy missing');
@@ -265,6 +288,7 @@ async function auditHttpSurface(base) {
   assert(sitemap.text.includes(expectedLiveQuantumBreakUrl), 'sitemap missing Quantum Break report URL');
   assert(sitemap.text.includes(expectedLiveQuantumBreakJourneyUrl), 'sitemap missing Quantum Break journey URL');
   assert(sitemap.text.includes(expectedLivePreyUrl), 'sitemap missing Prey report URL');
+  assert(sitemap.text.includes(expectedLivePreyJourneyUrl), 'sitemap missing Prey journey URL');
 
   await fetchText(url(base, 'missing-page-for-qa.html'), 404);
   await fetchText(url(base, `${reportPath}${sourceName}`), 404);
@@ -322,6 +346,7 @@ async function auditViewports(browser, base, buildId) {
         hasReportLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes(currentReportPath)),
         hasQuantumBreakLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/quantum-break/')),
         hasPreyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/prey/')),
+        hasPreyJourneyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/prey/journey/')),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
         imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
         reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
@@ -341,6 +366,7 @@ async function auditViewports(browser, base, buildId) {
     assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
     assert(homeMetrics.hasQuantumBreakLink, `${viewport.name} homepage missing Quantum Break link`);
     assert(homeMetrics.hasPreyLink, `${viewport.name} homepage missing Prey link`);
+    assert(homeMetrics.hasPreyJourneyLink, `${viewport.name} homepage missing Prey recorder link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
     assert(homeMetrics.reviewSplashComplete, `${viewport.name} homepage Metro review splash did not load`);
