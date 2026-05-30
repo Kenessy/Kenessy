@@ -133,7 +133,7 @@ async function auditHttp(base) {
   assert(root.text.includes('Active Lanes') && root.text.includes('Prompt pack ready'), 'portfolio homepage active lanes or prompt handoff missing');
   assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'portfolio homepage Quantum Break asset handoff links missing');
   assert(root.text.includes('id="work"') && root.text.includes('16:9 image panels') && root.text.includes('16:9 landscape panels'), 'portfolio homepage work or journal image guidance is missing');
-  assert(root.text.includes('class="journal-contract"') && root.text.includes('class="journal-file-queue"') && root.text.includes('qb-page-01-d-will-shadow.png'), 'portfolio homepage journal image contract/drop queue missing');
+  assert(root.text.includes('Page 02 logged') && root.text.includes('class="journal-contract"') && root.text.includes('class="journal-file-queue"') && root.text.includes('qb-page-02-d-frozen-will.png'), 'portfolio homepage journal image contract/drop queue missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
@@ -168,11 +168,13 @@ async function auditHttp(base) {
   assert(quantumBreak.text.includes('class="section live-evidence-section"') && quantumBreak.text.includes('class="section review-note-section"'), 'Quantum Break report polished evidence/reviewer section classing missing');
   assert(quantumBreak.text.includes('High</div><p>Wants cinematic time-fracture atmosphere') && quantumBreak.text.includes('None</div><p>Looks for co-op'), 'Quantum Break fit preview labels missing');
   assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade') && quantumBreak.text.includes('First Stutter'), 'Quantum Break report live evidence section missing');
+  assert(quantumBreak.text.includes('two-minute proof') && quantumBreak.text.includes('apparent self-detonation') && quantumBreak.text.includes('causality clarity'), 'Quantum Break report Page 02 evidence is stale');
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
   assert(quantumBreakJourney.text.includes('The Machine Breaks') && quantumBreakJourney.text.includes('First Stutter'), 'Quantum Break journey page 02 machine-break note missing');
+  assert(quantumBreakJourney.text.includes('two minutes') && quantumBreakJourney.text.includes('five-minute forward jump') && quantumBreakJourney.text.includes('self-detonating machine core') && quantumBreakJourney.text.includes('touching him awake'), 'Quantum Break journey Page 02 replay note is stale');
   assert(quantumBreakJourney.text.includes('Panel Contract') && quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey comic panel contract missing');
   assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b'), 'Quantum Break journey comic slot polish styling missing');
   assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy missing');
@@ -191,7 +193,7 @@ async function auditHttp(base) {
   const panelManifestJson = JSON.parse(panelManifest.text);
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio mismatch');
   assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
-  assert(panelManifestJson.promptVersion === 'qb-journey-page-02-v1', 'Quantum Break panel manifest promptVersion mismatch');
+  assert(panelManifestJson.promptVersion === 'qb-journey-page-02-v2', 'Quantum Break panel manifest promptVersion mismatch');
   assert(typeof panelManifestJson.sharedPrompt === 'string' && panelManifestJson.sharedPrompt.includes('16:9 cinematic sci-fi comic panel'), 'Quantum Break panel manifest sharedPrompt missing');
   assert(typeof panelManifestJson.negativePrompt === 'string' && panelManifestJson.negativePrompt.includes('fake UI overlays'), 'Quantum Break panel manifest negativePrompt missing');
   assert(Array.isArray(panelManifestJson.styleRules) && panelManifestJson.styleRules.length >= 4, 'Quantum Break panel manifest styleRules missing');
@@ -199,6 +201,7 @@ async function auditHttp(base) {
   assert(panelManifestJson.slots.filter((slot) => slot.requiredForCurrentPage).length === 4, 'Quantum Break panel manifest current-page required slots mismatch');
   assert(panelManifestJson.slots.every((slot) => slot.prompt && slot.composition && slot.avoid), 'Quantum Break panel manifest slot prompt fields missing');
   assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png') && panelManifest.text.includes('qb-page-02-d-frozen-will.png'), 'Quantum Break panel manifest missing expected Page 01/02 filenames');
+  assert(panelManifest.text.includes('five-minute forward jump') && panelManifest.text.includes('detonating on its own') && panelManifest.text.includes('touches him awake'), 'Quantum Break panel manifest Page 02 prompt details are stale');
   const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   assert(panelReadme.text.includes('npm run qa:qb-assets') && panelReadme.text.includes('npm run qa:qb-assets:strict'), 'Quantum Break asset README missing QA workflow commands');
   assert(panelReadme.text.includes('Shared prompt base') && panelReadme.text.includes('Page 01 prompts') && panelReadme.text.includes('qb-page-02-c-core-detonation.png'), 'Quantum Break asset README prompt workflow missing');

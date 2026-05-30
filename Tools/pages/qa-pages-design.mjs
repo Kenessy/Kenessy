@@ -138,7 +138,7 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
-  assert(root.text.includes('.journal-contract') && root.text.includes('.journal-file-queue') && root.text.includes('qb-page-01-a-university-exterior.png'), 'portfolio homepage journal image contract/drop queue styling is missing');
+  assert(root.text.includes('.journal-contract') && root.text.includes('.journal-file-queue') && root.text.includes('Page 02 logged') && root.text.includes('qb-page-02-a-airlock-threshold.png'), 'portfolio homepage journal image contract/drop queue styling is missing');
   assert(root.text.includes('.journal-asset-links') && root.text.includes('Panel manifest'), 'portfolio homepage journal asset links styling is missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling is missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy is missing');
@@ -153,6 +153,7 @@ async function auditDesignArtifacts(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
   assert(quantumBreakJourney.text.includes('The Machine Breaks') && quantumBreakJourney.text.includes('First Stutter') && quantumBreakJourney.text.includes('time is an egg'), 'Quantum Break journey replay-note page 02 copy is missing');
+  assert(quantumBreakJourney.text.includes('two minutes') && quantumBreakJourney.text.includes('five-minute forward jump') && quantumBreakJourney.text.includes('self-detonating machine core') && quantumBreakJourney.text.includes('touching him awake'), 'Quantum Break journey replay-note page 02 detail is stale');
   assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b') && quantumBreakJourney.text.includes('.slot-label span'), 'Quantum Break journey comic slot polish styling is missing');
   assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy is missing');
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
@@ -179,6 +180,7 @@ async function auditDesignArtifacts(base) {
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakReport.text), 'Quantum Break report CSS uses viewport-scaled font sizing');
   assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');
   assert(quantumBreakReport.text.includes('Project Promenade') && quantumBreakReport.text.includes('First Stutter'), 'Quantum Break report live replay evidence copy is missing');
+  assert(quantumBreakReport.text.includes('two-minute proof') && quantumBreakReport.text.includes('apparent self-detonation') && quantumBreakReport.text.includes('causality clarity'), 'Quantum Break report Page 02 evidence copy is stale');
   assert(quantumBreakReport.text.includes('aria-label="Quantum Break score unlock gates"') && quantumBreakReport.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail is missing');
   assert(quantumBreakReport.text.includes('<div class="num">High</div>') && quantumBreakReport.text.includes('<div class="num">None</div>'), 'Quantum Break report provisional fit labels are missing');
   assert(quantumBreakReport.text.includes('.journey-handoff') && quantumBreakReport.text.includes('.handoff-grid') && quantumBreakReport.text.includes('Prompt README'), 'Quantum Break report prompt handoff styling/link is missing');

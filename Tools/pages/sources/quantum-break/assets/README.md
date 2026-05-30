@@ -28,11 +28,11 @@ Page 01 prompts:
 - `qb-page-01-c-science-primer.png`: Project Promenade presentation moment, black-hole or field-primer visual, screen glow on observers, lab context still readable. Keep the diagram abstract. Avoid real equations or giant nonsense words.
 - `qb-page-01-d-will-shadow.png`: Subtle family tension and Will Joyce foreshadowing through documents, screens, an empty chair, or environmental traces. Use a quiet detail shot. Avoid spoiler-heavy imagery or readable legal text.
 
-Next-page candidates:
+Current Page 02 prompts:
 - `qb-page-02-a-airlock-threshold.png`: Jack and Paul at the machine threshold, clean tech door, the experiment still controlled but visibly about to cross into danger.
-- `qb-page-02-b-first-anomaly.png`: Time fracture proof after the machine escalation, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.
-- `qb-page-02-c-core-detonation.png`: Time machine core overloading and detonating, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.
-- `qb-page-02-d-frozen-will.png`: Will frozen in a time stutter while Jack reaches toward him, still room, suspended debris, first readable time-stop rescue beat.
+- `qb-page-02-b-first-anomaly.png`: Two-minute time-travel proof escalating into a five-minute forward jump, readable distortion, Will's urgent warning, strong silhouettes, cinematic spectacle without visual confusion.
+- `qb-page-02-c-core-detonation.png`: Time machine core overloading and detonating on its own, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.
+- `qb-page-02-d-frozen-will.png`: Will frozen in a time stutter while Jack touches him awake, still room, suspended debris, first readable time-stop rescue and combat power beat.
 
 Drop generated images into `docs/assets/img/quantum-break/` using the exact filenames in `panel-manifest.json`, then run the build so the journey page auto-wires any matching manifest files:
 
@@ -46,12 +46,12 @@ Then run:
 npm run qa:qb-assets
 ```
 
-This non-strict check allows missing images, validates every image that exists, and verifies that generated journey HTML only references image files that are actually present. Before treating Page 01 as image-complete, run:
+This non-strict check allows missing images, validates every image that exists, and verifies that generated journey HTML only references image files that are actually present. Before treating the current Page 02 image target as complete, run:
 
 ```powershell
 npm run qa:qb-assets:strict
 ```
 
-That strict check requires the four current Page 01 images, validates PNG headers, checks near-16:9 dimensions, verifies the auto-wired journey markup, and writes checkpoint state to `.cache/qb-asset-qa/latest.json`.
+That strict check requires the four current Page 02 images, validates PNG headers, checks near-16:9 dimensions, verifies the auto-wired journey markup, and writes checkpoint state to `.cache/qb-asset-qa/latest.json`.
 
 Do not manually swap placeholder frames in `Tools/pages/sources/quantum-break/journey.html`. Keep stable `data-qb-slot` markers there; `npm run build:metro` performs the image wiring from the manifest.

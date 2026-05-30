@@ -613,27 +613,27 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <img src="${quantumSplashHref}" width="1672" height="941" alt="">
         </a>
         <div class="journal-copy">
-          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 image-ready</span><span class="tag green">Prompt pack ready</span></div>
+          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 02 logged</span><span class="tag green">Prompt pack ready</span></div>
           <h3>Illustrated Review Journal</h3>
           <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
           <div class="journal-contract" aria-label="Quantum Break image contract">
             <span><b>Canvas</b> 16:9 landscape panels</span>
-            <span><b>Page 01</b> 4 required image slots</span>
-            <span><b>Output</b> Comic-style review evidence</span>
+            <span><b>Manifest</b> 8 image slots queued</span>
+            <span><b>Current</b> Page 02 machine break</span>
           </div>
           <div class="journal-slots" aria-label="Current image format recommendation">
-            <div class="journal-slot"><b>Panel A</b><span>University approach</span></div>
-            <div class="journal-slot"><b>Panel B</b><span>Paul corridor</span></div>
-            <div class="journal-slot"><b>Panel C</b><span>Science primer</span></div>
-            <div class="journal-slot"><b>Panel D</b><span>Will shadow</span></div>
+            <div class="journal-slot"><b>Panel A</b><span>Airlock threshold</span></div>
+            <div class="journal-slot"><b>Panel B</b><span>First anomaly</span></div>
+            <div class="journal-slot"><b>Panel C</b><span>Core detonation</span></div>
+            <div class="journal-slot"><b>Panel D</b><span>Frozen Will</span></div>
           </div>
-          <div class="journal-file-queue" aria-label="Quantum Break Page 01 drop queue">
-            <div><b>01-A</b><code>qb-page-01-a-university-exterior.png</code></div>
-            <div><b>01-B</b><code>qb-page-01-b-paul-corridor.png</code></div>
-            <div><b>01-C</b><code>qb-page-01-c-science-primer.png</code></div>
-            <div><b>01-D</b><code>qb-page-01-d-will-shadow.png</code></div>
+          <div class="journal-file-queue" aria-label="Quantum Break Page 02 drop queue">
+            <div><b>02-A</b><code>qb-page-02-a-airlock-threshold.png</code></div>
+            <div><b>02-B</b><code>qb-page-02-b-first-anomaly.png</code></div>
+            <div><b>02-C</b><code>qb-page-02-c-core-detonation.png</code></div>
+            <div><b>02-D</b><code>qb-page-02-d-frozen-will.png</code></div>
           </div>
-          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page when the generated images arrive.</div>
+          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page. Page 01 stays queued in the manifest; Page 02 is the current image target.</div>
           <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Panel manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
         </div>

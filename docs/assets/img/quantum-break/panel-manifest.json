@@ -1,7 +1,7 @@
 {
   "game": "Quantum Break",
   "page": "Page 01-02 - University and Machine Break",
-  "promptVersion": "qb-journey-page-02-v1",
+  "promptVersion": "qb-journey-page-02-v2",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/quantum-break/",
   "publicBase": "https://kenessy.github.io/Kenessy/assets/img/quantum-break/",
@@ -20,7 +20,7 @@
     {
       "id": "page-01-a",
       "filename": "qb-page-01-a-university-exterior.png",
-      "requiredForCurrentPage": true,
+      "requiredForCurrentPage": false,
       "role": "lead story beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 lead panel",
@@ -32,7 +32,7 @@
     {
       "id": "page-01-b",
       "filename": "qb-page-01-b-paul-corridor.png",
-      "requiredForCurrentPage": true,
+      "requiredForCurrentPage": false,
       "role": "support evidence beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel B",
@@ -44,7 +44,7 @@
     {
       "id": "page-01-c",
       "filename": "qb-page-01-c-science-primer.png",
-      "requiredForCurrentPage": true,
+      "requiredForCurrentPage": false,
       "role": "support context beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel C",
@@ -56,7 +56,7 @@
     {
       "id": "page-01-d",
       "filename": "qb-page-01-d-will-shadow.png",
-      "requiredForCurrentPage": true,
+      "requiredForCurrentPage": false,
       "role": "support tension beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel D",
@@ -68,7 +68,7 @@
     {
       "id": "page-02-a",
       "filename": "qb-page-02-a-airlock-threshold.png",
-      "requiredForCurrentPage": false,
+      "requiredForCurrentPage": true,
       "role": "next-page lead candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 lead panel candidate",
@@ -80,36 +80,36 @@
     {
       "id": "page-02-b",
       "filename": "qb-page-02-b-first-anomaly.png",
-      "requiredForCurrentPage": false,
+      "requiredForCurrentPage": true,
       "role": "next-page spectacle candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 support panel candidate",
-      "brief": "Time fracture proof and first unstable distortion after the machine escalation.",
-      "prompt": "Time fracture proof after the machine escalation, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.",
-      "composition": "One clear anomaly source, fractured light around the frame edge, figures anchored in the foreground.",
-      "avoid": "Abstract noise, overloaded shards, unreadable faces, or effects that hide the story beat."
+      "brief": "Two-minute proof, five-minute escalation, Will's warning, and first unstable distortion after the machine push.",
+      "prompt": "Two-minute time-travel proof escalating into a five-minute forward jump, readable distortion, Will's urgent warning, strong silhouettes, cinematic spectacle without visual confusion.",
+      "composition": "One clear anomaly source, fractured light around the frame edge, figures anchored in the foreground, warning energy without fake readable text.",
+      "avoid": "Abstract noise, overloaded shards, unreadable faces, captions, or effects that hide the story beat."
     },
     {
       "id": "page-02-c",
       "filename": "qb-page-02-c-core-detonation.png",
-      "requiredForCurrentPage": false,
+      "requiredForCurrentPage": true,
       "role": "page 02 failure candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 support panel candidate",
-      "brief": "Machine core overload, amber emergency contrast, unclear causality, people caught mid-reaction.",
-      "prompt": "Time machine core overloading and detonating, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.",
+      "brief": "Machine core overload, amber emergency contrast, unclear self-detonation read, people caught mid-reaction.",
+      "prompt": "Time machine core overloading and detonating on its own, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.",
       "composition": "Machine core as the visual anchor, humans at safe readable scale, explosion frozen at the first violent bloom rather than full chaos.",
       "avoid": "Firearm focus, gore, unreadable blast clutter, fake warning text, or making the cause look too certain."
     },
     {
       "id": "page-02-d",
       "filename": "qb-page-02-d-frozen-will.png",
-      "requiredForCurrentPage": false,
+      "requiredForCurrentPage": true,
       "role": "page 02 rescue candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 support panel candidate",
-      "brief": "Will frozen in the stutter, Jack reaching toward him, first readable time-stop rescue beat.",
-      "prompt": "Will frozen in a time stutter while Jack reaches toward him, still room, suspended debris, first readable time-stop rescue beat.",
+      "brief": "Will frozen in the stutter, Jack touching him awake, first readable time-stop rescue and combat beat.",
+      "prompt": "Will frozen in a time stutter while Jack touches him awake, still room, suspended debris, first readable time-stop rescue and combat power beat.",
       "composition": "Two clear human silhouettes, hand contact as the focus, frozen particles and blue light supporting the action without hiding faces.",
       "avoid": "Melodramatic portrait, abstract blue fog, unreadable characters, captions, or UI overlays."
     }
