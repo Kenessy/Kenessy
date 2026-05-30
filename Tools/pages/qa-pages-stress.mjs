@@ -172,6 +172,9 @@ async function auditHttp(base) {
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together comic reader'), 'Quantum Break journey fullscreen reader copy missing');
+  assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling missing');
+  assert(quantumBreakJourney.text.includes('Scroll sideways') && quantumBreakJourney.text.includes('fullscreen journal pages'), 'Quantum Break journey sideways reader navigation missing');
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
   assert(quantumBreakJourney.text.includes('The Machine Breaks') && quantumBreakJourney.text.includes('First Stutter'), 'Quantum Break journey page 02 machine-break note missing');
   assert(quantumBreakJourney.text.includes('two minutes') && quantumBreakJourney.text.includes('five-minute forward jump') && quantumBreakJourney.text.includes('self-detonating machine core') && quantumBreakJourney.text.includes('touching him awake'), 'Quantum Break journey Page 02 replay note is stale');
@@ -449,6 +452,47 @@ async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
     assert(initial.imageFrameCount >= pageSpec.minImageFrames, `${pageSpec.slug} ${viewport.name} expected at least ${pageSpec.minImageFrames} 16:9 frames, found ${initial.imageFrameCount}`);
     assert(initial.badImageFrameRatios.length === 0, `${pageSpec.slug} ${viewport.name} image frames are not 16:9 ${JSON.stringify(initial.badImageFrameRatios)}`);
   }
+  if (pageSpec.readerPages) {
+    const reader = await page.evaluate((expectedPages) => {
+      const track = document.querySelector('.reader-track');
+      const pages = [...document.querySelectorAll('.journal-page')];
+      const trackStyle = track ? getComputedStyle(track) : null;
+      return {
+        hasTrack: Boolean(track),
+        pageCount: pages.length,
+        snapType: trackStyle?.scrollSnapType || '',
+        overflowX: trackStyle?.overflowX || '',
+        rootHorizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+        expectedPages
+      };
+    }, pageSpec.readerPages);
+    assert(reader.hasTrack, `${pageSpec.slug} ${viewport.name} reader track missing`);
+    assert(reader.pageCount === pageSpec.readerPages, `${pageSpec.slug} ${viewport.name} expected ${pageSpec.readerPages} reader pages, found ${reader.pageCount}`);
+    assert(/x\s+mandatory/i.test(reader.snapType), `${pageSpec.slug} ${viewport.name} reader snap type weak: ${reader.snapType}`);
+    assert(/auto|scroll/i.test(reader.overflowX), `${pageSpec.slug} ${viewport.name} reader horizontal overflow disabled: ${reader.overflowX}`);
+    assert(!reader.rootHorizontalOverflow, `${pageSpec.slug} ${viewport.name} root horizontally overflows in reader mode`);
+    await checkpoint(`${pageSpec.slug} viewport ${viewport.name} reader shell ok`, reader);
+    for (let pageIndex = 0; pageIndex < pageSpec.readerPages; pageIndex += 1) {
+      await page.evaluate((index) => {
+        const track = document.querySelector('.reader-track');
+        const target = document.querySelectorAll('.journal-page')[index];
+        if (track && target) track.scrollTo({ left: target.offsetLeft, behavior: 'auto' });
+      }, pageIndex);
+      await page.waitForFunction((index) => {
+        const track = document.querySelector('.reader-track');
+        const target = document.querySelectorAll('.journal-page')[index];
+        return Boolean(track && target && Math.abs(track.scrollLeft - target.offsetLeft) <= 12);
+      }, pageIndex, { timeout: 1600 });
+      await page.waitForTimeout(80);
+      const pageMetrics = await collectStaticPageMetrics(page);
+      assert(!pageMetrics.horizontalOverflow, `${pageSpec.slug} ${viewport.name} reader page ${pageIndex + 1} root overflow ${pageMetrics.scrollWidth}/${pageMetrics.clientWidth}`);
+      assert(pageMetrics.meaningfulOverflow.length === 0, `${pageSpec.slug} ${viewport.name} reader page ${pageIndex + 1} offscreen elements ${JSON.stringify(pageMetrics.meaningfulOverflow)}`);
+      await checkpoint(`${pageSpec.slug} viewport ${viewport.name} reader page ${pageIndex + 1}/${pageSpec.readerPages}`, {
+        linkCount: pageMetrics.linkCount,
+        imageFrameCount: pageMetrics.imageFrameCount
+      });
+    }
+  }
   await auditInternalLinks(base, initial.hrefs);
 
   const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -504,6 +548,15 @@ async function collectHomeMetrics(page, buildId) {
     const meaningfulOverflow = visible
       .filter((el) => {
         const rect = el.getBoundingClientRect();
+        if (el.closest?.('.page-tabs')) return false;
+        if (el.classList?.contains('journal-page')) return false;
+        const page = el.closest?.('.journal-page');
+        if (page) {
+          const pageRect = page.getBoundingClientRect();
+          const visibleWidth = Math.min(pageRect.right, window.innerWidth) - Math.max(pageRect.left, 0);
+          const activePage = visibleWidth > Math.min(pageRect.width, window.innerWidth) * 0.5;
+          if (!activePage) return false;
+        }
         return rect.right > window.innerWidth + 1 || rect.left < -1;
       })
       .slice(0, 8)
@@ -563,6 +616,15 @@ async function collectStaticPageMetrics(page) {
     const meaningfulOverflow = visible
       .filter((el) => {
         const rect = el.getBoundingClientRect();
+        if (el.closest?.('.page-tabs')) return false;
+        if (el.classList?.contains('journal-page')) return false;
+        const journalPage = el.closest?.('.journal-page');
+        if (journalPage) {
+          const pageRect = journalPage.getBoundingClientRect();
+          const visibleWidth = Math.min(pageRect.right, window.innerWidth) - Math.max(pageRect.left, 0);
+          const activePage = visibleWidth > Math.min(pageRect.width, window.innerWidth) * 0.5;
+          if (!activePage) return false;
+        }
         return rect.right > window.innerWidth + 1 || rect.left < -1;
       })
       .slice(0, 8)
@@ -729,9 +791,10 @@ async function main() {
           slug: 'quantum-break-journey',
           path: quantumBreakJourneyPath,
           expectedText: 'Review-canon route selected',
-          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'The Machine Breaks', 'First Stutter', 'Generation Brief', 'Shared style contract', 'No fake UI / captions', 'qb-page-01-a-university-exterior.png', 'qb-page-02-d-frozen-will.png', 'build auto-wires any matching image file', quantumBreakPanelManifestPath],
+          requiredTexts: ['Fullscreen Journal', 'Play-it-together comic reader', 'Scroll sideways', 'Panel Contract', 'Image-ready comic page', 'The Machine Breaks', 'First Stutter', 'Generation Brief', 'Shared style contract', 'No fake UI / captions', 'qb-page-01-a-university-exterior.png', 'qb-page-02-d-frozen-will.png', 'build auto-wires any matching image file', quantumBreakPanelManifestPath],
           minLinks: 6,
-          minImageFrames: 7
+          minImageFrames: 7,
+          readerPages: 5
         }, viewport);
       }
       await auditFailureModes(browser, base, buildId);

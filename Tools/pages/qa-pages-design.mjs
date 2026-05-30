@@ -151,6 +151,9 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together comic reader'), 'Quantum Break journey fullscreen reader copy is missing');
+  assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling is missing');
+  assert(quantumBreakJourney.text.includes('Scroll sideways') && quantumBreakJourney.text.includes('fullscreen journal pages'), 'Quantum Break journey sideways reader navigation is missing');
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
   assert(quantumBreakJourney.text.includes('The Machine Breaks') && quantumBreakJourney.text.includes('First Stutter') && quantumBreakJourney.text.includes('time is an egg'), 'Quantum Break journey replay-note page 02 copy is missing');
   assert(quantumBreakJourney.text.includes('two minutes') && quantumBreakJourney.text.includes('five-minute forward jump') && quantumBreakJourney.text.includes('self-detonating machine core') && quantumBreakJourney.text.includes('touching him awake'), 'Quantum Break journey replay-note page 02 detail is stale');

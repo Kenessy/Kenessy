@@ -188,6 +188,9 @@ async function auditHttpSurface(base) {
   assert(!quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed evidence placeholders');
 
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together comic reader'), 'Quantum Break journey fullscreen reader copy missing');
+  assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling missing');
+  assert(quantumBreakJourney.text.includes('Scroll sideways') && quantumBreakJourney.text.includes('fullscreen journal pages'), 'Quantum Break journey sideways reader navigation missing');
   assert(quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey route lock missing');
   assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
   assert(quantumBreakJourney.text.includes('The Machine Breaks') && quantumBreakJourney.text.includes('First Stutter'), 'Quantum Break journey page 02 machine-break note missing');
