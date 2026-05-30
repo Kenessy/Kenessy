@@ -138,6 +138,7 @@ async function auditDesignArtifacts(base) {
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
+  assert(!/\.site-nav\{[^}]*position:sticky/i.test(root.text), 'portfolio homepage nav is sticky and can contaminate full-page captures');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash asset is missing');
@@ -147,8 +148,9 @@ async function auditDesignArtifacts(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
+  assert(quantumBreakJourney.text.includes('IMAGE SLOT') && quantumBreakJourney.text.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}'), 'Quantum Break journey storyboard slot styling is missing');
   assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey image slot markers are missing');
-  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS is missing');
+  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS is missing');
   assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
   assert(quantumBreakJourney.text.includes('.asset-links') && quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey asset manifest styling/link is missing');
   assert(quantumBreakJourney.text.includes('one coherent cinematic sci-fi comic style') && quantumBreakJourney.text.includes('Avoid large fake typography'), 'Quantum Break journey prompt style guardrails are missing');
@@ -157,6 +159,7 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
   const quantumBreakReport = await fetchText(url(base, 'plater-game-reports/games/quantum-break/'));
   assert(quantumBreakReport.text.includes('.score-panel-locked') && quantumBreakReport.text.includes('.hero-gate-list') && quantumBreakReport.text.includes('.evidence-gates') && quantumBreakReport.text.includes('.gate-card'), 'Quantum Break report evidence-gate styling is missing');
+  assert(quantumBreakReport.text.includes('.hud{position:relative;top:auto;z-index:auto}'), 'Quantum Break report nav still lacks the non-sticky full-page capture override');
   assert(quantumBreakReport.text.includes('.hero h1{font-size:104px}') && quantumBreakReport.text.includes('.section-head h2{font-size:44px}'), 'Quantum Break report fixed type-size overrides are missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakReport.text), 'Quantum Break report CSS uses viewport-scaled font sizing');
   assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');

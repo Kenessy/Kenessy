@@ -139,6 +139,7 @@ async function auditHttp(base) {
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash missing');
+  assert(!/\.site-nav\{[^}]*position:sticky/i.test(root.text), 'portfolio homepage nav is sticky and can contaminate full-page captures');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`main_canvas_diegetic_equation.bundle.js?v=${buildId}`), 'report bundle URL is not versioned with current build id');
@@ -154,6 +155,7 @@ async function auditHttp(base) {
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report missing panel manifest link');
   assert(quantumBreak.text.includes('Evidence Gate') && quantumBreak.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence gate matrix missing');
   assert(quantumBreak.text.includes('Quantum Break score unlock gates') && quantumBreak.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail missing');
+  assert(quantumBreak.text.includes('.hud{position:relative;top:auto;z-index:auto}'), 'Quantum Break report nav full-page capture override missing');
   assert(quantumBreak.text.includes('High</div><p>Wants cinematic time-fracture atmosphere') && quantumBreak.text.includes('None</div><p>Looks for co-op'), 'Quantum Break fit preview labels missing');
   assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade'), 'Quantum Break report live evidence section missing');
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
@@ -166,7 +168,8 @@ async function auditHttp(base) {
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state 16:9 image workflow');
   assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey slot markers missing');
-  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS missing');
+  assert(quantumBreakJourney.text.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS missing');
+  assert(quantumBreakJourney.text.includes('IMAGE SLOT'), 'Quantum Break journey storyboard slot styling missing');
   assert(quantumBreakJourney.text.includes('build auto-wires any matching image file'), 'Quantum Break journey auto-wiring contract missing');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   const panelManifestJson = JSON.parse(panelManifest.text);

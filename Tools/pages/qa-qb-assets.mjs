@@ -105,7 +105,7 @@ async function main() {
 
   assert(await fileExists(journeyIndexPath), 'public Quantum Break journey missing; run npm run build:metro');
   const journeyHtml = await readFile(journeyIndexPath, 'utf8');
-  assert(journeyHtml.includes('.panel-frame-ready:before{display:none}'), 'journey is missing ready-frame image CSS');
+  assert(journeyHtml.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}'), 'journey is missing ready-frame image CSS');
   assert(journeyHtml.includes('The build auto-wires any matching image file into its manifest slot.'), 'journey is missing auto-wiring handoff text');
   await checkpoint('journey page loaded for wiring audit');
 
