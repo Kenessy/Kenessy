@@ -129,7 +129,11 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
   assert(root.text.includes('I find the hidden failure before it becomes obvious.'), 'root homepage hero copy missing');
   assert(root.text.includes('CEO readout'), 'root homepage operator panel missing');
+  assert(root.text.includes('What This Is'), 'root homepage about section missing');
+  assert(root.text.includes('id="work"'), 'root homepage work section missing');
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
+  assert(root.text.includes('Play It Together'), 'root homepage journal section missing');
+  assert(root.text.includes('16:9 panel'), 'root homepage journal image slot guidance missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
   assert(root.text.includes(quantumBreakPath), 'root homepage does not link Quantum Break');
@@ -153,6 +157,8 @@ async function auditHttpSurface(base) {
   assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
   assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
   assert(quantumBreak.text.includes('Score locked'), 'Quantum Break score lock missing');
+  assert(quantumBreak.text.includes('Replay Notes So Far'), 'Quantum Break report live evidence section missing');
+  assert(quantumBreak.text.includes('Project Promenade'), 'Quantum Break report does not surface Page 01 evidence');
   assert(!quantumBreak.text.includes('[This becomes'), 'Quantum Break report still exposes raw verdict placeholder text');
   assert(!quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed evidence placeholders');
 

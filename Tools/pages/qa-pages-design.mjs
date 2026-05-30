@@ -126,9 +126,11 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.home-root'), 'portfolio homepage CSS is missing');
   assert(root.text.includes('.operator-panel'), 'portfolio homepage operator panel styling is missing');
   assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
+  assert(root.text.includes('.about-grid'), 'portfolio homepage about section styling is missing');
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
   assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
+  assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');

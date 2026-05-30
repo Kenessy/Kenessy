@@ -126,6 +126,8 @@ async function auditHttp(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
+  assert(root.text.includes('What This Is') && root.text.includes('Play It Together'), 'portfolio homepage about/journal sections are missing');
+  assert(root.text.includes('id="work"') && root.text.includes('16:9 panel'), 'portfolio homepage work or journal image guidance is missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
@@ -141,6 +143,7 @@ async function auditHttp(base) {
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
+  assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade'), 'Quantum Break report live evidence section missing');
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
@@ -185,7 +188,7 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
   assert(initial.hasHomeRoot, `${viewport.name} homepage root missing`);
   assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
-  assert(initial.sectionTitles.join('|') === 'Signal Stack|Proof Surface|Field Work|Game Reviews|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
+  assert(initial.sectionTitles.join('|') === 'What This Is|Signal Stack|Proof Surface|Field Work|Game Reviews|Play It Together|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
   assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
   assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);

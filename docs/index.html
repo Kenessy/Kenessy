@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kenessy - Systems Design, Adversarial QA, Game Critique</title>
+<title>Kenessy - Portfolio, Systems Design, Adversarial QA</title>
 <link rel="icon" href="data:,">
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/">
-<meta name="description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
+<meta name="description" content="Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.">
 <meta name="theme-color" content="#07090d">
 <meta name="build-id" content="5a07ad9ffa0a">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kenessy - Systems Design, Adversarial QA, Game Critique">
-<meta property="og:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
+<meta property="og:title" content="Kenessy - Portfolio, Systems Design, Adversarial QA">
+<meta property="og:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.">
 <meta property="og:url" content="https://kenessy.github.io/Kenessy/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kenessy - Systems Design, Adversarial QA, Game Critique">
-<meta name="twitter:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.">
+<meta name="twitter:title" content="Kenessy - Portfolio, Systems Design, Adversarial QA">
+<meta name="twitter:description" content="Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.">
 <style>
 :root{
   --bg:#07090d;
@@ -178,22 +178,29 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .signal b{display:block;color:var(--cyan);font-size:12px;text-transform:uppercase}
 .signal span{display:block;margin-top:17px;color:var(--ink);font-size:23px;line-height:1.04;font-weight:1000}
 .signal small{display:block;margin-top:10px;color:var(--muted);line-height:1.45;font-weight:720}
+.about-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr);gap:14px}
+.about-copy{border-left:3px solid var(--orange);padding-left:16px}
+.about-copy p{color:#d6c793;font-size:18px;line-height:1.58;font-weight:760}
+.about-list{display:grid;gap:10px}
+.about-line{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);background:linear-gradient(145deg,rgba(17,25,35,.86),rgba(8,11,15,.94));padding:14px}
+.about-line b{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
+.about-line span{color:var(--ink);font-size:17px;line-height:1.32;font-weight:850}
 .proof-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:14px}
-.proof-card,.project-card,.review-card,.hire-card{
+.proof-card,.project-card,.review-card,.journal-card,.hire-card{
   border:1px solid var(--line);
   background:linear-gradient(145deg,rgba(18,26,36,.93),rgba(9,12,17,.97));
 }
 .proof-card{padding:0;overflow:hidden}
 .proof-card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0b1017;border-bottom:1px solid var(--line)}
 .proof-card-body{padding:18px}
-.proof-card h3,.project-card h3,.review-copy h3,.hire-card h3{
+.proof-card h3,.project-card h3,.review-copy h3,.journal-copy h3,.hire-card h3{
   color:var(--ink);
   font-size:27px;
   line-height:1.03;
   font-weight:1000;
   text-transform:uppercase;
 }
-.proof-card p,.project-card p,.review-copy p,.hire-card p{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55;font-weight:680}
+.proof-card p,.project-card p,.review-copy p,.journal-copy p,.hire-card p{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55;font-weight:680}
 .proof-stack{display:grid;gap:10px}
 .proof-mini{border:1px solid var(--line);background:rgba(12,17,24,.76);padding:16px}
 .proof-mini b{display:block;color:var(--orange);font-size:12px;text-transform:uppercase}
@@ -272,6 +279,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .review-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
 .review-sub-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .review-sub-links a{border:1px solid var(--line);padding:7px 9px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase}
+.journal-card{display:grid;grid-template-columns:minmax(360px,.98fr) minmax(0,1fr);overflow:hidden}
+.journal-media{min-height:280px;border-right:1px solid var(--line);background:linear-gradient(145deg,rgba(19,212,232,.10),rgba(141,120,255,.06));display:grid;place-items:center}
+.journal-media img{width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center}
+.journal-copy{display:grid;align-content:center;padding:22px}
+.journal-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.journal-slot{border:1px dashed rgba(19,212,232,.38);background:rgba(7,9,13,.42);aspect-ratio:16/9;display:grid;place-items:center;padding:12px;color:#9fb0be;font-size:10px;font-weight:1000;text-align:center;text-transform:uppercase}
 .hire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .hire-card{padding:18px;min-height:188px}
 .hire-card strong{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(19,212,232,.36);padding:6px 8px;color:#7fe9f3;font-size:11px;text-transform:uppercase}
@@ -279,11 +292,13 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .footer a{min-height:32px;display:inline-flex;align-items:center;color:#ffb347;font-weight:900}
 @media(max-width:960px){
-  .hero-stage,.section-head,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card{grid-template-columns:1fr}
+  .hero-stage,.section-head,.about-grid,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card,.journal-card{grid-template-columns:1fr}
   .hero-copy{min-height:auto}
   .operator-panel{min-height:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .journal-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .review-media img{aspect-ratio:16/9;min-height:0}
+  .journal-media img{aspect-ratio:16/9;min-height:0}
   .qb-card .review-media img{aspect-ratio:1672/941}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
@@ -295,8 +310,8 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .wrap{width:min(calc(100% - 28px),var(--max))}
   section{scroll-margin-top:104px}
   .site-nav .wrap{align-items:flex-start;flex-direction:column;gap:9px;padding:10px 0}
-  .nav-links{width:100%;justify-content:space-between;gap:4px;flex-wrap:nowrap}
-  .nav-links a{min-height:32px;padding:6px 5px;font-size:10px}
+  .nav-links{width:100%;justify-content:flex-start;gap:4px;flex-wrap:wrap}
+  .nav-links a{min-height:32px;padding:6px 7px;font-size:10px}
   .brand{min-height:28px}
   .hero{padding-top:38px}
   h1{font-size:39px}
@@ -306,6 +321,8 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .hire-cell{border-right:0}
   .hire-cell:nth-last-child(2){border-bottom:1px solid var(--line)}
   .signal-row{grid-template-columns:1fr}
+  .about-line{grid-template-columns:1fr}
+  .journal-slots{grid-template-columns:1fr}
   .panel-top,.proof-line{grid-template-columns:1fr}
   .build-chip,.status-dot{justify-self:start}
 }
@@ -316,10 +333,10 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   <div class="wrap">
     <a class="brand" href="./">Kenessy</a>
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#signal">Signal</a>
-      <a href="#proof">Proof</a>
-      <a href="#artifacts">Artifacts</a>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
       <a href="#reviews">Reviews</a>
+      <a href="#journal">Journal</a>
       <a href="https://github.com/Kenessy/Kenessy">GitHub</a>
     </nav>
   </div>
@@ -353,6 +370,26 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <span class="status-dot">OK</span>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">About / operating mode</p><h2>What This Is</h2></div>
+        <p>A public hub for the things I make and stress-test: design systems, strange worlds, game reviews, proof loops, and experiments that need both taste and verification.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>I work best where the shape is not obvious yet: turning rough ideas into usable structures, finding the part that feels wrong, and pushing the result until it survives real screenshots, links, builds, and edge cases.</p>
+          <div class="tag-row"><span class="tag cyan">Systems</span><span class="tag amber">Narrative design</span><span class="tag">Game critique</span><span class="tag green">Adversarial QA</span></div>
+        </div>
+        <div class="about-list">
+          <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
+          <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane.</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -395,11 +432,11 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     </div>
   </section>
 
-  <section class="section" id="artifacts">
+  <section class="section" id="work">
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Selected artifacts</p><h2>Field Work</h2></div>
-        <p>Different outputs, same operating mode: make the invisible structure visible, then make it durable enough to ship.</p>
+        <p>Different outputs, same operating mode: make invisible structure visible, then make it durable enough to ship, revisit, and explain.</p>
       </div>
       <div class="project-grid">
         <a class="project-card featured" href="apocalypse-express/">
@@ -414,8 +451,8 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <a class="project-card" href="plater-game-reports/">
           <div class="tag-row"><span class="tag green">Public artifacts</span><span class="tag">Reports</span></div>
           <h3>Plater Game Reports</h3>
-          <p>A review format where taste-fit, score logic, caveats, and trust evidence are shown instead of hidden behind a single number.</p>
-          <div class="tag-row"><span class="tag cyan">ALERTED axes</span><span class="tag amber">Evidence rails</span></div>
+          <p>A review format where taste-fit, score logic, caveats, trust evidence, and replay journals are shown instead of hidden behind a single number.</p>
+          <div class="tag-row"><span class="tag cyan">ALERTED axes</span><span class="tag amber">Evidence rails</span><span class="tag">Journey pages</span></div>
         </a>
       </div>
     </div>
@@ -455,6 +492,31 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="score-box pending" aria-label="Quantum Break score pending"><span>--</span><small>Draft</small></div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="journal">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Live journal lane</p><h2>Play It Together</h2></div>
+        <p>The journal is the readable playthrough layer: session notes become compact comic-style pages with image slots, review implications, and friction notes.</p>
+      </div>
+      <article class="journal-card">
+        <a class="journal-media" href="plater-game-reports/games/quantum-break/journey/" aria-label="Open Quantum Break illustrated journey">
+          <img src="assets/img/quantum-break-review-journey-splash.svg" width="1672" height="941" alt="">
+        </a>
+        <div class="journal-copy">
+          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 ready</span><span class="tag green">16:9 panels</span></div>
+          <h3>Illustrated Review Journal</h3>
+          <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
+          <div class="journal-slots" aria-label="Current image format recommendation">
+            <div class="journal-slot">16:9 panel<br>story beat</div>
+            <div class="journal-slot">16:9 panel<br>evidence beat</div>
+            <div class="journal-slot">16:9 panel<br>friction beat</div>
+          </div>
+          <div class="review-sub-links"><a href="plater-game-reports/games/quantum-break/journey/">Open journey</a><a href="plater-game-reports/games/quantum-break/">Open review shell</a></div>
+        </div>
+      </article>
     </div>
   </section>
 
