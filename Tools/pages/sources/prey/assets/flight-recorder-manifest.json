@@ -1,13 +1,13 @@
 {
   "game": "Prey",
-  "status": "flight-recorder-session-01-partial-assets",
-  "promptVersion": "prey-flight-recorder-v1",
+  "status": "illustrated-journal-session-01-partial-assets",
+  "promptVersion": "prey-illustrated-journal-v1",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/prey/",
-  "sharedPrompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Use a dark orbital station mood, amber green cyan telemetry ambience, grounded environmental storytelling, no readable fake UI text, no logos, no captions, painterly cinematic realism, clean composition readable at mobile width.",
+  "sharedPrompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Use a dark orbital station mood, amber green cyan accent light, grounded environmental storytelling, no readable fake UI text, no logos, no captions, painterly cinematic realism, clean composition readable at mobile width.",
   "negativePrompt": "No logos, no captions, no fake UI text, no fake brand text, no watermark, no gore focus, no illegible typographic overlays, no cartoon style, no random extra limbs.",
   "styleRules": [
-    "Use TranStar flight recorder language: dark station UI, amber/green/cyan telemetry, scanline light, and restrained black box evidence tone.",
+    "Use illustrated field journal language: dark station pages, amber/green/cyan accent light, pinned evidence photos, and readable comic-review composition.",
     "16:9 PNGs only; target at least 1600x900 for public display.",
     "Missing images remain placeholders in the journey until exact filenames exist.",
     "Avoid large non-diegetic typography, fake UI text, captions, logos, and watermarks.",
@@ -16,34 +16,34 @@
   "slots": [
     {
       "id": "page-02-a-rooftop-helicopter",
-      "page": "mission-scope",
+      "page": "fake-morning",
       "filename": "prey-page-02-a-rooftop-helicopter.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
       "brief": "Rooftop helicopter route and first-day facade hook.",
-      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Morgan approaches a rooftop helicopter at sunrise above a polished futuristic city, wet helipad reflections, staged first-day corporate facade, subtle unease under a beautiful commute, amber blue dawn palette, no readable logos, no UI, no captions, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Morgan approaches a rooftop helicopter at sunrise above a polished futuristic city, wet helipad reflections, staged first-day corporate facade, subtle unease under a beautiful commute, amber blue dawn palette, no readable logos, no UI, no captions, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Keep Morgan and the helicopter readable with city depth behind them; the scene should feel too polished and staged before the later simulation reveal.",
       "avoid": "Avoid readable studio names, fake corporate text, busy rotor blur that hides the helicopter, UI overlays, captions, and logos."
     },
     {
       "id": "page-03-a-mimic-paranoia",
-      "page": "evidence-queue",
+      "page": "test-rooms",
       "filename": "prey-page-03-a-mimic-paranoia.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
       "brief": "Ordinary room objects staged as possible mimic threats.",
-      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Dark Talos I office or lab corner with ordinary objects arranged suspiciously, coffee mug, chair, lamp, tools, and one barely readable alien mimic distortion implied by shadow and amber/cyan station light, human-scale paranoia, no gore, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Dark Talos I office or lab corner with ordinary objects arranged suspiciously, coffee mug, chair, lamp, tools, and one barely readable alien mimic distortion implied by shadow and amber/cyan station light, human-scale paranoia, no gore, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Keep one suspicious object cluster as the focal point; the room should feel quiet, observed, and unsafe without needing monster action.",
       "avoid": "Avoid explicit readable notes or terminal text, cartoon monsters, gore focus, and over-bright horror lighting."
     },
     {
       "id": "page-03-b-crew-terminal-trace",
-      "page": "evidence-queue",
+      "page": "test-rooms",
       "filename": "prey-page-03-b-crew-terminal-trace.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
       "brief": "Crew trace workstation evidence without readable fake text.",
-      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Abandoned crew workstation inside Talos I, dark terminal glow, scattered personal objects, audio log recorder, access card shape, coffee stain, station corridor beyond, amber green cyan telemetry ambience, environmental storytelling about missing crew, no readable screen text, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Abandoned crew workstation inside Talos I, dark terminal glow, scattered personal objects, audio log recorder, access card shape, coffee stain, station corridor beyond, amber green cyan station ambience, environmental storytelling about missing crew, no readable screen text, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Use the desk as a foreground evidence table with corridor depth behind it; let personal traces imply story rather than text.",
       "avoid": "Avoid readable emails, fake terminal words, real-world logos, gore, and dense props that become visual noise."
     }

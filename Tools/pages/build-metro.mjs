@@ -160,12 +160,12 @@ async function renderQuantumBreakJourneyImages(html, manifest) {
 }
 
 function preyImageAlt(slot) {
-  return `Prey flight recorder evidence: ${slot.brief}`;
+  return `Prey illustrated journal evidence: ${slot.brief}`;
 }
 
 async function renderPreyJourneyImages(html, manifest) {
   if (!manifest || !Array.isArray(manifest.slots)) {
-    throw new Error('Prey flight recorder manifest is missing slots.');
+    throw new Error('Prey illustrated journal manifest is missing slots.');
   }
 
   let output = html;
@@ -176,7 +176,7 @@ async function renderPreyJourneyImages(html, manifest) {
     const id = String(slot.id || '');
     const filename = String(slot.filename || '');
     if (!id || !filename) {
-      throw new Error(`Prey flight recorder manifest has an invalid slot: ${JSON.stringify(slot)}`);
+      throw new Error(`Prey illustrated journal manifest has an invalid slot: ${JSON.stringify(slot)}`);
     }
 
     const visibleInJourney = slot.visibleInJourney !== false;
@@ -199,7 +199,7 @@ async function renderPreyJourneyImages(html, manifest) {
       `<div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="${escapeRegExp(id)}"><div class="slot-placeholder">([\\s\\S]*?)<\\/div><\\/div>`
     );
     if (!framePattern.test(output)) {
-      throw new Error(`Prey journey slot ${id} is not a recorder evidence placeholder.`);
+      throw new Error(`Prey journey slot ${id} is not a journal evidence placeholder.`);
     }
 
     const imageSrc = `../../../../assets/img/prey/${filename}`;
@@ -319,7 +319,7 @@ function reportsIndexHtml(buildId) {
 <header><p><a href="../">Kenessy home</a></p><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
 <a class="report" href="games/metro-2033-redux/?v=${buildId}"><div><div class="kicker">Metro 2033 Redux</div><h2>ALERTED Field Report</h2><p>Worth playing. Atmosphere-first, linear, cohesive action horror with bounded agency and visible caveats.</p><div class="mini"><span>A Atmosphere</span><span>L Loop</span><span>E Engagement</span><span>R Readability</span><span>T Technical</span><span class="good">86 / A</span></div></div><div class="score">86</div></a>
 <article class="report draft"><div><div class="kicker">Quantum Break</div><h2>Review Draft Shell</h2><p>Replay-ready structure for a Remedy cinematic sci-fi review, plus an illustrated journey page built from live narration.</p><div class="mini"><span>Promise</span><span>Loop</span><span>Agency</span><span>Trust</span><span>Readiness</span><span class="pending">Draft</span></div><div class="sub"><a href="games/quantum-break/">Open review</a><a href="games/quantum-break/journey/">Open journey</a></div></div><div class="score pending" aria-label="Quantum Break verdict locked until replay evidence"><span>LOCKED</span><small>Draft</small></div></article>
-<article class="report draft"><div><div class="kicker">Prey</div><h2>Flight Recorder</h2><p>Owned next-run candidate: a TranStar incident dossier for Talos I, mimic paranoia, immersive-sim agency, proof gates, and a pre-run black box recorder.</p><div class="mini"><span>Immersive sim</span><span>Talos I</span><span>Station horror</span><span>Systems audit</span><span class="pending">Recorder ready</span></div><div class="sub"><a href="games/prey/">Open entry</a><a href="games/prey/journey/">Open recorder</a></div></div><div class="score pending" aria-label="Prey verdict locked until first-run evidence"><span>LOCKED</span><small>Recorder</small></div></article>
+<article class="report draft"><div><div class="kicker">Prey</div><h2>Illustrated Journal</h2><p>Owned next-run candidate: a TranStar incident dossier for Talos I, mimic paranoia, immersive-sim agency, proof gates, and a narrated first-run review journal.</p><div class="mini"><span>Immersive sim</span><span>Talos I</span><span>Station horror</span><span>Systems audit</span><span class="pending">Journal ready</span></div><div class="sub"><a href="games/prey/">Open entry</a><a href="games/prey/journey/">Open journal</a></div></div><div class="score pending" aria-label="Prey verdict locked until first-run evidence"><span>LOCKED</span><small>Journal</small></div></article>
 </main>
 </body>
 </html>

@@ -73,16 +73,16 @@ function parsePngDimensions(buffer, filename) {
 
 function validateManifest(manifest) {
   assert(manifest.game === 'Prey', 'manifest game must be Prey');
-  assert(manifest.status === 'flight-recorder-session-01-partial-assets', 'manifest status mismatch');
-  assert(manifest.promptVersion === 'prey-flight-recorder-v1', 'manifest promptVersion mismatch');
+  assert(manifest.status === 'illustrated-journal-session-01-partial-assets', 'manifest status mismatch');
+  assert(manifest.promptVersion === 'prey-illustrated-journal-v1', 'manifest promptVersion mismatch');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/prey/', 'manifest assetBase mismatch');
-  assert(typeof manifest.sharedPrompt === 'string' && /black box recorder/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing black box recorder base');
+  assert(typeof manifest.sharedPrompt === 'string' && /illustrated evidence image/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing illustrated evidence base');
   assert(typeof manifest.negativePrompt === 'string' && /fake UI text/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI text guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 4, 'manifest needs at least four styleRules');
   assert(manifest.styleRules.some((rule) => /16:9 PNGs only/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
   assert(manifest.styleRules.some((rule) => /Missing images remain placeholders/i.test(rule)), 'manifest styleRules must preserve missing-image placeholder behavior');
-  assert(manifest.styleRules.some((rule) => /TranStar flight recorder/i.test(rule)), 'manifest styleRules must preserve recorder art direction');
+  assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
   assert(Array.isArray(manifest.slots) && manifest.slots.length === 3, 'manifest must contain exactly three photo evidence entries');
 
   const ids = new Set();
@@ -93,7 +93,7 @@ function validateManifest(manifest) {
     assert(isPlainFilename(slot.filename), `filename must not include paths: ${slot.filename}`);
     assert(slot.filename.endsWith('.png'), `slot must target PNG: ${slot.filename}`);
     assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
-    assert(slot.visibleInJourney !== false, `slot ${slot.id} should be visible in the Prey recorder v1`);
+    assert(slot.visibleInJourney !== false, `slot ${slot.id} should be visible in the Prey illustrated journal v1`);
     assert(slot.brief && slot.brief.length >= 24, `slot ${slot.id} brief is too short`);
     assert(slot.prompt && slot.prompt.length >= 48, `slot ${slot.id} prompt is too short`);
     assert(slot.composition && slot.composition.length >= 48, `slot ${slot.id} composition is too short`);
@@ -102,8 +102,8 @@ function validateManifest(manifest) {
     filenames.add(slot.filename);
   }
 
-  assert(expectedSlotIds.every((id) => ids.has(id)), 'manifest slot ids do not match Prey recorder contract');
-  assert(expectedFilenames.every((filename) => filenames.has(filename)), 'manifest filenames do not match Prey recorder contract');
+  assert(expectedSlotIds.every((id) => ids.has(id)), 'manifest slot ids do not match Prey journal contract');
+  assert(expectedFilenames.every((filename) => filenames.has(filename)), 'manifest filenames do not match Prey journal contract');
   return { ids, filenames };
 }
 
@@ -123,13 +123,13 @@ async function main() {
   const readme = await readFile(publicReadmePath, 'utf8');
   assert(readme.includes('npm run qa:prey-assets'), 'Prey README does not document asset QA');
   assert(expectedFilenames.every((filename) => readme.includes(filename)), 'Prey README missing expected drop-in filenames');
-  assert(readme.includes('Missing images remain visible as recorder placeholders'), 'Prey README missing placeholder behavior');
+  assert(readme.includes('Missing images remain visible as journal placeholders'), 'Prey README missing placeholder behavior');
   await checkpoint('public README ok');
 
   assert(await fileExists(journeyIndexPath), 'public Prey journey missing; run npm run build:metro');
   const journeyHtml = await readFile(journeyIndexPath, 'utf8');
   assert(journeyHtml.includes('.evidence-slot-ready .slot-placeholder{display:none}'), 'journey is missing ready evidence-slot image CSS');
-  assert(journeyHtml.includes('Missing images remain visible as recorder placeholders until exact filenames exist.'), 'journey is missing missing-image placeholder contract');
+  assert(journeyHtml.includes('Missing images remain visible as journal placeholders until exact filenames exist.'), 'journey is missing missing-image placeholder contract');
   assert(expectedSlotIds.every((id) => journeyHtml.includes(`data-prey-slot="${id}"`)), 'journey is missing one or more Prey data slot markers');
   await checkpoint('journey page loaded for wiring audit');
 

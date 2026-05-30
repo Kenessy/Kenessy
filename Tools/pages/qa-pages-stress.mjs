@@ -141,7 +141,7 @@ async function auditHttp(base) {
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire into visible photo evidence slots'), 'portfolio homepage Quantum Break state/journal handoff copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
-  assert(root.text.includes(preyPath) && root.text.includes(preyJourneyPath) && root.text.includes('Prey') && root.text.includes('Flight recorder ready'), 'portfolio homepage does not link Prey entry/recorder');
+  assert(root.text.includes(preyPath) && root.text.includes(preyJourneyPath) && root.text.includes('Prey') && root.text.includes('Field journal ready'), 'portfolio homepage does not link Prey entry/journal');
   assert(root.text.includes('LOCKED') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence gate missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
@@ -179,23 +179,23 @@ async function auditHttp(base) {
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const prey = await fetchText(url(base, preyPath));
   assert(prey.text.includes('ALERTED entry point / Prey 2017') && prey.text.includes('Prey score unlock gates'), 'Prey report entry/gates missing');
-  assert(prey.text.includes('Flight recorder ready') && prey.text.includes('Open Recorder') && prey.text.includes('journey/'), 'Prey report recorder contract missing');
+  assert(prey.text.includes('Field journal ready') && prey.text.includes('Open Journal') && prey.text.includes('journey/'), 'Prey report journal contract missing');
   assert(prey.text.includes('../../../assets/img/prey-review-splash.png'), 'Prey report local splash asset missing');
   assert(!prey.text.includes('data-qb-slot') && !prey.text.includes('Do Not Start The Journal Yet') && !prey.text.includes('Journal intentionally not started'), 'Prey report has stale no-journal or Quantum Break slot copy');
   assert(!/>--</.test(prey.text), 'Prey report still exposes raw dash placeholders');
   const preyJourney = await fetchText(url(base, preyJourneyPath));
-  assert(preyJourney.text.includes('TranStar Flight Recorder') && preyJourney.text.includes('Prey Black Box'), 'Prey journey flight recorder shell missing');
-  assert(preyJourney.text.includes('.recorder-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
-  assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey page copy missing');
+  assert(preyJourney.text.includes('Illustrated Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey illustrated journal shell missing');
+  assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
+  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey reuses stale Quantum Break/comic slot language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);
-  assert(preyManifestJson.game === 'Prey' && preyManifestJson.slots.length === 3, 'Prey flight recorder manifest mismatch');
+  assert(preyManifestJson.game === 'Prey' && preyManifestJson.slots.length === 3, 'Prey illustrated journal manifest mismatch');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
-  assert(preyReadme.text.includes('Prey Flight Recorder Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README workflow missing');
+  assert(preyReadme.text.includes('Prey Illustrated Journal Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README workflow missing');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together scrapbook reader'), 'Quantum Break journey fullscreen scrapbook reader copy missing');
   assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling missing');
@@ -837,16 +837,16 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey/i,
           expectedText: 'ALERTED entry point / Prey 2017',
-          requiredTexts: ['Talos I pull', 'System agency', 'Combat friction', 'Ending trust', 'Session 01 Logged', 'Open Recorder', 'Falsifiers'],
+          requiredTexts: ['Talos I pull', 'System agency', 'Combat friction', 'Ending trust', 'Session 01 Logged', 'Open Journal', 'Falsifiers'],
           minLinks: 5
         }, viewport);
         await auditStaticPageViewport(browser, base, {
           slug: 'prey-journey',
           path: preyJourneyPath,
           titlePattern: /Prey/i,
-          h1Pattern: /Prey|Flight Recorder|Black Box/i,
-          expectedText: 'TranStar Flight Recorder',
-          requiredTexts: ['Boot', 'Mission Scope', 'Evidence Queue', 'Image Handoff', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
+          h1Pattern: /Prey|Field Journal|Session 01/i,
+          expectedText: 'Session 01 Field Journal',
+          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
           minImageFrames: 3,
           maxImageFrames: 3,

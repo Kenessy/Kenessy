@@ -3,131 +3,137 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prey - TranStar Flight Recorder</title>
+<title>Prey - Illustrated Field Journal</title>
 <link rel="icon" href="data:,">
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
-<meta name="description" content="Prey fullscreen TranStar flight recorder: a live first-run black box UI for mission scope, Session 01 notes, evidence queue, image prompts, and review gates.">
-<meta name="theme-color" content="#030705">
+<meta name="description" content="Prey fullscreen illustrated field journal: Session 01 review notes told as a comic-like play diary with narration panels, captions, and optional scene art.">
+<meta name="theme-color" content="#060604">
 <meta name="build-id" content="__BUILD_ID__">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Prey - TranStar Flight Recorder">
-<meta property="og:description" content="A fullscreen Prey black box recorder for Session 01 notes, mission scope, evidence queue, and image handoff.">
+<meta property="og:title" content="Prey - Illustrated Field Journal">
+<meta property="og:description" content="A fullscreen Prey review journal for Session 01: fake morning, rooftop ride, test-room unease, first Mimic breach, and image handoff.">
 <meta property="og:url" content="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
 <meta property="og:image" content="https://kenessy.github.io/Kenessy/assets/img/prey-review-splash.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Prey - TranStar Flight Recorder">
-<meta name="twitter:description" content="Live first-run black box recorder for the Prey review journey.">
+<meta name="twitter:title" content="Prey - Illustrated Field Journal">
+<meta name="twitter:description" content="Session 01 of the Prey review told as a fullscreen illustrated field journal.">
 <style>
-:root{--bg:#030705;--ink:#eef7ef;--muted:#95aaa3;--soft:#dce5d8;--paper:#e6d39f;--amber:#ffb347;--orange:#ff8a1f;--green:#58e17e;--cyan:#6ee9e0;--red:#ff5647;--line:#263b33;--line2:#3f5f53;--panel:#08100d;--panel2:#101b16}
+:root{--bg:#060604;--ink:#f5f0dc;--paper:#e6d39f;--muted:#a9afa5;--line:#2c332b;--line2:#4c5745;--amber:#ffb347;--orange:#ff8a1f;--green:#58e17e;--cyan:#6ee9e0;--red:#ff5647;--panel:#11130f;--panel2:#191911;--shadow:#000}
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif}
-body{background:radial-gradient(900px 520px at 74% 8%,rgba(255,179,71,.13),transparent 62%),radial-gradient(700px 440px at 12% 90%,rgba(110,233,224,.08),transparent 64%),linear-gradient(180deg,#030705,#050b09 48%,#030705)}
+body{background:radial-gradient(760px 420px at 72% 6%,rgba(255,179,71,.16),transparent 68%),radial-gradient(620px 420px at 8% 92%,rgba(110,233,224,.09),transparent 64%),linear-gradient(180deg,#050504,#090a07 48%,#050504)}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%;height:auto}
 h1,h2,h3,p{margin:0}
-.recorder-app{height:100%;position:relative;overflow:hidden}
-.recorder-app:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(238,247,239,.04) 0 1px,transparent 1px 4px),linear-gradient(90deg,rgba(88,225,126,.035) 1px,transparent 1px),linear-gradient(0deg,rgba(255,179,71,.035) 1px,transparent 1px);background-size:100% 100%,92px 92px,92px 92px;opacity:.46;z-index:5}
-.recorder-topbar{position:fixed;left:0;right:0;top:0;z-index:10;border-bottom:1px solid rgba(238,247,239,.14);background:rgba(3,7,5,.86);backdrop-filter:blur(14px)}
-.topbar-inner{width:min(calc(100% - 28px),1360px);min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.journal-app{height:100%;position:relative;overflow:hidden}
+.journal-app:before{content:"";position:fixed;inset:0;z-index:5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(245,240,220,.035) 0 1px,transparent 1px 5px),linear-gradient(90deg,rgba(255,179,71,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(245,240,220,.035) 1px,transparent 1px);background-size:100% 100%,86px 86px,86px 86px;mix-blend-mode:screen;opacity:.55}
+.journal-topbar{position:fixed;left:0;right:0;top:0;z-index:10;border-bottom:1px solid rgba(245,240,220,.16);background:rgba(6,6,4,.88);backdrop-filter:blur(14px)}
+.topbar-inner{width:min(calc(100% - 28px),1420px);min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:inline-flex;align-items:center;gap:10px;color:var(--paper);font-size:12px;font-weight:1000;text-transform:uppercase}
-.brand:before{content:"";width:9px;height:9px;background:var(--amber);box-shadow:13px 0 0 var(--green),26px 0 0 var(--cyan)}
+.brand:before{content:"";width:10px;height:10px;background:var(--amber);box-shadow:14px 0 0 var(--green),28px 0 0 var(--cyan)}
 .page-tabs{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
-.page-tabs a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(238,247,239,.14);background:rgba(8,16,13,.72);padding:7px 9px;color:var(--muted);font-size:10px;font-weight:1000;text-transform:uppercase}
-.page-tabs a:hover,.page-tabs a:focus-visible{outline:0;border-color:rgba(255,179,71,.55);color:#ffcf83}
-.reader-track,.recorder-track{height:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain}
-.recorder-track::-webkit-scrollbar{height:10px}.recorder-track::-webkit-scrollbar-track{background:#030705}.recorder-track::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--green),var(--amber),var(--cyan))}
-.journal-page,.recorder-page{position:relative;flex:0 0 100vw;width:100vw;height:100vh;scroll-snap-align:start;overflow-y:auto;padding:82px 18px 22px}
-.recorder-page:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(88,225,126,.08),transparent 34%),linear-gradient(300deg,rgba(255,179,71,.09),transparent 36%);pointer-events:none}
-.page-shell{position:relative;z-index:1;width:min(100%,1360px);min-height:calc(100vh - 104px);margin:0 auto;display:grid;grid-template-rows:auto 1fr auto;gap:14px;border:1px solid rgba(238,247,239,.14);background:linear-gradient(145deg,rgba(8,16,13,.94),rgba(3,7,5,.97));box-shadow:0 30px 90px rgba(0,0,0,.45);overflow:hidden}
-.page-shell:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(238,247,239,.035) 1px,transparent 1px),linear-gradient(0deg,rgba(238,247,239,.028) 1px,transparent 1px);background-size:74px 74px;opacity:.52}
-.page-head,.page-foot{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:end;border-bottom:1px solid rgba(238,247,239,.12);padding:18px 20px}
-.page-foot{border-top:1px solid rgba(238,247,239,.12);border-bottom:0;align-items:center}
+.page-tabs a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(245,240,220,.15);background:rgba(17,19,15,.72);padding:7px 10px;color:#c9c1a3;font-size:10px;font-weight:1000;text-transform:uppercase}
+.page-tabs a:hover,.page-tabs a:focus-visible{outline:0;border-color:rgba(255,179,71,.62);color:#ffcf83}
+.reader-track,.journal-track{height:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain}
+.journal-track::-webkit-scrollbar{height:10px}.journal-track::-webkit-scrollbar-track{background:#050504}.journal-track::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--amber),var(--green),var(--cyan))}
+.journal-page{position:relative;flex:0 0 100vw;width:100vw;height:100vh;scroll-snap-align:start;overflow-y:auto;padding:80px 18px 22px}
+.journal-page:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,179,71,.10),transparent 36%),linear-gradient(310deg,rgba(88,225,126,.07),transparent 38%);pointer-events:none}
+.page-shell{position:relative;z-index:1;width:min(100%,1420px);min-height:calc(100vh - 102px);margin:0 auto;display:grid;grid-template-rows:auto 1fr auto;gap:14px;border:1px solid rgba(245,240,220,.16);background:linear-gradient(145deg,rgba(17,19,15,.96),rgba(6,6,4,.98));box-shadow:0 30px 90px rgba(0,0,0,.48);overflow:hidden}
+.page-shell:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(245,240,220,.035) 1px,transparent 1px),linear-gradient(0deg,rgba(245,240,220,.028) 1px,transparent 1px);background-size:72px 72px;opacity:.5}
+.page-head,.page-foot{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,560px);gap:18px;align-items:end;border-bottom:1px solid rgba(245,240,220,.13);padding:18px 22px}
+.page-foot{border-top:1px solid rgba(245,240,220,.13);border-bottom:0;align-items:center}
 .kicker,.label{color:#8ff0aa;font-size:11px;font-weight:1000;text-transform:uppercase}
-h1,.marker-title{margin-top:8px;color:var(--paper);font-size:72px;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000,0 0 30px rgba(255,179,71,.16)}
-h2{margin-top:8px;color:var(--paper);font-size:52px;line-height:.9;font-weight:1000;text-transform:uppercase}
-.head-copy{max-width:600px;color:#dfd0a8;font-size:17px;line-height:1.5;font-weight:760}
-.build-pill,.recorder-chip{border:1px solid rgba(255,179,71,.42);background:rgba(255,179,71,.07);padding:8px 10px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
-.page-grid{position:relative;z-index:1;display:grid;gap:14px;padding:0 20px 2px}
-.boot-grid{grid-template-columns:minmax(0,1fr) 360px;align-items:stretch}
-.scope-grid{grid-template-columns:minmax(0,.94fr) minmax(360px,1.06fr)}
-.queue-grid{grid-template-columns:minmax(0,1fr) minmax(360px,.72fr)}
-.handoff-grid{grid-template-columns:minmax(0,.82fr) minmax(360px,1.18fr)}
-.blackbox-page,.telemetry-card,.recorder-frame,.note-stack,.handoff-list,.prompt-card{position:relative;border:1px solid rgba(238,247,239,.13);background:linear-gradient(145deg,rgba(16,27,22,.84),rgba(5,9,7,.92));overflow:hidden}
-.blackbox-page:before,.telemetry-card:before,.recorder-frame:before,.note-stack:before,.handoff-list:before,.prompt-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--green),var(--amber),var(--cyan),transparent 84%);opacity:.84}
-.blackbox-page{min-height:430px;padding:24px;display:grid;align-content:end;background:linear-gradient(90deg,rgba(3,7,5,.98),rgba(3,7,5,.76) 42%,rgba(3,7,5,.30) 68%,rgba(3,7,5,.86)),url("../../../../assets/img/prey-review-splash.png") center/cover no-repeat}
-.blackbox-page .label{color:#ffcf83}
-.blackbox-page h1{font-size:92px}
-.blackbox-page p{max-width:760px;margin-top:15px;color:#e7d8ad;font-size:18px;line-height:1.55;font-weight:760}
-.boot-status{display:grid;gap:10px}
-.status-line{min-height:72px;border:1px solid rgba(238,247,239,.12);background:linear-gradient(135deg,rgba(88,225,126,.08),rgba(3,7,5,.66));padding:12px}
-.status-line b{display:block;color:#8ff0aa;font-size:10px;text-transform:uppercase}
-.status-line span{display:block;margin-top:8px;color:var(--paper);font-size:18px;line-height:1.15;font-weight:1000;text-transform:uppercase}
-.telemetry-card{min-height:126px;padding:17px}
-.telemetry-card h3,.prompt-card h3,.handoff-list h3{margin-top:9px;color:var(--paper);font-size:24px;line-height:1.02;text-transform:uppercase}
-.telemetry-card p,.prompt-card p,.handoff-list p{margin-top:10px;color:#b8c9c1;font-size:14px;line-height:1.5;font-weight:700}
-.scan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.recorder-frame{min-height:100%;padding:14px}
-.evidence-slot{position:relative;aspect-ratio:16/9;border:1px solid rgba(110,233,224,.32);background:linear-gradient(135deg,rgba(110,233,224,.08),rgba(3,7,5,.82));overflow:hidden}
-.evidence-slot:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(238,247,239,.04) 1px,transparent 1px),linear-gradient(0deg,rgba(238,247,239,.03) 1px,transparent 1px);background-size:42px 42px;opacity:.74}
+h1,.marker-title{margin-top:8px;color:var(--paper);font-size:76px;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000,0 0 28px rgba(255,179,71,.15)}
+h2{margin-top:8px;color:var(--paper);font-size:54px;line-height:.9;font-weight:1000;text-transform:uppercase;text-shadow:5px 5px 0 #000}
+h3{color:var(--paper);font-size:24px;line-height:1.02;font-weight:1000;text-transform:uppercase}
+.head-copy{max-width:620px;color:#dfd0a8;font-size:18px;line-height:1.5;font-weight:760}
+.page-grid{position:relative;z-index:1;display:grid;gap:14px;padding:0 22px 2px}
+.cover-grid{grid-template-columns:minmax(0,1.1fr) 370px;align-items:stretch}
+.scene-grid{grid-template-columns:minmax(0,.92fr) minmax(390px,1.08fr)}
+.breach-grid{grid-template-columns:minmax(0,1fr) minmax(380px,.78fr)}
+.handoff-grid{grid-template-columns:minmax(0,.84fr) minmax(380px,1.16fr)}
+.cover-art,.story-panel,.narrative-card,.beat-card,.handoff-list,.prompt-card,.photo-card{position:relative;border:1px solid rgba(245,240,220,.14);background:linear-gradient(145deg,rgba(25,25,17,.86),rgba(8,8,6,.94));overflow:hidden}
+.cover-art:before,.story-panel:before,.narrative-card:before,.beat-card:before,.handoff-list:before,.prompt-card:before,.photo-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--amber),var(--green),var(--cyan),transparent 84%);opacity:.84}
+.cover-art{min-height:440px;padding:26px;display:grid;align-content:end;background:linear-gradient(90deg,rgba(6,6,4,.98),rgba(6,6,4,.74) 42%,rgba(6,6,4,.28) 69%,rgba(6,6,4,.86)),url("../../../../assets/img/prey-review-splash.png") center/cover no-repeat}
+.cover-art .label{color:#ffcf83}
+.cover-art h1{font-size:92px}
+.cover-art p{max-width:760px;margin-top:16px;color:#e7d8ad;font-size:18px;line-height:1.55;font-weight:760}
+.cover-stack{display:grid;gap:10px}
+.stamp{min-height:78px;border:1px solid rgba(245,240,220,.13);background:linear-gradient(135deg,rgba(255,179,71,.10),rgba(6,6,4,.66));padding:12px}
+.stamp b{display:block;color:#8ff0aa;font-size:10px;text-transform:uppercase}
+.stamp span{display:block;margin-top:8px;color:var(--paper);font-size:18px;line-height:1.15;font-weight:1000;text-transform:uppercase}
+.narrative-card{min-height:132px;padding:18px}
+.narrative-card h3,.prompt-card h3,.handoff-list h3{margin-top:9px}
+.narrative-card p,.prompt-card p,.handoff-list p{margin-top:10px;color:#c9d1c8;font-size:15px;line-height:1.52;font-weight:700}
+.story-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.story-panel{min-height:100%;padding:16px}
+.story-panel .panel-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase}
+.story-panel p{color:#d9d2b6;font-size:16px;line-height:1.58;font-weight:760}
+.story-panel strong{color:#fff4c8}
+.photo-card{padding:14px;transform:rotate(-.45deg)}
+.photo-card.alt{transform:rotate(.65deg)}
+.photo-card.hero-photo{align-self:stretch;display:grid;grid-template-rows:auto 1fr auto}
+.evidence-slot{position:relative;aspect-ratio:16/9;border:1px solid rgba(255,179,71,.42);background:linear-gradient(135deg,rgba(255,179,71,.09),rgba(6,6,4,.84));overflow:hidden}
+.evidence-slot:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,240,220,.045) 1px,transparent 1px),linear-gradient(0deg,rgba(245,240,220,.035) 1px,transparent 1px);background-size:42px 42px;opacity:.72}
 .evidence-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .evidence-slot-ready .slot-placeholder{display:none}
-.slot-placeholder{position:absolute;inset:0;display:grid;align-content:end;gap:7px;padding:14px;background:linear-gradient(180deg,rgba(3,7,5,.28),rgba(3,7,5,.88));z-index:1}
+.slot-placeholder{position:absolute;inset:0;display:grid;align-content:end;gap:7px;padding:14px;background:linear-gradient(180deg,rgba(6,6,4,.22),rgba(6,6,4,.90));z-index:1}
 .slot-placeholder b{color:#ffcf83;font-size:11px;text-transform:uppercase}
-.slot-placeholder span{max-width:48ch;color:#dce5d8;font-size:13px;line-height:1.34;font-weight:820}
-.frame-caption{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
-.note-stack{padding:16px;display:grid;gap:10px}
-.note{border-left:3px solid var(--amber);background:rgba(255,179,71,.045);padding:10px 12px}
-.note b{display:block;color:#ffcf83;font-size:11px;text-transform:uppercase}
-.note span{display:block;margin-top:7px;color:#dce5d8;font-size:14px;line-height:1.45;font-weight:720}
-.queue-list{display:grid;gap:10px}
-.queue-list .telemetry-card{min-height:104px}
-.handoff-list{padding:16px;display:grid;gap:10px}
-.file-row{display:grid;grid-template-columns:122px minmax(0,1fr);gap:10px;align-items:center;border:1px solid rgba(238,247,239,.10);background:rgba(3,7,5,.58);padding:9px 10px}
+.slot-placeholder span{max-width:52ch;color:#f1ead0;font-size:13px;line-height:1.34;font-weight:820}
+.frame-caption{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:#bfc5b9;font-size:11px;font-weight:1000;text-transform:uppercase}
+.beat-stack{display:grid;gap:10px}
+.beat-card{padding:13px 14px;border-left:4px solid var(--amber)}
+.beat-card b{display:block;color:#ffcf83;font-size:11px;text-transform:uppercase}
+.beat-card span{display:block;margin-top:7px;color:#e5ddbf;font-size:14px;line-height:1.45;font-weight:720}
+.image-column{display:grid;gap:12px;align-content:start}
+.handoff-list{padding:17px;display:grid;gap:10px}
+.file-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:center;border:1px solid rgba(245,240,220,.11);background:rgba(6,6,4,.58);padding:10px}
 .file-row b{color:#8ff0aa;font-size:10px;text-transform:uppercase}
 .file-row code{min-width:0;color:#e6d39f;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.3;font-weight:850;overflow-wrap:anywhere}
 .prompt-stack{display:grid;gap:10px}
-.prompt-card{padding:16px}
+.prompt-card{padding:17px}
 .prompt-card code{display:block;margin-top:10px;color:#e6d39f;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.45;white-space:pre-wrap}
 .asset-links{display:flex;flex-wrap:wrap;gap:8px}
-.asset-links a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(110,233,224,.32);background:rgba(110,233,224,.05);padding:7px 9px;color:#a7f4ef;font-size:11px;font-weight:1000;text-transform:uppercase}
-.page-count{color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
-@media(max-width:980px){.page-head,.page-foot{grid-template-columns:1fr}.boot-grid,.scope-grid,.queue-grid,.handoff-grid{grid-template-columns:1fr}.blackbox-page{min-height:360px}.blackbox-page h1,h1,.marker-title{font-size:58px}h2{font-size:42px}.head-copy{font-size:16px}.scan-grid{grid-template-columns:1fr}.page-shell{min-height:calc(100vh - 104px)}}
-@media(max-width:560px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:9px 0}.page-tabs{justify-content:flex-start}.page-tabs a{min-height:31px;padding:6px 7px;font-size:9px}.journal-page,.recorder-page{padding:106px 12px 14px}.page-shell{min-height:calc(100vh - 120px)}.page-head,.page-foot,.page-grid{padding-left:14px;padding-right:14px}.blackbox-page{padding:18px;min-height:300px}.blackbox-page h1,h1,.marker-title{font-size:42px}.blackbox-page p{font-size:16px}h2{font-size:34px}.file-row{grid-template-columns:1fr}.build-pill,.recorder-chip{white-space:normal}}
+.asset-links a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(110,233,224,.32);background:rgba(110,233,224,.05);padding:7px 10px;color:#a7f4ef;font-size:11px;font-weight:1000;text-transform:uppercase}
+.page-count{color:#bfc5b9;font-size:11px;font-weight:1000;text-transform:uppercase}
+@media(max-width:1020px){.page-head,.page-foot{grid-template-columns:1fr}.cover-grid,.scene-grid,.breach-grid,.handoff-grid{grid-template-columns:1fr}.cover-art{min-height:360px}.cover-art h1,h1,.marker-title{font-size:58px}h2{font-size:42px}.head-copy{font-size:16px}.story-stack{grid-template-columns:1fr}.page-shell{min-height:calc(100vh - 104px)}}
+@media(max-width:560px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:9px 0}.page-tabs{justify-content:flex-start}.page-tabs a{min-height:31px;padding:6px 7px;font-size:9px}.journal-page{padding:108px 12px 14px}.page-shell{min-height:calc(100vh - 122px)}.page-head,.page-foot,.page-grid{padding-left:14px;padding-right:14px}.cover-art{padding:18px;min-height:300px}.cover-art h1,h1,.marker-title{font-size:42px}.cover-art p{font-size:16px}h2{font-size:34px}.file-row{grid-template-columns:1fr}.photo-card{transform:none}.photo-card.alt{transform:none}}
 </style>
 </head>
 <body>
-<div class="recorder-app">
-  <header class="recorder-topbar">
+<div class="journal-app">
+  <header class="journal-topbar">
     <div class="topbar-inner">
       <a class="brand" href="../">Kenessy / Prey</a>
-      <nav class="page-tabs" aria-label="Prey recorder pages">
-        <a href="#boot">Boot</a>
-        <a href="#mission">Mission Scope</a>
-        <a href="#queue">Evidence Queue</a>
-        <a href="#handoff">Image Handoff</a>
+      <nav class="page-tabs" aria-label="Prey journal pages">
+        <a href="#cover">Cover</a>
+        <a href="#morning">Fake Morning</a>
+        <a href="#tests">Test Rooms</a>
+        <a href="#handoff">Art Queue</a>
         <a href="../../../">Reports</a>
       </nav>
     </div>
   </header>
 
-  <main class="reader-track recorder-track" id="reader" aria-label="Prey TranStar flight recorder fullscreen pages">
-    <section class="journal-page recorder-page" id="boot" aria-label="Boot page">
+  <main class="reader-track journal-track" id="reader" aria-label="Prey illustrated field journal fullscreen pages">
+    <section class="journal-page" id="cover" aria-label="Journal cover page">
       <div class="page-shell">
         <div class="page-head">
-          <div><p class="kicker">01 / Boot</p><h1>Prey Black Box</h1></div>
-          <p class="head-copy">TranStar Flight Recorder is now live: Session 01 captured setup friction, the apartment loop, the rooftop ride, the test chambers, and the first mimic breach. No score yet.</p>
+          <div><p class="kicker">01 / Cover</p><h1>Session 01 Field Journal</h1></div>
+          <p class="head-copy">This is the play diary version: not a final verdict, not a sterile UI log. We tell what happened, keep the review questions visible, and pin illustrations where the run gives us a scene worth remembering.</p>
         </div>
-        <div class="page-grid boot-grid">
-          <article class="blackbox-page">
-            <p class="label">Flight recorder active / Session 01 logged</p>
-            <h1>TranStar<br>Flight Recorder</h1>
-            <p>Session 01 starts cleanly but not perfectly: ultra settings hold after a long texture-loading pause, 4K oversampling is rejected for screen overflow, and the opening already frames reality as staged evidence.</p>
+        <div class="page-grid cover-grid">
+          <article class="cover-art">
+            <p class="label">Prey / first run / no score yet</p>
+            <h1>Fake First Day</h1>
+            <p>Morgan wakes up into a perfect corporate morning. It looks clean, expensive, and almost too helpful. The page starts there: normal day, slight unease, then the first crack.</p>
           </article>
-          <aside class="boot-status" aria-label="Recorder boot status">
-            <div class="status-line"><b>Status</b><span>Session 01 logged</span></div>
-            <div class="status-line"><b>Run state</b><span>First day loop</span></div>
-            <div class="status-line"><b>Score</b><span>Locked</span></div>
-            <div class="status-line"><b>Evidence</b><span>First mimic breach</span></div>
+          <aside class="cover-stack" aria-label="Session 01 status">
+            <div class="stamp"><b>Run state</b><span>First run active</span></div>
+            <div class="stamp"><b>Score</b><span>Locked</span></div>
+            <div class="stamp"><b>Best hook</b><span>Staged reality</span></div>
+            <div class="stamp"><b>Hard caveat</b><span>Texture wait</span></div>
+            <div class="stamp"><b>Next proof</b><span>Talos I agency</span></div>
           </aside>
         </div>
         <div class="page-foot">
@@ -137,20 +143,21 @@ h2{margin-top:8px;color:var(--paper);font-size:52px;line-height:.9;font-weight:1
       </div>
     </section>
 
-    <section class="journal-page recorder-page" id="mission" aria-label="Mission scope page">
+    <section class="journal-page" id="morning" aria-label="Fake morning page">
       <div class="page-shell">
         <div class="page-head">
-          <div><p class="kicker">02 / Mission Scope</p><h2>First Day Loop</h2></div>
-          <p class="head-copy">The opening behaves like a controlled onboarding stage: apartment, hallway, rooftop helicopter, test rooms, and then a rupture that confirms the setup is not normal.</p>
+          <div><p class="kicker">02 / Fake Morning</p><h2>The Commute Is Too Clean</h2></div>
+          <p class="head-copy">The opening works best when treated like a short comic sequence: wake up, obey the routine, notice the staged details, fly across a beautiful lie, then walk into the test rooms.</p>
         </div>
-        <div class="page-grid scope-grid">
-          <div class="scan-grid">
-            <article class="telemetry-card"><p class="label">Setup friction</p><h3>Ultra works, loading bites</h3><p>Graphics tuning is mostly fine on the current PC, but the long texture-loading wait is a first technical caveat. Forced 4K oversampling is rejected because it overflows the screen.</p></article>
-            <article class="telemetry-card"><p class="label">Apartment loop</p><h3>Readable fake normal</h3><p>Morgan wakes up, checks emails, suits up, and follows First Day on the Job. The routine is mundane enough that the later simulation reveal has a useful baseline.</p></article>
-            <article class="telemetry-card"><p class="label">Environmental proof</p><h3>Small worker detail lands</h3><p>The hallway worker Patricia Varma and the water pressure issue sign make the staged world feel staffed, maintained, and plausibly broken before the rug pull.</p></article>
-            <article class="telemetry-card"><p class="label">Authored reveal</p><h3>Credits as set dressing</h3><p>The rooftop helicopter route turns studio credits into diegetic city signage. It is showy, but it also fits the opening's staged-reality trick.</p></article>
+        <div class="page-grid scene-grid">
+          <div class="story-stack">
+            <article class="story-panel"><div class="panel-title"><span>Panel 01</span><span>Apartment</span></div><p><strong>First Day on the Job</strong> starts as plain roleplay: emails, uniform, hallway, elevator. The normality is important because the game needs us to believe the routine before it folds.</p></article>
+            <article class="story-panel"><div class="panel-title"><span>Panel 02</span><span>Technical note</span></div><p>The machine mostly handles ultra settings, but the long <strong>Please wait while textures are loading</strong> pause goes into the caveat column. 4K oversampling is rejected because the image does not fit the screen.</p></article>
+            <article class="story-panel"><div class="panel-title"><span>Panel 03</span><span>Hallway detail</span></div><p>Patricia Varma fixing a panel and the water-pressure sign are exactly the kind of small, grounded touches that make a fake place feel staffed and maintained.</p></article>
+            <article class="story-panel"><div class="panel-title"><span>Panel 04</span><span>Helicopter</span></div><p>The rooftop ride is showy in a useful way: studio credits become city signage, the route feels expensive, and the whole thing reads like a corporate dream that is waiting to snap.</p></article>
           </div>
-          <article class="recorder-frame" aria-label="Talos I approach evidence slot">
+          <article class="photo-card hero-photo" aria-label="Rooftop helicopter evidence slot">
+            <p class="label">Scene illustration / existing art wired</p>
             <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-02-a-rooftop-helicopter"><div class="slot-placeholder"><b>Evidence 02-A</b><span>prey-page-02-a-rooftop-helicopter.png / Rooftop helicopter route and first-day facade hook.</span></div></div>
             <div class="frame-caption"><span>First-day facade seed</span><span>16:9 PNG</span></div>
           </article>
@@ -162,59 +169,62 @@ h2{margin-top:8px;color:var(--paper);font-size:52px;line-height:.9;font-weight:1
       </div>
     </section>
 
-    <section class="journal-page recorder-page" id="queue" aria-label="Evidence queue page">
+    <section class="journal-page" id="tests" aria-label="Test room page">
       <div class="page-shell">
         <div class="page-head">
-          <div><p class="kicker">03 / Evidence Queue</p><h2>First Evidence</h2></div>
-          <p class="head-copy">The score is still locked, but the recorder now has real evidence: onboarding clarity, technical caveat, testing unease, simulation structure, and first mimic threat.</p>
+          <div><p class="kicker">03 / Test Rooms</p><h2>The Room Starts Watching Back</h2></div>
+          <p class="head-copy">The test sequence is not great because the tasks are deep. It works because the observers keep reacting like the simplest answers are wrong, and then the Mimic proves the room was never safe.</p>
         </div>
-        <div class="page-grid queue-grid">
-          <div class="queue-list">
-            <article class="telemetry-card"><p class="label">Test chamber 01</p><h3>Simple tasks, wrong reactions</h3><p>Moving boxes, hiding behind the chair, and pressing buttons are mechanically basic, but the observers' dissatisfaction makes the room feel diagnostic instead of tutorial-clean.</p></article>
-            <article class="telemetry-card"><p class="label">Alex / Bellamy</p><h3>Friendly control pressure</h3><p>Alex frames the tests as normal and Bellamy keeps the process polite, which makes the off-screen comments and equipment excuses feel more suspicious.</p></article>
-            <article class="telemetry-card"><p class="label">Ethics prompt</p><h3>Trolley answers expose roleplay</h3><p>The inkblot and trolley choices are not deep yet, but they ask for moral posture before the game has earned trust. Useful data, not verdict material.</p></article>
-            <article class="telemetry-card"><p class="label">Mimic breach</p><h3>First threat reads instantly</h3><p>The coffee-cup style transformation into a Mimic and the researcher death clarify the core paranoia hook without needing combat yet.</p></article>
-            <article class="telemetry-card"><p class="label">Current ruling</p><h3>Promising, still unscored</h3><p>The opening is authored and clever. The only hard negative so far is startup/loading friction; actual station agency and survival pressure remain untested.</p></article>
+        <div class="page-grid breach-grid">
+          <div class="beat-stack">
+            <article class="narrative-card"><p class="label">Alex / Bellamy</p><h3>Polite control pressure</h3><p>Alex tells Morgan to act naturally, Bellamy keeps the lab calm, and the tests remain simple on purpose. The interesting part is the off-screen dissatisfaction.</p></article>
+            <article class="beat-card"><b>Boxes</b><span>Remove the boxes from the circle. Mechanically nothing, but the observers still sound like they expected another signal.</span></article>
+            <article class="beat-card"><b>Chair</b><span>Hide, move the chair, wait for judgment. The room feels like it is measuring behavior rather than teaching controls.</span></article>
+            <article class="beat-card"><b>Buttons</b><span>The fast reaction test gets blamed on equipment. That excuse is more interesting than the task.</span></article>
+            <article class="beat-card"><b>Inkblot / trolley</b><span>The moral prompts ask for a stance before the game has earned trust. Useful setup, not verdict material.</span></article>
+            <article class="beat-card"><b>First Mimic breach</b><span>A cup becomes a threat, the researcher goes down, and the opening finally names its real horror: ordinary objects can lie.</span></article>
           </div>
-          <aside class="note-stack">
-            <article class="recorder-frame" aria-label="Mimic paranoia evidence slot">
+          <aside class="image-column" aria-label="Pending Prey journal illustrations">
+            <article class="photo-card" aria-label="Mimic paranoia evidence slot">
+              <p class="label">Missing scene art / prompt ready</p>
               <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-a-mimic-paranoia"><div class="slot-placeholder"><b>Evidence 03-A</b><span>prey-page-03-a-mimic-paranoia.png / ordinary objects staged as possible mimic threats.</span></div></div>
               <div class="frame-caption"><span>Mimic paranoia</span><span>Prompt ready</span></div>
             </article>
-            <article class="recorder-frame" aria-label="Crew terminal trace evidence slot">
+            <article class="photo-card alt" aria-label="Crew terminal trace evidence slot">
+              <p class="label">Missing scene art / prompt ready</p>
               <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-b-crew-terminal-trace"><div class="slot-placeholder"><b>Evidence 03-B</b><span>prey-page-03-b-crew-terminal-trace.png / abandoned crew workstation and trace evidence.</span></div></div>
               <div class="frame-caption"><span>Crew trace</span><span>Prompt ready</span></div>
             </article>
           </aside>
         </div>
         <div class="page-foot">
-          <div class="asset-links"><a href="#handoff">Open image handoff</a><a href="../#scope">Prey proof gates</a></div>
+          <div class="asset-links"><a href="#handoff">Open art queue</a><a href="../#scope">Prey proof gates</a></div>
           <span class="page-count">Page 03 / 04</span>
         </div>
       </div>
     </section>
 
-    <section class="journal-page recorder-page" id="handoff" aria-label="Image handoff page">
+    <section class="journal-page" id="handoff" aria-label="Art queue page">
       <div class="page-shell">
         <div class="page-head">
-          <div><p class="kicker">04 / Image Handoff</p><h2>Drop Exact PNGs</h2></div>
-          <p class="head-copy">Missing images remain visible as recorder placeholders until exact filenames exist. Session 01 suggests the first useful image is now the staged first-day facade or the test-room mimic breach.</p>
+          <div><p class="kicker">04 / Art Queue</p><h2>What We Need Next</h2></div>
+          <p class="head-copy">Missing images remain visible as journal placeholders until exact filenames exist. The new format only needs a few strong illustrations: one big scene, one paranoia panel, one evidence trace.</p>
         </div>
         <div class="page-grid handoff-grid">
           <article class="handoff-list">
             <p class="label">Public asset contract</p>
-            <h3>Flight recorder manifest</h3>
-            <p>Use the filenames exactly. Put generated 16:9 PNGs into the public Prey image folder, then run the build and `npm run qa:prey-assets`.</p>
+            <h3>Exact filenames, no guessing</h3>
+            <p>Drop generated 16:9 PNGs into the Prey image folder, keep names exact, then rebuild. The page auto-wires matching files into the journal panels.</p>
             <div class="file-row"><b>02-A</b><code>prey-page-02-a-rooftop-helicopter.png</code></div>
             <div class="file-row"><b>03-A</b><code>prey-page-03-a-mimic-paranoia.png</code></div>
             <div class="file-row"><b>03-B</b><code>prey-page-03-b-crew-terminal-trace.png</code></div>
             <div class="asset-links"><a href="../../../../assets/img/prey/flight-recorder-manifest.json">flight-recorder-manifest.json</a><a href="../../../../assets/img/prey/README.md">README.md</a></div>
           </article>
           <div class="prompt-stack">
-            <article class="prompt-card"><p class="label">Shared prompt base</p><h3>TranStar recorder style</h3><p>Dark orbital-station recorder UI, amber/green/cyan telemetry, grounded environmental storytelling, no fake UI text, no captions, no logos.</p></article>
+            <article class="prompt-card"><p class="label">Style shift</p><h3>Illustrated review journal</h3><p>Less machine dashboard, more narrated play diary: dark page, strong captions, sparse scene art, and the feeling that each image is pinned beside a real note.</p></article>
             <article class="prompt-card"><p class="label">QA command</p><h3>Asset check</h3><code>npm run build:metro
 npm run qa:prey-assets</code></article>
-            <article class="prompt-card"><p class="label">Guardrail</p><h3>Session 01 is not a verdict</h3><p>Real notes have started, but the finished review still waits for Talos I exploration, system agency, survival friction, and longer trust payoff evidence.</p></article>
+            <article class="prompt-card"><p class="label">Guardrail</p><h3>Session 01 is not a verdict</h3><p>The opening is promising, but the final score still waits for Talos I exploration, system agency, survival friction, and longer trust payoff evidence.</p></article>
           </div>
         </div>
         <div class="page-foot">

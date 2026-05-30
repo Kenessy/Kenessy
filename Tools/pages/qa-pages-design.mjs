@@ -138,7 +138,7 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
   assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
-  assert(root.text.includes('.prey-card') && root.text.includes('plater-game-reports/games/prey/') && root.text.includes('plater-game-reports/games/prey/journey/') && root.text.includes('Flight recorder ready'), 'portfolio homepage Prey card/recorder styling link is missing');
+  assert(root.text.includes('.prey-card') && root.text.includes('plater-game-reports/games/prey/') && root.text.includes('plater-game-reports/games/prey/journey/') && root.text.includes('Field journal ready'), 'portfolio homepage Prey card/journal styling link is missing');
   assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
@@ -195,7 +195,7 @@ async function auditDesignArtifacts(base) {
   assert(!/>--</.test(quantumBreakReport.text), 'Quantum Break report still has raw dash placeholders');
   const preyReport = await fetchText(url(base, preyPath));
   assert(preyReport.text.includes('ALERTED entry point / Prey 2017') && preyReport.text.includes('Prey score unlock gates'), 'Prey report entry/gate copy is missing');
-  assert(preyReport.text.includes('Flight recorder ready') && preyReport.text.includes('Open Recorder') && preyReport.text.includes('journey/'), 'Prey report recorder link/copy is missing');
+  assert(preyReport.text.includes('Field journal ready') && preyReport.text.includes('Open Journal') && preyReport.text.includes('journey/'), 'Prey report journal link/copy is missing');
   assert(preyReport.text.includes('.fit-grid') && preyReport.text.includes('.gate-matrix') && preyReport.text.includes('.score-strip') && preyReport.text.includes('.tag-cloud'), 'Prey report core styling is missing');
   assert(preyReport.text.includes('../../../assets/img/prey-review-splash.png'), 'Prey report splash asset is missing');
   assert(!preyReport.text.includes('Do Not Start The Journal Yet') && !preyReport.text.includes('Journal not started'), 'Prey report still has stale no-journal copy');
@@ -203,11 +203,11 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(preyReport.text), 'Prey report CSS has negative letter spacing');
   assert(!/>--</.test(preyReport.text), 'Prey report still has raw dash placeholders');
   const preyJourney = await fetchText(url(base, preyJourneyPath));
-  assert(preyJourney.text.includes('TranStar Flight Recorder') && preyJourney.text.includes('Prey Black Box'), 'Prey journey recorder copy is missing');
-  assert(preyJourney.text.includes('.reader-track') && preyJourney.text.includes('.recorder-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling is missing');
-  assert(preyJourney.text.includes('.blackbox-page') && preyJourney.text.includes('.telemetry-card') && preyJourney.text.includes('.recorder-frame') && preyJourney.text.includes('.evidence-slot'), 'Prey journey recorder UI styling is missing');
+  assert(preyJourney.text.includes('Illustrated Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey illustrated journal copy is missing');
+  assert(preyJourney.text.includes('.reader-track') && preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling is missing');
+  assert(preyJourney.text.includes('.story-panel') && preyJourney.text.includes('.narrative-card') && preyJourney.text.includes('.photo-card') && preyJourney.text.includes('.evidence-slot'), 'Prey journey comic journal styling is missing');
   assert(preyJourney.text.includes('.evidence-slot-ready .slot-placeholder{display:none}') && preyJourney.text.includes('.slot-placeholder'), 'Prey journey evidence placeholder/ready styling is missing');
-  assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey tab copy is missing');
+  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey tab copy is missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
   assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 3, 'Prey journey should expose exactly three visible 16:9 frames');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image handoff filenames missing');
@@ -216,10 +216,10 @@ async function auditDesignArtifacts(base) {
   assert(!/font-size:clamp\([^)]*vw/i.test(preyJourney.text), 'Prey journey CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(preyJourney.text), 'Prey journey CSS has negative letter spacing');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
-  assert(preyManifest.text.includes('"game": "Prey"') && preyManifest.text.includes('"promptVersion": "prey-flight-recorder-v1"'), 'Prey flight recorder manifest metadata missing');
-  assert(preyManifest.text.includes('"defaultAspectRatio": "16:9"') && preyManifest.text.includes('"styleRules"'), 'Prey flight recorder manifest 16:9/style contract missing');
+  assert(preyManifest.text.includes('"game": "Prey"') && preyManifest.text.includes('"promptVersion": "prey-illustrated-journal-v1"'), 'Prey illustrated journal manifest metadata missing');
+  assert(preyManifest.text.includes('"defaultAspectRatio": "16:9"') && preyManifest.text.includes('"styleRules"'), 'Prey illustrated journal manifest 16:9/style contract missing');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
-  assert(preyReadme.text.includes('Prey Flight Recorder Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README workflow missing');
+  assert(preyReadme.text.includes('Prey Illustrated Journal Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README workflow missing');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
   assert(panelManifest.text.includes('"requiredForCurrentPage": true') && panelManifest.text.includes('"visibleInJourney": false'), 'Quantum Break panel manifest does not mark visible/prompt-only slots');
