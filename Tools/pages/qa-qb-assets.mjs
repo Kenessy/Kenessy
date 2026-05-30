@@ -69,16 +69,18 @@ function validateManifest(manifest) {
   assert(typeof manifest.promptVersion === 'string' && manifest.promptVersion.length >= 8, 'manifest promptVersion missing');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/quantum-break/', 'manifest assetBase mismatch');
-  assert(typeof manifest.sharedPrompt === 'string' && /16:9 cinematic sci-fi comic panel/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing image generation base');
+  assert(typeof manifest.sharedPrompt === 'string' && /16:9 cinematic sci-fi dossier photo/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing dossier photo generation base');
   assert(typeof manifest.negativePrompt === 'string' && /fake UI overlays/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 4, 'manifest needs at least four styleRules');
-  assert(manifest.styleRules.some((rule) => /16:9 landscape PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
-  assert(manifest.styleRules.some((rule) => /coherent cinematic sci-fi comic style/i.test(rule)), 'manifest styleRules must preserve coherent art direction');
+  assert(manifest.styleRules.some((rule) => /16:9 PNGs only/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
+  assert(manifest.styleRules.some((rule) => /dark dossier photo language/i.test(rule)), 'manifest styleRules must preserve scrapbook art direction');
   assert(manifest.styleRules.some((rule) => /Avoid large non-diegetic typography/i.test(rule)), 'manifest styleRules must guard against fake text overlays');
-  assert(Array.isArray(manifest.slots) && manifest.slots.length >= 6, 'manifest needs at least six slots');
+  assert(manifest.styleRules.some((rule) => /prompt-only missing images/i.test(rule)), 'manifest styleRules must avoid visible placeholder pressure');
+  assert(Array.isArray(manifest.slots) && manifest.slots.length === 3, 'manifest must contain exactly three photo evidence entries');
   const ids = new Set();
   const filenames = new Set();
   let currentRequired = 0;
+  let visibleInJourney = 0;
   for (const slot of manifest.slots) {
     assert(slot.id && !ids.has(slot.id), `duplicate or missing slot id ${slot.id}`);
     assert(slot.filename && !filenames.has(slot.filename), `duplicate or missing filename ${slot.filename}`);
@@ -90,10 +92,13 @@ function validateManifest(manifest) {
     assert(slot.composition && slot.composition.length >= 48, `slot ${slot.id} composition is too short`);
     assert(slot.avoid && slot.avoid.length >= 42, `slot ${slot.id} avoid guardrail is too short`);
     if (slot.requiredForCurrentPage) currentRequired += 1;
+    if (slot.visibleInJourney !== false) visibleInJourney += 1;
     ids.add(slot.id);
     filenames.add(slot.filename);
   }
-  assert(currentRequired === 4, `expected four current-page required slots, got ${currentRequired}`);
+  assert(ids.has('page-02-a') && ids.has('page-02-c') && ids.has('page-02-d'), 'manifest must preserve A/C wired photos and D next-missing prompt');
+  assert(currentRequired === 2, `expected two current-page required visible photos, got ${currentRequired}`);
+  assert(visibleInJourney === 2, `expected two visible journey photo slots, got ${visibleInJourney}`);
   return { ids, filenames };
 }
 
@@ -111,8 +116,8 @@ async function main() {
 
   assert(await fileExists(journeyIndexPath), 'public Quantum Break journey missing; run npm run build:metro');
   const journeyHtml = await readFile(journeyIndexPath, 'utf8');
-  assert(journeyHtml.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}'), 'journey is missing ready-frame image CSS');
-  assert(journeyHtml.includes('The build auto-wires any matching image file into its manifest slot.'), 'journey is missing auto-wiring handoff text');
+  assert(journeyHtml.includes('.photo-slot-ready .photo-placeholder{display:none}'), 'journey is missing ready photo-slot image CSS');
+  assert(journeyHtml.includes('The build auto-wires any matching image file into its photo evidence slot.'), 'journey is missing auto-wiring handoff text');
   await checkpoint('journey page loaded for wiring audit');
 
   const entries = await readdir(assetDir, { withFileTypes: true });
@@ -129,11 +134,17 @@ async function main() {
     const filePath = path.join(assetDir, slot.filename);
     const exists = await fileExists(filePath);
     const imageSrc = `../../../../assets/img/quantum-break/${slot.filename}`;
-    assert(journeyHtml.includes(`data-qb-slot="${slot.id}"`), `journey missing data slot ${slot.id}`);
+    const visibleInJourney = slot.visibleInJourney !== false;
+    if (visibleInJourney) {
+      assert(journeyHtml.includes(`data-qb-slot="${slot.id}"`), `journey missing data slot ${slot.id}`);
+    } else {
+      assert(!journeyHtml.includes(`data-qb-slot="${slot.id}"`), `prompt-only slot ${slot.id} should not render as a visible journey data slot`);
+    }
     const slotResult = {
       id: slot.id,
       filename: slot.filename,
       requiredForCurrentPage: Boolean(slot.requiredForCurrentPage),
+      visibleInJourney,
       exists
     };
     if (!exists) {
@@ -148,8 +159,13 @@ async function main() {
       continue;
     }
 
-    assert(journeyHtml.includes(`data-image-file="${slot.filename}"`), `present image ${slot.filename} is not wired in journey; run npm run build:metro`);
-    assert(journeyHtml.includes(imageSrc), `present image ${slot.filename} src missing from journey; run npm run build:metro`);
+    if (visibleInJourney) {
+      assert(journeyHtml.includes(`data-image-file="${slot.filename}"`), `present image ${slot.filename} is not wired in journey; run npm run build:metro`);
+      assert(journeyHtml.includes(imageSrc), `present image ${slot.filename} src missing from journey; run npm run build:metro`);
+    } else {
+      assert(!journeyHtml.includes(`data-image-file="${slot.filename}"`), `prompt-only image ${slot.filename} should not auto-wire into the journey`);
+      assert(!journeyHtml.includes(imageSrc), `prompt-only image ${slot.filename} should not have a journey src`);
+    }
 
     const buffer = await readFile(filePath);
     const { width, height } = parsePngDimensions(buffer, slot.filename);

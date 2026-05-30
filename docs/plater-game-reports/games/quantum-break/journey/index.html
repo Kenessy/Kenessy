@@ -3,35 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quantum Break - Fullscreen Journal</title>
+<title>Quantum Break - Scrapbook Journal</title>
 <link rel="icon" href="data:,">
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/quantum-break/journey/">
-<meta name="description" content="Quantum Break fullscreen illustrated journal: a native comic-spread reader for replay scenes, 16:9 panels, route lock, and review evidence.">
+<meta name="description" content="Quantum Break fullscreen dossier scrapbook journal: dark case-file pages, typed field notes, attached photo evidence, and replay-review context.">
 <meta name="theme-color" content="#05070c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Quantum Break - Fullscreen Journal">
-<meta property="og:description" content="Fullscreen Quantum Break comic-spread journal with 16:9 panels and review evidence rails.">
+<meta property="og:title" content="Quantum Break - Scrapbook Journal">
+<meta property="og:description" content="Fullscreen Quantum Break dossier scrapbook journal with field notes, attached photos, and replay-review evidence.">
 <meta property="og:url" content="https://kenessy.github.io/Kenessy/plater-game-reports/games/quantum-break/journey/">
 <meta property="og:image" content="https://kenessy.github.io/Kenessy/assets/img/quantum-break-review-journey-splash.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Quantum Break - Fullscreen Journal">
-<meta name="twitter:description" content="Fullscreen Quantum Break comic-spread journal with 16:9 panels and review evidence rails.">
+<meta name="twitter:title" content="Quantum Break - Scrapbook Journal">
+<meta name="twitter:description" content="Fullscreen Quantum Break dossier scrapbook journal with field notes, attached photos, and replay-review evidence.">
 <style>
 :root{
   --bg:#04060a;
-  --ink:#f3f7fb;
-  --paper:#dfd1a8;
+  --ink:#f4f0df;
+  --paper:#e4d3a4;
+  --white:#f7f5eb;
   --yellow:#ffc247;
-  --amber:#d69022;
-  --muted:#9aa8b6;
-  --soft:#d7dee7;
-  --line:#2b3542;
-  --panel:#0b1119;
-  --panel2:#121923;
-  --cyan:#83d4f0;
-  --green:#82de9c;
-  --red:#ff625c;
-  --violet:#a996ff;
+  --amber:#c88418;
+  --muted:#a9b2b8;
+  --soft:#d9e0e4;
+  --line:rgba(247,245,235,.18);
+  --line-strong:rgba(247,245,235,.36);
+  --panel:#0a0f14;
+  --panel2:#121820;
+  --tape:#d9c791;
+  --cyan:#95d7ef;
+  --green:#b3efc2;
+  --red:#ff6a5a;
 }
 *{box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
@@ -39,19 +41,20 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   background:
-    radial-gradient(900px 520px at 16% -10%,rgba(255,194,71,.13),transparent 64%),
-    radial-gradient(900px 520px at 100% 6%,rgba(131,212,240,.10),transparent 62%),
-    linear-gradient(180deg,#05070c,#090d13 55%,#04060a);
+    radial-gradient(900px 520px at 18% -14%,rgba(255,194,71,.16),transparent 64%),
+    radial-gradient(760px 460px at 100% 8%,rgba(149,215,239,.10),transparent 60%),
+    linear-gradient(180deg,#05070c,#090d13 54%,#04060a);
   color:var(--ink);
   font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;
   letter-spacing:0;
 }
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4,p,figure{margin:0}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
 .journal-app{height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr);min-width:0}
 .reader-chrome{
   z-index:30;
-  border-bottom:1px solid rgba(243,247,251,.12);
+  border-bottom:1px solid rgba(247,245,235,.12);
   background:rgba(4,6,10,.95);
   backdrop-filter:blur(14px);
 }
@@ -73,14 +76,14 @@ h1,h2,h3,h4,p,figure{margin:0}
   text-transform:uppercase;
   white-space:nowrap;
 }
-.brand:before{content:"";width:9px;height:9px;background:var(--yellow);box-shadow:13px 0 0 var(--cyan),26px 0 0 var(--violet)}
+.brand:before{content:"";width:9px;height:9px;background:var(--yellow);box-shadow:13px 0 0 var(--white),26px 0 0 #5b6470}
 .page-tabs{display:flex;gap:7px;min-width:0;overflow-x:auto;scrollbar-width:thin;padding:2px}
 .page-tabs a,.chrome-link,.page-jump a{
   min-height:34px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  border:1px solid rgba(243,247,251,.13);
+  border:1px solid rgba(247,245,235,.14);
   background:linear-gradient(145deg,rgba(255,194,71,.08),rgba(7,10,15,.72));
   padding:8px 10px;
   color:var(--soft);
@@ -90,7 +93,7 @@ h1,h2,h3,h4,p,figure{margin:0}
   text-transform:uppercase;
   white-space:nowrap;
 }
-.page-tabs a:hover,.page-tabs a:focus-visible,.chrome-link:hover,.page-jump a:hover{border-color:rgba(255,194,71,.56);color:#ffd58d}
+.page-tabs a:hover,.page-tabs a:focus-visible,.chrome-link:hover,.page-jump a:hover{border-color:rgba(255,194,71,.56);color:#ffd58d;outline:0}
 .chrome-actions{display:flex;gap:7px;align-items:center}
 .chrome-link.hot{color:#ffd58d;border-color:rgba(255,194,71,.52)}
 .reader-track{
@@ -105,8 +108,8 @@ h1,h2,h3,h4,p,figure{margin:0}
   overscroll-behavior-x:contain;
   scrollbar-width:thin;
   background:
-    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),
-    linear-gradient(0deg,rgba(255,255,255,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(247,245,235,.045) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(247,245,235,.032) 1px,transparent 1px),
     radial-gradient(900px 520px at 100% 0,rgba(255,194,71,.08),transparent 62%);
   background-size:96px 96px,96px 96px,auto;
 }
@@ -122,144 +125,92 @@ h1,h2,h3,h4,p,figure{margin:0}
   padding:10px;
 }
 .page-shell{width:100%;height:100%;min-height:100%;display:grid}
-.comic-page{
+.dossier-page{
   position:relative;
   width:100%;
   min-height:100%;
   overflow:hidden;
-  border:1px solid rgba(255,194,71,.42);
+  border:1px solid rgba(255,194,71,.38);
   background:
-    linear-gradient(135deg,rgba(255,194,71,.08),transparent 31%),
-    linear-gradient(155deg,rgba(17,25,35,.98),rgba(5,7,12,.99));
+    linear-gradient(135deg,rgba(255,194,71,.07),transparent 28%),
+    linear-gradient(155deg,rgba(18,25,31,.98),rgba(5,7,12,.99));
   box-shadow:0 30px 90px rgba(0,0,0,.44);
 }
-.comic-page:before{
+.dossier-page:before{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px),
-    linear-gradient(0deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:42px 42px;
-  opacity:.15;
+    linear-gradient(90deg,rgba(247,245,235,.060) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(247,245,235,.038) 1px,transparent 1px),
+    linear-gradient(45deg,transparent 0 48%,rgba(255,194,71,.08) 49%,transparent 51%);
+  background-size:44px 44px,44px 44px,100% 100%;
+  opacity:.18;
 }
-.comic-page:after{
+.dossier-page:after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),inset 0 0 80px rgba(0,0,0,.28);
+  box-shadow:inset 0 0 0 1px rgba(247,245,235,.035),inset 0 0 90px rgba(0,0,0,.35);
 }
-.comic-spread{height:100%}
-.comic-board{
+.scrapbook-board{
   position:relative;
   z-index:1;
   height:100%;
   min-height:calc(100svh - 78px);
   display:grid;
-  gap:10px;
-  padding:14px;
-}
-.spread-grid{
-  height:100%;
-  min-height:calc(100svh - 106px);
-  display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr));
   grid-template-rows:repeat(8,minmax(0,1fr));
-  gap:10px;
+  gap:12px;
+  padding:16px;
 }
-.cover-grid{grid-template-areas:
-  "hero hero hero hero hero hero status status status status status status"
-  "hero hero hero hero hero hero status status status status status status"
-  "hero hero hero hero hero hero status status status status status status"
-  "hero hero hero hero hero hero status status status status status status"
-  "hero hero hero hero hero hero beat1 beat1 beat1 beat2 beat2 beat2"
-  "hero hero hero hero hero hero beat1 beat1 beat1 beat2 beat2 beat2"
-  "hero hero hero hero hero hero jump jump jump jump jump jump"
-  "hero hero hero hero hero hero jump jump jump jump jump jump";}
-.route-grid{grid-template-areas:
-  "title title title title title title title title thesis thesis thesis thesis"
-  "title title title title title title title title thesis thesis thesis thesis"
-  "r1 r1 r1 r2 r2 r2 r3 r3 r3 r4 r4 r4"
-  "r1 r1 r1 r2 r2 r2 r3 r3 r3 r4 r4 r4"
-  "contract contract contract contract contract format format format format format format format"
-  "contract contract contract contract contract format format format format format format format"
-  "links links links links links format format format format format format format"
-  "links links links links links jump jump jump jump jump jump jump";}
-.page-grid{grid-template-areas:
-  "head head head head head head head head head meta meta meta"
-  "lead lead lead lead lead story story story story story p1 p1"
-  "lead lead lead lead lead story story story story story p1 p1"
-  "lead lead lead lead lead story story story story story p2 p2"
-  "lead lead lead lead lead story story story story story p2 p2"
-  "proof proof proof friction friction friction impact impact impact impact p3 p3"
-  "proof proof proof friction friction friction impact impact impact impact p3 p3"
-  "session session session session session session jump jump jump jump jump jump";}
-.brief-grid-spread{grid-template-areas:
-  "head head head head head head rules rules rules rules rules rules"
-  "head head head head head head rules rules rules rules rules rules"
-  "b1 b1 b1 b2 b2 b2 b3 b3 b3 b4 b4 b4"
-  "b1 b1 b1 b2 b2 b2 b3 b3 b3 b4 b4 b4"
-  "b5 b5 b5 b6 b6 b6 b7 b7 b7 b8 b8 b8"
-  "b5 b5 b5 b6 b6 b6 b7 b7 b7 b8 b8 b8"
-  "prompt prompt prompt prompt prompt handoff handoff handoff handoff links links links"
-  "prompt prompt prompt prompt prompt handoff handoff handoff handoff jump jump jump";}
-.panel{
+.case-block,.field-note,.stamp-card,.photo-card,.brief-card,.route-card{
   position:relative;
   min-width:0;
-  overflow:hidden;
   border:1px solid var(--line);
-  background:linear-gradient(145deg,rgba(18,27,39,.94),rgba(7,10,15,.98));
+  background:linear-gradient(145deg,rgba(20,27,34,.87),rgba(6,9,13,.88));
+  overflow:visible;
 }
-.panel.pad{padding:16px}
-.panel.hero-cover{
-  grid-area:hero;
-  display:grid;
-  align-content:end;
-  gap:16px;
-  padding:22px;
-  background:
-    linear-gradient(180deg,rgba(5,7,12,.08),rgba(5,7,12,.18) 38%,rgba(5,7,12,.92)),
-    url("../../../../assets/img/quantum-break-review-journey-splash.svg") center/cover no-repeat;
-}
-.panel.hero-cover:before,.image-panel:before{
+.case-block,.field-note,.stamp-card,.route-card,.brief-card{padding:16px}
+.case-block:before,.field-note:before,.stamp-card:before,.route-card:before,.brief-card:before{
   content:"";
   position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(255,194,71,.22) 0 2px,transparent 2px),linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px);
-  background-size:100% 100%,36px 36px;
-  opacity:.42;
+  inset:0 0 auto 0;
+  height:2px;
+  background:linear-gradient(90deg,var(--yellow),rgba(247,245,235,.34),transparent 82%);
+  opacity:.82;
 }
-.kicker,.eyebrow,.panel small,.comic-status small{
+.kicker,.eyebrow,.case-block small,.field-note small,.stamp-card small,.route-card small,.brief-card small{
   display:block;
   color:var(--yellow);
   font-size:10px;
   line-height:1;
   font-weight:1000;
   text-transform:uppercase;
-  letter-spacing:0;
 }
 .eyebrow{font-size:12px}
-h1{
+.marker-title{
   color:var(--paper);
-  font-size:96px;
-  line-height:.82;
-  font-weight:1000;
+  font-family:"Segoe Print","Comic Sans MS",cursive;
+  font-size:74px;
+  line-height:.88;
+  font-weight:900;
   text-transform:uppercase;
-  text-shadow:5px 5px 0 #000,0 0 34px rgba(255,194,71,.2);
+  text-shadow:5px 5px 0 #000,0 0 34px rgba(255,194,71,.20);
 }
-h2{
+h1.marker-title{font-size:96px}
+h2,.case-title{
   margin-top:7px;
   color:var(--paper);
-  font-size:44px;
+  font-size:42px;
   line-height:.94;
   font-weight:1000;
   text-transform:uppercase;
 }
 h3{margin-top:8px;color:var(--paper);font-size:24px;line-height:1;text-transform:uppercase}
-h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transform:uppercase}
+h4{margin-top:8px;color:var(--paper);font-size:28px;line-height:.98;text-transform:uppercase}
 .lede{
   max-width:760px;
   border-left:3px solid var(--yellow);
@@ -269,19 +220,19 @@ h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transfo
   line-height:1.46;
   font-weight:780;
 }
-.copy,.panel p,.image-panel figcaption,.route-step span,.brief-card p,.prompt-card p,.lock-note p,.prompt-note p{
+.copy,.case-block p,.field-note p,.stamp-card p,.route-card p,.brief-card p,.photo-card figcaption,.route-step span,.note-lines li{
   color:var(--muted);
   font-size:14px;
   line-height:1.48;
   font-weight:730;
 }
-.panel p+p,.story-copy p+p{margin-top:9px}
+.case-block p+p,.field-note p+p,.brief-card p+p{margin-top:9px}
 .tag-row,.chip-row,.asset-links{display:flex;flex-wrap:wrap;gap:8px}
-.tag,.chip,.comic-status span,.spoiler{
+.tag,.chip,.status-pill{
   min-height:32px;
   display:inline-flex;
   align-items:center;
-  border:1px solid rgba(243,247,251,.13);
+  border:1px solid rgba(247,245,235,.13);
   background:rgba(5,7,12,.66);
   padding:7px 9px;
   color:var(--soft);
@@ -290,25 +241,145 @@ h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transfo
   font-weight:1000;
   text-transform:uppercase;
 }
-.tag.yellow,.chip.yellow,.spoiler{border-color:rgba(255,194,71,.44);color:#ffd58d}
-.tag.green,.chip.green{border-color:rgba(130,222,156,.36);color:#b2efc2}
-.tag.cyan,.chip.cyan{border-color:rgba(131,212,240,.4);color:#c1efff}
-.status-hero{grid-area:status;display:grid;align-content:space-between;gap:16px}
-.status-hero b{display:block;margin-top:12px;color:var(--paper);font-size:56px;line-height:.88;font-weight:1000;text-transform:uppercase;overflow-wrap:normal}
-.beat-one{grid-area:beat1}
-.beat-two{grid-area:beat2}
-.page-jump{grid-area:jump;display:flex;align-items:end;justify-content:space-between;gap:10px;border:1px solid rgba(243,247,251,.12);background:linear-gradient(145deg,rgba(255,194,71,.045),rgba(5,7,12,.66));padding:12px}
-.page-jump span{color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase}
-.route-title{grid-area:title}
-.route-thesis{grid-area:thesis}
+.tag.yellow,.chip.yellow,.status-pill{border-color:rgba(255,194,71,.44);color:#ffd58d}
+.tag.green,.chip.green{border-color:rgba(179,239,194,.36);color:#b3efc2}
+.tag.cyan,.chip.cyan{border-color:rgba(149,215,239,.4);color:#c9f0ff}
+.cover-board .hero-cover{
+  grid-column:1/8;
+  grid-row:1/9;
+  display:grid;
+  align-content:end;
+  gap:16px;
+  padding:24px;
+  background:
+    linear-gradient(180deg,rgba(5,7,12,.05),rgba(5,7,12,.20) 34%,rgba(5,7,12,.94)),
+    url("../../../../assets/img/quantum-break-review-journey-splash.svg") center/cover no-repeat;
+}
+.cover-board .case-summary{grid-column:8/13;grid-row:1/5}
+.cover-board .stamp-one{grid-column:8/10;grid-row:5/7}
+.cover-board .stamp-two{grid-column:10/13;grid-row:5/7}
+.cover-board .page-jump{grid-column:8/13;grid-row:7/9}
+.route-board .route-title{grid-column:1/8;grid-row:1/3}
+.route-board .route-thesis{grid-column:8/13;grid-row:1/3}
+.route-board .route-step.r1{grid-column:1/4;grid-row:3/5}
+.route-board .route-step.r2{grid-column:4/7;grid-row:3/5}
+.route-board .route-step.r3{grid-column:7/10;grid-row:3/5}
+.route-board .route-step.r4{grid-column:10/13;grid-row:3/5}
+.route-board .contract-panel{grid-column:1/7;grid-row:5/8}
+.route-board .format-panel{grid-column:7/13;grid-row:5/8}
+.route-board .page-jump{grid-column:1/13;grid-row:8/9}
+.note-board .page-head{grid-column:1/7;grid-row:1/3}
+.note-board .story-note{grid-column:7/13;grid-row:1/4}
+.note-board .evidence-a{grid-column:1/4;grid-row:3/6}
+.note-board .evidence-b{grid-column:4/7;grid-row:3/6}
+.note-board .evidence-c{grid-column:1/7;grid-row:6/8}
+.note-board .session-strip{grid-column:7/13;grid-row:4/8}
+.note-board .page-jump{grid-column:1/13;grid-row:8/9}
+.scene-board{grid-template-rows:auto auto auto auto;align-content:start}
+.scene-board .page-head{grid-column:1/7;grid-row:1}
+.scene-board .story-note{grid-column:7/13;grid-row:1}
+.scene-board .photo-a{grid-column:1/8;grid-row:2}
+.scene-board .photo-c{grid-column:8/13;grid-row:2}
+.scene-board .proof{grid-column:1/4;grid-row:3}
+.scene-board .friction{grid-column:4/8;grid-row:3}
+.scene-board .impact{grid-column:8/13;grid-row:3}
+.scene-board .page-jump{grid-column:1/13;grid-row:4}
+.brief-board .page-head{grid-column:1/7;grid-row:1/3}
+.brief-board .rules-panel{grid-column:7/13;grid-row:1/3}
+.brief-board .brief-a{grid-column:1/4;grid-row:3/6}
+.brief-board .brief-c{grid-column:4/7;grid-row:3/6}
+.brief-board .brief-d{grid-column:7/13;grid-row:3/6}
+.brief-board .prompt-card{grid-column:1/9;grid-row:6/8}
+.brief-board .links-card{grid-column:9/13;grid-row:6/8}
+.brief-board .page-jump{grid-column:1/13;grid-row:8/9}
 .route-step{padding:14px}
 .route-step b{display:block;margin-top:8px;color:var(--paper);font-size:30px;line-height:1;text-transform:uppercase}
-.route-step.r1{grid-area:r1}.route-step.r2{grid-area:r2}.route-step.r3{grid-area:r3}.route-step.r4{grid-area:r4}
-.contract-panel{grid-area:contract}
-.format-panel{grid-area:format;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.format-card{border:1px solid rgba(243,247,251,.12);background:rgba(5,7,12,.48);padding:12px}
-.format-card strong{display:inline-flex;margin-top:10px;border:1px solid rgba(130,222,156,.34);padding:6px 8px;color:#b2efc2;font-size:11px;line-height:1;font-weight:1000;text-transform:uppercase}
-.link-panel{grid-area:links}
+.format-panel{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.format-card{border:1px solid rgba(247,245,235,.12);background:rgba(5,7,12,.48);padding:12px}
+.format-card strong{display:inline-flex;margin-top:10px;border:1px solid rgba(179,239,194,.34);padding:6px 8px;color:#b3efc2;font-size:11px;line-height:1;font-weight:1000;text-transform:uppercase}
+.photo-card{
+  overflow:visible;
+  background:transparent;
+  border:0;
+  transform:rotate(var(--tilt,0deg));
+}
+.photo-paper{
+  position:relative;
+  border:1px solid rgba(247,245,235,.26);
+  background:
+    linear-gradient(180deg,rgba(238,231,207,.94),rgba(196,184,145,.92)),
+    #d8c894;
+  padding:10px 10px 12px;
+  box-shadow:0 22px 42px rgba(0,0,0,.42);
+}
+.photo-paper:before,.photo-paper:after{
+  content:"";
+  position:absolute;
+  top:-11px;
+  width:76px;
+  height:22px;
+  background:linear-gradient(135deg,rgba(255,242,184,.72),rgba(169,149,84,.62));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 5px 12px rgba(0,0,0,.28);
+}
+.photo-paper:before{left:24px;transform:rotate(-4deg)}
+.photo-paper:after{right:28px;transform:rotate(5deg)}
+.photo-slot{
+  position:relative;
+  aspect-ratio:16/9;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(255,194,71,.13),transparent 40%),
+    repeating-linear-gradient(90deg,rgba(5,7,12,.10) 0 1px,transparent 1px 34px),
+    repeating-linear-gradient(0deg,rgba(5,7,12,.08) 0 1px,transparent 1px 34px),
+    linear-gradient(145deg,#090b0d,#171b1e);
+}
+.photo-slot-ready .photo-placeholder{display:none}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-placeholder{
+  position:relative;
+  z-index:1;
+  max-width:78%;
+  border-left:3px solid var(--yellow);
+  background:linear-gradient(135deg,rgba(5,7,12,.88),rgba(8,14,22,.68));
+  box-shadow:0 10px 26px rgba(0,0,0,.28);
+  color:#dfd2ad;
+  text-align:left;
+  padding:11px;
+  text-transform:uppercase;
+}
+.photo-placeholder b{display:block;color:#ffd58d;font-size:11px;line-height:1;font-weight:1000}
+.photo-placeholder span{display:block;margin-top:7px;color:#dce7f0;font-size:12px;line-height:1.22;font-weight:1000}
+.photo-card figcaption{
+  color:#16191d;
+  margin-top:9px;
+  padding:0 2px;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:900;
+}
+.photo-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.photo-meta span{border:1px solid rgba(5,7,12,.18);padding:4px 6px;color:#16191d;font-size:10px;line-height:1;font-weight:1000;text-transform:uppercase}
+.note-lines{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.note-lines li{border-left:2px solid rgba(255,194,71,.70);padding-left:10px;color:#e6d8b3}
+.session-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.session-strip .stamp-card{min-height:116px}
+.page-jump{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:10px;
+  border:1px solid rgba(247,245,235,.12);
+  background:linear-gradient(145deg,rgba(255,194,71,.045),rgba(5,7,12,.66));
+  padding:12px;
+}
+.page-jump span{color:var(--muted);font-size:11px;font-weight:900;text-transform:uppercase}
 .asset-links a{
   min-height:34px;
   display:inline-flex;
@@ -321,95 +392,14 @@ h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transfo
   font-weight:1000;
   text-transform:uppercase;
 }
-.comic-header{grid-area:meta;display:grid;align-content:start;gap:6px}
-.panel.pad.comic-header{padding:14px}
-.comic-header .comic-status{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
-.comic-status b{margin-right:5px;color:#ffd58d}
-.page-head{grid-area:head;align-content:end}
-.story-copy{grid-area:story;display:grid;align-content:start;gap:7px}
-.image-panel{
-  position:relative;
-  min-width:0;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:rgba(5,7,12,.5);
+.prompt-text{
+  margin-top:10px;
+  color:#f0e0b6;
+  font-size:13px;
+  line-height:1.48;
+  font-weight:760;
 }
-.lead-panel{grid-area:lead}
-.panel-a{grid-area:p1}.panel-b{grid-area:p2}.panel-c{grid-area:p3}
-.panel-frame{
-  position:relative;
-  aspect-ratio:16/9;
-  display:grid;
-  align-items:end;
-  justify-items:start;
-  overflow:hidden;
-  padding:12px;
-  background:
-    linear-gradient(135deg,rgba(255,194,71,.13),transparent 40%),
-    repeating-linear-gradient(90deg,rgba(243,247,251,.045) 0 1px,transparent 1px 34px),
-    repeating-linear-gradient(0deg,rgba(243,247,251,.035) 0 1px,transparent 1px 34px),
-    linear-gradient(145deg,#07090d,#101923);
-}
-.panel-frame:before{content:"";position:absolute;inset:10px;border:1px dashed rgba(255,194,71,.42);background:linear-gradient(145deg,rgba(255,194,71,.05),rgba(131,212,240,.04));opacity:.92}
-.panel-frame:after{content:"IMAGE SLOT";position:absolute;top:10px;left:10px;border:1px solid rgba(255,194,71,.36);background:rgba(5,7,12,.72);padding:5px 7px;color:#ffd58d;font-size:9px;font-weight:1000;text-transform:uppercase}
-.panel-frame-ready:before,.panel-frame-ready:after{display:none}
-.panel-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slot-label{
-  position:relative;
-  z-index:1;
-  max-width:84%;
-  border-left:3px solid var(--yellow);
-  background:linear-gradient(135deg,rgba(5,7,12,.88),rgba(8,14,22,.68));
-  box-shadow:0 10px 26px rgba(0,0,0,.28);
-  color:#dfd2ad;
-  text-align:left;
-  padding:11px;
-  text-transform:uppercase;
-}
-.slot-label b{display:block;color:#ffd58d;font-size:11px;line-height:1;font-weight:1000}
-.slot-label span{display:block;margin-top:7px;color:#dce7f0;font-size:12px;line-height:1.22;font-weight:1000}
-.image-panel figcaption{border-top:1px solid var(--line);padding:10px 11px}
-.panel-a figcaption,.panel-b figcaption,.panel-c figcaption{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:2;
-  border-top:1px solid rgba(243,247,251,.13);
-  background:linear-gradient(180deg,rgba(5,7,12,.08),rgba(5,7,12,.9));
-}
-@media(min-width:1181px){
-  .image-panel figcaption{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:2;
-    border-top:1px solid rgba(243,247,251,.13);
-    background:linear-gradient(180deg,rgba(5,7,12,.08),rgba(5,7,12,.9));
-  }
-  .panel-a .slot-label,.panel-b .slot-label,.panel-c .slot-label{display:none}
-}
-.proof{grid-area:proof}.friction{grid-area:friction}.impact{grid-area:impact}.session{grid-area:session}
-.evidence-card{padding:13px}
-.evidence-card h3{font-size:21px}
-.session-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.session-strip div{border:1px solid rgba(243,247,251,.10);background:rgba(5,7,12,.44);padding:10px}
-.session-strip b{display:block;margin-top:5px;color:var(--paper);font-size:13px;line-height:1.25}
-.rules-panel{grid-area:rules;display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
-.style-rule-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-content:center}
-.style-rule-grid span{min-height:38px;display:flex;align-items:center;border:1px solid rgba(243,247,251,.12);background:linear-gradient(135deg,rgba(255,194,71,.08),rgba(5,7,12,.58));padding:8px 9px;color:#dfe7ee;font-size:11px;line-height:1.25;font-weight:1000;text-transform:uppercase}
-.brief-card{padding:12px}
-.brief-card h3,.prompt-card h3{font-size:20px}
-.brief-card code,.prompt-card code{display:block;margin-top:8px;color:#ffd58d;font-size:12px;line-height:1.28;font-weight:900;white-space:normal}
-.b1{grid-area:b1}.b2{grid-area:b2}.b3{grid-area:b3}.b4{grid-area:b4}.b5{grid-area:b5}.b6{grid-area:b6}.b7{grid-area:b7}.b8{grid-area:b8}
-.prompt-pack{grid-area:prompt}
-.prompt-card{position:relative;overflow:hidden;border:1px solid rgba(131,212,240,.24);background:linear-gradient(145deg,rgba(18,27,39,.94),rgba(7,10,15,.98));padding:14px}
-.prompt-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--tone,var(--yellow)),transparent)}
-.handoff-checklist{grid-area:handoff;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.handoff-checklist div{border:1px solid rgba(243,247,251,.12);background:rgba(5,7,12,.46);padding:11px}
-.handoff-checklist b{display:block;margin-top:6px;color:var(--soft);font-size:13px;line-height:1.35}
-.brief-links{grid-area:links}
+.prompt-text code{display:block;margin-top:8px;color:#ffd58d;white-space:normal;overflow-wrap:anywhere}
 .scroll-cue{
   position:absolute;
   right:12px;
@@ -421,94 +411,89 @@ h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transfo
   text-transform:uppercase;
 }
 @media(max-width:1180px){
-  .spread-grid{grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:auto}
-  .cover-grid{grid-template-areas:
-    "hero hero hero hero hero hero hero hero"
-    "hero hero hero hero hero hero hero hero"
-    "status status status status status status status status"
-    "beat1 beat1 beat1 beat1 beat2 beat2 beat2 beat2"
-    "jump jump jump jump jump jump jump jump";}
-  .route-grid{grid-template-areas:
-    "title title title title thesis thesis thesis thesis"
-    "r1 r1 r2 r2 r3 r3 r4 r4"
-    "contract contract contract contract format format format format"
-    "links links links links jump jump jump jump";}
-  .page-grid{grid-template-areas:
-    "head head head head meta meta meta meta"
-    "lead lead lead lead story story story story"
-    "p1 p1 p1 p2 p2 p2 p3 p3"
-    "proof proof friction friction impact impact session session"
-    "jump jump jump jump jump jump jump jump";}
-  .brief-grid-spread{grid-template-areas:
-    "head head head head rules rules rules rules"
-    "b1 b1 b2 b2 b3 b3 b4 b4"
-    "b5 b5 b6 b6 b7 b7 b8 b8"
-    "prompt prompt prompt prompt handoff handoff links links"
-    "jump jump jump jump jump jump jump jump";}
-  .comic-board,.spread-grid{height:auto}
-  .comic-page{overflow:visible}
-  .lead-panel .panel-frame{height:auto;aspect-ratio:16/9}
-  h1{font-size:72px}
-  h2{font-size:36px}
-  .status-hero b{font-size:44px}
-  .format-panel,.rules-panel{grid-template-columns:1fr}
-}
-@media(max-width:1400px) and (min-width:1181px){
-  h1{font-size:76px}
-  h2{font-size:32px}
-  h3{font-size:22px}
-  h4{font-size:24px}
-  .status-hero b{font-size:46px}
-  .image-panel{display:block}
-  .panel-a,.panel-b,.panel-c{display:block}
-  .panel-a .slot-label,.panel-b .slot-label,.panel-c .slot-label{max-width:92%;padding:8px}
-  .panel-a .slot-label,.panel-b .slot-label,.panel-c .slot-label{display:none}
-  .panel-a figcaption,.panel-b figcaption,.panel-c figcaption{display:none}
-  .page-head p{display:none}
-  .comic-header .comic-status{display:none}
-  .panel.pad.page-head,.panel.pad.comic-header,.panel.pad.story-copy,.panel.pad.beat-one,.panel.pad.beat-two{padding:12px}
-  .panel.pad.page-head{padding:10px 12px}
-  .beat-one h3,.beat-two h3{font-size:21px}
-  .story-copy{gap:5px}
-  .story-copy p{font-size:12px;line-height:1.3}
-  .evidence-card{padding:10px 12px}
-  .evidence-card h3{font-size:19px}
-  .session-strip div{padding:8px 10px}
-  .session-strip b{font-size:12px}
+  .scrapbook-board{grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;align-content:start;min-height:calc(100svh - 78px)}
+  .cover-board .hero-cover{grid-column:1/9;grid-row:auto;min-height:430px}
+  .cover-board .case-summary{grid-column:1/9;grid-row:auto}
+  .cover-board .stamp-one{grid-column:1/5;grid-row:auto}
+  .cover-board .stamp-two{grid-column:5/9;grid-row:auto}
+  .cover-board .page-jump{grid-column:1/9;grid-row:auto}
+  .route-board .route-title{grid-column:1/5;grid-row:auto}
+  .route-board .route-thesis{grid-column:5/9;grid-row:auto}
+  .route-board .route-step.r1{grid-column:1/3;grid-row:auto}
+  .route-board .route-step.r2{grid-column:3/5;grid-row:auto}
+  .route-board .route-step.r3{grid-column:5/7;grid-row:auto}
+  .route-board .route-step.r4{grid-column:7/9;grid-row:auto}
+  .route-board .contract-panel{grid-column:1/5;grid-row:auto}
+  .route-board .format-panel{grid-column:5/9;grid-row:auto}
+  .route-board .page-jump{grid-column:1/9;grid-row:auto}
+  .note-board .page-head{grid-column:1/5;grid-row:auto}
+  .note-board .story-note{grid-column:5/9;grid-row:auto}
+  .note-board .evidence-a{grid-column:1/3;grid-row:auto}
+  .note-board .evidence-b{grid-column:3/5;grid-row:auto}
+  .note-board .evidence-c{grid-column:5/9;grid-row:auto}
+  .note-board .session-strip{grid-column:1/9;grid-row:auto}
+  .note-board .page-jump{grid-column:1/9;grid-row:auto}
+  .scene-board .page-head{grid-column:1/5;grid-row:auto}
+  .scene-board .story-note{grid-column:5/9;grid-row:auto}
+  .scene-board .photo-a{grid-column:1/6;grid-row:auto}
+  .scene-board .photo-c{grid-column:6/9;grid-row:auto}
+  .scene-board .proof{grid-column:1/3;grid-row:auto}
+  .scene-board .friction{grid-column:3/6;grid-row:auto}
+  .scene-board .impact{grid-column:6/9;grid-row:auto}
+  .scene-board .page-jump{grid-column:1/9;grid-row:auto}
+  .brief-board .page-head{grid-column:1/5;grid-row:auto}
+  .brief-board .rules-panel{grid-column:5/9;grid-row:auto}
+  .brief-board .brief-a{grid-column:1/3;grid-row:auto}
+  .brief-board .brief-c{grid-column:3/5;grid-row:auto}
+  .brief-board .brief-d{grid-column:5/9;grid-row:auto}
+  .brief-board .prompt-card{grid-column:1/6;grid-row:auto}
+  .brief-board .links-card{grid-column:6/9;grid-row:auto}
+  .brief-board .page-jump{grid-column:1/9;grid-row:auto}
+  .dossier-page{overflow:visible}
+  h1.marker-title{font-size:74px}
+  .marker-title{font-size:58px}
+  h2,.case-title{font-size:35px}
+  .format-panel{grid-template-columns:1fr}
 }
 @media(max-width:680px){
   .chrome-inner{grid-template-columns:1fr;gap:8px;padding:8px 10px}
   .chrome-actions{display:none}
   .journal-page{padding:8px}
-  .comic-board{padding:12px;min-height:calc(100svh - 78px)}
-  .spread-grid{grid-template-columns:1fr;gap:10px}
-  .cover-grid,.route-grid,.page-grid,.brief-grid-spread{grid-template-areas:none}
-  .panel,.panel.hero-cover,.status-hero,.beat-one,.beat-two,.page-jump,.route-title,.route-thesis,.route-step.r1,.route-step.r2,.route-step.r3,.route-step.r4,.contract-panel,.format-panel,.link-panel,.page-head,.comic-header,.story-copy,.lead-panel,.panel-a,.panel-b,.panel-c,.proof,.friction,.impact,.session,.rules-panel,.brief-card,.prompt-pack,.handoff-checklist,.brief-links{grid-area:auto}
-  .panel.hero-cover{min-height:420px;padding:18px}
-  h1{font-size:48px}
-  h2{font-size:30px}
-  h3{font-size:22px}
-  h4{font-size:25px}
-  .lede{font-size:15px}
-  h1,h2,h3,h4{overflow-wrap:anywhere}
-  .copy,.panel p,.image-panel figcaption,.route-step span,.brief-card p,.prompt-card p,.lock-note p,.prompt-note p{font-size:13px}
-  .comic-header .comic-status{justify-content:flex-start}
-  .format-panel,.style-rule-grid,.handoff-checklist{grid-template-columns:1fr}
+  .scrapbook-board{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto;align-content:start;gap:10px;padding:12px}
+  .cover-board .hero-cover,.cover-board .case-summary,.cover-board .stamp-one,.cover-board .stamp-two,.cover-board .page-jump,
+  .route-board .route-title,.route-board .route-thesis,.route-board .route-step.r1,.route-board .route-step.r2,.route-board .route-step.r3,.route-board .route-step.r4,.route-board .contract-panel,.route-board .format-panel,.route-board .page-jump,
+  .note-board .page-head,.note-board .story-note,.note-board .evidence-a,.note-board .evidence-b,.note-board .evidence-c,.note-board .session-strip,.note-board .page-jump,
+  .scene-board .page-head,.scene-board .story-note,.scene-board .photo-a,.scene-board .photo-c,.scene-board .proof,.scene-board .friction,.scene-board .impact,.scene-board .page-jump,
+  .brief-board .page-head,.brief-board .rules-panel,.brief-board .brief-a,.brief-board .brief-c,.brief-board .brief-d,.brief-board .prompt-card,.brief-board .links-card,.brief-board .page-jump{
+    grid-column:auto;
+    grid-row:auto;
+  }
+  .cover-board .hero-cover{min-height:390px}
+  h1.marker-title{font-size:48px}
+  .marker-title{font-size:42px}
+  h2,.case-title{font-size:30px}
+  h3{font-size:21px}
+  h4{font-size:24px}
+  .lede{font-size:16px}
   .session-strip{grid-template-columns:1fr}
+  .page-jump{align-items:stretch;flex-direction:column}
+  .photo-card{transform:none}
+  .photo-paper{padding:8px}
+  .photo-paper:before,.photo-paper:after{width:58px;height:18px;top:-9px}
 }
 </style>
 </head>
 <body>
 <div class="journal-app">
-  <header class="reader-chrome" aria-label="Quantum Break fullscreen journal navigation">
+  <header class="reader-chrome">
     <div class="chrome-inner">
-      <a class="brand" href="../../../../">Kenessy Journal</a>
+      <a class="brand" href="../../../../">Kenessy / Quantum Break</a>
       <nav class="page-tabs" aria-label="Journal pages">
         <a href="#cover">Cover</a>
         <a href="#route">Route</a>
-        <a href="#page-01">Page 01</a>
-        <a href="#page-02">Page 02</a>
-        <a href="#image-bank">Briefs</a>
+        <a href="#page-01">Field Note</a>
+        <a href="#page-02">Machine Break</a>
+        <a href="#photo-brief">Photo Brief</a>
       </nav>
       <div class="chrome-actions">
         <a class="chrome-link" href="../../../">Reports</a>
@@ -520,147 +505,121 @@ h4{margin-top:8px;color:var(--paper);font-size:30px;line-height:.98;text-transfo
   <main class="reader-track" id="reader" aria-label="Quantum Break fullscreen journal pages">
     <section class="journal-page" id="cover" aria-label="Cover page">
       <div class="page-shell">
-        <article class="comic-page comic-spread">
-          <div class="comic-board spread-grid cover-grid">
-            <div class="panel hero-cover">
-              <div class="eyebrow">Fullscreen Journal / Play-it-together comic reader</div>
-              <h1>Quantum Break</h1>
-              <p class="lede">A native comic-spread reader for replaying a 20-30 minute gameplay chunk: big scene panels, short text boxes, and review evidence placed like a magazine page instead of a vertical article.</p>
+        <article class="dossier-page">
+          <div class="scrapbook-board cover-board">
+            <div class="case-block hero-cover">
+              <div class="eyebrow">Fullscreen Journal / Play-it-together scrapbook reader</div>
+              <h1 class="marker-title">Quantum Break</h1>
+              <p class="lede">A dark dossier scrapbook for replaying the run: typed field notes, taped photo evidence, marker titles, and review implications on fullscreen journal pages you can scroll sideways.</p>
               <div class="tag-row">
                 <span class="tag yellow">Page 02 logged</span>
-                <span class="tag green">1 / 8 images wired</span>
-                <span class="tag cyan">16:9 first</span>
+                <span class="tag green">2 photo evidence files wired</span>
+                <span class="tag cyan">Max 1-3 photos per page</span>
                 <span class="tag">Scroll sideways</span>
               </div>
             </div>
-            <aside class="panel pad status-hero">
-              <div><small>Reader design</small><b>Full screen comic spread</b></div>
-              <p>This layout is built for page turns. Each screen is a full spread: art carries the first read, boxes explain the beat, and the review logic sits in lower panels like a field note.</p>
-              <div class="chip-row">
-                <span class="chip yellow">Cover</span>
-                <span class="chip">Route</span>
-                <span class="chip">Scene page</span>
-                <span class="chip cyan">Briefs</span>
-              </div>
+            <aside class="case-block case-summary">
+              <small>Reader design</small>
+              <h2>Case-file scrapbook</h2>
+              <p>This version removes the old image-slot queue. Each page is a field dossier: dark background, white technical lines, typed notes, attached photos, and a few marker-like titles where personality should show.</p>
+              <ul class="note-lines">
+                <li>Fewer images, stronger placement.</li>
+                <li>Photo evidence appears only when it helps the scene read faster.</li>
+                <li>The build auto-wires any matching image file into its manifest slot.</li>
+              </ul>
             </aside>
-            <div class="panel pad beat-one"><small>Current page</small><h3>The Machine Breaks</h3><p>Two-minute proof, five-minute jump, core failure, frozen Will, first combat handoff.</p></div>
-            <div class="panel pad beat-two"><small>Image state</small><h3>Panel A live</h3><p>Page 02-A is wired. Remaining slots are ready for the next generated panels.</p></div>
-            <div class="page-jump"><span>01 / 05 - fullscreen optimized spread</span><a href="#route">Next: Route</a></div>
+            <div class="stamp-card stamp-one"><small>Current page</small><h3>The Machine Breaks</h3><p>Two-minute proof, five-minute escalation, core failure, frozen-time state lands, first combat handoff.</p></div>
+            <div class="stamp-card stamp-two"><small>Image state</small><h3>Photo evidence live</h3><p>Page 02-A and Page 02-C are attached. Frozen Will is the next useful missing image, not an empty slot on the page.</p></div>
+            <div class="page-jump"><span>01 / 05 - fullscreen optimized dossier</span><a href="#route">Next: Route</a></div>
           </div>
           <div class="scroll-cue">Swipe / wheel sideways</div>
         </article>
       </div>
     </section>
 
-    <section class="journal-page" id="route" aria-label="Route and panel contract">
+    <section class="journal-page" id="route" aria-label="Route and dossier contract">
       <div class="page-shell">
-        <article class="comic-page comic-spread">
-          <div class="comic-board spread-grid route-grid">
-            <div class="panel pad route-title"><small>Session 0 - Route Lock</small><h2>Review-canon route selected</h2><p>This is not an official canon claim. It is the single route chosen for this Steam Completions review run, so the final verdict rates one coherent completed path.</p></div>
-            <div class="panel pad route-thesis"><small>Route verdict</small><h3>PR -> Personal -> Amaral -> Control</h3><p>Chosen because it keeps narrative control, personal tragedy, science logic, and Paul's antagonist arc coherent.</p></div>
-            <div class="panel route-step r1"><small>Junction 1</small><b>PR</b><span>Monarch controls the narrative, not only the guns.</span></div>
-            <div class="panel route-step r2"><small>Junction 2</small><b>Personal</b><span>Paul and Jack stay emotionally central.</span></div>
-            <div class="panel route-step r3"><small>Junction 3</small><b>Amaral</b><span>The chronon / Lifeboat science thread stays clean.</span></div>
-            <div class="panel route-step r4"><small>Junction 4</small><b>Control</b><span>Paul remains a coherent tragic antagonist.</span></div>
-            <div class="panel pad contract-panel"><small>Image format - Panel Contract</small><h2>16:9 First</h2><p>Use 16:9 landscape panels for the current journal template. Each page wants one lead image plus three support beats, so it reads as a comic spread before it reads as a spreadsheet.</p></div>
+        <article class="dossier-page">
+          <div class="scrapbook-board route-board">
+            <div class="case-block route-title"><small>Session 0 - Route Lock</small><h2>Review-canon route selected</h2><p>This is not an official canon claim. It is the single route chosen for this Steam Completions review run, so the final verdict rates one coherent completed path.</p></div>
+            <div class="case-block route-thesis"><small>Route verdict</small><h3>PR -> Personal -> Amaral -> Control</h3><p>Chosen because it keeps narrative control, personal tragedy, science logic, and Paul's antagonist arc coherent.</p></div>
+            <div class="route-card route-step r1"><small>Junction 1</small><b>PR</b><span>Monarch controls the narrative, not only the guns.</span></div>
+            <div class="route-card route-step r2"><small>Junction 2</small><b>Personal</b><span>Paul and Jack stay emotionally central.</span></div>
+            <div class="route-card route-step r3"><small>Junction 3</small><b>Amaral</b><span>The chronon / Lifeboat science thread stays clean.</span></div>
+            <div class="route-card route-step r4"><small>Junction 4</small><b>Control</b><span>Paul remains a coherent tragic antagonist.</span></div>
+            <div class="case-block contract-panel"><small>Scrapbook contract</small><h2>Field Notes First</h2><p>The page no longer demands four to eight image slots. It uses a dark dossier background, white technical line work, typed notes, and 1-3 attached photos only when the beat benefits from evidence.</p></div>
             <div class="format-panel">
-              <div class="format-card"><small>Default asset</small><h3>16:9 landscape panels</h3><p>Story beats, environment reveals, action setup, UI moments, and evidence screenshots.</p><strong>Recommended now</strong></div>
-              <div class="format-card"><small>Page rhythm</small><h3>1 lead + 3 support beats</h3><p>One establishing image, then three smaller beats for cause, detail, and review impact.</p><strong>Comic-page flow</strong></div>
-              <div class="format-card"><small>Reserve format</small><h3>3:4 later</h3><p>Only for deliberate close-ups, dossiers, or a special emotion beat.</p><strong>Optional later</strong></div>
+              <div class="format-card"><small>Default asset</small><h3>Photo evidence</h3><p>16:9 attached PNGs for moments that need visual proof.</p><strong>Use sparingly</strong></div>
+              <div class="format-card"><small>Page rhythm</small><h3>Notes + photos</h3><p>Typed notes carry the argument; photos carry memory and scene recognition.</p><strong>Dossier flow</strong></div>
+              <div class="format-card"><small>Reserve format</small><h3>Prompt only</h3><p>Missing images stay in the photo brief instead of creating noisy empty page boxes.</p><strong>Cleaner pages</strong></div>
             </div>
-            <div class="panel pad link-panel"><small>Asset handoff</small><h3>Exact filename slots</h3><p>The public manifest drives the image slots; the build replaces any matching file into its named panel.</p><div class="asset-links"><a href="../../../../assets/img/quantum-break/panel-manifest.json">Open panel manifest</a><a href="../../../../assets/img/quantum-break/README.md">Asset README</a></div></div>
-            <div class="page-jump"><a href="#cover">Previous</a><span>02 / 05</span><a href="#page-01">Next: Page 01</a></div>
+            <div class="page-jump"><a href="#cover">Previous</a><span>02 / 05</span><a href="#page-01">Next: Field Note</a></div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="journal-page" id="page-01" aria-label="Page 01 comic page">
+    <section class="journal-page" id="page-01" aria-label="Page 01 field note">
       <div class="page-shell">
-        <article class="comic-page comic-spread">
-          <div class="comic-board spread-grid page-grid">
-            <div class="panel pad page-head"><small>Page 01 - Act 1</small><h2>The University Before Time Breaks</h2><p>The first proper journal page: Riverport University, Paul Serene, Project Promenade, and the last quiet walk before the time machine.</p></div>
-            <div class="panel pad comic-header"><div><small>Image-ready comic page</small><h3>Project Promenade</h3></div><div class="comic-status"><span><b>4</b> image slots</span><span><b>16:9</b> first pass</span></div></div>
-            <figure class="image-panel lead-panel">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-a"><div class="slot-label"><b>Panel A / 16:9</b><span>Riverport University exterior / protest / 4 AM arrival</span></div></div>
-              <figcaption>Establish the place before the time fracture: cold campus, Monarch pressure, early-morning arrival, and the sense that the experiment has already escaped ordinary control.</figcaption>
-            </figure>
-            <div class="panel pad story-copy"><small>Read-aloud story beat</small><h4>The last normal walk</h4><p>Jack Joyce arrives before dawn, pulled in by Paul Serene, an old friend hiding the scale of what he is about to reveal.</p><p>The building is quiet, glossy, and overcontrolled: blue-lit doors, glassy lab surfaces, polished corridors, and sterile confidence.</p><p>It feels authored and deliberate: not an open playground, but a guided walk into a machine that has already started bending the story around itself.</p></div>
-            <figure class="image-panel panel-a">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-b"><div class="slot-label"><b>Panel B / 16:9</b><span>Paul leading Jack / lab corridor threshold</span></div></div>
-              <figcaption>Paul frames Project Promenade as a proof moment before the institution closes around it.</figcaption>
-            </figure>
-            <figure class="image-panel panel-b">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-c"><div class="slot-label"><b>Panel C / 16:9</b><span>Meyer-Joyce field / black-hole primer</span></div></div>
-              <figcaption>The science primer lands as short sci-fi texture: enough to sell the premise, not enough to stop the page.</figcaption>
-            </figure>
-            <figure class="image-panel panel-c">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-d"><div class="slot-label"><b>Panel D / 16:9</b><span>Will Joyce shadow / family tension seed</span></div></div>
-              <figcaption>Will Joyce is already a ghost-presence. Paul's secrecy creates tension before the machine is activated.</figcaption>
-            </figure>
-            <div class="panel evidence-card proof"><small>What this proves</small><h3>Authored momentum</h3><p>The opening supports the Remedy cinematic-experiment lens: constant dialogue, readable spaces, and controlled sci-fi mood.</p></div>
-            <div class="panel evidence-card friction"><small>Friction note</small><h3>Exposition density</h3><p>The setup is heavy, but it helps because the scene is a guided lab tour. Watch whether the game later overexplains.</p></div>
-            <div class="panel evidence-card impact"><small>Review impact</small><h3>Early positive delta</h3><p>Narrative Pull +1. Atmosphere +1. Readability +1. Technical Readiness remains unscored.</p></div>
-            <div class="panel session session-strip"><div><small>#002</small><b>Act 1 opening</b></div><div><small>Micro</small><b>Clarity 4 / Tension 2</b></div><div><small>Question</small><b>Does exposition stay active?</b></div></div>
-            <div class="page-jump"><a href="#route">Previous</a><span>03 / 05</span><a href="#page-02">Next: Page 02</a></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="journal-page" id="page-02" aria-label="Page 02 comic page">
-      <div class="page-shell">
-        <article class="comic-page comic-spread">
-          <div class="comic-board spread-grid page-grid">
-            <div class="panel pad page-head"><small>Page 02 - Act 1</small><h2>The Machine Breaks</h2><p>The experiment stops being a pitch and becomes the first real fracture: two-minute proof, five-minute escalation, unclear detonation, frozen-time rescue, and the first combat power.</p></div>
-            <div class="panel pad comic-header"><div><small>Replay note converted to comic page</small><h3>First Stutter</h3></div><div class="comic-status"><span><b>4</b> image slots</span><span><b>16:9</b> first pass</span></div></div>
-            <figure class="image-panel lead-panel">
-              <div class="panel-frame panel-frame-ready" data-image-ratio="16:9" data-qb-slot="page-02-a" data-image-file="qb-page-02-a-airlock-threshold.png"><img src="../../../../assets/img/quantum-break/qb-page-02-a-airlock-threshold.png" alt="Quantum Break journal panel: Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger." loading="lazy" decoding="async"></div>
-              <figcaption>The machine proves a two-minute jump, then Paul pushes the test forward again. The scene crosses from guided lecture into irreversible danger.</figcaption>
-            </figure>
-            <div class="panel pad story-copy"><small>Read-aloud story beat</small><h4>Time moves, then stops</h4><p>The demonstration proves the pitch: Paul sends an object back two minutes, then pushes into a five-minute forward jump. Will warns that time is going to end, but explains too late.</p><p>The core detonates while everyone is still inside. It reads like a self-detonating machine core, then the frozen-time state lands: Will is stuck, Jack restarts him by touching him awake, and combat becomes readable.</p></div>
-            <figure class="image-panel panel-a">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-b"><div class="slot-label"><b>Panel B / 16:9</b><span>First anomaly / time fracture proof</span></div></div>
-              <figcaption>The first anomaly needs to read as a story event: two-minute proof, five-minute escalation, and Will's warning before the explanation lands.</figcaption>
-            </figure>
-            <figure class="image-panel panel-b">
-              <div class="panel-frame panel-frame-ready" data-image-ratio="16:9" data-qb-slot="page-02-c" data-image-file="qb-page-02-c-core-detonation.png"><img src="../../../../assets/img/quantum-break/qb-page-02-c-core-detonation.png" alt="Quantum Break journal panel: Machine core overload, amber emergency contrast, unclear self-detonation read, people caught mid-reaction." loading="lazy" decoding="async"></div>
-              <figcaption>The explosion is effective but slightly muddy. The note flags uncertainty: it did not read like someone shot the core.</figcaption>
-            </figure>
-            <figure class="image-panel panel-c">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-d"><div class="slot-label"><b>Panel D / 16:9</b><span>Frozen Will / first combat power</span></div></div>
-              <figcaption>The stutter wake-up and first time-slow combat beat prove the premise can become readable play.</figcaption>
-            </figure>
-            <div class="panel evidence-card proof"><small>What this proves</small><h3>Spectacle becomes play</h3><p>Frozen people, readable danger, touch-to-unfreeze logic; spectacle becomes interaction.</p></div>
-            <div class="panel evidence-card friction"><small>Friction note</small><h3>Communication fog</h3><p>Urgent warnings arrive before useful explanation, so cause and effect stay deliberately muddy.</p></div>
-            <div class="panel evidence-card impact"><small>Review impact</small><h3>Positive, caveated</h3><p>Atmosphere +1, Engagement +1. Combat looks promising after the first time-slow beat.</p></div>
-            <div class="panel session session-strip"><div><small>#003</small><b>Act 1 machine break</b></div><div><small>Milestone</small><b>Frozen Will rescue</b></div><div><small>Question</small><b>Do rules clarify through play?</b></div></div>
-            <div class="page-jump"><a href="#page-01">Previous</a><span>04 / 05</span><a href="#image-bank">Next: Briefs</a></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="journal-page" id="image-bank" aria-label="Image generation brief">
-      <div class="page-shell">
-        <article class="comic-page comic-spread">
-          <div class="comic-board spread-grid brief-grid-spread">
-            <div class="panel pad page-head"><small>Image bank</small><h2>Generation Brief</h2><p>Use 16:9 landscape panels for the current journey template. Three to four images give a page a comic rhythm without bloating the beat; 3:4 portrait slots can come later for deliberate character close-ups.</p></div>
-            <div class="panel pad rules-panel">
-              <div><small>Shared style contract</small><h3>One visual language</h3><p>Keep one coherent cinematic sci-fi comic style across the whole page: dark Riverport campus and lab mood, blue chronon light, amber emergency contrast, readable silhouettes, and clean panels that still work at mobile width.</p></div>
-              <div class="style-rule-grid" aria-label="Quantum Break image style guardrails"><span>16:9 PNG only</span><span>No fake UI / captions</span><span>Readable silhouettes</span><span>Avoid large fake typography</span></div>
+        <article class="dossier-page">
+          <div class="scrapbook-board note-board">
+            <div class="case-block page-head"><small>Page 01 - Act 1</small><h2>The University Before Time Breaks</h2><p>The first proper field note: Riverport University, Paul Serene, Project Promenade, and the last quiet walk before the machine. This page intentionally stays mostly text until the scene has a truly useful image.</p></div>
+            <div class="field-note story-note"><small>Typed replay note</small><h4>The last normal walk</h4><p>Jack Joyce arrives before dawn, pulled in by Paul Serene, an old friend hiding the scale of what he is about to reveal.</p><p>The building is quiet, glossy, and overcontrolled: blue-lit doors, glassy lab surfaces, polished corridors, and sterile confidence.</p><p>It feels authored and deliberate: not an open playground, but a guided walk into a machine that has already started bending the story around itself.</p></div>
+            <div class="stamp-card evidence-a"><small>What this proves</small><h3>Authored momentum</h3><p>The opening supports the Remedy cinematic-experiment lens: constant dialogue, readable spaces, and controlled sci-fi mood.</p></div>
+            <div class="stamp-card evidence-b"><small>Friction note</small><h3>Exposition density</h3><p>The setup is heavy, but it helps because the scene is a guided lab tour. Watch whether the game later overexplains.</p></div>
+            <div class="stamp-card evidence-c"><small>Review impact</small><h3>Early positive delta</h3><p>Narrative Pull +1. Atmosphere +1. Readability +1. Technical Readiness remains unscored.</p></div>
+            <div class="session-strip">
+              <div class="stamp-card"><small>#002</small><h3>Act 1 opening</h3><p>Project Promenade, Paul secrecy, Will shadow, cold campus control.</p></div>
+              <div class="stamp-card"><small>Question</small><h3>Does exposition stay active?</h3><p>The review should track whether the story explains through scenes or pauses too often.</p></div>
+              <div class="stamp-card"><small>Photo policy</small><h3>No forced slot</h3><p>Page 01 images are no longer mandatory visual queues in v1 of the scrapbook redesign.</p></div>
+              <div class="stamp-card"><small>Style note</small><h3>Handwritten only as accent</h3><p>Marker titles and stamps create the journal feel; longer text stays typed for readability.</p></div>
             </div>
-            <article class="panel brief-card b1"><small>Page 01-A</small><h3>University exterior</h3><p>Riverport University before dawn, protest pressure, cold campus, cinematic sci-fi thriller mood.</p><code>qb-page-01-a-university-exterior.png</code></article>
-            <article class="panel brief-card b2"><small>Page 01-B</small><h3>Paul corridor lead</h3><p>Paul Serene leading Jack through a clean lab corridor, secretive but controlled, blue tech lighting.</p><code>qb-page-01-b-paul-corridor.png</code></article>
-            <article class="panel brief-card b3"><small>Page 01-C</small><h3>Science primer</h3><p>Project Promenade presentation, black-hole / field-primer visual, readable screen glow and lab context.</p><code>qb-page-01-c-science-primer.png</code></article>
-            <article class="panel brief-card b4"><small>Page 01-D / Tension panel</small><h3>Will tension seed</h3><p>Subtle family tension, Will Joyce implied through documents, screens, absence, or environmental foreshadowing.</p><code>qb-page-01-d-will-shadow.png</code></article>
-            <article class="panel brief-card b5"><small>Page 02-A</small><h3>Airlock threshold</h3><p>Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
-            <article class="panel brief-card b6"><small>Page 02-B</small><h3>First anomaly</h3><p>Two-minute proof, five-minute escalation, Will's warning, and the first unstable distortion after the machine push.</p><code>qb-page-02-b-first-anomaly.png</code></article>
-            <article class="panel brief-card b7"><small>Page 02-C</small><h3>Core detonation</h3><p>Machine core overload, amber emergency contrast, unclear self-detonation read, people caught mid-reaction.</p><code>qb-page-02-c-core-detonation.png</code></article>
-            <article class="panel brief-card b8"><small>Page 02-D</small><h3>Frozen Will</h3><p>Will frozen in the stutter, Jack touching him awake, first readable time-stop rescue and combat beat.</p><code>qb-page-02-d-frozen-will.png</code></article>
-            <article class="prompt-card prompt-pack" style="--tone:var(--cyan)" aria-label="Quantum Break panel prompt pack"><small>Prompt pack</small><h3>Scene prompts stay outside the art</h3><p><b>Page 02-B:</b> Two-minute time-travel proof escalating into a five-minute forward jump, readable distortion, Will's urgent warning, strong silhouettes, cinematic spectacle without visual confusion.</p><p><b>Page 02-C:</b> Time machine core overloading and detonating on its own, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.</p><p><b>Page 02-D:</b> Will frozen in a time stutter while Jack touches him awake, still room, suspended debris, first readable time-stop rescue and combat power beat.</p><code>qb-page-02-d-frozen-will.png</code></article>
-            <div class="handoff-checklist" aria-label="Quantum Break generated image drop-in checklist"><div><small>01 - Generate</small><b>Use the shared prompt base and the exact slot prompt.</b></div><div><small>02 - Export</small><b>Save as 16:9 PNG with the listed filename.</b></div><div><small>03 - Drop in</small><b>Place it under <code>docs/assets/img/quantum-break/</code>.</b></div><div><small>04 - Verify</small><b>Run <code>npm run qa:qb-assets</code>; strict mode when all Page 02 images exist.</b></div></div>
-            <div class="panel pad brief-links"><small>Drop-in contract</small><h3>Manifest controlled</h3><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact. The build auto-wires any matching image file into its manifest slot.</p><div class="asset-links"><a href="../../../../assets/img/quantum-break/panel-manifest.json">Panel manifest</a><a href="../../../../assets/img/quantum-break/README.md">Prompt README</a></div></div>
+            <div class="page-jump"><a href="#route">Previous</a><span>03 / 05</span><a href="#page-02">Next: Machine Break</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="journal-page" id="page-02" aria-label="Page 02 machine break scrapbook page">
+      <div class="page-shell">
+        <article class="dossier-page">
+          <div class="scrapbook-board scene-board">
+            <div class="case-block page-head"><small>Page 02 - Act 1</small><h2>The Machine Breaks</h2><p>The experiment stops being a pitch and becomes the first real fracture: two minutes, a five-minute forward jump, unclear detonation, frozen-time rescue, and the first combat power.</p></div>
+            <div class="field-note story-note"><small>Replay note converted to dossier</small><h4>First Stutter</h4><p>The demonstration proves the pitch: Paul sends an object back two minutes, then pushes into a five-minute forward jump. Will warns that time is going to end, but explains too late.</p><p>The core detonates while everyone is still inside. It reads like a self-detonating machine core, then the frozen-time state lands: Will is stuck, Jack restarts him by touching him awake, and combat becomes readable.</p></div>
+            <figure class="photo-card photo-a" style="--tilt:-1.4deg">
+              <div class="photo-paper">
+                <div class="photo-slot photo-slot-ready" data-image-ratio="16:9" data-qb-slot="page-02-a" data-image-file="qb-page-02-a-airlock-threshold.png"><img src="../../../../assets/img/quantum-break/qb-page-02-a-airlock-threshold.png" alt="Quantum Break journal photo evidence: Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger." loading="lazy" decoding="async"></div>
+                <figcaption>The machine proves a two-minute jump, then Paul pushes the test forward again. The scene crosses from guided lecture into irreversible danger.</figcaption>
+                <div class="photo-meta"><span>Attached photo</span><span>Page 02-A</span></div>
+              </div>
+            </figure>
+            <figure class="photo-card photo-c" style="--tilt:1.2deg">
+              <div class="photo-paper">
+                <div class="photo-slot photo-slot-ready" data-image-ratio="16:9" data-qb-slot="page-02-c" data-image-file="qb-page-02-c-core-detonation.png"><img src="../../../../assets/img/quantum-break/qb-page-02-c-core-detonation.png" alt="Quantum Break journal photo evidence: Machine core overload, amber emergency contrast, unclear self-detonation read, people caught mid-reaction." loading="lazy" decoding="async"></div>
+                <figcaption>The explosion is effective but slightly muddy. The note flags uncertainty: it did not read like someone shot the core.</figcaption>
+                <div class="photo-meta"><span>Attached photo</span><span>Page 02-C</span></div>
+              </div>
+            </figure>
+            <div class="stamp-card proof"><small>What this proves</small><h3>Spectacle becomes play</h3><p>Frozen people, readable danger, touch-to-unfreeze logic; spectacle becomes interaction.</p></div>
+            <div class="stamp-card friction"><small>Friction note</small><h3>Communication fog</h3><p>Urgent warnings arrive before useful explanation, so cause and effect stay deliberately muddy.</p></div>
+            <div class="stamp-card impact"><small>Review impact</small><h3>Positive, caveated</h3><p>Atmosphere +1, Engagement +1. Combat looks promising after the first time-slow beat.</p></div>
+            <div class="page-jump"><a href="#page-01">Previous</a><span>04 / 05 - 2 visible photo frames</span><a href="#photo-brief">Next: Photo Brief</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="journal-page" id="photo-brief" aria-label="Photo evidence brief">
+      <div class="page-shell">
+        <article class="dossier-page">
+          <div class="scrapbook-board brief-board">
+            <div class="case-block page-head"><small>Photo evidence bank</small><h2>Generation Brief</h2><p>The old eight-slot queue is gone. The current scrapbook contract is photo evidence: exact filenames, 16:9 PNGs, no fake UI, no captions inside the art, and no visible placeholder pressure on pages that do not need images.</p></div>
+            <div class="case-block rules-panel"><small>Shared style contract</small><h3>Dossier photo language</h3><p>Keep one coherent cinematic sci-fi dossier-photo style: dark laboratory mood, amber and white chronon fracture light, grounded human silhouettes, and clean composition that still reads at mobile width.</p><div class="tag-row"><span class="tag yellow">16:9 PNG</span><span class="tag">No logos</span><span class="tag">No fake text</span><span class="tag cyan">Readable at mobile width</span></div></div>
+            <article class="brief-card brief-a"><small>Wired photo</small><h3>Page 02-A</h3><p>Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
+            <article class="brief-card brief-c"><small>Wired photo</small><h3>Page 02-C</h3><p>Machine core overload, amber emergency contrast, unclear self-detonation read, people caught mid-reaction.</p><code>qb-page-02-c-core-detonation.png</code></article>
+            <article class="brief-card brief-d"><small>Next missing photo</small><h3>Frozen Will</h3><p>Will frozen inside a time stutter while Jack reaches out and touches him awake.</p><code>qb-page-02-d-frozen-will.png</code><p class="prompt-text">This is the #1 useful missing image after the redesign because it would complete the page's readable rescue/combat pivot without restoring the old visual queue.</p></article>
+            <article class="brief-card prompt-card" aria-label="Quantum Break next missing photo prompt"><small>Prompt</small><h3>qb-page-02-d-frozen-will.png</h3><p class="prompt-text">16:9 cinematic sci-fi dossier photo for a Quantum Break illustrated journal. Will frozen inside a time stutter while Jack reaches out and touches him awake, suspended debris and amber/white chronon fracture light around them, dark laboratory background, grounded human silhouettes, readable hand-contact focal point, no UI, no captions, no logos, no fake text, coherent yellow-white-black Quantum Break palette, painterly cinematic realism, clean composition readable at mobile width.</p></article>
+            <div class="case-block links-card"><small>Drop-in contract</small><h3>Manifest controlled</h3><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact. The build auto-wires any matching image file into its photo evidence slot.</p><div class="asset-links"><a href="../../../../assets/img/quantum-break/panel-manifest.json">Photo manifest</a><a href="../../../../assets/img/quantum-break/README.md">Prompt README</a></div></div>
             <div class="page-jump"><a href="#page-02">Previous</a><span>05 / 05</span><a href="#cover">Back to cover</a></div>
           </div>
         </article>

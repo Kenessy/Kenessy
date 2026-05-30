@@ -88,7 +88,7 @@ function transformedSourceWithoutInlineStyle(source, cssStart) {
 }
 
 function quantumBreakImageAlt(slot) {
-  return `Quantum Break journal panel: ${slot.brief}`;
+  return `Quantum Break journal photo evidence: ${slot.brief}`;
 }
 
 async function renderQuantumBreakJourneyImages(html, manifest) {
@@ -107,8 +107,9 @@ async function renderQuantumBreakJourneyImages(html, manifest) {
       throw new Error(`Quantum Break panel manifest has an invalid slot: ${JSON.stringify(slot)}`);
     }
 
+    const visibleInJourney = slot.visibleInJourney !== false;
     const slotMarker = `data-qb-slot="${id}"`;
-    if (!output.includes(slotMarker)) {
+    if (visibleInJourney && !output.includes(slotMarker)) {
       throw new Error(`Quantum Break journey missing slot marker ${id}`);
     }
 
@@ -118,17 +119,21 @@ async function renderQuantumBreakJourneyImages(html, manifest) {
       continue;
     }
 
+    if (!visibleInJourney) {
+      continue;
+    }
+
     const framePattern = new RegExp(
-      `<div class="panel-frame" data-image-ratio="16:9" data-qb-slot="${escapeRegExp(id)}"><div class="slot-label">([\\s\\S]*?)<\\/div><\\/div>`
+      `<div class="photo-slot" data-image-ratio="16:9" data-qb-slot="${escapeRegExp(id)}"><div class="photo-placeholder">([\\s\\S]*?)<\\/div><\\/div>`
     );
     if (!framePattern.test(output)) {
-      throw new Error(`Quantum Break journey slot ${id} is not a placeholder frame.`);
+      throw new Error(`Quantum Break journey slot ${id} is not a scrapbook photo placeholder.`);
     }
 
     const imageSrc = `../../../../assets/img/quantum-break/${filename}`;
     output = output.replace(
       framePattern,
-      `<div class="panel-frame panel-frame-ready" data-image-ratio="${escapeHtml(slot.aspectRatio || manifest.defaultAspectRatio || '16:9')}" data-qb-slot="${escapeHtml(id)}" data-image-file="${escapeHtml(filename)}"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(quantumBreakImageAlt(slot))}" loading="lazy" decoding="async"></div>`
+      `<div class="photo-slot photo-slot-ready" data-image-ratio="${escapeHtml(slot.aspectRatio || manifest.defaultAspectRatio || '16:9')}" data-qb-slot="${escapeHtml(id)}" data-image-file="${escapeHtml(filename)}"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(quantumBreakImageAlt(slot))}" loading="lazy" decoding="async"></div>`
     );
     presentCount += 1;
   }

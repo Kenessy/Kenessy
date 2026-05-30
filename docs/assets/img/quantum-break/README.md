@@ -1,13 +1,15 @@
-# Quantum Break Journey Images
+# Quantum Break Scrapbook Photo Evidence
 
 This directory is the source-of-truth handoff for generated Quantum Break journal images.
+
+The current layout is a dark dossier / notebook / scrapbook reader. It does not need four to eight visual slots per page. Use 1-3 attached photos only when the page benefits from visual evidence.
 
 Default format: `16:9` landscape PNG.
 
 Shared prompt base:
 
 ```text
-16:9 cinematic sci-fi comic panel for a Quantum Break illustrated playthrough journal. Use one coherent cinematic sci-fi comic style across every panel: dark Riverport university or lab mood, blue chronon light, amber emergency contrast, grounded human silhouettes, clean composition, and readable story action at mobile width.
+16:9 cinematic sci-fi dossier photo for a Quantum Break illustrated journal. Use a coherent yellow-white-black Quantum Break palette with neutral muted tones, dark laboratory or Riverport environment mood, amber/white chronon fracture light, grounded human silhouettes, painterly cinematic realism, clean composition, and readable story action at mobile width.
 ```
 
 Negative prompt:
@@ -17,24 +19,29 @@ Avoid large non-diegetic typography, fake UI overlays, logos, captions, unreadab
 ```
 
 Art direction guardrails:
-- Keep one coherent cinematic sci-fi comic style across the full page.
-- Keep silhouettes, faces, and time effects readable at small mobile widths.
-- Avoid large non-diegetic typography, logos, fake UI overlays, or captions inside the image.
-- Prefer dark university/lab mood, blue chronon light, amber emergency contrast, and clean composition.
+- Keep one coherent dark dossier photo language across the full scrapbook.
+- Keep silhouettes, faces, hand contact, and time effects readable at small mobile widths.
+- Avoid large non-diegetic typography, logos, fake UI overlays, fake readable text, or captions inside the image.
+- Prefer yellow-white-black Quantum Break contrast, neutral muted tones, dark lab mood, and amber/white chronon light.
+- Prompt-only missing images stay in the brief; do not restore empty visible slots just to show a queue.
 
-Page 01 prompts:
-- `qb-page-01-a-university-exterior.png`: Riverport University before dawn, cold air, protest pressure near the campus entrance, cinematic sci-fi thriller mood. Use a wide establishing shot with a readable campus silhouette. Avoid fake logos or large protest text.
-- `qb-page-01-b-paul-corridor.png`: Paul Serene leading Jack through a clean research corridor, controlled secrecy, blue tech light, restrained corporate lab atmosphere. Use two-character walk-and-talk framing. Avoid weapons focus or heavy typography on screens.
-- `qb-page-01-c-science-primer.png`: Project Promenade presentation moment, black-hole or field-primer visual, screen glow on observers, lab context still readable. Keep the diagram abstract. Avoid real equations or giant nonsense words.
-- `qb-page-01-d-will-shadow.png`: Subtle family tension and Will Joyce foreshadowing through documents, screens, an empty chair, or environmental traces. Use a quiet detail shot. Avoid spoiler-heavy imagery or readable legal text.
-
-Current Page 02 prompts:
+Current wired photo evidence:
 - `qb-page-02-a-airlock-threshold.png`: Jack and Paul at the machine threshold, clean tech door, the experiment still controlled but visibly about to cross into danger.
-- `qb-page-02-b-first-anomaly.png`: Two-minute time-travel proof escalating into a five-minute forward jump, readable distortion, Will's urgent warning, strong silhouettes, cinematic spectacle without visual confusion.
-- `qb-page-02-c-core-detonation.png`: Time machine core overloading and detonating on its own, amber emergency light, blue chronon rupture, people caught mid-reaction, cause intentionally unclear.
-- `qb-page-02-d-frozen-will.png`: Will frozen in a time stutter while Jack touches him awake, still room, suspended debris, first readable time-stop rescue and combat power beat.
+- `qb-page-02-c-core-detonation.png`: Time machine core overloading and detonating on its own, amber emergency light, blue-white chronon rupture, people caught mid-reaction, cause intentionally unclear.
 
-Drop generated images into `docs/assets/img/quantum-break/` using the exact filenames in `panel-manifest.json`, then run the build so the journey page auto-wires any matching manifest files:
+Next missing image:
+
+```text
+qb-page-02-d-frozen-will.png
+```
+
+Prompt:
+
+```text
+16:9 cinematic sci-fi dossier photo for a Quantum Break illustrated journal. Will frozen inside a time stutter while Jack reaches out and touches him awake, suspended debris and amber/white chronon fracture light around them, dark laboratory background, grounded human silhouettes, readable hand-contact focal point, no UI, no captions, no logos, no fake text, coherent yellow-white-black Quantum Break palette, painterly cinematic realism, clean composition readable at mobile width.
+```
+
+Drop generated images into `docs/assets/img/quantum-break/` using the exact filenames in `panel-manifest.json`, then run the build so the journey page auto-wires matching visible photo-evidence slots:
 
 ```powershell
 npm run build:metro
@@ -46,12 +53,10 @@ Then run:
 npm run qa:qb-assets
 ```
 
-This non-strict check allows missing images, validates every image that exists, and verifies that generated journey HTML only references image files that are actually present. Before treating the current Page 02 image target as complete, run:
+This non-strict check allows missing prompt-only images, validates every image that exists, and verifies that generated journey HTML only references image files that are actually present. Before treating all manifest images as complete, run:
 
 ```powershell
-npm run qa:qb-assets:strict
+npm run qa:qb-assets:all
 ```
 
-That strict check requires the four current Page 02 images, validates PNG headers, checks near-16:9 dimensions, verifies the auto-wired journey markup, and writes checkpoint state to `.cache/qb-asset-qa/latest.json`.
-
-Do not manually swap placeholder frames in `Tools/pages/sources/quantum-break/journey.html`. Keep stable `data-qb-slot` markers there; `npm run build:metro` performs the image wiring from the manifest.
+Do not manually swap photo frames in `Tools/pages/sources/quantum-break/journey.html`. Keep stable `data-qb-slot` markers there; `npm run build:metro` performs the image wiring from the manifest.

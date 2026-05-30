@@ -491,8 +491,8 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <a class="lane-card" style="--tone:var(--green)" href="${quantumJourneyHref}">
           <small>04 / Illustrated journals</small>
           <h3>Playthroughs as readable pages</h3>
-          <p>Session notes become comic-style 16:9 pages with image slots, review implications, and prompt handoff.</p>
-          <span>Prompt pack ready</span>
+          <p>Session notes become fullscreen dossier scrapbook pages with typed notes, attached photo evidence, and prompt handoff.</p>
+          <span>Photo evidence ready</span>
         </a>
       </div>
     </div>
@@ -589,7 +589,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <img src="${quantumSplashHref}" width="1672" height="941" alt="">
           </a>
           <div class="review-copy">
-            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span><span class="tag green">Prompt pack ready</span></div>
+            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span><span class="tag green">Photo evidence ready</span></div>
             <h3>Quantum Break</h3>
             <p>Replay-ready Remedy sci-fi review scaffold with old-PC readiness checks, adversarial bias tests, and a separate illustrated journey for live narration.</p>
             <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
@@ -606,35 +606,33 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Live journal lane</p><h2>Play It Together</h2></div>
-        <p>The journal is the readable playthrough layer: session notes become compact comic-style pages with 16:9 image panels, review implications, and friction notes.</p>
+        <p>The journal is the readable playthrough layer: session notes become fullscreen dossier scrapbook pages with typed notes, attached photos, review implications, and friction notes.</p>
       </div>
       <article class="journal-card">
         <a class="journal-media" href="${quantumJourneyHref}" aria-label="Open Quantum Break illustrated journey">
           <img src="${quantumSplashHref}" width="1672" height="941" alt="">
         </a>
         <div class="journal-copy">
-          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 02 logged</span><span class="tag green">Prompt pack ready</span></div>
-          <h3>Illustrated Review Journal</h3>
-          <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
+            <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 02 logged</span><span class="tag green">Photo evidence ready</span></div>
+          <h3>Scrapbook Review Journal</h3>
+          <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which attached photos or prompt-only images belong in the next dossier page.</p>
           <div class="journal-contract" aria-label="Quantum Break image contract">
-            <span><b>Canvas</b> 16:9 landscape panels</span>
-            <span><b>Manifest</b> 8 image slots queued</span>
-            <span><b>Current</b> Page 02 machine break</span>
+            <span><b>Canvas</b> Dossier scrapbook pages</span>
+            <span><b>Manifest</b> 2 photos wired</span>
+            <span><b>Next</b> Frozen Will prompt</span>
           </div>
           <div class="journal-slots" aria-label="Current image format recommendation">
-            <div class="journal-slot"><b>Panel A</b><span>Airlock threshold</span></div>
-            <div class="journal-slot"><b>Panel B</b><span>First anomaly</span></div>
-            <div class="journal-slot"><b>Panel C</b><span>Core detonation</span></div>
-            <div class="journal-slot"><b>Panel D</b><span>Frozen Will</span></div>
+            <div class="journal-slot"><b>Photo A</b><span>Airlock threshold</span></div>
+            <div class="journal-slot"><b>Photo C</b><span>Core detonation</span></div>
+            <div class="journal-slot"><b>Prompt D</b><span>Frozen Will</span></div>
           </div>
           <div class="journal-file-queue" aria-label="Quantum Break Page 02 drop queue">
-            <div><b>02-A</b><code>qb-page-02-a-airlock-threshold.png</code></div>
-            <div><b>02-B</b><code>qb-page-02-b-first-anomaly.png</code></div>
-            <div><b>02-C</b><code>qb-page-02-c-core-detonation.png</code></div>
-            <div><b>02-D</b><code>qb-page-02-d-frozen-will.png</code></div>
+            <div><b>Wired 02-A</b><code>qb-page-02-a-airlock-threshold.png</code></div>
+            <div><b>Wired 02-C</b><code>qb-page-02-c-core-detonation.png</code></div>
+            <div><b>Next 02-D</b><code>qb-page-02-d-frozen-will.png</code></div>
           </div>
-          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page. Page 01 stays queued in the manifest; Page 02 is the current image target.</div>
-          <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Panel manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
+          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into visible photo evidence slots. Prompt-only missing images stay in the brief instead of becoming empty visible boxes.</div>
+          <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Photo manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
         </div>
       </article>
