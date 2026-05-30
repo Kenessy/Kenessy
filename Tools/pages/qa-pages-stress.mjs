@@ -187,7 +187,7 @@ async function auditHttp(base) {
   assert(preyJourney.text.includes('TranStar Flight Recorder') && preyJourney.text.includes('Prey Black Box'), 'Prey journey flight recorder shell missing');
   assert(preyJourney.text.includes('.recorder-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
   assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey page copy missing');
-  assert(preyJourney.text.includes('prey-page-02-a-talosi-approach.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
+  assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey reuses stale Quantum Break/comic slot language');
@@ -846,7 +846,7 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey|Flight Recorder|Black Box/i,
           expectedText: 'TranStar Flight Recorder',
-          requiredTexts: ['Boot', 'Mission Scope', 'Evidence Queue', 'Image Handoff', 'prey-page-02-a-talosi-approach.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
+          requiredTexts: ['Boot', 'Mission Scope', 'Evidence Queue', 'Image Handoff', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
           minImageFrames: 3,
           maxImageFrames: 3,

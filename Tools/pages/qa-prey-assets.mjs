@@ -15,12 +15,12 @@ const ratioTolerance = 0.04;
 const minWidth = 960;
 const minHeight = 540;
 const expectedSlotIds = [
-  'page-02-a-talosi-approach',
+  'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
   'page-03-b-crew-terminal-trace'
 ];
 const expectedFilenames = [
-  'prey-page-02-a-talosi-approach.png',
+  'prey-page-02-a-rooftop-helicopter.png',
   'prey-page-03-a-mimic-paranoia.png',
   'prey-page-03-b-crew-terminal-trace.png'
 ];
@@ -73,7 +73,7 @@ function parsePngDimensions(buffer, filename) {
 
 function validateManifest(manifest) {
   assert(manifest.game === 'Prey', 'manifest game must be Prey');
-  assert(manifest.status === 'flight-recorder-session-01-placeholders', 'manifest status mismatch');
+  assert(manifest.status === 'flight-recorder-session-01-partial-assets', 'manifest status mismatch');
   assert(manifest.promptVersion === 'prey-flight-recorder-v1', 'manifest promptVersion mismatch');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/prey/', 'manifest assetBase mismatch');

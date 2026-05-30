@@ -1,6 +1,6 @@
 {
   "game": "Prey",
-  "status": "flight-recorder-session-01-placeholders",
+  "status": "flight-recorder-session-01-partial-assets",
   "promptVersion": "prey-flight-recorder-v1",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/prey/",
@@ -15,15 +15,15 @@
   ],
   "slots": [
     {
-      "id": "page-02-a-talosi-approach",
+      "id": "page-02-a-rooftop-helicopter",
       "page": "mission-scope",
-      "filename": "prey-page-02-a-talosi-approach.png",
+      "filename": "prey-page-02-a-rooftop-helicopter.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Talos I first sight and station identity hook.",
-      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Talos I space station seen from an approach angle in orbit, crescent Earth or deep space behind it, amber green cyan telemetry ambience, ominous corporate research-station silhouette, grounded realistic scale, quiet dread, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
-      "composition": "Station dominates the center-right with empty space and orbital darkness around it; use subtle recorder glare and one clear station silhouette.",
-      "avoid": "Avoid readable logos, fake TranStar text, huge UI overlays, comic exaggeration, and busy clutter that hides the station shape."
+      "brief": "Rooftop helicopter route and first-day facade hook.",
+      "prompt": "16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Morgan approaches a rooftop helicopter at sunrise above a polished futuristic city, wet helipad reflections, staged first-day corporate facade, subtle unease under a beautiful commute, amber blue dawn palette, no readable logos, no UI, no captions, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Keep Morgan and the helicopter readable with city depth behind them; the scene should feel too polished and staged before the later simulation reveal.",
+      "avoid": "Avoid readable studio names, fake corporate text, busy rotor blur that hides the helicopter, UI overlays, captions, and logos."
     },
     {
       "id": "page-03-a-mimic-paranoia",

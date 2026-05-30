@@ -15,14 +15,14 @@ Missing images remain visible as recorder placeholders until exact filenames exi
 
 ## Current Slots
 
-### prey-page-02-a-talosi-approach.png
+### prey-page-02-a-rooftop-helicopter.png
 
-Talos I first sight and station identity hook.
+Rooftop helicopter route and first-day facade hook.
 
 Prompt:
 
 ```text
-16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Talos I space station seen from an approach angle in orbit, crescent Earth or deep space behind it, amber green cyan telemetry ambience, ominous corporate research-station silhouette, grounded realistic scale, quiet dread, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+16:9 cinematic sci-fi black box recorder evidence image for a Prey review journal. Morgan approaches a rooftop helicopter at sunrise above a polished futuristic city, wet helipad reflections, staged first-day corporate facade, subtle unease under a beautiful commute, amber blue dawn palette, no readable logos, no UI, no captions, no fake text, painterly cinematic realism, clean composition readable at mobile width.
 ```
 
 ### prey-page-03-a-mimic-paranoia.png

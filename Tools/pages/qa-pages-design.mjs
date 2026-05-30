@@ -210,7 +210,7 @@ async function auditDesignArtifacts(base) {
   assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey tab copy is missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
   assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 3, 'Prey journey should expose exactly three visible 16:9 frames');
-  assert(preyJourney.text.includes('prey-page-02-a-talosi-approach.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image handoff filenames missing');
+  assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image handoff filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey manifest/QA handoff missing');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread') && !preyJourney.text.includes('IMAGE SLOT'), 'Prey journey reuses stale slot/comic language');
   assert(!/font-size:clamp\([^)]*vw/i.test(preyJourney.text), 'Prey journey CSS uses viewport-scaled font sizing');

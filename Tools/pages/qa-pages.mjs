@@ -212,16 +212,16 @@ async function auditHttpSurface(base) {
   assert(preyJourney.text.includes('.recorder-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
   assert(preyJourney.text.includes('.blackbox-page') && preyJourney.text.includes('.telemetry-card') && preyJourney.text.includes('.evidence-slot') && preyJourney.text.includes('.recorder-frame'), 'Prey journey recorder UI styling missing');
   assert(preyJourney.text.includes('Mission Scope') && preyJourney.text.includes('Evidence Queue') && preyJourney.text.includes('Image Handoff'), 'Prey journey required pages missing');
-  assert(preyJourney.text.includes('prey-page-02-a-talosi-approach.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
+  assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three visible Prey image slots');
   assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 3, 'Prey journey should expose exactly three visible 16:9 image frames');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey should not reuse Quantum Break slot or comic grid language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);
-  assert(preyManifestJson.game === 'Prey' && preyManifestJson.status === 'flight-recorder-session-01-placeholders', 'Prey flight recorder manifest metadata mismatch');
+  assert(preyManifestJson.game === 'Prey' && preyManifestJson.status === 'flight-recorder-session-01-partial-assets', 'Prey flight recorder manifest metadata mismatch');
   assert(preyManifestJson.defaultAspectRatio === '16:9' && Array.isArray(preyManifestJson.slots) && preyManifestJson.slots.length === 3, 'Prey flight recorder manifest slot contract mismatch');
-  assert(preyManifest.text.includes('prey-page-02-a-talosi-approach.png') && preyManifest.text.includes('prey-page-03-a-mimic-paranoia.png') && preyManifest.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey manifest missing expected filenames');
+  assert(preyManifest.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyManifest.text.includes('prey-page-03-a-mimic-paranoia.png') && preyManifest.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey manifest missing expected filenames');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
   assert(preyReadme.text.includes('Prey Flight Recorder Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README missing QA workflow');
 
