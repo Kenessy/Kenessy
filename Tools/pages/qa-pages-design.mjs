@@ -160,6 +160,8 @@ async function auditDesignArtifacts(base) {
   const quantumBreakReport = await fetchText(url(base, 'plater-game-reports/games/quantum-break/'));
   assert(quantumBreakReport.text.includes('.score-panel-locked') && quantumBreakReport.text.includes('.hero-gate-list') && quantumBreakReport.text.includes('.evidence-gates') && quantumBreakReport.text.includes('.gate-card'), 'Quantum Break report evidence-gate styling is missing');
   assert(quantumBreakReport.text.includes('.hud{position:relative;top:auto;z-index:auto}'), 'Quantum Break report nav still lacks the non-sticky full-page capture override');
+  assert(quantumBreakReport.text.includes('.status:before') && quantumBreakReport.text.includes('#diagnosis .diag:before') && quantumBreakReport.text.includes('.risk-ledger .aud:before'), 'Quantum Break report status/diagnosis/risk polish styling is missing');
+  assert(quantumBreakReport.text.includes('class="section risk-ledger-section"') && quantumBreakReport.text.includes('class="ledger risk-ledger"'), 'Quantum Break report risk ledger section classing is missing');
   assert(quantumBreakReport.text.includes('.hero h1{font-size:104px}') && quantumBreakReport.text.includes('.section-head h2{font-size:44px}'), 'Quantum Break report fixed type-size overrides are missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakReport.text), 'Quantum Break report CSS uses viewport-scaled font sizing');
   assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');
