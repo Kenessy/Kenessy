@@ -147,6 +147,9 @@ async function auditHttp(base) {
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
+  assert(quantumBreakJourney.text.includes('Panel Contract') && quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey comic panel contract missing');
+  assert(quantumBreakJourney.text.includes('Generation Brief') && quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey generation brief missing');
+  assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state 16:9 image workflow');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
@@ -382,9 +385,16 @@ async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
   assert(/Quantum\s*Break/i.test(initial.title), `${pageSpec.slug} ${viewport.name} title mismatch ${initial.title}`);
   assert(/Quantum\s*Break/i.test(initial.h1), `${pageSpec.slug} ${viewport.name} h1 mismatch ${initial.h1}`);
   assert(initial.bodyText.includes(pageSpec.expectedText), `${pageSpec.slug} ${viewport.name} missing expected text ${pageSpec.expectedText}`);
+  for (const requiredText of pageSpec.requiredTexts || []) {
+    assert(initial.bodyText.includes(requiredText), `${pageSpec.slug} ${viewport.name} missing required text ${requiredText}`);
+  }
   assert(initial.linkCount >= pageSpec.minLinks, `${pageSpec.slug} ${viewport.name} expected links ${initial.linkCount}`);
   assert(initial.bodyPrefix && !initial.bodyPrefix.startsWith(':root') && !initial.bodyPrefix.startsWith('.'), `${pageSpec.slug} ${viewport.name} body starts with raw CSS`);
   assert(!initial.badText, `${pageSpec.slug} ${viewport.name} bad placeholder text ${initial.badText}`);
+  if (pageSpec.minImageFrames) {
+    assert(initial.imageFrameCount >= pageSpec.minImageFrames, `${pageSpec.slug} ${viewport.name} expected at least ${pageSpec.minImageFrames} 16:9 frames, found ${initial.imageFrameCount}`);
+    assert(initial.badImageFrameRatios.length === 0, `${pageSpec.slug} ${viewport.name} image frames are not 16:9 ${JSON.stringify(initial.badImageFrameRatios)}`);
+  }
   await auditInternalLinks(base, initial.hrefs);
 
   const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -505,6 +515,10 @@ async function collectStaticPageMetrics(page) {
       .map((el) => ({ tag: el.tagName, className: String(el.className), text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
     const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
     const badTextMatch = bodyText.match(/\b(undefined|NaN|\[object Object\])\b/i);
+    const imageFrames = [...document.querySelectorAll('[data-image-ratio="16:9"]')].filter(isVisible);
+    const badImageFrameRatios = imageFrames
+      .map((el) => ({ text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80), rect: rectFor(el) }))
+      .filter((item) => item.rect.height > 0 && Math.abs((item.rect.width / item.rect.height) - (16 / 9)) > 0.08);
     return {
       finalUrl: location.href,
       title: document.title,
@@ -517,7 +531,9 @@ async function collectStaticPageMetrics(page) {
       meaningfulOverflow,
       badText: badTextMatch ? badTextMatch[0] : '',
       linkCount: document.querySelectorAll('a').length,
-      hrefs: [...document.querySelectorAll('a[href]')].map((el) => el.href)
+      hrefs: [...document.querySelectorAll('a[href]')].map((el) => el.href),
+      imageFrameCount: imageFrames.length,
+      badImageFrameRatios
     };
   });
 }
@@ -658,7 +674,9 @@ async function main() {
           slug: 'quantum-break-journey',
           path: quantumBreakJourneyPath,
           expectedText: 'Review-canon route selected',
-          minLinks: 6
+          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'Generation Brief', 'qb-page-01-a-university-exterior.png'],
+          minLinks: 6,
+          minImageFrames: 7
         }, viewport);
       }
       await auditFailureModes(browser, base, buildId);

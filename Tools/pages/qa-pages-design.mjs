@@ -11,6 +11,7 @@ const outputDir = path.join(repoRoot, '.cache/pages-design-qa');
 const mode = process.argv.includes('--live') ? 'live' : 'local';
 const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
+const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 
 const runState = {
   mode,
@@ -138,6 +139,12 @@ async function auditDesignArtifacts(base) {
   assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
+  const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
+  assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
+  assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
+  assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS uses viewport-scaled font sizing');
+  assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');

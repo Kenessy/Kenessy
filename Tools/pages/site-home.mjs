@@ -513,7 +513,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <img src="${quantumSplashHref}" width="1672" height="941" alt="">
           </a>
           <div class="review-copy">
-            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span></div>
+            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span><span class="tag green">Journal ready</span></div>
             <h3>Quantum Break</h3>
             <p>Replay-ready Remedy sci-fi review scaffold with old-PC readiness checks, adversarial bias tests, and a separate illustrated journey for live narration.</p>
             <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
@@ -529,20 +529,20 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Live journal lane</p><h2>Play It Together</h2></div>
-        <p>The journal is the readable playthrough layer: session notes become compact comic-style pages with image slots, review implications, and friction notes.</p>
+        <p>The journal is the readable playthrough layer: session notes become compact comic-style pages with 16:9 image panels, review implications, and friction notes.</p>
       </div>
       <article class="journal-card">
         <a class="journal-media" href="${quantumJourneyHref}" aria-label="Open Quantum Break illustrated journey">
           <img src="${quantumSplashHref}" width="1672" height="941" alt="">
         </a>
         <div class="journal-copy">
-          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 ready</span><span class="tag green">16:9 panels</span></div>
+          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 image-ready</span><span class="tag green">16:9 panels</span></div>
           <h3>Illustrated Review Journal</h3>
           <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
           <div class="journal-slots" aria-label="Current image format recommendation">
-            <div class="journal-slot">16:9 panel<br>story beat</div>
-            <div class="journal-slot">16:9 panel<br>evidence beat</div>
-            <div class="journal-slot">16:9 panel<br>friction beat</div>
+            <div class="journal-slot">16:9 lead<br>story beat</div>
+            <div class="journal-slot">16:9 support<br>evidence beat</div>
+            <div class="journal-slot">16:9 support<br>friction beat</div>
           </div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
         </div>

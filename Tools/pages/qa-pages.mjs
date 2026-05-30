@@ -165,6 +165,11 @@ async function auditHttpSurface(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey route lock missing');
   assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
+  assert(quantumBreakJourney.text.includes('Panel Contract'), 'Quantum Break journey panel contract missing');
+  assert(quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey image-ready comic page missing');
+  assert(quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image generation brief missing');
+  assert(quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey image handoff filenames missing');
+  assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state the current image aspect-ratio workflow');
 
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
