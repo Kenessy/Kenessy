@@ -13,18 +13,23 @@ const siteHomeSourcePath = path.join(scriptDir, 'site-home.mjs');
 const reportDir = path.join(repoRoot, 'docs/plater-game-reports/games/metro-2033-redux');
 const quantumBreakReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break');
 const quantumBreakJourneyDir = path.join(quantumBreakReportDir, 'journey');
+const preyReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/prey');
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const bundlePath = path.join(reportDir, bundleName);
 const reportIndexPath = path.join(reportDir, 'index.html');
 const quantumBreakReportIndexPath = path.join(quantumBreakReportDir, 'index.html');
 const quantumBreakJourneyIndexPath = path.join(quantumBreakJourneyDir, 'index.html');
+const preyReportIndexPath = path.join(preyReportDir, 'index.html');
 const quantumBreakReportSourcePath = path.join(scriptDir, 'sources/quantum-break/report.html');
 const quantumBreakJourneySourcePath = path.join(scriptDir, 'sources/quantum-break/journey.html');
 const quantumBreakAssetManifestSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/panel-manifest.json');
 const quantumBreakAssetReadmeSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/README.md');
+const preyReportSourcePath = path.join(scriptDir, 'sources/prey/report.html');
+const preySplashSourcePath = path.join(scriptDir, 'sources/prey/prey-review-splash.svg');
 const quantumBreakAssetPublicDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
 const quantumBreakAssetManifestPublicPath = path.join(quantumBreakAssetPublicDir, 'panel-manifest.json');
 const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 'README.md');
+const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-splash.svg');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
 const robotsPath = path.join(repoRoot, 'docs/robots.txt');
@@ -36,9 +41,11 @@ const siteBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakReportPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
+const preyReportPath = 'plater-game-reports/games/prey/';
 const reportUrl = new URL(reportPath, siteBase).toString();
 const quantumBreakReportUrl = new URL(quantumBreakReportPath, siteBase).toString();
 const quantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, siteBase).toString();
+const preyReportUrl = new URL(preyReportPath, siteBase).toString();
 const reportsUrl = new URL('plater-game-reports/', siteBase).toString();
 const apocalypseUrl = new URL('apocalypse-express/', siteBase).toString();
 const githubUrl = 'https://github.com/Kenessy/Kenessy';
@@ -219,6 +226,7 @@ function rootHtml(buildId) {
     reportsPath: 'plater-game-reports/',
     quantumBreakPath: quantumBreakReportPath,
     quantumBreakJourneyPath,
+    preyPath: preyReportPath,
     apocalypsePath: 'apocalypse-express/',
     githubUrl
   });
@@ -245,6 +253,7 @@ function reportsIndexHtml(buildId) {
 <header><p><a href="../">Kenessy home</a></p><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
 <a class="report" href="games/metro-2033-redux/?v=${buildId}"><div><div class="kicker">Metro 2033 Redux</div><h2>ALERTED Field Report</h2><p>Worth playing. Atmosphere-first, linear, cohesive action horror with bounded agency and visible caveats.</p><div class="mini"><span>A Atmosphere</span><span>L Loop</span><span>E Engagement</span><span>R Readability</span><span>T Technical</span><span class="good">86 / A</span></div></div><div class="score">86</div></a>
 <article class="report draft"><div><div class="kicker">Quantum Break</div><h2>Review Draft Shell</h2><p>Replay-ready structure for a Remedy cinematic sci-fi review, plus an illustrated journey page built from live narration.</p><div class="mini"><span>Promise</span><span>Loop</span><span>Agency</span><span>Trust</span><span>Readiness</span><span class="pending">Draft</span></div><div class="sub"><a href="games/quantum-break/">Open review</a><a href="games/quantum-break/journey/">Open journey</a></div></div><div class="score pending" aria-label="Quantum Break verdict locked until replay evidence"><span>LOCKED</span><small>Draft</small></div></article>
+<article class="report draft"><div><div class="kicker">Prey</div><h2>Entry Point</h2><p>Owned next-run candidate: a TranStar incident dossier for Talos I, mimic paranoia, immersive-sim agency, proof gates, and unscored first-run scope.</p><div class="mini"><span>Immersive sim</span><span>Talos I</span><span>Station horror</span><span>Systems audit</span><span class="pending">Unscored</span></div><div class="sub"><a href="games/prey/">Open entry</a></div></div><div class="score pending" aria-label="Prey verdict locked until first-run evidence"><span>LOCKED</span><small>Entry</small></div></article>
 </main>
 </body>
 </html>
@@ -259,7 +268,7 @@ Sitemap: ${new URL('sitemap.xml', siteBase).toString()}
 }
 
 function sitemapXml(buildDate) {
-  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, apocalypseUrl];
+  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, preyReportUrl, apocalypseUrl];
   const items = urls.map((url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${buildDate}</lastmod>
@@ -308,6 +317,10 @@ async function main() {
   const quantumBreakAssetManifest = await readFile(quantumBreakAssetManifestSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakAssetReadmeSourcePath)}`);
   const quantumBreakAssetReadme = await readFile(quantumBreakAssetReadmeSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, preyReportSourcePath)}`);
+  const preyReportSourceHtml = await readFile(preyReportSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, preySplashSourcePath)}`);
+  const preySplashSvg = await readFile(preySplashSourcePath, 'utf8');
   const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
   const wiredQuantumBreakJourneyHtml = await renderQuantumBreakJourneyImages(quantumBreakJourneyHtml, quantumBreakAssetManifestJson);
   const sourceHash = sha256(source);
@@ -317,9 +330,12 @@ async function main() {
     quantumBreakReportHtml,
     quantumBreakJourneyHtml,
     quantumBreakAssetManifest,
-    quantumBreakAssetReadme
+    quantumBreakAssetReadme,
+    preyReportSourceHtml,
+    preySplashSvg
   ].join('\n\n/* kenessy-pages-build-input */\n\n');
   const buildId = sha256(buildHashInput).slice(0, 12);
+  const preyReportHtml = preyReportSourceHtml.replaceAll('__BUILD_ID__', buildId);
   const { css, cssStart } = extractTemplateCss(source);
   const transformedSource = transformedSourceWithoutInlineStyle(source, cssStart);
 
@@ -353,12 +369,15 @@ async function main() {
     logStep(`writing Pages artifacts build=${buildId}`);
     await mkdir(quantumBreakReportDir, { recursive: true });
     await mkdir(quantumBreakJourneyDir, { recursive: true });
+    await mkdir(preyReportDir, { recursive: true });
     await mkdir(quantumBreakAssetPublicDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
     await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
     await writeFile(quantumBreakJourneyIndexPath, wiredQuantumBreakJourneyHtml, 'utf8');
+    await writeFile(preyReportIndexPath, preyReportHtml, 'utf8');
     await writeFile(quantumBreakAssetManifestPublicPath, quantumBreakAssetManifest, 'utf8');
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
+    await writeFile(preySplashPublicPath, preySplashSvg, 'utf8');
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
     await writeFile(robotsPath, robotsTxt(), 'utf8');

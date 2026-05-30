@@ -13,6 +13,7 @@ export function portfolioHomeHtml({
   reportsPath,
   quantumBreakPath = 'plater-game-reports/games/quantum-break/',
   quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/',
+  preyPath = 'plater-game-reports/games/prey/',
   apocalypsePath,
   githubUrl
 }) {
@@ -22,10 +23,12 @@ export function portfolioHomeHtml({
   const reportsHref = reportsPath;
   const quantumHref = quantumBreakPath;
   const quantumJourneyHref = quantumBreakJourneyPath;
+  const preyHref = preyPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashHref = 'assets/img/metro-2033-redux-review-splash.png';
   const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
+  const preySplashHref = 'assets/img/prey-review-splash.svg';
   const canonical = siteBase;
 
   return `<!doctype html>
@@ -306,6 +309,13 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .qb-card .review-media img{width:100%;height:auto;min-height:0;aspect-ratio:1672/941;object-fit:contain;object-position:center}
 .qb-card .review-media::after{background:linear-gradient(90deg,transparent 74%,rgba(7,9,13,.36))}
 .qb-card .review-copy{padding:22px 20px}
+.prey-card{grid-template-columns:minmax(430px,1.04fr) minmax(0,.98fr) 132px;align-items:center}
+.prey-card::before{background:linear-gradient(90deg,var(--green),var(--orange),var(--cyan),transparent 82%)}
+.prey-card .review-media{min-height:252px;background:#030604}
+.prey-card .review-media img{aspect-ratio:16/9;min-height:252px;object-fit:cover;object-position:center}
+.prey-card .review-media::after{background:linear-gradient(90deg,transparent 60%,rgba(7,9,13,.46))}
+.prey-card .score-box.pending{border-color:rgba(53,224,123,.42);background:linear-gradient(145deg,rgba(53,224,123,.12),rgba(255,138,31,.08) 48%,rgba(7,9,13,.92))}
+.prey-card .score-box.pending small{color:#7df0a7}
 .score-box{
   border:1px solid rgba(255,138,31,.48);
   background:linear-gradient(145deg,rgba(255,138,31,.18),rgba(7,9,13,.88));
@@ -356,7 +366,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .footer a{min-height:32px;display:inline-flex;align-items:center;color:#ffb347;font-weight:900}
 @media(max-width:960px){
-  .hero-stage,.section-head,.about-grid,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card,.journal-card{grid-template-columns:1fr}
+  .hero-stage,.section-head,.about-grid,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card,.prey-card,.journal-card{grid-template-columns:1fr}
   .hero-copy{min-height:auto}
   .operator-panel{min-height:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
@@ -364,6 +374,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .review-media img{aspect-ratio:16/9;min-height:0}
   .journal-media img{aspect-ratio:16/9;min-height:0}
   .qb-card .review-media img{aspect-ratio:1672/941}
+  .prey-card .review-media img{aspect-ratio:16/9}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
   .journal-contract{grid-template-columns:1fr}
@@ -436,7 +447,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, Prey entry point, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -457,7 +468,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft, prompt-pack handoff, and illustrated journal lane.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the next owned-game entry point.</span></div>
         </div>
       </div>
     </div>
@@ -480,7 +491,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <small>02 / Review lab</small>
           <h3>Game critique with receipts</h3>
           <p>ALERTED score anatomy, taste-fit lanes, trust ledgers, spoiler policy, and replay journals.</p>
-          <span>Metro + Quantum Break</span>
+          <span>Metro + Quantum Break + Prey</span>
         </a>
         <a class="lane-card" style="--tone:var(--violet)" href="${apocalypseHref}">
           <small>03 / Narrative worlds</small>
@@ -567,7 +578,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
-        <p>The Metro report is the current flagship. Quantum Break is staged under it as the next live draft with a separate journey page.</p>
+        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now added as the next owned-game entry point, without starting its journal yet.</p>
       </div>
       <div class="review-stack">
         <a class="review-card" href="${metroHref}">
@@ -597,6 +608,20 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <div class="review-sub-links"><a href="${quantumHref}">Open review</a><a href="${quantumJourneyHref}">Open journey</a></div>
           </div>
           <div class="score-box pending" aria-label="Quantum Break verdict locked until replay evidence"><b>LOCKED</b><small>Draft</small><em>4 gates open</em></div>
+        </article>
+        <article class="review-card prey-card">
+          <a class="review-media" href="${preyHref}" aria-label="Open Prey entry point">
+            <img src="${preySplashHref}" width="1600" height="900" alt="">
+          </a>
+          <div class="review-copy">
+            <div class="tag-row"><span class="tag green">Owned</span><span class="tag amber">Next run</span><span class="tag cyan">Entry point</span></div>
+            <h3>Prey</h3>
+            <p>TranStar incident dossier for the next review candidate: Talos I, mimic paranoia, immersive-sim agency, survival friction, proof gates, and a locked score until fresh run evidence exists.</p>
+            <div class="tag-row"><span class="tag">Immersive sim</span><span class="tag">Station horror</span><span class="tag">Systems audit</span><span class="tag amber">Journal later</span></div>
+            <div class="review-status" aria-label="Prey review publication state"><span><b>State</b> Entry point</span><span><b>Gate</b> First run pending</span><span><b>Next</b> Start notes</span></div>
+            <div class="review-sub-links"><a href="${preyHref}">Open entry</a></div>
+          </div>
+          <div class="score-box pending" aria-label="Prey verdict locked until first-run evidence"><b>LOCKED</b><small>Entry</small><em>No journal yet</em></div>
         </article>
       </div>
     </div>

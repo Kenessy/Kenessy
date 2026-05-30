@@ -12,6 +12,7 @@ const mode = process.argv.includes('--live') ? 'live' : 'local';
 const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
+const preyPath = 'plater-game-reports/games/prey/';
 const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 
 const runState = {
@@ -135,6 +136,7 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
   assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
+  assert(root.text.includes('.prey-card') && root.text.includes('plater-game-reports/games/prey/') && root.text.includes('Prey'), 'portfolio homepage Prey card styling/link is missing');
   assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
@@ -147,6 +149,7 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash asset is missing');
+  assert(root.text.includes('prey-review-splash.svg'), 'portfolio homepage Prey splash asset is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
@@ -188,6 +191,14 @@ async function auditDesignArtifacts(base) {
   assert(quantumBreakReport.text.includes('<div class="num">High</div>') && quantumBreakReport.text.includes('<div class="num">None</div>'), 'Quantum Break report provisional fit labels are missing');
   assert(quantumBreakReport.text.includes('.journey-handoff') && quantumBreakReport.text.includes('.handoff-grid') && quantumBreakReport.text.includes('Prompt README'), 'Quantum Break report prompt handoff styling/link is missing');
   assert(!/>--</.test(quantumBreakReport.text), 'Quantum Break report still has raw dash placeholders');
+  const preyReport = await fetchText(url(base, preyPath));
+  assert(preyReport.text.includes('ALERTED entry point / Prey 2017') && preyReport.text.includes('Prey score unlock gates'), 'Prey report entry/gate copy is missing');
+  assert(preyReport.text.includes('Do Not Start The Journal Yet') && !preyReport.text.includes('journey/'), 'Prey report should not start a journal');
+  assert(preyReport.text.includes('.fit-grid') && preyReport.text.includes('.gate-matrix') && preyReport.text.includes('.score-strip') && preyReport.text.includes('.tag-cloud'), 'Prey report core styling is missing');
+  assert(preyReport.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey report splash asset is missing');
+  assert(!/font-size:clamp\([^)]*vw/i.test(preyReport.text), 'Prey report CSS uses viewport-scaled font sizing');
+  assert(!/letter-spacing:-/i.test(preyReport.text), 'Prey report CSS has negative letter spacing');
+  assert(!/>--</.test(preyReport.text), 'Prey report still has raw dash placeholders');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
   assert(panelManifest.text.includes('"requiredForCurrentPage": true') && panelManifest.text.includes('"visibleInJourney": false'), 'Quantum Break panel manifest does not mark visible/prompt-only slots');

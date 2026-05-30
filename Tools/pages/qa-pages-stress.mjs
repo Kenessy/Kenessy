@@ -13,6 +13,7 @@ const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
+const preyPath = 'plater-game-reports/games/prey/';
 const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 
 const runState = {
@@ -138,12 +139,14 @@ async function auditHttp(base) {
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire into visible photo evidence slots'), 'portfolio homepage Quantum Break state/journal handoff copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
+  assert(root.text.includes(preyPath) && root.text.includes('Prey') && root.text.includes('Entry point'), 'portfolio homepage does not link Prey entry');
   assert(root.text.includes('LOCKED') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence gate missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
   assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash missing');
+  assert(root.text.includes('prey-review-splash.svg'), 'portfolio homepage Prey splash missing');
   assert(!/\.site-nav\{[^}]*position:sticky/i.test(root.text), 'portfolio homepage nav is sticky and can contaminate full-page captures');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
@@ -154,6 +157,7 @@ async function auditHttp(base) {
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes('LOCKED') && reports.text.includes('Draft'), 'reports index Quantum Break evidence gate missing');
+  assert(reports.text.includes('games/prey/') && reports.text.includes('TranStar incident dossier'), 'reports index Prey entry missing');
   assert(!/>--</.test(reports.text), 'reports index still exposes raw dash placeholders');
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
@@ -171,6 +175,12 @@ async function auditHttp(base) {
   assert(quantumBreak.text.includes('two-minute proof') && quantumBreak.text.includes('apparent self-detonation') && quantumBreak.text.includes('causality clarity'), 'Quantum Break report Page 02 evidence is stale');
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
+  const prey = await fetchText(url(base, preyPath));
+  assert(prey.text.includes('ALERTED entry point / Prey 2017') && prey.text.includes('Prey score unlock gates'), 'Prey report entry/gates missing');
+  assert(prey.text.includes('Do Not Start The Journal Yet') && prey.text.includes('Journal intentionally not started'), 'Prey report no-journal contract missing');
+  assert(prey.text.includes('../../../assets/img/prey-review-splash.svg'), 'Prey report local splash asset missing');
+  assert(!prey.text.includes('data-qb-slot') && !prey.text.includes('journey/'), 'Prey report should not start a journal or reuse Quantum Break slots');
+  assert(!/>--</.test(prey.text), 'Prey report still exposes raw dash placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together scrapbook reader'), 'Quantum Break journey fullscreen scrapbook reader copy missing');
   assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling missing');
@@ -251,10 +261,11 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
   assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
   assert(initial.sectionTitles.join('|') === 'What This Is|Active Lanes|Signal Stack|Proof Surface|Field Work|Game Reviews|Play It Together|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
-  assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
+  assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasPreyLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
   assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);
   assert(initial.quantumSplashComplete, `${viewport.name} homepage Quantum Break splash did not load`);
+  assert(initial.preySplashComplete, `${viewport.name} homepage Prey splash did not load`);
   assert(initial.linkCount >= 7, `${viewport.name} homepage expected links`);
   assert(initial.smallInteractive.length === 0, `${viewport.name} homepage small tap targets ${JSON.stringify(initial.smallInteractive)}`);
   assert(!initial.badText, `${viewport.name} homepage bad placeholder text ${initial.badText}`);
@@ -441,8 +452,10 @@ async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
   assert(response?.status() === 200, `${pageSpec.slug} ${viewport.name} returned ${response?.status()}`);
 
   const initial = await collectStaticPageMetrics(page);
-  assert(/Quantum\s*Break/i.test(initial.title), `${pageSpec.slug} ${viewport.name} title mismatch ${initial.title}`);
-  assert(/Quantum\s*Break/i.test(initial.h1), `${pageSpec.slug} ${viewport.name} h1 mismatch ${initial.h1}`);
+  const titlePattern = pageSpec.titlePattern || /Quantum\s*Break/i;
+  const h1Pattern = pageSpec.h1Pattern || titlePattern;
+  assert(titlePattern.test(initial.title), `${pageSpec.slug} ${viewport.name} title mismatch ${initial.title}`);
+  assert(h1Pattern.test(initial.h1), `${pageSpec.slug} ${viewport.name} h1 mismatch ${initial.h1}`);
   assert(initial.bodyText.includes(pageSpec.expectedText), `${pageSpec.slug} ${viewport.name} missing expected text ${pageSpec.expectedText}`);
   for (const requiredText of pageSpec.requiredTexts || []) {
     assert(initial.bodyText.includes(requiredText), `${pageSpec.slug} ${viewport.name} missing required text ${requiredText}`);
@@ -585,6 +598,7 @@ async function collectHomeMetrics(page, buildId) {
     const proofImage = document.querySelector('.proof-card img');
     const reviewSplash = document.querySelector('.review-media img');
     const quantumSplash = document.querySelector('.qb-card .review-media img');
+    const preySplash = document.querySelector('.prey-card .review-media img');
     const hrefs = [...document.querySelectorAll('a[href]')].map((el) => el.href);
     return {
       finalUrl: location.href,
@@ -595,11 +609,13 @@ async function collectHomeMetrics(page, buildId) {
       sectionTitles: [...document.querySelectorAll('.section h2')].map((el) => el.textContent.replace(/\s+/g, ' ').trim()),
       hasReportLink: hrefs.some((href) => href.includes('plater-game-reports/games/metro-2033-redux/')),
       hasQuantumBreakLink: hrefs.some((href) => href.includes('plater-game-reports/games/quantum-break/')),
+      hasPreyLink: hrefs.some((href) => href.includes('plater-game-reports/games/prey/')),
       hasReportsLink: hrefs.some((href) => href.includes('plater-game-reports/')),
       hasApocalypseLink: hrefs.some((href) => href.includes('apocalypse-express/')),
       imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
       reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
       quantumSplashComplete: Boolean(quantumSplash && quantumSplash.complete && quantumSplash.naturalWidth > 0),
+      preySplashComplete: Boolean(preySplash && preySplash.complete && preySplash.naturalWidth > 0),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -798,6 +814,15 @@ async function main() {
           expectedText: 'ALERTED field report draft',
           requiredTexts: ['Evidence Gate', 'Replay Gate Matrix', 'Combat feel', 'Episode flow', 'PC state', 'Final act'],
           minLinks: 5
+        }, viewport);
+        await auditStaticPageViewport(browser, base, {
+          slug: 'prey-report',
+          path: preyPath,
+          titlePattern: /Prey/i,
+          h1Pattern: /Prey/i,
+          expectedText: 'ALERTED entry point / Prey 2017',
+          requiredTexts: ['Talos I pull', 'System agency', 'Combat friction', 'Ending trust', 'Do Not Start The Journal Yet', 'Falsifiers'],
+          minLinks: 4
         }, viewport);
         await auditStaticPageViewport(browser, base, {
           slug: 'quantum-break-journey',

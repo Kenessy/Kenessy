@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Prey review entry splash</title>
+  <desc id="desc">A dark orbital station dossier graphic with amber light, glass arcs, and a hostile mimic signal.</desc>
+  <defs>
+    <linearGradient id="space" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020407"/>
+      <stop offset="0.42" stop-color="#071018"/>
+      <stop offset="1" stop-color="#020304"/>
+    </linearGradient>
+    <radialGradient id="amber-core" cx="56%" cy="42%" r="44%">
+      <stop offset="0" stop-color="#ffb23c" stop-opacity="0.58"/>
+      <stop offset="0.36" stop-color="#ce6e1b" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f0d19b" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#f0d19b" stop-opacity="0.58"/>
+      <stop offset="1" stop-color="#f0d19b" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#space)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#amber-core)"/>
+  <g opacity="0.56">
+    <circle cx="880" cy="440" r="258" fill="none" stroke="#f2d7a2" stroke-opacity="0.28" stroke-width="7"/>
+    <circle cx="880" cy="440" r="318" fill="none" stroke="#f2d7a2" stroke-opacity="0.16" stroke-width="2"/>
+    <path d="M622 440H312M1138 440h260M880 182v-94M880 698v108" stroke="url(#glass)" stroke-width="3"/>
+  </g>
+  <g transform="translate(822 250)" filter="url(#glow)">
+    <path d="M80 0 176 54v112l-96 55-96-55V54Z" fill="#0f1721" stroke="#f7c56c" stroke-opacity="0.78" stroke-width="6"/>
+    <path d="M80 36 144 72v76l-64 36-64-36V72Z" fill="#111b25" stroke="#f7c56c" stroke-opacity="0.44" stroke-width="3"/>
+    <path d="M80 76 112 94v38l-32 18-32-18V94Z" fill="#ff9c23" fill-opacity="0.24" stroke="#ffba4f" stroke-width="3"/>
+  </g>
+  <g opacity="0.88">
+    <path d="M265 676c125-68 234-84 330-48 64 24 107 22 151-5 45-28 92-25 142 8 52 35 118 36 198 2 88-37 177-19 268 56" fill="none" stroke="#e68d22" stroke-opacity="0.24" stroke-width="16"/>
+    <path d="M0 740c160-66 310-83 450-50 116 28 214 25 295-7 84-34 166-32 247 6 100 47 206 47 318 2 116-47 213-33 290 43v166H0Z" fill="#030506" fill-opacity="0.82"/>
+  </g>
+  <g transform="translate(1120 290)" opacity="0.92" filter="url(#glow)">
+    <path d="M94 148c-30-5-55-22-74-51 34 4 57-8 68-37 15 27 36 35 65 25-8 34 3 57 35 70-34 11-53 33-57 66-22-27-47-39-78-36 21-18 34-30 41-37Z" fill="#050608" stroke="#ffae43" stroke-opacity="0.72" stroke-width="5"/>
+    <path d="M94 148c-78-34-126-88-143-163M94 148c58-62 135-88 231-76M94 148c88 35 145 95 172 179M94 148c-31 74-94 116-188 126" fill="none" stroke="#ffae43" stroke-opacity="0.28" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(116 150)">
+    <text x="0" y="0" fill="#ffb43e" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="900" letter-spacing="3">TRANSTAR INCIDENT DOSSIER</text>
+    <text x="0" y="142" fill="#f2e5c2" font-family="Inter,Arial,sans-serif" font-size="160" font-weight="1000">PREY</text>
+    <rect x="5" y="176" width="520" height="12" fill="#ff8a1f" opacity="0.86"/>
+    <text x="0" y="246" fill="#d7c99e" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="800">FIRST-RUN ENTRY POINT</text>
+    <text x="0" y="292" fill="#8fa1b4" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700">Immersive sim / station horror / systems test</text>
+  </g>
+  <g opacity="0.78">
+    <path d="M92 806H500M92 836H348M1280 102h228M1328 132h180" stroke="#f2d7a2" stroke-opacity="0.28" stroke-width="2"/>
+    <rect x="94" y="742" width="210" height="34" fill="none" stroke="#f2d7a2" stroke-opacity="0.26" stroke-width="2"/>
+    <text x="112" y="765" fill="#f2d7a2" fill-opacity="0.64" font-family="Consolas,monospace" font-size="16" font-weight="700">SCOPE: UNSCORED</text>
+  </g>
+</svg>
