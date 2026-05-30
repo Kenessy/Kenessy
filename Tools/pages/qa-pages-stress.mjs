@@ -184,7 +184,7 @@ async function auditHttp(base) {
   assert(!prey.text.includes('data-qb-slot') && !prey.text.includes('Do Not Start The Journal Yet') && !prey.text.includes('Journal intentionally not started'), 'Prey report has stale no-journal or Quantum Break slot copy');
   assert(!/>--</.test(prey.text), 'Prey report still exposes raw dash placeholders');
   const preyJourney = await fetchText(url(base, preyJourneyPath));
-  assert(preyJourney.text.includes('Illustrated Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey illustrated journal shell missing');
+  assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');

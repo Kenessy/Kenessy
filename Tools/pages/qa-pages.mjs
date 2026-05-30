@@ -208,9 +208,9 @@ async function auditHttpSurface(base) {
   assert(!/>--</.test(prey.text), 'Prey page still exposes raw dash placeholders');
 
   const preyJourney = await fetchText(url(base, preyJourneyPath));
-  assert(preyJourney.text.includes('Illustrated Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey illustrated journal shell missing');
+  assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
-  assert(preyJourney.text.includes('.story-panel') && preyJourney.text.includes('.narrative-card') && preyJourney.text.includes('.photo-card') && preyJourney.text.includes('.evidence-slot'), 'Prey journey comic journal styling missing');
+  assert(preyJourney.text.includes('.journal-prose') && preyJourney.text.includes('.image-run') && preyJourney.text.includes('.split-images') && preyJourney.text.includes('.evidence-slot'), 'Prey journey minimal prose/image styling missing');
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey required journal pages missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');

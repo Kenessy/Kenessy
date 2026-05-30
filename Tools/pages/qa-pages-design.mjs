@@ -203,9 +203,9 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(preyReport.text), 'Prey report CSS has negative letter spacing');
   assert(!/>--</.test(preyReport.text), 'Prey report still has raw dash placeholders');
   const preyJourney = await fetchText(url(base, preyJourneyPath));
-  assert(preyJourney.text.includes('Illustrated Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey illustrated journal copy is missing');
+  assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal copy is missing');
   assert(preyJourney.text.includes('.reader-track') && preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling is missing');
-  assert(preyJourney.text.includes('.story-panel') && preyJourney.text.includes('.narrative-card') && preyJourney.text.includes('.photo-card') && preyJourney.text.includes('.evidence-slot'), 'Prey journey comic journal styling is missing');
+  assert(preyJourney.text.includes('.journal-prose') && preyJourney.text.includes('.image-run') && preyJourney.text.includes('.split-images') && preyJourney.text.includes('.evidence-slot'), 'Prey journey minimal prose/image styling is missing');
   assert(preyJourney.text.includes('.evidence-slot-ready .slot-placeholder{display:none}') && preyJourney.text.includes('.slot-placeholder'), 'Prey journey evidence placeholder/ready styling is missing');
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey tab copy is missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
