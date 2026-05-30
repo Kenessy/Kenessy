@@ -13,6 +13,7 @@ const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
+const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 
 const runState = {
   mode,
@@ -41,6 +42,7 @@ function contentType(filePath) {
   if (ext === '.txt') return 'text/plain; charset=utf-8';
   if (ext === '.png') return 'image/png';
   if (ext === '.svg') return 'image/svg+xml';
+  if (ext === '.json') return 'application/json; charset=utf-8';
   return 'application/octet-stream';
 }
 
@@ -143,14 +145,23 @@ async function auditHttp(base) {
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
+  assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report missing panel manifest link');
   assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade'), 'Quantum Break report live evidence section missing');
   assert(!quantumBreak.text.includes('[This becomes') && !quantumBreak.text.includes('[Evidence'), 'Quantum Break report still exposes bracketed placeholders');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
   assert(quantumBreakJourney.text.includes('Panel Contract') && quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey comic panel contract missing');
   assert(quantumBreakJourney.text.includes('Generation Brief') && quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey generation brief missing');
+  assert(quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey missing panel manifest link');
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state 16:9 image workflow');
+  const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
+  const panelManifestJson = JSON.parse(panelManifest.text);
+  assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio mismatch');
+  assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
+  assert(Array.isArray(panelManifestJson.slots) && panelManifestJson.slots.length >= 6, 'Quantum Break panel manifest slot list missing');
+  assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png'), 'Quantum Break panel manifest missing Page 01-D filename');
+  await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
 }
@@ -674,7 +685,7 @@ async function main() {
           slug: 'quantum-break-journey',
           path: quantumBreakJourneyPath,
           expectedText: 'Review-canon route selected',
-          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'Generation Brief', 'qb-page-01-a-university-exterior.png'],
+          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'Generation Brief', 'qb-page-01-a-university-exterior.png', quantumBreakPanelManifestPath],
           minLinks: 6,
           minImageFrames: 7
         }, viewport);

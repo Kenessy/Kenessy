@@ -138,6 +138,8 @@ h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:
 .card p{margin-top:9px;font-size:14px}
 .next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .brief-card code{display:block;margin-top:10px;color:#ffcf83;font-size:12px;font-weight:900;white-space:normal}
+.asset-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.asset-links a{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(23,215,255,.34);background:rgba(5,7,12,.58);padding:8px 10px;color:#7fe9ff;font-size:11px;font-weight:1000;text-transform:uppercase}
 footer{padding:26px 0;color:var(--muted)}
 @media(max-width:900px){
   .hero .wrap,.head,.route-vector,.format-grid,.impact,.brief-grid,.comic-lead,.panel-row,.review-rail,.next-grid{grid-template-columns:1fr}
@@ -223,6 +225,10 @@ footer{padding:26px 0;color:var(--muted)}
         <article class="spec-card"><small>Reserve format</small><h3>3:4 later, not default</h3><p>Use portrait only for actor close-ups, character dossiers, or a special emotion beat. It should feel intentional, not like a mismatched panel.</p><strong>Optional later</strong></article>
       </div>
       <div class="prompt-note" style="margin-top:14px"><b>Image handoff:</b><p>For this first page, generate 16:9 images for Panel A, B, C, and D. Filename targets are listed in the image brief so the assets can drop into the page without redesigning the layout.</p></div>
+      <div class="asset-links" aria-label="Quantum Break image handoff files">
+        <a href="../../../../assets/img/quantum-break/panel-manifest.json">Open panel manifest</a>
+        <a href="../../../../assets/img/quantum-break/README.md">Asset README</a>
+      </div>
     </div>
   </section>
 
@@ -329,6 +335,7 @@ footer{padding:26px 0;color:var(--muted)}
         <article class="brief-card"><small>Page 02-A</small><h3>Airlock threshold</h3><p>Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
         <article class="brief-card"><small>Page 02-B</small><h3>First anomaly</h3><p>Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing.</p><code>qb-page-02-b-first-anomaly.png</code></article>
       </div>
+      <div class="prompt-note" style="margin-top:14px"><b>Drop-in contract:</b><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact, use 16:9 PNGs, then replace the matching placeholder frame with the generated image in the source journey file.</p></div>
     </div>
   </section>
 </main>

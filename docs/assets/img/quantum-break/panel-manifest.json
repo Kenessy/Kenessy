@@ -1,0 +1,58 @@
+{
+  "game": "Quantum Break",
+  "page": "Page 01 - The University Before Time Breaks",
+  "defaultAspectRatio": "16:9",
+  "assetBase": "docs/assets/img/quantum-break/",
+  "publicBase": "https://kenessy.github.io/Kenessy/assets/img/quantum-break/",
+  "status": "waiting-for-generated-images",
+  "slots": [
+    {
+      "id": "page-01-a",
+      "filename": "qb-page-01-a-university-exterior.png",
+      "role": "lead story beat",
+      "aspectRatio": "16:9",
+      "placement": "Page 01 lead panel",
+      "brief": "Riverport University before dawn, protest pressure, cold campus, cinematic sci-fi thriller mood."
+    },
+    {
+      "id": "page-01-b",
+      "filename": "qb-page-01-b-paul-corridor.png",
+      "role": "support evidence beat",
+      "aspectRatio": "16:9",
+      "placement": "Page 01 support panel B",
+      "brief": "Paul Serene leading Jack through a clean lab corridor, secretive but controlled, blue tech lighting."
+    },
+    {
+      "id": "page-01-c",
+      "filename": "qb-page-01-c-science-primer.png",
+      "role": "support context beat",
+      "aspectRatio": "16:9",
+      "placement": "Page 01 support panel C",
+      "brief": "Project Promenade presentation, black-hole or field-primer visual, readable screen glow and lab context."
+    },
+    {
+      "id": "page-01-d",
+      "filename": "qb-page-01-d-will-shadow.png",
+      "role": "support tension beat",
+      "aspectRatio": "16:9",
+      "placement": "Page 01 support panel D",
+      "brief": "Subtle family tension, Will Joyce implied through documents, screens, absence, or environmental foreshadowing."
+    },
+    {
+      "id": "page-02-a",
+      "filename": "qb-page-02-a-airlock-threshold.png",
+      "role": "next-page lead candidate",
+      "aspectRatio": "16:9",
+      "placement": "Page 02 lead panel candidate",
+      "brief": "Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger."
+    },
+    {
+      "id": "page-02-b",
+      "filename": "qb-page-02-b-first-anomaly.png",
+      "role": "next-page spectacle candidate",
+      "aspectRatio": "16:9",
+      "placement": "Page 02 support panel candidate",
+      "brief": "Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing."
+    }
+  ]
+}

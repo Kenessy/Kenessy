@@ -19,6 +19,11 @@ const quantumBreakReportIndexPath = path.join(quantumBreakReportDir, 'index.html
 const quantumBreakJourneyIndexPath = path.join(quantumBreakJourneyDir, 'index.html');
 const quantumBreakReportSourcePath = path.join(scriptDir, 'sources/quantum-break/report.html');
 const quantumBreakJourneySourcePath = path.join(scriptDir, 'sources/quantum-break/journey.html');
+const quantumBreakAssetManifestSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/panel-manifest.json');
+const quantumBreakAssetReadmeSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/README.md');
+const quantumBreakAssetPublicDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
+const quantumBreakAssetManifestPublicPath = path.join(quantumBreakAssetPublicDir, 'panel-manifest.json');
+const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 'README.md');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
 const robotsPath = path.join(repoRoot, 'docs/robots.txt');
@@ -228,6 +233,10 @@ async function main() {
   const quantumBreakReportHtml = await readFile(quantumBreakReportSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakJourneySourcePath)}`);
   const quantumBreakJourneyHtml = await readFile(quantumBreakJourneySourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, quantumBreakAssetManifestSourcePath)}`);
+  const quantumBreakAssetManifest = await readFile(quantumBreakAssetManifestSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, quantumBreakAssetReadmeSourcePath)}`);
+  const quantumBreakAssetReadme = await readFile(quantumBreakAssetReadmeSourcePath, 'utf8');
   const sourceHash = sha256(source);
   const buildId = sourceHash.slice(0, 12);
   const { css, cssStart } = extractTemplateCss(source);
@@ -263,9 +272,12 @@ async function main() {
     logStep(`writing Pages artifacts build=${buildId}`);
     await mkdir(quantumBreakReportDir, { recursive: true });
     await mkdir(quantumBreakJourneyDir, { recursive: true });
+    await mkdir(quantumBreakAssetPublicDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
     await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
     await writeFile(quantumBreakJourneyIndexPath, quantumBreakJourneyHtml, 'utf8');
+    await writeFile(quantumBreakAssetManifestPublicPath, quantumBreakAssetManifest, 'utf8');
+    await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
     await writeFile(robotsPath, robotsTxt(), 'utf8');

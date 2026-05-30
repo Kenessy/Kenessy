@@ -12,6 +12,7 @@ const mode = process.argv.includes('--live') ? 'live' : 'local';
 const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
+const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 
 const runState = {
   mode,
@@ -40,6 +41,7 @@ function contentType(filePath) {
   if (ext === '.txt') return 'text/plain; charset=utf-8';
   if (ext === '.png') return 'image/png';
   if (ext === '.svg') return 'image/svg+xml';
+  if (ext === '.json') return 'application/json; charset=utf-8';
   return 'application/octet-stream';
 }
 
@@ -143,8 +145,11 @@ async function auditDesignArtifacts(base) {
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
   assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
+  assert(quantumBreakJourney.text.includes('.asset-links') && quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey asset manifest styling/link is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
+  const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
+  assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');
