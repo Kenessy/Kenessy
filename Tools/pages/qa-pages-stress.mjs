@@ -189,7 +189,7 @@ async function auditHttp(base) {
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
-  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
+  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 2, 'Prey journey should expose exactly two Prey image slots');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey reuses stale Quantum Break/comic slot language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);
@@ -848,9 +848,9 @@ async function main() {
           expectedText: 'Session 01 Field Journal',
           requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
-          minImageFrames: 3,
-          maxImageFrames: 3,
-          maxImageFramesPerPage: 2,
+          minImageFrames: 2,
+          maxImageFrames: 2,
+          maxImageFramesPerPage: 1,
           readerPages: 4
         }, viewport);
         await auditStaticPageViewport(browser, base, {

@@ -11,7 +11,7 @@ npm run build:metro
 npm run qa:prey-assets
 ```
 
-Missing images remain visible as journal placeholders until exact filenames exist. Existing images are validated and auto-wired into the public journey page.
+Missing images remain listed in the art queue until exact filenames exist. Existing visible images are validated and auto-wired into the public journey page.
 
 ## Current Slots
 
@@ -27,12 +27,12 @@ Prompt:
 
 ### prey-page-03-a-mimic-paranoia.png
 
-Ordinary room objects staged as possible mimic threats.
+First Mimic breach in the test-room lab after the experiment facade breaks.
 
 Prompt:
 
 ```text
-16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Dark Talos I office or lab corner with ordinary objects arranged suspiciously, coffee mug, chair, lamp, tools, and one barely readable alien mimic distortion implied by shadow and amber/cyan station light, human-scale paranoia, no gore, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Talos I test-room lab viewed through observation glass as Mimics attack researchers during the experiment breach, scattered debris, wet reflective floor, people fleeing, black alien shapes in motion, blue station darkness with amber/cyan highlights, no gore focus, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
 ```
 
 ### prey-page-03-b-crew-terminal-trace.png

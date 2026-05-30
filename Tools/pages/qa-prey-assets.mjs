@@ -19,6 +19,13 @@ const expectedSlotIds = [
   'page-03-a-mimic-paranoia',
   'page-03-b-crew-terminal-trace'
 ];
+const expectedVisibleSlotIds = [
+  'page-02-a-rooftop-helicopter',
+  'page-03-a-mimic-paranoia'
+];
+const expectedQueueOnlySlotIds = [
+  'page-03-b-crew-terminal-trace'
+];
 const expectedFilenames = [
   'prey-page-02-a-rooftop-helicopter.png',
   'prey-page-03-a-mimic-paranoia.png',
@@ -81,7 +88,7 @@ function validateManifest(manifest) {
   assert(typeof manifest.negativePrompt === 'string' && /fake UI text/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI text guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 4, 'manifest needs at least four styleRules');
   assert(manifest.styleRules.some((rule) => /16:9 PNGs only/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
-  assert(manifest.styleRules.some((rule) => /Missing images remain placeholders/i.test(rule)), 'manifest styleRules must preserve missing-image placeholder behavior');
+  assert(manifest.styleRules.some((rule) => /Missing images remain listed in the art queue/i.test(rule)), 'manifest styleRules must preserve missing-image art queue behavior');
   assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
   assert(Array.isArray(manifest.slots) && manifest.slots.length === 3, 'manifest must contain exactly three photo evidence entries');
 
@@ -93,7 +100,12 @@ function validateManifest(manifest) {
     assert(isPlainFilename(slot.filename), `filename must not include paths: ${slot.filename}`);
     assert(slot.filename.endsWith('.png'), `slot must target PNG: ${slot.filename}`);
     assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
-    assert(slot.visibleInJourney !== false, `slot ${slot.id} should be visible in the Prey illustrated journal v1`);
+    if (expectedVisibleSlotIds.includes(slot.id)) {
+      assert(slot.visibleInJourney !== false, `slot ${slot.id} should be visible in the Prey illustrated journal v1`);
+    }
+    if (expectedQueueOnlySlotIds.includes(slot.id)) {
+      assert(slot.visibleInJourney === false, `slot ${slot.id} should stay queue-only until its image is needed`);
+    }
     assert(slot.brief && slot.brief.length >= 24, `slot ${slot.id} brief is too short`);
     assert(slot.prompt && slot.prompt.length >= 48, `slot ${slot.id} prompt is too short`);
     assert(slot.composition && slot.composition.length >= 48, `slot ${slot.id} composition is too short`);
@@ -123,14 +135,15 @@ async function main() {
   const readme = await readFile(publicReadmePath, 'utf8');
   assert(readme.includes('npm run qa:prey-assets'), 'Prey README does not document asset QA');
   assert(expectedFilenames.every((filename) => readme.includes(filename)), 'Prey README missing expected drop-in filenames');
-  assert(readme.includes('Missing images remain visible as journal placeholders'), 'Prey README missing placeholder behavior');
+  assert(readme.includes('Missing images remain listed in the art queue'), 'Prey README missing art queue behavior');
   await checkpoint('public README ok');
 
   assert(await fileExists(journeyIndexPath), 'public Prey journey missing; run npm run build:metro');
   const journeyHtml = await readFile(journeyIndexPath, 'utf8');
   assert(journeyHtml.includes('.evidence-slot-ready .slot-placeholder{display:none}'), 'journey is missing ready evidence-slot image CSS');
-  assert(journeyHtml.includes('Missing images remain visible as journal placeholders until exact filenames exist.'), 'journey is missing missing-image placeholder contract');
-  assert(expectedSlotIds.every((id) => journeyHtml.includes(`data-prey-slot="${id}"`)), 'journey is missing one or more Prey data slot markers');
+  assert(journeyHtml.includes('Missing images stay listed here until exact filenames exist.'), 'journey is missing missing-image art queue contract');
+  assert(expectedVisibleSlotIds.every((id) => journeyHtml.includes(`data-prey-slot="${id}"`)), 'journey is missing one or more visible Prey data slot markers');
+  assert(expectedQueueOnlySlotIds.every((id) => !journeyHtml.includes(`data-prey-slot="${id}"`)), 'queue-only Prey slots should not render as visible image frames');
   await checkpoint('journey page loaded for wiring audit');
 
   const entries = await readdir(assetDir, { withFileTypes: true });
@@ -147,11 +160,16 @@ async function main() {
     const filePath = path.join(assetDir, slot.filename);
     const exists = await fileExists(filePath);
     const imageSrc = `../../../../assets/img/prey/${slot.filename}`;
-    assert(journeyHtml.includes(`data-prey-slot="${slot.id}"`), `journey missing data slot ${slot.id}`);
+    const visibleInJourney = slot.visibleInJourney !== false;
+    if (visibleInJourney) {
+      assert(journeyHtml.includes(`data-prey-slot="${slot.id}"`), `journey missing data slot ${slot.id}`);
+    } else {
+      assert(!journeyHtml.includes(`data-prey-slot="${slot.id}"`), `queue-only slot ${slot.id} should not render as a visible journey data slot`);
+    }
     const slotResult = {
       id: slot.id,
       filename: slot.filename,
-      visibleInJourney: true,
+      visibleInJourney,
       exists
     };
 
@@ -164,8 +182,13 @@ async function main() {
       continue;
     }
 
-    assert(journeyHtml.includes(`data-image-file="${slot.filename}"`), `present image ${slot.filename} is not wired in journey; run npm run build:metro`);
-    assert(journeyHtml.includes(imageSrc), `present image ${slot.filename} src missing from journey; run npm run build:metro`);
+    if (visibleInJourney) {
+      assert(journeyHtml.includes(`data-image-file="${slot.filename}"`), `present image ${slot.filename} is not wired in journey; run npm run build:metro`);
+      assert(journeyHtml.includes(imageSrc), `present image ${slot.filename} src missing from journey; run npm run build:metro`);
+    } else {
+      assert(!journeyHtml.includes(`data-image-file="${slot.filename}"`), `queue-only image ${slot.filename} should not be wired into the journey`);
+      assert(!journeyHtml.includes(imageSrc), `queue-only image ${slot.filename} should not have a journey src`);
+    }
 
     const buffer = await readFile(filePath);
     const { width, height } = parsePngDimensions(buffer, slot.filename);

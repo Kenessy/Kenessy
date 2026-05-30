@@ -210,12 +210,12 @@ async function auditHttpSurface(base) {
   const preyJourney = await fetchText(url(base, preyJourneyPath));
   assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
-  assert(preyJourney.text.includes('.journal-prose') && preyJourney.text.includes('.image-run') && preyJourney.text.includes('.split-images') && preyJourney.text.includes('.evidence-slot'), 'Prey journey minimal prose/image styling missing');
+  assert(preyJourney.text.includes('.journal-prose') && preyJourney.text.includes('.image-run') && preyJourney.text.includes('.evidence-slot'), 'Prey journey minimal prose/image styling missing');
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Art Queue'), 'Prey journey required journal pages missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
-  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three visible Prey image slots');
-  assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 3, 'Prey journey should expose exactly three visible 16:9 image frames');
+  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 2, 'Prey journey should expose exactly two visible Prey image slots');
+  assert((preyJourney.text.match(/data-image-ratio="16:9"/g) || []).length === 2, 'Prey journey should expose exactly two visible 16:9 image frames');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey should not reuse Quantum Break slot or comic grid language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);

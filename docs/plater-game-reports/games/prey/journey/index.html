@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
 <meta name="description" content="Prey fullscreen field journal: Session 01 review notes as simple prose pages with occasional scene images.">
 <meta name="theme-color" content="#070706">
-<meta name="build-id" content="9cbb9323c312">
+<meta name="build-id" content="141c76125bc7">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prey - Field Journal">
 <meta property="og:description" content="A minimal fullscreen Prey play diary for Session 01: fake morning, rooftop ride, test-room unease, first Mimic breach, and image handoff.">
@@ -56,14 +56,13 @@ h3{color:#ead9a8;font-size:24px;line-height:1.08;font-weight:900;text-transform:
 .slot-placeholder b{color:#ffcf83;font-size:12px;text-transform:uppercase}
 .slot-placeholder span{max-width:58ch;color:#bfb596;font-size:14px;line-height:1.45;font-weight:760}
 .caption{margin-top:9px;color:#aaa38b;font-size:12px;font-weight:850;text-transform:uppercase}
-.split-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:min(100%,980px)}
 .asset-list{max-width:820px;margin:0;padding-left:20px;color:#d8cfb1}
 .asset-list li{margin:10px 0}
 code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em;overflow-wrap:anywhere}
 .page-footer{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px 18px;color:#aaa38b;font-size:12px;font-weight:850;text-transform:uppercase}
 .page-footer a{color:#cfc5a7}
 .page-footer a:hover,.page-footer a:focus-visible{color:#fff1bf;outline:0}
-@media(max-width:760px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:10px 0}.page-tabs{justify-content:flex-start;gap:10px}.journal-page{padding:128px 18px 34px}h1,h2{font-size:42px}.lead{font-size:19px}.journal-prose p,.journal-prose li{font-size:17px}.split-images{grid-template-columns:1fr}.page-inner{min-height:calc(100vh - 162px)}}
+@media(max-width:760px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:10px 0}.page-tabs{justify-content:flex-start;gap:10px}.journal-page{padding:128px 18px 34px}h1,h2{font-size:42px}.lead{font-size:19px}.journal-prose p,.journal-prose li{font-size:17px}.page-inner{min-height:calc(100vh - 162px)}}
 </style>
 </head>
 <body>
@@ -132,16 +131,10 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
           <p>On paper, none of that is impressive. In practice, the off-screen dissatisfaction is the point. The game is not teaching me a control scheme as much as it is measuring a person and refusing to explain the criteria.</p>
           <p>Then a cup becomes a threat, the researcher goes down, and the opening finally names the core horror clearly: ordinary objects can lie. That is the first real review hook.</p>
         </div>
-        <div class="split-images" aria-label="Pending Prey journal illustrations">
-          <figure>
-            <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-a-mimic-paranoia"><div class="slot-placeholder"><b>Evidence 03-A</b><span>prey-page-03-a-mimic-paranoia.png / ordinary objects staged as possible mimic threats.</span></div></div>
-            <figcaption class="caption">Mimic paranoia / prompt ready</figcaption>
-          </figure>
-          <figure>
-            <div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="page-03-b-crew-terminal-trace"><div class="slot-placeholder"><b>Evidence 03-B</b><span>prey-page-03-b-crew-terminal-trace.png / abandoned crew workstation and trace evidence.</span></div></div>
-            <figcaption class="caption">Crew trace / prompt ready</figcaption>
-          </figure>
-        </div>
+        <figure class="image-run wide">
+          <div class="evidence-slot evidence-slot-ready" data-image-ratio="16:9" data-prey-slot="page-03-a-mimic-paranoia" data-image-file="prey-page-03-a-mimic-paranoia.png"><img src="../../../../assets/img/prey/prey-page-03-a-mimic-paranoia.png" alt="Prey illustrated journal evidence: First Mimic breach in the test-room lab after the experiment facade breaks." loading="lazy" decoding="async"></div>
+          <figcaption class="caption">First Mimic breach / experiment room</figcaption>
+        </figure>
         <div class="journal-prose">
           <p>Current ruling: promising, still unscored. The opening has a strong authored trick, but the real review has not started until Talos I becomes a place I can navigate, test, break, and understand.</p>
         </div>
@@ -153,7 +146,7 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
       <div class="page-inner">
         <p class="kicker">04 / Art Queue</p>
         <h2>What We Need Next</h2>
-        <p class="lead">Missing images remain visible as journal placeholders until exact filenames exist. The page should stay readable even when only one or two images are ready.</p>
+        <p class="lead">Missing images stay listed here until exact filenames exist. The journal pages should read cleanly even when only one or two strong images are ready.</p>
         <div class="journal-prose">
           <p>Drop generated 16:9 PNGs into the Prey image folder, keep the names exact, then rebuild. The page auto-wires matching files into the journal.</p>
           <ul class="asset-list">

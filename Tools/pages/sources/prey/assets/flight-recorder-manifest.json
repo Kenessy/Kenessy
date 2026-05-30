@@ -9,7 +9,7 @@
   "styleRules": [
     "Use illustrated field journal language: dark station pages, amber/green/cyan accent light, pinned evidence photos, and readable comic-review composition.",
     "16:9 PNGs only; target at least 1600x900 for public display.",
-    "Missing images remain placeholders in the journey until exact filenames exist.",
+    "Missing images remain listed in the art queue until exact filenames exist.",
     "Avoid large non-diegetic typography, fake UI text, captions, logos, and watermarks.",
     "Keep scenes readable at mobile width with one clear focal action."
   ],
@@ -31,17 +31,17 @@
       "filename": "prey-page-03-a-mimic-paranoia.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Ordinary room objects staged as possible mimic threats.",
-      "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Dark Talos I office or lab corner with ordinary objects arranged suspiciously, coffee mug, chair, lamp, tools, and one barely readable alien mimic distortion implied by shadow and amber/cyan station light, human-scale paranoia, no gore, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
-      "composition": "Keep one suspicious object cluster as the focal point; the room should feel quiet, observed, and unsafe without needing monster action.",
-      "avoid": "Avoid explicit readable notes or terminal text, cartoon monsters, gore focus, and over-bright horror lighting."
+      "brief": "First Mimic breach in the test-room lab after the experiment facade breaks.",
+      "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Talos I test-room lab viewed through observation glass as Mimics attack researchers during the experiment breach, scattered debris, wet reflective floor, people fleeing, black alien shapes in motion, blue station darkness with amber/cyan highlights, no gore focus, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Use the observation-window framing to make the room feel staged and suddenly unsafe; keep one fleeing researcher and several Mimics readable without turning the image into visual noise.",
+      "avoid": "Avoid readable notes or terminal text, cartoon monsters, gore focus, UI overlays, captions, and over-bright horror lighting."
     },
     {
       "id": "page-03-b-crew-terminal-trace",
       "page": "test-rooms",
       "filename": "prey-page-03-b-crew-terminal-trace.png",
       "aspectRatio": "16:9",
-      "visibleInJourney": true,
+      "visibleInJourney": false,
       "brief": "Crew trace workstation evidence without readable fake text.",
       "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Abandoned crew workstation inside Talos I, dark terminal glow, scattered personal objects, audio log recorder, access card shape, coffee stain, station corridor beyond, amber green cyan station ambience, environmental storytelling about missing crew, no readable screen text, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Use the desk as a foreground evidence table with corridor depth behind it; let personal traces imply story rather than text.",
