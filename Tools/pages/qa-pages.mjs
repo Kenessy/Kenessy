@@ -169,6 +169,8 @@ async function auditHttpSurface(base) {
   assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
   assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report does not link panel manifest');
+  assert(quantumBreak.text.includes('assets/img/quantum-break/README.md') && quantumBreak.text.includes('Prompt README'), 'Quantum Break report does not link prompt README');
+  assert(quantumBreak.text.includes('Prompt pack ready') && quantumBreak.text.includes('class="thesis journey-handoff"') && quantumBreak.text.includes('.handoff-grid'), 'Quantum Break report prompt handoff block missing');
   assert(quantumBreak.text.includes('Score locked') && quantumBreak.text.includes('Evidence Gate'), 'Quantum Break score lock missing');
   assert(quantumBreak.text.includes('Quantum Break score unlock gates') && quantumBreak.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail missing');
   assert(quantumBreak.text.includes('.hud{position:relative;top:auto;z-index:auto}'), 'Quantum Break report nav full-page capture override missing');

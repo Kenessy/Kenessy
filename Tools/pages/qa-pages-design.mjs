@@ -178,6 +178,7 @@ async function auditDesignArtifacts(base) {
   assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');
   assert(quantumBreakReport.text.includes('aria-label="Quantum Break score unlock gates"') && quantumBreakReport.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail is missing');
   assert(quantumBreakReport.text.includes('<div class="num">High</div>') && quantumBreakReport.text.includes('<div class="num">None</div>'), 'Quantum Break report provisional fit labels are missing');
+  assert(quantumBreakReport.text.includes('.journey-handoff') && quantumBreakReport.text.includes('.handoff-grid') && quantumBreakReport.text.includes('Prompt README'), 'Quantum Break report prompt handoff styling/link is missing');
   assert(!/>--</.test(quantumBreakReport.text), 'Quantum Break report still has raw dash placeholders');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
