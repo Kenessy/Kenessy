@@ -837,7 +837,7 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey/i,
           expectedText: 'ALERTED entry point / Prey 2017',
-          requiredTexts: ['Talos I pull', 'System agency', 'Combat friction', 'Ending trust', 'Flight Recorder Ready', 'Open Recorder', 'Falsifiers'],
+          requiredTexts: ['Talos I pull', 'System agency', 'Combat friction', 'Ending trust', 'Session 01 Logged', 'Open Recorder', 'Falsifiers'],
           minLinks: 5
         }, viewport);
         await auditStaticPageViewport(browser, base, {

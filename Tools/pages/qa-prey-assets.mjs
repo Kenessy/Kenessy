@@ -73,7 +73,7 @@ function parsePngDimensions(buffer, filename) {
 
 function validateManifest(manifest) {
   assert(manifest.game === 'Prey', 'manifest game must be Prey');
-  assert(manifest.status === 'flight-recorder-pre-run-placeholders', 'manifest status mismatch');
+  assert(manifest.status === 'flight-recorder-session-01-placeholders', 'manifest status mismatch');
   assert(manifest.promptVersion === 'prey-flight-recorder-v1', 'manifest promptVersion mismatch');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/prey/', 'manifest assetBase mismatch');

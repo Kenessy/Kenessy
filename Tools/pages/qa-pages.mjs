@@ -219,7 +219,7 @@ async function auditHttpSurface(base) {
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey should not reuse Quantum Break slot or comic grid language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);
-  assert(preyManifestJson.game === 'Prey' && preyManifestJson.status === 'flight-recorder-pre-run-placeholders', 'Prey flight recorder manifest metadata mismatch');
+  assert(preyManifestJson.game === 'Prey' && preyManifestJson.status === 'flight-recorder-session-01-placeholders', 'Prey flight recorder manifest metadata mismatch');
   assert(preyManifestJson.defaultAspectRatio === '16:9' && Array.isArray(preyManifestJson.slots) && preyManifestJson.slots.length === 3, 'Prey flight recorder manifest slot contract mismatch');
   assert(preyManifest.text.includes('prey-page-02-a-talosi-approach.png') && preyManifest.text.includes('prey-page-03-a-mimic-paranoia.png') && preyManifest.text.includes('prey-page-03-b-crew-terminal-trace.png'), 'Prey manifest missing expected filenames');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));

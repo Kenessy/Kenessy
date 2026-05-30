@@ -1,6 +1,6 @@
 {
   "game": "Prey",
-  "status": "flight-recorder-pre-run-placeholders",
+  "status": "flight-recorder-session-01-placeholders",
   "promptVersion": "prey-flight-recorder-v1",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/prey/",
