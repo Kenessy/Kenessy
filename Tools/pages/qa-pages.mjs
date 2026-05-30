@@ -190,6 +190,8 @@ async function auditHttpSurface(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together comic reader'), 'Quantum Break journey fullscreen reader copy missing');
   assert(quantumBreakJourney.text.includes('.reader-track') && quantumBreakJourney.text.includes('.journal-page') && quantumBreakJourney.text.includes('scroll-snap-type:x mandatory'), 'Quantum Break journey fullscreen reader styling missing');
+  assert(quantumBreakJourney.text.includes('.comic-spread') && quantumBreakJourney.text.includes('.spread-grid') && quantumBreakJourney.text.includes('grid-template-areas'), 'Quantum Break journey native comic-spread layout missing');
+  assert(quantumBreakJourney.text.includes('.page-shell{width:100%;height:100%;') && !quantumBreakJourney.text.includes('.page-shell{width:min'), 'Quantum Break journey still uses centered page-shell sizing');
   assert(quantumBreakJourney.text.includes('Scroll sideways') && quantumBreakJourney.text.includes('fullscreen journal pages'), 'Quantum Break journey sideways reader navigation missing');
   assert(quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey route lock missing');
   assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
