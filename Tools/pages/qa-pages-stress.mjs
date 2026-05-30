@@ -159,6 +159,8 @@ async function auditHttp(base) {
   assert(quantumBreak.text.includes('Quantum Break score unlock gates') && quantumBreak.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail missing');
   assert(quantumBreak.text.includes('.hud{position:relative;top:auto;z-index:auto}'), 'Quantum Break report nav full-page capture override missing');
   assert(quantumBreak.text.includes('.status:before') && quantumBreak.text.includes('#diagnosis .diag:before') && quantumBreak.text.includes('.risk-ledger .aud:before'), 'Quantum Break report lower-section polish styling missing');
+  assert(quantumBreak.text.includes('.evidence-ledger .aud:before') && quantumBreak.text.includes('.review-note-section .field-note:before') && quantumBreak.text.includes('.reader-tags:before'), 'Quantum Break report evidence/reviewer polish styling missing');
+  assert(quantumBreak.text.includes('class="section live-evidence-section"') && quantumBreak.text.includes('class="section review-note-section"'), 'Quantum Break report polished evidence/reviewer section classing missing');
   assert(quantumBreak.text.includes('High</div><p>Wants cinematic time-fracture atmosphere') && quantumBreak.text.includes('None</div><p>Looks for co-op'), 'Quantum Break fit preview labels missing');
   assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade'), 'Quantum Break report live evidence section missing');
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');
