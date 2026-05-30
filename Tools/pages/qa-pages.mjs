@@ -189,6 +189,9 @@ async function auditHttpSurface(base) {
   assert(quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image generation brief missing');
   assert(quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey does not link panel manifest');
   assert(quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey image handoff filenames missing');
+  assert(quantumBreakJourney.text.includes('Shared style contract') && quantumBreakJourney.text.includes('.prompt-pack'), 'Quantum Break journey prompt pack missing');
+  assert(quantumBreakJourney.text.includes('No fake UI / captions') && quantumBreakJourney.text.includes('Page 01-D / Tension panel'), 'Quantum Break journey prompt guardrails missing');
+  assert(quantumBreakJourney.text.includes('.handoff-checklist') && quantumBreakJourney.text.includes('Use the shared prompt base'), 'Quantum Break journey handoff checklist missing');
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state the current image aspect-ratio workflow');
   assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey slot markers missing');
@@ -199,12 +202,17 @@ async function auditHttpSurface(base) {
   const panelManifestJson = JSON.parse(panelManifest.text);
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio is not 16:9');
   assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
+  assert(panelManifestJson.promptVersion === 'qb-journey-page-01-v2', 'Quantum Break panel manifest promptVersion mismatch');
+  assert(typeof panelManifestJson.sharedPrompt === 'string' && panelManifestJson.sharedPrompt.includes('16:9 cinematic sci-fi comic panel'), 'Quantum Break panel manifest sharedPrompt missing');
+  assert(typeof panelManifestJson.negativePrompt === 'string' && panelManifestJson.negativePrompt.includes('fake UI overlays'), 'Quantum Break panel manifest negativePrompt missing');
   assert(Array.isArray(panelManifestJson.styleRules) && panelManifestJson.styleRules.length >= 4, 'Quantum Break panel manifest styleRules missing');
   assert(Array.isArray(panelManifestJson.slots) && panelManifestJson.slots.length >= 6, 'Quantum Break panel manifest slots missing');
   assert(panelManifestJson.slots.filter((slot) => slot.requiredForCurrentPage).length === 4, 'Quantum Break panel manifest current-page required slots mismatch');
+  assert(panelManifestJson.slots.every((slot) => slot.prompt && slot.composition && slot.avoid), 'Quantum Break panel manifest slot prompt fields missing');
   assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png'), 'Quantum Break panel manifest missing Page 01-D slot');
   const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   assert(panelReadme.text.includes('npm run qa:qb-assets') && panelReadme.text.includes('npm run qa:qb-assets:strict'), 'Quantum Break asset README missing QA workflow commands');
+  assert(panelReadme.text.includes('Shared prompt base') && panelReadme.text.includes('Page 01 prompts'), 'Quantum Break asset README prompt workflow missing');
 
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`${bundleName}?v=${buildId}`), 'report HTML does not load versioned bundle');

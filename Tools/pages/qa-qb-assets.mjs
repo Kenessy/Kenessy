@@ -66,8 +66,11 @@ function parsePngDimensions(buffer, filename) {
 
 function validateManifest(manifest) {
   assert(manifest.game === 'Quantum Break', 'manifest game must be Quantum Break');
+  assert(typeof manifest.promptVersion === 'string' && manifest.promptVersion.length >= 8, 'manifest promptVersion missing');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/quantum-break/', 'manifest assetBase mismatch');
+  assert(typeof manifest.sharedPrompt === 'string' && /16:9 cinematic sci-fi comic panel/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing image generation base');
+  assert(typeof manifest.negativePrompt === 'string' && /fake UI overlays/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 4, 'manifest needs at least four styleRules');
   assert(manifest.styleRules.some((rule) => /16:9 landscape PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
   assert(manifest.styleRules.some((rule) => /coherent cinematic sci-fi comic style/i.test(rule)), 'manifest styleRules must preserve coherent art direction');
@@ -83,6 +86,9 @@ function validateManifest(manifest) {
     assert(slot.filename.endsWith('.png'), `slot must target PNG: ${slot.filename}`);
     assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
     assert(slot.brief && slot.brief.length >= 24, `slot ${slot.id} brief is too short`);
+    assert(slot.prompt && slot.prompt.length >= 48, `slot ${slot.id} prompt is too short`);
+    assert(slot.composition && slot.composition.length >= 48, `slot ${slot.id} composition is too short`);
+    assert(slot.avoid && slot.avoid.length >= 42, `slot ${slot.id} avoid guardrail is too short`);
     if (slot.requiredForCurrentPage) currentRequired += 1;
     ids.add(slot.id);
     filenames.add(slot.filename);

@@ -156,6 +156,9 @@ async function auditDesignArtifacts(base) {
   assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey image slot markers are missing');
   assert(quantumBreakJourney.text.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}') && quantumBreakJourney.text.includes('.panel-frame img{position:absolute'), 'Quantum Break journey ready-image CSS is missing');
   assert(quantumBreakJourney.text.includes('.brief-grid') && quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image brief styling is missing');
+  assert(quantumBreakJourney.text.includes('.prompt-pack') && quantumBreakJourney.text.includes('Shared style contract'), 'Quantum Break journey prompt-pack styling/copy is missing');
+  assert(quantumBreakJourney.text.includes('No fake UI / captions') && quantumBreakJourney.text.includes('Page 01-D / Tension panel'), 'Quantum Break journey image guardrail prompt deck is missing');
+  assert(quantumBreakJourney.text.includes('.handoff-checklist') && quantumBreakJourney.text.includes('Use the shared prompt base'), 'Quantum Break journey image handoff checklist is missing');
   assert(quantumBreakJourney.text.includes('.asset-links') && quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey asset manifest styling/link is missing');
   assert(quantumBreakJourney.text.includes('one coherent cinematic sci-fi comic style') && quantumBreakJourney.text.includes('Avoid large fake typography'), 'Quantum Break journey prompt style guardrails are missing');
   assert(quantumBreakJourney.text.includes('build auto-wires any matching image file'), 'Quantum Break journey auto-wiring contract is missing');
@@ -178,8 +181,10 @@ async function auditDesignArtifacts(base) {
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
   assert(panelManifest.text.includes('"requiredForCurrentPage": true'), 'Quantum Break panel manifest does not mark current-page required slots');
   assert(panelManifest.text.includes('"styleRules"') && panelManifest.text.includes('coherent cinematic sci-fi comic style'), 'Quantum Break panel manifest styleRules missing');
+  assert(panelManifest.text.includes('"promptVersion"') && panelManifest.text.includes('"sharedPrompt"') && panelManifest.text.includes('"composition"'), 'Quantum Break panel manifest prompt fields missing');
   const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   assert(panelReadme.text.includes('npm run qa:qb-assets'), 'Quantum Break asset README does not document asset QA');
+  assert(panelReadme.text.includes('Shared prompt base') && panelReadme.text.includes('Page 01 prompts'), 'Quantum Break asset README prompt workflow missing');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');

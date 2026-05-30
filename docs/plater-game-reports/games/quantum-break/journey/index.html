@@ -26,6 +26,7 @@
   --gold:#dec99d;
   --amber:#ffae43;
   --cyan:#17d7ff;
+  --blue:#5c8dff;
   --violet:#8d78ff;
   --green:#35e07b;
   --red:#ff4d4d;
@@ -86,7 +87,7 @@ h1{margin-top:12px;color:var(--gold);font-size:96px;line-height:.82;text-transfo
 .head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.55fr);gap:22px;align-items:end;margin-bottom:18px}
 .kicker{color:var(--amber);letter-spacing:0}
 h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:uppercase}
-.head p,.card p,.spec-card p,.brief-card p{color:var(--muted);line-height:1.55;font-weight:700}
+.head p,.card p,.spec-card p,.brief-card p,.prompt-card p,.style-contract p{color:var(--muted);line-height:1.55;font-weight:700}
 .route-vector{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
 .route-step{position:relative;border:1px solid rgba(23,215,255,.36);background:linear-gradient(180deg,rgba(23,215,255,.09),rgba(5,7,12,.58));padding:14px}
 .route-step:after{content:"->";position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:var(--amber);font-size:19px;font-weight:1000}
@@ -153,11 +154,27 @@ h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:
 .card p{margin-top:9px;font-size:14px}
 .next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .brief-card code{display:block;margin-top:10px;color:#ffcf83;font-size:12px;font-weight:900;white-space:normal}
+.style-contract{display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,.7fr);gap:14px;margin-bottom:14px;border:1px solid rgba(255,174,67,.34);background:linear-gradient(145deg,rgba(255,174,67,.08),rgba(8,14,22,.88) 45%,rgba(5,7,12,.96));padding:18px}
+.style-contract small,.prompt-card small,.handoff-checklist small{display:block;color:var(--amber);font-size:10px;font-weight:1000;text-transform:uppercase}
+.style-contract h3{margin-top:8px;color:var(--gold);font-size:28px;line-height:1;text-transform:uppercase}
+.style-contract p{margin-top:10px;color:#d9c9a3;font-size:15px}
+.style-rule-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-content:center}
+.style-rule-grid span{min-height:38px;display:flex;align-items:center;border:1px solid rgba(237,246,255,.12);background:linear-gradient(135deg,rgba(23,215,255,.08),rgba(5,7,12,.58));padding:8px 9px;color:#cfe4f3;font-size:11px;line-height:1.25;font-weight:1000;text-transform:uppercase}
+.prompt-pack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.prompt-card{position:relative;overflow:hidden;border:1px solid rgba(23,215,255,.22);background:linear-gradient(145deg,rgba(16,26,40,.96),rgba(6,10,16,.98));padding:18px;min-width:0}
+.prompt-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--tone, var(--cyan)),transparent)}
+.prompt-card h3{margin-top:8px;color:var(--gold);font-size:25px;line-height:1;text-transform:uppercase}
+.prompt-card p{margin-top:10px;font-size:14px}
+.prompt-card p b{color:#ffcf83}
+.prompt-card code{display:block;margin-top:12px;border:1px solid rgba(255,174,67,.22);background:rgba(5,7,12,.58);padding:8px;color:#ffcf83;font-size:12px;font-weight:900;white-space:normal}
+.handoff-checklist{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.handoff-checklist div{border:1px solid rgba(237,246,255,.12);background:rgba(5,7,12,.46);padding:12px}
+.handoff-checklist b{display:block;margin-top:6px;color:var(--soft);font-size:13px;line-height:1.35}
 .asset-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .asset-links a{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(23,215,255,.34);background:rgba(5,7,12,.58);padding:8px 10px;color:#7fe9ff;font-size:11px;font-weight:1000;text-transform:uppercase}
 footer{padding:26px 0;color:var(--muted)}
 @media(max-width:900px){
-  .hero .wrap,.head,.route-vector,.format-grid,.impact,.brief-grid,.comic-lead,.panel-row,.review-rail,.next-grid{grid-template-columns:1fr}
+  .hero .wrap,.head,.route-vector,.format-grid,.impact,.brief-grid,.style-contract,.style-rule-grid,.prompt-pack,.handoff-checklist,.comic-lead,.panel-row,.review-rail,.next-grid{grid-template-columns:1fr}
   .route-step:after{display:none}
   h1{font-size:62px}
 }
@@ -343,6 +360,19 @@ footer{padding:26px 0;color:var(--muted)}
         <div><div class="kicker">Image bank</div><h2>Generation Brief</h2></div>
         <p>Use 16:9 landscape panels for the current journey template. Three to four images give a page a comic rhythm without bloating the beat; 3:4 portrait slots can come later for deliberate character close-ups.</p>
       </div>
+      <div class="style-contract">
+        <div>
+          <small>Shared style contract</small>
+          <h3>One visual language</h3>
+          <p>Keep one coherent cinematic sci-fi comic style across the whole page: dark Riverport campus and lab mood, blue chronon light, amber emergency contrast, readable silhouettes, and clean panels that still work at mobile width.</p>
+        </div>
+        <div class="style-rule-grid" aria-label="Quantum Break image style guardrails">
+          <span>16:9 PNG only</span>
+          <span>No fake UI / captions</span>
+          <span>Readable silhouettes</span>
+          <span>Avoid large fake typography</span>
+        </div>
+      </div>
       <div class="brief-grid">
         <article class="brief-card"><small>Page 01-A</small><h3>University exterior</h3><p>Riverport University before dawn, protest pressure, cold campus, cinematic sci-fi thriller mood.</p><code>qb-page-01-a-university-exterior.png</code></article>
         <article class="brief-card"><small>Page 01-B</small><h3>Paul corridor lead</h3><p>Paul Serene leading Jack through a clean lab corridor, secretive but controlled, blue tech lighting.</p><code>qb-page-01-b-paul-corridor.png</code></article>
@@ -350,6 +380,20 @@ footer{padding:26px 0;color:var(--muted)}
         <article class="brief-card"><small>Page 01-D</small><h3>Will tension seed</h3><p>Subtle family tension, Will Joyce implied through documents, screens, absence, or environmental foreshadowing.</p><code>qb-page-01-d-will-shadow.png</code></article>
         <article class="brief-card"><small>Page 02-A</small><h3>Airlock threshold</h3><p>Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
         <article class="brief-card"><small>Page 02-B</small><h3>First anomaly</h3><p>Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing.</p><code>qb-page-02-b-first-anomaly.png</code></article>
+      </div>
+      <div class="prompt-pack" aria-label="Quantum Break panel prompt pack">
+        <article class="prompt-card" style="--tone:var(--cyan)"><small>Page 01-A / Lead panel</small><h3>University Exterior</h3><p><b>Scene prompt:</b> Riverport University before dawn, cold air, protest pressure near the campus entrance, cinematic sci-fi thriller mood.</p><p><b>Composition:</b> Wide establishing shot, strong readable building silhouette, empty negative space for the page caption outside the image.</p><p><b>Avoid:</b> fake logos, large protest text, illegible clutter, or a generic city skyline with no university identity.</p><code>qb-page-01-a-university-exterior.png</code></article>
+        <article class="prompt-card" style="--tone:var(--amber)"><small>Page 01-B / Support panel</small><h3>Paul Corridor Lead</h3><p><b>Scene prompt:</b> Paul Serene leading Jack through a clean research corridor, controlled secrecy, blue tech light, restrained corporate lab atmosphere.</p><p><b>Composition:</b> Two-character walk-and-talk framing, Paul slightly ahead, Jack reading the room, corridor depth pulling forward.</p><p><b>Avoid:</b> action poses too early, weapons focus, messy horror-lab gore, or heavy typography on screens.</p><code>qb-page-01-b-paul-corridor.png</code></article>
+        <article class="prompt-card" style="--tone:var(--green)"><small>Page 01-C / Context panel</small><h3>Science Primer</h3><p><b>Scene prompt:</b> Project Promenade presentation moment, black-hole or field-primer visual, screen glow on observers, lab context still readable.</p><p><b>Composition:</b> Screen or projection as the visual anchor, people secondary, diagrams abstract enough to avoid fake readable UI.</p><p><b>Avoid:</b> real equations, giant nonsense words, over-designed holograms, or a panel that becomes pure interface art.</p><code>qb-page-01-c-science-primer.png</code></article>
+        <article class="prompt-card" style="--tone:var(--violet)"><small>Page 01-D / Tension panel</small><h3>Will Shadow</h3><p><b>Scene prompt:</b> Subtle family tension and Will Joyce foreshadowing through documents, screens, an empty chair, or environmental traces.</p><p><b>Composition:</b> Quiet detail shot with a human absence, warm paper or monitor glow against the cold lab palette.</p><p><b>Avoid:</b> melodramatic portrait inserts, spoiler-heavy imagery, readable legal text, or turning Will into a literal exposition poster.</p><code>qb-page-01-d-will-shadow.png</code></article>
+        <article class="prompt-card" style="--tone:var(--blue)"><small>Page 02-A / Next lead candidate</small><h3>Airlock Threshold</h3><p><b>Scene prompt:</b> Jack and Paul at the machine threshold, clean tech door, the experiment still controlled but visibly about to cross into danger.</p><p><b>Composition:</b> Symmetric doorway, human scale against machinery, blue chronon glow kept disciplined and readable.</p><p><b>Avoid:</b> explosion moment too soon, chaotic fracture effects, or a door so dark the figures disappear.</p><code>qb-page-02-a-airlock-threshold.png</code></article>
+        <article class="prompt-card" style="--tone:var(--red)"><small>Page 02-B / Next spectacle candidate</small><h3>First Anomaly</h3><p><b>Scene prompt:</b> Time fracture beginning, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.</p><p><b>Composition:</b> One clear anomaly source, fractured light around the frame edge, figures anchored in the foreground.</p><p><b>Avoid:</b> abstract noise, overloaded shards, unreadable faces, or effects that hide the story beat.</p><code>qb-page-02-b-first-anomaly.png</code></article>
+      </div>
+      <div class="handoff-checklist" aria-label="Quantum Break generated image drop-in checklist">
+        <div><small>01 · Generate</small><b>Use the shared prompt base and the exact slot prompt.</b></div>
+        <div><small>02 · Export</small><b>Save as 16:9 PNG with the listed filename.</b></div>
+        <div><small>03 · Drop in</small><b>Place it under <code>docs/assets/img/quantum-break/</code>.</b></div>
+        <div><small>04 · Verify</small><b>Run <code>npm run qa:qb-assets</code>; strict mode when all Page 01 images exist.</b></div>
       </div>
       <div class="prompt-note" style="margin-top:14px"><b>Drop-in contract:</b><p>The public manifest lives at <code>assets/img/quantum-break/panel-manifest.json</code>. Keep filenames exact, use 16:9 PNGs, and keep one coherent cinematic sci-fi comic style across the whole page. Avoid large fake typography or UI overlays inside the images; the page itself handles captions and labels. The build auto-wires any matching image file into its manifest slot.</p></div>
     </div>

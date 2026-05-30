@@ -171,6 +171,9 @@ async function auditHttp(base) {
   assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b'), 'Quantum Break journey comic slot polish styling missing');
   assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy missing');
   assert(quantumBreakJourney.text.includes('Generation Brief') && quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey generation brief missing');
+  assert(quantumBreakJourney.text.includes('Shared style contract') && quantumBreakJourney.text.includes('.prompt-pack'), 'Quantum Break journey prompt pack missing');
+  assert(quantumBreakJourney.text.includes('No fake UI / captions') && quantumBreakJourney.text.includes('Page 01-D / Tension panel'), 'Quantum Break journey prompt guardrails missing');
+  assert(quantumBreakJourney.text.includes('.handoff-checklist') && quantumBreakJourney.text.includes('Use the shared prompt base'), 'Quantum Break journey handoff checklist missing');
   assert(quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey missing panel manifest link');
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
   assert(quantumBreakJourney.text.includes('16:9 landscape panels'), 'Quantum Break journey does not state 16:9 image workflow');
@@ -182,12 +185,17 @@ async function auditHttp(base) {
   const panelManifestJson = JSON.parse(panelManifest.text);
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio mismatch');
   assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
+  assert(panelManifestJson.promptVersion === 'qb-journey-page-01-v2', 'Quantum Break panel manifest promptVersion mismatch');
+  assert(typeof panelManifestJson.sharedPrompt === 'string' && panelManifestJson.sharedPrompt.includes('16:9 cinematic sci-fi comic panel'), 'Quantum Break panel manifest sharedPrompt missing');
+  assert(typeof panelManifestJson.negativePrompt === 'string' && panelManifestJson.negativePrompt.includes('fake UI overlays'), 'Quantum Break panel manifest negativePrompt missing');
   assert(Array.isArray(panelManifestJson.styleRules) && panelManifestJson.styleRules.length >= 4, 'Quantum Break panel manifest styleRules missing');
   assert(Array.isArray(panelManifestJson.slots) && panelManifestJson.slots.length >= 6, 'Quantum Break panel manifest slot list missing');
   assert(panelManifestJson.slots.filter((slot) => slot.requiredForCurrentPage).length === 4, 'Quantum Break panel manifest current-page required slots mismatch');
+  assert(panelManifestJson.slots.every((slot) => slot.prompt && slot.composition && slot.avoid), 'Quantum Break panel manifest slot prompt fields missing');
   assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png'), 'Quantum Break panel manifest missing Page 01-D filename');
   const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
   assert(panelReadme.text.includes('npm run qa:qb-assets') && panelReadme.text.includes('npm run qa:qb-assets:strict'), 'Quantum Break asset README missing QA workflow commands');
+  assert(panelReadme.text.includes('Shared prompt base') && panelReadme.text.includes('Page 01 prompts'), 'Quantum Break asset README prompt workflow missing');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
 }
@@ -712,7 +720,7 @@ async function main() {
           slug: 'quantum-break-journey',
           path: quantumBreakJourneyPath,
           expectedText: 'Review-canon route selected',
-          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'Generation Brief', 'qb-page-01-a-university-exterior.png', 'build auto-wires any matching image file', quantumBreakPanelManifestPath],
+          requiredTexts: ['Panel Contract', 'Image-ready comic page', 'Generation Brief', 'Shared style contract', 'No fake UI / captions', 'qb-page-01-a-university-exterior.png', 'build auto-wires any matching image file', quantumBreakPanelManifestPath],
           minLinks: 6,
           minImageFrames: 7
         }, viewport);

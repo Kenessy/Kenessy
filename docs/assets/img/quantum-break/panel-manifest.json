@@ -1,15 +1,20 @@
 {
   "game": "Quantum Break",
   "page": "Page 01 - The University Before Time Breaks",
+  "promptVersion": "qb-journey-page-01-v2",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/quantum-break/",
   "publicBase": "https://kenessy.github.io/Kenessy/assets/img/quantum-break/",
   "status": "waiting-for-generated-images",
+  "sharedPrompt": "16:9 cinematic sci-fi comic panel for a Quantum Break illustrated playthrough journal. Use one coherent cinematic sci-fi comic style across every panel: dark Riverport university or lab mood, blue chronon light, amber emergency contrast, grounded human silhouettes, clean composition, and readable story action at mobile width.",
+  "negativePrompt": "Avoid large non-diegetic typography, fake UI overlays, logos, captions, unreadable screen text, over-busy time distortion, abstract noise, or composition that hides the story beat.",
   "styleRules": [
     "16:9 landscape PNGs only for the current page.",
     "Use one coherent cinematic sci-fi comic style across all panels.",
     "Keep silhouettes and action readable; avoid over-busy time distortion.",
-    "Avoid large non-diegetic typography, logos, UI overlays, or fake captions."
+    "Avoid large non-diegetic typography, logos, UI overlays, or fake captions.",
+    "Keep captions and explanatory text out of the image; the page handles labels.",
+    "Use dark university/lab mood, blue chronon light, amber emergency contrast, and clean composition."
   ],
   "slots": [
     {
@@ -19,7 +24,10 @@
       "role": "lead story beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 lead panel",
-      "brief": "Riverport University before dawn, protest pressure, cold campus, cinematic sci-fi thriller mood."
+      "brief": "Riverport University before dawn, protest pressure, cold campus, cinematic sci-fi thriller mood.",
+      "prompt": "Riverport University before dawn, cold air, protest pressure near the campus entrance, cinematic sci-fi thriller mood.",
+      "composition": "Wide establishing shot, strong readable building silhouette, empty negative space for the page caption outside the image.",
+      "avoid": "Fake logos, large protest text, illegible clutter, or a generic city skyline with no university identity."
     },
     {
       "id": "page-01-b",
@@ -28,7 +36,10 @@
       "role": "support evidence beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel B",
-      "brief": "Paul Serene leading Jack through a clean lab corridor, secretive but controlled, blue tech lighting."
+      "brief": "Paul Serene leading Jack through a clean lab corridor, secretive but controlled, blue tech lighting.",
+      "prompt": "Paul Serene leading Jack through a clean research corridor, controlled secrecy, blue tech light, restrained corporate lab atmosphere.",
+      "composition": "Two-character walk-and-talk framing, Paul slightly ahead, Jack reading the room, corridor depth pulling forward.",
+      "avoid": "Action poses too early, weapons focus, messy horror-lab gore, or heavy typography on screens."
     },
     {
       "id": "page-01-c",
@@ -37,7 +48,10 @@
       "role": "support context beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel C",
-      "brief": "Project Promenade presentation, black-hole or field-primer visual, readable screen glow and lab context."
+      "brief": "Project Promenade presentation, black-hole or field-primer visual, readable screen glow and lab context.",
+      "prompt": "Project Promenade presentation moment, black-hole or field-primer visual, screen glow on observers, lab context still readable.",
+      "composition": "Screen or projection as the visual anchor, people secondary, diagrams abstract enough to avoid fake readable UI.",
+      "avoid": "Real equations, giant nonsense words, over-designed holograms, or a panel that becomes pure interface art."
     },
     {
       "id": "page-01-d",
@@ -46,7 +60,10 @@
       "role": "support tension beat",
       "aspectRatio": "16:9",
       "placement": "Page 01 support panel D",
-      "brief": "Subtle family tension, Will Joyce implied through documents, screens, absence, or environmental foreshadowing."
+      "brief": "Subtle family tension, Will Joyce implied through documents, screens, absence, or environmental foreshadowing.",
+      "prompt": "Subtle family tension and Will Joyce foreshadowing through documents, screens, an empty chair, or environmental traces.",
+      "composition": "Quiet detail shot with a human absence, warm paper or monitor glow against the cold lab palette.",
+      "avoid": "Melodramatic portrait inserts, spoiler-heavy imagery, readable legal text, or turning Will into a literal exposition poster."
     },
     {
       "id": "page-02-a",
@@ -55,7 +72,10 @@
       "role": "next-page lead candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 lead panel candidate",
-      "brief": "Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger."
+      "brief": "Jack and Paul at the machine threshold, clean tech door, before the experiment crosses from theory into danger.",
+      "prompt": "Jack and Paul at the machine threshold, clean tech door, the experiment still controlled but visibly about to cross into danger.",
+      "composition": "Symmetric doorway, human scale against machinery, blue chronon glow kept disciplined and readable.",
+      "avoid": "Explosion moment too soon, chaotic fracture effects, or a door so dark the figures disappear."
     },
     {
       "id": "page-02-b",
@@ -64,7 +84,10 @@
       "role": "next-page spectacle candidate",
       "aspectRatio": "16:9",
       "placement": "Page 02 support panel candidate",
-      "brief": "Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing."
+      "brief": "Time fracture beginning, readable distortion, strong silhouette, cinematic but not visually confusing.",
+      "prompt": "Time fracture beginning, readable distortion, strong silhouettes, cinematic spectacle without visual confusion.",
+      "composition": "One clear anomaly source, fractured light around the frame edge, figures anchored in the foreground.",
+      "avoid": "Abstract noise, overloaded shards, unreadable faces, or effects that hide the story beat."
     }
   ]
 }
