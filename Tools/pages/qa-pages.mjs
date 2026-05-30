@@ -132,10 +132,13 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('I find the hidden failure before it becomes obvious.'), 'root homepage hero copy missing');
   assert(root.text.includes('Operator readout'), 'root homepage operator panel missing');
   assert(root.text.includes('What This Is'), 'root homepage about section missing');
+  assert(root.text.includes('id="lanes"') && root.text.includes('Active Lanes'), 'root homepage active lanes map missing');
   assert(root.text.includes('id="work"'), 'root homepage work section missing');
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
   assert(root.text.includes('Play It Together'), 'root homepage journal section missing');
   assert(root.text.includes('16:9 panel'), 'root homepage journal image slot guidance missing');
+  assert(root.text.includes('Prompt pack ready') && root.text.includes('Panel manifest'), 'root homepage Quantum Break prompt handoff links missing');
+  assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'root homepage Quantum Break handoff asset links missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'root homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'root homepage Quantum Break review/journal state copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');

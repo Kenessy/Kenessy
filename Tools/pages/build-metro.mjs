@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '../..');
 const sourcePath = path.join(scriptDir, 'sources/metro-2033-redux/main_canvas_diegetic_equation.jsx');
+const siteHomeSourcePath = path.join(scriptDir, 'site-home.mjs');
 const reportDir = path.join(repoRoot, 'docs/plater-game-reports/games/metro-2033-redux');
 const quantumBreakReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break');
 const quantumBreakJourneyDir = path.join(quantumBreakReportDir, 'journey');
@@ -292,6 +293,8 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060
 async function main() {
   logStep(`reading source ${path.relative(repoRoot, sourcePath)}`);
   const source = await readFile(sourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, siteHomeSourcePath)}`);
+  const siteHomeSource = await readFile(siteHomeSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakReportSourcePath)}`);
   const quantumBreakReportHtml = await readFile(quantumBreakReportSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakJourneySourcePath)}`);
@@ -303,7 +306,15 @@ async function main() {
   const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
   const wiredQuantumBreakJourneyHtml = await renderQuantumBreakJourneyImages(quantumBreakJourneyHtml, quantumBreakAssetManifestJson);
   const sourceHash = sha256(source);
-  const buildId = sourceHash.slice(0, 12);
+  const buildHashInput = [
+    source,
+    siteHomeSource,
+    quantumBreakReportHtml,
+    quantumBreakJourneyHtml,
+    quantumBreakAssetManifest,
+    quantumBreakAssetReadme
+  ].join('\n\n/* kenessy-pages-build-input */\n\n');
+  const buildId = sha256(buildHashInput).slice(0, 12);
   const { css, cssStart } = extractTemplateCss(source);
   const transformedSource = transformedSourceWithoutInlineStyle(source, cssStart);
 

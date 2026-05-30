@@ -131,12 +131,14 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout copy is stale');
   assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
   assert(root.text.includes('.about-grid'), 'portfolio homepage about section styling is missing');
+  assert(root.text.includes('.lane-grid') && root.text.includes('.lane-card') && root.text.includes('Active Lanes'), 'portfolio homepage active lanes styling/copy is missing');
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
   assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
   assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
+  assert(root.text.includes('.journal-asset-links') && root.text.includes('Panel manifest'), 'portfolio homepage journal asset links styling is missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling is missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');

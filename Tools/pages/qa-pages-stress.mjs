@@ -130,6 +130,8 @@ async function auditHttp(base) {
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
   assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout missing');
   assert(root.text.includes('What This Is') && root.text.includes('Play It Together'), 'portfolio homepage about/journal sections are missing');
+  assert(root.text.includes('Active Lanes') && root.text.includes('Prompt pack ready'), 'portfolio homepage active lanes or prompt handoff missing');
+  assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'portfolio homepage Quantum Break asset handoff links missing');
   assert(root.text.includes('id="work"') && root.text.includes('16:9 panel'), 'portfolio homepage work or journal image guidance is missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy missing');
@@ -236,7 +238,7 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
   assert(initial.hasHomeRoot, `${viewport.name} homepage root missing`);
   assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
-  assert(initial.sectionTitles.join('|') === 'What This Is|Signal Stack|Proof Surface|Field Work|Game Reviews|Play It Together|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
+  assert(initial.sectionTitles.join('|') === 'What This Is|Active Lanes|Signal Stack|Proof Surface|Field Work|Game Reviews|Play It Together|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
   assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
   assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);

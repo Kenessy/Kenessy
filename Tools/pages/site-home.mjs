@@ -212,6 +212,20 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .about-line{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);background:linear-gradient(145deg,rgba(17,25,35,.86),rgba(8,11,15,.94));padding:14px}
 .about-line b{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
 .about-line span{color:var(--ink);font-size:17px;line-height:1.32;font-weight:850}
+.lane-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.lane-card{
+  position:relative;
+  min-height:218px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(18,26,36,.96),rgba(8,11,15,.98));
+  padding:18px;
+  overflow:hidden;
+}
+.lane-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--tone,var(--cyan)),transparent 82%);opacity:.86}
+.lane-card small{display:block;color:var(--tone,var(--cyan));font-size:11px;font-weight:1000;text-transform:uppercase}
+.lane-card h3{margin-top:14px;color:var(--ink);font-size:24px;line-height:1.02;font-weight:1000;text-transform:uppercase}
+.lane-card p{margin-top:11px;color:var(--muted);font-size:14px;line-height:1.52;font-weight:700}
+.lane-card span{display:inline-flex;min-height:32px;align-items:center;margin-top:14px;border:1px solid rgba(218,229,241,.12);background:rgba(7,9,13,.58);padding:6px 8px;color:var(--bone);font-size:10px;font-weight:1000;text-transform:uppercase}
 .proof-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:14px}
 .proof-card,.project-card,.review-card,.journal-card,.hire-card{
   border:1px solid var(--line);
@@ -325,6 +339,8 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .journal-slot span{position:relative;display:block;margin-top:5px;color:#d6c793;font-size:10px;line-height:1.16;font-weight:900}
 .journal-note{margin-top:14px;border:1px solid rgba(255,138,31,.34);border-left:3px solid var(--orange);background:rgba(255,138,31,.055);padding:11px 12px;color:#d6c793;font-size:13px;line-height:1.42;font-weight:780}
 .journal-note b{color:#ffb347;text-transform:uppercase}
+.journal-asset-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.journal-asset-links a{min-height:32px;display:inline-flex;align-items:center;border:1px solid rgba(19,212,232,.34);background:rgba(7,9,13,.58);padding:7px 9px;color:#7fe9f3;font-size:11px;font-weight:1000;text-transform:uppercase}
 .hire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .hire-card{padding:18px;min-height:188px}
 .hire-card strong{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(19,212,232,.36);padding:6px 8px;color:#7fe9f3;font-size:11px;text-transform:uppercase}
@@ -343,7 +359,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
   .journal-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signal-row,.lane-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hire-grid{grid-template-columns:1fr}
   h1{font-size:52px}
 }
@@ -362,6 +378,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .hire-cell{border-right:0}
   .hire-cell:nth-last-child(2){border-bottom:1px solid var(--line)}
   .signal-row{grid-template-columns:1fr}
+  .lane-grid{grid-template-columns:1fr}
   .about-line{grid-template-columns:1fr}
   .journal-slots{grid-template-columns:1fr}
   .review-status{grid-template-columns:1fr}
@@ -376,6 +393,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <a class="brand" href="./">Kenessy</a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="#about">About</a>
+      <a href="#lanes">Lanes</a>
       <a href="#work">Work</a>
       <a href="#reviews">Reviews</a>
       <a href="#journal">Journal</a>
@@ -408,7 +426,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -429,8 +447,43 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft, prompt-pack handoff, and illustrated journal lane.</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lanes">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Portfolio map</p><h2>Active Lanes</h2></div>
+        <p>The page is organized as a working map, not a landing page: product surfaces, review artifacts, worldbuilding, and verification all stay visible and linked.</p>
+      </div>
+      <div class="lane-grid">
+        <a class="lane-card" style="--tone:var(--cyan)" href="#proof">
+          <small>01 / Proof systems</small>
+          <h3>Builds that can be checked</h3>
+          <p>Static Pages output, source-of-truth generation, screenshots, fallback paths, and local/live QA loops.</p>
+          <span>Evidence over vibes</span>
+        </a>
+        <a class="lane-card" style="--tone:var(--orange)" href="${reportsHref}">
+          <small>02 / Review lab</small>
+          <h3>Game critique with receipts</h3>
+          <p>ALERTED score anatomy, taste-fit lanes, trust ledgers, spoiler policy, and replay journals.</p>
+          <span>Metro + Quantum Break</span>
+        </a>
+        <a class="lane-card" style="--tone:var(--violet)" href="${apocalypseHref}">
+          <small>03 / Narrative worlds</small>
+          <h3>Systems for strange settings</h3>
+          <p>World rules, procedures, lore structures, visual maps, and playable constraints for unusual concepts.</p>
+          <span>Apocalypse Express</span>
+        </a>
+        <a class="lane-card" style="--tone:var(--green)" href="${quantumJourneyHref}">
+          <small>04 / Illustrated journals</small>
+          <h3>Playthroughs as readable pages</h3>
+          <p>Session notes become comic-style 16:9 pages with image slots, review implications, and prompt handoff.</p>
+          <span>Prompt pack ready</span>
+        </a>
       </div>
     </div>
   </section>
@@ -526,11 +579,11 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <img src="${quantumSplashHref}" width="1672" height="941" alt="">
           </a>
           <div class="review-copy">
-            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span><span class="tag green">Journal ready</span></div>
+            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span><span class="tag green">Prompt pack ready</span></div>
             <h3>Quantum Break</h3>
             <p>Replay-ready Remedy sci-fi review scaffold with old-PC readiness checks, adversarial bias tests, and a separate illustrated journey for live narration.</p>
             <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
-            <div class="review-status" aria-label="Quantum Break review publication state"><span><b>State</b> Live draft</span><span><b>Gate</b> 4 checks open</span><span><b>Next</b> Journey images</span></div>
+            <div class="review-status" aria-label="Quantum Break review publication state"><span><b>State</b> Live draft</span><span><b>Gate</b> 4 checks open</span><span><b>Next</b> Images pending</span></div>
             <div class="review-sub-links"><a href="${quantumHref}">Open review</a><a href="${quantumJourneyHref}">Open journey</a></div>
           </div>
           <div class="score-box pending" aria-label="Quantum Break verdict locked until replay evidence"><b>LOCKED</b><small>Draft</small><em>4 gates open</em></div>
@@ -550,7 +603,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <img src="${quantumSplashHref}" width="1672" height="941" alt="">
         </a>
         <div class="journal-copy">
-          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 image-ready</span><span class="tag green">16:9 panels</span></div>
+          <div class="tag-row"><span class="tag cyan">Quantum Break</span><span class="tag amber">Page 01 image-ready</span><span class="tag green">Prompt pack ready</span></div>
           <h3>Illustrated Review Journal</h3>
           <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
           <div class="journal-slots" aria-label="Current image format recommendation">
@@ -560,6 +613,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <div class="journal-slot"><b>Drag</b><span>16:9 panel / friction</span></div>
           </div>
           <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page when the generated images arrive.</div>
+          <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Panel manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
         </div>
       </article>
