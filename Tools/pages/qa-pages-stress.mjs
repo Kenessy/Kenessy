@@ -160,8 +160,10 @@ async function auditHttp(base) {
   assert(panelManifestJson.defaultAspectRatio === '16:9', 'Quantum Break panel manifest default aspect ratio mismatch');
   assert(panelManifestJson.status === 'waiting-for-generated-images', 'Quantum Break panel manifest status mismatch');
   assert(Array.isArray(panelManifestJson.slots) && panelManifestJson.slots.length >= 6, 'Quantum Break panel manifest slot list missing');
+  assert(panelManifestJson.slots.filter((slot) => slot.requiredForCurrentPage).length === 4, 'Quantum Break panel manifest current-page required slots mismatch');
   assert(panelManifest.text.includes('qb-page-01-d-will-shadow.png'), 'Quantum Break panel manifest missing Page 01-D filename');
-  await fetchText(url(base, 'assets/img/quantum-break/README.md'));
+  const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
+  assert(panelReadme.text.includes('npm run qa:qb-assets') && panelReadme.text.includes('npm run qa:qb-assets:strict'), 'Quantum Break asset README missing QA workflow commands');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
 }

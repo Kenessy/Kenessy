@@ -150,6 +150,9 @@ async function auditDesignArtifacts(base) {
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));
   assert(panelManifest.text.includes('"defaultAspectRatio": "16:9"'), 'Quantum Break panel manifest does not preserve 16:9 contract');
+  assert(panelManifest.text.includes('"requiredForCurrentPage": true'), 'Quantum Break panel manifest does not mark current-page required slots');
+  const panelReadme = await fetchText(url(base, 'assets/img/quantum-break/README.md'));
+  assert(panelReadme.text.includes('npm run qa:qb-assets'), 'Quantum Break asset README does not document asset QA');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');
