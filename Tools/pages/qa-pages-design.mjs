@@ -156,9 +156,11 @@ async function auditDesignArtifacts(base) {
   assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(quantumBreakJourney.text), 'Quantum Break journey CSS has negative letter spacing');
   const quantumBreakReport = await fetchText(url(base, 'plater-game-reports/games/quantum-break/'));
-  assert(quantumBreakReport.text.includes('.score-panel-locked') && quantumBreakReport.text.includes('.evidence-gates') && quantumBreakReport.text.includes('.gate-card'), 'Quantum Break report evidence-gate styling is missing');
+  assert(quantumBreakReport.text.includes('.score-panel-locked') && quantumBreakReport.text.includes('.hero-gate-list') && quantumBreakReport.text.includes('.evidence-gates') && quantumBreakReport.text.includes('.gate-card'), 'Quantum Break report evidence-gate styling is missing');
   assert(quantumBreakReport.text.includes('.hero h1{font-size:104px}') && quantumBreakReport.text.includes('.section-head h2{font-size:44px}'), 'Quantum Break report fixed type-size overrides are missing');
+  assert(!/font-size:clamp\([^)]*vw/i.test(quantumBreakReport.text), 'Quantum Break report CSS uses viewport-scaled font sizing');
   assert(quantumBreakReport.text.includes('Evidence Gate') && quantumBreakReport.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence-gate copy is missing');
+  assert(quantumBreakReport.text.includes('aria-label="Quantum Break score unlock gates"') && quantumBreakReport.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail is missing');
   assert(quantumBreakReport.text.includes('<div class="num">High</div>') && quantumBreakReport.text.includes('<div class="num">None</div>'), 'Quantum Break report provisional fit labels are missing');
   assert(!/>--</.test(quantumBreakReport.text), 'Quantum Break report still has raw dash placeholders');
   const panelManifest = await fetchText(url(base, quantumBreakPanelManifestPath));

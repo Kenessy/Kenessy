@@ -153,6 +153,7 @@ async function auditHttp(base) {
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report missing panel manifest link');
   assert(quantumBreak.text.includes('Evidence Gate') && quantumBreak.text.includes('Replay Gate Matrix'), 'Quantum Break report evidence gate matrix missing');
+  assert(quantumBreak.text.includes('Quantum Break score unlock gates') && quantumBreak.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail missing');
   assert(quantumBreak.text.includes('High</div><p>Wants cinematic time-fracture atmosphere') && quantumBreak.text.includes('None</div><p>Looks for co-op'), 'Quantum Break fit preview labels missing');
   assert(quantumBreak.text.includes('Replay Notes So Far') && quantumBreak.text.includes('Project Promenade'), 'Quantum Break report live evidence section missing');
   assert(!/>--</.test(quantumBreak.text), 'Quantum Break report still exposes raw dash placeholders');

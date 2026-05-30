@@ -164,6 +164,7 @@ async function auditHttpSurface(base) {
   assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report does not link panel manifest');
   assert(quantumBreak.text.includes('Score locked') && quantumBreak.text.includes('Evidence Gate'), 'Quantum Break score lock missing');
+  assert(quantumBreak.text.includes('Quantum Break score unlock gates') && quantumBreak.text.includes('<b>Final act</b>'), 'Quantum Break hero score gate rail missing');
   assert(quantumBreak.text.includes('Replay Notes So Far'), 'Quantum Break report live evidence section missing');
   assert(quantumBreak.text.includes('Project Promenade'), 'Quantum Break report does not surface Page 01 evidence');
   assert(quantumBreak.text.includes('Replay Gate Matrix') && quantumBreak.text.includes('Combat feel') && quantumBreak.text.includes('Episode flow') && quantumBreak.text.includes('PC state') && quantumBreak.text.includes('Final act'), 'Quantum Break report gate matrix missing');
