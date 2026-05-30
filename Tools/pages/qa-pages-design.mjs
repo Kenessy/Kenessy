@@ -38,6 +38,7 @@ function contentType(filePath) {
   if (ext === '.xml') return 'application/xml; charset=utf-8';
   if (ext === '.txt') return 'text/plain; charset=utf-8';
   if (ext === '.png') return 'image/png';
+  if (ext === '.svg') return 'image/svg+xml';
   return 'application/octet-stream';
 }
 
@@ -127,9 +128,11 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
+  assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro splash asset is missing');
+  assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash asset is missing');
   assert(!/font-size:clamp\([^)]*vw/i.test(root.text), 'homepage CSS uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(root.text), 'homepage CSS has negative letter spacing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');

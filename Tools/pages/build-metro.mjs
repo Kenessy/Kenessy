@@ -10,9 +10,15 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '../..');
 const sourcePath = path.join(scriptDir, 'sources/metro-2033-redux/main_canvas_diegetic_equation.jsx');
 const reportDir = path.join(repoRoot, 'docs/plater-game-reports/games/metro-2033-redux');
+const quantumBreakReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break');
+const quantumBreakJourneyDir = path.join(quantumBreakReportDir, 'journey');
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const bundlePath = path.join(reportDir, bundleName);
 const reportIndexPath = path.join(reportDir, 'index.html');
+const quantumBreakReportIndexPath = path.join(quantumBreakReportDir, 'index.html');
+const quantumBreakJourneyIndexPath = path.join(quantumBreakJourneyDir, 'index.html');
+const quantumBreakReportSourcePath = path.join(scriptDir, 'sources/quantum-break/report.html');
+const quantumBreakJourneySourcePath = path.join(scriptDir, 'sources/quantum-break/journey.html');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
 const robotsPath = path.join(repoRoot, 'docs/robots.txt');
@@ -22,7 +28,11 @@ const publicSourcePath = path.join(reportDir, 'main_canvas_diegetic_equation.jsx
 
 const siteBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
+const quantumBreakReportPath = 'plater-game-reports/games/quantum-break/';
+const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 const reportUrl = new URL(reportPath, siteBase).toString();
+const quantumBreakReportUrl = new URL(quantumBreakReportPath, siteBase).toString();
+const quantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, siteBase).toString();
 const reportsUrl = new URL('plater-game-reports/', siteBase).toString();
 const apocalypseUrl = new URL('apocalypse-express/', siteBase).toString();
 const githubUrl = 'https://github.com/Kenessy/Kenessy';
@@ -133,6 +143,8 @@ function rootHtml(buildId) {
     siteBase,
     reportPath,
     reportsPath: 'plater-game-reports/',
+    quantumBreakPath: quantumBreakReportPath,
+    quantumBreakJourneyPath,
     apocalypsePath: 'apocalypse-express/',
     githubUrl
   });
@@ -149,14 +161,16 @@ function reportsIndexHtml(buildId) {
 <link rel="canonical" href="${reportsUrl}">
 <meta name="description" content="Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.">
 <meta name="theme-color" content="#05070a">
+<meta name="build-id" content="${buildId}">
 <style>
-:root{--bg:#05070a;--ink:#eef8ff;--muted:rgba(238,248,255,.62);--cyan:#00e5ff;--orange:#ff7a00;--green:#16ffc1}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:start center;padding:30px 14px;color:var(--ink);background:repeating-linear-gradient(90deg,rgba(0,229,255,.05) 0 1px,transparent 1px 88px),linear-gradient(180deg,#030405,#070a0d 48%,#030405);font-family:Inter,system-ui,Segoe UI,sans-serif}main{width:min(100%,980px);display:grid;gap:18px}header{display:grid;gap:10px;border-bottom:3px solid rgba(238,248,255,.12);padding-bottom:18px}h1{margin:0;color:var(--orange);font-size:3.4rem;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000}p{margin:0;color:var(--muted);font-size:15px;line-height:1.45;font-weight:780}.report{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;border:5px solid var(--ink);background:#060708;box-shadow:12px 12px 0 var(--orange),-6px -6px 0 var(--cyan),0 28px 80px #000;padding:22px;color:inherit;text-decoration:none}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}h2{margin:8px 0 10px;color:var(--ink);font-size:2.4rem;line-height:.95;font-weight:1000;text-transform:uppercase;text-shadow:4px 4px 0 #000}.score{display:grid;place-items:center;min-width:118px;min-height:118px;border:4px solid var(--cyan);background:#0006;box-shadow:6px 6px 0 var(--orange);color:var(--orange);font-size:42px;font-weight:1000;text-shadow:4px 4px 0 #000}.mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mini span{border:2px solid var(--cyan);padding:6px 8px;font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted)}.mini .good{border-color:var(--green);color:var(--green)}@media(max-width:680px){.report{grid-template-columns:1fr}.score{justify-self:start}}
+:root{--bg:#05070a;--ink:#eef8ff;--muted:rgba(238,248,255,.62);--cyan:#00e5ff;--orange:#ff7a00;--green:#16ffc1;--line:rgba(238,248,255,.16)}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:start center;padding:30px 14px;color:var(--ink);background:repeating-linear-gradient(90deg,rgba(0,229,255,.05) 0 1px,transparent 1px 88px),linear-gradient(180deg,#030405,#070a0d 48%,#030405);font-family:Inter,system-ui,Segoe UI,sans-serif}main{width:min(100%,980px);display:grid;gap:18px}a{color:inherit;text-decoration:none}header{display:grid;gap:10px;border-bottom:3px solid rgba(238,248,255,.12);padding-bottom:18px}h1{margin:0;color:var(--orange);font-size:3.4rem;line-height:.86;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000}p{margin:0;color:var(--muted);font-size:15px;line-height:1.45;font-weight:780}.report{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;border:5px solid var(--ink);background:#060708;box-shadow:12px 12px 0 var(--orange),-6px -6px 0 var(--cyan),0 28px 80px #000;padding:22px;color:inherit;text-decoration:none}.report.draft{border-color:rgba(238,248,255,.72);box-shadow:12px 12px 0 #26384f,-6px -6px 0 var(--cyan),0 28px 80px #000}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}h2{margin:8px 0 10px;color:var(--ink);font-size:2.4rem;line-height:.95;font-weight:1000;text-transform:uppercase;text-shadow:4px 4px 0 #000}.score{display:grid;place-items:center;min-width:118px;min-height:118px;border:4px solid var(--cyan);background:#0006;box-shadow:6px 6px 0 var(--orange);color:var(--orange);font-size:42px;font-weight:1000;text-shadow:4px 4px 0 #000;text-transform:uppercase}.score.pending{font-size:28px;color:var(--muted);box-shadow:6px 6px 0 #26384f}.mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mini span{border:2px solid var(--cyan);padding:6px 8px;font-size:11px;font-weight:1000;text-transform:uppercase;color:var(--muted)}.mini .good{border-color:var(--green);color:var(--green)}.mini .pending{border-color:var(--orange);color:#ffcf83}.sub{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.sub a{border:2px solid var(--line);padding:6px 8px;font-size:11px;font-weight:1000;text-transform:uppercase;color:#ffcf83}@media(max-width:680px){.report{grid-template-columns:1fr}.score{justify-self:start}}
 </style>
 </head>
 <body>
 <main>
 <header><p><a href="../">Kenessy home</a></p><h1>ALERT Reports</h1><p>Canon game verdicts, ALERTED axis evidence, overlays, verdict logic, and adversarial audit files.</p></header>
 <a class="report" href="games/metro-2033-redux/?v=${buildId}"><div><div class="kicker">Metro 2033 Redux</div><h2>ALERTED Field Report</h2><p>Worth playing. Atmosphere-first, linear, cohesive action horror with bounded agency and visible caveats.</p><div class="mini"><span>A Atmosphere</span><span>L Loop</span><span>E Engagement</span><span>R Readability</span><span>T Technical</span><span class="good">86 / A</span></div></div><div class="score">86</div></a>
+<article class="report draft"><div><div class="kicker">Quantum Break</div><h2>Review Draft Shell</h2><p>Replay-ready structure for a Remedy cinematic sci-fi review, plus an illustrated journey page built from live narration.</p><div class="mini"><span>Promise</span><span>Loop</span><span>Agency</span><span>Trust</span><span>Readiness</span><span class="pending">Draft</span></div><div class="sub"><a href="games/quantum-break/">Open review</a><a href="games/quantum-break/journey/">Open journey</a></div></div><div class="score pending">--</div></article>
 </main>
 </body>
 </html>
@@ -171,7 +185,7 @@ Sitemap: ${new URL('sitemap.xml', siteBase).toString()}
 }
 
 function sitemapXml(buildDate) {
-  const urls = [siteBase, reportsUrl, reportUrl, apocalypseUrl];
+  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, apocalypseUrl];
   const items = urls.map((url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${buildDate}</lastmod>
@@ -210,6 +224,10 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060
 async function main() {
   logStep(`reading source ${path.relative(repoRoot, sourcePath)}`);
   const source = await readFile(sourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, quantumBreakReportSourcePath)}`);
+  const quantumBreakReportHtml = await readFile(quantumBreakReportSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, quantumBreakJourneySourcePath)}`);
+  const quantumBreakJourneyHtml = await readFile(quantumBreakJourneySourcePath, 'utf8');
   const sourceHash = sha256(source);
   const buildId = sourceHash.slice(0, 12);
   const { css, cssStart } = extractTemplateCss(source);
@@ -243,7 +261,11 @@ async function main() {
     const bundle = await readFile(bundlePath, 'utf8');
     const bundleHash = sha256(bundle);
     logStep(`writing Pages artifacts build=${buildId}`);
+    await mkdir(quantumBreakReportDir, { recursive: true });
+    await mkdir(quantumBreakJourneyDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
+    await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
+    await writeFile(quantumBreakJourneyIndexPath, quantumBreakJourneyHtml, 'utf8');
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
     await writeFile(robotsPath, robotsTxt(), 'utf8');

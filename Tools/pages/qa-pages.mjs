@@ -11,9 +11,13 @@ const docsRoot = path.join(repoRoot, 'docs');
 const mode = process.argv.includes('--live') ? 'live' : 'local';
 const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
+const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
+const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const sourceName = 'main_canvas_diegetic_equation.jsx';
 const expectedLiveReportUrl = new URL(reportPath, liveBase).toString();
+const expectedLiveQuantumBreakUrl = new URL(quantumBreakPath, liveBase).toString();
+const expectedLiveQuantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, liveBase).toString();
 
 function checkpoint(message) {
   console.log(`[qa:pages:${mode}] ${new Date().toISOString()} ${message}`);
@@ -35,6 +39,8 @@ function contentType(filePath) {
   if (ext === '.js') return 'application/javascript; charset=utf-8';
   if (ext === '.xml') return 'application/xml; charset=utf-8';
   if (ext === '.txt') return 'text/plain; charset=utf-8';
+  if (ext === '.svg') return 'image/svg+xml';
+  if (ext === '.png') return 'image/png';
   return 'application/octet-stream';
 }
 
@@ -126,16 +132,31 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
+  assert(root.text.includes(quantumBreakPath), 'root homepage does not link Quantum Break');
+  assert(root.text.includes('Quantum Break'), 'root homepage Quantum Break card missing');
   assert(root.text.includes('assets/img/triad-validation-flow.png'), 'root homepage project visual missing');
   assert(root.text.includes('assets/img/metro-2033-redux-review-splash.png'), 'root homepage Metro review splash missing');
+  assert(root.text.includes('assets/img/quantum-break-review-journey-splash.svg'), 'root homepage Quantum Break splash missing');
   assert(root.text.includes('<link rel="canonical" href="https://kenessy.github.io/Kenessy/">'), 'root canonical metadata missing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'root still contains redirect behavior');
   await fetchText(url(base, 'assets/img/triad-validation-flow.png'));
   await fetchText(url(base, 'assets/img/metro-2033-redux-review-splash.png'));
+  await fetchText(url(base, 'assets/img/quantum-break-review-journey-splash.svg'));
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
+  assert(reports.text.includes('games/quantum-break/'), 'reports index does not link Quantum Break');
+  assert(reports.text.includes('games/quantum-break/journey/'), 'reports index does not link Quantum Break journey');
   assert(reports.text.includes('../'), 'reports index does not link back to homepage');
+
+  const quantumBreak = await fetchText(url(base, quantumBreakPath));
+  assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
+  assert(quantumBreak.text.includes('Open Journey'), 'Quantum Break report does not link journey');
+  assert(quantumBreak.text.includes('Score locked'), 'Quantum Break score lock missing');
+
+  const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey route lock missing');
+  assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
 
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`${bundleName}?v=${buildId}`), 'report HTML does not load versioned bundle');
@@ -155,6 +176,8 @@ async function auditHttpSurface(base) {
 
   const sitemap = await fetchText(url(base, 'sitemap.xml'));
   assert(sitemap.text.includes(expectedLiveReportUrl), 'sitemap missing live report URL');
+  assert(sitemap.text.includes(expectedLiveQuantumBreakUrl), 'sitemap missing Quantum Break report URL');
+  assert(sitemap.text.includes(expectedLiveQuantumBreakJourneyUrl), 'sitemap missing Quantum Break journey URL');
 
   await fetchText(url(base, 'missing-page-for-qa.html'), 404);
   await fetchText(url(base, `${reportPath}${sourceName}`), 404);
@@ -203,14 +226,17 @@ async function auditViewports(browser, base, buildId) {
       const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
       const proofImage = document.querySelector('.proof-card img');
       const reviewSplash = document.querySelector('.review-media img');
+      const quantumSplash = document.querySelector('.qb-card .review-media img');
       return {
         title: document.title,
         hasHomeRoot: Boolean(document.querySelector('.home-root')),
         h1: document.querySelector('h1')?.textContent.trim(),
         hasReportLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes(currentReportPath)),
+        hasQuantumBreakLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/quantum-break/')),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
         imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
         reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
+        quantumSplashComplete: Boolean(quantumSplash && quantumSplash.complete && quantumSplash.naturalWidth > 0),
         horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
         rootWidth: root.scrollWidth,
         clientWidth: root.clientWidth,
@@ -223,9 +249,11 @@ async function auditViewports(browser, base, buildId) {
     assert(homeMetrics.hasHomeRoot, `${viewport.name} homepage root missing`);
     assert(homeMetrics.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
     assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
+    assert(homeMetrics.hasQuantumBreakLink, `${viewport.name} homepage missing Quantum Break link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
     assert(homeMetrics.reviewSplashComplete, `${viewport.name} homepage Metro review splash did not load`);
+    assert(homeMetrics.quantumSplashComplete, `${viewport.name} homepage Quantum Break splash did not load`);
     assert(!homeMetrics.horizontalOverflow, `${viewport.name} homepage overflow ${homeMetrics.rootWidth}/${homeMetrics.clientWidth}`);
     assert(homeMetrics.linkCount >= 7, `${viewport.name} homepage expected navigation links`);
     assert(!homeMetrics.badText, `${viewport.name} homepage has placeholder text`);

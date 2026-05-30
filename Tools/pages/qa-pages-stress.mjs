@@ -11,6 +11,8 @@ const outputDir = path.join(repoRoot, '.cache/pages-stress-qa');
 const mode = process.argv.includes('--live') ? 'live' : 'local';
 const liveBase = 'https://kenessy.github.io/Kenessy/';
 const reportPath = 'plater-game-reports/games/metro-2033-redux/';
+const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
+const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 
 const runState = {
   mode,
@@ -38,6 +40,7 @@ function contentType(filePath) {
   if (ext === '.xml') return 'application/xml; charset=utf-8';
   if (ext === '.txt') return 'text/plain; charset=utf-8';
   if (ext === '.png') return 'image/png';
+  if (ext === '.svg') return 'image/svg+xml';
   return 'application/octet-stream';
 }
 
@@ -124,9 +127,11 @@ async function auditHttp(base) {
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
+  assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
+  assert(root.text.includes('quantum-break-review-journey-splash.svg'), 'portfolio homepage Quantum Break splash missing');
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'portfolio homepage still redirects');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
   assert(report.text.includes(`main_canvas_diegetic_equation.bundle.js?v=${buildId}`), 'report bundle URL is not versioned with current build id');
@@ -134,6 +139,10 @@ async function auditHttp(base) {
   assert(report.text.includes('property="og:title"'), 'report Open Graph title missing');
   assert(report.text.includes('name="twitter:card"'), 'report Twitter card metadata missing');
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
+  const quantumBreak = await fetchText(url(base, quantumBreakPath));
+  assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
+  const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
+  assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
   await checkpoint(`HTTP entrypoints ok build=${buildId}`);
   return buildId;
 }
@@ -175,9 +184,10 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
   assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
   assert(initial.sectionTitles.join('|') === 'Signal Stack|Proof Surface|Field Work|Game Reviews|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
-  assert(initial.hasReportLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
+  assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);
   assert(initial.imageComplete, `${viewport.name} homepage visual did not load`);
   assert(initial.reviewSplashComplete, `${viewport.name} homepage Metro splash did not load`);
+  assert(initial.quantumSplashComplete, `${viewport.name} homepage Quantum Break splash did not load`);
   assert(initial.linkCount >= 7, `${viewport.name} homepage expected links`);
   assert(initial.smallInteractive.length === 0, `${viewport.name} homepage small tap targets ${JSON.stringify(initial.smallInteractive)}`);
   assert(!initial.badText, `${viewport.name} homepage bad placeholder text ${initial.badText}`);
@@ -331,6 +341,85 @@ async function auditViewport(browser, base, buildId, viewport) {
   await checkpoint(`viewport ${viewport.name} ok`, { scrollChecks: uniquePositions.length });
 }
 
+async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
+  await checkpoint(`${pageSpec.slug} viewport ${viewport.name} start`, viewport);
+  const baseOrigin = new URL(base).origin;
+  const context = await browser.newContext({
+    viewport: { width: viewport.width, height: viewport.height },
+    deviceScaleFactor: viewport.deviceScaleFactor || 1,
+    isMobile: Boolean(viewport.isMobile),
+    hasTouch: Boolean(viewport.isMobile),
+    reducedMotion: 'reduce'
+  });
+  const page = await context.newPage();
+  const consoleErrors = [];
+  const pageErrors = [];
+  const failedRequests = [];
+  const badResponses = [];
+  const loadedOrigins = new Set();
+
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  page.on('requestfailed', (request) => failedRequests.push(`${request.url()} ${request.failure()?.errorText || ''}`));
+  page.on('response', (response) => {
+    const responseUrl = response.url();
+    loadedOrigins.add(new URL(responseUrl).origin);
+    if (response.status() >= 400) badResponses.push(`${response.status()} ${responseUrl}`);
+  });
+
+  const response = await page.goto(`${url(base, pageSpec.path)}?stress=${viewport.name}`, { waitUntil: 'load', timeout: 30000 });
+  await page.waitForTimeout(900);
+  assert(response?.status() === 200, `${pageSpec.slug} ${viewport.name} returned ${response?.status()}`);
+
+  const initial = await collectStaticPageMetrics(page);
+  assert(/Quantum\s*Break/i.test(initial.title), `${pageSpec.slug} ${viewport.name} title mismatch ${initial.title}`);
+  assert(/Quantum\s*Break/i.test(initial.h1), `${pageSpec.slug} ${viewport.name} h1 mismatch ${initial.h1}`);
+  assert(initial.bodyText.includes(pageSpec.expectedText), `${pageSpec.slug} ${viewport.name} missing expected text ${pageSpec.expectedText}`);
+  assert(initial.linkCount >= pageSpec.minLinks, `${pageSpec.slug} ${viewport.name} expected links ${initial.linkCount}`);
+  assert(initial.bodyPrefix && !initial.bodyPrefix.startsWith(':root') && !initial.bodyPrefix.startsWith('.'), `${pageSpec.slug} ${viewport.name} body starts with raw CSS`);
+  assert(!initial.badText, `${pageSpec.slug} ${viewport.name} bad placeholder text ${initial.badText}`);
+  await auditInternalLinks(base, initial.hrefs);
+
+  const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  const step = Math.max(240, Math.floor(viewport.height * 0.82));
+  const positions = [];
+  for (let y = 0; y < scrollHeight; y += step) positions.push(y);
+  positions.push(Math.max(0, scrollHeight - viewport.height));
+  const uniquePositions = [...new Set(positions)].sort((a, b) => a - b);
+
+  for (const [index, y] of uniquePositions.entries()) {
+    await page.evaluate((nextY) => window.scrollTo(0, nextY), y);
+    await page.waitForTimeout(70);
+    const metrics = await collectStaticPageMetrics(page);
+    runState.viewports.push({ viewport: `${pageSpec.slug}-${viewport.name}`, scrollIndex: index, y, metrics });
+    assert(!metrics.horizontalOverflow, `${pageSpec.slug} ${viewport.name} y=${y} horizontal overflow ${metrics.scrollWidth}/${metrics.clientWidth}`);
+    assert(metrics.meaningfulOverflow.length === 0, `${pageSpec.slug} ${viewport.name} y=${y} offscreen elements ${JSON.stringify(metrics.meaningfulOverflow)}`);
+    assert(!metrics.badText, `${pageSpec.slug} ${viewport.name} y=${y} bad placeholder text ${metrics.badText}`);
+    await checkpoint(`${pageSpec.slug} viewport ${viewport.name} scroll ${index + 1}/${uniquePositions.length}`, {
+      y,
+      scrollHeight,
+      overflow: metrics.horizontalOverflow
+    });
+  }
+
+  await page.screenshot({
+    path: path.join(outputDir, `${mode}-${pageSpec.slug}-${viewport.name}-full.png`),
+    fullPage: true
+  });
+
+  const unexpectedOrigins = [...loadedOrigins].filter((origin) => origin !== baseOrigin);
+  assert(unexpectedOrigins.length === 0, `${pageSpec.slug} ${viewport.name} loaded unexpected origins ${unexpectedOrigins.join(', ')}`);
+  assert(badResponses.length === 0, `${pageSpec.slug} ${viewport.name} HTTP error responses ${badResponses.join(' | ')}`);
+  assert(consoleErrors.length === 0, `${pageSpec.slug} ${viewport.name} console errors ${consoleErrors.join(' | ')}`);
+  assert(pageErrors.length === 0, `${pageSpec.slug} ${viewport.name} page errors ${pageErrors.join(' | ')}`);
+  assert(failedRequests.length === 0, `${pageSpec.slug} ${viewport.name} failed requests ${failedRequests.join(' | ')}`);
+
+  await context.close();
+  await checkpoint(`${pageSpec.slug} viewport ${viewport.name} ok`, { scrollChecks: uniquePositions.length });
+}
+
 async function collectHomeMetrics(page, buildId) {
   return page.evaluate((expectedBuildId) => {
     const rectFor = (el) => {
@@ -361,6 +450,7 @@ async function collectHomeMetrics(page, buildId) {
       .map((el) => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
     const proofImage = document.querySelector('.proof-card img');
     const reviewSplash = document.querySelector('.review-media img');
+    const quantumSplash = document.querySelector('.qb-card .review-media img');
     const hrefs = [...document.querySelectorAll('a[href]')].map((el) => el.href);
     return {
       finalUrl: location.href,
@@ -370,10 +460,12 @@ async function collectHomeMetrics(page, buildId) {
       h1: document.querySelector('h1')?.textContent.trim() || '',
       sectionTitles: [...document.querySelectorAll('.section h2')].map((el) => el.textContent.replace(/\s+/g, ' ').trim()),
       hasReportLink: hrefs.some((href) => href.includes('plater-game-reports/games/metro-2033-redux/')),
+      hasQuantumBreakLink: hrefs.some((href) => href.includes('plater-game-reports/games/quantum-break/')),
       hasReportsLink: hrefs.some((href) => href.includes('plater-game-reports/')),
       hasApocalypseLink: hrefs.some((href) => href.includes('apocalypse-express/')),
       imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
       reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
+      quantumSplashComplete: Boolean(quantumSplash && quantumSplash.complete && quantumSplash.naturalWidth > 0),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -385,6 +477,44 @@ async function collectHomeMetrics(page, buildId) {
       smallInteractive
     };
   }, buildId);
+}
+
+async function collectStaticPageMetrics(page) {
+  return page.evaluate(() => {
+    const rectFor = (el) => {
+      const rect = el.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+    };
+    const isVisible = (el) => {
+      const rect = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
+    };
+    const visible = [...document.querySelectorAll('*')].filter(isVisible);
+    const meaningfulOverflow = visible
+      .filter((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.right > window.innerWidth + 1 || rect.left < -1;
+      })
+      .slice(0, 8)
+      .map((el) => ({ tag: el.tagName, className: String(el.className), text: (el.textContent || '').trim().slice(0, 80), rect: rectFor(el) }));
+    const bodyText = document.body.textContent.replace(/\s+/g, ' ').trim();
+    const badTextMatch = bodyText.match(/\b(undefined|NaN|\[object Object\])\b/i);
+    return {
+      finalUrl: location.href,
+      title: document.title,
+      h1: document.querySelector('h1')?.textContent.replace(/\s+/g, ' ').trim() || '',
+      bodyText,
+      bodyPrefix: bodyText.slice(0, 140),
+      horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+      meaningfulOverflow,
+      badText: badTextMatch ? badTextMatch[0] : '',
+      linkCount: document.querySelectorAll('a').length,
+      hrefs: [...document.querySelectorAll('a[href]')].map((el) => el.href)
+    };
+  });
 }
 
 async function collectMetrics(page, buildId) {
@@ -513,6 +643,18 @@ async function main() {
       for (const viewport of viewports) {
         await auditHomeViewport(browser, base, buildId, viewport);
         await auditViewport(browser, base, buildId, viewport);
+        await auditStaticPageViewport(browser, base, {
+          slug: 'quantum-break-report',
+          path: quantumBreakPath,
+          expectedText: 'ALERTED field report draft',
+          minLinks: 5
+        }, viewport);
+        await auditStaticPageViewport(browser, base, {
+          slug: 'quantum-break-journey',
+          path: quantumBreakJourneyPath,
+          expectedText: 'Review-canon route selected',
+          minLinks: 6
+        }, viewport);
       }
       await auditFailureModes(browser, base, buildId);
     } finally {

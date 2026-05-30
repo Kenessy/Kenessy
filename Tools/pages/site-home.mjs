@@ -11,6 +11,8 @@ export function portfolioHomeHtml({
   siteBase,
   reportPath,
   reportsPath,
+  quantumBreakPath = 'plater-game-reports/games/quantum-break/',
+  quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/',
   apocalypsePath,
   githubUrl
 }) {
@@ -18,9 +20,12 @@ export function portfolioHomeHtml({
   const description = 'Portfolio hub for Kenessy: systems design, adversarial QA, game critique, Apocalypse Express, and public review artifacts.';
   const metroHref = `${reportPath}?v=${buildId}`;
   const reportsHref = reportsPath;
+  const quantumHref = quantumBreakPath;
+  const quantumJourneyHref = quantumBreakJourneyPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashHref = 'assets/img/metro-2033-redux-review-splash.png';
+  const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
   const canonical = siteBase;
 
   return `<!doctype html>
@@ -274,6 +279,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 }
 .review-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 58%,rgba(7,9,13,.42));pointer-events:none}
 .review-copy{display:grid;align-content:center;padding:20px}
+.review-stack{display:grid;gap:18px}
+.qb-card{grid-template-columns:minmax(460px,1.12fr) minmax(0,.92fr) 132px;align-items:center}
+.qb-card .review-media{display:flex;align-items:center;justify-content:center;min-height:0;background:#03070d}
+.qb-card .review-media img{width:100%;height:auto;min-height:0;aspect-ratio:1672/941;object-fit:contain;object-position:center}
+.qb-card .review-media::after{background:linear-gradient(90deg,transparent 74%,rgba(7,9,13,.36))}
+.qb-card .review-copy{padding:22px 20px}
 .score-box{
   border:1px solid rgba(255,138,31,.48);
   background:linear-gradient(145deg,rgba(255,138,31,.18),rgba(7,9,13,.88));
@@ -285,7 +296,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 }
 .score-box span{display:block;text-align:center;color:var(--orange);font-size:60px;line-height:.86;font-weight:1000}
 .score-box small{display:block;margin-top:9px;color:var(--bone);font-size:34px;line-height:1;font-weight:1000}
+.score-box.pending{align-self:stretch;min-height:156px}
+.score-box.pending span{font-size:54px;color:var(--muted)}
+.score-box.pending small{font-size:18px;color:#ffb347}
 .review-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
+.review-sub-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.review-sub-links a{border:1px solid var(--line);padding:7px 9px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase}
 .hire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .hire-card{padding:18px;min-height:188px}
 .hire-card strong{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(19,212,232,.36);padding:6px 8px;color:#7fe9f3;font-size:11px;text-transform:uppercase}
@@ -293,11 +309,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .footer a{min-height:32px;display:inline-flex;align-items:center;color:#ffb347;font-weight:900}
 @media(max-width:960px){
-  .hero-stage,.section-head,.proof-grid,.project-grid,.project-card.featured,.review-card{grid-template-columns:1fr}
+  .hero-stage,.section-head,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card{grid-template-columns:1fr}
   .hero-copy{min-height:auto}
   .operator-panel{min-height:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .review-media img{aspect-ratio:16/9;min-height:0}
+  .qb-card .review-media img{aspect-ratio:1672/941}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
   .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -362,7 +379,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> portfolio root, Metro review, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -438,21 +455,36 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
-        <p>The Metro report is the current flagship: not just a verdict, but an inspectable argument with player-fit, score logic, caveats, and trust evidence.</p>
+        <p>The Metro report is the current flagship. Quantum Break is staged under it as the next live draft with a separate journey page.</p>
       </div>
-      <a class="review-card" href="${metroHref}">
-        <span class="review-media" aria-hidden="true">
-          <img src="${metroSplashHref}" width="1600" height="900" alt="">
-        </span>
-        <div class="review-copy">
-          <div class="tag-row"><span class="tag cyan">ALERTED report</span><span class="tag green">Published</span></div>
-          <h3>Metro 2033 Redux</h3>
-          <p>Atmosphere-first survival FPS verdict with player-fit lanes, score strip, correction ledger, spoiler-light judgment, trust layer, and dossier evidence arc.</p>
-          <div class="tag-row"><span class="tag">Atmosphere</span><span class="tag">Linear FPS</span><span class="tag">Survival horror</span><span class="tag amber">Caveated buy</span></div>
-          <div class="review-link">Open current build</div>
-        </div>
-        <div class="score-box" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
-      </a>
+      <div class="review-stack">
+        <a class="review-card" href="${metroHref}">
+          <span class="review-media" aria-hidden="true">
+            <img src="${metroSplashHref}" width="1600" height="900" alt="">
+          </span>
+          <div class="review-copy">
+            <div class="tag-row"><span class="tag cyan">ALERTED report</span><span class="tag green">Published</span></div>
+            <h3>Metro 2033 Redux</h3>
+            <p>Atmosphere-first survival FPS verdict with player-fit lanes, score strip, correction ledger, spoiler-light judgment, trust layer, and dossier evidence arc.</p>
+            <div class="tag-row"><span class="tag">Atmosphere</span><span class="tag">Linear FPS</span><span class="tag">Survival horror</span><span class="tag amber">Caveated buy</span></div>
+            <div class="review-link">Open current build</div>
+          </div>
+          <div class="score-box" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
+        </a>
+        <article class="review-card qb-card">
+          <a class="review-media" href="${quantumHref}" aria-label="Open Quantum Break review">
+            <img src="${quantumSplashHref}" width="1672" height="941" alt="">
+          </a>
+          <div class="review-copy">
+            <div class="tag-row"><span class="tag cyan">Steam Completions</span><span class="tag amber">Draft shell</span></div>
+            <h3>Quantum Break</h3>
+            <p>Replay-ready Remedy sci-fi review scaffold with old-PC readiness checks, adversarial bias tests, and a separate illustrated journey for live narration.</p>
+            <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
+            <div class="review-sub-links"><a href="${quantumHref}">Open review</a><a href="${quantumJourneyHref}">Open journey</a></div>
+          </div>
+          <div class="score-box pending" aria-label="Quantum Break score pending"><span>--</span><small>Draft</small></div>
+        </article>
+      </div>
     </div>
   </section>
 
