@@ -137,6 +137,8 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
   assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
+  assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling is missing');
+  assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
   assert(!/\.site-nav\{[^}]*position:sticky/i.test(root.text), 'portfolio homepage nav is sticky and can contaminate full-page captures');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');
@@ -147,6 +149,8 @@ async function auditDesignArtifacts(base) {
   assert(!/http-equiv="refresh"|window\.location\.replace/.test(root.text), 'homepage still contains redirect behavior');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('.comic-page') && quantumBreakJourney.text.includes('.comic-board'), 'Quantum Break journey comic-page styling is missing');
+  assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b') && quantumBreakJourney.text.includes('.slot-label span'), 'Quantum Break journey comic slot polish styling is missing');
+  assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy is missing');
   assert(quantumBreakJourney.text.includes('.panel-frame') && quantumBreakJourney.text.includes('data-image-ratio="16:9"'), 'Quantum Break journey 16:9 frame styling is missing');
   assert(quantumBreakJourney.text.includes('IMAGE SLOT') && quantumBreakJourney.text.includes('.panel-frame-ready:before,.panel-frame-ready:after{display:none}'), 'Quantum Break journey storyboard slot styling is missing');
   assert(quantumBreakJourney.text.includes('data-qb-slot="page-01-a"') && quantumBreakJourney.text.includes('data-qb-slot="page-02-b"'), 'Quantum Break journey image slot markers are missing');

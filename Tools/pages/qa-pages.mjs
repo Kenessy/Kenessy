@@ -136,6 +136,8 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
   assert(root.text.includes('Play It Together'), 'root homepage journal section missing');
   assert(root.text.includes('16:9 panel'), 'root homepage journal image slot guidance missing');
+  assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'root homepage review/journal polish styling missing');
+  assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'root homepage Quantum Break review/journal state copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
   assert(root.text.includes(quantumBreakPath), 'root homepage does not link Quantum Break');
@@ -180,6 +182,8 @@ async function auditHttpSurface(base) {
   assert(quantumBreakJourney.text.includes('Page 01'), 'Quantum Break journey page 01 missing');
   assert(quantumBreakJourney.text.includes('Panel Contract'), 'Quantum Break journey panel contract missing');
   assert(quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey image-ready comic page missing');
+  assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b'), 'Quantum Break journey comic slot polish styling missing');
+  assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy missing');
   assert(quantumBreakJourney.text.includes('Generation Brief'), 'Quantum Break journey image generation brief missing');
   assert(quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey does not link panel manifest');
   assert(quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey image handoff filenames missing');

@@ -261,6 +261,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .project-stat strong{color:var(--cyan);font-size:42px;line-height:.9;font-weight:1000}
 .project-stat span{margin-top:9px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
 .review-card{
+  position:relative;
   display:grid;
   grid-template-columns:minmax(340px,.96fr) minmax(0,1fr) 132px;
   gap:0;
@@ -268,6 +269,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   padding:0;
   overflow:hidden;
 }
+.review-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--orange),transparent 76%);z-index:1;opacity:.86}
 .review-media{
   position:relative;
   min-height:252px;
@@ -285,6 +287,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .review-copy{display:grid;align-content:center;padding:20px}
 .review-stack{display:grid;gap:18px}
 .qb-card{grid-template-columns:minmax(460px,1.12fr) minmax(0,.92fr) 132px;align-items:center}
+.qb-card::before{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--orange),transparent 82%)}
 .qb-card .review-media{display:flex;align-items:center;justify-content:center;min-height:0;background:#03070d}
 .qb-card .review-media img{width:100%;height:auto;min-height:0;aspect-ratio:1672/941;object-fit:contain;object-position:center}
 .qb-card .review-media::after{background:linear-gradient(90deg,transparent 74%,rgba(7,9,13,.36))}
@@ -307,12 +310,21 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .review-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
 .review-sub-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .review-sub-links a{border:1px solid var(--line);padding:7px 9px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase}
-.journal-card{display:grid;grid-template-columns:minmax(360px,.98fr) minmax(0,1fr);overflow:hidden}
+.review-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:14px}
+.review-status span{min-height:46px;border:1px solid rgba(218,229,241,.12);background:linear-gradient(135deg,rgba(19,212,232,.06),rgba(7,9,13,.52));padding:8px 9px;color:var(--bone);font-size:12px;line-height:1.18;font-weight:900}
+.review-status b{display:block;margin-bottom:5px;color:var(--cyan);font-size:9px;font-weight:1000;text-transform:uppercase}
+.journal-card{position:relative;display:grid;grid-template-columns:minmax(390px,.95fr) minmax(0,1.05fr);overflow:hidden}
+.journal-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--orange),transparent 82%);z-index:1;opacity:.86}
 .journal-media{min-height:280px;border-right:1px solid var(--line);background:linear-gradient(145deg,rgba(19,212,232,.10),rgba(141,120,255,.06));display:grid;place-items:center}
 .journal-media img{width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center}
 .journal-copy{display:grid;align-content:center;padding:22px}
-.journal-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
-.journal-slot{border:1px dashed rgba(19,212,232,.38);background:rgba(7,9,13,.42);aspect-ratio:16/9;display:grid;place-items:center;padding:12px;color:#9fb0be;font-size:10px;font-weight:1000;text-align:center;text-transform:uppercase}
+.journal-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}
+.journal-slot{position:relative;overflow:hidden;border:1px solid rgba(19,212,232,.34);background:linear-gradient(145deg,rgba(19,212,232,.08),rgba(7,9,13,.70));aspect-ratio:16/9;display:grid;align-content:end;padding:10px;text-align:left;text-transform:uppercase}
+.journal-slot::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),var(--orange));opacity:.86}
+.journal-slot b{position:relative;display:block;color:#7fe9f3;font-size:10px;line-height:1;font-weight:1000}
+.journal-slot span{position:relative;display:block;margin-top:5px;color:#d6c793;font-size:10px;line-height:1.16;font-weight:900}
+.journal-note{margin-top:14px;border:1px solid rgba(255,138,31,.34);border-left:3px solid var(--orange);background:rgba(255,138,31,.055);padding:11px 12px;color:#d6c793;font-size:13px;line-height:1.42;font-weight:780}
+.journal-note b{color:#ffb347;text-transform:uppercase}
 .hire-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .hire-card{padding:18px;min-height:188px}
 .hire-card strong{display:inline-flex;min-height:34px;align-items:center;border:1px solid rgba(19,212,232,.36);padding:6px 8px;color:#7fe9f3;font-size:11px;text-transform:uppercase}
@@ -330,6 +342,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .qb-card .review-media img{aspect-ratio:1672/941}
   .review-media::after{background:linear-gradient(180deg,transparent 64%,rgba(7,9,13,.46))}
   .score-box{justify-self:start;width:168px;min-height:144px;margin:0 20px 20px}
+  .journal-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
   .signal-row{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hire-grid{grid-template-columns:1fr}
   h1{font-size:52px}
@@ -351,6 +364,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .signal-row{grid-template-columns:1fr}
   .about-line{grid-template-columns:1fr}
   .journal-slots{grid-template-columns:1fr}
+  .review-status{grid-template-columns:1fr}
   .panel-top,.proof-line{grid-template-columns:1fr}
   .build-chip,.status-dot{justify-self:start}
 }
@@ -502,6 +516,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <h3>Metro 2033 Redux</h3>
             <p>Atmosphere-first survival FPS verdict with player-fit lanes, score strip, correction ledger, spoiler-light judgment, trust layer, and dossier evidence arc.</p>
             <div class="tag-row"><span class="tag">Atmosphere</span><span class="tag">Linear FPS</span><span class="tag">Survival horror</span><span class="tag amber">Caveated buy</span></div>
+            <div class="review-status" aria-label="Metro review publication state"><span><b>State</b> Published</span><span><b>Proof</b> Full report</span><span><b>Use</b> Flagship format</span></div>
             <div class="review-link">Open current build</div>
           </div>
           <div class="score-box" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
@@ -515,6 +530,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <h3>Quantum Break</h3>
             <p>Replay-ready Remedy sci-fi review scaffold with old-PC readiness checks, adversarial bias tests, and a separate illustrated journey for live narration.</p>
             <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
+            <div class="review-status" aria-label="Quantum Break review publication state"><span><b>State</b> Live draft</span><span><b>Gate</b> 4 checks open</span><span><b>Next</b> Journey images</span></div>
             <div class="review-sub-links"><a href="${quantumHref}">Open review</a><a href="${quantumJourneyHref}">Open journey</a></div>
           </div>
           <div class="score-box pending" aria-label="Quantum Break verdict locked until replay evidence"><b>LOCKED</b><small>Draft</small><em>4 gates open</em></div>
@@ -538,10 +554,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <h3>Illustrated Review Journal</h3>
           <p>Built for the “play it together” style: each update captures what happened, why it matters for the review, and which images should be generated for the next readable page.</p>
           <div class="journal-slots" aria-label="Current image format recommendation">
-            <div class="journal-slot">16:9 lead<br>story beat</div>
-            <div class="journal-slot">16:9 support<br>evidence beat</div>
-            <div class="journal-slot">16:9 support<br>friction beat</div>
+            <div class="journal-slot"><b>Lead</b><span>16:9 panel / place</span></div>
+            <div class="journal-slot"><b>Cause</b><span>16:9 panel / action</span></div>
+            <div class="journal-slot"><b>Proof</b><span>16:9 panel / evidence</span></div>
+            <div class="journal-slot"><b>Drag</b><span>16:9 panel / friction</span></div>
           </div>
+          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the public journey page when the generated images arrive.</div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
         </div>
       </article>

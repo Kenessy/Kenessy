@@ -111,6 +111,10 @@ h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:
 .comic-header small{color:var(--cyan);font-size:10px;font-weight:1000;text-transform:uppercase}
 .comic-header h3{margin-top:6px;color:var(--gold);font-size:32px;line-height:1;text-transform:uppercase}
 .spoiler{display:inline-flex;border:1px solid rgba(255,174,67,.42);color:#ffcf83;padding:7px 9px;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
+.comic-status{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:380px}
+.comic-status span{display:inline-flex;min-height:32px;align-items:center;border:1px solid rgba(237,246,255,.12);background:rgba(5,7,12,.58);padding:7px 9px;color:var(--soft);font-size:11px;font-weight:1000;text-transform:uppercase}
+.comic-status b{margin-right:5px;color:var(--cyan)}
+.comic-status .spoiler{background:rgba(255,174,67,.06)}
 .comic-board{padding:16px}
 .comic-lead{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:14px;align-items:stretch}
 .image-panel{border:1px solid var(--line);background:rgba(5,7,12,.52);min-width:0;overflow:hidden}
@@ -133,7 +137,9 @@ h2{margin-top:7px;color:var(--gold);font-size:38px;line-height:1;text-transform:
 .panel-frame:after{content:"IMAGE SLOT";position:absolute;top:10px;left:10px;border:1px solid rgba(23,215,255,.34);background:rgba(5,7,12,.72);padding:5px 7px;color:#7fe9ff;font-size:9px;font-weight:1000;text-transform:uppercase}
 .panel-frame-ready:before,.panel-frame-ready:after{display:none}
 .panel-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slot-label{position:relative;z-index:1;max-width:82%;border-left:3px solid var(--cyan);background:linear-gradient(135deg,rgba(5,7,12,.88),rgba(8,14,22,.66));box-shadow:0 10px 26px rgba(0,0,0,.28);color:#d9e8f3;text-align:left;padding:12px 12px 11px;font-size:12px;line-height:1.35;font-weight:1000;text-transform:uppercase;letter-spacing:.04em}
+.slot-label{position:relative;z-index:1;max-width:82%;border-left:3px solid var(--cyan);background:linear-gradient(135deg,rgba(5,7,12,.88),rgba(8,14,22,.66));box-shadow:0 10px 26px rgba(0,0,0,.28);color:#d9e8f3;text-align:left;padding:12px 12px 11px;text-transform:uppercase;letter-spacing:.04em}
+.slot-label b{display:block;color:#7fe9ff;font-size:11px;line-height:1;font-weight:1000}
+.slot-label span{display:block;margin-top:7px;color:#d9c9a3;font-size:12px;line-height:1.22;font-weight:1000}
 .hero-panel .slot-label{max-width:min(420px,82%);font-size:13px}
 .image-panel figcaption{padding:12px;color:#c9d9e7;font-size:13px;line-height:1.45;font-weight:760}
 .story-copy{border:1px solid var(--line);background:linear-gradient(145deg,rgba(8,12,18,.92),rgba(5,7,12,.98));padding:18px}
@@ -166,6 +172,7 @@ footer{padding:26px 0;color:var(--muted)}
   .lede{font-size:16px}
   .comic-header{display:grid}
   .spoiler{justify-self:start;white-space:normal}
+  .comic-status{justify-content:flex-start}
   .story-copy h4{font-size:25px}
 }
 </style>
@@ -268,12 +275,12 @@ footer{padding:26px 0;color:var(--muted)}
       <article class="comic-page">
         <div class="comic-header">
           <div><small>Image-ready comic page</small><h3>Project Promenade</h3></div>
-          <span class="spoiler">Spoiler level: low / setup premise</span>
+          <div class="comic-status"><span><b>4</b> image slots</span><span><b>16:9</b> first pass</span><span class="spoiler">Spoiler level: low / setup premise</span></div>
         </div>
         <div class="comic-board">
           <div class="comic-lead">
             <figure class="image-panel hero-panel">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-a"><div class="slot-label">Panel A / 16:9<br>Riverport University exterior<br>protest / 4 AM arrival</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-a"><div class="slot-label"><b>Panel A / 16:9</b><span>Riverport University exterior / protest / 4 AM arrival</span></div></div>
               <figcaption>Establish the place before the time fracture: cold campus, Monarch pressure, early-morning arrival, and the sense that the experiment has already escaped ordinary control.</figcaption>
             </figure>
             <div class="story-copy">
@@ -286,15 +293,15 @@ footer{padding:26px 0;color:var(--muted)}
           </div>
           <div class="panel-row">
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-b"><div class="slot-label">Panel B / 16:9<br>Paul leading Jack<br>lab corridor threshold</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-b"><div class="slot-label"><b>Panel B / 16:9</b><span>Paul leading Jack / lab corridor threshold</span></div></div>
               <figcaption>Paul frames Project Promenade as a proof moment. The demonstration becomes a last attempt to prove the machine works before the institution closes around it.</figcaption>
             </figure>
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-c"><div class="slot-label">Panel C / 16:9<br>Meyer-Joyce field<br>black-hole primer</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-c"><div class="slot-label"><b>Panel C / 16:9</b><span>Meyer-Joyce field / black-hole primer</span></div></div>
               <figcaption>The science primer lands as short sci-fi texture rather than a full physics lecture: enough to sell the premise, not enough to slow the scene down.</figcaption>
             </figure>
             <figure class="image-panel">
-              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-d"><div class="slot-label">Panel D / 16:9<br>Will Joyce shadow<br>family tension seed</div></div>
+              <div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-01-d"><div class="slot-label"><b>Panel D / 16:9</b><span>Will Joyce shadow / family tension seed</span></div></div>
               <figcaption>Will Joyce is already a ghost-presence in the scene. Paul's secrecy around Jack's visit creates tension before the machine is even activated.</figcaption>
             </figure>
           </div>
@@ -323,9 +330,9 @@ footer{padding:26px 0;color:var(--muted)}
         <p>Next update should begin when Jack and Paul enter the airlock / machine sequence and the time experiment stops being just a presentation.</p>
       </div>
       <div class="next-grid">
-        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-a"><div class="slot-label">Next 01 / 16:9<br>Airlock threshold</div></div><figcaption>Project Promenade stops being an abstract pitch and becomes a physical threshold.</figcaption></figure>
-        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9"><div class="slot-label">Next 02 / 16:9<br>Machine chamber / core</div></div><figcaption>The machine should sell scale, danger, sterile confidence, and the human error about to happen.</figcaption></figure>
-        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-b"><div class="slot-label">Next 03 / 16:9<br>First time anomaly</div></div><figcaption>The first fracture image should show whether the visual identity remains readable under spectacle.</figcaption></figure>
+        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-a"><div class="slot-label"><b>Next 01 / 16:9</b><span>Airlock threshold</span></div></div><figcaption>Project Promenade stops being an abstract pitch and becomes a physical threshold.</figcaption></figure>
+        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9"><div class="slot-label"><b>Next 02 / 16:9</b><span>Machine chamber / core</span></div></div><figcaption>The machine should sell scale, danger, sterile confidence, and the human error about to happen.</figcaption></figure>
+        <figure class="image-panel"><div class="panel-frame" data-image-ratio="16:9" data-qb-slot="page-02-b"><div class="slot-label"><b>Next 03 / 16:9</b><span>First time anomaly</span></div></div><figcaption>The first fracture image should show whether the visual identity remains readable under spectacle.</figcaption></figure>
       </div>
     </div>
   </section>

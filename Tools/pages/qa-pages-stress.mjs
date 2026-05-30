@@ -131,6 +131,8 @@ async function auditHttp(base) {
   assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout missing');
   assert(root.text.includes('What This Is') && root.text.includes('Play It Together'), 'portfolio homepage about/journal sections are missing');
   assert(root.text.includes('id="work"') && root.text.includes('16:9 panel'), 'portfolio homepage work or journal image guidance is missing');
+  assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'portfolio homepage review/journal polish styling missing');
+  assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire'), 'portfolio homepage Quantum Break state/journal handoff copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
   assert(root.text.includes('LOCKED') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence gate missing');
@@ -164,6 +166,8 @@ async function auditHttp(base) {
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Page 01') && quantumBreakJourney.text.includes('Review-canon route selected'), 'Quantum Break journey missing page 01 route lock');
   assert(quantumBreakJourney.text.includes('Panel Contract') && quantumBreakJourney.text.includes('Image-ready comic page'), 'Quantum Break journey comic panel contract missing');
+  assert(quantumBreakJourney.text.includes('.comic-status') && quantumBreakJourney.text.includes('.slot-label b'), 'Quantum Break journey comic slot polish styling missing');
+  assert(quantumBreakJourney.text.includes('<b>4</b> image slots') && quantumBreakJourney.text.includes('<b>Panel A / 16:9</b>'), 'Quantum Break journey comic slot status copy missing');
   assert(quantumBreakJourney.text.includes('Generation Brief') && quantumBreakJourney.text.includes('qb-page-01-a-university-exterior.png'), 'Quantum Break journey generation brief missing');
   assert(quantumBreakJourney.text.includes(quantumBreakPanelManifestPath), 'Quantum Break journey missing panel manifest link');
   assert((quantumBreakJourney.text.match(/data-image-ratio="16:9"/g) || []).length >= 7, 'Quantum Break journey does not expose enough 16:9 panel frames');
