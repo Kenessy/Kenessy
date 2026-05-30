@@ -134,6 +134,8 @@ async function auditDesignArtifacts(base) {
   assert(root.text.includes('.review-card'), 'portfolio homepage review section styling is missing');
   assert(root.text.includes('.review-media'), 'portfolio homepage review splash styling is missing');
   assert(root.text.includes('.qb-card'), 'portfolio homepage Quantum Break card styling is missing');
+  assert(root.text.includes('.score-box.pending b') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence-gate score styling is missing');
+  assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('.journal-card') && root.text.includes('.journal-slot'), 'portfolio homepage journal styling is missing');
   assert(root.text.includes('.proof-grid'), 'portfolio homepage proof surface styling is missing');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual asset is missing');

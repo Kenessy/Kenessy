@@ -271,11 +271,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   color:var(--bone);
   margin:18px 18px 18px 0;
 }
-.score-box span{display:block;text-align:center;color:var(--orange);font-size:60px;line-height:.86;font-weight:1000}
+.score-box span,.score-box b{display:block;text-align:center;color:var(--orange);font-size:60px;line-height:.86;font-weight:1000}
 .score-box small{display:block;margin-top:9px;color:var(--bone);font-size:34px;line-height:1;font-weight:1000}
-.score-box.pending{align-self:stretch;min-height:156px}
-.score-box.pending span{font-size:54px;color:var(--muted)}
-.score-box.pending small{font-size:18px;color:#ffb347}
+.score-box em{display:block;margin-top:10px;color:var(--muted);font-size:10px;line-height:1.15;font-style:normal;font-weight:1000;text-align:center;text-transform:uppercase}
+.score-box.pending{align-self:stretch;min-height:156px;border-color:rgba(19,212,232,.46);background:linear-gradient(145deg,rgba(19,212,232,.13),rgba(255,138,31,.08) 48%,rgba(7,9,13,.92))}
+.score-box.pending b{font-size:21px;line-height:1;color:#ffcf83}
+.score-box.pending small{font-size:18px;color:#7fe9f3;text-transform:uppercase}
 .review-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
 .review-sub-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .review-sub-links a{border:1px solid var(--line);padding:7px 9px;color:#ffcf83;font-size:11px;font-weight:1000;text-transform:uppercase}
@@ -489,7 +490,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
             <div class="tag-row"><span class="tag">Time fracture</span><span class="tag">Third-person action</span><span class="tag">Narrative sci-fi</span><span class="tag amber">Pending score</span></div>
             <div class="review-sub-links"><a href="plater-game-reports/games/quantum-break/">Open review</a><a href="plater-game-reports/games/quantum-break/journey/">Open journey</a></div>
           </div>
-          <div class="score-box pending" aria-label="Quantum Break score pending"><span>--</span><small>Draft</small></div>
+          <div class="score-box pending" aria-label="Quantum Break verdict locked until replay evidence"><b>LOCKED</b><small>Draft</small><em>4 gates open</em></div>
         </article>
       </div>
     </div>

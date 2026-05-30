@@ -133,6 +133,8 @@ async function auditHttp(base) {
   assert(root.text.includes('id="work"') && root.text.includes('16:9 panel'), 'portfolio homepage work or journal image guidance is missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'portfolio homepage does not link current Metro build id');
   assert(root.text.includes(quantumBreakPath), 'portfolio homepage does not link Quantum Break');
+  assert(root.text.includes('LOCKED') && root.text.includes('4 gates open'), 'portfolio homepage Quantum Break evidence gate missing');
+  assert(!/>--</.test(root.text), 'portfolio homepage still exposes raw dash placeholders');
   assert(root.text.includes('apocalypse-express/'), 'portfolio homepage does not link Apocalypse Express');
   assert(root.text.includes('triad-validation-flow.png'), 'portfolio homepage visual missing');
   assert(root.text.includes('metro-2033-redux-review-splash.png'), 'portfolio homepage Metro review splash missing');
@@ -144,6 +146,9 @@ async function auditHttp(base) {
   assert(report.text.includes('property="og:title"'), 'report Open Graph title missing');
   assert(report.text.includes('name="twitter:card"'), 'report Twitter card metadata missing');
   assert(!report.text.includes('https://esm.sh/'), 'report references esm.sh');
+  const reports = await fetchText(url(base, 'plater-game-reports/'));
+  assert(reports.text.includes('LOCKED') && reports.text.includes('Draft'), 'reports index Quantum Break evidence gate missing');
+  assert(!/>--</.test(reports.text), 'reports index still exposes raw dash placeholders');
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft') && quantumBreak.text.includes('Open Journey'), 'Quantum Break report shell missing journey link');
   assert(quantumBreak.text.includes(quantumBreakPanelManifestPath), 'Quantum Break report missing panel manifest link');

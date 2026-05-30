@@ -140,6 +140,8 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('apocalypse-express/'), 'root homepage does not link Apocalypse Express');
   assert(root.text.includes(quantumBreakPath), 'root homepage does not link Quantum Break');
   assert(root.text.includes('Quantum Break'), 'root homepage Quantum Break card missing');
+  assert(root.text.includes('LOCKED') && root.text.includes('4 gates open'), 'root homepage Quantum Break evidence gate card missing');
+  assert(!/>--</.test(root.text), 'root homepage still exposes raw dash placeholders');
   assert(root.text.includes('assets/img/triad-validation-flow.png'), 'root homepage project visual missing');
   assert(root.text.includes('assets/img/metro-2033-redux-review-splash.png'), 'root homepage Metro review splash missing');
   assert(root.text.includes('assets/img/quantum-break-review-journey-splash.svg'), 'root homepage Quantum Break splash missing');
@@ -154,6 +156,8 @@ async function auditHttpSurface(base) {
   assert(reports.text.includes('games/quantum-break/'), 'reports index does not link Quantum Break');
   assert(reports.text.includes('games/quantum-break/journey/'), 'reports index does not link Quantum Break journey');
   assert(reports.text.includes('../'), 'reports index does not link back to homepage');
+  assert(reports.text.includes('LOCKED') && reports.text.includes('Draft'), 'reports index Quantum Break evidence gate missing');
+  assert(!/>--</.test(reports.text), 'reports index still exposes raw dash placeholders');
 
   const quantumBreak = await fetchText(url(base, quantumBreakPath));
   assert(quantumBreak.text.includes('ALERTED field report draft'), 'Quantum Break report shell missing');
