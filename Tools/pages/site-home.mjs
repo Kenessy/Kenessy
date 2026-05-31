@@ -470,7 +470,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office.</span></div>
         </div>
       </div>
     </div>
@@ -580,7 +580,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
-        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now active as the first-run illustrated field journal with Session 01 expanded.</p>
+        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now active as the first-run illustrated field journal with Session 01 expanded through Morgan's office and Looking Glass.</p>
       </div>
       <div class="review-stack">
         <a class="review-card" href="${metroHref}">
@@ -618,9 +618,9 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="review-copy">
             <div class="tag-row"><span class="tag green">Owned</span><span class="tag amber">Session 01+</span><span class="tag cyan">Field journal ready</span></div>
             <h3>Prey</h3>
-            <p>TranStar incident dossier for the live review candidate: first-day simulation loop, texture-loading caveat, test-room unease, first Mimic breach, apartment escape, first lobby friction, and a locked score until fresh Talos I evidence exists.</p>
+            <p>TranStar incident dossier for the live review candidate: first-day simulation loop, texture-loading caveat, test-room unease, first Mimic breach, apartment escape, first lobby friction, Hacking I, Morgan's office, Looking Glass, and a locked score until fresh Talos I evidence exists.</p>
             <div class="tag-row"><span class="tag">Immersive sim</span><span class="tag">Station horror</span><span class="tag">Systems audit</span><span class="tag amber">Live journal</span></div>
-            <div class="review-status" aria-label="Prey review publication state"><span><b>State</b> First run</span><span><b>Journal</b> Session 01 expanded</span><span><b>Next</b> Continue Talos I</span></div>
+            <div class="review-status" aria-label="Prey review publication state"><span><b>State</b> First run</span><span><b>Journal</b> Office logged</span><span><b>Next</b> Looking Glass servers</span></div>
             <div class="review-sub-links"><a href="${preyHref}">Open entry</a><a href="${preyJourneyHref}">Open journal</a></div>
           </div>
           <div class="score-box pending" aria-label="Prey verdict locked until first-run evidence"><b>LOCKED</b><small>Entry</small><em>Session 01+</em></div>

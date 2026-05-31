@@ -186,7 +186,7 @@ async function auditHttp(base) {
   const preyJourney = await fetchText(url(base, preyJourneyPath));
   assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
-  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Escape') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
+  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Escape') && preyJourney.text.includes('Office') && preyJourney.text.includes('Looking Glass') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png') && preyJourney.text.includes('prey-page-04-a-lobby-wrench-mimic.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
@@ -846,12 +846,12 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey|Field Journal|Session 01/i,
           expectedText: 'Session 01 Field Journal',
-          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
+          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Office', 'Looking Glass', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
           minImageFrames: 3,
           maxImageFrames: 3,
           maxImageFramesPerPage: 1,
-          readerPages: 5
+          readerPages: 6
         }, viewport);
         await auditStaticPageViewport(browser, base, {
           slug: 'quantum-break-journey',
