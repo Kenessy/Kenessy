@@ -65,4 +65,14 @@ Prompt:
 9:16 portrait comic-style sci-fi evidence image for a Prey review journal. Morgan sits in a dark Talos I office facing a glitching January video message on a workstation monitor, Earth and the station visible through the window, a keycard insert panel, a Neuromod or GLOO tool insert panel, defensive turrets in the room, wrench foreground, amber green cyan station light, no readable UI, no captions, no logos, no fake text, painterly pixel-cinematic realism, clean composition readable at mobile width.
 ```
 
+### prey-page-06-a-teleconferencing-keycard.png
+
+Teleconferencing keycard in hand at the office threshold, with the next Phantom-tier corridor threat waiting beyond.
+
+Prompt:
+
+```text
+9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan holds the Teleconferencing keycard at the threshold between a warm cluttered office and a cold blue Talos I corridor, a Phantom silhouette waiting in the hallway, green access light on the door reader, scattered office evidence, amber green cyan station palette, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+```
+
 Do not manually edit generated image tags in `Tools/pages/sources/prey/journey.html`. Keep stable `data-prey-slot` markers there; `npm run build:metro` performs the image wiring from `flight-recorder-manifest.json`.

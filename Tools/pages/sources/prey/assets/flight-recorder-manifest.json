@@ -68,6 +68,17 @@
       "prompt": "9:16 portrait comic-style sci-fi evidence image for a Prey review journal. Morgan sits in a dark Talos I office facing a glitching January video message on a workstation monitor, Earth and the station visible through the window, a keycard insert panel, a Neuromod or GLOO tool insert panel, defensive turrets in the room, wrench foreground, amber green cyan station light, no readable UI, no captions, no logos, no fake text, painterly pixel-cinematic realism, clean composition readable at mobile width.",
       "composition": "Use one strong portrait composition with a main office scene and small visual evidence inserts; keep January, Morgan, keycard, turrets, and wrench readable without turning it into a fake dashboard.",
       "avoid": "Avoid readable terminal text, fake brand marks, captions, official UI, gore focus, crowded tiny panels, and text overlays that fight the journal typography."
+    },
+    {
+      "id": "page-06-a-teleconferencing-keycard",
+      "page": "hardware-labs",
+      "filename": "prey-page-06-a-teleconferencing-keycard.png",
+      "aspectRatio": "9:16",
+      "visibleInJourney": true,
+      "brief": "Teleconferencing keycard in hand at the office threshold, with the next Phantom-tier corridor threat waiting beyond.",
+      "prompt": "9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan holds the Teleconferencing keycard at the threshold between a warm cluttered office and a cold blue Talos I corridor, a Phantom silhouette waiting in the hallway, green access light on the door reader, scattered office evidence, amber green cyan station palette, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Split the portrait between safe office evidence and dangerous corridor depth; keep the keycard, access reader, and Phantom silhouette readable as one route-solving beat.",
+      "avoid": "Avoid readable text on the keycard or panels, fake UI labels, official logos, gore focus, overbusy corridor clutter, and a threat silhouette that hides the keycard action."
     }
   ]
 }

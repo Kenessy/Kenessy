@@ -18,23 +18,30 @@ const expectedSlotIds = [
   'page-03-a-mimic-paranoia',
   'page-03-b-crew-terminal-trace',
   'page-04-a-lobby-wrench-mimic',
-  'page-05-a-office-looking-glass'
+  'page-05-a-office-looking-glass',
+  'page-06-a-teleconferencing-keycard'
 ];
 const expectedVisibleSlotIds = [
   'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
   'page-04-a-lobby-wrench-mimic',
-  'page-05-a-office-looking-glass'
+  'page-05-a-office-looking-glass',
+  'page-06-a-teleconferencing-keycard'
 ];
 const expectedQueueOnlySlotIds = [
   'page-03-b-crew-terminal-trace'
+];
+const expectedPortraitSlotIds = [
+  'page-05-a-office-looking-glass',
+  'page-06-a-teleconferencing-keycard'
 ];
 const expectedFilenames = [
   'prey-page-02-a-rooftop-helicopter.png',
   'prey-page-03-a-mimic-paranoia.png',
   'prey-page-03-b-crew-terminal-trace.png',
   'prey-page-04-a-lobby-wrench-mimic.png',
-  'prey-page-05-a-office-looking-glass.png'
+  'prey-page-05-a-office-looking-glass.png',
+  'prey-page-06-a-teleconferencing-keycard.png'
 ];
 
 const runState = {
@@ -104,7 +111,7 @@ function validateManifest(manifest) {
   assert(manifest.styleRules.some((rule) => /16:9 PNGs/i.test(rule) && /9:16 portrait PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 default plus 9:16 portrait contract');
   assert(manifest.styleRules.some((rule) => /Missing images remain listed in the art queue/i.test(rule)), 'manifest styleRules must preserve missing-image art queue behavior');
   assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
-  assert(Array.isArray(manifest.slots) && manifest.slots.length === 5, 'manifest must contain exactly five photo evidence entries');
+  assert(Array.isArray(manifest.slots) && manifest.slots.length === 6, 'manifest must contain exactly six photo evidence entries');
 
   const ids = new Set();
   const filenames = new Set();
@@ -114,7 +121,7 @@ function validateManifest(manifest) {
     assert(isPlainFilename(slot.filename), `filename must not include paths: ${slot.filename}`);
     assert(slot.filename.endsWith('.png'), `slot must target PNG: ${slot.filename}`);
     assert(['16:9', '9:16'].includes(slot.aspectRatio), `slot ${slot.id} must use a supported aspect ratio`);
-    if (slot.id === 'page-05-a-office-looking-glass') {
+    if (expectedPortraitSlotIds.includes(slot.id)) {
       assert(slot.aspectRatio === '9:16', `slot ${slot.id} must preserve portrait layout`);
     } else {
       assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
