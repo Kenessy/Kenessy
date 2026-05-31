@@ -17,11 +17,13 @@ const minHeight = 540;
 const expectedSlotIds = [
   'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
-  'page-03-b-crew-terminal-trace'
+  'page-03-b-crew-terminal-trace',
+  'page-04-a-lobby-wrench-mimic'
 ];
 const expectedVisibleSlotIds = [
   'page-02-a-rooftop-helicopter',
-  'page-03-a-mimic-paranoia'
+  'page-03-a-mimic-paranoia',
+  'page-04-a-lobby-wrench-mimic'
 ];
 const expectedQueueOnlySlotIds = [
   'page-03-b-crew-terminal-trace'
@@ -29,7 +31,8 @@ const expectedQueueOnlySlotIds = [
 const expectedFilenames = [
   'prey-page-02-a-rooftop-helicopter.png',
   'prey-page-03-a-mimic-paranoia.png',
-  'prey-page-03-b-crew-terminal-trace.png'
+  'prey-page-03-b-crew-terminal-trace.png',
+  'prey-page-04-a-lobby-wrench-mimic.png'
 ];
 
 const runState = {
@@ -90,7 +93,7 @@ function validateManifest(manifest) {
   assert(manifest.styleRules.some((rule) => /16:9 PNGs only/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
   assert(manifest.styleRules.some((rule) => /Missing images remain listed in the art queue/i.test(rule)), 'manifest styleRules must preserve missing-image art queue behavior');
   assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
-  assert(Array.isArray(manifest.slots) && manifest.slots.length === 3, 'manifest must contain exactly three photo evidence entries');
+  assert(Array.isArray(manifest.slots) && manifest.slots.length === 4, 'manifest must contain exactly four photo evidence entries');
 
   const ids = new Set();
   const filenames = new Set();

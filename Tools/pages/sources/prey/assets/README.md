@@ -45,4 +45,14 @@ Prompt:
 16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Abandoned crew workstation inside Talos I, dark terminal glow, scattered personal objects, audio log recorder, access card shape, coffee stain, station corridor beyond, amber green cyan station ambience, environmental storytelling about missing crew, no readable screen text, no UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
 ```
 
+### prey-page-04-a-lobby-wrench-mimic.png
+
+First wrench-forward Mimic fight after the apartment set breaks open.
+
+Prompt:
+
+```text
+16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan raises a wrench against a black Mimic threat inside a dark orbital station lobby after the apartment simulation breaks, floating debris, blue station depth with amber sparks, vulnerable early-combat tension, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+```
+
 Do not manually edit generated image tags in `Tools/pages/sources/prey/journey.html`. Keep stable `data-prey-slot` markers there; `npm run build:metro` performs the image wiring from `flight-recorder-manifest.json`.
