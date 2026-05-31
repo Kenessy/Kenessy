@@ -79,6 +79,17 @@
       "prompt": "9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan holds the Teleconferencing keycard at the threshold between a warm cluttered office and a cold blue Talos I corridor, a Phantom silhouette waiting in the hallway, green access light on the door reader, scattered office evidence, amber green cyan station palette, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Split the portrait between safe office evidence and dangerous corridor depth; keep the keycard, access reader, and Phantom silhouette readable as one route-solving beat.",
       "avoid": "Avoid readable text on the keycard or panels, fake UI labels, official logos, gore focus, overbusy corridor clutter, and a threat silhouette that hides the keycard action."
+    },
+    {
+      "id": "page-08-a-calvino-exterior",
+      "page": "calvino",
+      "filename": "prey-page-08-a-calvino-exterior.png",
+      "aspectRatio": "9:16",
+      "visibleInJourney": true,
+      "brief": "Calvino's body floating outside Hardware Labs during the exterior repair and Looking Glass recovery route.",
+      "prompt": "9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. Calvino's body floats in zero gravity outside Hardware Labs under a cold maintenance spotlight, dark Talos I hull plates around him, small loose tools and recorder-like objects drifting nearby, blue-black vacuum mood with restrained amber highlights, no gore focus, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
+      "composition": "Use the floating body as the central proof object, with the station wall and exterior void making the route feel physical; keep the body, spotlight, drifting loot, and repair-space context readable in portrait format.",
+      "avoid": "Avoid gore focus, readable labels, fake HUD elements, official logos, overbright space fantasy lighting, and clutter that hides the body or the exterior route."
     }
   ]
 }

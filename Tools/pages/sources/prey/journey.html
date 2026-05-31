@@ -253,15 +253,21 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
         <p class="kicker">08 / Calvino</p>
         <h2>The Glass Comes Back Online</h2>
         <p class="lead">The exterior detour pays off: vacuum repair, Calvino's body, useful loot, a material safe, the Q-Beam lab, Josh Dalton's trail, a full Hardware Labs cleanup, and finally the restored Looking Glass servers.</p>
-        <div class="journal-prose">
-          <p>The outside route is not just a detour. It becomes a station-maintenance proof test: repair what can be repaired, loot the exposed spaces, survive the operator pressure, and use the exterior path to make the next objective physically believable instead of abstract.</p>
-          <p><strong>Calvino's body</strong> is the important proof object. The corpse supplies the practical access chain for the workshop route, but it also turns the objective from "fix a server" into "reconstruct what happened to the person who understood the server."</p>
-          <p><strong>Loot / lore pull:</strong> the Calvino evidence is best treated as paraphrase, not a transcript wall. The relevant logs frame him as increasingly unwell, forgetful, and contradictory around his work. Another thread points to a micro-lens/materials errand, so the workshop reads less like a generic lab and more like a specialized Looking Glass repair space whose owner was already slipping.</p>
-          <p>The safe and exterior loot matter because they turn this into a resource-positive recovery beat, not only a corpse pickup. That is useful pacing after the earlier scarcity pressure: the game lets careful exploration pay back the player with materials and route confidence.</p>
-          <p>The upstairs beam-gun setup is the first real <strong>Q-Beam</strong> proof. A Phantom is held under beam pressure, another target is weakened, and the pickup feels earned because the room already demonstrated the tool before handing it over. That is a much better weapon introduction than a glowing gun on a table.</p>
-          <p>The locked section and <strong>Josh Dalton</strong> objective stay unresolved for now, but that is not dead progress. It points the review toward GUTS later, so Talos I keeps turning current obstacles into future memory hooks instead of simple "come back with key" chores.</p>
-          <p>Before leaving, the whole area gets cleaned: the Sputnik-looking probe is activated, repairable systems are fixed, remaining Phantoms and Mimics are cleared, and the labs are looted as far as the current toolset allows. That gives this section a clean end state instead of a messy pause.</p>
-          <p>Back inside Calvino's workshop, the logs make the deterioration clearer, and the practical payoff finally lands: the <strong>Looking Glass servers</strong> come back online. The next instruction is clean enough to end the section here: return to Morgan's office and continue the January/Morgan message with the restored servers.</p>
+        <div class="media-prose">
+          <div class="journal-prose">
+            <p>The outside route is not just a detour. It becomes a station-maintenance proof test: repair what can be repaired, loot the exposed spaces, survive the operator pressure, and use the exterior path to make the next objective physically believable instead of abstract.</p>
+            <p><strong>Calvino's body</strong> is the important proof object. The corpse supplies the practical access chain for the workshop route, but it also turns the objective from "fix a server" into "reconstruct what happened to the person who understood the server."</p>
+            <p><strong>Loot / lore pull:</strong> the Calvino evidence is best treated as paraphrase, not a transcript wall. The relevant logs frame him as increasingly unwell, forgetful, and contradictory around his work. Another thread points to a micro-lens/materials errand, so the workshop reads less like a generic lab and more like a specialized Looking Glass repair space whose owner was already slipping.</p>
+            <p>The safe and exterior loot matter because they turn this into a resource-positive recovery beat, not only a corpse pickup. That is useful pacing after the earlier scarcity pressure: the game lets careful exploration pay back the player with materials and route confidence.</p>
+            <p>The upstairs beam-gun setup is the first real <strong>Q-Beam</strong> proof. A Phantom is held under beam pressure, another target is weakened, and the pickup feels earned because the room already demonstrated the tool before handing it over. That is a much better weapon introduction than a glowing gun on a table.</p>
+            <p>The locked section and <strong>Josh Dalton</strong> objective stay unresolved for now, but that is not dead progress. It points the review toward GUTS later, so Talos I keeps turning current obstacles into future memory hooks instead of simple "come back with key" chores.</p>
+            <p>Before leaving, the whole area gets cleaned: the Sputnik-looking probe is activated, repairable systems are fixed, remaining Phantoms and Mimics are cleared, and the labs are looted as far as the current toolset allows. That gives this section a clean end state instead of a messy pause.</p>
+            <p>Back inside Calvino's workshop, the logs make the deterioration clearer, and the practical payoff finally lands: the <strong>Looking Glass servers</strong> come back online. The next instruction is clean enough to end the section here: return to Morgan's office and continue the January/Morgan message with the restored servers.</p>
+          </div>
+          <figure class="image-run portrait" aria-label="Calvino exterior body evidence slot">
+            <div class="evidence-slot" data-image-ratio="9:16" data-prey-slot="page-08-a-calvino-exterior"><div class="slot-placeholder"><b>Evidence 08-A</b><span>prey-page-08-a-calvino-exterior.png / Calvino body, exterior repair route, and Looking Glass recovery proof object.</span></div></div>
+            <figcaption class="caption">Calvino exterior / corpse as route evidence</figcaption>
+          </figure>
         </div>
         <div class="plain-meta" aria-label="Calvino Looking Glass watch items">
           <span>Calvino corpse found</span><span>Q-Beam acquired</span><span>Josh Dalton queued</span><span>Probe activated</span><span>Labs cleared</span><span>Looking Glass restored</span><span>Return to Morgan office</span>
@@ -284,6 +290,7 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
             <li><code>prey-page-04-a-lobby-wrench-mimic.png</code></li>
             <li><code>prey-page-05-a-office-looking-glass.png</code></li>
             <li><code>prey-page-06-a-teleconferencing-keycard.png</code></li>
+            <li><code>prey-page-08-a-calvino-exterior.png</code></li>
           </ul>
           <p><code>npm run build:metro</code><br><code>npm run qa:prey-assets</code></p>
           <p>The style rule is now simple: no decorative dashboard, no extra boxes, no fake UI. Write the run like a review diary and drop in a strong image only when the scene needs one.</p>
@@ -295,6 +302,7 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
 </div>
 <script>
 (() => {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const track = document.getElementById('reader');
   const pageForHash = (hash) => {
     if (!hash || hash.length < 2) return null;
@@ -315,6 +323,15 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
     }
     return true;
   };
+  const alignHash = () => {
+    if (!location.hash) return false;
+    return scrollToPage(location.hash, 'auto');
+  };
+  const scheduleHashAlignment = () => {
+    alignHash();
+    requestAnimationFrame(() => alignHash());
+    [80, 240, 520, 1000].forEach((delay) => setTimeout(() => alignHash(), delay));
+  };
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a[href^="#"]');
     if (!link) return;
@@ -325,7 +342,11 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
     scrollToPage(hash);
   });
   window.addEventListener('hashchange', () => scrollToPage(location.hash));
-  if (location.hash) requestAnimationFrame(() => scrollToPage(location.hash, 'auto'));
+  window.addEventListener('load', scheduleHashAlignment);
+  document.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) img.addEventListener('load', () => alignHash(), { once: true });
+  });
+  if (location.hash) scheduleHashAlignment();
 })();
 </script>
 </body>

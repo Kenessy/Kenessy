@@ -19,21 +19,24 @@ const expectedSlotIds = [
   'page-03-b-crew-terminal-trace',
   'page-04-a-lobby-wrench-mimic',
   'page-05-a-office-looking-glass',
-  'page-06-a-teleconferencing-keycard'
+  'page-06-a-teleconferencing-keycard',
+  'page-08-a-calvino-exterior'
 ];
 const expectedVisibleSlotIds = [
   'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
   'page-04-a-lobby-wrench-mimic',
   'page-05-a-office-looking-glass',
-  'page-06-a-teleconferencing-keycard'
+  'page-06-a-teleconferencing-keycard',
+  'page-08-a-calvino-exterior'
 ];
 const expectedQueueOnlySlotIds = [
   'page-03-b-crew-terminal-trace'
 ];
 const expectedPortraitSlotIds = [
   'page-05-a-office-looking-glass',
-  'page-06-a-teleconferencing-keycard'
+  'page-06-a-teleconferencing-keycard',
+  'page-08-a-calvino-exterior'
 ];
 const expectedFilenames = [
   'prey-page-02-a-rooftop-helicopter.png',
@@ -41,7 +44,8 @@ const expectedFilenames = [
   'prey-page-03-b-crew-terminal-trace.png',
   'prey-page-04-a-lobby-wrench-mimic.png',
   'prey-page-05-a-office-looking-glass.png',
-  'prey-page-06-a-teleconferencing-keycard.png'
+  'prey-page-06-a-teleconferencing-keycard.png',
+  'prey-page-08-a-calvino-exterior.png'
 ];
 
 const runState = {
@@ -111,7 +115,7 @@ function validateManifest(manifest) {
   assert(manifest.styleRules.some((rule) => /16:9 PNGs/i.test(rule) && /9:16 portrait PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 default plus 9:16 portrait contract');
   assert(manifest.styleRules.some((rule) => /Missing images remain listed in the art queue/i.test(rule)), 'manifest styleRules must preserve missing-image art queue behavior');
   assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
-  assert(Array.isArray(manifest.slots) && manifest.slots.length === 6, 'manifest must contain exactly six photo evidence entries');
+  assert(Array.isArray(manifest.slots) && manifest.slots.length === 7, 'manifest must contain exactly seven photo evidence entries');
 
   const ids = new Set();
   const filenames = new Set();

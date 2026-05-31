@@ -75,4 +75,14 @@ Prompt:
 9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan holds the Teleconferencing keycard at the threshold between a warm cluttered office and a cold blue Talos I corridor, a Phantom silhouette waiting in the hallway, green access light on the door reader, scattered office evidence, amber green cyan station palette, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
 ```
 
+### prey-page-08-a-calvino-exterior.png
+
+Calvino's body floating outside Hardware Labs during the exterior repair and Looking Glass recovery route.
+
+Prompt:
+
+```text
+9:16 portrait cinematic sci-fi illustrated evidence image for a Prey review journal. Calvino's body floats in zero gravity outside Hardware Labs under a cold maintenance spotlight, dark Talos I hull plates around him, small loose tools and recorder-like objects drifting nearby, blue-black vacuum mood with restrained amber highlights, no gore focus, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+```
+
 Do not manually edit generated image tags in `Tools/pages/sources/prey/journey.html`. Keep stable `data-prey-slot` markers there; `npm run build:metro` performs the image wiring from `flight-recorder-manifest.json`.
