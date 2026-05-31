@@ -186,7 +186,7 @@ async function auditHttp(base) {
   const preyJourney = await fetchText(url(base, preyJourneyPath));
   assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
-  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Escape') && preyJourney.text.includes('Office') && preyJourney.text.includes('Looking Glass') && preyJourney.text.includes('Teleconferencing Keycard') && preyJourney.text.includes('pistol pickup') && preyJourney.text.includes('Hardware Labs') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
+  assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Escape') && preyJourney.text.includes('Office') && preyJourney.text.includes('Looking Glass') && preyJourney.text.includes('Teleconferencing Keycard') && preyJourney.text.includes('pistol pickup') && preyJourney.text.includes('Hardware Labs') && preyJourney.text.includes('Ballistics Lab') && preyJourney.text.includes('Recycler Charge') && preyJourney.text.includes('Dr. Calvino') && preyJourney.text.includes("Calvino's body") && preyJourney.text.includes('Q-Beam') && preyJourney.text.includes('Josh Dalton') && preyJourney.text.includes('Probe activated') && preyJourney.text.includes('Labs cleared') && preyJourney.text.includes('Looking Glass restored') && preyJourney.text.includes('Return to Morgan office') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
   assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png') && preyJourney.text.includes('prey-page-04-a-lobby-wrench-mimic.png') && preyJourney.text.includes('prey-page-05-a-office-looking-glass.png') && preyJourney.text.includes('prey-page-06-a-teleconferencing-keycard.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
   assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 5, 'Prey journey should expose exactly five Prey image slots');
@@ -859,13 +859,13 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey|Field Journal|Session 01/i,
           expectedText: 'Session 01 Field Journal',
-          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Office', 'Looking Glass', 'Teleconferencing Keycard', 'pistol pickup', 'Hardware Labs', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'prey-page-05-a-office-looking-glass.png', 'prey-page-06-a-teleconferencing-keycard.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
+          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Office', 'Looking Glass', 'Teleconferencing Keycard', 'pistol pickup', 'Hardware Labs', 'Ballistics Lab', 'Recycler Charge', 'Dr. Calvino', "Calvino's body", 'Q-Beam', 'Josh Dalton', 'Probe activated', 'Labs cleared', 'Looking Glass restored', 'Return to Morgan office', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'prey-page-05-a-office-looking-glass.png', 'prey-page-06-a-teleconferencing-keycard.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
           minImageFrames: 3,
           maxImageFrames: 3,
           maxImageFramesPerPage: 1,
           hashTabTargets: ['#office'],
-          readerPages: 7
+          readerPages: 9
         }, viewport);
         await auditStaticPageViewport(browser, base, {
           slug: 'quantum-break-journey',
