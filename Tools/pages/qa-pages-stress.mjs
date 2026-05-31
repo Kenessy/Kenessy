@@ -187,13 +187,14 @@ async function auditHttp(base) {
   assert(preyJourney.text.includes('Prey - Field Journal') && preyJourney.text.includes('Session 01 Field Journal'), 'Prey journey field journal shell missing');
   assert(preyJourney.text.includes('.journal-track') && preyJourney.text.includes('.journal-page') && preyJourney.text.includes('scroll-snap-type:x mandatory'), 'Prey journey fullscreen reader styling missing');
   assert(preyJourney.text.includes('Fake Morning') && preyJourney.text.includes('Test Rooms') && preyJourney.text.includes('Escape') && preyJourney.text.includes('Office') && preyJourney.text.includes('Looking Glass') && preyJourney.text.includes('Art Queue'), 'Prey journey page copy missing');
-  assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png') && preyJourney.text.includes('prey-page-04-a-lobby-wrench-mimic.png'), 'Prey journey image filenames missing');
+  assert(preyJourney.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyJourney.text.includes('prey-page-03-a-mimic-paranoia.png') && preyJourney.text.includes('prey-page-03-b-crew-terminal-trace.png') && preyJourney.text.includes('prey-page-04-a-lobby-wrench-mimic.png') && preyJourney.text.includes('prey-page-05-a-office-looking-glass.png'), 'Prey journey image filenames missing');
   assert(preyJourney.text.includes(preyFlightRecorderManifestPath) && preyJourney.text.includes('npm run qa:prey-assets'), 'Prey journey asset handoff missing');
-  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 3, 'Prey journey should expose exactly three Prey image slots');
+  assert((preyJourney.text.match(/data-prey-slot="/g) || []).length === 4, 'Prey journey should expose exactly four Prey image slots');
+  assert((preyJourney.text.match(/<div class="evidence-slot[^"]*" data-image-ratio="9:16"/g) || []).length === 1, 'Prey journey should expose exactly one portrait Prey image slot');
   assert(!preyJourney.text.includes('data-qb-slot') && !preyJourney.text.includes('.comic-spread'), 'Prey journey reuses stale Quantum Break/comic slot language');
   const preyManifest = await fetchText(url(base, preyFlightRecorderManifestPath));
   const preyManifestJson = JSON.parse(preyManifest.text);
-  assert(preyManifestJson.game === 'Prey' && preyManifestJson.slots.length === 4, 'Prey illustrated journal manifest mismatch');
+  assert(preyManifestJson.game === 'Prey' && preyManifestJson.slots.length === 5, 'Prey illustrated journal manifest mismatch');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
   assert(preyReadme.text.includes('Prey Illustrated Journal Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README workflow missing');
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
@@ -505,6 +506,18 @@ async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
     assert(/auto|scroll/i.test(reader.overflowX), `${pageSpec.slug} ${viewport.name} reader horizontal overflow disabled: ${reader.overflowX}`);
     assert(!reader.rootHorizontalOverflow, `${pageSpec.slug} ${viewport.name} root horizontally overflows in reader mode`);
     await checkpoint(`${pageSpec.slug} viewport ${viewport.name} reader shell ok`, reader);
+    for (const targetHash of pageSpec.hashTabTargets || []) {
+      const tabLink = page.locator(`.page-tabs a[href="${targetHash}"]`);
+      const tabLinkCount = await tabLink.count();
+      assert(tabLinkCount === 1, `${pageSpec.slug} ${viewport.name} expected one top tab for ${targetHash}, found ${tabLinkCount}`);
+      await tabLink.click({ timeout: 3000 });
+      await page.waitForFunction((hash) => {
+        const track = document.querySelector('.reader-track');
+        const target = document.querySelector(hash);
+        return Boolean(track && target && location.hash === hash && Math.abs(track.scrollLeft - target.offsetLeft) <= 12);
+      }, targetHash, { timeout: 1800 });
+      await checkpoint(`${pageSpec.slug} viewport ${viewport.name} hash tab ${targetHash} ok`);
+    }
     for (let pageIndex = 0; pageIndex < pageSpec.readerPages; pageIndex += 1) {
       await page.evaluate((index) => {
         const track = document.querySelector('.reader-track');
@@ -846,11 +859,12 @@ async function main() {
           titlePattern: /Prey/i,
           h1Pattern: /Prey|Field Journal|Session 01/i,
           expectedText: 'Session 01 Field Journal',
-          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Office', 'Looking Glass', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
+          requiredTexts: ['Cover', 'Fake Morning', 'Test Rooms', 'Escape', 'Office', 'Looking Glass', 'Art Queue', 'prey-page-02-a-rooftop-helicopter.png', 'prey-page-03-a-mimic-paranoia.png', 'prey-page-03-b-crew-terminal-trace.png', 'prey-page-04-a-lobby-wrench-mimic.png', 'prey-page-05-a-office-looking-glass.png', 'flight-recorder-manifest.json', 'npm run qa:prey-assets'],
           minLinks: 7,
           minImageFrames: 3,
           maxImageFrames: 3,
           maxImageFramesPerPage: 1,
+          hashTabTargets: ['#office'],
           readerPages: 6
         }, viewport);
         await auditStaticPageViewport(browser, base, {

@@ -4,11 +4,11 @@
   "promptVersion": "prey-illustrated-journal-v1",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/prey/",
-  "sharedPrompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. Use a dark orbital station mood, amber green cyan accent light, grounded environmental storytelling, no readable fake UI text, no logos, no captions, painterly cinematic realism, clean composition readable at mobile width.",
+  "sharedPrompt": "Cinematic sci-fi illustrated evidence image for a Prey review journal. Use a dark orbital station mood, amber green cyan accent light, grounded environmental storytelling, no readable fake UI text, no logos, no captions, painterly cinematic realism, clean composition readable at mobile width.",
   "negativePrompt": "No logos, no captions, no fake UI text, no fake brand text, no watermark, no gore focus, no illegible typographic overlays, no cartoon style, no random extra limbs.",
   "styleRules": [
     "Use illustrated field journal language: dark station pages, amber/green/cyan accent light, pinned evidence photos, and readable comic-review composition.",
-    "16:9 PNGs only; target at least 1600x900 for public display.",
+    "Use 16:9 PNGs for scene evidence by default; use 9:16 portrait PNGs only when the page is explicitly designed for a profile/comic insert.",
     "Missing images remain listed in the art queue until exact filenames exist.",
     "Avoid large non-diegetic typography, fake UI text, captions, logos, and watermarks.",
     "Keep scenes readable at mobile width with one clear focal action."
@@ -57,6 +57,17 @@
       "prompt": "16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan raises a wrench against a black Mimic threat inside a dark orbital station lobby after the apartment simulation breaks, floating debris, blue station depth with amber sparks, vulnerable early-combat tension, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.",
       "composition": "Keep the wrench readable in the foreground and the Mimic threat as the central focal danger; use station depth and debris to show that this is no longer the safe fake morning.",
       "avoid": "Avoid readable signage, official UI, fake HUD elements, gore focus, logo marks, and overbusy debris that hides the Mimic silhouette."
+    },
+    {
+      "id": "page-05-a-office-looking-glass",
+      "page": "office",
+      "filename": "prey-page-05-a-office-looking-glass.png",
+      "aspectRatio": "9:16",
+      "visibleInJourney": true,
+      "brief": "Morgan's office evidence collage with January monitor, keycard, Neuromod/GLOO handoff, turrets, wrench, and the Looking Glass objective.",
+      "prompt": "9:16 portrait comic-style sci-fi evidence image for a Prey review journal. Morgan sits in a dark Talos I office facing a glitching January video message on a workstation monitor, Earth and the station visible through the window, a keycard insert panel, a Neuromod or GLOO tool insert panel, defensive turrets in the room, wrench foreground, amber green cyan station light, no readable UI, no captions, no logos, no fake text, painterly pixel-cinematic realism, clean composition readable at mobile width.",
+      "composition": "Use one strong portrait composition with a main office scene and small visual evidence inserts; keep January, Morgan, keycard, turrets, and wrench readable without turning it into a fake dashboard.",
+      "avoid": "Avoid readable terminal text, fake brand marks, captions, official UI, gore focus, crowded tiny panels, and text overlays that fight the journal typography."
     }
   ]
 }

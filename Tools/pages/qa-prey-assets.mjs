@@ -10,20 +10,21 @@ const publicReadmePath = path.join(repoRoot, 'docs/assets/img/prey/README.md');
 const assetDir = path.join(repoRoot, 'docs/assets/img/prey');
 const journeyIndexPath = path.join(repoRoot, 'docs/plater-game-reports/games/prey/journey/index.html');
 const outputDir = path.join(repoRoot, '.cache/prey-asset-qa');
-const expectedRatio = 16 / 9;
 const ratioTolerance = 0.04;
-const minWidth = 960;
-const minHeight = 540;
+const minShortEdge = 540;
+const minLongEdge = 960;
 const expectedSlotIds = [
   'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
   'page-03-b-crew-terminal-trace',
-  'page-04-a-lobby-wrench-mimic'
+  'page-04-a-lobby-wrench-mimic',
+  'page-05-a-office-looking-glass'
 ];
 const expectedVisibleSlotIds = [
   'page-02-a-rooftop-helicopter',
   'page-03-a-mimic-paranoia',
-  'page-04-a-lobby-wrench-mimic'
+  'page-04-a-lobby-wrench-mimic',
+  'page-05-a-office-looking-glass'
 ];
 const expectedQueueOnlySlotIds = [
   'page-03-b-crew-terminal-trace'
@@ -32,7 +33,8 @@ const expectedFilenames = [
   'prey-page-02-a-rooftop-helicopter.png',
   'prey-page-03-a-mimic-paranoia.png',
   'prey-page-03-b-crew-terminal-trace.png',
-  'prey-page-04-a-lobby-wrench-mimic.png'
+  'prey-page-04-a-lobby-wrench-mimic.png',
+  'prey-page-05-a-office-looking-glass.png'
 ];
 
 const runState = {
@@ -70,6 +72,15 @@ function isPlainFilename(filename) {
   return filename === path.basename(filename) && !filename.includes('/') && !filename.includes('\\');
 }
 
+function parseAspectRatio(value) {
+  const match = /^(\d+):(\d+)$/.exec(String(value || ''));
+  assert(match, `invalid aspect ratio ${value}`);
+  const width = Number(match[1]);
+  const height = Number(match[2]);
+  assert(width > 0 && height > 0, `invalid aspect ratio ${value}`);
+  return width / height;
+}
+
 function parsePngDimensions(buffer, filename) {
   const signature = '89504e470d0a1a0a';
   assert(buffer.length >= 24, `${filename} is too small to be a PNG`);
@@ -90,10 +101,10 @@ function validateManifest(manifest) {
   assert(typeof manifest.sharedPrompt === 'string' && /illustrated evidence image/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing illustrated evidence base');
   assert(typeof manifest.negativePrompt === 'string' && /fake UI text/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI text guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 4, 'manifest needs at least four styleRules');
-  assert(manifest.styleRules.some((rule) => /16:9 PNGs only/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');
+  assert(manifest.styleRules.some((rule) => /16:9 PNGs/i.test(rule) && /9:16 portrait PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 default plus 9:16 portrait contract');
   assert(manifest.styleRules.some((rule) => /Missing images remain listed in the art queue/i.test(rule)), 'manifest styleRules must preserve missing-image art queue behavior');
   assert(manifest.styleRules.some((rule) => /illustrated field journal/i.test(rule)), 'manifest styleRules must preserve journal art direction');
-  assert(Array.isArray(manifest.slots) && manifest.slots.length === 4, 'manifest must contain exactly four photo evidence entries');
+  assert(Array.isArray(manifest.slots) && manifest.slots.length === 5, 'manifest must contain exactly five photo evidence entries');
 
   const ids = new Set();
   const filenames = new Set();
@@ -102,7 +113,12 @@ function validateManifest(manifest) {
     assert(slot.filename && !filenames.has(slot.filename), `duplicate or missing filename ${slot.filename}`);
     assert(isPlainFilename(slot.filename), `filename must not include paths: ${slot.filename}`);
     assert(slot.filename.endsWith('.png'), `slot must target PNG: ${slot.filename}`);
-    assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
+    assert(['16:9', '9:16'].includes(slot.aspectRatio), `slot ${slot.id} must use a supported aspect ratio`);
+    if (slot.id === 'page-05-a-office-looking-glass') {
+      assert(slot.aspectRatio === '9:16', `slot ${slot.id} must preserve portrait layout`);
+    } else {
+      assert(slot.aspectRatio === '16:9', `slot ${slot.id} must use 16:9`);
+    }
     if (expectedVisibleSlotIds.includes(slot.id)) {
       assert(slot.visibleInJourney !== false, `slot ${slot.id} should be visible in the Prey illustrated journal v1`);
     }
@@ -196,10 +212,11 @@ async function main() {
     const buffer = await readFile(filePath);
     const { width, height } = parsePngDimensions(buffer, slot.filename);
     const ratio = width / height;
+    const expectedRatio = parseAspectRatio(slot.aspectRatio);
     const ratioError = Math.abs(ratio - expectedRatio);
     Object.assign(slotResult, { width, height, ratio: Number(ratio.toFixed(4)), ratioError: Number(ratioError.toFixed(4)) });
-    assert(ratioError <= ratioTolerance, `${slot.filename} is not close enough to 16:9: ${width}x${height}`);
-    assert(width >= minWidth && height >= minHeight, `${slot.filename} is too small: ${width}x${height}, expected at least ${minWidth}x${minHeight}`);
+    assert(ratioError <= ratioTolerance, `${slot.filename} is not close enough to ${slot.aspectRatio}: ${width}x${height}`);
+    assert(Math.min(width, height) >= minShortEdge && Math.max(width, height) >= minLongEdge, `${slot.filename} is too small: ${width}x${height}, expected at least ${minShortEdge}px short edge and ${minLongEdge}px long edge`);
     presentCount += 1;
     runState.slots.push(slotResult);
     await checkpoint(`validated ${slot.filename}`, slotResult);

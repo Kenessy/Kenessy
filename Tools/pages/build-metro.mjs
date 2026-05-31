@@ -196,7 +196,7 @@ async function renderPreyJourneyImages(html, manifest) {
     }
 
     const framePattern = new RegExp(
-      `<div class="evidence-slot" data-image-ratio="16:9" data-prey-slot="${escapeRegExp(id)}"><div class="slot-placeholder">([\\s\\S]*?)<\\/div><\\/div>`
+      `<div class="evidence-slot" data-image-ratio="[^"]+" data-prey-slot="${escapeRegExp(id)}"><div class="slot-placeholder">([\\s\\S]*?)<\\/div><\\/div>`
     );
     if (!framePattern.test(output)) {
       throw new Error(`Prey journey slot ${id} is not a journal evidence placeholder.`);

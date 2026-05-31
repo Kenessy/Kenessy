@@ -4,7 +4,7 @@ This directory is the source-of-truth handoff for generated Prey illustrated jou
 
 ## Drop-In Rule
 
-Generate 16:9 PNGs and place them in `docs/assets/img/prey/` with the exact filenames below. Then run:
+Generate PNGs and place them in `docs/assets/img/prey/` with the exact filenames below. Use 16:9 for scene evidence unless a slot explicitly asks for a 9:16 portrait insert. Then run:
 
 ```bash
 npm run build:metro
@@ -53,6 +53,16 @@ Prompt:
 
 ```text
 16:9 cinematic sci-fi illustrated evidence image for a Prey review journal. First-person Morgan raises a wrench against a black Mimic threat inside a dark orbital station lobby after the apartment simulation breaks, floating debris, blue station depth with amber sparks, vulnerable early-combat tension, no readable UI, no captions, no logos, no fake text, painterly cinematic realism, clean composition readable at mobile width.
+```
+
+### prey-page-05-a-office-looking-glass.png
+
+Morgan's office evidence collage with January monitor, keycard, Neuromod/GLOO handoff, turrets, wrench, and the Looking Glass objective.
+
+Prompt:
+
+```text
+9:16 portrait comic-style sci-fi evidence image for a Prey review journal. Morgan sits in a dark Talos I office facing a glitching January video message on a workstation monitor, Earth and the station visible through the window, a keycard insert panel, a Neuromod or GLOO tool insert panel, defensive turrets in the room, wrench foreground, amber green cyan station light, no readable UI, no captions, no logos, no fake text, painterly pixel-cinematic realism, clean composition readable at mobile width.
 ```
 
 Do not manually edit generated image tags in `Tools/pages/sources/prey/journey.html`. Keep stable `data-prey-slot` markers there; `npm run build:metro` performs the image wiring from `flight-recorder-manifest.json`.

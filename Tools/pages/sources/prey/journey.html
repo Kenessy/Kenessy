@@ -48,20 +48,26 @@ h3{color:#ead9a8;font-size:24px;line-height:1.08;font-weight:900;text-transform:
 .plain-meta{display:flex;flex-wrap:wrap;gap:12px 18px;color:#bfb596;font-size:12px;font-weight:850;text-transform:uppercase}
 .image-run{width:min(100%,980px);margin:4px 0 0}
 .image-run.wide{width:100%}
+.image-run.portrait{width:min(100%,430px)}
 .image-run img{width:100%;border:0}
 .evidence-slot{position:relative;aspect-ratio:16/9;width:100%;background:#0d0d0a;overflow:hidden}
+.evidence-slot[data-image-ratio="9:16"]{aspect-ratio:9/16}
 .evidence-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .evidence-slot-ready .slot-placeholder{display:none}
 .slot-placeholder{position:absolute;inset:0;display:grid;place-content:center;gap:10px;padding:24px;background:#0d0d0a;color:#d8cfb1;text-align:center}
 .slot-placeholder b{color:#ffcf83;font-size:12px;text-transform:uppercase}
 .slot-placeholder span{max-width:58ch;color:#bfb596;font-size:14px;line-height:1.45;font-weight:760}
 .caption{margin-top:9px;color:#aaa38b;font-size:12px;font-weight:850;text-transform:uppercase}
+.media-prose{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,430px);gap:30px;align-items:start}
+.media-prose .journal-prose{max-width:none}
+.media-prose .image-run{margin-top:0}
 .asset-list{max-width:820px;margin:0;padding-left:20px;color:#d8cfb1}
 .asset-list li{margin:10px 0}
 code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em;overflow-wrap:anywhere}
 .page-footer{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px 18px;color:#aaa38b;font-size:12px;font-weight:850;text-transform:uppercase}
 .page-footer a{color:#cfc5a7}
 .page-footer a:hover,.page-footer a:focus-visible{color:#fff1bf;outline:0}
+@media(max-width:900px){.media-prose{grid-template-columns:1fr}.media-prose .image-run{order:-1}.image-run.portrait{width:min(100%,520px)}}
 @media(max-width:760px){.topbar-inner{align-items:flex-start;flex-direction:column;padding:10px 0}.page-tabs{justify-content:flex-start;gap:10px}.journal-page{padding:128px 18px 34px}h1,h2{font-size:42px}.lead{font-size:19px}.journal-prose p,.journal-prose li{font-size:17px}.page-inner{min-height:calc(100vh - 162px)}}
 </style>
 </head>
@@ -172,15 +178,21 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
         <p class="kicker">05 / Office</p>
         <h2>The Station Opens Behind The Set</h2>
         <p class="lead">The route stops being only escape survival and becomes the first real systems handoff: keycards, GLOO reach, Neuromods, emails, turrets, office evidence, and the Looking Glass objective.</p>
-        <div class="journal-prose">
-          <p>The first block is still simple friction: a door wants a card, I do not have it, then the simulation lab card turns up. That matters because the game is already teaching a loop: blocked route, search the nearby fiction, return with a permission object.</p>
-          <p>The Phantom shows up as question marks, which is a good early threat read. It is not fully legible yet, but the shape is enough to tell me this is above the current Mimic tier. The GLOO climb is more important than the fight. Being able to jump back up to higher surfaces, find extra GLOO, and loot around the top of the space is the first clear proof that vertical problem solving is part of the game.</p>
-          <p>The security booth is still locked behind a password, which is fine if the station expects a return pass. The review note here is not "I was stuck," it is "does the game make backtracking feel like memory, or does it become a list of doors I forgot?" That will need more evidence later.</p>
-          <p>The first Neuromod lands cleanly. Taking <strong>Hacking I</strong> feels like the right first explicit build choice because it immediately answers the current pressure: terminals, codes, and blocked access. This is also the point where the page cut becomes natural. We are still in Session 01, but the opening set is over and the station systems are starting to take control.</p>
-          <p>The Talos I reveal is doing a lot of work. Seeing the ship/station structure from inside the broken route makes the fake apartment feel small in hindsight. Bodies everywhere, random loot, emails, and changed keycodes turn the place into a readable disaster. If those keycodes are randomized per run, that is a strong anti-spoiler design choice because it pushes attention back to the world instead of old memory.</p>
-          <p>I start moving turrets into a better defensive corner, which is exactly the kind of behavior this game needs to reward. If a room can be prepared before trouble arrives, then the review can judge combat as planning plus improvisation, not just melee stamina management.</p>
-          <p>Morgan's office is the personal anchor. The workstation video introduces January as a backup made by Morgan, then drops the key Neuromod premise: removing or exporting a Neuromod resets memory back to the point before it was installed. The moment the video is about to explain why, the connection dies. Alex cutting in is a strong trust-layer move because the conflict is no longer just survival; it is control over what Morgan is allowed to know.</p>
-          <p>The next objective is clean: restore the Looking Glass servers. That is a good endpoint for this page. The first act is not finished because the game said so; it is finished because the review question has changed from "what is real?" to "who controls the evidence?"</p>
+        <div class="media-prose">
+          <div class="journal-prose">
+            <p>The first block is still simple friction: a door wants a card, I do not have it, then the simulation lab card turns up. That matters because the game is already teaching a loop: blocked route, search the nearby fiction, return with a permission object.</p>
+            <p>The Phantom shows up as question marks, which is a good early threat read. It is not fully legible yet, but the shape is enough to tell me this is above the current Mimic tier. The GLOO climb is more important than the fight. Being able to jump back up to higher surfaces, find extra GLOO, and loot around the top of the space is the first clear proof that vertical problem solving is part of the game.</p>
+            <p>The security booth is still locked behind a password, which is fine if the station expects a return pass. The review note here is not "I was stuck," it is "does the game make backtracking feel like memory, or does it become a list of doors I forgot?" That will need more evidence later.</p>
+            <p>The first Neuromod lands cleanly. Taking <strong>Hacking I</strong> feels like the right first explicit build choice because it immediately answers the current pressure: terminals, codes, and blocked access. This is also the point where the page cut becomes natural. We are still in Session 01, but the opening set is over and the station systems are starting to take control.</p>
+            <p>The Talos I reveal is doing a lot of work. Seeing the ship/station structure from inside the broken route makes the fake apartment feel small in hindsight. Bodies everywhere, random loot, emails, and changed keycodes turn the place into a readable disaster. If those keycodes are randomized per run, that is a strong anti-spoiler design choice because it pushes attention back to the world instead of old memory.</p>
+            <p>I start moving turrets into a better defensive corner, which is exactly the kind of behavior this game needs to reward. If a room can be prepared before trouble arrives, then the review can judge combat as planning plus improvisation, not just melee stamina management.</p>
+            <p>Morgan's office is the personal anchor. The workstation video introduces January as a backup made by Morgan, then drops the key Neuromod premise: removing or exporting a Neuromod resets memory back to the point before it was installed. The moment the video is about to explain why, the connection dies. Alex cutting in is a strong trust-layer move because the conflict is no longer just survival; it is control over what Morgan is allowed to know.</p>
+            <p>The next objective is clean: restore the Looking Glass servers. That is a good endpoint for this page. The first act is not finished because the game said so; it is finished because the review question has changed from "what is real?" to "who controls the evidence?"</p>
+          </div>
+          <figure class="image-run portrait" aria-label="Office Looking Glass evidence slot">
+            <div class="evidence-slot" data-image-ratio="9:16" data-prey-slot="page-05-a-office-looking-glass"><div class="slot-placeholder"><b>Evidence 05-A</b><span>prey-page-05-a-office-looking-glass.png / Morgan's office, January monitor, keycard, Neuromod evidence, turrets, and Looking Glass objective.</span></div></div>
+            <figcaption class="caption">Office evidence / January turns survival into trust audit</figcaption>
+          </figure>
         </div>
         <footer class="page-footer"><a href="#handoff">Open art queue</a><a href="../#scope">Prey proof gates</a><span>Page 05 / 06</span></footer>
       </div>
@@ -198,6 +210,7 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
             <li><code>prey-page-03-a-mimic-paranoia.png</code></li>
             <li><code>prey-page-03-b-crew-terminal-trace.png</code></li>
             <li><code>prey-page-04-a-lobby-wrench-mimic.png</code></li>
+            <li><code>prey-page-05-a-office-looking-glass.png</code></li>
           </ul>
           <p><code>npm run build:metro</code><br><code>npm run qa:prey-assets</code></p>
           <p>The style rule is now simple: no decorative dashboard, no extra boxes, no fake UI. Write the run like a review diary and drop in a strong image only when the scene needs one.</p>
@@ -207,5 +220,40 @@ code{color:#ead9a8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
     </section>
   </main>
 </div>
+<script>
+(() => {
+  const track = document.getElementById('reader');
+  const pageForHash = (hash) => {
+    if (!hash || hash.length < 2) return null;
+    const target = document.querySelector(hash);
+    return target?.classList.contains('journal-page') ? target : null;
+  };
+  const scrollToPage = (hash, behavior = 'smooth') => {
+    const target = pageForHash(hash);
+    if (!track || !target) return false;
+    const left = target.offsetLeft;
+    if (behavior === 'auto') {
+      track.scrollLeft = left;
+    } else {
+      track.scrollTo({ left, behavior });
+      requestAnimationFrame(() => {
+        if (Math.abs(track.scrollLeft - left) > 12) track.scrollLeft = left;
+      });
+    }
+    return true;
+  };
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest?.('a[href^="#"]');
+    if (!link) return;
+    const hash = link.getAttribute('href');
+    if (!pageForHash(hash)) return;
+    event.preventDefault();
+    history.pushState(null, '', hash);
+    scrollToPage(hash);
+  });
+  window.addEventListener('hashchange', () => scrollToPage(location.hash));
+  if (location.hash) requestAnimationFrame(() => scrollToPage(location.hash, 'auto'));
+})();
+</script>
 </body>
 </html>
