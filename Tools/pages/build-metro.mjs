@@ -217,14 +217,14 @@ async function renderPreyJourneyImages(html, manifest) {
 function shellCss() {
   return `
 :root{color-scheme:dark}
-html,body,#root{min-height:100%;margin:0;background:#05060a;color:#e7ecf3;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,sans-serif}
+html,body,#root{min-height:100%;margin:0;background:#050403;color:#f1e7d2;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,sans-serif}
 body{overflow-x:hidden}
-.fallback{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(900px 500px at 20% 0,rgba(17,250,203,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,138,31,.10),transparent 60%),linear-gradient(180deg,#05060a,#060810 50%,#05060a)}
-.fallback-card{width:min(820px,calc(100% - 32px));border:1px solid #1e2733;background:#0d1117;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}
-.fallback small{color:#11facb;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:0}
-.fallback h1{margin:10px 0 0;color:#d9c9a3;font-size:3.2rem;line-height:.92;text-transform:uppercase}
-.fallback p{color:#b8a982;line-height:1.7}
-.fallback ul{margin:18px 0 0;padding-left:20px;color:#8592a5;line-height:1.7}
+.fallback{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(900px 500px at 20% 0,rgba(255,179,71,.10),transparent 60%),radial-gradient(900px 500px at 90% 100%,rgba(255,51,34,.08),transparent 60%),linear-gradient(180deg,#050403,#080604 50%,#050403)}
+.fallback-card{width:min(820px,calc(100% - 32px));border:1px solid #2b2118;background:#100d0a;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.55)}
+.fallback small{color:#ffb347;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:0}
+.fallback h1{margin:10px 0 0;color:#ead6a8;font-size:3.2rem;line-height:.92;text-transform:uppercase}
+.fallback p{color:#c9ad7a;line-height:1.7}
+.fallback ul{margin:18px 0 0;padding-left:20px;color:#9b8a72;line-height:1.7}
 .fallback a{color:#ffb347}
 `;
 }

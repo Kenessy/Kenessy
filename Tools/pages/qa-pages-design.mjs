@@ -28,6 +28,53 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+function rgbFromString(value) {
+  const match = String(value).match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)/i);
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
+}
+
+function rgbFromHex(value) {
+  let hex = String(value).replace('#', '').trim();
+  if (hex.length === 3) hex = hex.split('').map((char) => char + char).join('');
+  if (hex.length < 6) return null;
+  return [0, 2, 4].map((index) => Number.parseInt(hex.slice(index, index + 2), 16));
+}
+
+function warmFamily(rgb) {
+  if (!rgb) return false;
+  const [r0, g0, b0] = rgb.map((value) => value / 255);
+  const max = Math.max(r0, g0, b0);
+  const min = Math.min(r0, g0, b0);
+  const delta = max - min;
+  if (delta < 0.025) return true;
+  let hue;
+  if (max === r0) hue = (((g0 - b0) / delta) % 6) * 60;
+  else if (max === g0) hue = (((b0 - r0) / delta) + 2) * 60;
+  else hue = (((r0 - g0) / delta) + 4) * 60;
+  hue = (hue + 360) % 360;
+  return hue < 75 || hue >= 345;
+}
+
+function assertWarmMetroPalette(text, label) {
+  const legacyCool = [
+    '#5ddcff',
+    '#11facb',
+    '#7cff6b',
+    '#7c6dff',
+    '#2b7fff',
+    '#c056ff',
+    '#b6f505',
+    '#ff005d'
+  ];
+  const lowerText = text.toLowerCase();
+  const stale = legacyCool.filter((token) => lowerText.includes(token));
+  assert(stale.length === 0, `${label} still contains legacy cool palette tokens ${stale.join(', ')}`);
+
+  const colors = [...new Set([...text.matchAll(/#[0-9a-fA-F]{3,8}\b/g)].map((match) => match[0].toLowerCase()))];
+  const cool = colors.filter((color) => !warmFamily(rgbFromHex(color)));
+  assert(cool.length === 0, `${label} contains non-warm explicit hex colors ${cool.join(', ')}`);
+}
+
 async function checkpoint(message, extra = {}) {
   const item = { at: new Date().toISOString(), message, ...extra };
   runState.checkpoints.push(item);
@@ -230,6 +277,7 @@ async function auditDesignArtifacts(base) {
   assert(panelReadme.text.includes('npm run qa:qb-assets'), 'Quantum Break asset README does not document asset QA');
   assert(panelReadme.text.includes('Shared prompt base') && panelReadme.text.includes('Next missing image'), 'Quantum Break asset README prompt workflow missing');
   const report = await fetchText(url(base, `${reportPath}?v=${buildId}`));
+  assertWarmMetroPalette(report.text, 'Metro report');
   assert(!/font-size:clamp\([^)]*vw/i.test(report.text), 'report CSS still uses viewport-scaled font sizing');
   assert(!/letter-spacing:-/i.test(report.text), 'report CSS still has negative letter spacing');
   assert(!/\.site-links\{position:fixed/i.test(report.text), 'report still has floating nav overlay CSS');
@@ -963,7 +1011,8 @@ async function auditViewport(browser, base, buildId, viewport) {
   assert(metrics.audienceFit.exists && metrics.audienceFit.kicker === '02 · Audience Fit' && metrics.audienceFit.title === 'Who Is This 86 For?' && metrics.audienceFit.desc.includes('fit filter') && metrics.audienceFit.descSize >= 15.5 && metrics.audienceFit.descColor !== 'rgb(133, 146, 165)' && !metrics.audienceFit.staleWho86, `${viewport.name} audience fit heading/copy mismatch ${JSON.stringify(metrics.audienceFit)}`);
   assert(metrics.audienceFit.thesisLabel === 'Verdict Thesis' && metrics.audienceFit.thesisText.includes('atmosphere-first players') && metrics.audienceFit.thesisText.includes('not a sandbox or co-op promise') && !metrics.audienceFit.staleCoreThesis && metrics.audienceFit.thesisTransform === 'none' && metrics.audienceFit.thesisSize >= 15 && metrics.audienceFit.thesisLineHeight >= 22 && metrics.audienceFit.thesisBorderLeft === 0 && metrics.audienceFit.thesisHasGradient, `${viewport.name} audience fit thesis mismatch ${JSON.stringify(metrics.audienceFit)}`);
   assert(metrics.scoreAnatomy.exists && metrics.scoreAnatomy.kicker === '03 · Score Anatomy' && metrics.scoreAnatomy.title === 'ALERTED Score Strip' && metrics.scoreAnatomy.desc.includes('Five main axes') && metrics.scoreAnatomy.descSize >= 15.5 && metrics.scoreAnatomy.descColor !== 'rgb(133, 146, 165)', `${viewport.name} score anatomy heading/copy mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
-  assert(metrics.scoreAnatomy.alertedText === 'ALERTED' && metrics.scoreAnatomy.alertedCount === 7 && metrics.scoreAnatomy.alertedUniqueColors >= 6 && /rgb\(124,\s*109,\s*255\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*176,\s*0\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*45,\s*31\)/.test(metrics.scoreAnatomy.alertedColors), `${viewport.name} ALERTED wordmark color mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
+  const alertedColors = metrics.scoreAnatomy.alertedColors.split('|').filter(Boolean);
+  assert(metrics.scoreAnatomy.alertedText === 'ALERTED' && metrics.scoreAnatomy.alertedCount === 7 && metrics.scoreAnatomy.alertedUniqueColors >= 6 && alertedColors.every((color) => warmFamily(rgbFromString(color))) && /rgb\(255,\s*179,\s*71\)/.test(metrics.scoreAnatomy.alertedColors) && /rgb\(255,\s*51,\s*34\)/.test(metrics.scoreAnatomy.alertedColors), `${viewport.name} ALERTED wordmark warm palette mismatch ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.scoreAnatomy.tileCount === 7 && metrics.scoreAnatomy.stripBorderMax === 0 && metrics.scoreAnatomy.stripBackgroundColor === 'rgba(0, 0, 0, 0)' && metrics.scoreAnatomy.stripBackgroundImage === 'none' && metrics.scoreAnatomy.stripGap >= 10 && metrics.scoreAnatomy.tileBorderMax === 0 && !metrics.scoreAnatomy.tileHasBoxShadow && metrics.scoreAnatomy.tileBackgroundsTransparent && metrics.scoreAnatomy.tileMaxRight <= viewport.width + 1, `${viewport.name} score strip still has secondary wrapper/card chrome ${JSON.stringify(metrics.scoreAnatomy)}`);
   assert(metrics.scoreCalculator.exists && metrics.scoreCalculator.title === 'Score Calculator' && metrics.scoreCalculator.termCount === 3 && metrics.scoreCalculator.labels === 'Axes|Fit / Risk|Final Score' && metrics.scoreCalculator.values === '90|4|86' && metrics.scoreCalculator.operators === '−|=' && metrics.scoreCalculator.noteText.includes('five core axes') && metrics.scoreCalculator.noteText.includes('public score is 86'), `${viewport.name} simplified score calculator content mismatch ${JSON.stringify(metrics.scoreCalculator)}`);
   assert(metrics.scoreCalculator.oldLcdNodes === 0 && !metrics.scoreCalculator.staleText && metrics.scoreCalculator.labelMinSize >= 11 && metrics.scoreCalculator.valueMinSize >= 54 && metrics.scoreCalculator.noteSize >= 14 && metrics.scoreCalculator.clipPath === 'none' && metrics.scoreCalculator.boxShadow === 'none' && metrics.scoreCalculator.beforeDisplay === 'none' && metrics.scoreCalculator.maxRight <= viewport.width + 1, `${viewport.name} score calculator still has LCD/decor clutter or overflow ${JSON.stringify(metrics.scoreCalculator)}`);
