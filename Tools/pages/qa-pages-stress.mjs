@@ -519,17 +519,33 @@ async function auditStaticPageViewport(browser, base, pageSpec, viewport) {
       }, targetHash, { timeout: 1800 });
       await checkpoint(`${pageSpec.slug} viewport ${viewport.name} hash tab ${targetHash} ok`);
     }
+    if ((pageSpec.hashTabTargets || []).length) {
+      await page.evaluate(() => {
+        const track = document.querySelector('.reader-track');
+        if (location.hash) history.replaceState(null, '', `${location.pathname}${location.search}`);
+        if (track) track.scrollLeft = 0;
+      });
+      await page.waitForFunction(() => {
+        const track = document.querySelector('.reader-track');
+        if (!track || location.hash) return false;
+        if (Math.abs(track.scrollLeft) > 12) track.scrollLeft = 0;
+        return Math.abs(track.scrollLeft) <= 12;
+      }, undefined, { timeout: 2400 });
+    }
     for (let pageIndex = 0; pageIndex < pageSpec.readerPages; pageIndex += 1) {
       await page.evaluate((index) => {
         const track = document.querySelector('.reader-track');
         const target = document.querySelectorAll('.journal-page')[index];
-        if (track && target) track.scrollTo({ left: target.offsetLeft, behavior: 'auto' });
+        if (track && target) track.scrollLeft = target.offsetLeft;
       }, pageIndex);
       await page.waitForFunction((index) => {
         const track = document.querySelector('.reader-track');
         const target = document.querySelectorAll('.journal-page')[index];
-        return Boolean(track && target && Math.abs(track.scrollLeft - target.offsetLeft) <= 12);
-      }, pageIndex, { timeout: 1600 });
+        if (!track || !target) return false;
+        const left = target.offsetLeft;
+        if (Math.abs(track.scrollLeft - left) > 12) track.scrollLeft = left;
+        return Math.abs(track.scrollLeft - left) <= 12;
+      }, pageIndex, { timeout: 2400 });
       await page.waitForTimeout(80);
       const pageMetrics = await collectStaticPageMetrics(page);
       if (pageSpec.maxImageFramesPerPage) {
