@@ -381,6 +381,100 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .review-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 58%,rgba(7,9,13,.42));pointer-events:none}
 .review-copy{display:grid;align-content:center;padding:20px}
 .review-stack{display:grid;gap:18px}
+.metro-card{
+  grid-template-columns:minmax(360px,.92fr) minmax(0,1.08fr) 150px;
+  border-color:rgba(216,154,72,.54);
+  background:
+    radial-gradient(740px 360px at 18% 8%,rgba(255,179,71,.18),transparent 68%),
+    radial-gradient(640px 340px at 94% 100%,rgba(166,74,30,.22),transparent 68%),
+    linear-gradient(145deg,rgba(54,35,17,.94),rgba(16,12,9,.98) 58%,rgba(43,48,54,.84));
+  box-shadow:0 26px 70px rgba(0,0,0,.34),0 0 0 1px rgba(255,179,71,.10) inset;
+}
+.metro-card::before{height:4px;background:linear-gradient(90deg,#ffb347,var(--rust),var(--bone),transparent 84%)}
+.metro-card .review-media{min-height:286px;border-right-color:rgba(216,154,72,.40);background:#120d09}
+.metro-card .review-media img{min-height:286px;filter:saturate(1.08) contrast(1.05)}
+.metro-card .review-media::after{
+  background:
+    linear-gradient(90deg,transparent 46%,rgba(18,13,9,.42) 74%,rgba(18,13,9,.82)),
+    linear-gradient(180deg,rgba(255,179,71,.08),transparent 32%,rgba(0,0,0,.18));
+}
+.metro-card .review-copy{
+  position:relative;
+  padding:24px;
+  background:linear-gradient(135deg,rgba(255,179,71,.065),rgba(18,13,9,.34) 54%,rgba(166,74,30,.08));
+}
+.metro-card .review-copy::before{
+  content:'';
+  position:absolute;
+  inset:16px auto 16px 0;
+  width:3px;
+  background:linear-gradient(180deg,#ffb347,var(--rust));
+}
+.metro-card .review-copy h3{color:#f2dfb4;font-size:31px}
+.metro-card .review-copy p{color:#c8b99a}
+.metro-kicker{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:center;
+  gap:9px;
+  color:#ffb347;
+  font-size:11px;
+  line-height:1;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+}
+.metro-kicker::after{content:'';height:1px;background:linear-gradient(90deg,rgba(255,179,71,.68),transparent)}
+.metro-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.metro-axis{
+  min-height:58px;
+  border:1px solid rgba(255,179,71,.34);
+  background:linear-gradient(145deg,rgba(18,13,9,.72),rgba(166,74,30,.13));
+  display:grid;
+  grid-template-columns:30px minmax(0,1fr);
+  align-items:center;
+  gap:9px;
+  padding:9px 10px;
+  color:#f2dfb4;
+}
+.metro-axis b{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border:1px solid rgba(255,179,71,.44);
+  background:rgba(0,0,0,.24);
+  color:#ffb347;
+  font-size:15px;
+  line-height:1;
+  font-weight:1000;
+}
+.metro-axis small{display:block;color:#c8b99a;font-size:10px;line-height:1.12;font-weight:1000;text-transform:uppercase}
+.metro-axis.verdict{grid-template-columns:54px minmax(0,1fr);border-color:rgba(216,208,184,.48);background:linear-gradient(145deg,rgba(166,74,30,.30),rgba(216,208,184,.10))}
+.metro-axis.verdict b{width:54px;color:#f2dfb4}
+.metro-status-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.metro-status-grid span{
+  min-height:54px;
+  border:1px solid rgba(216,208,184,.18);
+  background:linear-gradient(135deg,rgba(255,179,71,.08),rgba(18,13,9,.62));
+  padding:9px 10px;
+  color:#f2dfb4;
+  font-size:12px;
+  line-height:1.18;
+  font-weight:900;
+}
+.metro-status-grid b{display:block;margin-bottom:5px;color:#ffb347;font-size:9px;font-weight:1000;text-transform:uppercase}
+.metro-link{margin-top:18px;color:#ffb347;font-size:12px;font-weight:1000;text-transform:uppercase}
+.score-box.metro-score{
+  border-color:rgba(255,179,71,.58);
+  background:linear-gradient(145deg,rgba(255,179,71,.18),rgba(166,74,30,.24) 46%,rgba(18,13,9,.92));
+  box-shadow:8px 8px 0 rgba(166,74,30,.68),0 0 0 1px rgba(216,208,184,.08) inset;
+  align-content:center;
+  justify-items:center;
+  gap:18px;
+}
+.score-box.metro-score span{color:#ffb347;font-size:62px}
+.score-box.metro-score small{color:#f2dfb4}
 .qb-card{grid-template-columns:minmax(460px,1.12fr) minmax(0,.92fr) 132px;align-items:center}
 .qb-card::before{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--orange),transparent 82%)}
 .qb-card .review-media{display:flex;align-items:center;justify-content:center;min-height:0;background:#08111b}
@@ -457,6 +551,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .hire-cell:nth-child(2n){border-right:0}
   .hire-cell:nth-last-child(-n+2){border-bottom:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .metro-card .review-media{border-right:0;border-bottom:1px solid rgba(216,154,72,.40)}
   .journal-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .review-media img{aspect-ratio:16/9;min-height:0}
   .journal-media img{aspect-ratio:16/9;min-height:0}
@@ -494,6 +589,9 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .about-line{grid-template-columns:1fr}
   .journal-slots{grid-template-columns:1fr}
   .journal-file-queue div{grid-template-columns:1fr}
+  .metro-card .review-copy{padding:20px}
+  .metro-card .review-media,.metro-card .review-media img{min-height:220px}
+  .metro-axis-grid,.metro-status-grid{grid-template-columns:1fr}
   .review-status{grid-template-columns:1fr}
   .panel-top,.proof-line{grid-template-columns:1fr}
   .build-chip,.status-dot{justify-self:start}
@@ -684,19 +782,26 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now active as the first-run illustrated field journal with Session 01 expanded through Morgan's office and Looking Glass.</p>
       </div>
       <div class="review-stack">
-        <a class="review-card" href="${metroHref}">
+        <a class="review-card metro-card" href="${metroHref}">
           <span class="review-media" aria-hidden="true">
             <img src="${metroSplashHref}" width="1600" height="900" alt="">
           </span>
           <div class="review-copy">
-            <div class="tag-row"><span class="tag cyan">ALERTED report</span><span class="tag green">Published</span></div>
+            <div class="metro-kicker">Published ALERTED dossier</div>
             <h3>Metro 2033 Redux</h3>
             <p>Atmosphere-first survival FPS verdict with player-fit lanes, score strip, correction ledger, spoiler-light judgment, trust layer, and dossier evidence arc.</p>
-            <div class="tag-row"><span class="tag">Atmosphere</span><span class="tag">Linear FPS</span><span class="tag">Survival horror</span><span class="tag amber">Caveated buy</span></div>
-            <div class="review-status" aria-label="Metro review publication state"><span><b>State</b> Published</span><span><b>Proof</b> Full report</span><span><b>Use</b> Flagship format</span></div>
-            <div class="review-link">Open current build</div>
+            <div class="metro-axis-grid" aria-label="Metro ALERTED axis summary">
+              <span class="metro-axis"><b>A</b><small>Atmosphere</small></span>
+              <span class="metro-axis"><b>L</b><small>Loop</small></span>
+              <span class="metro-axis"><b>E</b><small>Engagement</small></span>
+              <span class="metro-axis"><b>R</b><small>Readability</small></span>
+              <span class="metro-axis"><b>T</b><small>Technical</small></span>
+              <span class="metro-axis verdict"><b>86/A</b><small>Caveated buy</small></span>
+            </div>
+            <div class="metro-status-grid" aria-label="Metro review publication state"><span><b>State</b> Published</span><span><b>Proof</b> Full report</span><span><b>Use</b> Flagship format</span></div>
+            <div class="metro-link">Open current build</div>
           </div>
-          <div class="score-box" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
+          <div class="score-box metro-score" aria-label="Metro 2033 Redux score 86 rank A"><span>86</span><small>A</small></div>
         </a>
         <article class="review-card qb-card">
           <a class="review-media" href="${quantumHref}" aria-label="Open Quantum Break review">
