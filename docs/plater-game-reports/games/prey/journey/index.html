@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/prey/journey/">
 <meta name="description" content="Prey fullscreen field journal: Session 01 review notes as simple prose pages with occasional scene images, from fake morning to first lobby friction, office reveal, Looking Glass, Teleconferencing keycard, pistol pickup, Hardware Labs, Ballistics Lab, recycler charge, Dr. Calvino location, Q-Beam pickup, Josh Dalton hook, repaired exterior route, and restored Looking Glass servers.">
 <meta name="theme-color" content="#08111b">
-<meta name="build-id" content="158c60f8a318">
+<meta name="build-id" content="1dd578e67ac7">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prey - Field Journal">
 <meta property="og:description" content="A minimal fullscreen Prey play diary for Session 01: fake morning, rooftop ride, test-room unease, first Mimic breach, apartment escape, office reveal, Teleconferencing keycard, pistol pickup, Ballistics Lab, Dr. Calvino, Q-Beam, Josh Dalton, exterior cleanup, and Looking Glass restored.">
@@ -309,7 +309,7 @@ code{color:#D8D0B8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
     const target = document.querySelector(hash);
     return target?.classList.contains('journal-page') ? target : null;
   };
-  const scrollToPage = (hash, behavior = 'smooth') => {
+  const scrollToPage = (hash, behavior = 'auto') => {
     const target = pageForHash(hash);
     if (!track || !target) return false;
     const left = target.offsetLeft;
@@ -339,7 +339,7 @@ code{color:#D8D0B8;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;fo
     if (!pageForHash(hash)) return;
     event.preventDefault();
     history.pushState(null, '', hash);
-    scrollToPage(hash);
+    scrollToPage(hash, 'auto');
   });
   window.addEventListener('hashchange', () => scrollToPage(location.hash));
   window.addEventListener('load', scheduleHashAlignment);
