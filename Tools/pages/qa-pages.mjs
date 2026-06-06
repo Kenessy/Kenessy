@@ -134,7 +134,7 @@ async function auditHttpSurface(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
-  assert(root.text.includes('I find the hidden failure before it becomes obvious.'), 'root homepage hero copy missing');
+  assert(root.text.includes('OBJECTIVE/<wbr>ACTUAL') && root.text.includes('Knowing the next move is clarity.') && root.text.includes('Understanding the game is control.'), 'root homepage OBJECTIVE/ACTUAL hero copy missing');
   assert(root.text.includes('Operator readout'), 'root homepage operator panel missing');
   assert(root.text.includes('What This Is'), 'root homepage about section missing');
   assert(root.text.includes('id="lanes"') && root.text.includes('Active Lanes'), 'root homepage active lanes map missing');
@@ -363,7 +363,7 @@ async function auditViewports(browser, base, buildId) {
     }, reportPath);
     assert(homeMetrics.title.includes('Kenessy'), `${viewport.name} homepage title missing Kenessy`);
     assert(homeMetrics.hasHomeRoot, `${viewport.name} homepage root missing`);
-    assert(homeMetrics.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
+    assert(homeMetrics.h1 === 'OBJECTIVE/ACTUAL', `${viewport.name} unexpected homepage h1 ${homeMetrics.h1}`);
     assert(homeMetrics.hasReportLink, `${viewport.name} homepage missing Metro report link`);
     assert(homeMetrics.hasQuantumBreakLink, `${viewport.name} homepage missing Quantum Break link`);
     assert(homeMetrics.hasPreyLink, `${viewport.name} homepage missing Prey link`);

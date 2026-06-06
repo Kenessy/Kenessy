@@ -131,6 +131,7 @@ async function auditHttp(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('class="home-root"'), 'root is not the portfolio homepage');
+  assert(root.text.includes('OBJECTIVE/<wbr>ACTUAL') && root.text.includes('Knowing the next move is clarity.') && root.text.includes('Understanding the game is control.'), 'root homepage OBJECTIVE/ACTUAL hero copy missing');
   assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout missing');
   assert(root.text.includes('What This Is') && root.text.includes('Play It Together'), 'portfolio homepage about/journal sections are missing');
   assert(root.text.includes('Active Lanes') && root.text.includes('Photo evidence ready'), 'portfolio homepage active lanes or photo handoff missing');
@@ -274,7 +275,7 @@ async function auditHomeViewport(browser, base, buildId, viewport) {
 
   const initial = await collectHomeMetrics(page, buildId);
   assert(initial.hasHomeRoot, `${viewport.name} homepage root missing`);
-  assert(initial.h1 === 'I find the hidden failure before it becomes obvious.', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
+  assert(initial.h1 === 'OBJECTIVE/ACTUAL', `${viewport.name} homepage h1 mismatch ${initial.h1}`);
   assert(initial.buildId === buildId, `${viewport.name} homepage build mismatch ${initial.buildId}`);
   assert(initial.sectionTitles.join('|') === 'What This Is|Active Lanes|Signal Stack|Proof Surface|Field Work|Game Reviews|Play It Together|Why This Profile', `${viewport.name} homepage section order mismatch ${JSON.stringify(initial.sectionTitles)}`);
   assert(initial.hasReportLink && initial.hasQuantumBreakLink && initial.hasPreyLink && initial.hasPreyJourneyLink && initial.hasReportsLink && initial.hasApocalypseLink, `${viewport.name} homepage primary links missing ${JSON.stringify(initial)}`);

@@ -18,8 +18,8 @@ export function portfolioHomeHtml({
   apocalypsePath,
   githubUrl
 }) {
-  const title = 'Kenessy - Portfolio, Systems Design, Adversarial QA';
-  const description = 'Portfolio hub for Kenessy: systems design, adversarial QA, narrative worlds, game critique, review journals, and public build artifacts.';
+  const title = 'OBJECTIVE/ACTUAL by Kenessy - Systems, Game Reports, AI Motion';
+  const description = 'OBJECTIVE/ACTUAL is Kenessy\'s portfolio field method for game reports, AI motion, code tools, world systems, and adversarially tested public artifacts.';
   const metroHref = `${reportPath}?v=${buildId}`;
   const reportsHref = reportsPath;
   const quantumHref = quantumBreakPath;
@@ -97,8 +97,10 @@ section{scroll-margin-top:26px}
   backdrop-filter:blur(14px);
 }
 .site-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px}
-.brand{min-height:38px;display:inline-flex;align-items:center;color:var(--bone);font-size:15px;font-weight:1000;text-transform:uppercase}
-.brand::before{content:'';width:9px;height:9px;margin-right:10px;background:var(--orange);box-shadow:13px 0 0 var(--cyan),26px 0 0 var(--red)}
+.brand{min-height:42px;display:inline-grid;align-content:center;color:var(--bone);font-size:15px;font-weight:1000;text-transform:uppercase}
+.brand span{display:inline-flex;align-items:center}
+.brand span::before{content:'';width:9px;height:9px;margin-right:10px;background:var(--orange);box-shadow:13px 0 0 var(--cyan),26px 0 0 var(--green)}
+.brand em{display:block;margin-top:2px;margin-left:49px;color:var(--faint);font-size:10px;font-style:normal;font-weight:900}
 .nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .nav-links a{
   min-height:38px;
@@ -114,37 +116,97 @@ section{scroll-margin-top:26px}
 .nav-links a:hover,.nav-links a:focus-visible{border-color:var(--line-2);color:var(--ink);outline:0}
 .hero{
   position:relative;
-  padding:62px 0 44px;
+  min-height:0;
+  padding:34px 0 28px;
   border-bottom:1px solid rgba(218,229,241,.12);
+  overflow:hidden;
+  display:grid;
+  align-items:end;
 }
 .hero::before{
   content:'';
   position:absolute;
   inset:0;
   background:
-    linear-gradient(115deg,rgba(255,138,31,.08),transparent 32%),
-    linear-gradient(245deg,rgba(19,212,232,.09),transparent 30%);
+    linear-gradient(90deg,rgba(7,9,13,.96) 0,rgba(7,9,13,.82) 46%,rgba(7,9,13,.46) 100%),
+    linear-gradient(180deg,rgba(7,9,13,.18),#07090d 94%),
+    linear-gradient(115deg,rgba(255,138,31,.14),transparent 34%),
+    linear-gradient(245deg,rgba(19,212,232,.15),transparent 32%);
   pointer-events:none;
+  z-index:1;
 }
-.hero-stage{position:relative;display:grid;grid-template-columns:minmax(0,1.03fr) minmax(360px,.97fr);gap:30px;align-items:stretch}
-.hero-copy{display:grid;align-content:center;min-height:560px}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(19,212,232,.07) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(218,229,241,.045) 1px,transparent 1px);
+  background-size:96px 96px,96px 96px;
+  mask-image:linear-gradient(90deg,#000 0,rgba(0,0,0,.72) 54%,transparent 100%);
+  pointer-events:none;
+  z-index:2;
+}
+.hero-visual{position:absolute;inset:0;z-index:0;overflow:hidden;background:#07090d}
+.hero-visual img{position:absolute;object-fit:cover;filter:saturate(.82) contrast(1.06);opacity:.50}
+.hero-visual-main{right:0;top:5%;width:min(64vw,860px);height:76%;border-left:1px solid rgba(218,229,241,.10)}
+.hero-visual-map{right:7%;bottom:2%;width:min(42vw,560px);height:auto;opacity:.28!important;filter:saturate(.58) contrast(1.1) brightness(.86)!important;mix-blend-mode:screen}
+.hero-stage{position:relative;z-index:3;display:grid;grid-template-columns:1fr;gap:24px;align-content:start}
+.hero-copy{display:grid;align-content:center;max-width:930px}
 .eyebrow{color:var(--cyan);font-size:12px;font-weight:1000;text-transform:uppercase}
 h1{
-  margin-top:14px;
-  max-width:750px;
+  margin-top:16px;
+  max-width:980px;
   color:var(--bone);
-  font-size:68px;
-  line-height:.88;
+  font-size:82px;
+  line-height:.84;
+  font-weight:1000;
+  text-transform:uppercase;
+  overflow-wrap:anywhere;
+  text-shadow:0 18px 38px rgba(0,0,0,.52);
+}
+.hero-motto{
+  display:grid;
+  gap:5px;
+  margin-top:22px;
+  color:#f2d58a;
+  font-size:27px;
+  line-height:1.05;
   font-weight:1000;
   text-transform:uppercase;
 }
+.hero-motto span{display:block}
+.hero-motto span::before{content:'//';margin-right:9px;color:var(--cyan)}
+.hero-motto span:nth-child(2)::before{color:var(--orange)}
+.hero-protocol{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin-top:24px;
+  max-width:860px;
+}
+.hero-protocol span{
+  min-height:58px;
+  border:1px solid rgba(218,229,241,.13);
+  background:rgba(7,9,13,.48);
+  padding:10px 11px;
+  color:#c9d7e5;
+  font-size:11px;
+  line-height:1.22;
+  font-weight:920;
+  text-transform:uppercase;
+}
+.hero-protocol b{display:block;margin-bottom:6px;color:#7fe9f3;font-size:9px;font-weight:1000}
+.hero-protocol span:nth-child(2) b{color:#ffb347}
+.hero-protocol span:nth-child(3) b{color:#7df0a7}
+.hero-protocol span:nth-child(4) b{color:#d0c3ff}
 .hero-lede{
   max-width:710px;
-  margin-top:22px;
-  color:#d6c793;
-  font-size:20px;
+  margin-top:20px;
+  color:#dce8ee;
+  font-size:18px;
   line-height:1.48;
-  font-weight:780;
+  font-weight:760;
 }
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .button{
@@ -167,31 +229,31 @@ h1{
   grid-template-rows:auto 1fr auto;
   border:1px solid var(--line);
   background:
-    linear-gradient(145deg,rgba(22,32,43,.96),rgba(7,9,13,.98)),
+    linear-gradient(145deg,rgba(22,32,43,.88),rgba(7,9,13,.94)),
     #0b1016;
-  box-shadow:0 30px 90px rgba(0,0,0,.42);
+  box-shadow:0 30px 90px rgba(0,0,0,.34);
   overflow:hidden;
+  backdrop-filter:blur(12px);
 }
-.panel-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;border-bottom:1px solid var(--line);padding:18px}
+.panel-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;border-bottom:1px solid var(--line);padding:14px 16px}
 .panel-top small,.module-kicker{display:block;color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
-.panel-top strong{display:block;margin-top:6px;color:var(--bone);font-size:24px;line-height:1.02;text-transform:uppercase}
+.panel-top strong{display:block;margin-top:5px;color:var(--bone);font-size:21px;line-height:1.02;text-transform:uppercase}
 .build-chip{border:1px solid rgba(255,138,31,.44);color:#ffb347;padding:7px 9px;font-size:11px;font-weight:1000;text-transform:uppercase;white-space:nowrap}
 .hire-read{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:0;
   border-bottom:1px solid var(--line);
 }
-.hire-cell{min-height:138px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px;background:rgba(7,9,13,.28)}
-.hire-cell:nth-child(2n){border-right:0}
-.hire-cell:nth-last-child(-n+2){border-bottom:0}
+.hire-cell{min-height:104px;border-right:1px solid var(--line);padding:13px 16px;background:rgba(7,9,13,.28)}
+.hire-cell:last-child{border-right:0}
 .hire-cell b{display:block;color:var(--orange);font-size:12px;text-transform:uppercase}
-.hire-cell span{display:block;margin-top:13px;color:var(--ink);font-size:22px;line-height:1.08;font-weight:1000}
-.hire-cell small{display:block;margin-top:9px;color:var(--muted);line-height:1.42;font-weight:700}
-.proof-line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:18px}
+.hire-cell span{display:block;margin-top:10px;color:var(--ink);font-size:20px;line-height:1.06;font-weight:1000}
+.hire-cell small{display:block;margin-top:7px;color:var(--muted);line-height:1.34;font-weight:700}
+.proof-line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 16px}
 .proof-line p{color:var(--muted);font-size:14px;line-height:1.5;font-weight:700}
 .proof-line b{color:var(--green)}
-.status-dot{width:74px;height:74px;display:grid;place-items:center;border:1px solid rgba(53,224,123,.45);color:var(--green);font-size:26px;font-weight:1000;background:rgba(53,224,123,.08)}
+.status-dot{width:58px;height:58px;display:grid;place-items:center;border:1px solid rgba(53,224,123,.45);color:var(--green);font-size:24px;font-weight:1000;background:rgba(53,224,123,.08)}
 .section{padding:40px 0;border-bottom:1px solid rgba(218,229,241,.12)}
 .section-head{display:grid;grid-template-columns:minmax(0,.88fr) minmax(290px,.72fr);gap:28px;align-items:end;margin-bottom:20px}
 .kicker{color:var(--orange);font-size:12px;font-weight:1000;text-transform:uppercase}
@@ -371,6 +433,15 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .hero-stage,.section-head,.about-grid,.proof-grid,.project-grid,.project-card.featured,.review-card,.qb-card,.prey-card,.journal-card{grid-template-columns:1fr}
   .hero-copy{min-height:auto}
   .operator-panel{min-height:0}
+  .hero{min-height:auto}
+  .hero-stage{min-height:auto}
+  .hero-visual-main{right:0;width:100%;height:100%;opacity:.30}
+  .hero-visual-map{right:0;width:70vw}
+  .hero-protocol{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hire-read{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hire-cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .hire-cell:nth-child(2n){border-right:0}
+  .hire-cell:nth-last-child(-n+2){border-bottom:0}
   .review-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .journal-media{min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .review-media img{aspect-ratio:16/9;min-height:0}
@@ -383,22 +454,27 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
   .journal-slots{grid-template-columns:repeat(2,minmax(0,1fr))}
   .signal-row,.lane-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hire-grid{grid-template-columns:1fr}
-  h1{font-size:52px}
+  h1{font-size:58px}
 }
 @media(max-width:560px){
   .wrap{width:min(calc(100% - 28px),var(--max))}
   section{scroll-margin-top:26px}
   .site-nav .wrap{align-items:flex-start;flex-direction:column;gap:9px;padding:10px 0}
-  .nav-links{width:100%;justify-content:flex-start;gap:4px;flex-wrap:wrap}
-  .nav-links a{min-height:32px;padding:6px 7px;font-size:10px}
-  .brand{min-height:28px}
+  .nav-links{width:100%;justify-content:flex-start;gap:3px;flex-wrap:wrap}
+  .nav-links a{min-height:30px;padding:6px 5px;font-size:9px}
+  .brand{min-height:34px}
+  .brand em{margin-left:49px}
   .hero{padding-top:38px}
-  h1{font-size:39px}
+  h1{font-size:38px;line-height:.9}
   h2{font-size:34px}
-  .hero-lede{font-size:17px}
+  .hero-motto{font-size:17px;line-height:1.18}
+  .hero-lede{font-size:16px}
+  .hero-protocol{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .hero-protocol span{min-height:52px;padding:8px;font-size:10px}
+  .button{min-height:42px;padding:10px 12px;font-size:11px}
   .hire-read{grid-template-columns:1fr}
-  .hire-cell{border-right:0}
-  .hire-cell:nth-last-child(2){border-bottom:1px solid var(--line)}
+  .hire-cell{border-right:0;border-bottom:1px solid var(--line)}
+  .hire-cell:last-child{border-bottom:0}
   .signal-row{grid-template-columns:1fr}
   .lane-grid{grid-template-columns:1fr}
   .about-line{grid-template-columns:1fr}
@@ -413,7 +489,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 <body>
 <header class="site-nav">
   <div class="wrap">
-    <a class="brand" href="./">Kenessy</a>
+    <a class="brand" href="./"><span>OBJECTIVE/ACTUAL</span><em>by Kenessy</em></a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#lanes">Lanes</a>
@@ -426,30 +502,41 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 </header>
 <main class="home-root">
   <section class="hero" id="top">
+    <div class="hero-visual" aria-hidden="true">
+      <img class="hero-visual-main" src="${metroSplashHref}" width="1600" height="900" alt="" decoding="async" fetchpriority="high">
+      <img class="hero-visual-map" src="${graphHref}" width="1600" height="900" alt="" decoding="async">
+    </div>
     <div class="wrap hero-stage">
       <div class="hero-copy">
-        <p class="eyebrow">Pattern breaker / systems reader / adversarial builder</p>
-        <h1>I find the hidden failure before it becomes obvious.</h1>
-        <p class="hero-lede">I build strange systems, then pressure-test them until the logic, taste, and proof are visible. Useful when the brief is messy, the edge cases matter, and the obvious answer is probably not enough.</p>
+        <p class="eyebrow">Decision layer / system critique / field artifacts</p>
+        <h1>OBJECTIVE/<wbr>ACTUAL</h1>
+        <p class="hero-motto"><span>Knowing the next move is clarity.</span><span>Understanding the game is control.</span></p>
+        <p class="hero-lede">A portfolio for testing where objectives meet behavior: game reports, AI motion, code tools, and world systems read as loops, constraints, and evidence.</p>
+        <div class="hero-protocol" aria-label="OBJECTIVE/ACTUAL method">
+          <span><b>Objective</b>Goal, intent, spec, desired state.</span>
+          <span><b>Actual</b>Runtime behavior, friction, proof.</span>
+          <span><b>Route</b>Map resistance into the next move.</span>
+          <span><b>Control</b>Read the game, not only the brief.</span>
+        </div>
         <div class="hero-actions">
-          <a class="button" href="#hire">Why hire this profile</a>
+          <a class="button" href="#about">Open the method</a>
           <a class="button secondary" href="#reviews">Open game reviews</a>
           <a class="button secondary" href="${githubUrl}">Inspect the repo</a>
         </div>
       </div>
       <aside class="operator-panel" aria-label="Operator dossier">
         <div class="panel-top">
-          <span><small>Operator readout</small><strong>High-agency operator for ambiguous systems.</strong></span>
+          <span><small>Operator readout</small><strong>Intent, behavior, constraint, proof.</strong></span>
           <span class="build-chip">Build ${buildId}</span>
         </div>
         <div class="hire-read">
-          <div class="hire-cell"><b>Sees</b><span>Hidden failure modes</span><small>Not just what works. What breaks when real people touch it.</small></div>
-          <div class="hire-cell"><b>Builds</b><span>Readable proof</span><small>Interfaces, reports, and tests that make reasoning visible.</small></div>
-          <div class="hire-cell"><b>Moves</b><span>Fast with receipts</span><small>Local build, live QA, screenshots, and deploy state stay connected.</small></div>
-          <div class="hire-cell"><b>Plays</b><span>Outside the obvious line</span><small>Not chaos. Controlled rule-breaking when the default path is weak.</small></div>
+          <div class="hire-cell"><b>Reads</b><span>The objective gap</span><small>What the system claims, what it actually does, and where the distance appears.</small></div>
+          <div class="hire-cell"><b>Maps</b><span>Friction and loops</span><small>Constraints, failure modes, player behavior, and edge cases become visible structure.</small></div>
+          <div class="hire-cell"><b>Routes</b><span>The next move</span><small>The work is broken into executable decisions instead of vague taste statements.</small></div>
+          <div class="hire-cell"><b>Proves</b><span>With public artifacts</span><small>Reports, screenshots, generated pages, local QA, live QA, and repo state stay connected.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> portfolio root, Metro report, Quantum Break draft shell, Prey entry point and illustrated field journal, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> the homepage, Metro report, Quantum Break draft shell, Prey entry point, illustrated field journals, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -460,16 +547,16 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">About / operating mode</p><h2>What This Is</h2></div>
-        <p>A public hub for the things I make and stress-test: design systems, strange worlds, game reviews, proof loops, and experiments that need both taste and verification.</p>
+        <p>OBJECTIVE/ACTUAL is a working portfolio method: compare intent against behavior, read the system state, then route the next move with evidence.</p>
       </div>
       <div class="about-grid">
         <div class="about-copy">
-          <p>I work best where the shape is not obvious yet: turning rough ideas into usable structures, finding the part that feels wrong, and pushing the result until it survives real screenshots, links, builds, and edge cases.</p>
+          <p>I work best where the shape is not obvious yet: turning rough ideas into usable structures, finding the gap between goal and behavior, and pushing the result until it survives screenshots, links, builds, and edge cases.</p>
           <div class="tag-row"><span class="tag cyan">Systems</span><span class="tag amber">Narrative design</span><span class="tag">Game critique</span><span class="tag green">Adversarial QA</span></div>
         </div>
         <div class="about-list">
-          <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
-          <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
+          <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, AI/video experiments, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
+          <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, decision loops, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
           <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office.</span></div>
         </div>
       </div>
@@ -480,30 +567,30 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Portfolio map</p><h2>Active Lanes</h2></div>
-        <p>The page is organized as a working map, not a landing page: product surfaces, review artifacts, worldbuilding, and verification all stay visible and linked.</p>
+        <p>The lanes are different outputs of the same method: read intent, inspect behavior, map friction, and turn the next decision into a public artifact.</p>
       </div>
       <div class="lane-grid">
         <a class="lane-card" style="--tone:var(--cyan)" href="#proof">
           <small>01 / Proof systems</small>
-          <h3>Builds that can be checked</h3>
+          <h3>Artifacts that can be checked</h3>
           <p>Static Pages output, source-of-truth generation, screenshots, fallback paths, and local/live QA loops.</p>
-          <span>Evidence over vibes</span>
+          <span>Objective to proof</span>
         </a>
         <a class="lane-card" style="--tone:var(--orange)" href="${reportsHref}">
           <small>02 / Review lab</small>
-          <h3>Game critique with receipts</h3>
+          <h3>Game critique as system read</h3>
           <p>ALERTED score anatomy, taste-fit lanes, trust ledgers, spoiler policy, and replay journals.</p>
           <span>Metro + Quantum Break + Prey</span>
         </a>
         <a class="lane-card" style="--tone:var(--violet)" href="${apocalypseHref}">
           <small>03 / Narrative worlds</small>
-          <h3>Systems for strange settings</h3>
+          <h3>Rules that create behavior</h3>
           <p>World rules, procedures, lore structures, visual maps, and playable constraints for unusual concepts.</p>
           <span>Apocalypse Express</span>
         </a>
         <a class="lane-card" style="--tone:var(--green)" href="${quantumJourneyHref}">
           <small>04 / Illustrated journals</small>
-          <h3>Playthroughs as readable pages</h3>
+          <h3>State changes you can read</h3>
           <p>Session notes become fullscreen dossier scrapbook pages with typed notes, attached photo evidence, and prompt handoff.</p>
           <span>Photo evidence ready</span>
         </a>
@@ -515,13 +602,13 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">What you hire for</p><h2>Signal Stack</h2></div>
-        <p>The value is not only making things. It is noticing the subtle wrongness, turning it into structure, and proving the fix under pressure.</p>
+        <p>The value is not only making things. It is reading the game well enough to know which move should happen next, then proving it under pressure.</p>
       </div>
       <div class="signal-row">
-        <div class="signal"><b>01 / Sensemaking</b><span>Turns noise into map</span><small>Messy ideas become axes, constraints, systems, and next actions.</small></div>
-        <div class="signal"><b>02 / Taste</b><span>Knows when it feels off</span><small>Design decisions are judged visually, functionally, and emotionally.</small></div>
-        <div class="signal"><b>03 / Adversarial QA</b><span>Tries to disprove the work</span><small>Viewport, fallback, link, public build, and failure-mode checks are part of the craft.</small></div>
-        <div class="signal"><b>04 / Shipping</b><span>Pushes the clean version</span><small>Repo source, generated output, and live Pages stay synchronized.</small></div>
+        <div class="signal"><b>01 / Sensemaking</b><span>Turns noise into route</span><small>Messy ideas become axes, constraints, systems, and next actions.</small></div>
+        <div class="signal"><b>02 / Taste</b><span>Detects the wrong state</span><small>Design decisions are judged visually, functionally, and emotionally.</small></div>
+        <div class="signal"><b>03 / Adversarial QA</b><span>Pressure-tests the actual</span><small>Viewport, fallback, link, public build, and failure-mode checks are part of the craft.</small></div>
+        <div class="signal"><b>04 / Shipping</b><span>Keeps source and live in sync</span><small>Repo source, generated output, and live Pages stay synchronized.</small></div>
       </div>
     </div>
   </section>
@@ -530,7 +617,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Evidence over vibes</p><h2>Proof Surface</h2></div>
-        <p>If the work claims to be robust, it should expose how it was reasoned about. The portfolio itself is a small product surface with tests behind it.</p>
+        <p>If the work claims to be robust, it should expose how it was reasoned about. The portfolio itself is a product surface with tests behind it.</p>
       </div>
       <div class="proof-grid">
         <a class="proof-card" href="${apocalypseHref}">

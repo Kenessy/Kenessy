@@ -177,6 +177,7 @@ async function auditDesignArtifacts(base) {
   const root = await fetchText(url(base));
   const buildId = extractBuildId(root.text);
   assert(root.text.includes('.home-root'), 'portfolio homepage CSS is missing');
+  assert(root.text.includes('.hero-motto') && root.text.includes('OBJECTIVE/<wbr>ACTUAL') && root.text.includes('Understanding the game is control.'), 'portfolio homepage OBJECTIVE/ACTUAL hero styling/copy is missing');
   assert(root.text.includes('.operator-panel'), 'portfolio homepage operator panel styling is missing');
   assert(root.text.includes('Operator readout'), 'portfolio homepage operator readout copy is stale');
   assert(root.text.includes('.hire-read'), 'portfolio homepage hiring signal grid styling is missing');
