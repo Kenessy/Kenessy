@@ -28,7 +28,9 @@ export function portfolioHomeHtml({
   const preyJourneyHref = preyJourneyPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
-  const metroSplashHref = 'assets/img/metro-2033-redux-review-splash.png';
+  const metroSplashAsset = 'assets/img/metro-2033-redux-review-splash.png';
+  const metroSplashHref = `${metroSplashAsset}?v=${buildId}`;
+  const metroSplashAbsolute = `${siteBase}${metroSplashAsset}?v=${buildId}`;
   const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
   const preySplashHref = 'assets/img/prey-review-splash.png';
   const canonical = siteBase;
@@ -48,9 +50,13 @@ export function portfolioHomeHtml({
 <meta property="og:title" content="${escapeHtml(title)}">
 <meta property="og:description" content="${escapeHtml(description)}">
 <meta property="og:url" content="${canonical}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${escapeHtml(metroSplashAbsolute)}">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escapeHtml(title)}">
 <meta name="twitter:description" content="${escapeHtml(description)}">
+<meta name="twitter:image" content="${escapeHtml(metroSplashAbsolute)}">
 <style>
 :root{
   --bg:#07090d;

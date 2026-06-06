@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '../..');
 const sourcePath = path.join(scriptDir, 'sources/metro-2033-redux/main_canvas_diegetic_equation.jsx');
+const metroSplashSourcePath = path.join(scriptDir, 'sources/metro-2033-redux/metro-2033-redux-review-splash.png');
 const siteHomeSourcePath = path.join(scriptDir, 'site-home.mjs');
 const reportDir = path.join(repoRoot, 'docs/plater-game-reports/games/metro-2033-redux');
 const quantumBreakReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/quantum-break');
@@ -37,6 +38,7 @@ const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 
 const preyAssetPublicDir = path.join(repoRoot, 'docs/assets/img/prey');
 const preyAssetManifestPublicPath = path.join(preyAssetPublicDir, 'flight-recorder-manifest.json');
 const preyAssetReadmePublicPath = path.join(preyAssetPublicDir, 'README.md');
+const metroSplashPublicPath = path.join(repoRoot, 'docs/assets/img/metro-2033-redux-review-splash.png');
 const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-splash.png');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
@@ -250,6 +252,7 @@ function reportHtml({ appCss, buildId, sourceHash, bundleHash }) {
   const title = 'Metro 2033 Redux - ALERTED Field Report';
   const description = 'Metro 2033 Redux ALERTED review: an 86/A atmosphere-first survival FPS verdict with score anatomy, audience fit, friction ledger, evidence arcs, and adversarial audit checks.';
   const versionedReportUrl = `${reportUrl}?v=${buildId}`;
+  const imageUrl = `${siteBase}assets/img/metro-2033-redux-review-splash.png?v=${buildId}`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -267,9 +270,13 @@ function reportHtml({ appCss, buildId, sourceHash, bundleHash }) {
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${escapeHtml(description)}">
 <meta property="og:url" content="${versionedReportUrl}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${escapeHtml(imageUrl)}">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${escapeHtml(description)}">
+<meta name="twitter:image" content="${escapeHtml(imageUrl)}">
 <style>${shellCss()}
 ${appCss}
 </style>
@@ -373,6 +380,8 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060
 async function main() {
   logStep(`reading source ${path.relative(repoRoot, sourcePath)}`);
   const source = await readFile(sourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, metroSplashSourcePath)}`);
+  const metroSplashPng = await readFile(metroSplashSourcePath);
   logStep(`reading source ${path.relative(repoRoot, siteHomeSourcePath)}`);
   const siteHomeSource = await readFile(siteHomeSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, quantumBreakReportSourcePath)}`);
@@ -409,6 +418,7 @@ async function main() {
     preyJourneySourceHtml,
     preyAssetManifest,
     preyAssetReadme,
+    metroSplashPng.toString('base64'),
     preySplashPng.toString('base64')
   ].join('\n\n/* kenessy-pages-build-input */\n\n');
   const buildId = sha256(buildHashInput).slice(0, 12);
@@ -460,6 +470,7 @@ async function main() {
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
     await writeFile(preyAssetManifestPublicPath, preyAssetManifest, 'utf8');
     await writeFile(preyAssetReadmePublicPath, preyAssetReadme, 'utf8');
+    await writeFile(metroSplashPublicPath, metroSplashPng);
     await writeFile(preySplashPublicPath, preySplashPng);
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
