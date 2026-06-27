@@ -42,6 +42,12 @@ szóval mi is az elején a kártyákra irva? Apró gond nem lehetett alt tabbal 
 nos hát elején bemutatta hogy van kb egy backpackünk és hogy tévelygünk egy sivatagban majd megint vágás és megint valami altatókamrában találjuk magunkat gondolom most márlehet a bázison vagyunk. Elméletileg szétváltunk és mi egyedül mentünk aztán hirtelen elvesztettük az eszméletünket. Legalábbis kb ennyit értettem meg. Kaptunk ilyen kis kütyüt hogy megvizygáljuk a környezetet és betájoljuk magunkat a mapon amivel unlockoltuk azt is és tájképeket kellett benne felismeni ilyen messzelátóval. Aztán egy M el megnyitható több szinű mapot kaptunk ami elég fasza. Most idáig kb ennyit tudok mondani.
 ```
 
+## Raw Intake 005 | 2026-06-27 | Lake memory / desert exploration / first route decision
+
+```text
+okés nos idáig visszakerültünk egy vizes tő vagy akármilyen folyadékos tó partjára mintha csak emlékeztünk volna valamire. Erre mentem tovább, igazából egy desert bolygót fedeztünk fel. Nem nagyon tudom mit kommenteljek, kicsit bolyongtam, léynegében látszott merre nem lehet menni és miután végigmentem mindenhol ahol nem lehet csak az maradt ahol lehet xd és láttunk a messzeségben homokviharokat és a sátrakat is megpillantottuk messzelátóval. Az egyetlen decision amit meghoztam hogy egy gentle vs risky slope közül a gentlen mentem le ami nem sokkal a risky után volt egy kis extra kutató ág végén.
+```
+
 ## Raw Intake Template
 
 ```text
