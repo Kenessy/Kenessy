@@ -1,6 +1,6 @@
 # The Invincible — Steam Completions Working Folder
 
-Status: **Sketch / pre-run setup**  
+Status: **In Progress / Session 1 live evidence**  
 Owner signal: **Bought on Steam — user confirmed**  
 Primary lens: **Cognitive Decompression + Hard Sci-Fi Agency Lens**  
 Public report state: **Do not score yet**
@@ -18,8 +18,8 @@ Metro 2033 Redux is the main public report pattern: **clear lens, fit verdict, a
 - **Engagement** becomes curiosity pull, chapter momentum, and whether the story stays active despite low mechanical load.
 - **Readability** becomes decision clarity, route clarity, feedback, and whether choices feel understandable.
 - **Technical** becomes stability, settings comfort, performance, audio/subtitle quality, and screenshot capture readiness.
-- **Extra** becomes AI-training value, completion shape, and cognitive decompression fit.
-- **Danger** becomes walking-sim fatigue, false-agency risk, slow pacing, replay burden, and achievement cleanup pain.
+- **Extra** becomes AI-training value, completion shape, comic/codex reconstruction, and cognitive decompression fit.
+- **Danger** becomes walking-sim fatigue, false-agency risk, slow pacing, replay burden, and achievement/comic cleanup pain.
 
 ## Reporting protocol for Daniel
 
@@ -52,7 +52,7 @@ Recommended first run:
 3. **Use headphones if possible.** Audio atmosphere is part of the lens.
 4. **Prefer stable performance over max graphics.** Stutter or uneven frame pacing would pollute the decompression test.
 5. **Disable or reduce motion blur / camera shake if it bothers you.** If no clear toggle exists, just note discomfort.
-6. **Take screenshots manually** at strong vistas, tool-use moments, decision screens, and strange discoveries.
+6. **Take screenshots manually** at strong vistas, tool-use moments, decision screens, strange discoveries, and comic/codex pages.
 7. **Do not over-document while playing.** The game is partly being tested as rest for a programming-saturated brain.
 
 ## Folder map
@@ -65,7 +65,10 @@ the-invincible/
   review-board.md           # Metro/PLATER adaptation + custom categories
   processed-playthrough.md  # Publishable journey draft scaffold
   ai-training-dataset.md    # Story/decision/agency dataset scaffold
+  comics-log.md             # Comic/codex unlock and lore reconstruction log
   asset-plan.md             # Screenshot and image plan
+  ai-snapshots/             # Story-state / uncertainty snapshots
+  ai-decisions/             # Decision-point records
 ```
 
 ## Current open questions
@@ -73,5 +76,6 @@ the-invincible/
 - Is the game genuinely restful after programming, or just slow?
 - Do decisions feel meaningful while playing, not only after reading ending guides?
 - Is the mystery strong enough to carry low interaction density?
-- Does completion cleanup damage the first-run experience?
+- Does completion cleanup or comic hunting damage the first-run experience?
+- Are the comics automatic route unlocks, optional collectibles, or missable completion objects?
 - What does the game teach us about perceived agency, uncertainty, and human-machine/alien-system interpretation?
