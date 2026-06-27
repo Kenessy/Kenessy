@@ -36,6 +36,12 @@ Mindent és még amit esetleg kihagytam applikálj és gondolj végig és szólj
 szóval mi is az elején a kártyákra irva? Apró gond nem lehetett alt tabbal pausolni mert a windows gomb is triggerelte ezt igy ahogy próbáltam screenshotolni átlépte xdd nem nagy dolog csak apro nitpick, de mi is van akkor a slidokon hogy valami lába megsérült valakinek és betették ilyen sleep kapszulába aztán most látom hogy felébredek valami bolygón kábultan ebből a intróból
 ```
 
+## Raw Intake 004 | 2026-06-27 | Desert backpack / base wake-up / locator-map onboarding
+
+```text
+nos hát elején bemutatta hogy van kb egy backpackünk és hogy tévelygünk egy sivatagban majd megint vágás és megint valami altatókamrában találjuk magunkat gondolom most márlehet a bázison vagyunk. Elméletileg szétváltunk és mi egyedül mentünk aztán hirtelen elvesztettük az eszméletünket. Legalábbis kb ennyit értettem meg. Kaptunk ilyen kis kütyüt hogy megvizygáljuk a környezetet és betájoljuk magunkat a mapon amivel unlockoltuk azt is és tájképeket kellett benne felismeni ilyen messzelátóval. Aztán egy M el megnyitható több szinű mapot kaptunk ami elég fasza. Most idáig kb ennyit tudok mondani.
+```
+
 ## Raw Intake Template
 
 ```text
