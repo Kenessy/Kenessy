@@ -9,7 +9,7 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision and repeated blackout pattern captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, and first major flashback lore payload captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
@@ -68,21 +68,31 @@ Observation: The repeated blackout pattern is now an active narrative/system mys
 Axis delta: Narrative Pull +1 because repeated unconsciousness and flashback timing deepen the mystery; Atmosphere +0.5 because sandstorm crossing plus ringed moon strengthens planetary identity; Time Respect +0.25 because blackout compression may skip dead walking, but needs watch for overuse; Readability 0 because the event is understandable as a story beat but not yet explained.  
 Open question: Are blackouts diegetic symptoms, memory reconstruction, environmental effects, or pacing devices?
 
+## Entry 005 | 2026-06-27 | Invincible flashback / doctor role / scanner path / Steam build unknown
+
+Milestone: Flashback reveals the incoming Invincible as a massive iron/war-machine-like vessel able to melt mountains with lasers; the crew has 13 days before it arrives; Yasna is framed as a doctor who should stay aboard because the planet supposedly has no biological life; flashback ends and scanner route guidance begins in the desert.  
+Session: unknown | Total: unknown | Mode: solo / blind / flashback exposition  
+Micro: Clarity 3 · Mastery 2? · Tension 2 · Fatigue ? · Social 0 · Desire ?  
+Observation: The flashback adds the strongest premise layer so far: the planet is officially lifeless, yet the story centers on a doctor who ends up planetside before a colossal destructive ship arrives. The scanner showing the route after the flashback turns the memory payload back into forward navigation.  
+Axis delta: Promise Fit +1 because the hard-sci-fi setup now has scale, mission stakes, and contradiction; Narrative Pull +1 because Invincible/13-day clock/doctor-on-lifeless-planet creates a clear mystery hook; Scientific/Philosophical Density +0.5 because the no-biology premise conflicts with Yasna's role; Readability +0.25 because the scanner now shows the route after the flashback.  
+Open question: Why is a doctor on a supposedly lifeless planet, and did the crew underestimate what counts as “life” or “danger”?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
-| Promise Fit | Early positive | Opening matches hard-sci-fi disorientation / planetary mystery promise. Need first sustained exploration segment. |
+| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-planet contradiction, incoming Invincible, and mission clock. Need first sustained base/crew evidence. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, and flashbacks create mystery. Need desire-to-continue check. |
+| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, and doctor-on-lifeless-planet contradiction create mystery. Need desire-to-continue check. |
 | Agency Feel | Low-stakes first signal | Gentle slope chosen over risky slope. Need consequence check and later story/dialogue decisions. |
-| Readability / Trust | Early mixed-positive | Intro cards were missable during screenshotting; locator/binocular/map onboarding was understood and liked; blocked paths are legible; blackouts are story-clear but cause unresolved uncertainty. |
-| Time Respect | Unknown / watch | Early bolyongás happened, but the blackout may compress traversal. Need fatigue score and watch for overused interruptions. |
+| Readability / Trust | Early mixed-positive | Intro cards were missable during screenshotting; locator/binocular/map onboarding was understood and liked; blocked paths are legible; blackouts are story-clear but unresolved; scanner route guidance now helps. |
+| Time Respect | Unknown / watch | Early bolyongás happened, but blackouts may compress traversal and scanner guidance may reduce route friction. Need fatigue score and watch for overused interruptions. |
 | Completion Shape | Unknown | First run only; cleanup assessed later. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, and repeated blackout hypothesis tracking. Need more decisions. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, and role/premise contradiction. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
-| Tool Embodiment | Early positive | Environment scanning, landmark recognition, map unlock, and binocular tent/sandstorm scouting create a tactile orientation loop. |
-| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, and ringed moon are strong screenshot candidates. |
+| Tool Embodiment | Early positive | Environment scanning, landmark recognition, map unlock, binocular scouting, and scanner route guidance create a tactile orientation loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, and desert route guidance are strong screenshot candidates. |
+| Scientific / Philosophical Density | Early positive | “No biological life” plus doctor role suggests the story may challenge definitions of life, danger, and mission assumptions. |
 
 ## Open questions to carry into Session 1
 
@@ -98,6 +108,9 @@ Open question: Are blackouts diegetic symptoms, memory reconstruction, environme
 10. Do bounded routes feel relaxing because they reduce navigation stress, or restrictive because they reduce exploration agency?
 11. Are blackouts diegetic symptoms, memory-reconstruction events, environmental effects, or narrative pacing cuts?
 12. Does the flashback after the ringed-moon climb clarify prior events or add more fog?
+13. Why is Yasna, a doctor, central on a planet said to contain zero biological life?
+14. Does Invincible's destructive capacity create real narrative pressure, or mainly lore scale?
+15. Does scanner path guidance improve decompression or reduce exploration agency?
 
 ## Compact post-session form
 
