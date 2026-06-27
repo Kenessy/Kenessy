@@ -44,18 +44,21 @@ Evidence targets:
 
 ### Entry 02 — First tools, first trust test
 
-Source: pending.  
-Public paragraph: pending.  
+Source: Raw Intake 004 + Session Entry 002.  
+Public paragraph draft: The next fragment made the opening more readable without fully removing its fog. Yasna seems to have moved alone through a desert-like landscape with backpack gear, separated from the others, lost consciousness, and then returned to another chamber or base-like recovery space. The important design move is that the game does not leave orientation abstract: it gives her a small inspection device, asks the player to recognize distant landscape features, and then turns that recognition into a multicolored M-key map. That map landed well. For this review lens, that matters: the game is already trying to make confusion navigable instead of merely cinematic.
+
 Image slots:
 
 - `INV-IMG-003` — scanner / telemeter / analogue UI moment
 - `INV-IMG-004` — readable clue or confusing clue
+- `INV-IMG-004B` — multicolored M-map first-use screenshot
 
 Evidence targets:
 
 - Tool embodiment
 - Route clarity
 - Whether confusion is interesting or annoying
+- Whether the map stays useful after first unlock
 
 ### Entry 03 — First real decision
 
@@ -154,10 +157,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured with exact-card gap.
-Best moment so far: Yasna waking groggy on the planet, pending first playable impression.
+Current public summary: Opening started; first premise captured; first locator/map onboarding was understood and liked.
+Best moment so far: Unlocking the multicolored M-map after recognizing distant landscape features.
 Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt.
-Most useful screenshot so far: Missing / intro screenshots not captured cleanly.
-Strongest AI-training moment so far: Reconstructing story state from partial intro memory.
+Most useful screenshot so far: M-map / locator tool screenshot needed.
+Strongest AI-training moment so far: Reconstructing story state from partial intro memory and tool-mediated spatial orientation.
 Likely final artifact: Review card + illustrated playthrough, pending evidence.
 ```
