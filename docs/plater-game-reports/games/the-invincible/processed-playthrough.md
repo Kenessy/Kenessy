@@ -117,14 +117,32 @@ Evidence targets:
 - Is repeated unconsciousness environmental, medical, psychological, or narrative-only?
 - Visual report value: ringed moon / sandstorm / steep climb
 
-### Entry 06 — Mid-run fatigue or pull check
+### Entry 06 — The Invincible / doctor contradiction
+
+Source: Raw Intake 007 + Session Entry 005.  
+Public paragraph draft: The flashback finally gives the title weight. The Invincible is not introduced as a poetic idea but as an enormous iron presence on its way to Regis III, a machine capable of burning through mountains with its weapons. That scale changes the planet from a quiet desert mystery into a place important enough to draw catastrophic hardware. The stranger part is Yasna's role: she is framed as a doctor, yet the crew says there is no biological life below and that she has no real reason to leave the ship. That contradiction is the first genuinely sharp hard-sci-fi hook: either the mission misunderstands the planet, or the game is about to challenge what the crew thinks counts as life, danger, or relevance.
+
+Image slots:
+
+- `INV-IMG-011` — Invincible / ship flashback shot, if spoiler-safe
+- `INV-IMG-012` — briefing / 13-day clock context, if visually available
+- `INV-IMG-012B` — scanner path guidance after flashback
+
+Evidence targets:
+
+- Does the 13-day Invincible clock create real urgency or only lore scale?
+- Why is Yasna, a doctor, important on a supposedly lifeless planet?
+- Does the scanner path reduce route friction after flashback?
+- Does the game clarify or complicate the definition of life?
+
+### Entry 07 — Mid-run fatigue or pull check
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-011` — most beautiful quiet moment
-- `INV-IMG-012` — worst downtime / friction if visualizable
+- `INV-IMG-013` — most beautiful quiet moment
+- `INV-IMG-014` — worst downtime / friction if visualizable
 
 Evidence targets:
 
@@ -132,14 +150,14 @@ Evidence targets:
 - Did the slow pace become atmospheric or padded?
 - Was the game still decompressing the brain?
 
-### Entry 07 — Ending / verdict reconstruction
+### Entry 08 — Ending / verdict reconstruction
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-013` — spoiler-light final journey image
-- `INV-IMG-014` — spoiler-full ending appendix image, if used
+- `INV-IMG-015` — spoiler-light final journey image
+- `INV-IMG-016` — spoiler-full ending appendix image, if used
 
 Evidence targets:
 
@@ -181,10 +199,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision and repeated blackout pattern captured.
-Best moment so far: Ringed moon reveal after the steep climb, plus the M-map / binocular orientation loop.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, and Invincible/doctor-role flashback captured.
+Best moment so far: The hard-sci-fi contradiction: Yasna is a doctor told to stay aboard because Regis III has no biological life, yet she is clearly central planetside before the Invincible arrives.
 Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains.
-Most useful screenshot so far: Ringed moon, M-map, locator tool, sandstorm/tent scouting.
-Strongest AI-training moment so far: Reconstructing story state from partial intro memory, tool-mediated spatial orientation, first route-risk decision, and repeated blackout hypothesis tracking.
+Most useful screenshot so far: Ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
+Strongest AI-training moment so far: Role/premise contradiction plus repeated blackout hypothesis tracking and scanner-assisted world-state reconstruction.
 Likely final artifact: Review card + illustrated playthrough, pending evidence.
 ```
