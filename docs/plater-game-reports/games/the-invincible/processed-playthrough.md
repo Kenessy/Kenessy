@@ -62,36 +62,41 @@ Evidence targets:
 
 ### Entry 03 — First real decision
 
-Source: pending.  
-Public paragraph: pending.  
+Source: Raw Intake 005 + Session Entry 003.  
+Public paragraph draft: The first explicit choice was not a moral crossroads or a branching conversation. It was smaller and more physical: take the gentle slope or the risky one. Daniel chose the gentle route after exploring a small side branch. That is not heavy agency, but it is useful agency: the game asked for a risk read, presented a safer-looking option nearby, and let the player express a basic survival preference. The unresolved question is whether the risky slope carries real consequence or only texture.
+
 Image slots:
 
-- `INV-IMG-005` — dialogue / decision setup if safe
-- `INV-IMG-006` — immediate consequence or emotional aftermath
+- `INV-IMG-005` — gentle vs risky slope setup, if screenshot exists later
+- `INV-IMG-006` — immediate consequence / lower path aftermath
+- `INV-IMG-006B` — desert path boundary / blocked route evidence
 
 Evidence targets:
 
-- What choice was offered
-- What Daniel chose
-- Why he chose it
-- Predicted consequence
-- Actual consequence
-- Agency felt 0-4
+- What choice was offered: gentle vs risky slope
+- What Daniel chose: gentle slope
+- Why he chose it: safer route after noticing both options
+- Predicted consequence: reduced traversal risk
+- Actual consequence: unknown / no consequence reported yet
+- Agency felt: low-stakes route agency, score pending
 
 ### Entry 04 — The planet becomes a system
 
-Source: pending.  
-Public paragraph: pending.  
+Source: Raw Intake 005 + Session Entry 003.  
+Public paragraph draft: The desert is beginning to define itself as a guided alien space rather than a free-roam zone. Daniel wandered, checked edges, found the places where the game clearly said no, and eventually followed the remaining viable route. In the distance, sandstorms and tent-like structures gave the binocular scouting a purpose: the horizon was not just backdrop, it was direction. The early exploration is readable, but bounded enough that we need to watch whether it becomes calming guidance or visible railroading.
+
 Image slots:
 
-- `INV-IMG-007` — alien ecology / machine / strange pattern
-- `INV-IMG-008` — human technology vs alien environment contrast
+- `INV-IMG-007` — sandstorms seen in the distance
+- `INV-IMG-008` — tents / human trace spotted with binoculars
+- `INV-IMG-008B` — liquid/lake shore memory location
 
 Evidence targets:
 
 - Epistemic uncertainty
 - Scientific/philosophical density
 - Hypothesis updates
+- Whether bounded exploration feels restful or restrictive
 
 ### Entry 05 — Mid-run fatigue or pull check
 
@@ -157,10 +162,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; first locator/map onboarding was understood and liked.
-Best moment so far: Unlocking the multicolored M-map after recognizing distant landscape features.
-Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt.
-Most useful screenshot so far: M-map / locator tool screenshot needed.
-Strongest AI-training moment so far: Reconstructing story state from partial intro memory and tool-mediated spatial orientation.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision captured.
+Best moment so far: Unlocking the multicolored M-map and using binoculars to spot distant sandstorms/tents.
+Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains.
+Most useful screenshot so far: M-map / locator tool / sandstorm-tent scouting screenshot needed.
+Strongest AI-training moment so far: Reconstructing story state from partial intro memory, tool-mediated spatial orientation, and first route-risk decision.
 Likely final artifact: Review card + illustrated playthrough, pending evidence.
 ```
