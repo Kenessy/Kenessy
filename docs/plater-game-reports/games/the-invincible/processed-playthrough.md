@@ -98,14 +98,33 @@ Evidence targets:
 - Hypothesis updates
 - Whether bounded exploration feels restful or restrictive
 
-### Entry 05 — Mid-run fatigue or pull check
+### Entry 05 — Sandstorm blackout / ringed moon
+
+Source: Raw Intake 006 + Session Entry 004.  
+Public paragraph draft: The sandstorm turned the journey from simple walking into another gap in consciousness. Yasna crossed it, blacked out again, and woke much closer to the base, with enough awareness for the character to comment on the shift. Then the route climbed upward, away from pure desert navigation, and the sky briefly became the evidence: Regis III's moon, ringed and visible, gave the planet a stronger astronomical identity. The flashback that begins afterward is worth pausing on, because the game is now clearly using memory interruption as structure, not only atmosphere.
+
+Image slots:
+
+- `INV-IMG-009` — sandstorm crossing / low-visibility scene
+- `INV-IMG-010` — base closer after blackout
+- `INV-IMG-010B` — Regis III ringed moon screenshot
+- `INV-IMG-010C` — flashback start marker, if spoiler-safe
+
+Evidence targets:
+
+- Does blackout compress dead walking or disrupt agency?
+- Does the flashback clarify or add fog?
+- Is repeated unconsciousness environmental, medical, psychological, or narrative-only?
+- Visual report value: ringed moon / sandstorm / steep climb
+
+### Entry 06 — Mid-run fatigue or pull check
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-009` — most beautiful quiet moment
-- `INV-IMG-010` — worst downtime / friction if visualizable
+- `INV-IMG-011` — most beautiful quiet moment
+- `INV-IMG-012` — worst downtime / friction if visualizable
 
 Evidence targets:
 
@@ -113,14 +132,14 @@ Evidence targets:
 - Did the slow pace become atmospheric or padded?
 - Was the game still decompressing the brain?
 
-### Entry 06 — Ending / verdict reconstruction
+### Entry 07 — Ending / verdict reconstruction
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-011` — spoiler-light final journey image
-- `INV-IMG-012` — spoiler-full ending appendix image, if used
+- `INV-IMG-013` — spoiler-light final journey image
+- `INV-IMG-014` — spoiler-full ending appendix image, if used
 
 Evidence targets:
 
@@ -162,10 +181,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision captured.
-Best moment so far: Unlocking the multicolored M-map and using binoculars to spot distant sandstorms/tents.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision and repeated blackout pattern captured.
+Best moment so far: Ringed moon reveal after the steep climb, plus the M-map / binocular orientation loop.
 Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains.
-Most useful screenshot so far: M-map / locator tool / sandstorm-tent scouting screenshot needed.
-Strongest AI-training moment so far: Reconstructing story state from partial intro memory, tool-mediated spatial orientation, and first route-risk decision.
+Most useful screenshot so far: Ringed moon, M-map, locator tool, sandstorm/tent scouting.
+Strongest AI-training moment so far: Reconstructing story state from partial intro memory, tool-mediated spatial orientation, first route-risk decision, and repeated blackout hypothesis tracking.
 Likely final artifact: Review card + illustrated playthrough, pending evidence.
 ```
