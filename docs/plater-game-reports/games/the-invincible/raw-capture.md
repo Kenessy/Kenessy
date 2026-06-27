@@ -48,6 +48,12 @@ nos hát elején bemutatta hogy van kb egy backpackünk és hogy tévelygünk eg
 okés nos idáig visszakerültünk egy vizes tő vagy akármilyen folyadékos tó partjára mintha csak emlékeztünk volna valamire. Erre mentem tovább, igazából egy desert bolygót fedeztünk fel. Nem nagyon tudom mit kommenteljek, kicsit bolyongtam, léynegében látszott merre nem lehet menni és miután végigmentem mindenhol ahol nem lehet csak az maradt ahol lehet xd és láttunk a messzeségben homokviharokat és a sátrakat is megpillantottuk messzelátóval. Az egyetlen decision amit meghoztam hogy egy gentle vs risky slope közül a gentlen mentem le ami nem sokkal a risky után volt egy kis extra kutató ág végén.
 ```
 
+## Raw Intake 006 | 2026-06-27 | Sandstorm blackout / base approach / ringed moon / flashback pause
+
+```text
+na most átgyalogoltunk egy homokviharon ami valahogy megint blackoutot okozott nálunk majd hirtelen sokkal közelebb ébredtünk fel a bázishoz amit kommentált a csajszi. Felmásztuink egy meredek hegyoldalon felismerve a regis 3 holdját is aminek ilyen gyűrűi is voltak. Ezutrán ismét kezdődik egy flashback ugyhogy pausoltam is
+```
+
 ## Raw Intake Template
 
 ```text
