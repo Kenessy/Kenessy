@@ -9,7 +9,7 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision and repeated blackout pattern captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
@@ -59,20 +59,30 @@ Observation: Exploration is currently bounded and readable: Daniel could tell wh
 Axis delta: Readability +0.5 because blocked paths and viable route were legible; Exploration Agency -0.25 because the pathing currently feels like checking every "no" until only one "yes" remains; Decision Traceability +1 because the first route decision was cleanly captured; Tool Embodiment +0.25 because binocular scouting remains useful.  
 Open question: Did the gentle slope avoid a real consequence, or was the risky slope only flavor / minor traversal color?
 
+## Entry 004 | 2026-06-27 | sandstorm blackout / base approach / ringed moon / Steam build unknown
+
+Milestone: Yasna crossed a sandstorm, blacked out again, woke much closer to the base, climbed a steep mountainside, recognized Regis III's moon with rings, then another flashback began and Daniel paused.  
+Session: unknown | Total: unknown | Mode: solo / blind / early exploration  
+Micro: Clarity 3? · Mastery 2? · Tension 2 · Fatigue ? · Social 0 · Desire ?  
+Observation: The repeated blackout pattern is now an active narrative/system mystery rather than a one-off intro device. The sandstorm-to-base jump compresses travel while raising uncertainty, and the ringed moon is strong visual/worldbuilding evidence for the illustrated playthrough.  
+Axis delta: Narrative Pull +1 because repeated unconsciousness and flashback timing deepen the mystery; Atmosphere +0.5 because sandstorm crossing plus ringed moon strengthens planetary identity; Time Respect +0.25 because blackout compression may skip dead walking, but needs watch for overuse; Readability 0 because the event is understandable as a story beat but not yet explained.  
+Open question: Are blackouts diegetic symptoms, memory reconstruction, environmental effects, or pacing devices?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
 | Promise Fit | Early positive | Opening matches hard-sci-fi disorientation / planetary mystery promise. Need first sustained exploration segment. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Early signal | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, and distant tents create mystery. Need desire-to-continue check. |
+| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, and flashbacks create mystery. Need desire-to-continue check. |
 | Agency Feel | Low-stakes first signal | Gentle slope chosen over risky slope. Need consequence check and later story/dialogue decisions. |
-| Readability / Trust | Early mixed-positive | Intro cards were missable during screenshotting; locator/binocular/map onboarding was understood and liked; blocked paths are legible but may feel bounded. |
-| Time Respect | Unknown / watch | Early bolyongás happened, but it was still readable. Need fatigue score. |
+| Readability / Trust | Early mixed-positive | Intro cards were missable during screenshotting; locator/binocular/map onboarding was understood and liked; blocked paths are legible; blackouts are story-clear but cause unresolved uncertainty. |
+| Time Respect | Unknown / watch | Early bolyongás happened, but the blackout may compress traversal. Need fatigue score and watch for overused interruptions. |
 | Completion Shape | Unknown | First run only; cleanup assessed later. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, and first route decision. Need more decisions/hypotheses. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, and repeated blackout hypothesis tracking. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
 | Tool Embodiment | Early positive | Environment scanning, landmark recognition, map unlock, and binocular tent/sandstorm scouting create a tactile orientation loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, and ringed moon are strong screenshot candidates. |
 
 ## Open questions to carry into Session 1
 
@@ -86,6 +96,8 @@ Open question: Did the gentle slope avoid a real consequence, or was the risky s
 8. Was the second chamber wake-up in the base, the ship, or another medical/sleep location?
 9. Did the risky slope have a real penalty, unique path, achievement implication, or only perceived danger?
 10. Do bounded routes feel relaxing because they reduce navigation stress, or restrictive because they reduce exploration agency?
+11. Are blackouts diegetic symptoms, memory-reconstruction events, environmental effects, or narrative pacing cuts?
+12. Does the flashback after the ringed-moon climb clarify prior events or add more fog?
 
 ## Compact post-session form
 
