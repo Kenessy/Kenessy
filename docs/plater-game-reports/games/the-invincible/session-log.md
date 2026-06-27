@@ -9,7 +9,7 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, and first major flashback lore payload captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, and comic/codex evidence captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
@@ -77,22 +77,31 @@ Observation: The flashback adds the strongest premise layer so far: the planet i
 Axis delta: Promise Fit +1 because the hard-sci-fi setup now has scale, mission stakes, and contradiction; Narrative Pull +1 because Invincible/13-day clock/doctor-on-lifeless-planet creates a clear mystery hook; Scientific/Philosophical Density +0.5 because the no-biology premise conflicts with Yasna's role; Readability +0.25 because the scanner now shows the route after the flashback.  
 Open question: Why is a doctor on a supposedly lifeless planet, and did the crew underestimate what counts as “life” or “danger”?
 
+## Entry 006 | 2026-06-27 | camp arrival / unresponsive robot and doctor / comics evidence / Steam build unknown
+
+Milestone: Camp reached; a non-responsive marching robot and an unresponsive doctor-like crew member were found; Daniel also found the comics/codex interface and captured screenshots for Dragonfly En Route, Regis III Issue, and the beginning of Lost.  
+Session: unknown | Total: unknown | Mode: solo / blind / camp investigation / codex review  
+Micro: Clarity 3 · Mastery 2? · Tension 3 · Fatigue ? · Social 0 · Desire ?  
+Observation: The camp converts the abstract mystery into concrete abnormal behavior: machine activity continues without responsiveness, and a human doctor appears mentally absent or stunned. The comic/codex system is a major supporting evidence layer, filling in Dragonfly crew history, Novik's mineral accident, hibernation, the emergency approach to Regis III, and the rival Alliance sending the USCA Invincible to a planet supposedly lacking research value.  
+Axis delta: Narrative Pull +1 because camp evidence links the blackout/memory mystery to observable human and machine dysfunction; Readability +0.75 because the comic/codex materially clarifies timeline and faction context; Completion Shape +0.25 because comics appear to unlock along the route and may be trackable; AI Training Value +1 because the codex offers structured story-state reconstruction; Trust +0.25 because the game provides an in-game way to reread/repair missed context.  
+Open question: Are the marching robot and blank doctor affected by the same phenomenon, and are comics automatic route unlocks, collectibles, or missable completion objects?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
-| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-planet contradiction, incoming Invincible, and mission clock. Need first sustained base/crew evidence. |
+| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-planet contradiction, incoming Invincible, mission clock, camp abnormality, and faction context. Need first sustained base/crew evidence. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, and doctor-on-lifeless-planet contradiction create mystery. Need desire-to-continue check. |
+| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, doctor-on-lifeless-planet contradiction, unresponsive camp entities, and codex lore create mystery. Need desire-to-continue check. |
 | Agency Feel | Low-stakes first signal | Gentle slope chosen over risky slope. Need consequence check and later story/dialogue decisions. |
-| Readability / Trust | Early mixed-positive | Intro cards were missable during screenshotting; locator/binocular/map onboarding was understood and liked; blocked paths are legible; blackouts are story-clear but unresolved; scanner route guidance now helps. |
-| Time Respect | Unknown / watch | Early bolyongás happened, but blackouts may compress traversal and scanner guidance may reduce route friction. Need fatigue score and watch for overused interruptions. |
-| Completion Shape | Unknown | First run only; cleanup assessed later. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, and role/premise contradiction. Need more decisions. |
+| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, blocked-path clarity, and comics/codex rereading now repair context. Blackouts remain unresolved by design. |
+| Time Respect | Unknown / watch | Early bolyongás happened, but blackouts may compress traversal, scanner guidance may reduce route friction, and comics may clarify without forcing external guide use. Need fatigue score. |
+| Completion Shape | Early watch | Comics appear to unlock during play; need to verify whether they are automatic, route-based, missable, or tied to exploration/completion. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise contradiction, and codex-based timeline correction. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
-| Tool Embodiment | Early positive | Environment scanning, landmark recognition, map unlock, binocular scouting, and scanner route guidance create a tactile orientation loop. |
-| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, and desert route guidance are strong screenshot candidates. |
-| Scientific / Philosophical Density | Early positive | “No biological life” plus doctor role suggests the story may challenge definitions of life, danger, and mission assumptions. |
+| Tool Embodiment | Early positive | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, and codex browsing create a tactile orientation/lore loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/doctor scene, and comics pages are strong screenshot candidates. |
+| Scientific / Philosophical Density | Early positive | “No biological life” plus doctor role, rare mineral extraction, camp dysfunction, and machine/human non-responsiveness suggest the story may challenge definitions of life, danger, autonomy, and mission assumptions. |
 
 ## Open questions to carry into Session 1
 
@@ -111,6 +120,10 @@ Open question: Why is a doctor on a supposedly lifeless planet, and did the crew
 13. Why is Yasna, a doctor, central on a planet said to contain zero biological life?
 14. Does Invincible's destructive capacity create real narrative pressure, or mainly lore scale?
 15. Does scanner path guidance improve decompression or reduce exploration agency?
+16. Are the comics automatic route unlocks, optional collectibles, or completion-critical missables?
+17. Is the unresponsive robot following corrupted orders, stuck in a loop, or affected by the same phenomenon as the doctor?
+18. Is the doctor's blank state medical, psychological, environmental, technological, or alien/non-biological influence?
+19. Does the codex/comics system reliably repair missed context enough to reduce note-taking pressure?
 
 ## Compact post-session form
 
