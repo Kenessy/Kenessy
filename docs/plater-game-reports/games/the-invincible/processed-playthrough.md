@@ -27,8 +27,9 @@ I did not start **The Invincible** looking for a reflex test, a build system, or
 
 ### Entry 01 — Arrival / mental state
 
-Source: pending Session 1.  
-Public paragraph: pending.  
+Source: Raw Intake 003 + Session Entry 001.  
+Public paragraph draft: The opening does not begin with power fantasy or clean exposition. It begins with damaged context: a partially caught sequence of mission cards, an implied injury, a sleep or recovery capsule, and then Yasna waking groggy on an alien planet. The first tiny friction was not dramatic but useful for the review: trying to screenshot or alt-tab did not pause safely, so the intro advanced and some exact card text was lost. That creates the first proper evidence note for The Invincible: the game wants disorientation, but the PC wrapper can accidentally add extra disorientation.
+
 Image slots:
 
 - `INV-IMG-001` — first strong landscape / arrival mood
@@ -153,10 +154,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Not started.
-Best moment so far: Unknown.
-Main friction so far: Unknown.
-Most useful screenshot so far: Unknown.
-Strongest AI-training moment so far: Unknown.
+Current public summary: Opening started; first premise captured with exact-card gap.
+Best moment so far: Yasna waking groggy on the planet, pending first playable impression.
+Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt.
+Most useful screenshot so far: Missing / intro screenshots not captured cleanly.
+Strongest AI-training moment so far: Reconstructing story state from partial intro memory.
 Likely final artifact: Review card + illustrated playthrough, pending evidence.
 ```
