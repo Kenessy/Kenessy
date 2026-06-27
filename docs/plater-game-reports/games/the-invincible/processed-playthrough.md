@@ -135,14 +135,34 @@ Evidence targets:
 - Does the scanner path reduce route friction after flashback?
 - Does the game clarify or complicate the definition of life?
 
-### Entry 07 — Mid-run fatigue or pull check
+### Entry 07 — Camp abnormality / comics repair the timeline
+
+Source: Raw Intake 008 + Session Entry 006 + comic screenshots.  
+Public paragraph draft: Reaching the camp turns the mystery from memory fog into evidence. There is a marching robot that does not respond, and a doctor-like crew member in a strange blank state, present but not meaningfully reachable. At the same time, the comic/codex system becomes important: it quietly repairs the earlier confusion by showing the Dragonfly as a six-person research unit, Novik's rare-mineral accident and broken leg, the crew entering hibernation after their research cycle, the emergency near Regis III, and the fact that a rival faction is sending the USCA Invincible to a planet supposedly of little value. This is strong review evidence: the game is not only hiding information in flashbacks; it also gives the player a way to reconstruct the timeline inside the game.
+
+Image slots:
+
+- `INV-IMG-013` — non-responsive marching robot at camp
+- `INV-IMG-014` — blank/unresponsive doctor state, spoiler-labeled
+- `INV-IMG-015` — Dragonfly En Route comic page
+- `INV-IMG-016` — Regis III Issue comic page
+- `INV-IMG-016B` — Lost comic/chapter start, if later completed
+
+Evidence targets:
+
+- Are robot and doctor affected by the same phenomenon?
+- Does the comic/codex system repair missed context without external lookup?
+- Are comics automatic unlocks, route unlocks, or missable completion objects?
+- Does the camp create investigation agency or mostly authored observation?
+
+### Entry 08 — Mid-run fatigue or pull check
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-013` — most beautiful quiet moment
-- `INV-IMG-014` — worst downtime / friction if visualizable
+- `INV-IMG-017` — most beautiful quiet moment
+- `INV-IMG-018` — worst downtime / friction if visualizable
 
 Evidence targets:
 
@@ -150,14 +170,14 @@ Evidence targets:
 - Did the slow pace become atmospheric or padded?
 - Was the game still decompressing the brain?
 
-### Entry 08 — Ending / verdict reconstruction
+### Entry 09 — Ending / verdict reconstruction
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-015` — spoiler-light final journey image
-- `INV-IMG-016` — spoiler-full ending appendix image, if used
+- `INV-IMG-019` — spoiler-light final journey image
+- `INV-IMG-020` — spoiler-full ending appendix image, if used
 
 Evidence targets:
 
@@ -199,10 +219,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, and Invincible/doctor-role flashback captured.
-Best moment so far: The hard-sci-fi contradiction: Yasna is a doctor told to stay aboard because Regis III has no biological life, yet she is clearly central planetside before the Invincible arrives.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, Invincible/doctor-role flashback, camp abnormality, and comic/codex timeline evidence captured.
+Best moment so far: The comic/codex system repairing the timeline while the camp shows concrete dysfunction: a robot still moving without response and a doctor present but mentally unreachable.
 Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains.
-Most useful screenshot so far: Ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
-Strongest AI-training moment so far: Role/premise contradiction plus repeated blackout hypothesis tracking and scanner-assisted world-state reconstruction.
-Likely final artifact: Review card + illustrated playthrough, pending evidence.
+Most useful screenshot so far: Comics pages, camp robot/doctor state, ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
+Strongest AI-training moment so far: Codex-assisted timeline correction plus role/premise contradiction, repeated blackout hypothesis tracking, and human-machine non-responsiveness at camp.
+Likely final artifact: Review card + illustrated playthrough + comic/codex appendix, pending evidence.
 ```
