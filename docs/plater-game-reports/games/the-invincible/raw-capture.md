@@ -60,6 +60,14 @@ na most átgyalogoltunk egy homokviharon ami valahogy megint blackoutot okozott 
 A flashbackben egy hajón vagyunk feltételezhetően a multban ahol mondják hogy erre a bolygóra fog jönni az INVINCIBLE ami valami hatlmas vas óriás és lézereivel hegyeket tud leolvasztani szóval tuti van valami érdekes a bolygón? És odamegyünk előtte mert van 13 napunk mire ideér. Kb ennyi volt mondjuk direkt az is elhangzott benne hogy nekünk mint orvosnak semmi keresnivalónk odalent mert 0 biologiai életforma van úgyhogy mi maradjunk a hajón. Ezután véget ért a flashback és megint a homokos területen találtam magam és most már valamiért előkaptam a scannert is ami mutatja az utat.
 ```
 
+## Raw Intake 008 | 2026-06-27 | Camp reached / unresponsive robot and doctor / comics screenshots
+
+```text
+Na végre odaértünk a táborhoz és egy nem reagáló menetelő robotot találtunk és a doctort aki valami fura bambaságban van és nem reagál. Közben megtaláltam a comicsot is, ezt is updatelheted, integrálhatod mint extra infót, úgynéz ki lockolom ki útközben ahogy megyek - screenshotoltam neked.
+```
+
+Attachments in chat: comic/codex screenshots showing Dragonfly En Route, Regis III Issue, and the beginning of Lost.
+
 ## Raw Intake Template
 
 ```text
