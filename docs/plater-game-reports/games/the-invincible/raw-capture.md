@@ -30,6 +30,12 @@ Pluszban ugye az AI training is ahol a sztorit kapja + majd decisionoket is amik
 Mindent és még amit esetleg kihagytam applikálj és gondolj végig és szólj ha minden kész a start new gamere - esetleg még gamehez is akármi ami kellhet pl valami opciot bekapcsolni okvetlen akkor olyat is mondj.
 ```
 
+## Raw Intake 003 | 2026-06-27 | Intro cards / alt-tab pause nitpick
+
+```text
+szóval mi is az elején a kártyákra irva? Apró gond nem lehetett alt tabbal pausolni mert a windows gomb is triggerelte ezt igy ahogy próbáltam screenshotolni átlépte xdd nem nagy dolog csak apro nitpick, de mi is van akkor a slidokon hogy valami lába megsérült valakinek és betették ilyen sleep kapszulába aztán most látom hogy felébredek valami bolygón kábultan ebből a intróból
+```
+
 ## Raw Intake Template
 
 ```text
