@@ -9,7 +9,7 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, and first repair/problem-solving loop captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, first repair/problem-solving loop, and first physical old-metal-structure discovery captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
@@ -104,22 +104,31 @@ Observation: This is the first strong investigation-and-repair loop: steal/use K
 Axis delta: Core Loop +1 because observation -> tool use -> log reading -> repair -> objective update becomes an active loop; Agency +0.75 because Daniel solves a practical camp problem rather than only watching exposition; Readability +1 because Base/Novik, mission log, and coordinates create clearer goals; Tool Embodiment +1 because cable, detector, relay, and android repair are tactile problem-solving props; Narrative Pull +1 because Dr. Gorsky, structures, BA-23-16, and impossible relay damage add new mystery hooks; Time Respect +0.25 because the repair loop converts camp searching into payoff.  
 Open question: What damaged the relay if a normal sandstorm could not, and do the structures/material composition connect to the fish/probe fear or the human/android stupor?
 
+## Entry 009 | 2026-06-27 | cave / landing landmark / research area journal / old metal structure / Steam build unknown
+
+Milestone: Yasna enters a nearby cave; quest updates toward trying to save everyone; cave/landmark area is associated with the future landing site; Daniel finds a journal on the ground while reaching the old research area and sees the old metal structure protruding from the ground. Comic/codex screenshot confirms Yasna locating a distinct landmark near the landing area.  
+Session: unknown | Total: unknown | Mode: solo / blind / cave exploration / research area investigation  
+Micro: Clarity 4 · Mastery 3 · Tension 3 · Fatigue ? · Social 0 · Desire ?  
+Observation: The previously abstract “structures?” note is now physical evidence: a visible old metal structure at or near the old research area, tied to a landmark/landing-area route and rescue objective. The bone-like cave shapes add unsettling visual ambiguity, but the main review value is the convergence of mission log, comic landmark, journal, landing planning, and the actual structure in the world.  
+Axis delta: Narrative Pull +1 because the structure mystery is now visible instead of only logged; Scientific/Philosophical Density +0.75 because an old metal structure in the ground strengthens artificial/nonstandard geology hypotheses; Readability +0.5 because the quest, landmark, journal, and landing-area framing align; Core Loop +0.5 because the mission-log thread now pays off through exploration; Visual Report Value +0.5 because the old metal structure and bone-like cave are strong image targets.  
+Open question: Is the old metal structure artificial, meteor-derived, ancient machine residue, or something that breaks the natural/artificial distinction?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
-| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, and impossible relay damage. Need first sustained base/crew evidence. |
+| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, impossible relay damage, and visible old metal structure. Need sustained follow-through. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive camp entities, codex lore, fish/probe fear, structures, and fried relay create mystery. Need desire-to-continue check. |
-| Agency Feel | Improving from low to functional | Gentle slope route choice + camp repair loop. Need later story/dialogue consequences. |
-| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
+| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive camp entities, codex lore, fish/probe fear, structures, fried relay, and old metal structure create mystery. Need desire-to-continue check. |
+| Agency Feel | Improving from low to functional | Gentle slope route choice + camp repair loop + research-area exploration. Need later story/dialogue consequences. |
+| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, landmark/comic alignment, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
 | Time Respect | Mixed / watch | Early bolyongás happened; blackouts may compress traversal, scanner/log guidance reduces route friction, repair loop gives payoff, but long cutscenes need fatigue tracking. |
 | Completion Shape | Early watch | Comics appear to unlock during play; need to verify whether they are automatic, route-based, missable, or tied to exploration/completion. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, and repair-loop causal reasoning. Need more decisions. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, repair-loop causal reasoning, and structure/landmark hypothesis tracking. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
-| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, and android reboot create a tactile orientation/lore/repair loop. |
-| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, and comics pages are strong screenshot candidates. |
-| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, and impossible relay damage suggest the story challenges definitions of life, danger, autonomy, learning, environment, and mission assumptions. |
+| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, android reboot, journal reading, and research-area navigation create a tactile orientation/lore/repair loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, comics pages, bone-like cave, and old metal structure are strong screenshot candidates. |
+| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, impossible relay damage, and visible old metal structure suggest the story challenges definitions of life, danger, autonomy, learning, environment, geology, and artificiality. |
 
 ## Open questions to carry into Session 1
 
@@ -148,6 +157,9 @@ Open question: What damaged the relay if a normal sandstorm could not, and do th
 23. What are the marked “structures,” and why do sample compositions / material notes contradict simple meteor or ordinary geology hypotheses?
 24. Is the camp repair loop a sign of stronger agency going forward, or a one-off onboarding puzzle?
 25. Where did Dr. Gorsky go, and how does his route connect to BA-23-16 / landing coordinates / lander planning?
+26. Is the old metal structure artificial, meteor-derived, ancient machine residue, or a category the crew has not modeled yet?
+27. Are the bone-like cave shapes organic-looking geology, actual remains, or visual misdirection?
+28. Does the landing-area landmark become a stable navigation anchor for the lander objective?
 
 ## Compact post-session form
 
