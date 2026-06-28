@@ -117,10 +117,10 @@ Evidence targets:
 - Is repeated unconsciousness environmental, medical, psychological, or narrative-only?
 - Visual report value: ringed moon / sandstorm / steep climb
 
-### Entry 06 — The Invincible / doctor contradiction
+### Entry 06 — The Invincible / astrobiologist contradiction
 
-Source: Raw Intake 007 + Session Entry 005.  
-Public paragraph draft: The flashback finally gives the title weight. The Invincible is not introduced as a poetic idea but as an enormous iron presence on its way to Regis III, a machine capable of burning through mountains with its weapons. That scale changes the planet from a quiet desert mystery into a place important enough to draw catastrophic hardware. The stranger part is Yasna's role: she is framed as a doctor, yet the crew says there is no biological life below and that she has no real reason to leave the ship. That contradiction is the first genuinely sharp hard-sci-fi hook: either the mission misunderstands the planet, or the game is about to challenge what the crew thinks counts as life, danger, or relevance.
+Source: Raw Intake 007 + Session Entry 005 + later comic correction.  
+Public paragraph draft: The flashback finally gives the title weight. The Invincible is not introduced as a poetic idea but as an enormous iron presence on its way to Regis III, a machine capable of burning through mountains with its weapons. That scale changes the planet from a quiet desert mystery into a place important enough to draw catastrophic hardware. The sharper correction comes from the comics: Yasna is the Dragonfly's astrobiologist. Regis III is not simply “dead”; its surface appears lifeless while its oceans contain life. That turns the early contradiction into a more precise hard-sci-fi question: why has life stayed in the oceans, what does it know, and why does the surface still break people and machines?
 
 Image slots:
 
@@ -131,7 +131,7 @@ Image slots:
 Evidence targets:
 
 - Does the 13-day Invincible clock create real urgency or only lore scale?
-- Why is Yasna, a doctor, important on a supposedly lifeless planet?
+- Why is Yasna, an astrobiologist, central on a surface-lifeless but ocean-life planet?
 - Does the scanner path reduce route friction after flashback?
 - Does the game clarify or complicate the definition of life?
 
@@ -155,14 +155,34 @@ Evidence targets:
 - Are comics automatic unlocks, route unlocks, or missable completion objects?
 - Does the camp create investigation agency or mostly authored observation?
 
-### Entry 08 — Mid-run fatigue or pull check
+### Entry 08 — Aquarium fish / probe-fear anomaly
+
+Source: Raw Intake 009 + Session Entry 007 + comic supplement screenshots.  
+Public paragraph draft: The nearby tent adds the first living specimen to the mystery: a small water tank with a fish-like organism. The following cutscene is long enough to become a time-respect watch item, but its core observation is strong. The crew goes down to capture aquatic life, and Yasna notices something that should not make sense: the fish are afraid of robot probes, even though they should not recognize such machines if they have never encountered them. Combined with the comic clarification that Regis III's oceans teem with life while the land remains empty, the game stops asking only “is there life here?” and starts asking “what has that life learned, and from what?”
+
+Image slots:
+
+- `INV-IMG-017` — aquarium / fish specimen in tent
+- `INV-IMG-018` — fish capture cutscene / aquatic life panel
+- `INV-IMG-019` — robot probe / fish fear evidence, if visible
+- `INV-IMG-020` — Lost comic panels: wake-up, camp, caution, blackout
+- `INV-IMG-020B` — The Camp comic panel: unresponsive android
+
+Evidence targets:
+
+- Why do fish fear robot probes?
+- Is probe fear learned, instinctive, sensory, or a hint of prior contact?
+- Does the long cutscene maintain narrative pull or tax decompression value?
+- Does aquatic life reframe the “lifeless planet” premise clearly enough?
+
+### Entry 09 — Mid-run fatigue or pull check
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-017` — most beautiful quiet moment
-- `INV-IMG-018` — worst downtime / friction if visualizable
+- `INV-IMG-021` — most beautiful quiet moment
+- `INV-IMG-022` — worst downtime / friction if visualizable
 
 Evidence targets:
 
@@ -170,14 +190,14 @@ Evidence targets:
 - Did the slow pace become atmospheric or padded?
 - Was the game still decompressing the brain?
 
-### Entry 09 — Ending / verdict reconstruction
+### Entry 10 — Ending / verdict reconstruction
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-019` — spoiler-light final journey image
-- `INV-IMG-020` — spoiler-full ending appendix image, if used
+- `INV-IMG-023` — spoiler-light final journey image
+- `INV-IMG-024` — spoiler-full ending appendix image, if used
 
 Evidence targets:
 
@@ -219,10 +239,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, Invincible/doctor-role flashback, camp abnormality, and comic/codex timeline evidence captured.
-Best moment so far: The comic/codex system repairing the timeline while the camp shows concrete dysfunction: a robot still moving without response and a doctor present but mentally unreachable.
-Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains.
-Most useful screenshot so far: Comics pages, camp robot/doctor state, ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
-Strongest AI-training moment so far: Codex-assisted timeline correction plus role/premise contradiction, repeated blackout hypothesis tracking, and human-machine non-responsiveness at camp.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, Invincible/astrobiology flashback, camp abnormality, comic/codex timeline evidence, and fish/probe anomaly captured.
+Best moment so far: The game sharpened its life-definition question: Regis III's surface is empty, its oceans are alive, and the fish appear to fear probes they should not know.
+Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains; one fish cutscene was described as long.
+Most useful screenshot so far: Aquarium/fish, comics pages, camp robot/doctor state, ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
+Strongest AI-training moment so far: Fish/probe fear anomaly plus codex-assisted timeline correction, role/premise correction, repeated blackout hypothesis tracking, and human-machine non-responsiveness at camp.
 Likely final artifact: Review card + illustrated playthrough + comic/codex appendix, pending evidence.
 ```
