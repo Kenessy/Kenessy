@@ -15,6 +15,7 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | Human traces | Crew evidence, abandoned spaces, human technology in alien place. | Narrative pull and emotional stakes. |
 | Camp repair / mission log | Krauta cable, mission log, detector, relay, androbot reboot. | First practical investigation/repair loop and clearer goals. |
 | Research area / structures | Cave landmark, journal, old metal structure, landing-area landmark. | Converts mission-log mystery into visible world evidence. |
+| Rescue / recovery | Marit, Koval, lander, body recovery. | Turns missing-crew objective into survival/loss/values evidence. |
 | Friction evidence | Confusing route, unclear prompt, bad visibility, technical issue. | Friction ledger. |
 | Aquarium / fish / probes | Fish tank, aquatic life, probe fear cutscene, ocean-life comic panels. | Life-definition mystery and anomaly modeling. |
 | Comics / codex | Dragonfly, Regis III Issue, Lost, The Camp, and later comic pages. | Timeline repair, lore evidence, completion shape. |
@@ -56,9 +57,14 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-030 | Landing-area landmark comic panel | spoiler-marked | received in chat, not committed as image file |
 | INV-IMG-031 | Journal near old research area | spoiler-marked | screenshot needed |
 | INV-IMG-032 | Old metal structure protruding from ground | spoiler-marked | screenshot needed |
-| INV-IMG-033 | Worst downtime / friction if visualizable | spoiler-light | missing |
-| INV-IMG-034 | Spoiler-light final journey image | spoiler-light | missing |
-| INV-IMG-035 | Ending / completion appendix image | spoiler-full | missing |
+| INV-IMG-033 | Dr. Marit found too late comic panel | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-034 | Dr. Marit body / field discovery | spoiler-marked | screenshot needed |
+| INV-IMG-035 | Koval alive but unresponsive | spoiler-marked | screenshot needed |
+| INV-IMG-036 | Lander extraction / Koval onboard | spoiler-marked | screenshot needed |
+| INV-IMG-037 | Marit body recovery to lander | spoiler-marked | screenshot needed |
+| INV-IMG-038 | Worst downtime / friction if visualizable | spoiler-light | missing |
+| INV-IMG-039 | Spoiler-light final journey image | spoiler-light | missing |
+| INV-IMG-040 | Ending / completion appendix image | spoiler-full | missing |
 
 ## Comic screenshot intake — 2026-06-27
 
@@ -73,7 +79,8 @@ Screenshots supplied in chat show:
 - Regis III surface is desolate/lifeless while oceans contain life that did not evolve onto land.
 - `Lost` shows Yasna waking alone, disoriented/amnesic, connection issues, identifying Regis III, heading to camp, using caution, and blacking out from a serious head injury.
 - `The Camp` shows Yasna reaching camp, encountering an unresponsive android, finding Dr. Krauta, using Krauta's radio/cable to contact Novik/Base, and later rebooting the android so it can care for Krauta.
-- Latest comic panel shows Yasna locating a distinct landmark near the landing area.
+- Landing-area panel shows Yasna locating a distinct landmark near the landing area.
+- Latest panel confirms Yasna finds Dr. Marit too late to save her.
 
 ## Mission-log / repair screenshot intake — 2026-06-27
 
@@ -95,6 +102,17 @@ Latest raw note reports:
 - Old metal structure seen protruding from the ground.
 - Comic/codex confirms a distinct landmark near the landing area.
 
+## Rescue / recovery intake — 2026-06-27
+
+Latest raw note reports:
+
+- Dr. Marit is found lying on the ground, unresponsive, and not breathing.
+- Koval is found alive but unresponsive nearby.
+- Lander is sent down.
+- Koval is brought into the lander.
+- Daniel chooses to return for Marit's body and place it in the lander too.
+- Comic/codex confirms Marit was found too late to save.
+
 Current decision: keep these as **lore/codex/evidence images**, not just decoration. If used publicly, paraphrase the text and show selected panels as spoiler-marked visual support.
 
 ## File naming convention
@@ -114,6 +132,7 @@ docs/assets/img/the-invincible/inv-024-mission-log-samples.png
 docs/assets/img/the-invincible/inv-025-mission-log-map.png
 docs/assets/img/the-invincible/inv-030-comic-landing-landmark.png
 docs/assets/img/the-invincible/inv-032-old-metal-structure.png
+docs/assets/img/the-invincible/inv-033-comic-marit-found.png
 ```
 
 ## Capture notes
@@ -127,6 +146,7 @@ docs/assets/img/the-invincible/inv-032-old-metal-structure.png
 - Aquarium/fish/probe screenshots are high-value because they convert the life-definition question into a concrete behavioral anomaly.
 - Mission-log and repair screenshots are high-value because they show the first active investigation/repair loop.
 - Old-structure screenshots are high-value because they turn the `STRUCTURES?` mystery into visible world evidence.
+- Marit/Koval/lander screenshots are high-value because they show the missing-crew objective changing from search to rescue/recovery.
 
 ## Future public artifacts
 
@@ -138,5 +158,6 @@ Likely final outputs:
 3. AI agency/decision appendix
 4. Comic/codex appendix for timeline reconstruction
 5. Repair/investigation appendix if the camp loop becomes structurally important
-6. Completion cleanup appendix, if 100% route is attempted
+6. Rescue/recovery ethics appendix if body recovery creates consequence
+7. Completion cleanup appendix, if 100% route is attempted
 ```
