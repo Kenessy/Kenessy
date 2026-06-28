@@ -14,6 +14,7 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | Scientific mystery | Strange formations, machines, ecological clues, anomalies. | Epistemic uncertainty and hard-sci-fi density. |
 | Human traces | Crew evidence, abandoned spaces, human technology in alien place. | Narrative pull and emotional stakes. |
 | Camp repair / mission log | Krauta cable, mission log, detector, relay, androbot reboot. | First practical investigation/repair loop and clearer goals. |
+| Research area / structures | Cave landmark, journal, old metal structure, landing-area landmark. | Converts mission-log mystery into visible world evidence. |
 | Friction evidence | Confusing route, unclear prompt, bad visibility, technical issue. | Friction ledger. |
 | Aquarium / fish / probes | Fish tank, aquatic life, probe fear cutscene, ocean-life comic panels. | Life-definition mystery and anomaly modeling. |
 | Comics / codex | Dragonfly, Regis III Issue, Lost, The Camp, and later comic pages. | Timeline repair, lore evidence, completion shape. |
@@ -51,9 +52,13 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-026 | Detector / X-ray-like equipment pickup | spoiler-light | screenshot needed or received later |
 | INV-IMG-027 | Fried relay antenna / repair evidence | spoiler-marked | screenshot needed |
 | INV-IMG-028 | Androbot reboot / care for Krauta | spoiler-marked | received in chat, not committed as image file |
-| INV-IMG-029 | Worst downtime / friction if visualizable | spoiler-light | missing |
-| INV-IMG-030 | Spoiler-light final journey image | spoiler-light | missing |
-| INV-IMG-031 | Ending / completion appendix image | spoiler-full | missing |
+| INV-IMG-029 | Cave / skeletal-looking landmark shapes | spoiler-marked | screenshot needed |
+| INV-IMG-030 | Landing-area landmark comic panel | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-031 | Journal near old research area | spoiler-marked | screenshot needed |
+| INV-IMG-032 | Old metal structure protruding from ground | spoiler-marked | screenshot needed |
+| INV-IMG-033 | Worst downtime / friction if visualizable | spoiler-light | missing |
+| INV-IMG-034 | Spoiler-light final journey image | spoiler-light | missing |
+| INV-IMG-035 | Ending / completion appendix image | spoiler-full | missing |
 
 ## Comic screenshot intake — 2026-06-27
 
@@ -68,6 +73,7 @@ Screenshots supplied in chat show:
 - Regis III surface is desolate/lifeless while oceans contain life that did not evolve onto land.
 - `Lost` shows Yasna waking alone, disoriented/amnesic, connection issues, identifying Regis III, heading to camp, using caution, and blacking out from a serious head injury.
 - `The Camp` shows Yasna reaching camp, encountering an unresponsive android, finding Dr. Krauta, using Krauta's radio/cable to contact Novik/Base, and later rebooting the android so it can care for Krauta.
+- Latest comic panel shows Yasna locating a distinct landmark near the landing area.
 
 ## Mission-log / repair screenshot intake — 2026-06-27
 
@@ -77,6 +83,17 @@ Screenshots supplied in chat show:
 - Mission log/map page: Gorsky note, structures marker, potential landing place, BA-23-16 / coordinate-like marker, camp marker, and Dr. Gorsky moving away from the research sector.
 - Comic/codex panel: Dr. Krauta in deep stupor, Yasna using Krauta's radio/cable to regain contact.
 - Comic/codex panel: Yasna helps reboot the android so it can take care of Dr. Krauta.
+
+## Research-area / structure intake — 2026-06-27
+
+Latest raw note reports:
+
+- Nearby cave entered.
+- Quest updates toward trying to save everyone.
+- Cave/landmark area is tied to a future landing site.
+- Journal found near old research area.
+- Old metal structure seen protruding from the ground.
+- Comic/codex confirms a distinct landmark near the landing area.
 
 Current decision: keep these as **lore/codex/evidence images**, not just decoration. If used publicly, paraphrase the text and show selected panels as spoiler-marked visual support.
 
@@ -95,6 +112,8 @@ docs/assets/img/the-invincible/inv-021-comic-lost.png
 docs/assets/img/the-invincible/inv-022-comic-camp.png
 docs/assets/img/the-invincible/inv-024-mission-log-samples.png
 docs/assets/img/the-invincible/inv-025-mission-log-map.png
+docs/assets/img/the-invincible/inv-030-comic-landing-landmark.png
+docs/assets/img/the-invincible/inv-032-old-metal-structure.png
 ```
 
 ## Capture notes
@@ -107,6 +126,7 @@ docs/assets/img/the-invincible/inv-025-mission-log-map.png
 - For comics, capture the chapter title and enough surrounding panel context, but public text should be paraphrased.
 - Aquarium/fish/probe screenshots are high-value because they convert the life-definition question into a concrete behavioral anomaly.
 - Mission-log and repair screenshots are high-value because they show the first active investigation/repair loop.
+- Old-structure screenshots are high-value because they turn the `STRUCTURES?` mystery into visible world evidence.
 
 ## Future public artifacts
 
