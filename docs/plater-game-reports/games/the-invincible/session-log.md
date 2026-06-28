@@ -9,14 +9,14 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, first repair/problem-solving loop, and first physical old-metal-structure discovery captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, first repair/problem-solving loop, first physical old-metal-structure discovery, and first explicit rescue/recovery choice captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
 ```text
 #[entry] | [date] | [build]
 Milestone: [what changed]
-Session: [duration] | Total: [total duration] | Mode: solo / blind / guided / cleanup
+Session: [duration] | Total: [total duration] | Mode: solo / co-op / matchmaking / custom / etc
 Micro: Clarity [0-4] · Mastery [0-4] · Tension [0-4] · Fatigue [0-4] · Social [0-4] · Desire [0-4]
 Observation: [lossless 1-2 sentence compression]
 Axis delta: [Axis +1/-1/0, with reason]
@@ -113,22 +113,31 @@ Observation: The previously abstract “structures?” note is now physical evid
 Axis delta: Narrative Pull +1 because the structure mystery is now visible instead of only logged; Scientific/Philosophical Density +0.75 because an old metal structure in the ground strengthens artificial/nonstandard geology hypotheses; Readability +0.5 because the quest, landmark, journal, and landing-area framing align; Core Loop +0.5 because the mission-log thread now pays off through exploration; Visual Report Value +0.5 because the old metal structure and bone-like cave are strong image targets.  
 Open question: Is the old metal structure artificial, meteor-derived, ancient machine residue, or something that breaks the natural/artificial distinction?
 
+## Entry 010 | 2026-06-27 | Dr. Marit dead / Koval alive unresponsive / lander evacuation choice / Steam build unknown
+
+Milestone: Yasna unexpectedly finds Dr. Marit lying on the ground near two protruding rocks; Marit is unresponsive and not breathing, with comic/codex confirmation that it is too late to save her. Shortly afterward, Yasna finds Koval alive but also unresponsive. A lander is sent down, Koval is carried into it, and Daniel chooses to go back for Marit's body and place her in the lander as well.  
+Session: unknown | Total: unknown | Mode: solo / blind / rescue-recovery / lander extraction  
+Micro: Clarity 4 · Mastery 3 · Tension 4 · Fatigue ? · Social 1 · Desire ?  
+Observation: The rescue objective gains stakes: one crew member is beyond saving, another is alive but unreachable, and the lander becomes an active evacuation tool. Daniel's choice to retrieve Marit's body is the first clear ethical/roleplay-style decision rather than a route or repair task.  
+Axis delta: Narrative Pull +1 because the missing-crew thread now has loss, survival, and evacuation stakes; Agency +1 because returning for Marit is a player-expressed values decision; Time Respect +0.25 because the lander objective converts searching into concrete extraction; Scientific/Medical Mystery +0.5 because Koval's alive-but-unresponsive state parallels Krauta and may share the same cause; Completion/Consequence Watch +0.25 because body recovery may have story, relationship, or ending implications.  
+Open question: Does recovering Marit's body matter later, and are Marit, Koval, Krauta, and the android failures connected by one phenomenon or several?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
-| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, impossible relay damage, and visible old metal structure. Need sustained follow-through. |
+| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, impossible relay damage, visible old metal structure, and crew casualty/survival stakes. Need sustained follow-through. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Early positive | Waking confused, separation, desert wandering, lake/memory beat, sandstorms, distant tents, repeated blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive camp entities, codex lore, fish/probe fear, structures, fried relay, and old metal structure create mystery. Need desire-to-continue check. |
-| Agency Feel | Improving from low to functional | Gentle slope route choice + camp repair loop + research-area exploration. Need later story/dialogue consequences. |
-| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, landmark/comic alignment, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
-| Time Respect | Mixed / watch | Early bolyongás happened; blackouts may compress traversal, scanner/log guidance reduces route friction, repair loop gives payoff, but long cutscenes need fatigue tracking. |
-| Completion Shape | Early watch | Comics appear to unlock during play; need to verify whether they are automatic, route-based, missable, or tied to exploration/completion. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, repair-loop causal reasoning, and structure/landmark hypothesis tracking. Need more decisions. |
+| Narrative Pull | Strong early positive | Waking confused, separation, blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive entities, codex lore, fish/probe fear, structures, fried relay, old metal structure, Marit death, Koval survival, and lander extraction create escalating mystery. Need desire-to-continue check. |
+| Agency Feel | Improving from low to functional/value-expressive | Gentle slope route choice + camp repair loop + research-area exploration + choice to recover Marit's body. Need later story/dialogue consequences. |
+| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, landmark/comic alignment, lander objective, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
+| Time Respect | Mixed / watch | Early bolyongás happened; blackouts may compress traversal, scanner/log guidance reduces route friction, repair loop gives payoff, lander extraction gives objective payoff, but long cutscenes need fatigue tracking. |
+| Completion Shape | Early watch | Comics appear to unlock during play; body recovery may be consequential or just roleplay. Need to verify missability and consequence. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, repair-loop causal reasoning, structure/landmark hypothesis tracking, and ethical recovery decision modeling. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
-| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, android reboot, journal reading, and research-area navigation create a tactile orientation/lore/repair loop. |
-| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, comics pages, bone-like cave, and old metal structure are strong screenshot candidates. |
-| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, impossible relay damage, and visible old metal structure suggest the story challenges definitions of life, danger, autonomy, learning, environment, geology, and artificiality. |
+| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, android reboot, journal reading, research-area navigation, and lander extraction create a tactile orientation/lore/repair/rescue loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, comics pages, bone-like cave, old metal structure, Marit, Koval, and lander extraction are strong screenshot candidates. |
+| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, impossible relay damage, visible old metal structure, and repeated alive-but-unresponsive states suggest the story challenges definitions of life, danger, autonomy, consciousness, learning, environment, geology, and artificiality. |
 
 ## Open questions to carry into Session 1
 
@@ -160,6 +169,9 @@ Open question: Is the old metal structure artificial, meteor-derived, ancient ma
 26. Is the old metal structure artificial, meteor-derived, ancient machine residue, or a category the crew has not modeled yet?
 27. Are the bone-like cave shapes organic-looking geology, actual remains, or visual misdirection?
 28. Does the landing-area landmark become a stable navigation anchor for the lander objective?
+29. Does recovering Marit's body have consequence, dialogue recognition, achievement relevance, or only roleplay value?
+30. Is Koval's unresponsive-but-alive state the same condition as Krauta's stupor?
+31. Why did Marit die while Koval and Krauta survived in altered states?
 
 ## Compact post-session form
 
