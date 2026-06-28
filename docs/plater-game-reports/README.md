@@ -5,8 +5,9 @@ Static PLATER verdict reports and working folders for Steam Completions review a
 ## Current Reports
 
 - [Metro 2033 Redux](games/metro-2033-redux/)
-- [Quantum Break](games/quantum-break/)
-- [Prey](games/prey/)
+- [Quantum Break](games/quantum-break/) / [Journey](games/quantum-break/journey/)
+- [Prey](games/prey/) / [Field Journal](games/prey/journey/)
+- [The Invincible](games/invincible/) / [Illustrated Playthrough](games/invincible/journey/)
 
 ## Working / Draft Folders
 
@@ -23,6 +24,10 @@ games/
     journey/
       index.html
   prey/
+    index.html
+    journey/
+      index.html
+  invincible/
     index.html
     journey/
       index.html

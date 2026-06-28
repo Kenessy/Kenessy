@@ -15,6 +15,8 @@ export function portfolioHomeHtml({
   quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/',
   preyPath = 'plater-game-reports/games/prey/',
   preyJourneyPath = 'plater-game-reports/games/prey/journey/',
+  invinciblePath = 'plater-game-reports/games/invincible/',
+  invincibleJourneyPath = 'plater-game-reports/games/invincible/journey/',
   apocalypsePath,
   githubUrl
 }) {
@@ -26,6 +28,8 @@ export function portfolioHomeHtml({
   const quantumJourneyHref = quantumBreakJourneyPath;
   const preyHref = preyPath;
   const preyJourneyHref = preyJourneyPath;
+  const invincibleHref = invinciblePath;
+  const invincibleJourneyHref = invincibleJourneyPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashAsset = 'assets/img/metro-2033-redux-review-splash.png';
@@ -33,6 +37,7 @@ export function portfolioHomeHtml({
   const metroSplashAbsolute = `${siteBase}${metroSplashAsset}?v=${buildId}`;
   const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
   const preySplashHref = 'assets/img/prey-review-splash.png';
+  const invincibleSplashHref = 'assets/img/invincible/invincible-hero-regis.png';
   const canonical = siteBase;
 
   return `<!doctype html>
@@ -510,6 +515,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
 .review-status span{min-height:46px;border:1px solid rgba(216,208,184,.12);background:linear-gradient(135deg,rgba(0,229,255,.07),rgba(8,17,27,.56));padding:8px 9px;color:var(--bone);font-size:12px;line-height:1.18;font-weight:900}
 .review-status b{display:block;margin-bottom:5px;color:var(--cyan);font-size:9px;font-weight:1000;text-transform:uppercase}
 .journal-card{position:relative;display:grid;grid-template-columns:minmax(390px,.95fr) minmax(0,1.05fr);overflow:hidden}
+.journal-card+.journal-card{margin-top:18px}
 .journal-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--orange),transparent 82%);z-index:1;opacity:.86}
 .journal-media{min-height:280px;border-right:1px solid var(--line);background:linear-gradient(145deg,rgba(0,229,255,.10),rgba(75,29,115,.10));display:grid;place-items:center}
 .journal-media img{width:100%;height:100%;min-height:280px;object-fit:cover;object-position:center}
@@ -648,7 +654,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Proves</b><span>With public artifacts</span><small>Reports, screenshots, generated pages, local QA, live QA, and repo state stay connected.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> the homepage, Metro report, Quantum Break draft shell, Prey entry point, illustrated field journals, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> the homepage, Metro report, Quantum Break draft shell, Prey entry point, Invincible PLATER replay page, illustrated field journals, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -669,7 +675,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, AI/video experiments, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, decision loops, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office.</span></div>
+          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office. The Invincible is the active PLATER replay page with a comic-like illustrated playthrough.</span></div>
         </div>
       </div>
     </div>
@@ -692,7 +698,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <small>02 / Review lab</small>
           <h3>Game critique as system read</h3>
           <p>ALERTED score anatomy, taste-fit lanes, trust ledgers, spoiler policy, and replay journals.</p>
-          <span>Metro + Quantum Break + Prey</span>
+          <span>Metro + Quantum Break + Prey + Invincible</span>
         </a>
         <a class="lane-card" style="--tone:var(--violet)" href="${apocalypseHref}">
           <small>03 / Narrative worlds</small>
@@ -704,7 +710,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <small>04 / Illustrated journals</small>
           <h3>State changes you can read</h3>
           <p>Session notes become fullscreen dossier scrapbook pages with typed notes, attached photo evidence, and prompt handoff.</p>
-          <span>Photo evidence ready</span>
+          <span>Replay panels ready</span>
         </a>
       </div>
     </div>
@@ -779,7 +785,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Game critique lab</p><h2>Game Reviews</h2></div>
-        <p>The Metro report is the current flagship. Quantum Break is staged as the live draft with a separate journey page. Prey is now active as the first-run illustrated field journal with Session 01 expanded through Morgan's office and Looking Glass.</p>
+        <p>The Metro report is the current flagship. Quantum Break and Prey keep the live journal lanes. The Invincible now has a PLATER-style replay report plus a comic-like illustrated playthrough tab.</p>
       </div>
       <div class="review-stack">
         <a class="review-card metro-card" href="${metroHref}">
@@ -831,6 +837,20 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           </div>
           <div class="score-box pending" aria-label="Prey verdict locked until first-run evidence"><b>LOCKED</b><small>Entry</small><em>Session 01+</em></div>
         </article>
+        <article class="review-card invincible-card">
+          <a class="review-media" href="${invincibleHref}" aria-label="Open The Invincible PLATER report">
+            <img src="${invincibleSplashHref}" width="1536" height="864" alt="">
+          </a>
+          <div class="review-copy">
+            <div class="tag-row"><span class="tag amber">Replay active</span><span class="tag cyan">PLATER shell</span><span class="tag green">Comic panels wired</span></div>
+            <h3>The Invincible</h3>
+            <p>Metro-like ALERTED report with an atompunk Regis III design, locked score strip, falsifier ledger, and a separate illustrated playthrough page built from generated scene panels and review analysis.</p>
+            <div class="tag-row"><span class="tag">Hard sci-fi</span><span class="tag">Atompunk</span><span class="tag">Regis III</span><span class="tag amber">Replay locked</span></div>
+            <div class="review-status" aria-label="The Invincible review publication state"><span><b>State</b> Replay active</span><span><b>Score</b> Locked</span><span><b>Tab</b> Illustrated playthrough</span></div>
+            <div class="review-sub-links"><a href="${invincibleHref}">Open report</a><a href="${invincibleJourneyHref}">Open playthrough</a></div>
+          </div>
+          <div class="score-box pending" aria-label="The Invincible verdict locked until replay evidence"><b>LOCKED</b><small>Replay</small><em>Panels live</em></div>
+        </article>
       </div>
     </div>
   </section>
@@ -839,7 +859,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
     <div class="wrap">
       <div class="section-head">
         <div><p class="kicker">Live journal lane</p><h2>Play It Together</h2></div>
-        <p>The journal is the readable playthrough layer: session notes become fullscreen dossier scrapbook pages with typed notes, attached photos, review implications, and friction notes.</p>
+        <p>The journal is the readable playthrough layer: session notes become fullscreen dossier or comic-style pages with typed notes, attached generated panels, review implications, and friction notes.</p>
       </div>
       <article class="journal-card">
         <a class="journal-media" href="${quantumJourneyHref}" aria-label="Open Quantum Break illustrated journey">
@@ -867,6 +887,29 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into visible photo evidence slots. Prompt-only missing images stay in the brief instead of becoming empty visible boxes.</div>
           <div class="journal-asset-links" aria-label="Quantum Break image handoff files"><a href="assets/img/quantum-break/panel-manifest.json">Photo manifest</a><a href="assets/img/quantum-break/README.md">Prompt README</a></div>
           <div class="review-sub-links"><a href="${quantumJourneyHref}">Open journey</a><a href="${quantumHref}">Open review shell</a></div>
+        </div>
+      </article>
+      <article class="journal-card invincible-journal-card">
+        <a class="journal-media" href="${invincibleJourneyHref}" aria-label="Open The Invincible illustrated playthrough">
+          <img src="${invincibleSplashHref}" width="1536" height="864" alt="">
+        </a>
+        <div class="journal-copy">
+          <div class="tag-row"><span class="tag amber">The Invincible</span><span class="tag cyan">Comic-style playthrough</span><span class="tag green">6 panels wired</span></div>
+          <h3>Regis III Replay Reader</h3>
+          <p>The active replay is staged as readable pages: wake point, analog tool trail, convoy silence, machine ruins, metal-cloud threat, and return-signal judgment. Each page pairs the scene with its ALERTED implication.</p>
+          <div class="journal-contract" aria-label="The Invincible image contract">
+            <span><b>Canvas</b> Fullscreen comic pages</span>
+            <span><b>Manifest</b> 6 panels wired</span>
+            <span><b>Status</b> Score locked</span>
+          </div>
+          <div class="journal-file-queue" aria-label="The Invincible panel filenames">
+            <div><b>Panel 01</b><code>invincible-page-01-wake-regis.png</code></div>
+            <div><b>Panel 05</b><code>invincible-page-05-metal-cloud.png</code></div>
+            <div><b>Panel 06</b><code>invincible-page-06-return-signal.png</code></div>
+          </div>
+          <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the visible comic panel slots. Missing images stay in the art queue instead of becoming broken boxes.</div>
+          <div class="journal-asset-links" aria-label="The Invincible image handoff files"><a href="assets/img/invincible/panel-manifest.json">Panel manifest</a><a href="assets/img/invincible/README.md">Prompt README</a></div>
+          <div class="review-sub-links"><a href="${invincibleJourneyHref}">Open playthrough</a><a href="${invincibleHref}">Open report</a></div>
         </div>
       </article>
     </div>

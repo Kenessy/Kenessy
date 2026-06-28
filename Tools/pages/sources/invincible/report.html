@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Invincible - PLATER Field Report</title>
+<link rel="icon" href="data:,">
+<link rel="canonical" href="https://kenessy.github.io/Kenessy/plater-game-reports/games/invincible/">
+<meta name="description" content="The Invincible PLATER field report: a Metro-style ALERTED review shell with an Invincible atompunk design, locked replay verdict, standardized rating axes, and an illustrated playthrough tab.">
+<meta name="theme-color" content="#080604">
+<meta name="build-id" content="__BUILD_ID__">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Invincible - PLATER Field Report">
+<meta property="og:description" content="Replay-in-progress field report for The Invincible with ALERTED rating axes and a linked comic-style illustrated playthrough.">
+<meta property="og:url" content="https://kenessy.github.io/Kenessy/plater-game-reports/games/invincible/">
+<meta property="og:image" content="https://kenessy.github.io/Kenessy/assets/img/invincible/invincible-hero-regis.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Invincible - PLATER Field Report">
+<meta name="twitter:description" content="Metro-like PLATER report for The Invincible with score locked until replay evidence finishes and a comic-style playthrough tab.">
+<style>
+:root{--bg:#080604;--ink:#f4ead0;--muted:#a99b82;--soft:#d7c8a6;--sand:#e4c478;--amber:#ffb347;--orange:#dc6a24;--rust:#a54122;--red:#ff5a3d;--teal:#61d9c6;--blue:#6aa8ff;--violet:#a487ff;--green:#8ee58b;--line:#3f2f22;--panel:#130d08;--panel2:#1b120b;--max:1320px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;overflow-x:hidden;background:radial-gradient(920px 560px at 78% -8%,rgba(255,179,71,.14),transparent 62%),radial-gradient(780px 520px at 8% 12%,rgba(97,217,198,.08),transparent 58%),repeating-linear-gradient(90deg,rgba(244,234,208,.042) 0 1px,transparent 1px 92px),linear-gradient(180deg,#080604,#110a06 48%,#060403);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p{margin:0}
+.hud{border-bottom:1px solid rgba(244,234,208,.13);background:rgba(8,6,4,.88);backdrop-filter:blur(14px)}
+.hud .inner{width:min(calc(100% - 28px),var(--max));min-height:58px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--sand);font-size:12px;font-weight:1000;text-transform:uppercase}
+.brand:before{content:"";width:9px;height:9px;background:var(--amber);box-shadow:13px 0 0 var(--teal),26px 0 0 var(--rust)}
+.links{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end}
+.links a{min-height:34px;display:inline-flex;align-items:center;border:1px solid rgba(244,234,208,.14);background:rgba(8,6,4,.48);padding:7px 9px;color:var(--muted);font-size:11px;font-weight:1000;text-transform:uppercase}
+.links a.hot{border-color:rgba(255,179,71,.50);color:#ffd992}
+.links a.tab{border-color:rgba(97,217,198,.40);color:#b4f2e8}
+.shell{width:min(calc(100% - 28px),var(--max));margin:0 auto;display:grid;gap:18px;padding:18px 0 42px}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);background:#080604}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,6,4,.97) 0%,rgba(8,6,4,.88) 38%,rgba(8,6,4,.30) 72%,rgba(8,6,4,.86) 100%),url('../../../assets/img/invincible/invincible-hero-regis.png') center/cover no-repeat;opacity:.98}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(244,234,208,.050) 1px,transparent 1px),linear-gradient(0deg,rgba(244,234,208,.035) 1px,transparent 1px);background-size:88px 88px;opacity:.20}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 332px;gap:22px;align-items:end;min-height:560px;padding:34px}
+.kicker{color:var(--amber);font-size:12px;font-weight:1000;text-transform:uppercase}
+.hero h1{margin-top:12px;color:var(--sand);font-size:116px;line-height:.78;font-weight:1000;text-transform:uppercase;text-shadow:6px 6px 0 #000,0 0 36px rgba(255,179,71,.20)}
+.hero h1 span{display:block;color:#f2d99c}
+.identity{max-width:800px;margin-top:18px;border-left:3px solid var(--amber);padding-left:15px;color:#e6d2a5;font-size:18px;line-height:1.58;font-weight:760}
+.meta-rail{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;min-height:34px;border:1px solid var(--line);background:rgba(8,6,4,.72);padding:7px 10px;color:var(--soft);font-size:11px;font-weight:1000;text-transform:uppercase}
+.chip.amber{border-color:rgba(255,179,71,.46);color:#ffd992}
+.chip.green{border-color:rgba(142,229,139,.42);color:#bdf2b6}
+.chip.teal{border-color:rgba(97,217,198,.38);color:#b4f2e8}
+.score-panel{min-height:430px;border:1px solid rgba(255,179,71,.66);background:linear-gradient(145deg,rgba(220,106,36,.20),rgba(18,11,6,.94) 46%,rgba(4,3,2,.98));display:grid;align-content:space-between;padding:18px;box-shadow:0 30px 90px rgba(0,0,0,.54)}
+.score-panel small{color:var(--amber);font-size:11px;font-weight:1000;text-transform:uppercase}
+.score-big{display:grid;place-items:center;text-align:center}
+.score-big b{display:block;color:#ffd992;font-size:58px;line-height:.9;font-weight:1000;text-transform:uppercase;text-shadow:0 0 24px rgba(255,179,71,.18)}
+.score-big span{display:block;margin-top:10px;color:var(--teal);font-size:26px;line-height:1;font-weight:1000;text-transform:uppercase}
+.score-panel p{color:var(--muted);font-size:13px;line-height:1.5;font-weight:760}
+.gate-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.gate{min-height:62px;border:1px solid rgba(244,234,208,.13);background:linear-gradient(145deg,rgba(97,217,198,.08),rgba(8,6,4,.76));padding:10px}
+.gate small{color:var(--teal);font-size:9px;font-weight:1000;text-transform:uppercase}
+.gate b{display:block;margin-top:6px;color:var(--sand);font-size:13px;line-height:1;text-transform:uppercase}
+.section{border:1px solid var(--line);background:linear-gradient(145deg,rgba(27,18,11,.94),rgba(10,6,4,.98));padding:24px;overflow:hidden}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:22px;border-bottom:1px solid rgba(244,234,208,.11);padding-bottom:16px;margin-bottom:18px}
+.section-head h2{margin-top:6px;color:var(--sand);font-size:44px;line-height:.95;text-transform:uppercase}
+.section-head p{max-width:670px;color:#d9c69c;font-size:16px;line-height:1.55;font-weight:740}
+.fit-grid,.score-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:11px}
+.fit,.score-tile{border:1px solid color-mix(in srgb,var(--tone) 54%,#3f2f22);background:linear-gradient(180deg,rgba(244,234,208,.035),rgba(0,0,0,.25));padding:14px 10px;text-align:center;color:var(--tone)}
+.fit .letter,.score-tile .letter{font-size:34px;line-height:1;font-weight:1000;text-shadow:0 0 14px color-mix(in srgb,var(--tone) 34%,transparent)}
+.fit h3,.score-tile h3{margin-top:5px;color:var(--tone);font-size:12px;line-height:1.05;text-transform:uppercase}
+.fit .num,.score-tile b{display:block;margin-top:12px;color:var(--sand);font-size:22px;line-height:1;font-weight:1000;text-transform:uppercase}
+.fit p,.score-tile p{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.35;font-weight:700}
+.status-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:18px}
+.status{position:relative;overflow:hidden;min-height:70px;border:1px solid rgba(244,234,208,.12);background:linear-gradient(135deg,rgba(97,217,198,.075),rgba(8,6,4,.76) 56%,rgba(255,179,71,.045));padding:13px 14px 12px 15px}
+.status:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--teal),rgba(255,179,71,.72));opacity:.92}
+.status small{color:#b4f2e8;font-size:9px;font-weight:1000;text-transform:uppercase}
+.status b{display:block;margin-top:7px;color:#ead6aa;font-size:15px;line-height:1.16}
+.aud-grid,.ledger{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.aud,.gate-card{position:relative;overflow:hidden;min-height:150px;border:1px solid rgba(244,234,208,.13);background:linear-gradient(145deg,rgba(255,179,71,.07),rgba(8,6,4,.82) 40%,rgba(18,12,8,.98));padding:16px}
+.aud:before,.gate-card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber),transparent 82%);opacity:.78}
+.aud small,.gate-card small{color:#b4f2e8;font-size:10px;font-weight:1000;text-transform:uppercase}
+.aud h3,.gate-card h3{margin-top:10px;color:#ead6aa;font-size:24px;line-height:1.02;text-transform:uppercase}
+.aud p,.gate-card p{margin-top:12px;color:#c0b091;font-size:14px;line-height:1.5;font-weight:700}
+.thesis{position:relative;overflow:hidden;margin-top:14px;border:1px solid rgba(255,179,71,.34);background:linear-gradient(135deg,rgba(255,179,71,.09),rgba(8,6,4,.74));padding:15px 16px 16px 18px}
+.thesis:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--amber),var(--teal))}
+.thesis small{color:#ffd992;font-size:11px;font-weight:1000;text-transform:uppercase}
+.thesis p{max-width:82ch;margin-top:8px;color:#e6d2a5;font-size:15px;line-height:1.58;font-weight:760}
+.gate-matrix{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gate-card{min-height:126px}
+.note-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.42fr);gap:12px}
+.field-note{position:relative;overflow:hidden;min-height:188px;border:1px solid rgba(255,179,71,.30);background:linear-gradient(145deg,rgba(255,179,71,.08),rgba(8,6,4,.84) 42%,rgba(97,217,198,.035));padding:20px}
+.field-note:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--amber),var(--teal),transparent 82%);opacity:.78}
+.field-note small{color:#ffd992;font-size:11px;font-weight:1000;text-transform:uppercase}
+.field-note h3{margin-top:8px;color:var(--sand);font-size:34px;line-height:.98;text-transform:uppercase}
+.field-note p{max-width:80ch;margin-top:12px;color:#e6d2a5;font-size:16px;line-height:1.62;font-weight:700}
+.tag-cloud{position:relative;overflow:hidden;border:1px solid rgba(97,217,198,.22);background:linear-gradient(145deg,rgba(97,217,198,.055),rgba(8,6,4,.82));padding:18px}
+.tag-cloud:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--teal),var(--orange))}
+.tag-cloud h3{color:#ead6aa;font-size:24px;text-transform:uppercase}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tags span{border:1px solid rgba(97,217,198,.26);background:rgba(97,217,198,.045);padding:7px 9px;color:#d0eee8;font-size:11px;font-weight:1000;text-transform:uppercase}
+.tags span:nth-child(2n){border-color:rgba(255,179,71,.28);background:rgba(255,179,71,.045);color:#ead6aa}
+.handoff-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.footer{padding:24px 0;color:var(--muted);font-size:13px}
+.footer .shell{padding:0}
+.footer a{color:#ffd992}
+@media(max-width:980px){.hero-grid,.note-card{grid-template-columns:1fr}.fit-grid,.score-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.status-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.aud-grid,.ledger,.gate-matrix{grid-template-columns:1fr}.score-panel{min-height:260px}.hero h1{font-size:78px}.section-head{display:grid}.section-head h2{font-size:40px}}
+@media(max-width:560px){.hud .inner{align-items:flex-start;flex-direction:column;padding:10px 0}.links{justify-content:flex-start}.links a{font-size:10px}.shell{width:min(calc(100% - 24px),var(--max))}.hero-grid,.section{padding:18px}.hero h1{font-size:52px}.section-head h2{font-size:34px}.fit-grid,.score-strip,.status-grid{grid-template-columns:1fr}.identity{font-size:16px}}
+</style>
+</head>
+<body>
+<header class="hud"><div class="inner"><a class="brand" href="../../../">Kenessy Game Reports</a><nav class="links"><a href="../../../">Home</a><a href="../../">Reports</a><a class="hot" href="#summary">Summary Tab</a><a class="tab" href="journey/">Illustrated Playthrough</a><a href="#score">Score</a><a href="#audit">Audit</a></nav></div></header>
+<main class="shell" id="summary">
+<section class="hero"><div class="hero-grid"><div><p class="kicker">PLATER field report / The Invincible</p><h1>The<span>Invincible</span></h1><p class="identity">The Invincible gets the Metro-style treatment, but in its own language: dusty atompunk instruments, hard sci-fi loneliness, analog procedure, and a locked verdict until the replay produces enough evidence. This is a standardized ALERTED report shell, not a final score pretending to be finished.</p><div class="meta-rail"><span class="chip amber">Replay in progress</span><span class="chip teal">Illustrated tab live</span><span class="chip">Score locked</span><span class="chip green">Regis III dossier</span></div></div><aside class="score-panel"><small>Verdict Gate</small><div class="score-big"><b>LOCKED</b><span>Replay</span></div><div class="gate-list" aria-label="The Invincible score unlock gates"><div class="gate"><small>Gate 01</small><b>Atmosphere proof</b></div><div class="gate"><small>Gate 02</small><b>Interaction trust</b></div><div class="gate"><small>Gate 03</small><b>Pacing fatigue</b></div><div class="gate"><small>Gate 04</small><b>Ending weight</b></div></div><p>The number unlocks only after the active replay tests whether mood, route reading, walking-sim pacing, and final narrative payoff survive together.</p></aside></div></section>
+<section class="section" id="fit"><div class="section-head"><div><p class="kicker">01 / Player Fit Check</p><h2>Is This For You?</h2></div><p>Use the lanes as a taste filter while the verdict is locked. The Invincible should be judged as an authored hard-sci-fi expedition, not as a combat loop.</p></div><div class="fit-grid"><div class="fit" style="--tone:#ffb347"><div class="letter">I</div><h3>Immersion</h3><div class="num">High</div><p>Wants planet mood and analog exploration.</p></div><div class="fit" style="--tone:#61d9c6"><div class="letter">N</div><h3>Narrative</h3><div class="num">High</div><p>Likes mystery, memory, and command pressure.</p></div><div class="fit" style="--tone:#8ee58b"><div class="letter">S</div><h3>Systems</h3><div class="num">Low</div><p>Needs buildcraft, combat, or sandbox tools.</p></div><div class="fit" style="--tone:#a487ff"><div class="letter">P</div><h3>Pacing</h3><div class="num">Watch</div><p>Tests slow traversal and exposition density.</p></div><div class="fit" style="--tone:#6aa8ff"><div class="letter">E</div><h3>Exploration</h3><div class="num">Mid+</div><p>Reads routes, devices, tracks, and planet clues.</p></div><div class="fit" style="--tone:#dc6a24"><div class="letter">C</div><h3>Comfort</h3><div class="num">Watch</div><p>Checks friction, motion, saves, and clarity.</p></div><div class="fit" style="--tone:#ff5a3d"><div class="letter">T</div><h3>Teamplay</h3><div class="num">None</div><p>Solo authored narrative expedition.</p></div></div><div class="status-grid"><div class="status"><small>Status</small><b>Replay active</b></div><div class="status"><small>Verdict</small><b>Score locked</b></div><div class="status"><small>Mode</small><b>Hard sci-fi read</b></div><div class="status"><small>Tab</small><b>Illustrated playthrough live</b></div><div class="status"><small>Main pull</small><b>Regis III atmosphere</b></div><div class="status"><small>Main risk</small><b>Slow route fatigue</b></div><div class="status"><small>Design lens</small><b>Atompunk procedure</b></div><div class="status"><small>Spoilers</small><b>Layered, controlled</b></div></div></section>
+<section class="section"><div class="section-head"><div><p class="kicker">02 / Audience Fit</p><h2>Who Should Start It?</h2></div><p>The expected best player is someone who wants a readable expedition story, not a power fantasy or systems sandbox.</p></div><div class="aud-grid"><article class="aud"><small>Start if</small><h3>Slow sci-fi works</h3><p>You enjoy mood, mystery, analog tools, radio pressure, and a planet that feels indifferent rather than gamey.</p></article><article class="aud"><small>Works if</small><h3>Walking is thinking</h3><p>You can accept deliberate traversal when each device, track, and landmark changes what the expedition means.</p></article><article class="aud"><small>Skip if</small><h3>Loop first</h3><p>You need combat depth, loot escalation, fast traversal, broad agency, or a game that constantly refreshes mechanics.</p></article></div><div class="thesis"><small>Replay thesis</small><p>The Invincible can score high only if its slow authored structure feels like pressure and discovery instead of padding. The review will not reward atmosphere if the interaction layer stops carrying the mystery.</p></div></section>
+<section class="section" id="evidence"><div class="section-head"><div><p class="kicker">03 / Replay Evidence</p><h2>What Is Already Legible?</h2></div><p>The report currently uses active-replay analysis and the known game frame: Yasna on Regis III, atompunk tools, a missing crew, and a planet mystery that should be judged through trust and pacing.</p></div><div class="gate-matrix"><article class="gate-card"><small>Evidence 01</small><h3>World identity</h3><p>The red desert and analog hardware make the game visually distinct before any plot turn has to carry it.</p></article><article class="gate-card"><small>Evidence 02</small><h3>Tool language</h3><p>Detectors, maps, radio calls, and rover-like hardware should turn walking into procedure.</p></article><article class="gate-card"><small>Evidence 03</small><h3>Story pressure</h3><p>The missing-crew hook works if the player feels discovery and command conflict at the same time.</p></article><article class="gate-card"><small>Evidence 04</small><h3>Open risk</h3><p>If route reading becomes repetitive or the ending over-explains the mystery, the ceiling drops.</p></article></div></section>
+<section class="section" id="score"><div class="section-head"><div><p class="kicker">04 / Standardized Rating</p><h2>ALERTED Score Strip</h2></div><p>The same standardized rating system is used here as the Metro-family reports. The values stay qualitative until replay evidence is complete.</p></div><div class="score-strip"><div class="score-tile" style="--tone:#ffb347"><div class="letter">A</div><h3>Atmosphere</h3><p>Regis III, sound, mood</p><b>Likely strong</b></div><div class="score-tile" style="--tone:#61d9c6"><div class="letter">L</div><h3>Loop</h3><p>Walking, tools, procedure</p><b>Test hard</b></div><div class="score-tile" style="--tone:#8ee58b"><div class="letter">E</div><h3>Engagement</h3><p>Mystery pull</p><b>Watch</b></div><div class="score-tile" style="--tone:#6aa8ff"><div class="letter">R</div><h3>Readability</h3><p>Routes and signals</p><b>Gate</b></div><div class="score-tile" style="--tone:#a487ff"><div class="letter">T</div><h3>Technical</h3><p>PC state and comfort</p><b>Gate</b></div><div class="score-tile" style="--tone:#dc6a24"><div class="letter">E</div><h3>Extra</h3><p>Lem-style concept weight</p><b>Upside</b></div><div class="score-tile" style="--tone:#ff5a3d"><div class="letter">D</div><h3>Danger</h3><p>Slow-burn fatigue</p><b>Risk</b></div></div></section>
+<section class="section"><div class="section-head"><div><p class="kicker">05 / Human Verdict Draft</p><h2>Short Field Note</h2></div><p>The review voice stays honest: it can describe the shape and current promise without pretending the ending has been audited.</p></div><div class="note-card"><article class="field-note"><small>Recovered field note</small><h3>Beautiful, Unproven, Dangerous</h3><p>The strongest current read is that The Invincible is a mood-first expedition with unusually coherent visual identity. The danger is also obvious: if the player is mostly walking between exposition nodes, then atmosphere must keep paying rent. The illustrated playthrough tab exists to capture that difference scene by scene.</p></article><aside class="tag-cloud"><h3>Reader Tags</h3><div class="tags"><span>Hard sci-fi</span><span>Atompunk</span><span>Regis III</span><span>Analog tools</span><span>Walking mystery</span><span>Replay locked</span><span>Illustrated playthrough</span><span>ALERTED axes</span></div></aside></div></section>
+<section class="section" id="audit"><div class="section-head"><div><p class="kicker">06 / Audit</p><h2>Falsifiers</h2></div><p>The page actively tracks what could break the eventual score.</p></div><div class="ledger"><article class="aud"><small>Atmosphere bias</small><h3>Planet may carry too much</h3><p>Check whether Regis III remains meaningful after the first visual impression fades.</p></article><article class="aud"><small>Narrative bias</small><h3>Concept may mask thin play</h3><p>Check whether the player is doing enough interpretation, route work, and choice evaluation.</p></article><article class="aud"><small>Pacing bias</small><h3>Slow can become flat</h3><p>Check whether quiet traversal creates dread and thought, or simply stretches the same beat.</p></article></div></section>
+<section class="section"><div class="section-head"><div><p class="kicker">07 / Extra Tab</p><h2>Illustrated Playthrough</h2></div><p>The companion tab reads like a comic-style playthrough: fullscreen panels, prose beats, review implications, and generated 16:9 scene images wired from the manifest.</p></div><div class="thesis"><small>Open the playthrough</small><p>The first version covers the wake on Regis III, analog route procedure, convoy silence, machine ruins, the metal-cloud threat lens, and the return-signal question. It is built to expand as live replay text arrives.</p><div class="handoff-links"><a class="chip amber" href="journey/">Open Illustrated Playthrough</a><a class="chip teal" href="../../../assets/img/invincible/panel-manifest.json">Panel Manifest</a><a class="chip green" href="../../../assets/img/invincible/README.md">Prompt README</a></div></div></section>
+</main>
+<footer class="footer"><div class="shell"><span>The Invincible PLATER report. ALERTED score locked until replay evidence completes.</span><span><a href="../../">Reports index</a> / <a href="journey/">Illustrated playthrough</a> / <a href="../../../">Kenessy home</a></span></div></footer>
+</body>
+</html>

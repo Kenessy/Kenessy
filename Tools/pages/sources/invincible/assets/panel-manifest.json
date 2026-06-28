@@ -1,0 +1,95 @@
+{
+  "game": "The Invincible",
+  "status": "replay-in-progress-illustrated-playthrough",
+  "promptVersion": "invincible-illustrated-playthrough-v1",
+  "defaultAspectRatio": "16:9",
+  "assetBase": "docs/assets/img/invincible/",
+  "sharedPrompt": "Cinematic comic-style hard sci-fi illustration for The Invincible replay playthrough. Use retro-futuristic atompunk exploration language, analog expedition tools, rust-red Regis III desert, lonely mystery, restrained panel composition, no readable UI text, no logos, no captions, no watermark.",
+  "negativePrompt": "No logos, no captions, no fake UI text, no readable typography, no watermark, no gore focus, no official game UI, no brand marks, no cluttered tiny panel noise.",
+  "styleRules": [
+    "Use 16:9 PNGs for every visible playthrough panel.",
+    "Keep the art direction atompunk, analog, dusty, and readable at mobile width.",
+    "Missing images remain listed in the art queue until exact filenames exist.",
+    "Avoid large non-diegetic typography, fake UI text, captions, logos, and watermarks.",
+    "Each image should carry one clear replay beat, not a collage of unrelated moments."
+  ],
+  "slots": [
+    {
+      "id": "hero-regis",
+      "page": "report-hero",
+      "filename": "invincible-hero-regis.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": false,
+      "brief": "Wide hero image for the Invincible report: lone atompunk expedition against the Regis III desert.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. A lone orange-suited astrobiologist stands near analog expedition equipment in a rust-red alien desert, distant retro-futuristic rover silhouettes, pale sky, lonely mystery, restrained atompunk design, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use a strong wide hero with the explorer left of center and open desert depth for title overlay readability.",
+      "avoid": "Avoid official logos, readable instrument labels, fake UI overlays, mascot-style character design, and overbusy foreground clutter."
+    },
+    {
+      "id": "page-01-wake-regis",
+      "page": "wake",
+      "filename": "invincible-page-01-wake-regis.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Yasna-like explorer waking alone beside scattered analog equipment on Regis III.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration for The Invincible replay. A lone astrobiologist in an orange atompunk spacesuit wakes in a rust-red desert beside scattered analog expedition instruments, pale sun, dust haze, low survival tension, no readable text, no UI, no logos, no watermark.",
+      "composition": "Keep the explorer and equipment as one readable focal beat; the empty planet should dominate the rest of the frame.",
+      "avoid": "Avoid readable name patches, fake UI, official suit logos, gore, crowded props, and bright heroic fantasy lighting."
+    },
+    {
+      "id": "page-02-instrument-trail",
+      "page": "instruments",
+      "filename": "invincible-page-02-instrument-trail.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Analog detector, cable reel, and footstep trail turning exploration into procedure.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Close-to-mid scene of an atompunk explorer following an analog detector needle and cable reel across a red alien valley, footprints, dust, compact rover in the distance, procedural mystery mood, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use the detector and cable as foreground leading lines that pull the eye toward the distant rover and valley route.",
+      "avoid": "Avoid modern digital HUDs, readable gauges, official UI, logos, captions, and over-sharp military sci-fi design."
+    },
+    {
+      "id": "page-03-convoy-valley",
+      "page": "convoy",
+      "filename": "invincible-page-03-convoy-valley.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Dusty convoy path and silent expedition machines in the Regis III valley.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Retro-futuristic expedition convoy vehicles sit silent in a rust-red alien valley, one explorer approaches from the foreground, analog antennas and round hulls, oppressive quiet, pale sky, no readable text, no UI, no logos, no watermark.",
+      "composition": "Make the convoy feel discovered rather than posed; use rover silhouettes and valley walls to create a clear path through the frame.",
+      "avoid": "Avoid readable vehicle numbers, official logos, battle damage gore, cluttered machinery, and generic modern tanks."
+    },
+    {
+      "id": "page-04-robot-ruins",
+      "page": "ruins",
+      "filename": "invincible-page-04-robot-ruins.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Ruined machines and antenna shadows suggesting the planet is not empty.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. An explorer studies broken retro robots and antenna-like machine ruins half buried in red dust, long shadows, analog flashlight beam, the planet feels not empty but not alive in a human way, no readable text, no UI, no logos, no watermark.",
+      "composition": "Frame the explorer small against large machine remains; keep one broken robot silhouette and one antenna shadow readable.",
+      "avoid": "Avoid humanoid battle robots, laser combat, official UI, gore, captions, logos, and text labels."
+    },
+    {
+      "id": "page-05-metal-cloud",
+      "page": "swarm",
+      "filename": "invincible-page-05-metal-cloud.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "A black metallic micro-machine cloud crossing the sunlit desert as the core threat lens.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. A black metallic micro-machine cloud crosses a rust-red desert valley, blotting part of the pale sky, a lone orange-suited explorer watches from behind a rock with analog scanner raised, eerie non-biological threat, no readable text, no UI, no logos, no watermark.",
+      "composition": "Make the swarm a readable dark shape against the sky while keeping the explorer and scanner small but clear in the foreground.",
+      "avoid": "Avoid monster faces, magic smoke, readable scanner text, official UI, logos, gore, and chaotic particle noise that hides the scene."
+    },
+    {
+      "id": "page-06-return-signal",
+      "page": "signal",
+      "filename": "invincible-page-06-return-signal.png",
+      "aspectRatio": "16:9",
+      "visibleInJourney": true,
+      "brief": "Analog radio mast, distant lander signal, and the review question shifting from survival to judgment.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. At dusk on Regis III, a lone explorer tunes an analog radio mast beside a compact lander silhouette, dusty orange horizon, equipment lights, final reflective mystery rather than action, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use the mast, lander, and explorer as a triangular composition; keep the mood quiet and unresolved.",
+      "avoid": "Avoid triumphant action poses, readable panels, fake UI overlays, logos, captions, and crowded background ships."
+    }
+  ]
+}

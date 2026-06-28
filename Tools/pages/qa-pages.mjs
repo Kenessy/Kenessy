@@ -15,8 +15,11 @@ const quantumBreakPath = 'plater-game-reports/games/quantum-break/';
 const quantumBreakJourneyPath = 'plater-game-reports/games/quantum-break/journey/';
 const preyPath = 'plater-game-reports/games/prey/';
 const preyJourneyPath = 'plater-game-reports/games/prey/journey/';
+const invinciblePath = 'plater-game-reports/games/invincible/';
+const invincibleJourneyPath = 'plater-game-reports/games/invincible/journey/';
 const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 const preyFlightRecorderManifestPath = 'assets/img/prey/flight-recorder-manifest.json';
+const invinciblePanelManifestPath = 'assets/img/invincible/panel-manifest.json';
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const sourceName = 'main_canvas_diegetic_equation.jsx';
 const expectedLiveReportUrl = new URL(reportPath, liveBase).toString();
@@ -24,6 +27,8 @@ const expectedLiveQuantumBreakUrl = new URL(quantumBreakPath, liveBase).toString
 const expectedLiveQuantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, liveBase).toString();
 const expectedLivePreyUrl = new URL(preyPath, liveBase).toString();
 const expectedLivePreyJourneyUrl = new URL(preyJourneyPath, liveBase).toString();
+const expectedLiveInvincibleUrl = new URL(invinciblePath, liveBase).toString();
+const expectedLiveInvincibleJourneyUrl = new URL(invincibleJourneyPath, liveBase).toString();
 
 function checkpoint(message) {
   console.log(`[qa:pages:${mode}] ${new Date().toISOString()} ${message}`);
@@ -147,7 +152,9 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('Photo evidence ready') && root.text.includes('Photo manifest'), 'root homepage Quantum Break photo handoff links missing');
   assert(root.text.includes('assets/img/quantum-break/panel-manifest.json') && root.text.includes('assets/img/quantum-break/README.md'), 'root homepage Quantum Break handoff asset links missing');
   assert(root.text.includes('plater-game-reports/games/prey/') && root.text.includes('plater-game-reports/games/prey/journey/') && root.text.includes('Prey') && root.text.includes('Field journal ready'), 'root homepage Prey entry point/journal missing');
+  assert(root.text.includes('plater-game-reports/games/invincible/') && root.text.includes('plater-game-reports/games/invincible/journey/') && root.text.includes('The Invincible') && root.text.includes('Regis III Replay Reader'), 'root homepage The Invincible report/playthrough missing');
   assert(root.text.includes('assets/img/prey-review-splash.png'), 'root homepage Prey splash missing');
+  assert(root.text.includes('assets/img/invincible/invincible-hero-regis.png'), 'root homepage The Invincible splash missing');
   assert(root.text.includes('.review-status') && root.text.includes('.journal-note'), 'root homepage review/journal polish styling missing');
   assert(root.text.includes('State</b> Live draft') && root.text.includes('exact 16:9 filenames auto-wire into visible photo evidence slots'), 'root homepage Quantum Break review/journal state copy missing');
   assert(root.text.includes(`${reportPath}?v=${buildId}`), 'root homepage does not link current Metro build id');
@@ -168,12 +175,16 @@ async function auditHttpSurface(base) {
   await fetchText(url(base, 'assets/img/prey-review-splash.png'));
   await fetchText(url(base, preyFlightRecorderManifestPath));
   await fetchText(url(base, 'assets/img/prey/README.md'));
+  await fetchText(url(base, 'assets/img/invincible/invincible-hero-regis.png'));
+  await fetchText(url(base, invinciblePanelManifestPath));
+  await fetchText(url(base, 'assets/img/invincible/README.md'));
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
   assert(reports.text.includes('games/quantum-break/'), 'reports index does not link Quantum Break');
   assert(reports.text.includes('games/quantum-break/journey/'), 'reports index does not link Quantum Break journey');
   assert(reports.text.includes('games/prey/') && reports.text.includes('games/prey/journey/') && reports.text.includes('TranStar incident dossier'), 'reports index does not link Prey entry/recorder');
+  assert(reports.text.includes('games/invincible/') && reports.text.includes('games/invincible/journey/') && reports.text.includes('The Invincible') && reports.text.includes('Illustrated Replay'), 'reports index does not link The Invincible report/playthrough');
   assert(reports.text.includes('../'), 'reports index does not link back to homepage');
   assert(reports.text.includes('LOCKED') && reports.text.includes('Draft'), 'reports index Quantum Break evidence gate missing');
   assert(!/>--</.test(reports.text), 'reports index still exposes raw dash placeholders');
@@ -225,6 +236,37 @@ async function auditHttpSurface(base) {
   assert(preyManifest.text.includes('prey-page-02-a-rooftop-helicopter.png') && preyManifest.text.includes('prey-page-03-a-mimic-paranoia.png') && preyManifest.text.includes('prey-page-03-b-crew-terminal-trace.png') && preyManifest.text.includes('prey-page-04-a-lobby-wrench-mimic.png') && preyManifest.text.includes('prey-page-05-a-office-looking-glass.png') && preyManifest.text.includes('prey-page-06-a-teleconferencing-keycard.png') && preyManifest.text.includes('prey-page-08-a-calvino-exterior.png'), 'Prey manifest missing expected filenames');
   const preyReadme = await fetchText(url(base, 'assets/img/prey/README.md'));
   assert(preyReadme.text.includes('Prey Illustrated Journal Evidence') && preyReadme.text.includes('npm run qa:prey-assets'), 'Prey asset README missing QA workflow');
+
+  const invincible = await fetchText(url(base, invinciblePath));
+  assert(invincible.text.includes('PLATER field report / The Invincible') && invincible.text.includes('The Invincible'), 'The Invincible report hero missing');
+  assert(invincible.text.includes('Illustrated Playthrough') && invincible.text.includes('journey/'), 'The Invincible report should link the illustrated playthrough');
+  assert(invincible.text.includes('ALERTED Score Strip') && invincible.text.includes('Atmosphere') && invincible.text.includes('Loop') && invincible.text.includes('Readability') && invincible.text.includes('Danger'), 'The Invincible report standardized ALERTED score strip missing');
+  assert(invincible.text.includes('Verdict Gate') && invincible.text.includes('LOCKED') && invincible.text.includes('Replay in progress'), 'The Invincible report score lock missing');
+  assert(invincible.text.includes('Regis III') && invincible.text.includes('Atompunk') && invincible.text.includes('Falsifiers'), 'The Invincible report core design/audit copy missing');
+  assert(invincible.text.includes('../../../assets/img/invincible/invincible-hero-regis.png'), 'The Invincible report local hero asset missing');
+  assert(invincible.text.includes('../../../assets/img/invincible/panel-manifest.json') && invincible.text.includes('../../../assets/img/invincible/README.md'), 'The Invincible report asset handoff links missing');
+  assert(!/>--</.test(invincible.text), 'The Invincible report still exposes raw dash placeholders');
+
+  const invincibleJourney = await fetchText(url(base, invincibleJourneyPath));
+  assert(invincibleJourney.text.includes('The Invincible - Illustrated Playthrough') && invincibleJourney.text.includes('fullscreen illustrated playthrough'), 'The Invincible playthrough shell missing');
+  assert(invincibleJourney.text.includes('.reader-track') && invincibleJourney.text.includes('.play-page') && invincibleJourney.text.includes('scroll-snap-type:x mandatory'), 'The Invincible playthrough fullscreen reader styling missing');
+  assert(invincibleJourney.text.includes('.comic-frame') && invincibleJourney.text.includes('.comic-frame-ready .slot-placeholder{display:none}'), 'The Invincible playthrough comic-frame styling missing');
+  assert(invincibleJourney.text.includes('Wake In The Red') && invincibleJourney.text.includes('The Detector Becomes The Verb') && invincibleJourney.text.includes('The Crew Is Present As Absence') && invincibleJourney.text.includes('The Enemy Is A Process') && invincibleJourney.text.includes('Leaving Is Not The Same As Solving'), 'The Invincible playthrough required pages missing');
+  assert(invincibleJourney.text.includes('invincible-page-01-wake-regis.png') && invincibleJourney.text.includes('invincible-page-02-instrument-trail.png') && invincibleJourney.text.includes('invincible-page-03-convoy-valley.png') && invincibleJourney.text.includes('invincible-page-04-robot-ruins.png') && invincibleJourney.text.includes('invincible-page-05-metal-cloud.png') && invincibleJourney.text.includes('invincible-page-06-return-signal.png'), 'The Invincible playthrough image filenames missing');
+  assert(invincibleJourney.text.includes(invinciblePanelManifestPath) && invincibleJourney.text.includes('Prompt README'), 'The Invincible playthrough asset handoff missing');
+  assert((invincibleJourney.text.match(/data-invincible-slot="/g) || []).length === 6, 'The Invincible playthrough should expose exactly six visible image slots');
+  assert((invincibleJourney.text.match(/data-image-file="invincible-page-/g) || []).length === 6, 'The Invincible playthrough should wire exactly six generated panel images');
+  assert(invincibleJourney.text.includes('The build auto-wires any matching image file into its comic panel slot.'), 'The Invincible playthrough auto-wiring contract missing');
+  assert(!invincibleJourney.text.includes('data-prey-slot') && !invincibleJourney.text.includes('data-qb-slot'), 'The Invincible playthrough should not reuse Prey or Quantum Break slot markers');
+
+  const invincibleManifest = await fetchText(url(base, invinciblePanelManifestPath));
+  const invincibleManifestJson = JSON.parse(invincibleManifest.text);
+  assert(invincibleManifestJson.game === 'The Invincible' && invincibleManifestJson.status === 'replay-in-progress-illustrated-playthrough', 'The Invincible panel manifest metadata mismatch');
+  assert(invincibleManifestJson.defaultAspectRatio === '16:9' && Array.isArray(invincibleManifestJson.slots) && invincibleManifestJson.slots.length === 7, 'The Invincible panel manifest slot contract mismatch');
+  assert(invincibleManifestJson.slots.filter((slot) => slot.visibleInJourney !== false).length === 6, 'The Invincible manifest visible journey slots mismatch');
+  assert(invincibleManifest.text.includes('invincible-hero-regis.png') && invincibleManifest.text.includes('invincible-page-05-metal-cloud.png') && invincibleManifest.text.includes('no fake UI text'), 'The Invincible manifest prompt details missing');
+  const invincibleReadme = await fetchText(url(base, 'assets/img/invincible/README.md'));
+  assert(invincibleReadme.text.includes('The Invincible Illustrated Playthrough Assets') && invincibleReadme.text.includes('npm run qa:invincible-assets'), 'The Invincible asset README missing QA workflow');
 
   const quantumBreakJourney = await fetchText(url(base, quantumBreakJourneyPath));
   assert(quantumBreakJourney.text.includes('Fullscreen Journal') && quantumBreakJourney.text.includes('Play-it-together scrapbook reader'), 'Quantum Break journey fullscreen scrapbook reader copy missing');
@@ -290,6 +332,8 @@ async function auditHttpSurface(base) {
   assert(sitemap.text.includes(expectedLiveQuantumBreakJourneyUrl), 'sitemap missing Quantum Break journey URL');
   assert(sitemap.text.includes(expectedLivePreyUrl), 'sitemap missing Prey report URL');
   assert(sitemap.text.includes(expectedLivePreyJourneyUrl), 'sitemap missing Prey journey URL');
+  assert(sitemap.text.includes(expectedLiveInvincibleUrl), 'sitemap missing The Invincible report URL');
+  assert(sitemap.text.includes(expectedLiveInvincibleJourneyUrl), 'sitemap missing The Invincible playthrough URL');
 
   await fetchText(url(base, 'missing-page-for-qa.html'), 404);
   await fetchText(url(base, `${reportPath}${sourceName}`), 404);
@@ -340,6 +384,7 @@ async function auditViewports(browser, base, buildId) {
       const reviewSplash = document.querySelector('.review-media img');
       const quantumSplash = document.querySelector('.qb-card .review-media img');
       const preySplash = document.querySelector('.prey-card .review-media img');
+      const invincibleSplash = document.querySelector('.invincible-card .review-media img');
       return {
         title: document.title,
         hasHomeRoot: Boolean(document.querySelector('.home-root')),
@@ -348,11 +393,14 @@ async function auditViewports(browser, base, buildId) {
         hasQuantumBreakLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/quantum-break/')),
         hasPreyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/prey/')),
         hasPreyJourneyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/prey/journey/')),
+        hasInvincibleLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/invincible/')),
+        hasInvincibleJourneyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/invincible/journey/')),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
         imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
         reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
         quantumSplashComplete: Boolean(quantumSplash && quantumSplash.complete && quantumSplash.naturalWidth > 0),
         preySplashComplete: Boolean(preySplash && preySplash.complete && preySplash.naturalWidth > 0),
+        invincibleSplashComplete: Boolean(invincibleSplash && invincibleSplash.complete && invincibleSplash.naturalWidth > 0),
         horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
         rootWidth: root.scrollWidth,
         clientWidth: root.clientWidth,
@@ -368,11 +416,14 @@ async function auditViewports(browser, base, buildId) {
     assert(homeMetrics.hasQuantumBreakLink, `${viewport.name} homepage missing Quantum Break link`);
     assert(homeMetrics.hasPreyLink, `${viewport.name} homepage missing Prey link`);
     assert(homeMetrics.hasPreyJourneyLink, `${viewport.name} homepage missing Prey recorder link`);
+    assert(homeMetrics.hasInvincibleLink, `${viewport.name} homepage missing The Invincible link`);
+    assert(homeMetrics.hasInvincibleJourneyLink, `${viewport.name} homepage missing The Invincible playthrough link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
     assert(homeMetrics.reviewSplashComplete, `${viewport.name} homepage Metro review splash did not load`);
     assert(homeMetrics.quantumSplashComplete, `${viewport.name} homepage Quantum Break splash did not load`);
     assert(homeMetrics.preySplashComplete, `${viewport.name} homepage Prey splash did not load`);
+    assert(homeMetrics.invincibleSplashComplete, `${viewport.name} homepage The Invincible splash did not load`);
     assert(!homeMetrics.horizontalOverflow, `${viewport.name} homepage overflow ${homeMetrics.rootWidth}/${homeMetrics.clientWidth}`);
     assert(homeMetrics.linkCount >= 7, `${viewport.name} homepage expected navigation links`);
     assert(!homeMetrics.badText, `${viewport.name} homepage has placeholder text`);
