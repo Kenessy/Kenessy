@@ -89,6 +89,14 @@ ott volt az orvos melleti sátor szobában. Aztán olvassa hogy gorsky akármi l
 
 Attachments in chat: comic/codex screenshot showing Dr. Krauta, cable/radio contact with Astrogator Novik, and androbot reboot; mission-log tablet screenshots showing sample composition, structures note, BA-23-16 landing coordinate/path context, and Dr. Gorsky moving away from the research sector.
 
+## Raw Intake 011 | 2026-06-27 | Cave / landing area landmark / research area journal / old metal structure
+
+```text
+Most bejöttem egy közeli barlangba és updatelődött a questem hogy próbáljak itt mindenkit megmenteni. Mondjuk hogy ugy neznek ki mint csontok :D és állitolag itt majd lesz a leszállópálya később. Na közben találtam egy journalt a földön ahogy elérek a régi research area területére és meglátom azt is amit találtak - egy régi fém strukturát ami kiáll a földből.
+```
+
+Attachments in chat: comic/codex screenshot showing Yasna locating a distinct landmark near the landing area.
+
 ## Raw Intake Template
 
 ```text
