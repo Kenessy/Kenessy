@@ -138,19 +138,19 @@ Evidence targets:
 ### Entry 07 — Camp abnormality / comics repair the timeline
 
 Source: Raw Intake 008 + Session Entry 006 + comic screenshots.  
-Public paragraph draft: Reaching the camp turns the mystery from memory fog into evidence. There is a marching robot that does not respond, and a doctor-like crew member in a strange blank state, present but not meaningfully reachable. At the same time, the comic/codex system becomes important: it quietly repairs the earlier confusion by showing the Dragonfly as a six-person research unit, Novik's rare-mineral accident and broken leg, the crew entering hibernation after their research cycle, the emergency near Regis III, and the fact that a rival faction is sending the USCA Invincible to a planet supposedly of little value. This is strong review evidence: the game is not only hiding information in flashbacks; it also gives the player a way to reconstruct the timeline inside the game.
+Public paragraph draft: Reaching the camp turns the mystery from memory fog into evidence. There is a marching android that does not respond, and Dr. Krauta in a strange blank state, present but not meaningfully reachable. At the same time, the comic/codex system becomes important: it quietly repairs the earlier confusion by showing the Dragonfly as a six-person research unit, Novik's rare-mineral accident and broken leg, the crew entering hibernation after their research cycle, the emergency near Regis III, and the fact that a rival faction is sending the USCA Invincible to a planet supposedly of little value. This is strong review evidence: the game is not only hiding information in flashbacks; it also gives the player a way to reconstruct the timeline inside the game.
 
 Image slots:
 
-- `INV-IMG-013` — non-responsive marching robot at camp
-- `INV-IMG-014` — blank/unresponsive doctor state, spoiler-labeled
+- `INV-IMG-013` — non-responsive marching android at camp
+- `INV-IMG-014` — Dr. Krauta blank/unresponsive state, spoiler-labeled
 - `INV-IMG-015` — Dragonfly En Route comic page
 - `INV-IMG-016` — Regis III Issue comic page
 - `INV-IMG-016B` — Lost comic/chapter start, if later completed
 
 Evidence targets:
 
-- Are robot and doctor affected by the same phenomenon?
+- Are android and Krauta affected by the same phenomenon?
 - Does the comic/codex system repair missed context without external lookup?
 - Are comics automatic unlocks, route unlocks, or missable completion objects?
 - Does the camp create investigation agency or mostly authored observation?
@@ -175,14 +175,36 @@ Evidence targets:
 - Does the long cutscene maintain narrative pull or tax decompression value?
 - Does aquatic life reframe the “lifeless planet” premise clearly enough?
 
-### Entry 09 — Mid-run fatigue or pull check
+### Entry 09 — Mission log / relay repair / androbot reboot
+
+Source: Raw Intake 010 + Session Entry 008 + mission-log/comic screenshots.  
+Public paragraph draft: The camp finally stops being only a scene of eerie absence and becomes a solvable system. Yasna takes Krauta's cable/radio path and regains contact with Base/Novik after two hours of being heard but unable to hear back. That restores the mission frame: examine Krauta, find the missing people, recover the mission log, determine where the lander should come down, and follow Gorsky's trail. The log adds a new layer of hard-sci-fi texture: metallic samples, a contradicted meteor theory, structures marked on the map, and a landing coordinate that starts to make the camp feel like an active research site rather than abandoned décor. The androbot repair then gives the section its first clear practical payoff: a fried relay that should not have been cooked by an ordinary sandstorm, scavenged replacement parts, and a rebooted machine left to care for Krauta.
+
+Image slots:
+
+- `INV-IMG-021` — Krauta radio/cable comic panel
+- `INV-IMG-022` — mission log tablet / material analysis
+- `INV-IMG-023` — mission log map with structures / BA-23-16 / landing place
+- `INV-IMG-024` — detector / X-ray-like device pickup
+- `INV-IMG-025` — fried relay antenna
+- `INV-IMG-026` — androbot reboot / care for Krauta comic panel
+
+Evidence targets:
+
+- What damaged the relay if a normal sandstorm could not?
+- What are the marked structures, and why do sample shapes contradict a meteor hypothesis?
+- Does the camp repair loop indicate stronger agency going forward?
+- Does Base/Novik communication reduce disorientation or add command pressure?
+- Is Gorsky's route a strong next objective?
+
+### Entry 10 — Mid-run fatigue or pull check
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-021` — most beautiful quiet moment
-- `INV-IMG-022` — worst downtime / friction if visualizable
+- `INV-IMG-027` — most beautiful quiet moment
+- `INV-IMG-028` — worst downtime / friction if visualizable
 
 Evidence targets:
 
@@ -190,14 +212,14 @@ Evidence targets:
 - Did the slow pace become atmospheric or padded?
 - Was the game still decompressing the brain?
 
-### Entry 10 — Ending / verdict reconstruction
+### Entry 11 — Ending / verdict reconstruction
 
 Source: pending.  
 Public paragraph: pending.  
 Image slots:
 
-- `INV-IMG-023` — spoiler-light final journey image
-- `INV-IMG-024` — spoiler-full ending appendix image, if used
+- `INV-IMG-029` — spoiler-light final journey image
+- `INV-IMG-030` — spoiler-full ending appendix image, if used
 
 Evidence targets:
 
@@ -239,10 +261,10 @@ Do not:
 ## Running public summary slot
 
 ```text
-Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, Invincible/astrobiology flashback, camp abnormality, comic/codex timeline evidence, and fish/probe anomaly captured.
-Best moment so far: The game sharpened its life-definition question: Regis III's surface is empty, its oceans are alive, and the fish appear to fear probes they should not know.
+Current public summary: Opening started; first premise captured; locator/map onboarding was understood and liked; first low-stakes route decision, repeated blackout pattern, Invincible/astrobiology flashback, camp abnormality, comic/codex timeline evidence, fish/probe anomaly, and camp repair-loop evidence captured.
+Best moment so far: The camp turned from eerie tableau into an interactive investigation chain: cable comms, mission log, impossible relay damage, replacement hunt, and android reboot.
 Main friction so far: Alt-tab / Windows key did not pause safely and advanced intro cards during screenshot attempt; early exploration can feel like checking blocked routes until the viable route remains; one fish cutscene was described as long.
-Most useful screenshot so far: Aquarium/fish, comics pages, camp robot/doctor state, ringed moon, Invincible flashback, scanner route guidance, M-map, locator tool, sandstorm/tent scouting.
-Strongest AI-training moment so far: Fish/probe fear anomaly plus codex-assisted timeline correction, role/premise correction, repeated blackout hypothesis tracking, and human-machine non-responsiveness at camp.
-Likely final artifact: Review card + illustrated playthrough + comic/codex appendix, pending evidence.
+Most useful screenshot so far: Mission log tablet/map, fried relay, androbot reboot, aquarium/fish, comics pages, camp robot/Krauta state, ringed moon, Invincible flashback, scanner route guidance.
+Strongest AI-training moment so far: Repair-loop causal reasoning plus fish/probe fear anomaly, codex-assisted timeline correction, role/premise correction, repeated blackout hypothesis tracking, and human-machine non-responsiveness at camp.
+Likely final artifact: Review card + illustrated playthrough + comic/codex appendix + AI anomaly/repair appendix, pending evidence.
 ```
