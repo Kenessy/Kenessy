@@ -10,6 +10,8 @@ The comic interface is not just cosmetic. It functions as an in-game context rep
 
 The latest screenshots also correct the earlier simplified premise: Regis III is not simply “no life.” Its **surface** appears desolate/lifeless, while its oceans contain life that did not evolve onto land. This makes Yasna's astrobiologist role more coherent while preserving the mystery: aquatic organisms should not fear unknown robot probes unless something about their history, perception, or environment makes that fear meaningful.
 
+The camp screenshots/comics now also clarify the doctor thread: the unresponsive doctor is **Dr. Krauta**, and his radio/cable becomes the practical bridge that restores contact with Novik/Base. The camp is therefore not just an eerie tableau; it becomes the first concrete repair/investigation loop.
+
 ## Unlocked / observed entries
 
 | Entry / chapter | Observed content | Review value | Completion risk |
@@ -23,16 +25,19 @@ The latest screenshots also correct the earlier simplified premise: Regis III is
 | **Lost — camp direction** | Yasna identifies Regis III and heads toward a nearby crew camp to learn more. | Confirms the opening navigation arc and camp objective. | Unknown. |
 | **Lost — caution / slope** | Yasna handles a traversal challenge cautiously and prudently. | Lines up with Daniel choosing the gentle slope; potential comic reflection of route behavior or authored summary. | Unknown if choice-dependent. |
 | **Lost — head injury / blackout** | Yasna's head injury appears serious and she blacks out again. | Explains repeated blackouts as at least partly injury-related, while other causes remain possible. | Unknown. |
-| **The Camp** | Yasna reaches the camp and initially encounters only an unresponsive android. | Confirms the camp abnormality and robot non-responsiveness. | Unknown. |
+| **The Camp — unresponsive android** | Yasna reaches the camp and initially encounters only an unresponsive android. | Confirms the camp abnormality and robot non-responsiveness. | Unknown. |
+| **The Camp — Dr. Krauta** | Yasna finds Dr. Krauta in deep stupor; using his radio/cable, she regains contact with Astrogator Novik/Base. | Clarifies the doctor identity and turns the camp into a practical communication-repair beat. | Unknown. |
+| **The Camp — android reboot** | Yasna helps reboot the android so it can take care of Dr. Krauta. | Confirms the repair loop and practical payoff of the relay/android objective. | Unknown. |
 
 ## Evidence implications
 
 - The comics repair missing context from skipped/advanced intro screens.
-- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue -> Yasna lost -> camp approach.
+- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue -> Yasna lost -> camp approach -> Krauta/androbot repair.
 - They clarify that the “no life” premise is more specific: desolate surface, living oceans.
+- They provide names and roles that the raw playthrough can miss in real time, especially Dr. Krauta and Novik/Base.
 - They may be useful as public artifact panels if spoiler-labeled.
 - They may become a Completion Shape risk if pages are missable.
-- Some comic summaries may reflect player route behavior, such as cautious traversal, so we need to watch whether these are authored summaries or choice-aware records.
+- Some comic summaries may reflect player route behavior, such as cautious traversal and android reboot, so we need to watch whether these are authored summaries or choice-aware records.
 
 ## Open questions
 
@@ -41,8 +46,9 @@ The latest screenshots also correct the earlier simplified premise: Regis III is
 3. Does completion require all comic pages?
 4. Can already-unlocked comics be reread anytime from menu?
 5. Does the comic system fully repair missed intro context, or only partial timeline context?
-6. Are Lost panels reactive to player behavior, or fixed summaries?
+6. Are Lost/The Camp panels reactive to player behavior, or fixed summaries?
 7. Does the aquarium/fish cutscene later appear in comics/codex, and does it explain probe fear?
+8. Do comic/codex updates confirm successful android repair only after the player completes it?
 
 ## Public use rule
 
