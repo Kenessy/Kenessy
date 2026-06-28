@@ -13,6 +13,7 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | Decision moments | Dialogue choice screens or action-choice setups. | Agency tracking and AI dataset. |
 | Scientific mystery | Strange formations, machines, ecological clues, anomalies. | Epistemic uncertainty and hard-sci-fi density. |
 | Human traces | Crew evidence, abandoned spaces, human technology in alien place. | Narrative pull and emotional stakes. |
+| Camp repair / mission log | Krauta cable, mission log, detector, relay, androbot reboot. | First practical investigation/repair loop and clearer goals. |
 | Friction evidence | Confusing route, unclear prompt, bad visibility, technical issue. | Friction ledger. |
 | Aquarium / fish / probes | Fish tank, aquatic life, probe fear cutscene, ocean-life comic panels. | Life-definition mystery and anomaly modeling. |
 | Comics / codex | Dragonfly, Regis III Issue, Lost, The Camp, and later comic pages. | Timeline repair, lore evidence, completion shape. |
@@ -34,8 +35,8 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-010 | Regis III ringed moon | spoiler-light | screenshot needed |
 | INV-IMG-011 | Invincible / ship flashback | spoiler-marked | screenshot needed |
 | INV-IMG-012 | Scanner path guidance after flashback | spoiler-light | screenshot needed |
-| INV-IMG-013 | Camp marching robot, non-responsive | spoiler-marked | screenshot needed |
-| INV-IMG-014 | Doctor blank/unresponsive state | spoiler-marked | screenshot needed |
+| INV-IMG-013 | Camp marching android, non-responsive | spoiler-marked | screenshot needed |
+| INV-IMG-014 | Dr. Krauta blank/unresponsive state | spoiler-marked | screenshot needed |
 | INV-IMG-015 | Dragonfly En Route comic page | spoiler-marked | received in chat, not committed as image file |
 | INV-IMG-016 | Regis III Issue comic page | spoiler-marked | received in chat, not committed as image file |
 | INV-IMG-017 | Lost comic/chapter start | spoiler-marked | received in chat, not committed as image file |
@@ -43,10 +44,16 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-019 | Fish/probe fear cutscene evidence | spoiler-marked | screenshot needed |
 | INV-IMG-020 | Regis III ocean-life comic panel | spoiler-marked | received in chat, not committed as image file |
 | INV-IMG-021 | Lost panels: wake-up / map / cautious slope / blackout | spoiler-marked | received in chat, not committed as image file |
-| INV-IMG-022 | The Camp comic: unresponsive android | spoiler-marked | received in chat, not committed as image file |
-| INV-IMG-023 | Worst downtime / friction if visualizable | spoiler-light | missing |
-| INV-IMG-024 | Spoiler-light final journey image | spoiler-light | missing |
-| INV-IMG-025 | Ending / completion appendix image | spoiler-full | missing |
+| INV-IMG-022 | The Camp comic: unresponsive android / Krauta / android reboot | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-023 | Krauta radio/cable contact panel | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-024 | Mission log tablet — sample composition / meteor theory contradicted | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-025 | Mission log map — structures / Gorsky / BA-23-16 / landing place | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-026 | Detector / X-ray-like equipment pickup | spoiler-light | screenshot needed or received later |
+| INV-IMG-027 | Fried relay antenna / repair evidence | spoiler-marked | screenshot needed |
+| INV-IMG-028 | Androbot reboot / care for Krauta | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-029 | Worst downtime / friction if visualizable | spoiler-light | missing |
+| INV-IMG-030 | Spoiler-light final journey image | spoiler-light | missing |
+| INV-IMG-031 | Ending / completion appendix image | spoiler-full | missing |
 
 ## Comic screenshot intake — 2026-06-27
 
@@ -60,9 +67,18 @@ Screenshots supplied in chat show:
 - Regis III appears low-value, but the Alliance sends the USCA Invincible.
 - Regis III surface is desolate/lifeless while oceans contain life that did not evolve onto land.
 - `Lost` shows Yasna waking alone, disoriented/amnesic, connection issues, identifying Regis III, heading to camp, using caution, and blacking out from a serious head injury.
-- `The Camp` shows Yasna reaching camp and initially finding only an unresponsive android.
+- `The Camp` shows Yasna reaching camp, encountering an unresponsive android, finding Dr. Krauta, using Krauta's radio/cable to contact Novik/Base, and later rebooting the android so it can care for Krauta.
 
-Current decision: keep these as **lore/codex evidence**, not just decoration. If used publicly, paraphrase the text and show at most selected panels as spoiler-marked visual support.
+## Mission-log / repair screenshot intake — 2026-06-27
+
+Screenshots supplied in chat show:
+
+- Mission log text: initial sample analysis with nickel, iron, manganese, beryllium, titanium, and a contradicted quick theory about a giant nickel-iron meteor.
+- Mission log/map page: Gorsky note, structures marker, potential landing place, BA-23-16 / coordinate-like marker, camp marker, and Dr. Gorsky moving away from the research sector.
+- Comic/codex panel: Dr. Krauta in deep stupor, Yasna using Krauta's radio/cable to regain contact.
+- Comic/codex panel: Yasna helps reboot the android so it can take care of Dr. Krauta.
+
+Current decision: keep these as **lore/codex/evidence images**, not just decoration. If used publicly, paraphrase the text and show selected panels as spoiler-marked visual support.
 
 ## File naming convention
 
@@ -77,6 +93,8 @@ docs/assets/img/the-invincible/inv-016-comic-regis-iii-issue.png
 docs/assets/img/the-invincible/inv-020-comic-ocean-life.png
 docs/assets/img/the-invincible/inv-021-comic-lost.png
 docs/assets/img/the-invincible/inv-022-comic-camp.png
+docs/assets/img/the-invincible/inv-024-mission-log-samples.png
+docs/assets/img/the-invincible/inv-025-mission-log-map.png
 ```
 
 ## Capture notes
@@ -88,6 +106,7 @@ docs/assets/img/the-invincible/inv-022-comic-camp.png
 - Mark every image as `spoiler-light`, `spoiler-marked`, or `spoiler-full` before publication.
 - For comics, capture the chapter title and enough surrounding panel context, but public text should be paraphrased.
 - Aquarium/fish/probe screenshots are high-value because they convert the life-definition question into a concrete behavioral anomaly.
+- Mission-log and repair screenshots are high-value because they show the first active investigation/repair loop.
 
 ## Future public artifacts
 
@@ -98,5 +117,6 @@ Likely final outputs:
 2. Illustrated processed playthrough
 3. AI agency/decision appendix
 4. Comic/codex appendix for timeline reconstruction
-5. Completion cleanup appendix, if 100% route is attempted
+5. Repair/investigation appendix if the camp loop becomes structurally important
+6. Completion cleanup appendix, if 100% route is attempted
 ```
