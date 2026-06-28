@@ -12,7 +12,9 @@ The latest screenshots also correct the earlier simplified premise: Regis III is
 
 The camp screenshots/comics now also clarify the doctor thread: the unresponsive doctor is **Dr. Krauta**, and his radio/cable becomes the practical bridge that restores contact with Novik/Base. The camp is therefore not just an eerie tableau; it becomes the first concrete repair/investigation loop.
 
-The latest landing-area comic panel confirms that Yasna locates a distinct landmark near the future landing area. This aligns the mission log, field navigation, and the visible old metal structure: the route is no longer just “follow scanner,” it is becoming a landmark-based investigation path.
+The landing-area comic panel confirms that Yasna locates a distinct landmark near the future landing area. This aligns the mission log, field navigation, and the visible old metal structure: the route is no longer just “follow scanner,” it is becoming a landmark-based investigation path.
+
+The latest comic panel confirms the first found crew death: Yasna finds **Dr. Marit**, but it is too late to save her. This turns the missing-crew objective from abstract rescue into mixed rescue/recovery.
 
 ## Unlocked / observed entries
 
@@ -31,16 +33,17 @@ The latest landing-area comic panel confirms that Yasna locates a distinct landm
 | **The Camp — Dr. Krauta** | Yasna finds Dr. Krauta in deep stupor; using his radio/cable, she regains contact with Astrogator Novik/Base. | Clarifies the doctor identity and turns the camp into a practical communication-repair beat. | Unknown. |
 | **The Camp — android reboot** | Yasna helps reboot the android so it can take care of Dr. Krauta. | Confirms the repair loop and practical payoff of the relay/android objective. | Unknown. |
 | **Landing area landmark** | Yasna locates a distinct landmark near the landing area. | Confirms the landing-site/navigation thread and connects the mission log to a visible world landmark. | Unknown. |
+| **Dr. Marit discovered** | Yasna finds Dr. Marit, but it is too late to save her. | Confirms the first unrecoverable crew casualty and raises stakes for the rescue objective. | Unknown if body recovery changes later panels or outcomes. |
 
 ## Evidence implications
 
 - The comics repair missing context from skipped/advanced intro screens.
-- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue -> Yasna lost -> camp approach -> Krauta/androbot repair -> landing landmark.
+- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue -> Yasna lost -> camp approach -> Krauta/androbot repair -> landing landmark -> Marit discovery.
 - They clarify that the “no life” premise is more specific: desolate surface, living oceans.
-- They provide names and roles that the raw playthrough can miss in real time, especially Dr. Krauta and Novik/Base.
+- They provide names and roles that the raw playthrough can miss in real time, especially Dr. Krauta, Dr. Marit, and Novik/Base.
 - They may be useful as public artifact panels if spoiler-labeled.
 - They may become a Completion Shape risk if pages are missable.
-- Some comic summaries may reflect player route behavior, such as cautious traversal, android reboot, and landmark discovery, so we need to watch whether these are authored summaries or choice-aware records.
+- Some comic summaries may reflect player route behavior, such as cautious traversal, android reboot, landmark discovery, and possibly body recovery, so we need to watch whether these are authored summaries or choice-aware records.
 
 ## Open questions
 
@@ -53,6 +56,7 @@ The latest landing-area comic panel confirms that Yasna locates a distinct landm
 7. Does the aquarium/fish cutscene later appear in comics/codex, and does it explain probe fear?
 8. Do comic/codex updates confirm successful android repair only after the player completes it?
 9. Does the landing landmark panel unlock only after finding the landmark, or is it part of a fixed sequence?
+10. Does recovering Marit's body affect later comic/codex panels or outcomes?
 
 ## Public use rule
 
