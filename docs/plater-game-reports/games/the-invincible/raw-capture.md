@@ -77,6 +77,18 @@ Egy kis comic book pótlás:
 
 Attachments in chat: comic/codex screenshots expanding Regis III ocean life and Lost / The Camp panels.
 
+## Raw Intake 010 | 2026-06-27 | Krauta replay / mission log / detector / relay repair / androbot reboot
+
+```text
+jah most replayelem itt a doktoros részt, Krauta a neve most már emklékszem, itt fontos mondani hogy végre mi elcsórjuk a kábelját és emiatt már végre tudunk kommunikálni a többiekkel -vagyis legalább valakivel. Jah igen Base here hogy 2 órán át hallgatott minket de most már végre hall it, hogy vizsgáljuk meg a csávót és igen hogy unresponsiv csak ül dülöngél és motyog. És itt mondja hogy még mindig kell megtalálni embereket és valami mission logot és hogy hova szálljon le a lander - szóval akkor ezzel is lesz a cél meg a goal ahha.
+Még több kép hogy beérjük magunkat végre:
+
+na megkerestem a mission logot:
+ott volt az orvos melleti sátor szobában. Aztán olvassa hogy gorsky akármi legyen az bal fele ment, aztán hogy talán most important are landing kkordinate B... elkezdi olvasni őket. Még látok egy STRUCTURES? kérdőjeles jelölést és ennyi. Éss hogy vegyünk ki valamilyen detectort? Abból a nagy ládából ami valamilyen Xray machinenak néz ki mert átlátni vele a sátor szélén. Most hogy kijöttünk próbálja a csávó fentről restartolni a nem működő droidot de nem sikerül neki. Mi meglátjuk hogy a relay antenna meg van sülve, és furcsálljuk is hogy mitől - sima sandstorm ilyet nem tudna csinálni. És most körbemegyek keresek replacementet, mert van jó sok láda tele kacattal. Igy a végén restartolni is tudjuk a botot aki igy vigyáz majd az orvosra.
+```
+
+Attachments in chat: comic/codex screenshot showing Dr. Krauta, cable/radio contact with Astrogator Novik, and androbot reboot; mission-log tablet screenshots showing sample composition, structures note, BA-23-16 landing coordinate/path context, and Dr. Gorsky moving away from the research sector.
+
 ## Raw Intake Template
 
 ```text
