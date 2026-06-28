@@ -16,21 +16,21 @@ const minHeight = 540;
 const expectedSlotIds = [
   'hero-regis',
   'page-01-wake-regis',
-  'page-02-instrument-trail',
-  'page-03-convoy-valley',
-  'page-04-robot-ruins',
-  'page-05-metal-cloud',
-  'page-06-return-signal'
+  'page-02-locator-map',
+  'page-03-sandstorm-ringed-moon',
+  'page-04-camp-krauta',
+  'page-05-aquarium-probe-fear',
+  'page-06-relay-repair'
 ];
 const expectedVisibleSlotIds = expectedSlotIds.filter((id) => id !== 'hero-regis');
 const expectedFilenames = [
   'invincible-hero-regis.png',
   'invincible-page-01-wake-regis.png',
-  'invincible-page-02-instrument-trail.png',
-  'invincible-page-03-convoy-valley.png',
-  'invincible-page-04-robot-ruins.png',
-  'invincible-page-05-metal-cloud.png',
-  'invincible-page-06-return-signal.png'
+  'invincible-page-02-locator-map.png',
+  'invincible-page-03-sandstorm-ringed-moon.png',
+  'invincible-page-04-camp-krauta.png',
+  'invincible-page-05-aquarium-probe-fear.png',
+  'invincible-page-06-relay-repair.png'
 ];
 
 const runState = {
@@ -82,10 +82,10 @@ function parsePngDimensions(buffer, filename) {
 function validateManifest(manifest) {
   assert(manifest.game === 'The Invincible', 'manifest game must be The Invincible');
   assert(manifest.status === 'replay-in-progress-illustrated-playthrough', 'manifest status mismatch');
-  assert(manifest.promptVersion === 'invincible-illustrated-playthrough-v1', 'manifest promptVersion mismatch');
+  assert(manifest.promptVersion === 'invincible-illustrated-playthrough-v2', 'manifest promptVersion mismatch');
   assert(manifest.defaultAspectRatio === '16:9', 'manifest defaultAspectRatio must be 16:9');
   assert(manifest.assetBase === 'docs/assets/img/invincible/', 'manifest assetBase mismatch');
-  assert(typeof manifest.sharedPrompt === 'string' && /atompunk/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing atompunk direction');
+  assert(typeof manifest.sharedPrompt === 'string' && /active replay evidence/i.test(manifest.sharedPrompt) && /atompunk/i.test(manifest.sharedPrompt), 'manifest sharedPrompt missing active replay and atompunk direction');
   assert(typeof manifest.negativePrompt === 'string' && /fake UI text/i.test(manifest.negativePrompt), 'manifest negativePrompt missing fake UI text guardrail');
   assert(Array.isArray(manifest.styleRules) && manifest.styleRules.length >= 5, 'manifest needs at least five styleRules');
   assert(manifest.styleRules.some((rule) => /16:9 PNGs/i.test(rule)), 'manifest styleRules must preserve 16:9 PNG contract');

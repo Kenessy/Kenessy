@@ -35,54 +35,54 @@ Prompt:
 16:9 cinematic comic-style hard sci-fi illustration for The Invincible replay. A lone astrobiologist in an orange atompunk spacesuit wakes in a rust-red desert beside scattered analog expedition instruments, pale sun, dust haze, low survival tension, no readable text, no UI, no logos, no watermark.
 ```
 
-### invincible-page-02-instrument-trail.png
+### invincible-page-02-locator-map.png
 
-Analog detector, cable reel, and footstep trail turning exploration into procedure.
+Locator device and abstract M-map turning early disorientation into navigable trust.
 
 Prompt:
 
 ```text
-16:9 cinematic comic-style hard sci-fi illustration. Close-to-mid scene of an atompunk explorer following an analog detector needle and cable reel across a red alien valley, footprints, dust, compact rover in the distance, procedural mystery mood, no readable text, no UI, no logos, no watermark.
+16:9 cinematic comic-style hard sci-fi illustration. Atompunk astrobiologist on Regis III studies a physical analog locator and an abstract multicolored map plate with no readable labels, red desert landmarks behind, compact rover far away, first navigation trust test, no readable text, no UI, no logos, no watermark.
 ```
 
-### invincible-page-03-convoy-valley.png
+### invincible-page-03-sandstorm-ringed-moon.png
 
-Dusty convoy path and silent expedition machines in the Regis III valley.
+Gentle-route exploration gives way to sandstorm blackout and the ringed moon visual memory.
 
 Prompt:
 
 ```text
-16:9 cinematic comic-style hard sci-fi illustration. Retro-futuristic expedition convoy vehicles sit silent in a rust-red alien valley, one explorer approaches from the foreground, analog antennas and round hulls, oppressive quiet, pale sky, no readable text, no UI, no logos, no watermark.
+16:9 cinematic comic-style hard sci-fi illustration. A cautious atompunk explorer crosses a rust-red alien slope toward distant tents as a sandstorm cuts across the valley, Regis III ringed moon visible through dust, blackout/memory mood, no readable text, no UI, no logos, no watermark.
 ```
 
-### invincible-page-04-robot-ruins.png
+### invincible-page-04-camp-krauta.png
 
-Ruined machines and antenna shadows suggesting the planet is not empty.
+Camp investigation: unresponsive android, Dr. Krauta in stupor, comics/codex repairing the timeline.
 
 Prompt:
 
 ```text
-16:9 cinematic comic-style hard sci-fi illustration. An explorer studies broken retro robots and antenna-like machine ruins half buried in red dust, long shadows, analog flashlight beam, the planet feels not empty but not alive in a human way, no readable text, no UI, no logos, no watermark.
+16:9 cinematic comic-style hard sci-fi illustration. Regis III expedition camp with angular tents, an unresponsive retro android, a quiet medical silhouette representing Dr. Krauta under a tarp, an explorer reconnecting analog cable/radio equipment, eerie investigative mood, no readable text, no UI, no logos, no watermark.
 ```
 
-### invincible-page-05-metal-cloud.png
+### invincible-page-05-aquarium-probe-fear.png
 
-A black metallic micro-machine cloud crossing the sunlit desert as the core threat lens.
+Aquarium fish/probe anomaly: ocean life fears robotic probes for reasons the replay must track.
 
 Prompt:
 
 ```text
-16:9 cinematic comic-style hard sci-fi illustration. A black metallic micro-machine cloud crosses a rust-red desert valley, blotting part of the pale sky, a lone orange-suited explorer watches from behind a rock with analog scanner raised, eerie non-biological threat, no readable text, no UI, no logos, no watermark.
+16:9 cinematic comic-style hard sci-fi illustration. Inside a dim atompunk expedition tent, a glass aquarium holds strange fish-like alien specimens while small retro robot probes hover near the tank, the explorer watches as the fish recoil, scientific mystery mood, no readable text, no UI, no logos, no watermark.
 ```
 
-### invincible-page-06-return-signal.png
+### invincible-page-06-relay-repair.png
 
-Analog radio mast, distant lander signal, and the review question shifting from survival to judgment.
+Mission log, impossible fried relay, replacement part, and android reboot turn camp searching into active problem-solving.
 
 Prompt:
 
 ```text
-16:9 cinematic comic-style hard sci-fi illustration. At dusk on Regis III, a lone explorer tunes an analog radio mast beside a compact lander silhouette, dusty orange horizon, equipment lights, final reflective mystery rather than action, no readable text, no UI, no logos, no watermark.
+16:9 cinematic comic-style hard sci-fi illustration. An atompunk explorer repairs a fried relay antenna at a Regis III camp, analog cable line, replacement module, retro android nearby, radio mast glowing with abstract signal rings, practical investigation payoff, no readable text, no UI, no logos, no watermark.
 ```
 
 Do not manually edit generated image tags in `Tools/pages/sources/invincible/journey.html`. Keep stable `data-invincible-slot` markers there; `npm run build:metro` performs the image wiring from `panel-manifest.json`.

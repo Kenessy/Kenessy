@@ -896,7 +896,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="journal-copy">
           <div class="tag-row"><span class="tag amber">The Invincible</span><span class="tag cyan">Comic-style playthrough</span><span class="tag green">6 panels wired</span></div>
           <h3>Regis III Replay Reader</h3>
-          <p>The active replay is staged as readable pages: wake point, analog tool trail, convoy silence, machine ruins, metal-cloud threat, and return-signal judgment. Each page pairs the scene with its ALERTED implication.</p>
+          <p>The active replay is staged as readable pages from the current notes: wake/intro friction, locator map trust, gentle route into sandstorm blackout, camp/Krauta codex repair, aquarium fish/probe anomaly, and relay repair payoff. Each page pairs the scene with its ALERTED implication.</p>
           <div class="journal-contract" aria-label="The Invincible image contract">
             <span><b>Canvas</b> Fullscreen comic pages</span>
             <span><b>Manifest</b> 6 panels wired</span>
@@ -904,8 +904,9 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           </div>
           <div class="journal-file-queue" aria-label="The Invincible panel filenames">
             <div><b>Panel 01</b><code>invincible-page-01-wake-regis.png</code></div>
-            <div><b>Panel 05</b><code>invincible-page-05-metal-cloud.png</code></div>
-            <div><b>Panel 06</b><code>invincible-page-06-return-signal.png</code></div>
+            <div><b>Panel 04</b><code>invincible-page-04-camp-krauta.png</code></div>
+            <div><b>Panel 05</b><code>invincible-page-05-aquarium-probe-fear.png</code></div>
+            <div><b>Panel 06</b><code>invincible-page-06-relay-repair.png</code></div>
           </div>
           <div class="journal-note"><b>Drop-in rule:</b> exact 16:9 filenames auto-wire into the visible comic panel slots. Missing images stay in the art queue instead of becoming broken boxes.</div>
           <div class="journal-asset-links" aria-label="The Invincible image handoff files"><a href="assets/img/invincible/panel-manifest.json">Panel manifest</a><a href="assets/img/invincible/README.md">Prompt README</a></div>

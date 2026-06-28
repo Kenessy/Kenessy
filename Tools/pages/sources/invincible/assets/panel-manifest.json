@@ -1,10 +1,10 @@
 {
   "game": "The Invincible",
   "status": "replay-in-progress-illustrated-playthrough",
-  "promptVersion": "invincible-illustrated-playthrough-v1",
+  "promptVersion": "invincible-illustrated-playthrough-v2",
   "defaultAspectRatio": "16:9",
   "assetBase": "docs/assets/img/invincible/",
-  "sharedPrompt": "Cinematic comic-style hard sci-fi illustration for The Invincible replay playthrough. Use retro-futuristic atompunk exploration language, analog expedition tools, rust-red Regis III desert, lonely mystery, restrained panel composition, no readable UI text, no logos, no captions, no watermark.",
+  "sharedPrompt": "Cinematic comic-style hard sci-fi illustration for The Invincible replay playthrough. Use Daniel's active replay evidence: disoriented wake-up, locator map trust, gentle-slope/sandstorm blackout, camp/Krauta investigation, aquarium fish/probe anomaly, mission-log relay repair. Use retro-futuristic atompunk exploration language, analog expedition tools, rust-red Regis III desert, lonely mystery, restrained panel composition, no readable UI text, no logos, no captions, no watermark.",
   "negativePrompt": "No logos, no captions, no fake UI text, no readable typography, no watermark, no gore focus, no official game UI, no brand marks, no cluttered tiny panel noise.",
   "styleRules": [
     "Use 16:9 PNGs for every visible playthrough panel.",
@@ -37,59 +37,59 @@
       "avoid": "Avoid readable name patches, fake UI, official suit logos, gore, crowded props, and bright heroic fantasy lighting."
     },
     {
-      "id": "page-02-instrument-trail",
-      "page": "instruments",
-      "filename": "invincible-page-02-instrument-trail.png",
+      "id": "page-02-locator-map",
+      "page": "locator-map",
+      "filename": "invincible-page-02-locator-map.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Analog detector, cable reel, and footstep trail turning exploration into procedure.",
-      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Close-to-mid scene of an atompunk explorer following an analog detector needle and cable reel across a red alien valley, footprints, dust, compact rover in the distance, procedural mystery mood, no readable text, no UI, no logos, no watermark.",
-      "composition": "Use the detector and cable as foreground leading lines that pull the eye toward the distant rover and valley route.",
-      "avoid": "Avoid modern digital HUDs, readable gauges, official UI, logos, captions, and over-sharp military sci-fi design."
+      "brief": "Locator device and abstract M-map turning early disorientation into navigable trust.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Atompunk astrobiologist on Regis III studies a physical analog locator and an abstract multicolored map plate with no readable labels, red desert landmarks behind, compact rover far away, first navigation trust test, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use the physical map plate and locator as the clear foreground beat, with route colors as abstract lines and the planet horizon behind.",
+      "avoid": "Avoid readable map labels, modern digital HUDs, official UI, logos, captions, and over-sharp military sci-fi design."
     },
     {
-      "id": "page-03-convoy-valley",
-      "page": "convoy",
-      "filename": "invincible-page-03-convoy-valley.png",
+      "id": "page-03-sandstorm-ringed-moon",
+      "page": "sandstorm",
+      "filename": "invincible-page-03-sandstorm-ringed-moon.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Dusty convoy path and silent expedition machines in the Regis III valley.",
-      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Retro-futuristic expedition convoy vehicles sit silent in a rust-red alien valley, one explorer approaches from the foreground, analog antennas and round hulls, oppressive quiet, pale sky, no readable text, no UI, no logos, no watermark.",
-      "composition": "Make the convoy feel discovered rather than posed; use rover silhouettes and valley walls to create a clear path through the frame.",
-      "avoid": "Avoid readable vehicle numbers, official logos, battle damage gore, cluttered machinery, and generic modern tanks."
+      "brief": "Gentle-route exploration gives way to sandstorm blackout and the ringed moon visual memory.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. A cautious atompunk explorer crosses a rust-red alien slope toward distant tents as a sandstorm cuts across the valley, Regis III ringed moon visible through dust, blackout/memory mood, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use the ringed moon and dust wall as the large visual anchor, with the explorer small and cautious on the route.",
+      "avoid": "Avoid readable UI prompts, heroic combat poses, logos, captions, clear spoiler text, and generic fantasy moons."
     },
     {
-      "id": "page-04-robot-ruins",
-      "page": "ruins",
-      "filename": "invincible-page-04-robot-ruins.png",
+      "id": "page-04-camp-krauta",
+      "page": "camp",
+      "filename": "invincible-page-04-camp-krauta.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Ruined machines and antenna shadows suggesting the planet is not empty.",
-      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. An explorer studies broken retro robots and antenna-like machine ruins half buried in red dust, long shadows, analog flashlight beam, the planet feels not empty but not alive in a human way, no readable text, no UI, no logos, no watermark.",
-      "composition": "Frame the explorer small against large machine remains; keep one broken robot silhouette and one antenna shadow readable.",
-      "avoid": "Avoid humanoid battle robots, laser combat, official UI, gore, captions, logos, and text labels."
+      "brief": "Camp investigation: unresponsive android, Dr. Krauta in stupor, comics/codex repairing the timeline.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Regis III expedition camp with angular tents, an unresponsive retro android, a quiet medical silhouette representing Dr. Krauta under a tarp, an explorer reconnecting analog cable/radio equipment, eerie investigative mood, no readable text, no UI, no logos, no watermark.",
+      "composition": "Stage the camp as evidence: explorer left, android and cable in the middle, medical silhouette/tent to the right, all readable at mobile size.",
+      "avoid": "Avoid gore, readable medical labels, official UI, logos, captions, horror jump-scare lighting, and modern hospital props."
     },
     {
-      "id": "page-05-metal-cloud",
-      "page": "swarm",
-      "filename": "invincible-page-05-metal-cloud.png",
+      "id": "page-05-aquarium-probe-fear",
+      "page": "aquarium",
+      "filename": "invincible-page-05-aquarium-probe-fear.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "A black metallic micro-machine cloud crossing the sunlit desert as the core threat lens.",
-      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. A black metallic micro-machine cloud crosses a rust-red desert valley, blotting part of the pale sky, a lone orange-suited explorer watches from behind a rock with analog scanner raised, eerie non-biological threat, no readable text, no UI, no logos, no watermark.",
-      "composition": "Make the swarm a readable dark shape against the sky while keeping the explorer and scanner small but clear in the foreground.",
-      "avoid": "Avoid monster faces, magic smoke, readable scanner text, official UI, logos, gore, and chaotic particle noise that hides the scene."
+      "brief": "Aquarium fish/probe anomaly: ocean life fears robotic probes for reasons the replay must track.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. Inside a dim atompunk expedition tent, a glass aquarium holds strange fish-like alien specimens while small retro robot probes hover near the tank, the explorer watches as the fish recoil, scientific mystery mood, no readable text, no UI, no logos, no watermark.",
+      "composition": "Make the tank the main panel, with fish movement and probe silhouettes creating a clear question: why are they afraid?",
+      "avoid": "Avoid readable lab labels, cute aquarium style, gore, horror monsters, official UI, logos, captions, and modern digital screens."
     },
     {
-      "id": "page-06-return-signal",
-      "page": "signal",
-      "filename": "invincible-page-06-return-signal.png",
+      "id": "page-06-relay-repair",
+      "page": "relay",
+      "filename": "invincible-page-06-relay-repair.png",
       "aspectRatio": "16:9",
       "visibleInJourney": true,
-      "brief": "Analog radio mast, distant lander signal, and the review question shifting from survival to judgment.",
-      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. At dusk on Regis III, a lone explorer tunes an analog radio mast beside a compact lander silhouette, dusty orange horizon, equipment lights, final reflective mystery rather than action, no readable text, no UI, no logos, no watermark.",
-      "composition": "Use the mast, lander, and explorer as a triangular composition; keep the mood quiet and unresolved.",
-      "avoid": "Avoid triumphant action poses, readable panels, fake UI overlays, logos, captions, and crowded background ships."
+      "brief": "Mission log, impossible fried relay, replacement part, and android reboot turn camp searching into active problem-solving.",
+      "prompt": "16:9 cinematic comic-style hard sci-fi illustration. An atompunk explorer repairs a fried relay antenna at a Regis III camp, analog cable line, replacement module, retro android nearby, radio mast glowing with abstract signal rings, practical investigation payoff, no readable text, no UI, no logos, no watermark.",
+      "composition": "Use the relay mast, cable, explorer, and android as a triangular repair scene with clear hands-on procedure.",
+      "avoid": "Avoid readable mission-log text, modern laptops, official UI, logos, captions, combat posing, and crowded machinery."
     }
   ]
 }

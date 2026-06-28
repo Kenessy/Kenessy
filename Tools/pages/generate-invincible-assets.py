@@ -211,6 +211,51 @@ def instruments():
     return img
 
 
+def locator_map():
+    img, draw = base_scene(sun=(1230, 150), horizon=410)
+    rover(draw, 1030, 560, 0.72)
+    explorer(draw, 450, 610, 0.86)
+    instrument(draw, 335, 660, 1.05)
+
+    # Diegetic map plate: abstract route colors, no readable labels.
+    polygon(draw, [(650, 458), (1125, 400), (1210, 672), (720, 744)], (37, 43, 41, 230), (238, 196, 116, 135))
+    for i, color in enumerate([(97, 217, 198, 145), (255, 179, 71, 145), (164, 135, 255, 115)]):
+        pts = []
+        for step in range(7):
+            px = 700 + step * 70
+            py = 650 - i * 44 + int(math.sin(step * 1.5 + i) * 32)
+            pts.append((px, py))
+        line(draw, pts, color, 6 - i)
+    for px, py, r in [(760, 620, 15), (920, 540, 20), (1060, 610, 13), (830, 690, 10)]:
+        ellipse(draw, (px - r, py - r, px + r, py + r), (255, 179, 71, 58), (255, 216, 143, 165), 3)
+    for x in range(690, 1180, 62):
+        line(draw, [(x, 425), (x - 18, 724)], (244, 234, 208, 25), 1)
+    for y in range(450, 720, 48):
+        line(draw, [(680, y), (1188, y - 50)], (244, 234, 208, 22), 1)
+    return img
+
+
+def sandstorm_ringed_moon():
+    img = gradient((53, 54, 58), (133, 63, 31))
+    overlay = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    sun_and_sky(draw, (1185, 165), 42)
+    ellipse(draw, (300, 92, 420, 212), (210, 184, 132, 130))
+    for w, a in [(250, 48), (310, 34), (380, 22)]:
+        draw.arc((360 - w, 118 - w // 7, 360 + w, 188 + w // 7), 8, 172, fill=(230, 204, 145, a), width=5)
+    terrain(draw, 430)
+    for i in range(120):
+        x = RNG.randint(-100, 1500)
+        y = RNG.randint(270, 760)
+        line(draw, [(x, y), (x + RNG.randint(160, 460), y - RNG.randint(6, 42))], (219, 137, 72, RNG.randint(34, 86)), RNG.randint(2, 8))
+    explorer(draw, 460, 650, 0.78)
+    for tx, ty in [(990, 545), (1080, 530), (1175, 552)]:
+        polygon(draw, [(tx - 38, ty + 54), (tx, ty - 8), (tx + 42, ty + 54)], (102, 68, 43, 190), (234, 177, 94, 70))
+    add_noise(overlay, 28)
+    img.alpha_composite(overlay)
+    return img
+
+
 def convoy():
     img, draw = base_scene(sun=(1160, 150), horizon=400)
     rover(draw, 720, 590, 1.35)
@@ -231,12 +276,67 @@ def ruins():
     return img
 
 
+def camp_krauta():
+    img, draw = base_scene(sun=(1160, 150), horizon=405)
+    for tx, ty, sc in [(830, 548, 1.15), (1040, 575, 0.86), (1210, 535, 0.62)]:
+        polygon(draw, [(tx - int(90*sc), ty + int(65*sc)), (tx, ty - int(44*sc)), (tx + int(110*sc), ty + int(65*sc))], (96, 67, 48, 230), (232, 172, 91, 120))
+        line(draw, [(tx, ty - int(42*sc)), (tx, ty + int(65*sc))], (230, 186, 106, 80), max(1, int(3*sc)))
+    machine_ruins(draw, 600, 585, 0.72)
+    explorer(draw, 390, 640, 0.85)
+    # Dr. Krauta as a quiet medical silhouette under a tarp, kept abstract.
+    ellipse(draw, (930, 650, 1088, 692), (27, 23, 20, 170), (238, 190, 112, 80), 3)
+    polygon(draw, [(915, 670), (1045, 642), (1130, 676), (1002, 720)], (82, 68, 54, 215), (219, 178, 106, 70))
+    line(draw, [(500, 642), (660, 630), (930, 675)], (42, 32, 25, 150), 7)
+    for px, py in [(735, 604), (755, 620), (775, 636), (795, 653)]:
+        ellipse(draw, (px - 4, py - 4, px + 4, py + 4), (97, 217, 198, 150))
+    return img
+
+
+def aquarium_probe():
+    img = gradient((23, 31, 32), (87, 43, 29))
+    overlay = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    polygon(draw, [(0, 620), (1536, 570), (1536, 864), (0, 864)], (72, 42, 27, 255))
+    polygon(draw, [(235, 230), (1225, 190), (1310, 675), (160, 735)], (37, 74, 75, 210), (171, 226, 210, 120))
+    polygon(draw, [(270, 280), (1170, 240), (1230, 635), (225, 690)], (46, 108, 104, 125))
+    for i in range(11):
+        fx = RNG.randint(360, 1080)
+        fy = RNG.randint(360, 590)
+        body = RNG.randint(22, 42)
+        ellipse(draw, (fx - body, fy - body // 2, fx + body, fy + body // 2), (180, 126, 71, 150), (235, 197, 124, 100), 2)
+        polygon(draw, [(fx + body, fy), (fx + body + 28, fy - 13), (fx + body + 24, fy + 14)], (177, 113, 66, 130))
+    for px, py in [(530, 340), (705, 320), (888, 355)]:
+        ellipse(draw, (px - 22, py - 22, px + 22, py + 22), (40, 45, 44, 220), (97, 217, 198, 110), 3)
+        line(draw, [(px + 20, py), (px + 74, py + 24)], (97, 217, 198, 90), 3)
+    explorer(draw, 1330, 660, 0.72, facing=-1)
+    for x in range(260, 1240, 70):
+        line(draw, [(x, 260), (x + 54, 650)], (244, 234, 208, 16), 1)
+    add_noise(overlay, 22)
+    img.alpha_composite(overlay)
+    return img
+
+
 def metal_cloud():
     img, draw = base_scene(sun=(1090, 140), horizon=420)
     swarm(draw, 940, 250, 1.15)
     explorer(draw, 435, 635, 0.82)
     polygon(draw, [(310, 735), (405, 610), (505, 725)], (70, 33, 24, 255))
     line(draw, [(490, 570), (590, 500)], (97, 217, 198, 110), 5)
+    return img
+
+
+def relay_repair():
+    img, draw = base_scene(sun=(1210, 215), horizon=418)
+    explorer(draw, 555, 625, 0.88)
+    machine_ruins(draw, 1040, 625, 0.56)
+    line(draw, [(740, 640), (790, 385)], (215, 178, 105, 230), 8)
+    line(draw, [(790, 385), (730, 450)], (215, 178, 105, 190), 5)
+    line(draw, [(790, 385), (872, 462)], (215, 178, 105, 190), 5)
+    ellipse(draw, (846, 424, 950, 520), (63, 54, 44, 210), (232, 182, 93, 110), 5)
+    line(draw, [(620, 650), (720, 630), (850, 466)], (42, 32, 25, 160), 7)
+    for r, a in [(46, 80), (92, 52), (150, 30)]:
+        ellipse(draw, (790 - r, 385 - r, 790 + r, 385 + r), (97, 217, 198, a))
+    rover(draw, 1195, 585, 0.65)
     return img
 
 
@@ -256,12 +356,17 @@ def main() -> None:
     scenes = {
         "invincible-hero-regis.png": hero(),
         "invincible-page-01-wake-regis.png": wake(),
-        "invincible-page-02-instrument-trail.png": instruments(),
-        "invincible-page-03-convoy-valley.png": convoy(),
-        "invincible-page-04-robot-ruins.png": ruins(),
-        "invincible-page-05-metal-cloud.png": metal_cloud(),
-        "invincible-page-06-return-signal.png": signal(),
+        "invincible-page-02-locator-map.png": locator_map(),
+        "invincible-page-03-sandstorm-ringed-moon.png": sandstorm_ringed_moon(),
+        "invincible-page-04-camp-krauta.png": camp_krauta(),
+        "invincible-page-05-aquarium-probe-fear.png": aquarium_probe(),
+        "invincible-page-06-relay-repair.png": relay_repair(),
     }
+    OUT.mkdir(parents=True, exist_ok=True)
+    for stale in OUT.glob("invincible-*.png"):
+        if stale.name not in scenes:
+            stale.unlink()
+            print(f"removed stale {stale}")
     for name, img in scenes.items():
         save(name, img)
 
