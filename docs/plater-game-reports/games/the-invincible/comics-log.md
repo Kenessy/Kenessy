@@ -8,6 +8,8 @@ Source status: screenshots provided in chat by Daniel. Exact long text should no
 
 The comic interface is not just cosmetic. It functions as an in-game context repair system: it summarizes prior events, crew background, faction context, and mission setup. This is important because Daniel missed some intro cards earlier, and the comics may reduce the need for external guide/wiki lookups.
 
+The latest screenshots also correct the earlier simplified premise: Regis III is not simply “no life.” Its **surface** appears desolate/lifeless, while its oceans contain life that did not evolve onto land. This makes Yasna's astrobiologist role more coherent while preserving the mystery: aquatic organisms should not fear unknown robot probes unless something about their history, perception, or environment makes that fear meaningful.
+
 ## Unlocked / observed entries
 
 | Entry / chapter | Observed content | Review value | Completion risk |
@@ -16,14 +18,21 @@ The comic interface is not just cosmetic. It functions as an in-game context rep
 | **Dragonfly En Route — Novik mineral accident** | Astrogator Novik personally extracts a rare valuable mineral, succeeds, but breaks his leg and is in pain. The crew later celebrates the end of the research cycle and enters hibernation for the return journey. | Clarifies the earlier leg-injury / hibernation capsule context and explains why a medical/recovery setup exists. | Unknown whether all pages are route-unlocked. |
 | **Regis III Issue** | The Dragonfly crew wakes from hibernation in emergency mode near Regis III. Novik does not immediately explain the mission. | Clarifies that the current Regis III situation interrupts the return-home plan. | Unknown. |
 | **Regis III Issue — Invincible context** | Regis III appears to have little/no research value, yet a rival faction called the Alliance is sending the USCA Invincible, its strongest unit, there. | Strongly reframes the earlier Invincible flashback: the planet's value is suspicious because a major power is sending overwhelming hardware there. | Unknown. |
-| **Lost** | First panel/section visible in screenshot, but not enough text captured in the provided image set for a clean paraphrase yet. | Likely connects to Yasna's current lost/desert state. | Needs next screenshot/text. |
+| **Regis III Issue — ocean life** | Regis III's surface is desolate/lifeless, but its oceans contain life that stayed aquatic rather than evolving onto land. | Corrects the earlier “zero life” simplification and strengthens the astrobiology angle. | Unknown. |
+| **Lost — wake-up** | Yasna wakes alone, disoriented, and amnesic in an unfamiliar place, hoping someone is receiving her messages despite connection issues. | Confirms that player confusion is diegetic and intended, not only note-taking loss. | Unknown. |
+| **Lost — camp direction** | Yasna identifies Regis III and heads toward a nearby crew camp to learn more. | Confirms the opening navigation arc and camp objective. | Unknown. |
+| **Lost — caution / slope** | Yasna handles a traversal challenge cautiously and prudently. | Lines up with Daniel choosing the gentle slope; potential comic reflection of route behavior or authored summary. | Unknown if choice-dependent. |
+| **Lost — head injury / blackout** | Yasna's head injury appears serious and she blacks out again. | Explains repeated blackouts as at least partly injury-related, while other causes remain possible. | Unknown. |
+| **The Camp** | Yasna reaches the camp and initially encounters only an unresponsive android. | Confirms the camp abnormality and robot non-responsiveness. | Unknown. |
 
 ## Evidence implications
 
 - The comics repair missing context from skipped/advanced intro screens.
-- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue.
+- They provide a cleaner timeline: research mission -> rare mineral task -> Novik injury -> celebration -> hibernation -> emergency near Regis III -> Invincible/faction issue -> Yasna lost -> camp approach.
+- They clarify that the “no life” premise is more specific: desolate surface, living oceans.
 - They may be useful as public artifact panels if spoiler-labeled.
 - They may become a Completion Shape risk if pages are missable.
+- Some comic summaries may reflect player route behavior, such as cautious traversal, so we need to watch whether these are authored summaries or choice-aware records.
 
 ## Open questions
 
@@ -32,6 +41,8 @@ The comic interface is not just cosmetic. It functions as an in-game context rep
 3. Does completion require all comic pages?
 4. Can already-unlocked comics be reread anytime from menu?
 5. Does the comic system fully repair missed intro context, or only partial timeline context?
+6. Are Lost panels reactive to player behavior, or fixed summaries?
+7. Does the aquarium/fish cutscene later appear in comics/codex, and does it explain probe fear?
 
 ## Public use rule
 
