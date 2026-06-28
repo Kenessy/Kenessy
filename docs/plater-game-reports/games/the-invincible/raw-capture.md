@@ -68,6 +68,15 @@ Na végre odaértünk a táborhoz és egy nem reagáló menetelő robotot talál
 
 Attachments in chat: comic/codex screenshots showing Dragonfly En Route, Regis III Issue, and the beginning of Lost.
 
+## Raw Intake 009 | 2026-06-27 | Aquarium fish / probe fear cutscene / comic supplement
+
+```text
+Na most bementem egy mellettem lévő sátorba és találtam egy vizes kis akváriumot valami hallal amire jött megint egy hosszadalmas cutscene ahol halgattam ahogy a többiek lemennek a bolygóra halakat befogni és beszélgetnek közben és végül mondja nekik a csaj hogy hozzanak egyet be mert fura hogy félnek a halak a robot probeoktól mert nem szabadna ha nem láttak még olyant. 
+Egy kis comic book pótlás:
+```
+
+Attachments in chat: comic/codex screenshots expanding Regis III ocean life and Lost / The Camp panels.
+
 ## Raw Intake Template
 
 ```text
