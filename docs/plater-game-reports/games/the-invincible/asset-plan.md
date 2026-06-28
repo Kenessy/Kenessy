@@ -14,7 +14,8 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | Scientific mystery | Strange formations, machines, ecological clues, anomalies. | Epistemic uncertainty and hard-sci-fi density. |
 | Human traces | Crew evidence, abandoned spaces, human technology in alien place. | Narrative pull and emotional stakes. |
 | Friction evidence | Confusing route, unclear prompt, bad visibility, technical issue. | Friction ledger. |
-| Comics / codex | Dragonfly, Regis III Issue, Lost, and later comic pages. | Timeline repair, lore evidence, completion shape. |
+| Aquarium / fish / probes | Fish tank, aquatic life, probe fear cutscene, ocean-life comic panels. | Life-definition mystery and anomaly modeling. |
+| Comics / codex | Dragonfly, Regis III Issue, Lost, The Camp, and later comic pages. | Timeline repair, lore evidence, completion shape. |
 | Completion cleanup | Missed achievement evidence, replay/branching moments. | Completion shape and disruption risk. |
 
 ## Initial image slots
@@ -37,10 +38,15 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-014 | Doctor blank/unresponsive state | spoiler-marked | screenshot needed |
 | INV-IMG-015 | Dragonfly En Route comic page | spoiler-marked | received in chat, not committed as image file |
 | INV-IMG-016 | Regis III Issue comic page | spoiler-marked | received in chat, not committed as image file |
-| INV-IMG-017 | Lost comic/chapter start | spoiler-marked | partial screenshot received; needs cleaner text if relevant |
-| INV-IMG-018 | Worst downtime / friction if visualizable | spoiler-light | missing |
-| INV-IMG-019 | Spoiler-light final journey image | spoiler-light | missing |
-| INV-IMG-020 | Ending / completion appendix image | spoiler-full | missing |
+| INV-IMG-017 | Lost comic/chapter start | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-018 | Aquarium / fish specimen in tent | spoiler-marked | screenshot needed |
+| INV-IMG-019 | Fish/probe fear cutscene evidence | spoiler-marked | screenshot needed |
+| INV-IMG-020 | Regis III ocean-life comic panel | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-021 | Lost panels: wake-up / map / cautious slope / blackout | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-022 | The Camp comic: unresponsive android | spoiler-marked | received in chat, not committed as image file |
+| INV-IMG-023 | Worst downtime / friction if visualizable | spoiler-light | missing |
+| INV-IMG-024 | Spoiler-light final journey image | spoiler-light | missing |
+| INV-IMG-025 | Ending / completion appendix image | spoiler-full | missing |
 
 ## Comic screenshot intake — 2026-06-27
 
@@ -52,7 +58,9 @@ Screenshots supplied in chat show:
 - Crew celebration and hibernation chambers.
 - `Regis III Issue` page start: emergency wake near Regis III and Novik withholding details.
 - Regis III appears low-value, but the Alliance sends the USCA Invincible.
-- `Lost` chapter start is visible but not enough text was captured yet for full summary.
+- Regis III surface is desolate/lifeless while oceans contain life that did not evolve onto land.
+- `Lost` shows Yasna waking alone, disoriented/amnesic, connection issues, identifying Regis III, heading to camp, using caution, and blacking out from a serious head injury.
+- `The Camp` shows Yasna reaching camp and initially finding only an unresponsive android.
 
 Current decision: keep these as **lore/codex evidence**, not just decoration. If used publicly, paraphrase the text and show at most selected panels as spoiler-marked visual support.
 
@@ -66,6 +74,9 @@ docs/assets/img/the-invincible/inv-002-first-tool-use.png
 docs/assets/img/the-invincible/inv-003-analogue-ui.png
 docs/assets/img/the-invincible/inv-015-comic-dragonfly-en-route.png
 docs/assets/img/the-invincible/inv-016-comic-regis-iii-issue.png
+docs/assets/img/the-invincible/inv-020-comic-ocean-life.png
+docs/assets/img/the-invincible/inv-021-comic-lost.png
+docs/assets/img/the-invincible/inv-022-comic-camp.png
 ```
 
 ## Capture notes
@@ -76,6 +87,7 @@ docs/assets/img/the-invincible/inv-016-comic-regis-iii-issue.png
 - Avoid long verbatim dialogue/comic text in spoiler-light public materials.
 - Mark every image as `spoiler-light`, `spoiler-marked`, or `spoiler-full` before publication.
 - For comics, capture the chapter title and enough surrounding panel context, but public text should be paraphrased.
+- Aquarium/fish/probe screenshots are high-value because they convert the life-definition question into a concrete behavioral anomaly.
 
 ## Future public artifacts
 
