@@ -97,6 +97,14 @@ Most bejöttem egy közeli barlangba és updatelődött a questem hogy próbálj
 
 Attachments in chat: comic/codex screenshot showing Yasna locating a distinct landmark near the landing area.
 
+## Raw Intake 012 | 2026-06-27 | Dr. Marit dead / Koval alive unresponsive / lander evacuation decision
+
+```text
+nah egyszercsak a smmiből ott van egy fekvő asztronauta a földön aki nem reagál és ezzel megtaláltuk marit, akiről fingom sincs ki vagy mi baja de nem lélegzett. Nem sokkal kséőbb volt 2 kialló sziklától. Picivel arrébb megtaláljuk Kovalt aki életben van de ő is nem responsive. Leküldik a landert és bele is visszük a csávót majd úgy döntünk hogy maritért is visszamegyek és beteszem a testét ide.
+```
+
+Attachments in chat: comic/codex screenshot stating Yasna finds Dr. Marit too late to save her.
+
 ## Raw Intake Template
 
 ```text
