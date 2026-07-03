@@ -111,6 +111,12 @@ Attachments in chat: comic/codex screenshot stating Yasna finds Dr. Marit too la
 na bepakoltam őt is a hajoba és mentem az utolsó csávó után, mindjárt fel is fedeztem egy probet ott, amire a fonok azt modta hogy lekellscannelni és tanulni blőle. 
 ```
 
+## Raw Intake 014 | 2026-06-27 | Probe scan result / electromagnetic wave / probe following Yasna
+
+```text
+okés kb annyi derült ki hogy elektromágneses hullám vagy mi jött és egy probe megsérólt és hogy az utolsó csávót követte vagy mi? Ennyi mas nem nagyon. Most már követ minket. 
+```
+
 ## Raw Intake Template
 
 ```text
