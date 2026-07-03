@@ -9,7 +9,7 @@ Sketch -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
 Current status: **In Progress**  
-Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, first repair/problem-solving loop, first physical old-metal-structure discovery, and first explicit rescue/recovery choice captured, but duration, fatigue, and desire-to-continue are still incomplete.
+Reason: first live opening evidence exists; navigation/tool onboarding has started; first low-stakes route decision, repeated blackout pattern, first major flashback lore payload, camp arrival, unresponsive entities, comic/codex evidence, first alien-life/probe-behavior anomaly, mission-log objective layer, first repair/problem-solving loop, first physical old-metal-structure discovery, first explicit rescue/recovery choice, and first probe-scan investigation objective captured, but duration, fatigue, and desire-to-continue are still incomplete.
 
 ## Exact session entry template
 
@@ -122,22 +122,31 @@ Observation: The rescue objective gains stakes: one crew member is beyond saving
 Axis delta: Narrative Pull +1 because the missing-crew thread now has loss, survival, and evacuation stakes; Agency +1 because returning for Marit is a player-expressed values decision; Time Respect +0.25 because the lander objective converts searching into concrete extraction; Scientific/Medical Mystery +0.5 because Koval's alive-but-unresponsive state parallels Krauta and may share the same cause; Completion/Consequence Watch +0.25 because body recovery may have story, relationship, or ending implications.  
 Open question: Does recovering Marit's body matter later, and are Marit, Koval, Krauta, and the android failures connected by one phenomenon or several?
 
+## Entry 011 | 2026-06-27 | Marit loaded / final crew search / probe scan objective / Steam build unknown
+
+Milestone: Marit is placed in the lander as well; Yasna continues toward the last missing crew member and discovers a probe; the commander/Novik instructs Yasna to scan it and learn from it.  
+Session: unknown | Total: unknown | Mode: solo / blind / rescue-recovery / probe investigation  
+Micro: Clarity 4 · Mastery 3 · Tension 4 · Fatigue ? · Social 1 · Desire ?  
+Observation: The player-expressed Marit recovery action is completed, and the rescue thread pivots back into scientific investigation: a probe becomes a concrete object to scan, directly connecting the earlier fish/probe fear anomaly to a new learn-from-the-object task.  
+Axis delta: Agency +0.5 because Daniel follows through on the body-recovery decision; Core Loop +0.75 because rescue -> exploration -> probe discovery -> scan objective continues the active investigation loop; Tool Embodiment +0.75 because scanning a probe is exactly the game’s analogue-tool sci-fi promise; Narrative Pull +0.5 because the probe may explain fish fear or crew dysfunction; AI Training Value +0.75 because this creates an object-centered evidence-gathering step.  
+Open question: Does scanning the probe reveal why aquatic life fears probes, what damaged camp equipment, or what happened to the unresponsive crew?
+
 ## Evidence board
 
 | Area | Current state | Needed evidence |
 |---|---|---|
-| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, impossible relay damage, visible old metal structure, and crew casualty/survival stakes. Need sustained follow-through. |
+| Promise Fit | Early positive | Opening now has hard-sci-fi disorientation, lifeless-surface/ocean-life distinction, incoming Invincible, mission clock, camp abnormality, faction context, fish/probe anomaly, unknown structures, impossible relay damage, visible old metal structure, crew casualty/survival stakes, and active probe investigation. Need sustained follow-through. |
 | Cognitive Decompression | Unknown | Energy before/after at least 2 sessions. |
-| Narrative Pull | Strong early positive | Waking confused, separation, blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive entities, codex lore, fish/probe fear, structures, fried relay, old metal structure, Marit death, Koval survival, and lander extraction create escalating mystery. Need desire-to-continue check. |
-| Agency Feel | Improving from low to functional/value-expressive | Gentle slope route choice + camp repair loop + research-area exploration + choice to recover Marit's body. Need later story/dialogue consequences. |
-| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, landmark/comic alignment, lander objective, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
+| Narrative Pull | Strong early positive | Waking confused, separation, blackouts, flashbacks, Invincible arrival, astrobiologist role, Dr. Krauta, Gorsky, unresponsive entities, codex lore, fish/probe fear, structures, fried relay, old metal structure, Marit death, Koval survival, lander extraction, and probe scan objective create escalating mystery. Need desire-to-continue check. |
+| Agency Feel | Improving from low to functional/value-expressive | Gentle slope route choice + camp repair loop + research-area exploration + choice to recover Marit's body + probe investigation. Need later story/dialogue consequences. |
+| Readability / Trust | Early positive with minor friction | Intro cards were missable during screenshotting, but locator/binocular/map onboarding, scanner guidance, Base comms, mission log, landmark/comic alignment, lander objective, probe-scan instruction, blocked-path clarity, comics/codex rereading, and surface/ocean clarification now repair context. Blackouts remain unresolved by design. |
 | Time Respect | Mixed / watch | Early bolyongás happened; blackouts may compress traversal, scanner/log guidance reduces route friction, repair loop gives payoff, lander extraction gives objective payoff, but long cutscenes need fatigue tracking. |
 | Completion Shape | Early watch | Comics appear to unlock during play; body recovery may be consequential or just roleplay. Need to verify missability and consequence. |
-| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, repair-loop causal reasoning, structure/landmark hypothesis tracking, and ethical recovery decision modeling. Need more decisions. |
+| AI Training Value | Early positive | Useful story-state reconstruction, tool-mediated orientation, first route decision, repeated blackout hypothesis tracking, role/premise correction, codex timeline correction, fish/probe anomaly modeling, repair-loop causal reasoning, structure/landmark hypothesis tracking, ethical recovery decision modeling, and object-centered probe scanning. Need more decisions. |
 | Technical Comfort | Minor nitpick | Alt-tab/Windows key did not pause cleanly and advanced intro cards during screenshot attempt. |
-| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, android reboot, journal reading, research-area navigation, and lander extraction create a tactile orientation/lore/repair/rescue loop. |
-| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, comics pages, bone-like cave, old metal structure, Marit, Koval, and lander extraction are strong screenshot candidates. |
-| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, impossible relay damage, visible old metal structure, and repeated alive-but-unresponsive states suggest the story challenges definitions of life, danger, autonomy, consciousness, learning, environment, geology, and artificiality. |
+| Tool Embodiment | Early strong | Environment scanning, landmark recognition, map unlock, binocular scouting, scanner route guidance, codex browsing, aquarium investigation, cable comms, detector, relay replacement, android reboot, journal reading, research-area navigation, lander extraction, and probe scanning create a tactile orientation/lore/repair/rescue/investigation loop. |
+| Visual Report Value | Early positive | Sandstorms, distant tents, steep climb, ringed moon, ship flashback, scanner UI, camp/robot/Krauta scene, mission log tablet, fried relay, android reboot, aquarium/fish, comics pages, bone-like cave, old metal structure, Marit, Koval, lander extraction, and probe are strong screenshot candidates. |
+| Scientific / Philosophical Density | Early strong | Surface lifelessness, ocean life, no land evolution, astrobiologist role, rare mineral extraction, camp dysfunction, machine/human non-responsiveness, fish/probe fear, unknown structures, alloy/mineral notes, impossible relay damage, visible old metal structure, repeated alive-but-unresponsive states, and probe analysis suggest the story challenges definitions of life, danger, autonomy, consciousness, learning, environment, geology, artificiality, and machine agency. |
 
 ## Open questions to carry into Session 1
 
@@ -172,6 +181,9 @@ Open question: Does recovering Marit's body matter later, and are Marit, Koval, 
 29. Does recovering Marit's body have consequence, dialogue recognition, achievement relevance, or only roleplay value?
 30. Is Koval's unresponsive-but-alive state the same condition as Krauta's stupor?
 31. Why did Marit die while Koval and Krauta survived in altered states?
+32. What does the probe scan reveal, and is it connected to fish/probe fear?
+33. Is the probe damaged, acting normally, or recording something the crew missed?
+34. Does probe scanning become a repeatable investigation mechanic or a one-off clue interaction?
 
 ## Compact post-session form
 
