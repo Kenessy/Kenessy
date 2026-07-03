@@ -105,6 +105,12 @@ nah egyszercsak a smmiből ott van egy fekvő asztronauta a földön aki nem rea
 
 Attachments in chat: comic/codex screenshot stating Yasna finds Dr. Marit too late to save her.
 
+## Raw Intake 013 | 2026-06-27 | Marit loaded / last crew search / probe scan objective
+
+```text
+na bepakoltam őt is a hajoba és mentem az utolsó csávó után, mindjárt fel is fedeztem egy probet ott, amire a fonok azt modta hogy lekellscannelni és tanulni blőle. 
+```
+
 ## Raw Intake Template
 
 ```text
