@@ -16,6 +16,7 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | Camp repair / mission log | Krauta cable, mission log, detector, relay, androbot reboot. | First practical investigation/repair loop and clearer goals. |
 | Research area / structures | Cave landmark, journal, old metal structure, landing-area landmark. | Converts mission-log mystery into visible world evidence. |
 | Rescue / recovery | Marit, Koval, lander, body recovery. | Turns missing-crew objective into survival/loss/values evidence. |
+| Probe investigation | Probe object, scan UI, data readout, boss instruction. | Connects fish/probe anomaly to active evidence gathering. |
 | Friction evidence | Confusing route, unclear prompt, bad visibility, technical issue. | Friction ledger. |
 | Aquarium / fish / probes | Fish tank, aquatic life, probe fear cutscene, ocean-life comic panels. | Life-definition mystery and anomaly modeling. |
 | Comics / codex | Dragonfly, Regis III Issue, Lost, The Camp, and later comic pages. | Timeline repair, lore evidence, completion shape. |
@@ -62,9 +63,12 @@ Rule: screenshots should prove experience, not decorate it. Every image needs a 
 | INV-IMG-035 | Koval alive but unresponsive | spoiler-marked | screenshot needed |
 | INV-IMG-036 | Lander extraction / Koval onboard | spoiler-marked | screenshot needed |
 | INV-IMG-037 | Marit body recovery to lander | spoiler-marked | screenshot needed |
-| INV-IMG-038 | Worst downtime / friction if visualizable | spoiler-light | missing |
-| INV-IMG-039 | Spoiler-light final journey image | spoiler-light | missing |
-| INV-IMG-040 | Ending / completion appendix image | spoiler-full | missing |
+| INV-IMG-038 | Probe found near final crew route | spoiler-marked | screenshot needed |
+| INV-IMG-039 | Probe scan UI / data readout | spoiler-marked | screenshot needed |
+| INV-IMG-040 | Boss/Novik scan instruction, if subtitled | spoiler-marked | screenshot needed |
+| INV-IMG-041 | Worst downtime / friction if visualizable | spoiler-light | missing |
+| INV-IMG-042 | Spoiler-light final journey image | spoiler-light | missing |
+| INV-IMG-043 | Ending / completion appendix image | spoiler-full | missing |
 
 ## Comic screenshot intake — 2026-06-27
 
@@ -104,14 +108,24 @@ Latest raw note reports:
 
 ## Rescue / recovery intake — 2026-06-27
 
-Latest raw note reports:
+Latest raw notes report:
 
 - Dr. Marit is found lying on the ground, unresponsive, and not breathing.
 - Koval is found alive but unresponsive nearby.
 - Lander is sent down.
 - Koval is brought into the lander.
 - Daniel chooses to return for Marit's body and place it in the lander too.
+- Marit is later placed into the lander as well.
 - Comic/codex confirms Marit was found too late to save.
+
+## Probe investigation intake — 2026-06-27
+
+Latest raw note reports:
+
+- After placing Marit in the lander, Yasna continues toward the final missing crew member.
+- A probe is discovered nearby.
+- Novik/boss tells Yasna to scan it and learn from it.
+- This is high-value evidence because it may connect the earlier fish/probe fear anomaly to direct probe data.
 
 Current decision: keep these as **lore/codex/evidence images**, not just decoration. If used publicly, paraphrase the text and show selected panels as spoiler-marked visual support.
 
@@ -133,6 +147,8 @@ docs/assets/img/the-invincible/inv-025-mission-log-map.png
 docs/assets/img/the-invincible/inv-030-comic-landing-landmark.png
 docs/assets/img/the-invincible/inv-032-old-metal-structure.png
 docs/assets/img/the-invincible/inv-033-comic-marit-found.png
+docs/assets/img/the-invincible/inv-038-probe-found.png
+docs/assets/img/the-invincible/inv-039-probe-scan-ui.png
 ```
 
 ## Capture notes
@@ -147,6 +163,7 @@ docs/assets/img/the-invincible/inv-033-comic-marit-found.png
 - Mission-log and repair screenshots are high-value because they show the first active investigation/repair loop.
 - Old-structure screenshots are high-value because they turn the `STRUCTURES?` mystery into visible world evidence.
 - Marit/Koval/lander screenshots are high-value because they show the missing-crew objective changing from search to rescue/recovery.
+- Probe scan screenshots are high-value because they may explain probe behavior and connect multiple anomaly threads.
 
 ## Future public artifacts
 
