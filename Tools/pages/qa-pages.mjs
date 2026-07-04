@@ -17,7 +17,6 @@ const preyPath = 'plater-game-reports/games/prey/';
 const preyJourneyPath = 'plater-game-reports/games/prey/journey/';
 const invinciblePath = 'plater-game-reports/games/invincible/';
 const invincibleJourneyPath = 'plater-game-reports/games/invincible/journey/';
-const instnctPath = 'instnct/';
 const quantumBreakPanelManifestPath = 'assets/img/quantum-break/panel-manifest.json';
 const preyFlightRecorderManifestPath = 'assets/img/prey/flight-recorder-manifest.json';
 const invinciblePanelManifestPath = 'assets/img/invincible/panel-manifest.json';
@@ -30,7 +29,6 @@ const expectedLivePreyUrl = new URL(preyPath, liveBase).toString();
 const expectedLivePreyJourneyUrl = new URL(preyJourneyPath, liveBase).toString();
 const expectedLiveInvincibleUrl = new URL(invinciblePath, liveBase).toString();
 const expectedLiveInvincibleJourneyUrl = new URL(invincibleJourneyPath, liveBase).toString();
-const expectedLiveInstnctUrl = new URL(instnctPath, liveBase).toString();
 
 function checkpoint(message) {
   console.log(`[qa:pages:${mode}] ${new Date().toISOString()} ${message}`);
@@ -148,8 +146,6 @@ async function auditHttpSurface(base) {
   assert(root.text.includes('id="work"'), 'root homepage work section missing');
   assert(root.text.includes('Why This Profile'), 'root homepage hiring readout missing');
   assert(root.text.includes('Play It Together'), 'root homepage journal section missing');
-  assert(root.text.includes('href="instnct/"') && root.text.includes('INSTNCT') && root.text.includes('VRAXION') && root.text.includes('Product surface'), 'root homepage INSTNCT product surface missing');
-  assert(root.text.includes('assets/img/instnct/instnct-logo.png') && root.text.includes('assets/img/instnct/instnct-hero-bg.png'), 'root homepage INSTNCT assets missing');
   assert(root.text.includes('fullscreen dossier scrapbook pages') && root.text.includes('attached photos'), 'root homepage journal scrapbook guidance missing');
   assert(root.text.includes('Page 02 logged') && root.text.includes('class="journal-contract"') && root.text.includes('Dossier scrapbook pages') && root.text.includes('2 photos wired'), 'root homepage journal photo-evidence contract missing');
   assert(root.text.includes('class="journal-file-queue"') && root.text.includes('qb-page-02-a-airlock-threshold.png') && root.text.includes('qb-page-02-c-core-detonation.png') && root.text.includes('qb-page-02-d-frozen-will.png'), 'root homepage journal photo evidence filenames missing');
@@ -182,20 +178,6 @@ async function auditHttpSurface(base) {
   await fetchText(url(base, 'assets/img/invincible/invincible-hero-regis.png'));
   await fetchText(url(base, invinciblePanelManifestPath));
   await fetchText(url(base, 'assets/img/invincible/README.md'));
-  await fetchText(url(base, 'assets/img/instnct/instnct-logo.png'));
-  await fetchText(url(base, 'assets/img/instnct/vraxion-logo.png'));
-  await fetchText(url(base, 'assets/img/instnct/instnct-hero-bg.png'));
-
-  const instnct = await fetchText(url(base, instnctPath));
-  assert(instnct.text.includes('INSTNCT by VRAXION') && instnct.text.includes('A reflex-class reasoning engine.'), 'INSTNCT page hero missing');
-  assert(instnct.text.includes('Not AI. Not ever.') && instnct.text.includes('Local-first') && instnct.text.includes('No neural net'), 'INSTNCT page positioning missing');
-  assert(instnct.text.includes('Hallucination becomes a mode') && instnct.text.includes('data-mode="exact"') && instnct.text.includes('data-mode="imagination"'), 'INSTNCT hallucination toggle missing');
-  assert(instnct.text.includes('Run it. Measure it. Trust it.') && instnct.text.includes('5 us') && instnct.text.includes('52x'), 'INSTNCT proof/benchmark section missing');
-  assert(instnct.text.includes('Prismion') && instnct.text.includes('alpha-Sync') && instnct.text.includes('Bounded path'), 'INSTNCT fabric section missing');
-  assert(instnct.text.includes('instnct-logo.png') && instnct.text.includes('vraxion-logo.png') && instnct.text.includes('instnct-hero-bg.png'), 'INSTNCT page image assets missing');
-  assert(instnct.text.includes('mailto:') && instnct.text.includes('Static Pages build'), 'INSTNCT static signal/footer missing');
-  assert(instnct.text.includes(`content="${buildId}"`) && instnct.text.includes(`Static Pages build ${buildId}`), 'INSTNCT page build id missing');
-  assert(!instnct.text.includes('/api/notify') && !instnct.text.includes('Prisma'), 'INSTNCT static page should not expose nonfunctional Next API wiring');
 
   const reports = await fetchText(url(base, 'plater-game-reports/'));
   assert(reports.text.includes(`games/metro-2033-redux/?v=${buildId}`), 'reports index does not link current build id');
@@ -348,7 +330,6 @@ async function auditHttpSurface(base) {
   assert(robots.text.includes('Sitemap:'), 'robots.txt missing sitemap reference');
 
   const sitemap = await fetchText(url(base, 'sitemap.xml'));
-  assert(sitemap.text.includes(expectedLiveInstnctUrl), 'sitemap missing INSTNCT URL');
   assert(sitemap.text.includes(expectedLiveReportUrl), 'sitemap missing live report URL');
   assert(sitemap.text.includes(expectedLiveQuantumBreakUrl), 'sitemap missing Quantum Break report URL');
   assert(sitemap.text.includes(expectedLiveQuantumBreakJourneyUrl), 'sitemap missing Quantum Break journey URL');
@@ -407,7 +388,6 @@ async function auditViewports(browser, base, buildId) {
       const quantumSplash = document.querySelector('.qb-card .review-media img');
       const preySplash = document.querySelector('.prey-card .review-media img');
       const invincibleSplash = document.querySelector('.invincible-card .review-media img');
-      const instnctLogo = document.querySelector('a[href="instnct/"] img[src*="instnct-logo"]');
       return {
         title: document.title,
         hasHomeRoot: Boolean(document.querySelector('.home-root')),
@@ -418,14 +398,12 @@ async function auditViewports(browser, base, buildId) {
         hasPreyJourneyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/prey/journey/')),
         hasInvincibleLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/invincible/')),
         hasInvincibleJourneyLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('plater-game-reports/games/invincible/journey/')),
-        hasInstnctLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href') === 'instnct/'),
         hasApocalypseLink: [...document.querySelectorAll('a[href]')].some((el) => el.getAttribute('href')?.includes('apocalypse-express/')),
         imageComplete: Boolean(proofImage && proofImage.complete && proofImage.naturalWidth > 0),
         reviewSplashComplete: Boolean(reviewSplash && reviewSplash.complete && reviewSplash.naturalWidth > 0),
         quantumSplashComplete: Boolean(quantumSplash && quantumSplash.complete && quantumSplash.naturalWidth > 0),
         preySplashComplete: Boolean(preySplash && preySplash.complete && preySplash.naturalWidth > 0),
         invincibleSplashComplete: Boolean(invincibleSplash && invincibleSplash.complete && invincibleSplash.naturalWidth > 0),
-        instnctLogoComplete: Boolean(instnctLogo && instnctLogo.complete && instnctLogo.naturalWidth > 0),
         horizontalOverflow: root.scrollWidth > root.clientWidth + 1,
         rootWidth: root.scrollWidth,
         clientWidth: root.clientWidth,
@@ -443,14 +421,12 @@ async function auditViewports(browser, base, buildId) {
     assert(homeMetrics.hasPreyJourneyLink, `${viewport.name} homepage missing Prey recorder link`);
     assert(homeMetrics.hasInvincibleLink, `${viewport.name} homepage missing The Invincible link`);
     assert(homeMetrics.hasInvincibleJourneyLink, `${viewport.name} homepage missing The Invincible playthrough link`);
-    assert(homeMetrics.hasInstnctLink, `${viewport.name} homepage missing INSTNCT link`);
     assert(homeMetrics.hasApocalypseLink, `${viewport.name} homepage missing Apocalypse Express link`);
     assert(homeMetrics.imageComplete, `${viewport.name} homepage hero image did not load`);
     assert(homeMetrics.reviewSplashComplete, `${viewport.name} homepage Metro review splash did not load`);
     assert(homeMetrics.quantumSplashComplete, `${viewport.name} homepage Quantum Break splash did not load`);
     assert(homeMetrics.preySplashComplete, `${viewport.name} homepage Prey splash did not load`);
     assert(homeMetrics.invincibleSplashComplete, `${viewport.name} homepage The Invincible splash did not load`);
-    assert(homeMetrics.instnctLogoComplete, `${viewport.name} homepage INSTNCT logo did not load`);
     assert(!homeMetrics.horizontalOverflow, `${viewport.name} homepage overflow ${homeMetrics.rootWidth}/${homeMetrics.clientWidth}`);
     assert(homeMetrics.linkCount >= 7, `${viewport.name} homepage expected navigation links`);
     assert(!homeMetrics.badText, `${viewport.name} homepage has placeholder text`);
