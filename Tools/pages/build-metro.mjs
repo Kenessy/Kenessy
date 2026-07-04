@@ -18,6 +18,7 @@ const preyReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/prey')
 const preyJourneyDir = path.join(preyReportDir, 'journey');
 const invincibleReportDir = path.join(repoRoot, 'docs/plater-game-reports/games/invincible');
 const invincibleJourneyDir = path.join(invincibleReportDir, 'journey');
+const instnctDir = path.join(repoRoot, 'docs/instnct');
 const bundleName = 'main_canvas_diegetic_equation.bundle.js';
 const bundlePath = path.join(reportDir, bundleName);
 const reportIndexPath = path.join(reportDir, 'index.html');
@@ -27,6 +28,7 @@ const preyReportIndexPath = path.join(preyReportDir, 'index.html');
 const preyJourneyIndexPath = path.join(preyJourneyDir, 'index.html');
 const invincibleReportIndexPath = path.join(invincibleReportDir, 'index.html');
 const invincibleJourneyIndexPath = path.join(invincibleJourneyDir, 'index.html');
+const instnctIndexPath = path.join(instnctDir, 'index.html');
 const quantumBreakReportSourcePath = path.join(scriptDir, 'sources/quantum-break/report.html');
 const quantumBreakJourneySourcePath = path.join(scriptDir, 'sources/quantum-break/journey.html');
 const quantumBreakAssetManifestSourcePath = path.join(scriptDir, 'sources/quantum-break/assets/panel-manifest.json');
@@ -40,6 +42,8 @@ const invincibleReportSourcePath = path.join(scriptDir, 'sources/invincible/repo
 const invincibleJourneySourcePath = path.join(scriptDir, 'sources/invincible/journey.html');
 const invincibleAssetManifestSourcePath = path.join(scriptDir, 'sources/invincible/assets/panel-manifest.json');
 const invincibleAssetReadmeSourcePath = path.join(scriptDir, 'sources/invincible/assets/README.md');
+const instnctSourcePath = path.join(scriptDir, 'sources/instnct/index.html');
+const instnctAssetSourceDir = path.join(scriptDir, 'sources/instnct/assets');
 const quantumBreakAssetPublicDir = path.join(repoRoot, 'docs/assets/img/quantum-break');
 const quantumBreakAssetManifestPublicPath = path.join(quantumBreakAssetPublicDir, 'panel-manifest.json');
 const quantumBreakAssetReadmePublicPath = path.join(quantumBreakAssetPublicDir, 'README.md');
@@ -51,6 +55,7 @@ const preySplashPublicPath = path.join(repoRoot, 'docs/assets/img/prey-review-sp
 const invincibleAssetPublicDir = path.join(repoRoot, 'docs/assets/img/invincible');
 const invincibleAssetManifestPublicPath = path.join(invincibleAssetPublicDir, 'panel-manifest.json');
 const invincibleAssetReadmePublicPath = path.join(invincibleAssetPublicDir, 'README.md');
+const instnctAssetPublicDir = path.join(repoRoot, 'docs/assets/img/instnct');
 const rootIndexPath = path.join(repoRoot, 'docs/index.html');
 const reportsIndexPath = path.join(repoRoot, 'docs/plater-game-reports/index.html');
 const robotsPath = path.join(repoRoot, 'docs/robots.txt');
@@ -66,6 +71,7 @@ const preyReportPath = 'plater-game-reports/games/prey/';
 const preyJourneyPath = 'plater-game-reports/games/prey/journey/';
 const invincibleReportPath = 'plater-game-reports/games/invincible/';
 const invincibleJourneyPath = 'plater-game-reports/games/invincible/journey/';
+const instnctPath = 'instnct/';
 const reportUrl = new URL(reportPath, siteBase).toString();
 const quantumBreakReportUrl = new URL(quantumBreakReportPath, siteBase).toString();
 const quantumBreakJourneyUrl = new URL(quantumBreakJourneyPath, siteBase).toString();
@@ -73,9 +79,11 @@ const preyReportUrl = new URL(preyReportPath, siteBase).toString();
 const preyJourneyUrl = new URL(preyJourneyPath, siteBase).toString();
 const invincibleReportUrl = new URL(invincibleReportPath, siteBase).toString();
 const invincibleJourneyUrl = new URL(invincibleJourneyPath, siteBase).toString();
+const instnctUrl = new URL(instnctPath, siteBase).toString();
 const reportsUrl = new URL('plater-game-reports/', siteBase).toString();
 const apocalypseUrl = new URL('apocalypse-express/', siteBase).toString();
 const githubUrl = 'https://github.com/Kenessy/Kenessy';
+const instnctAssetNames = ['instnct-logo.png', 'vraxion-logo.png', 'instnct-hero-bg.png'];
 
 function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
@@ -372,6 +380,7 @@ function rootHtml(buildId) {
     preyJourneyPath,
     invinciblePath: invincibleReportPath,
     invincibleJourneyPath,
+    instnctPath,
     apocalypsePath: 'apocalypse-express/',
     githubUrl
   });
@@ -444,7 +453,7 @@ Sitemap: ${new URL('sitemap.xml', siteBase).toString()}
 }
 
 function sitemapXml(buildDate) {
-  const urls = [siteBase, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, preyReportUrl, preyJourneyUrl, invincibleReportUrl, invincibleJourneyUrl, apocalypseUrl];
+  const urls = [siteBase, instnctUrl, reportsUrl, reportUrl, quantumBreakReportUrl, quantumBreakJourneyUrl, preyReportUrl, preyJourneyUrl, invincibleReportUrl, invincibleJourneyUrl, apocalypseUrl];
   const items = urls.map((url) => `  <url>
     <loc>${url}</loc>
     <lastmod>${buildDate}</lastmod>
@@ -513,6 +522,14 @@ async function main() {
   const invincibleAssetManifest = await readFile(invincibleAssetManifestSourcePath, 'utf8');
   logStep(`reading source ${path.relative(repoRoot, invincibleAssetReadmeSourcePath)}`);
   const invincibleAssetReadme = await readFile(invincibleAssetReadmeSourcePath, 'utf8');
+  logStep(`reading source ${path.relative(repoRoot, instnctSourcePath)}`);
+  const instnctSourceHtml = await readFile(instnctSourcePath, 'utf8');
+  const instnctAssets = [];
+  for (const assetName of instnctAssetNames) {
+    const assetPath = path.join(instnctAssetSourceDir, assetName);
+    logStep(`reading source ${path.relative(repoRoot, assetPath)}`);
+    instnctAssets.push({ name: assetName, buffer: await readFile(assetPath) });
+  }
   const quantumBreakAssetManifestJson = JSON.parse(quantumBreakAssetManifest);
   const preyAssetManifestJson = JSON.parse(preyAssetManifest);
   const invincibleAssetManifestJson = JSON.parse(invincibleAssetManifest);
@@ -536,13 +553,16 @@ async function main() {
     invincibleReportSourceHtml,
     invincibleJourneySourceHtml,
     invincibleAssetManifest,
-    invincibleAssetReadme
+    invincibleAssetReadme,
+    instnctSourceHtml,
+    ...instnctAssets.map((asset) => asset.buffer.toString('base64'))
   ].join('\n\n/* kenessy-pages-build-input */\n\n');
   const buildId = sha256(buildHashInput).slice(0, 12);
   const preyReportHtml = preyReportSourceHtml.replaceAll('__BUILD_ID__', buildId);
   const preyJourneyHtml = wiredPreyJourneyHtml.replaceAll('__BUILD_ID__', buildId);
   const invincibleReportHtml = invincibleReportSourceHtml.replaceAll('__BUILD_ID__', buildId);
   const invincibleJourneyHtml = wiredInvincibleJourneyHtml.replaceAll('__BUILD_ID__', buildId);
+  const instnctHtml = instnctSourceHtml.replaceAll('__BUILD_ID__', buildId);
   const { css, cssStart } = extractTemplateCss(source);
   const transformedSource = transformedSourceWithoutInlineStyle(source, cssStart);
 
@@ -580,9 +600,11 @@ async function main() {
     await mkdir(preyJourneyDir, { recursive: true });
     await mkdir(invincibleReportDir, { recursive: true });
     await mkdir(invincibleJourneyDir, { recursive: true });
+    await mkdir(instnctDir, { recursive: true });
     await mkdir(quantumBreakAssetPublicDir, { recursive: true });
     await mkdir(preyAssetPublicDir, { recursive: true });
     await mkdir(invincibleAssetPublicDir, { recursive: true });
+    await mkdir(instnctAssetPublicDir, { recursive: true });
     await writeFile(reportIndexPath, reportHtml({ appCss: css, buildId, sourceHash, bundleHash }), 'utf8');
     await writeFile(quantumBreakReportIndexPath, quantumBreakReportHtml, 'utf8');
     await writeFile(quantumBreakJourneyIndexPath, wiredQuantumBreakJourneyHtml, 'utf8');
@@ -590,6 +612,7 @@ async function main() {
     await writeFile(preyJourneyIndexPath, preyJourneyHtml, 'utf8');
     await writeFile(invincibleReportIndexPath, invincibleReportHtml, 'utf8');
     await writeFile(invincibleJourneyIndexPath, invincibleJourneyHtml, 'utf8');
+    await writeFile(instnctIndexPath, instnctHtml, 'utf8');
     await writeFile(quantumBreakAssetManifestPublicPath, quantumBreakAssetManifest, 'utf8');
     await writeFile(quantumBreakAssetReadmePublicPath, quantumBreakAssetReadme, 'utf8');
     await writeFile(preyAssetManifestPublicPath, preyAssetManifest, 'utf8');
@@ -598,6 +621,9 @@ async function main() {
     await writeFile(preySplashPublicPath, preySplashPng);
     await writeFile(invincibleAssetManifestPublicPath, invincibleAssetManifest, 'utf8');
     await writeFile(invincibleAssetReadmePublicPath, invincibleAssetReadme, 'utf8');
+    for (const asset of instnctAssets) {
+      await writeFile(path.join(instnctAssetPublicDir, asset.name), asset.buffer);
+    }
     await writeFile(rootIndexPath, rootHtml(buildId), 'utf8');
     await writeFile(reportsIndexPath, reportsIndexHtml(buildId), 'utf8');
     await writeFile(robotsPath, robotsTxt(), 'utf8');

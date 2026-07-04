@@ -1,5 +1,16 @@
 # GitHub Pages Site
 
-This folder is prepared as a GitHub Pages publishing source for Apocalypse Express.
+This folder is the generated GitHub Pages publishing source for Kenessy artifacts.
 
-Use branch `Apocalypse-Express-DnD-Game` and folder `/docs` in GitHub Pages settings.
+Current public surfaces:
+
+- `index.html` - OBJECTIVE/ACTUAL portfolio home.
+- `instnct/` - INSTNCT / VRAXION static product surface.
+- `plater-game-reports/` - PLATER / ALERTED game reports and replay journals.
+- `apocalypse-express/` - Apocalypse Express design vault.
+
+Regenerate with:
+
+```bash
+npm run build:metro
+```

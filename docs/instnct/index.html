@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INSTNCT by VRAXION - Local Reflex Reasoning</title>
+<link rel="icon" href="data:,">
+<link rel="canonical" href="https://kenessy.github.io/Kenessy/instnct/">
+<meta name="description" content="INSTNCT is VRAXION's local-first T1 reflex reasoning surface: not AI, no neural net, microsecond selector path, offline runnable, and built around bounded symbolic grounding.">
+<meta name="theme-color" content="#050507">
+<meta name="build-id" content="09ea70dc730b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="INSTNCT by VRAXION">
+<meta property="og:description" content="A serious static product page for INSTNCT: local-first reflex reasoning, not AI, built around bounded symbolic grounding.">
+<meta property="og:url" content="https://kenessy.github.io/Kenessy/instnct/">
+<meta property="og:image" content="https://kenessy.github.io/Kenessy/assets/img/instnct/instnct-hero-bg.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="INSTNCT by VRAXION">
+<meta name="twitter:description" content="Local-first reflex reasoning. Not AI. Runs offline.">
+<meta name="twitter:image" content="https://kenessy.github.io/Kenessy/assets/img/instnct/instnct-hero-bg.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "INSTNCT",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Local desktop and edge targets",
+  "description": "A local-first reflex reasoning surface from VRAXION, built around bounded symbolic grounding rather than neural network generation.",
+  "author": { "@type": "Person", "name": "Daniel Kenessy" },
+  "publisher": { "@type": "Organization", "name": "VRAXION" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": ["Local-first runtime", "No neural net", "Exact recall mode", "Bounded imagination mode", "Microsecond selector path"]
+}
+</script>
+<style>
+:root{
+  color-scheme:dark;
+  --void:#050507;
+  --void2:#0a0b0e;
+  --void3:#11141b;
+  --ink:#f0f4f8;
+  --muted:#8a93a4;
+  --soft:#b8c0ce;
+  --cyan:#00e5ff;
+  --cyan-soft:#b0f4ff;
+  --seal:#ff3d81;
+  --seal-soft:#ffd0e0;
+  --line:rgba(255,255,255,.10);
+  --line2:rgba(255,255,255,.18);
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),
+    linear-gradient(180deg,var(--void),#080a10 48%,var(--void));
+  background-size:56px 56px,auto;
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;
+  text-rendering:geometricPrecision;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.028;
+  z-index:3;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit}
+.wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
+.skip-link{
+  position:fixed;
+  top:12px;
+  left:12px;
+  z-index:100;
+  transform:translateY(-150%);
+  border:1px solid rgba(0,229,255,.42);
+  background:rgba(5,5,7,.96);
+  color:var(--cyan-soft);
+  padding:10px 14px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:800;
+}
+.skip-link:focus{transform:translateY(0)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.progress{
+  position:fixed;
+  inset:0 0 auto 0;
+  height:3px;
+  z-index:90;
+  background:linear-gradient(90deg,var(--cyan),var(--seal));
+  transform-origin:left center;
+  transform:scaleX(0);
+}
+.site-header{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:80;
+  border-bottom:1px solid var(--line);
+  background:rgba(5,5,7,.74);
+  backdrop-filter:blur(16px);
+}
+.site-header .wrap{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  font-weight:1000;
+}
+.brand img{height:28px;width:auto}
+.brand span{font-size:16px}
+.brand small{display:block;color:var(--muted);font-size:10px;font-weight:800}
+.nav{display:flex;gap:7px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.nav a{
+  min-height:36px;
+  display:inline-flex;
+  align-items:center;
+  border:1px solid transparent;
+  padding:8px 10px;
+  color:var(--soft);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.nav a:hover,.nav a:focus-visible{border-color:var(--line2);color:#fff}
+.nav .hot{border-color:rgba(0,229,255,.34);color:var(--cyan-soft)}
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:grid;
+  align-items:center;
+  overflow:hidden;
+  padding:118px 0 64px;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,5,7,.97) 0%,rgba(5,5,7,.86) 42%,rgba(5,5,7,.42) 72%,rgba(5,5,7,.92) 100%),
+    linear-gradient(180deg,rgba(5,5,7,.18),var(--void) 97%),
+    url("../assets/img/instnct/instnct-hero-bg.png") center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,229,255,.052) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(255,61,129,.034) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(90deg,#000,rgba(0,0,0,.84),transparent);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:2;max-width:820px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:32px;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.035);
+  padding:7px 10px;
+  color:var(--soft);
+  font-size:11px;
+  font-weight:950;
+  text-transform:uppercase;
+}
+.badge.cyan{border-color:rgba(0,229,255,.34);color:var(--cyan-soft);background:rgba(0,229,255,.06)}
+.badge.seal{border-color:rgba(255,61,129,.38);color:var(--seal-soft);background:rgba(255,61,129,.08)}
+.wordmark{width:min(560px,100%);filter:drop-shadow(0 0 42px rgba(0,229,255,.28));margin-bottom:18px}
+.creator{color:var(--muted);font-size:12px;font-weight:850;text-transform:uppercase}
+.creator b{color:var(--seal-soft)}
+.hero h1{
+  margin-top:26px;
+  max-width:760px;
+  color:var(--ink);
+  font-size:44px;
+  line-height:1.02;
+  font-weight:1000;
+}
+.mix{background:linear-gradient(90deg,var(--cyan),var(--seal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-lead{
+  max-width:650px;
+  margin-top:20px;
+  color:#c5ccd8;
+  font-size:18px;
+  line-height:1.62;
+  font-weight:650;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.button{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(240,244,248,.88);
+  background:var(--ink);
+  color:var(--void);
+  padding:11px 16px;
+  border-radius:7px;
+  font-size:14px;
+  font-weight:950;
+}
+.button.secondary{border-color:var(--line2);background:rgba(255,255,255,.04);color:var(--ink)}
+.button:hover{filter:brightness(1.08)}
+.readout{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:36px;
+  max-width:760px;
+}
+.readout div{
+  min-height:86px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  padding:13px;
+  border-radius:8px;
+}
+.readout b{display:block;color:var(--cyan);font-size:24px;font-weight:1000}
+.readout span{display:block;margin-top:7px;color:var(--muted);font-size:12px;line-height:1.35;font-weight:800}
+.section{position:relative;padding:88px 0;border-top:1px solid var(--line);background:rgba(5,5,7,.84)}
+.section.alt{background:rgba(10,11,14,.86)}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:28px;
+}
+.kicker{color:var(--cyan);font-size:12px;font-weight:1000;text-transform:uppercase}
+.section-head h2,.solo-head h2{
+  margin-top:10px;
+  max-width:760px;
+  font-size:38px;
+  line-height:1.05;
+  font-weight:1000;
+}
+.section-head p{
+  max-width:430px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.6;
+  font-weight:700;
+}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border-radius:8px;
+  padding:20px;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--seal),transparent 80%);
+  opacity:.78;
+}
+.card h3{font-size:20px;line-height:1.12;font-weight:1000}
+.card p{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.58;font-weight:700}
+.card .label{display:block;margin-bottom:14px;color:var(--cyan);font-size:11px;font-weight:1000;text-transform:uppercase}
+.hallucination{
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(320px,1.05fr);
+  gap:18px;
+  align-items:stretch;
+}
+.toggle-panel{border-color:rgba(0,229,255,.24)}
+.toggle-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+.toggle-row button{
+  min-height:38px;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.035);
+  color:var(--soft);
+  border-radius:7px;
+  padding:8px 11px;
+  font-weight:900;
+  cursor:pointer;
+}
+.toggle-row button[aria-pressed="true"]{border-color:rgba(0,229,255,.52);color:var(--cyan-soft);background:rgba(0,229,255,.08)}
+.mode-box{
+  min-height:172px;
+  border:1px solid rgba(0,229,255,.25);
+  background:
+    linear-gradient(90deg,rgba(0,229,255,.045) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(0,229,255,.07),rgba(255,61,129,.04));
+  background-size:26px 26px,auto;
+  border-radius:8px;
+  padding:18px;
+}
+.mode-box b{display:block;color:var(--cyan-soft);font-size:22px}
+.mode-box p{margin-top:10px;color:#c7d0dd;line-height:1.58;font-weight:720}
+.benchmark{
+  display:grid;
+  gap:16px;
+  max-width:760px;
+}
+.bar-row{display:grid;grid-template-columns:132px minmax(0,1fr) 82px;gap:12px;align-items:center}
+.bar-row span{color:var(--soft);font-size:13px;font-weight:900}
+.bar{
+  height:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  overflow:hidden;
+  border-radius:6px;
+}
+.bar i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--cyan),var(--seal));box-shadow:0 0 26px rgba(0,229,255,.22)}
+.bar-row b{text-align:right;color:var(--ink)}
+.terminal{
+  border:1px solid rgba(0,229,255,.22);
+  background:
+    repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,229,255,.035) 3px),
+    #07090d;
+  border-radius:8px;
+  padding:18px;
+  color:#d7faff;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:13px;
+  line-height:1.78;
+  min-height:250px;
+}
+.terminal .prompt{color:var(--cyan)}
+.terminal .refuse{color:var(--seal-soft)}
+.diagram{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  align-items:center;
+}
+.node{
+  min-height:112px;
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  border-radius:8px;
+  padding:12px;
+  text-align:center;
+}
+.node b{color:var(--cyan-soft);font-size:15px}
+.node span{margin-top:7px;color:var(--muted);font-size:12px;font-weight:750}
+.arrow{height:2px;background:linear-gradient(90deg,var(--cyan),var(--seal))}
+.roadmap{display:grid;gap:10px}
+.roadmap li{
+  list-style:none;
+  display:grid;
+  grid-template-columns:56px minmax(0,1fr) auto;
+  gap:14px;
+  align-items:center;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  border-radius:8px;
+  padding:15px;
+}
+.roadmap strong{color:var(--cyan);font-size:22px}
+.roadmap b{display:block}
+.roadmap p{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.45}
+.pill{border:1px solid rgba(255,61,129,.32);color:var(--seal-soft);padding:5px 8px;border-radius:999px;font-size:11px;font-weight:1000;text-transform:uppercase}
+.faq{display:grid;gap:10px}
+details{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  border-radius:8px;
+  padding:15px 16px;
+}
+summary{cursor:pointer;color:var(--ink);font-weight:1000}
+details p{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.58}
+.final-cta{
+  border:1px solid rgba(0,229,255,.28);
+  background:
+    linear-gradient(135deg,rgba(0,229,255,.09),rgba(255,61,129,.08)),
+    rgba(255,255,255,.03);
+  border-radius:8px;
+  padding:28px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:18px;
+  align-items:center;
+}
+.footer{border-top:1px solid var(--line);background:#050507;padding:24px 0;color:var(--muted);font-size:13px}
+.footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.footer a{color:var(--cyan-soft)}
+.backtop{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:70;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(0,229,255,.34);
+  background:rgba(5,5,7,.84);
+  color:var(--cyan-soft);
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  font-weight:1000;
+  opacity:0;
+  pointer-events:none;
+}
+.backtop.visible{opacity:1;pointer-events:auto}
+@media(max-width:900px){
+  .hero h1{font-size:36px}
+  .readout,.grid3,.grid2,.hallucination,.diagram{grid-template-columns:1fr}
+  .section-head{display:grid}
+  .roadmap li{grid-template-columns:42px minmax(0,1fr)}
+  .roadmap .pill{grid-column:2}
+  .final-cta{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .wrap{width:min(calc(100% - 24px),var(--max))}
+  .site-header{position:relative}
+  .site-header .wrap{align-items:flex-start;flex-direction:column;padding:10px 0}
+  .nav{justify-content:flex-start}
+  .nav a{font-size:11px}
+  .hero{min-height:auto;padding:44px 0 54px}
+  .hero h1{font-size:30px}
+  .hero-lead{font-size:16px}
+  .section{padding:58px 0}
+  .section-head h2,.solo-head h2{font-size:30px}
+  .bar-row{grid-template-columns:1fr}
+  .bar-row b{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress" id="progress"></div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="Kenessy home">
+      <img src="../assets/img/instnct/vraxion-logo.png" alt="VRAXION logo" width="1462" height="254">
+      <span>VRAXION<small>INSTNCT public surface</small></span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#not-ai">Not AI</a>
+      <a href="#trust">Trust</a>
+      <a href="#fabric">Fabric</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="hot" href="#signal">Signal</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="badges">
+          <span class="badge cyan">T1 reflex class</span>
+          <span class="badge seal">Not AI</span>
+          <span class="badge">Local-first</span>
+        </div>
+        <img class="wordmark" src="../assets/img/instnct/instnct-logo.png" alt="INSTNCT" width="1478" height="254" decoding="async" fetchpriority="high">
+        <p class="creator">Created and maintained by <b>Daniel Kenessy</b> / VRAXION</p>
+        <h1>A reflex-class reasoning engine. <span class="mix">Not AI.</span> Runs locally.</h1>
+        <p class="hero-lead">INSTNCT is VRAXION's first public SymGround demo surface: a microsecond-class reasoning core built on bounded symbolic grounding. No neural net. No phone-home. Pull the network and it still runs.</p>
+        <div class="hero-actions">
+          <a class="button" href="#signal">Signal interest</a>
+          <a class="button secondary" href="https://github.com/VRAXION/VRAXION">Open VRAXION repo</a>
+          <a class="button secondary" href="../">Kenessy home</a>
+        </div>
+        <div class="readout" aria-label="INSTNCT proof readout">
+          <div><b>5 us</b><span>warm selector p50 target</span></div>
+          <div><b>0 GPU</b><span>CPU and RAM baseline</span></div>
+          <div><b>Offline</b><span>local-first verification</span></div>
+          <div><b>T1</b><span>free baseline target</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="not-ai">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Position</p><h2>Not AI. Not ever.</h2></div>
+        <p>Smarter means deeper internal structure and more curated skills, not a bigger probabilistic blob.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><span class="label">Own fabric</span><h3>Not a wrapper around someone else's model.</h3><p>The alpha-Sync substrate is positioned as native VRAXION infrastructure, not a hosted LLM shell with different branding.</p></article>
+        <article class="card"><span class="label">Structural</span><h3>Bounded path, not sampled distribution.</h3><p>The public claim is narrow and testable: exact recall refuses when it cannot stay inside approved transformations.</p></article>
+        <article class="card"><span class="label">Local-first</span><h3>Disconnect the network and test the claim.</h3><p>The page keeps the proof burden concrete: offline behavior, latency, footprint, and repeatable local runs.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hallucination">
+    <div class="wrap hallucination">
+      <div class="solo-head">
+        <p class="kicker">Flagship capability</p>
+        <h2>Hallucination becomes a mode, not a surprise.</h2>
+        <p class="hero-lead">The useful distinction is simple: exact recall emits only approved transformations; imagination composes beyond seen patterns inside a bounded drift budget.</p>
+      </div>
+      <article class="card toggle-panel">
+        <span class="label">Mode switch</span>
+        <h3 id="mode-title">Exact recall</h3>
+        <div class="toggle-row">
+          <button type="button" data-mode="exact" aria-pressed="true">Exact recall</button>
+          <button type="button" data-mode="imagination" aria-pressed="false">Imagination</button>
+        </div>
+        <div class="mode-box" id="mode-box">
+          <b>Refuse rather than invent.</b>
+          <p>When the requested pattern is outside approved grounding, the engine should stop instead of making a plausible-looking guess.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section alt" id="trust">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Trust protocol</p><h2>Run it. Measure it. Trust it.</h2></div>
+        <p>The GLM build's strongest move was making proof visible. This static version keeps that: footprint, local run, encrypted binary, and measured selector path.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><span class="label">Footprint</span><h3>300MB-1GB target model size.</h3><p>Training-dependent, CPU/RAM oriented, and aimed at hardware people actually own.</p></article>
+        <article class="card"><span class="label">Provable</span><h3>Pull the network.</h3><p>Remote dependency cannot hide inside a microsecond local timing claim if the machine is offline.</p></article>
+        <article class="card"><span class="label">Source boundary</span><h3>Encrypted binary first.</h3><p>The method stays protected while behavior remains inspectable through local runs and repeatable checks.</p></article>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <span class="label">Benchmark / 16k mixed-unique workload</span>
+        <div class="benchmark">
+          <div class="bar-row"><span>INSTNCT selector</span><div class="bar"><i style="--w:18%"></i></div><b>5 us</b></div>
+          <div class="bar-row"><span>Baseline path</span><div class="bar"><i style="--w:94%"></i></div><b>261 us</b></div>
+          <div class="bar-row"><span>Speedup</span><div class="bar"><i style="--w:52%"></i></div><b>52x</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fabric">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Fabric</p><h2>Prismion to alpha-Sync to bounded path.</h2></div>
+        <p>High-level only. The page explains the shape without pretending to publish the core grounding method.</p>
+      </div>
+      <div class="diagram" aria-label="INSTNCT fabric diagram">
+        <div class="node"><b>Input</b><span>Observed signal</span></div>
+        <div class="arrow"></div>
+        <div class="node"><b>Prismion</b><span>Data refraction unit</span></div>
+        <div class="arrow"></div>
+        <div class="node"><b>Bounded path</b><span>Inspectable result route</span></div>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <article class="card"><span class="label">Manifesto</span><h3>We did not build a better AI. We built something else.</h3><p>Grounded. Traceable. Bounded. No weights. No probabilities. A fabric that reasons instead of guessing.</p></article>
+        <article class="terminal" aria-label="INSTNCT CLI demo"><span class="prompt">$</span> instnct --version<br>instnct t1-local preview<br><span class="prompt">$</span> instnct run --mode exact-recall<br>selector p50: 5 us<br>network: unavailable<br>status: still running<br><span class="prompt">$</span> query "invent missing source text"<br><span class="refuse">refused: outside grounded pattern</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="roadmap">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Roadmap</p><h2>Local scale, not current capability theater.</h2></div>
+        <p>Direction, not promises. The order matters: prove locally first, then expand.</p>
+      </div>
+      <ol class="roadmap">
+        <li><strong>01</strong><div><b>Local releases</b><p>Stabilize the T1 binary. Ship the smallest honest version. Listen, fix, repeat.</p></div><span class="pill">now</span></li>
+        <li><strong>02</strong><div><b>Skill libraries</b><p>Curated, inspectable packs that extend capability without bloating the core.</p></div><span class="pill">next</span></li>
+        <li><strong>03</strong><div><b>Node mesh</b><p>Opt-in global consensus matrix. No personal data. Paid or opt-out.</p></div><span class="pill">research</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Founder note</p><h2>Founder-led. Narrow. Verified in small loops.</h2></div>
+        <p>VRAXION is the project identity named by Daniel Kenessy. Public notes show direction and discipline, not a promise of release, scale, or final capability.</p>
+      </div>
+      <div class="grid2">
+        <article class="card"><span class="label">Build status</span><h3>Prototype, test, document, refine.</h3><p>Built with AI coding tools, but not presented as magic. The site keeps the boundary visible.</p></article>
+        <article class="card"><span class="label">Near mission</span><h3>Make local intelligence affordable enough to try.</h3><p>Ship the smallest honest version, learn from real runs, and earn the next step.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="kicker">Questions</p><h2>Skepticism is the correct response.</h2></div>
+        <p>The static page keeps the claims testable and avoids pretending the protected method is public.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Is it really not AI?</summary><p>The public position is explicit: no neural network, no probabilistic model core, no hosted LLM wrapper. The proof burden is in local behavior, latency, and refusal semantics.</p></details>
+        <details><summary>How do I verify it is local?</summary><p>Run the binary, disconnect the network, repeat the same checks, and compare timing. Remote inference cannot hide cleanly in a 5 us selector claim.</p></details>
+        <details><summary>Why not publish the grounding method?</summary><p>The grounding method is the protected asset. The current trade is encrypted binary plus inspectable behavior.</p></details>
+        <details><summary>What can it do now?</summary><p>T1 is framed as a bounded baseline, not an all-knowing system. The first useful version should be small, local, and honest about limits.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="signal">
+    <div class="wrap">
+      <div class="final-cta">
+        <div>
+          <p class="kicker">Training in progress</p>
+          <h2>T1 is coming. Be first to run it.</h2>
+          <p class="hero-lead">The first signal path stays direct and human-reviewed while T1 is still being shaped. Send a short note if you want early access context, benchmark notes, or release updates.</p>
+        </div>
+        <div class="hero-actions" style="margin-top:0">
+          <a class="button" href="mailto:kenessy.daniel@gmail.com?subject=INSTNCT%20T1%20signal">Send signal</a>
+          <a class="button secondary" href="https://github.com/VRAXION/VRAXION">Open repo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>INSTNCT / VRAXION / Static Pages build 09ea70dc730b</span>
+    <span><a href="../">Kenessy home</a> / <a href="../plater-game-reports/">Game reports</a> / <a href="https://github.com/Kenessy/Kenessy">GitHub</a></span>
+  </div>
+</footer>
+<a class="backtop" id="backtop" href="#main" aria-label="Back to top">Top</a>
+<script>
+const progress = document.getElementById('progress');
+const backtop = document.getElementById('backtop');
+function syncChrome(){
+  const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const ratio = Math.min(1, Math.max(0, scrollY / max));
+  progress.style.transform = `scaleX(${ratio})`;
+  backtop.classList.toggle('visible', scrollY > innerHeight * 1.2);
+}
+addEventListener('scroll', syncChrome, { passive: true });
+addEventListener('resize', syncChrome);
+syncChrome();
+const modeButtons = [...document.querySelectorAll('[data-mode]')];
+const modeTitle = document.getElementById('mode-title');
+const modeBox = document.getElementById('mode-box');
+const modes = {
+  exact: ['Exact recall', 'Refuse rather than invent.', 'When the requested pattern is outside approved grounding, the engine should stop instead of making a plausible-looking guess.'],
+  imagination: ['Imagination', 'Compose with a drift budget.', 'When imagination is enabled, the engine can move beyond seen patterns while keeping the deviation explicit and bounded.']
+};
+for (const button of modeButtons) {
+  button.addEventListener('click', () => {
+    const mode = button.dataset.mode;
+    for (const item of modeButtons) item.setAttribute('aria-pressed', String(item === button));
+    modeTitle.textContent = modes[mode][0];
+    modeBox.innerHTML = `<b>${modes[mode][1]}</b><p>${modes[mode][2]}</p>`;
+  });
+}
+</script>
+</body>
+</html>

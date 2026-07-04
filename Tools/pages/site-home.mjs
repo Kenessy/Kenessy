@@ -17,6 +17,7 @@ export function portfolioHomeHtml({
   preyJourneyPath = 'plater-game-reports/games/prey/journey/',
   invinciblePath = 'plater-game-reports/games/invincible/',
   invincibleJourneyPath = 'plater-game-reports/games/invincible/journey/',
+  instnctPath = 'instnct/',
   apocalypsePath,
   githubUrl
 }) {
@@ -30,6 +31,7 @@ export function portfolioHomeHtml({
   const preyJourneyHref = preyJourneyPath;
   const invincibleHref = invinciblePath;
   const invincibleJourneyHref = invincibleJourneyPath;
+  const instnctHref = instnctPath;
   const apocalypseHref = apocalypsePath;
   const graphHref = 'assets/img/triad-validation-flow.png';
   const metroSplashAsset = 'assets/img/metro-2033-redux-review-splash.png';
@@ -38,6 +40,8 @@ export function portfolioHomeHtml({
   const quantumSplashHref = 'assets/img/quantum-break-review-journey-splash.svg';
   const preySplashHref = 'assets/img/prey-review-splash.png';
   const invincibleSplashHref = 'assets/img/invincible/invincible-hero-regis.png';
+  const instnctLogoHref = 'assets/img/instnct/instnct-logo.png';
+  const instnctHeroHref = 'assets/img/instnct/instnct-hero-bg.png';
   const canonical = siteBase;
 
   return `<!doctype html>
@@ -612,6 +616,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
       <a href="#about">About</a>
       <a href="#lanes">Lanes</a>
       <a href="#work">Work</a>
+      <a href="${instnctHref}">INSTNCT</a>
       <a href="#reviews">Reviews</a>
       <a href="#journal">Journal</a>
       <a href="${githubUrl}">GitHub</a>
@@ -638,6 +643,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         </div>
         <div class="hero-actions">
           <a class="button" href="#about">Open the method</a>
+          <a class="button secondary" href="${instnctHref}">Open INSTNCT</a>
           <a class="button secondary" href="#reviews">Open game reviews</a>
           <a class="button secondary" href="${githubUrl}">Inspect the repo</a>
         </div>
@@ -654,7 +660,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <div class="hire-cell"><b>Proves</b><span>With public artifacts</span><small>Reports, screenshots, generated pages, local QA, live QA, and repo state stay connected.</small></div>
         </div>
         <div class="proof-line">
-          <p><b>Current public artifact:</b> the homepage, Metro report, Quantum Break draft shell, Prey entry point, Invincible PLATER replay page, illustrated field journals, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
+          <p><b>Current public artifact:</b> the homepage, INSTNCT product surface, Metro report, Quantum Break draft shell, Prey entry point, Invincible PLATER replay page, illustrated field journals, prompt-pack journal, build pipeline, and adversarial QA all ship from one Pages repo.</p>
           <span class="status-dot">OK</span>
         </div>
       </aside>
@@ -675,7 +681,7 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <div class="about-list">
           <div class="about-line"><b>Work</b><span>Readable interfaces, review frameworks, AI/video experiments, QA loops, generated Pages artifacts, and source-of-truth cleanup.</span></div>
           <div class="about-line"><b>Interests</b><span>Games, tools, storytelling systems, decision loops, hidden failure modes, weird mechanics, and proof-shaped design.</span></div>
-          <div class="about-line"><b>Public now</b><span>Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office. The Invincible is the active PLATER replay page with a comic-like illustrated playthrough.</span></div>
+          <div class="about-line"><b>Public now</b><span>INSTNCT is the serious VRAXION product surface. Metro is the finished review flagship. Quantum Break is the live draft and illustrated journal lane. Prey is the first-run review journal with Session 01 expanded through Morgan's office. The Invincible is the active PLATER replay page with a comic-like illustrated playthrough.</span></div>
         </div>
       </div>
     </div>
@@ -711,6 +717,12 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
           <h3>State changes you can read</h3>
           <p>Session notes become fullscreen dossier scrapbook pages with typed notes, attached photo evidence, and prompt handoff.</p>
           <span>Replay panels ready</span>
+        </a>
+        <a class="lane-card" style="--tone:var(--magenta)" href="${instnctHref}">
+          <small>05 / Product surface</small>
+          <h3>Serious technical landing page</h3>
+          <p>INSTNCT is the VRAXION product narrative: local-first reasoning, proof claims, roadmap, FAQ, and static Pages deployment.</p>
+          <span>INSTNCT / VRAXION</span>
         </a>
       </div>
     </div>
@@ -762,6 +774,18 @@ h2{margin-top:7px;color:var(--bone);font-size:42px;line-height:.95;font-weight:1
         <p>Different outputs, same operating mode: make invisible structure visible, then make it durable enough to ship, revisit, and explain.</p>
       </div>
       <div class="project-grid">
+        <a class="project-card featured" href="${instnctHref}">
+          <div>
+            <div class="tag-row"><span class="tag cyan">VRAXION</span><span class="tag">Product surface</span><span class="tag amber">Static Pages</span></div>
+            <h3>INSTNCT</h3>
+            <p>A serious local-first reasoning product page ported from the GLM build into the Kenessy Pages pipeline: official wordmark, proof readouts, Not AI positioning, benchmark strip, fabric diagram, roadmap, and FAQ.</p>
+            <div class="tag-row"><span class="tag cyan">Not AI</span><span class="tag">5 us selector</span><span class="tag green">Offline proof</span></div>
+          </div>
+          <div class="project-stat" style="background-image:linear-gradient(145deg,rgba(0,229,255,.12),rgba(255,0,102,.10)),url('${instnctHeroHref}');background-size:cover;background-position:center">
+            <img src="${instnctLogoHref}" width="1478" height="254" alt="INSTNCT wordmark">
+            <span>Local-first reflex reasoning</span>
+          </div>
+        </a>
         <a class="project-card featured" href="${apocalypseHref}">
           <div>
             <div class="tag-row"><span class="tag amber">Tabletop RPG</span><span class="tag cyan">Industrial arcane</span></div>
