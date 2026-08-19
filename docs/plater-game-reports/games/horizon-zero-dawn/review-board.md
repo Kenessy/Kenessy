@@ -26,6 +26,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - World mystery: the nature-reclaimed old-world / tribal-humanity premise prompted an immediate clarification question. This is a positive curiosity signal, not yet a verdict on reveal quality.
 - Technical comfort: the first New Game load felt slow. Keep this provisional unless it recurs during ordinary loading or is joined by frame-pacing problems.
 - Difficulty: Normal is now confirmed, but no combat evidence exists yet.
+- Opening tone: the childhood cave/ruin sequence felt `elég fura`. Treat this as an unresolved signal; later reactions must show whether the uncanniness creates intrigue or distance.
 
 ## Pre-run hypotheses
 

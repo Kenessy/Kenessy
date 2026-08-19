@@ -1,9 +1,9 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 00:17 Europe/Budapest — New Game opening**
+Last durable update: **2026-08-20 00:23 Europe/Budapest — childhood ruin opening**
 Current phase: **PLAYTHROUGH — OPENING**
 Current session: **HZD-S01 OPEN**
-Next raw intake: **HZD-RAW-007**
+Next raw intake: **HZD-RAW-008**
 Next structured session: **HZD-S02 after HZD-S01 closes**
 Verdict state: **LOCKED**
 
@@ -13,7 +13,7 @@ Verdict state: **LOCKED**
 Scratch setup       [##########] READY
 Live preflight      [########--] LAUNCHED; CLIENT CHECKS OPEN
 Story / credits     [#---------] OPENING IN PROGRESS
-Review evidence     [#---------] 1 opening checkpoint
+Review evidence     [#---------] 2 opening checkpoints
 Mastery / extras    [----------] NOT STARTED
 ```
 
@@ -35,6 +35,7 @@ Setup readiness is not gameplay progress.
 - Local hardware is an RTX 4070 Ti SUPER, Ryzen 9 3900X, and 64 GiB RAM; a stable 60 FPS benchmark remains the practical gate.
 - Daniel perceived the first load as slow; recurrence and cause are not yet known.
 - The opening's nature-reclaimed old-world / tribal-humanity premise prompted immediate curiosity and a clarification question.
+- The childhood cave/ruin opening registered as `elég fura`; its positive or negative valence is not yet known.
 
 ## Still unconfirmed
 
@@ -46,4 +47,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue the opening blind and let the lost-world premise explain itself. Capture Daniel's next natural reaction as `HZD-RAW-007`; do not answer future-world mysteries beyond what the game has already shown. Verify whether the slow load recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue the childhood prologue blind and let the old-world environment explain itself. Capture Daniel's next natural reaction as `HZD-RAW-008`; do not turn `elég fura` into a positive or negative judgment until he clarifies it through later reactions. Verify whether the slow load recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

@@ -58,6 +58,14 @@ Mik vannak id ir, hogy földben, a távol lévőben, a Nature-höz reclaimed som
 
 Spoiler-free clarification returned in voice mode: the setting combines nature-reclaimed ruins of an older advanced civilization with new human tribal societies. The tribes are distinct cultures with settlements, beliefs, and politics rather than generic cavemen; the old world's fate and the machines' relationship to it remain mysteries for the playthrough to reveal.
 
+## HZD-RAW-007 | 2026-08-20 00:23 Europe/Budapest | HZD-S01 | story / character / atmosphere
+
+```text
+Okés, látom valami kis barlangba kezdünk, ilyen barlangon át megyünk egy kis csajszival. Hát... hát elég fura
+```
+
+Interpretation boundary: `elég fura` is retained as an ambiguous first reaction, not silently converted into praise or criticism. Spoiler-free orientation returned: the child is Aloy in a short childhood prologue, and the cave/old-world contrast is intentional.
+
 ## Raw intake template
 
 ```text

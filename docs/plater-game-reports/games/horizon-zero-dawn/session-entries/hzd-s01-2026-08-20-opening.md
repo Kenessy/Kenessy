@@ -8,9 +8,9 @@ Status: **OPEN**
 - Ending state: not yet
 - Difficulty: Normal, confirmed at start
 - Mode: solo / blind / story-first
-- Raw intake IDs: HZD-RAW-005, HZD-RAW-006
+- Raw intake IDs: HZD-RAW-005, HZD-RAW-006, HZD-RAW-007
 - Screenshot IDs: none yet
-- Remote sync: pending session checkpoint
+- Remote sync: first session checkpoint synced; current local checkpoint pending
 
 ## Chronological checkpoints
 
@@ -18,17 +18,20 @@ Status: **OPEN**
 2. The initial load felt slow.
 3. The opening premise text introduced nature-reclaimed remnants of a forgotten civilization and humanity living on in tribes.
 4. Daniel immediately asked whether this means the world contains human civilizational areas; spoiler-free clarification separated the old-world ruins from the new tribal societies.
+5. The playable childhood cave/ruin opening felt `elég fura`; whether that means intriguing, disorienting, or off-putting remains deliberately unresolved.
 
 ## Confirmed observations
 
 - Normal is the actual first-run difficulty.
 - The first load was perceived as slow.
 - The setting premise generated an immediate world-structure question.
+- The childhood opening produced a distinct but ambiguous tonal reaction: `elég fura`.
 
 ## Hypotheses, not findings
 
 - The lost-civilization mystery may be the main early immersion hook.
 - The slow load may be a one-time startup cost; recurrence must be observed before it becomes a technical criticism.
+- The old-world / tribal-child contrast may be creating productive uncanniness, but later reactions must establish the valence.
 
 ## Friction and recovery
 
