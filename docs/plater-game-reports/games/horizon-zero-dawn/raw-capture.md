@@ -22,6 +22,16 @@ ja ez igy tetszik és majd a voice modeban fogjuk nyomni közben te nyugodtan tu
 addig akkor készitsd elő neki a repon a megfelelő scratchhelyet ahova synceled ezt a draft mappát hogy majd ne vesszen el
 ```
 
+## HZD-RAW-003 | 2026-08-19 | Pre-run difficulty question
+
+Source note: the realtime handoff repeated the same utterance twice; it is retained once here as one semantic intake.
+
+```text
+Oké, és akkor milyen nehézségi szintet válasszak elsőre? Mit mondasz
+```
+
+Guidance returned in voice mode: start on Normal; lower it if combat becomes delay rather than fun. This is a recommendation, not a confirmed in-game selection.
+
 ## Raw intake template
 
 ```text

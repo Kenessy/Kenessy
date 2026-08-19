@@ -3,7 +3,7 @@
 Last durable update: **2026-08-19 — repository scratch setup**
 Current phase: **PRE-RUN**
 Current session: **none open**
-Next raw intake: **HZD-RAW-003**
+Next raw intake: **HZD-RAW-004**
 Next structured session: **HZD-S01**
 Verdict state: **LOCKED**
 
@@ -24,6 +24,7 @@ Setup readiness is not gameplay progress.
 - The Complete Edition is present in the 2026-08-19 Steam-library snapshot.
 - The snapshot recorded 117 minutes and 0/79 Steam achievements.
 - The intended first run is solo, blind, story-first, and not Ultra Hard.
+- Normal is the current first-run recommendation; the in-game selection is still unconfirmed.
 - Voice-mode notes have a durable append-only destination.
 - Co-op is not part of the intended completion contract.
 
