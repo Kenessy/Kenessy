@@ -8,7 +8,7 @@ Status ladder:
 Pre-run -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
-Current status: **Pre-run**
+Current status: **In Progress — HZD-S01 opening**
 
 ## Exact session entry template
 
@@ -51,3 +51,16 @@ Axis delta: Technical Readiness +1 because install, save provenance, and the cur
 Counterevidence: Stable frame pacing, subtitle state, Steam Cloud state, and actual difficulty selection remain unverified.
 Open question: Does the opening hold a stable 60 FPS at the current 3840x2160 DLSS Quality / Ultra configuration?
 Stop state: Game not launched by Codex; user is at the start decision.
+
+## HZD-S01 | 2026-08-20 | New Game opening / local Steam build 8040161
+
+Milestone: Daniel started a new blind playthrough on Normal and reached the opening world-premise text.
+Session: open | Total: open | Mode: solo / blind
+Difficulty: Normal confirmed; no change
+Micro: Clarity 3 · Combat ? · Mystery 3 · Agency ? · Fatigue ? · Desire 3
+Observation: The first load felt slow. The nature-reclaimed ruins, forgotten civilization, and surviving tribal humanity immediately prompted Daniel to check his understanding of the world's structure, providing the first direct evidence of curiosity without yet judging the mystery's execution.
+Evidence refs: HZD-RAW-005, HZD-RAW-006
+Axis delta: World Mystery +1 for immediate premise curiosity; Presentation and Technical Comfort -0.5 provisionally for the perceived slow initial load.
+Counterevidence: This may be a one-time startup or shader-related load, and a clarification question alone does not prove sustained narrative investment.
+Open question: Does the prologue turn premise curiosity into attachment to Aloy and a desire to explore?
+Stop state: Opening in progress; no gameplay checkpoint or save point confirmed yet.

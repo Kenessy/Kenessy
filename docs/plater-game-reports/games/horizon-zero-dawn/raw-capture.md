@@ -40,6 +40,24 @@ okés bármi mást mielőtt belemegyek?
 
 Preflight response scope: verify install, old save state, current graphics profile, Complete Edition content, and achievement ceiling without launching or modifying the game.
 
+## HZD-RAW-005 | 2026-08-20 00:17 Europe/Budapest | HZD-S01 | technical / difficulty
+
+Source note: the realtime handoff repeated the same utterance twice; it is retained once here as one semantic intake.
+
+```text
+Okés, akkor a normálon indítottam. Hát... jó lassan tölt be
+```
+
+Confirmed state: New Game was started on Normal. The slow load is Daniel's first technical observation; cause and recurrence are not yet known.
+
+## HZD-RAW-006 | 2026-08-20 00:17 Europe/Budapest | HZD-S01 | story / world
+
+```text
+Mik vannak id ir, hogy földben, a távol lévőben, a Nature-höz reclaimed something, forgotten civilization, but humanity lives on... primitív tribes... Ja, hogy akkor vannak lényegében emberi civilizációs részek, amik ilyenek, hogyha jól értem, vagy nem nem pont így
+```
+
+Spoiler-free clarification returned in voice mode: the setting combines nature-reclaimed ruins of an older advanced civilization with new human tribal societies. The tribes are distinct cultures with settlements, beliefs, and politics rather than generic cavemen; the old world's fate and the machines' relationship to it remain mysteries for the playthrough to reveal.
+
 ## Raw intake template
 
 ```text
