@@ -66,6 +66,14 @@ Okés, látom valami kis barlangba kezdünk, ilyen barlangon át megyünk egy ki
 
 Interpretation boundary: `elég fura` is retained as an ambiguous first reaction, not silently converted into praise or criticism. Spoiler-free orientation returned: the child is Aloy in a short childhood prologue, and the cave/old-world contrast is intentional.
 
+## HZD-RAW-008 | 2026-08-20 00:24 Europe/Budapest | HZD-S01 | capture protocol
+
+```text
+Okés, akkor mostantól átváltok ilyen diktálásra, úgyhogy ha csak nincs konkrétan, úgyhogy specifikus kérdésem, amit így értenél, akkor nem muszáj okvetlenül válaszolnod innentől, hogy csak írod, hogy oké, írtam, vagy még annyit sem muszáj
+```
+
+Protocol change: ordinary play observations are captured silently. Voice responses are reserved for explicit questions, urgent technical risks, or a genuinely time-sensitive spoiler-free decision.
+
 ## Raw intake template
 
 ```text

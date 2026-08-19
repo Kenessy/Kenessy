@@ -1,7 +1,7 @@
 # Horizon Zero Dawn — Steam Completions Working Folder
 
-Status: **Pre-run / scratch space ready**
-Evidence horizon: **Steam-library snapshot from 2026-08-19; live game preflight still required**
+Status: **Playthrough in progress / HZD-S01 opening**
+Evidence horizon: **Steam-library snapshot and local preflight from 2026-08-19; live observations through HZD-RAW-008**
 Owner signal: **Complete Edition owned on Steam; 117 minutes recorded; 0/79 achievements in the snapshot**
 Primary lens: **World Mystery vs Lightweight Roleplay**
 Public score: **Locked until credits and evidence audit**
@@ -25,6 +25,8 @@ During voice play, Codex maintains the files rather than relying on conversation
 7. At session close, the working folder is committed and synced. Long sessions may receive additional remote checkpoint commits.
 
 Voice commentary can be completely natural. Useful signals include what just happened, what felt good or annoying, a choice made, a machine or quest that stood out, a difficulty spike, a technical issue, a screenshot moment, or simply whether the desire to continue rose or fell.
+
+Current interaction mode is **silent dictation capture**. Codex does not verbally acknowledge routine observations. It responds only to an explicit question, an urgent technical risk, or a genuinely time-sensitive spoiler-free decision; all other substantive commentary is still written durably.
 
 ## First-run route
 
@@ -54,4 +56,4 @@ horizon-zero-dawn/
 
 ## Start gate
 
-The scratch space is ready. **The game itself is not yet marked ready to launch** until the live preflight confirms the installed Complete Edition content, current achievement list, graphics/accessibility settings, screenshot path, save/cloud state, and any missable-but-spoiler-safe completion constraints.
+Passed for the story-first run: New Game is active on Normal. Subtitle, overlay/screenshot, Steam Cloud, and stable-performance checks remain open client observations rather than blockers to the opening.

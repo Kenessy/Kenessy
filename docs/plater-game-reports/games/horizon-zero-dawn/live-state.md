@@ -1,11 +1,12 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 00:23 Europe/Budapest — childhood ruin opening**
+Last durable update: **2026-08-20 00:24 Europe/Budapest — silent dictation mode enabled**
 Current phase: **PLAYTHROUGH — OPENING**
 Current session: **HZD-S01 OPEN**
-Next raw intake: **HZD-RAW-008**
+Next raw intake: **HZD-RAW-009**
 Next structured session: **HZD-S02 after HZD-S01 closes**
 Verdict state: **LOCKED**
+Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 
 ## Progress readback
 
@@ -36,6 +37,7 @@ Setup readiness is not gameplay progress.
 - Daniel perceived the first load as slow; recurrence and cause are not yet known.
 - The opening's nature-reclaimed old-world / tribal-humanity premise prompted immediate curiosity and a clarification question.
 - The childhood cave/ruin opening registered as `elég fura`; its positive or negative valence is not yet known.
+- Daniel switched the live session to dictation mode: ordinary observations are recorded without spoken acknowledgements.
 
 ## Still unconfirmed
 
@@ -47,4 +49,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue the childhood prologue blind and let the old-world environment explain itself. Capture Daniel's next natural reaction as `HZD-RAW-008`; do not turn `elég fura` into a positive or negative judgment until he clarifies it through later reactions. Verify whether the slow load recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue the childhood prologue blind and capture Daniel's next natural reaction as `HZD-RAW-009` without a spoken acknowledgement unless it contains an explicit question, urgent technical risk, or time-sensitive decision. Do not turn `elég fura` into a positive or negative judgment until later reactions clarify it. Verify whether the slow load recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

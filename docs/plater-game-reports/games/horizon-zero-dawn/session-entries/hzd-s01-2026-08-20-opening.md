@@ -8,7 +8,7 @@ Status: **OPEN**
 - Ending state: not yet
 - Difficulty: Normal, confirmed at start
 - Mode: solo / blind / story-first
-- Raw intake IDs: HZD-RAW-005, HZD-RAW-006, HZD-RAW-007
+- Raw intake IDs: HZD-RAW-005, HZD-RAW-006, HZD-RAW-007, HZD-RAW-008
 - Screenshot IDs: none yet
 - Remote sync: first session checkpoint synced; current local checkpoint pending
 
@@ -19,6 +19,7 @@ Status: **OPEN**
 3. The opening premise text introduced nature-reclaimed remnants of a forgotten civilization and humanity living on in tribes.
 4. Daniel immediately asked whether this means the world contains human civilizational areas; spoiler-free clarification separated the old-world ruins from the new tribal societies.
 5. The playable childhood cave/ruin opening felt `elég fura`; whether that means intriguing, disorienting, or off-putting remains deliberately unresolved.
+6. Daniel enabled silent dictation mode: ordinary observations should be logged without verbal acknowledgement unless he asks a concrete question or immediate intervention is necessary.
 
 ## Confirmed observations
 
