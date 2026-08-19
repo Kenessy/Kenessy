@@ -6,11 +6,11 @@ Legend: `[ ]` pending · `[x]` verified complete · `[?]` conditional / live pre
 
 ## Lane 00 — Access and preflight
 
-- [ ] Verify current Steam install and build.
-- [?] Verify Complete Edition / Frozen Wilds content is installed and recognized.
+- [x] Verify current Steam install and build: `G:` library, build `8040161`, `StateFlags=4`.
+- [x] Verify Complete Edition identity and official Frozen Wilds inclusion.
 - [ ] Decide whether to restart or continue the existing 117-minute save.
 - [ ] Lock comfortable graphics, subtitle, accessibility, and capture settings.
-- [?] Re-read the current 79-achievement list without exposing story spoilers.
+- [x] Re-read the current 79-achievement list without exposing story spoilers.
 - [?] Check for missable or route-sensitive achievements and record only spoiler-safe precautions.
 
 ## Lane 01 — Story / review-canon credits

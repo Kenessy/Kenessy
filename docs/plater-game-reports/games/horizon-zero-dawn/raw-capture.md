@@ -32,6 +32,14 @@ Oké, és akkor milyen nehézségi szintet válasszak elsőre? Mit mondasz
 
 Guidance returned in voice mode: start on Normal; lower it if combat becomes delay rather than fun. This is a recommendation, not a confirmed in-game selection.
 
+## HZD-RAW-004 | 2026-08-19 | Final pre-start check
+
+```text
+okés bármi mást mielőtt belemegyek?
+```
+
+Preflight response scope: verify install, old save state, current graphics profile, Complete Edition content, and achievement ceiling without launching or modifying the game.
+
 ## Raw intake template
 
 ```text

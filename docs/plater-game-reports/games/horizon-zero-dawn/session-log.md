@@ -39,3 +39,15 @@ Axis delta: Lens Honesty +1 because the desired experience and the game's non-go
 Counterevidence: Horizon may prove too checklist-heavy, too action-led, or too light on roleplaying and companion relationships.
 Open question: Does the opening create enough mystery and mechanical confidence to make Daniel want to continue?
 Stop state: No game session started.
+
+## HZD-PF01 | 2026-08-19 | local install / save / settings preflight
+
+Milestone: A read-only local preflight confirmed the installed Complete Edition app and exposed the old-save decision before launch.
+Session: 0h | Total review-canon play: 0h | Mode: setup / read-only preflight
+Difficulty: Normal recommended; not yet selected in-game
+Observation: Steam build `8040161` is installed in the `G:` library with `StateFlags=4`. The only populated gameplay saves date to 2021-12-25, while the graphics/profile files were refreshed on 2026-08-19; a clean New Game is therefore the recommended review-canon route.
+Evidence refs: HZD-RAW-003, HZD-RAW-004; local app manifest and save-directory readback at 2026-08-19 22:41 Europe/Budapest
+Axis delta: Technical Readiness +1 because install, save provenance, and the current 4K/DLSS/Ultra profile are known before play.
+Counterevidence: Stable frame pacing, subtitle state, Steam Cloud state, and actual difficulty selection remain unverified.
+Open question: Does the opening hold a stable 60 FPS at the current 3840x2160 DLSS Quality / Ultra configuration?
+Stop state: Game not launched by Codex; user is at the start decision.
