@@ -1,10 +1,10 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 00:24 Europe/Budapest — silent dictation mode enabled**
-Current phase: **PLAYTHROUGH — OPENING**
-Current session: **HZD-S01 OPEN**
-Next raw intake: **HZD-RAW-009**
-Next structured session: **HZD-S02 after HZD-S01 closes**
+Last durable update: **2026-08-20 00:28 Europe/Budapest, voice session closed in the underground ruin**
+Current phase: **PLAYTHROUGH: OPENING / VOICE PAUSED**
+Current session: **HZD-S01 CLOSED**
+Next raw intake: **HZD-RAW-010**
+Next structured session: **HZD-S02 at the next active play capture**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 
@@ -14,7 +14,7 @@ Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / t
 Scratch setup       [##########] READY
 Live preflight      [########--] LAUNCHED; CLIENT CHECKS OPEN
 Story / credits     [#---------] OPENING IN PROGRESS
-Review evidence     [#---------] 2 opening checkpoints
+Review evidence     [##--------] 3 opening checkpoints
 Mastery / extras    [----------] NOT STARTED
 ```
 
@@ -36,8 +36,9 @@ Setup readiness is not gameplay progress.
 - Local hardware is an RTX 4070 Ti SUPER, Ryzen 9 3900X, and 64 GiB RAM; a stable 60 FPS benchmark remains the practical gate.
 - Daniel perceived the first load as slow; recurrence and cause are not yet known.
 - The opening's nature-reclaimed old-world / tribal-humanity premise prompted immediate curiosity and a clarification question.
-- The childhood cave/ruin opening registered as `elég fura`; its positive or negative valence is not yet known.
+- The childhood cave/ruin opening initially registered as `elég fura`; the later cave-to-laboratory reaction clarified that signal in a conditionally positive direction.
 - Daniel switched the live session to dictation mode: ordinary observations are recorded without spoken acknowledgements.
+- Within the same opening, the cave-to-laboratory transition became `egész érdekes`, with a conditional positive reaction to seeing more environments built from rock and old technology merging together.
 
 ## Still unconfirmed
 
@@ -49,4 +50,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue the childhood prologue blind and capture Daniel's next natural reaction as `HZD-RAW-009` without a spoken acknowledgement unless it contains an explicit question, urgent technical risk, or time-sensitive decision. Do not turn `elég fura` into a positive or negative judgment until later reactions clarify it. Verify whether the slow load recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+At the next active capture, open `HZD-S02` from the childhood underground ruin and record the next substantive observation as `HZD-RAW-010`. Preserve silent dictation mode. Continue blind, verify whether slow loading recurs, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

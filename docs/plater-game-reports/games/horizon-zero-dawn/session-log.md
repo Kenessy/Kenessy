@@ -8,7 +8,7 @@ Status ladder:
 Pre-run -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
-Current status: **In Progress — HZD-S01 opening**
+Current status: **In Progress: HZD-S01 closed, opening continues**
 
 ## Exact session entry template
 
@@ -54,13 +54,13 @@ Stop state: Game not launched by Codex; user is at the start decision.
 
 ## HZD-S01 | 2026-08-20 | New Game opening / local Steam build 8040161
 
-Milestone: Daniel started a new blind playthrough on Normal and reached the opening world-premise text.
-Session: open | Total: open | Mode: solo / blind
+Milestone: Daniel started a new blind playthrough on Normal and explored the first childhood underground ruin.
+Session: approximately 11 minutes of voice capture | Total: approximately 11 minutes captured | Mode: solo / blind
 Difficulty: Normal confirmed; no change
 Micro: Clarity 3 · Combat ? · Mystery 3 · Agency ? · Fatigue ? · Desire 3
-Observation: The first load felt slow. The nature-reclaimed ruins, forgotten civilization, and surviving tribal humanity immediately prompted Daniel to check his understanding of the world's structure, providing the first direct evidence of curiosity without yet judging the mystery's execution.
-Evidence refs: HZD-RAW-005, HZD-RAW-006
-Axis delta: World Mystery +1 for immediate premise curiosity; Presentation and Technical Comfort -0.5 provisionally for the perceived slow initial load.
-Counterevidence: This may be a one-time startup or shader-related load, and a clarification question alone does not prove sustained narrative investment.
+Observation: The first load felt slow. The lost-world premise prompted an immediate clarification question, and the childhood ruin shifted from `elég fura` to `egész érdekes` as natural cave formations blended into a forgotten laboratory-like space. Daniel's positive reaction remained conditional on the game offering more areas like it.
+Evidence refs: HZD-RAW-005 through HZD-RAW-009
+Axis delta: World Mystery +1. Presentation and Technical Comfort is mixed, with +1 for environmental contrast and a provisional -0.5 for the perceived slow initial load.
+Counterevidence: This is one short opening area, no combat or character attachment has been tested, and the slow load may be a one-time startup cost.
 Open question: Does the prologue turn premise curiosity into attachment to Aloy and a desire to explore?
-Stop state: Opening in progress; no gameplay checkpoint or save point confirmed yet.
+Stop state: Voice capture ended in the childhood underground ruin; exact save point and whether gameplay continued afterward are unknown.

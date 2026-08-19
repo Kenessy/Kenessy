@@ -1,6 +1,6 @@
 # Horizon Zero Dawn — Processed Playthrough Draft
 
-Status: **Scaffold only / no gameplay prose yet**
+Status: **Live draft / opening session converted provisionally**
 
 This file becomes the readable illustrated journey. It is derived from `raw-capture.md`, `session-log.md`, and accepted image evidence; it is never the sole source of truth.
 
@@ -10,13 +10,19 @@ Horizon Zero Dawn entered the queue as a possible bridge between several things 
 
 That tension is the review. The run will not ask whether Horizon is secretly Dragon Age with robot animals. It will ask whether Aloy's authored journey, the machine ecology, and the mystery of the old world create enough momentum to make the missing party-RPG systems irrelevant—or make their absence impossible to ignore.
 
+## Session 1: A barlang, amely laboratóriummá válik
+
+Az első erős benyomást nem egy harc, hanem két világ szó szerinti összenövése adta. Aloy gyerekkori nyitányában a cseppkőbarlang sziklái egy elfeledett, laboratóriumszerű térbe futottak át. Ami elsőre csak `elég fura` volt, néhány percen belül `egész érdekes` lett. A pozitív jel egyelőre feltételes: ha a játék később is kínál ilyen, természetet és régi technológiát összeolvasztó helyszíneket, akkor ez a világ jó eséllyel működni fog.
+
+Vázlatforrás: HZD-RAW-007, HZD-RAW-009 és HZD-S01. A harc, a karakterkötődés és a tartós felfedezés még nincs tesztelve.
+
 ## Session conversion queue
 
-- HZD-S01 — pending
-- HZD-S02 — pending
-- Credits synthesis — pending
-- Frozen Wilds synthesis — pending
-- Optional mastery appendix — deferred
+- HZD-S01: provisional opening conversion complete
+- HZD-S02: pending
+- Credits synthesis: pending
+- Frozen Wilds synthesis: pending
+- Optional mastery appendix: deferred
 
 ## Conversion rules
 

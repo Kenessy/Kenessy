@@ -74,6 +74,16 @@ Okés, akkor mostantól átváltok ilyen diktálásra, úgyhogy ha csak nincs ko
 
 Protocol change: ordinary play observations are captured silently. Voice responses are reserved for explicit questions, urgent technical risks, or a genuinely time-sensitive spoiler-free decision.
 
+## HZD-RAW-009 | 2026-08-20 ~00:25-00:28 Europe/Budapest | HZD-S01 | world / atmosphere
+
+Source note: the final realtime handoff repeated the same utterance twice; it is retained once here as one semantic intake. The exact utterance time was not supplied, so the timestamp is bounded by the voice-tail window rather than invented.
+
+```text
+Na, itt első megjegyzés, elég érdekes ez a föld alatti rész, itt egy barlangból mentünk át, mindig egy elfeledett ilyen kutatóintézetbe, vagy hát nem is tudom, minek nevezzem, ilyen, ilyen sziklák összeolvadva cseppkőbarlangok, egy ilyen laboratóriumi területbe, egész érdekes. Hogyha több is ilyen rész lesz, akkor nem, nem néz ki rosszul A picsát csinálnak ezzel? [breath] [cough] Hmm De jó szagos... Istenem, milyen kibaszott picsába egészet, innen
+```
+
+Interpretation boundary: the game-relevant portion ends with the conditional positive reaction to seeing more areas like this. The trailing fragments may be background or off-game speech; they remain preserved here but are excluded from structured review evidence unless Daniel later connects them to the game.
+
 ## Raw intake template
 
 ```text

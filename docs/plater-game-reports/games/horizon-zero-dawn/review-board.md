@@ -10,14 +10,14 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 
 | Axis | What counts as positive evidence | What can falsify it | State |
 |---|---|---|---|
-| World mystery | Curiosity, coherent reveals, rewarding environmental/story clues | Predictable answers, exposition without payoff | Opening signal |
+| World mystery | Curiosity, coherent reveals, rewarding environmental/story clues | Predictable answers, exposition without payoff | Opening positive |
 | Aloy and characters | Emotional investment, memorable relationships, credible growth | Thin interactions, weak dialogue, detachment | Untested |
 | Machine hunting | Readable weaknesses, preparation, expressive tools, satisfying component removal | Repetitive kiting, stun-locks, ammo chores | Untested |
 | Roleplay and agency | Choices or quest responses that feel meaningfully authored by the player | Mostly cosmetic dialogue and fixed outcomes | Untested |
 | Quest quality | Side content strengthens characters, world, or themes | Map filler and interchangeable errands | Untested |
 | Open-world friction | Exploration creates discovery and useful detours | Icon clearing, traversal friction, inventory busywork | Untested |
 | Difficulty fairness | Failure teaches, settings preserve flow, encounters allow preparation | Mob chaos, damage spikes, forced grind | Untested |
-| Presentation and technical comfort | Stable performance, readable UI, strong audio/visual identity | Stutter, camera discomfort, capture problems | Opening signal |
+| Presentation and technical comfort | Stable performance, readable UI, strong audio/visual identity | Stutter, camera discomfort, capture problems | Mixed opening signal |
 | Completion shape | Cleanup remains legible and optional until mastery is chosen | Repetition or challenge modes poison the review run | Preflight only |
 | Summer immersion fit | Desire to return, long-session comfort, memorable world presence | Fatigue, boredom, obligation feeling | Untested |
 
@@ -26,7 +26,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - World mystery: the nature-reclaimed old-world / tribal-humanity premise prompted an immediate clarification question. This is a positive curiosity signal, not yet a verdict on reveal quality.
 - Technical comfort: the first New Game load felt slow. Keep this provisional unless it recurs during ordinary loading or is joined by frame-pacing problems.
 - Difficulty: Normal is now confirmed, but no combat evidence exists yet.
-- Opening tone: the childhood cave/ruin sequence felt `elég fura`. Treat this as an unresolved signal; later reactions must show whether the uncanniness creates intrigue or distance.
+- Opening tone: the childhood cave/ruin sequence first felt `elég fura`, then became `egész érdekes` once the cave formations and forgotten laboratory-like architecture visibly merged. This supports productive uncanniness, but only within one short opening area.
 
 ## Pre-run hypotheses
 
@@ -34,7 +34,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 
 The lost-world mystery will be the main narrative engine, closer to the archaeological pull of Mass Effect than to Dragon Age's party politics.
 
-- Evidence for: pitch fit only; no gameplay evidence.
+- Evidence for: the premise prompted an immediate world-structure question, followed by conditional interest in seeing more cave-to-old-world environments.
 - Evidence against: none yet.
 - Falsifier: the first major reveals feel obvious, detached, or delivered without player curiosity.
 
