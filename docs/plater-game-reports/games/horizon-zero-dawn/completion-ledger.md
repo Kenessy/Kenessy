@@ -35,7 +35,7 @@ First-run success does **not** require every collectible, every hunting-trial ma
 - [>] Append-only raw capture maintained for every session.
 - [>] Structured session entry closed and synced after every completed session.
 - [>] Difficulty changes and friction spikes logged with context.
-- [>] Screenshot evidence intake labeled by spoiler level: 1/10 initial slots accepted.
+- [>] Screenshot evidence intake labeled by spoiler level: 1/10 initial slots and 2 files accepted.
 - [>] Review board updated with supporting and contradicting evidence.
 - [>] Processed playthrough completed through every closed session.
 - [ ] Final PLATER review card and adversarial audit completed.

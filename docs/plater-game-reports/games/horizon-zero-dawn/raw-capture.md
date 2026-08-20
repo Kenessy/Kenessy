@@ -124,6 +124,16 @@ Interpretation boundary: `vível` and `mikorő számítógépes displayk` remain
 
 Spoiler-free guidance returned: the Focus is functionally related to Eagle Vision but acts as an augmented-reality scanner rather than a simple highlight mode. Local profile readback at 10:56 confirmed `FieldOfView=100` with the documented range `70-100`, `MotionBlur=True`, and current fullscreen resolution `2560x1440`.
 
+## HZD-RAW-014 | 2026-08-20 11:16 Europe/Budapest | HZD-S03 | interaction / world / image
+
+```text
+Na igen, most mondja, hogy nem tudja kinyitni az ajtót, itt egy First door. Tovább megyünk, scannenünk, látom patkányok, és ki vannak világítva itt az alul. Így futkároznak. És valami ilyen cucc van itt, nem tudom, forgatható, clockwise, counterclockwise, valami. És itt van mellette egy ábra, ami mutassa, hogy hogy kéne elforgatni, aha. Na és akkor a másik ábra eltűnt. Ja. És akkor ezzel kinyílik az a zárt ajtó. Igen.
+```
+
+Interpretation boundary: `First door` is retained as transcript-exact uncertain wording. No exact rotation direction or input sequence is inferred. Confirmed user signals are that a locked door blocked progress, the Focus scan highlighted moving rats, a nearby control offered clockwise and counterclockwise rotation, a separate displayed shape acted as the reference, and using the control opened the door.
+
+Image boundary: HZD-IMG-011 shows the Focus overlay, the displayed shape, the connected device, the crossed-out objective `Use the Device to Scan the Room`, and Aloy's subtitle linking the shape to the door. It does not show the door opening; that result comes from Daniel's narration.
+
 ## Raw intake template
 
 ```text

@@ -1,9 +1,9 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 10:56 Europe/Budapest, Focus view and maximum FOV confirmed**
+Last durable update: **2026-08-20 11:16 Europe/Budapest, first Focus-guided locked door opened**
 Current phase: **PLAYTHROUGH: A GIFT FROM THE PAST / FIND A WAY OUT**
 Current session: **HZD-S03 OPEN**
-Next raw intake: **HZD-RAW-014**
+Next raw intake: **HZD-RAW-015**
 Next structured session: **HZD-S04 after HZD-S03 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
@@ -16,7 +16,7 @@ Review completion   [>---------] ~1%  OPENING EVIDENCE ONLY
 Story coverage      [>---------] ~1%  PROLOGUE
 Capture to date     [##########] 100% OF RECEIVED COMMENTARY LOGGED
 Critical axes       [##--------] 2/10 OPENED; 0/10 VERDICT-READY
-Asset evidence      [#---------] 1/10 INITIAL SCREENSHOT SLOTS ACCEPTED
+Asset evidence      [#---------] 1/10 INITIAL SLOTS; 2 FILES ACCEPTED
 Final review card   [----------] LOCKED UNTIL CREDITS
 Optional mastery    [----------] OUTSIDE MAIN GOAL
 ```
@@ -48,6 +48,8 @@ Setup readiness is not gameplay progress.
 - The Focus view prompted an Eagle Vision comparison. Daniel likes the abandoned-laboratory level design, while the identity of its projected computer-like displays remains deliberately unresolved.
 - Daniel changed FOV from the minimum to the maximum. Local profile readback confirmed `FieldOfView=100`, the official configuration range `70-100`, `MotionBlur=True`, and current fullscreen resolution `2560x1440`.
 - HZD-IMG-005 is the first accepted screenshot evidence: a 2560x1440 Focus-view image from `A Gift from the Past`, preserved byte-identically in the review folder.
+- The Focus highlighted moving rats and displayed a shape connected to the first locked door. Daniel used the adjacent clockwise/counterclockwise control with that shape as reference, and the door opened without reported frustration.
+- HZD-IMG-011 is a second byte-identical 2560x1440 evidence file. It captures the clue state but not the narrated door-opening result, and it supplements the existing old-world mystery slot instead of inflating planned-slot coverage.
 
 ## Still unconfirmed
 
@@ -60,4 +62,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue HZD-S03 from `Find a Way out` and record the next substantive observation as `HZD-RAW-014`. Preserve silent dictation mode. Keep FOV at 100 unless the wider view becomes distorted; consider disabling Motion Blur for clarity. Confirm whether 2560x1440 is intentional, verify whether slow loading recurs, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S03 beyond the first Focus-guided locked door and record the next substantive observation as `HZD-RAW-015`. Preserve silent dictation mode. Watch whether later Focus interactions demand observation or merely show an answer beside the control. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

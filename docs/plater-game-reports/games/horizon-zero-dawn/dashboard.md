@@ -1,6 +1,6 @@
 # Horizon Zero Dawn: Review-Completion Dashboard
 
-Current checkpoint: A Gift from the Past, Find a Way out, HZD-S03 open
+Current checkpoint: A Gift from the Past, first locked door opened, HZD-S03 open
 
 ```text
 +------------------------------------------------------------------------+
@@ -10,7 +10,7 @@ Current checkpoint: A Gift from the Past, Find a Way out, HZD-S03 open
 | STORY COVERAGE  [>-------------------] ~1% | PROLOGUE | NORMAL / BLIND |
 | CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
 | AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
-| ASSET EVIDENCE  [##------------------] 1/10 INITIAL SLOTS ACCEPTED     |
+| ASSET EVIDENCE  [##------------------] 1/10 SLOTS | 2 FILES ACCEPTED   |
 | JOURNAL         [>-------------------] S01 + S02 DRAFTS | S03 LIVE     |
 | FINAL CARD      [--------------------] LOCKED UNTIL CREDITS            |
 +------------------------------------------------------------------------+

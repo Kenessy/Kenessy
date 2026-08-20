@@ -31,6 +31,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - Focus and interface: the Focus immediately evoked Eagle Vision, while its projected display language remained strange and unexplained. The mechanism is interesting, but later sessions must show whether it rewards observation or merely highlights answers.
 - Level design: the abandoned cave-laboratory earned explicit praise, `Jó, meg van csinálva ez a pálya rész` and `Tetszik`. HZD-IMG-005 visually supports the contrast between purple projections, monumental old-world structure, rock, water, and vegetation.
 - Technical comfort: minimum FOV felt poor and maximum FOV improved it somewhat. Local readback confirms FOV 100, Motion Blur enabled, and 2560x1440 fullscreen; the resolution change from the earlier 3840x2160 preflight is not yet explained.
+- Focus-led interaction: the Focus highlighted moving rats and displayed a shape connected to a locked door. Daniel used the adjacent rotational control and the door opened, providing the first evidence that the Focus participates in navigation and interaction rather than only adding atmosphere. The counterevidence is immediate: the solution was displayed in a tutorial area, so mechanical depth remains unproven.
 
 ## Pre-run hypotheses
 
