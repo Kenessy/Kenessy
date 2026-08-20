@@ -80,13 +80,13 @@ Stop state: Voice capture ended immediately after taking the unidentified object
 
 ## HZD-S03 | 2026-08-20 | A Gift from the Past / Find a Way out / local Steam build 8040161
 
-Milestone: Daniel activated the Focus view, widened the FOV from minimum to maximum, documented the abandoned laboratory, and used the Focus-led shape clue to open the first locked door.
+Milestone: Daniel activated the Focus, corrected the FOV, opened the first Focus-guided door, and discovered the first cluster of corpse-associated audio and hologram records.
 Session: open | Total captured: approximately 31 minutes plus current session | Mode: solo / blind
 Difficulty: Normal; no change reported
-Micro: Clarity 3 · Combat ? · Mystery 4 · Agency 2 · Fatigue ? · Desire 3
-Observation: The Focus initially read as an Eagle Vision-like mode, but the projected computer-like elements remained unexplained. The wider maximum FOV improved the view somewhat, the cave-laboratory environment earned the explicit reactions `Jó, meg van csinálva ez a pálya rész` and `Tetszik`, and the first scan-led shape clue was readable enough to open a locked door without reported frustration.
-Evidence refs: HZD-RAW-013 through HZD-RAW-014; HZD-IMG-005 and HZD-IMG-011; local graphics-profile readback at 2026-08-20 10:56 Europe/Budapest
-Axis delta: World Mystery +1 and Presentation +1 for the Focus-layered abandoned laboratory and its first environmental interaction; Technical Comfort is mixed because FOV required correction and Motion Blur remains enabled. Roleplay and Agency remains untested because a tutorial door interaction is not roleplay evidence.
-Counterevidence: The first shape clue was visibly supplied in a highly authored tutorial area. It may prove to be answer-highlighting rather than sustained observation or deduction.
-Open question: Do later Focus interactions reward observation, or do they routinely display the answer beside the control?
-Stop state: Session open in `A Gift from the Past`, immediately after the first Focus-guided locked door opened.
+Micro: Clarity 2 · Combat ? · Mystery 4 · Agency 2 · Fatigue ? · Desire 3
+Observation: The cave-laboratory and first Focus-guided door remained positive, while the next branching section introduced a speech-like marker whose target was unclear and multiple corpse-associated recordings whose meaning did not yet cohere. Daniel repeatedly said he did not understand what happened, but he shared Aloy's question about why the people died and continued scanning, so confusion currently coexists with active curiosity.
+Evidence refs: HZD-RAW-013 through HZD-RAW-015; HZD-IMG-005 and HZD-IMG-011; local graphics-profile readback at 2026-08-20 10:56 Europe/Budapest
+Axis delta: World Mystery strengthens because the fragmented testimony produced an explicit desire to understand the deaths. Presentation and Technical Comfort remains mixed: the environment and holographic records are compelling, but one marker failed to communicate its target and the information volume raised an early completion-friction concern. Roleplay and Agency remains untested.
+Counterevidence: The testimony may be deliberately incomplete and later assemble into a coherent narrative mosaic. Conversely, if comprehension depends on exhaustive optional scanning, the current curiosity could become clutter fatigue.
+Open question: Does the game assemble these fragments without requiring a datapoint sweep, and does the speech-like marker become readable through repetition?
+Stop state: Session open in `A Gift from the Past`, inside the branching corpse-filled ruin after the record Daniel identified as `Skyler`.

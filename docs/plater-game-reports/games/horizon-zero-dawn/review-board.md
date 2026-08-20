@@ -32,6 +32,8 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - Level design: the abandoned cave-laboratory earned explicit praise, `Jó, meg van csinálva ez a pálya rész` and `Tetszik`. HZD-IMG-005 visually supports the contrast between purple projections, monumental old-world structure, rock, water, and vegetation.
 - Technical comfort: minimum FOV felt poor and maximum FOV improved it somewhat. Local readback confirms FOV 100, Motion Blur enabled, and 2560x1440 fullscreen; the resolution change from the earlier 3840x2160 preflight is not yet explained.
 - Focus-led interaction: the Focus highlighted moving rats and displayed a shape connected to a locked door. Daniel used the adjacent rotational control and the door opened, providing the first evidence that the Focus participates in navigation and interaction rather than only adding atmosphere. The counterevidence is immediate: the solution was displayed in a tutorial area, so mechanical depth remains unproven.
+- Fragmented testimony: the first corpse-associated audio and hologram records mentioned a community room, medication, personal regret, Machu Picchu, and Owen. Daniel did not understand the causal picture, but his repeated questions about why the people died show that the mystery is still pulling him forward. This becomes negative evidence if the story requires exhaustive optional scanning or never turns the fragments into a coherent answer.
+- Interface clarity: one speech-like marker appeared non-interactive and did not identify its source. Daniel recovered by scanning other bodies or nearby sources, but recurrence would turn this from a tutorial ambiguity into UI friction.
 
 ## Pre-run hypotheses
 
@@ -39,8 +41,8 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 
 The lost-world mystery will be the main narrative engine, closer to the archaeological pull of Mass Effect than to Dragon Age's party politics.
 
-- Evidence for: the premise prompted an immediate world-structure question, followed by conditional interest in seeing more cave-to-old-world environments.
-- Evidence against: none yet.
+- Evidence for: the premise prompted an immediate world-structure question, followed by conditional interest in more cave-to-old-world environments and explicit curiosity about the deaths behind the first fragmented records.
+- Evidence against: the first testimony cluster registered as `keszekusza`, and Daniel immediately worried about the possible volume of scannable data.
 - Falsifier: the first major reveals feel obvious, detached, or delivered without player curiosity.
 
 ### H2 — Tactical but non-Soulslike combat

@@ -1,13 +1,13 @@
 # Horizon Zero Dawn: Review-Completion Dashboard
 
-Current checkpoint: A Gift from the Past, first locked door opened, HZD-S03 open
+Current checkpoint: A Gift from the Past, branching ruin and testimony records, HZD-S03 open
 
 ```text
 +------------------------------------------------------------------------+
 | HORIZON ZERO DAWN: REVIEW-COMPLETION DASHBOARD                         |
 +------------------------------------------------------------------------+
 | REVIEW COMPLETE [>-------------------] ~1% | OPENING EVIDENCE ONLY     |
-| STORY COVERAGE  [>-------------------] ~1% | PROLOGUE | NORMAL / BLIND |
+| STORY COVERAGE  [>-------------------] ~2% | PROLOGUE | NORMAL / BLIND |
 | CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
 | AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
 | ASSET EVIDENCE  [##------------------] 1/10 SLOTS | 2 FILES ACCEPTED   |

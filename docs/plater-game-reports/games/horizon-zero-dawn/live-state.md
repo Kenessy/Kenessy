@@ -1,9 +1,9 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 11:16 Europe/Budapest, first Focus-guided locked door opened**
+Last durable update: **2026-08-20 16:55 Europe/Budapest, first audio and hologram testimony cluster discovered**
 Current phase: **PLAYTHROUGH: A GIFT FROM THE PAST / FIND A WAY OUT**
 Current session: **HZD-S03 OPEN**
-Next raw intake: **HZD-RAW-015**
+Next raw intake: **HZD-RAW-016**
 Next structured session: **HZD-S04 after HZD-S03 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
@@ -13,7 +13,7 @@ Dashboard mode: **REVIEW COMPLETION; re-render after every material progress cha
 
 ```text
 Review completion   [>---------] ~1%  OPENING EVIDENCE ONLY
-Story coverage      [>---------] ~1%  PROLOGUE
+Story coverage      [>---------] ~2%  PROLOGUE ESTIMATE
 Capture to date     [##########] 100% OF RECEIVED COMMENTARY LOGGED
 Critical axes       [##--------] 2/10 OPENED; 0/10 VERDICT-READY
 Asset evidence      [#---------] 1/10 INITIAL SLOTS; 2 FILES ACCEPTED
@@ -50,6 +50,10 @@ Setup readiness is not gameplay progress.
 - HZD-IMG-005 is the first accepted screenshot evidence: a 2560x1440 Focus-view image from `A Gift from the Past`, preserved byte-identically in the review folder.
 - The Focus highlighted moving rats and displayed a shape connected to the first locked door. Daniel used the adjacent clockwise/counterclockwise control with that shape as reference, and the door opened without reported frustration.
 - HZD-IMG-011 is a second byte-identical 2560x1440 evidence file. It captures the clue state but not the narrated door-opening result, and it supplements the existing old-world mystery slot instead of inflating planned-slot coverage.
+- Beyond the first door, a branching corpse-filled ruin introduced audio and hologram records that Daniel accessed by scanning bodies or nearby data sources.
+- The records raised specific questions about a community room, medication, personal regret, Machu Picchu, Owen, and why the people died. Daniel did not yet understand the causal picture, but continued investigating.
+- A speech-like marker did not clearly identify an interaction target. This is provisional interface friction, not yet a recurring fault.
+- The review route requires naturally encountered narrative records, not an exhaustive datapoint sweep.
 
 ## Still unconfirmed
 
@@ -59,7 +63,9 @@ Setup readiness is not gameplay progress.
 - Decide whether Motion Blur stays on; it remains enabled, while the recommendation is off for clarity and screenshots.
 - Confirm Steam Cloud status in the live client.
 - Complete the spoiler-safe missable audit after the first blind credits unless a pre-run warning proves necessary.
+- Determine whether the fragmented testimony assembles coherently without exhaustive scanning.
+- Determine whether the unclear speech-like marker recurs or becomes readable through repetition.
 
 ## Next legal action
 
-Continue HZD-S03 beyond the first Focus-guided locked door and record the next substantive observation as `HZD-RAW-015`. Preserve silent dictation mode. Watch whether later Focus interactions demand observation or merely show an answer beside the control. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S03 through the branching ruin and record the next substantive observation as `HZD-RAW-016`. Preserve silent dictation mode. Listen to records encountered naturally without sweeping the area for completion, and watch whether later context assembles the testimony. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
