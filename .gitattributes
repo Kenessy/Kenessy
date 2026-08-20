@@ -2,6 +2,7 @@
 /docs/** text eol=lf
 /docs/assets/img/*.png binary
 /docs/assets/img/**/*.png binary
+/docs/plater-game-reports/**/*.png binary
 /Tools/pages/** text eol=lf
 /Tools/pages/**/*.png binary
 /package.json text eol=lf
