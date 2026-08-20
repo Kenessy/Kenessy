@@ -1,10 +1,10 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 09:34 Europe/Budapest, HZD-S02 closed after the underground object discovery**
-Current phase: **PLAYTHROUGH: CHILDHOOD UNDERGROUND RUIN / VOICE PAUSED**
-Current session: **HZD-S02 CLOSED**
-Next raw intake: **HZD-RAW-013**
-Next structured session: **HZD-S03 at the next active play capture**
+Last durable update: **2026-08-20 10:56 Europe/Budapest, Focus view and maximum FOV confirmed**
+Current phase: **PLAYTHROUGH: A GIFT FROM THE PAST / FIND A WAY OUT**
+Current session: **HZD-S03 OPEN**
+Next raw intake: **HZD-RAW-014**
+Next structured session: **HZD-S04 after HZD-S03 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 Dashboard mode: **REVIEW COMPLETION; re-render after every material progress change or explicit request**
@@ -16,6 +16,7 @@ Review completion   [>---------] ~1%  OPENING EVIDENCE ONLY
 Story coverage      [>---------] ~1%  PROLOGUE
 Capture to date     [##########] 100% OF RECEIVED COMMENTARY LOGGED
 Critical axes       [##--------] 2/10 OPENED; 0/10 VERDICT-READY
+Asset evidence      [#---------] 1/10 INITIAL SCREENSHOT SLOTS ACCEPTED
 Final review card   [----------] LOCKED UNTIL CREDITS
 Optional mastery    [----------] OUTSIDE MAIN GOAL
 ```
@@ -44,15 +45,19 @@ Setup readiness is not gameplay progress.
 - A spotlight-like visual focus isolated a corpse and the object taken from it; the discovery produced the strongest explicit positive reaction so far, `marha érdekes`.
 - A persistent ASCII completionist dashboard is now part of the live capture protocol. Verified achievement percentage and estimated story position are kept separate.
 - Dashboard correction: its primary percentage now measures the completeness of our review project. Steam achievements, New Game+, and Ultra Hard do not advance that percentage and remain optional after review completion.
+- The Focus view prompted an Eagle Vision comparison. Daniel likes the abandoned-laboratory level design, while the identity of its projected computer-like displays remains deliberately unresolved.
+- Daniel changed FOV from the minimum to the maximum. Local profile readback confirmed `FieldOfView=100`, the official configuration range `70-100`, `MotionBlur=True`, and current fullscreen resolution `2560x1440`.
+- HZD-IMG-005 is the first accepted screenshot evidence: a 2560x1440 Focus-view image from `A Gift from the Past`, preserved byte-identically in the review folder.
 
 ## Still unconfirmed
 
-- Confirm subtitles, dynamic/default HUD, Steam overlay, and screenshot capture.
+- Confirm subtitles, dynamic/default HUD, and Steam overlay.
 - Run the built-in benchmark or verify stable 60 FPS during the opening.
-- Decide whether Motion Blur stays on; recommendation is off for clarity and screenshots.
+- Decide whether the current 2560x1440 resolution is intentional; the earlier preflight read 3840x2160.
+- Decide whether Motion Blur stays on; it remains enabled, while the recommendation is off for clarity and screenshots.
 - Confirm Steam Cloud status in the live client.
 - Complete the spoiler-safe missable audit after the first blind credits unless a pre-run warning proves necessary.
 
 ## Next legal action
 
-At the next active capture, open HZD-S03 immediately after the object discovery and record the next substantive observation as `HZD-RAW-013`. Preserve silent dictation mode and re-render the review-completion dashboard after a material progress change. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S03 from `Find a Way out` and record the next substantive observation as `HZD-RAW-014`. Preserve silent dictation mode. Keep FOV at 100 unless the wider view becomes distorted; consider disabling Motion Blur for clarity. Confirm whether 2560x1440 is intentional, verify whether slow loading recurs, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

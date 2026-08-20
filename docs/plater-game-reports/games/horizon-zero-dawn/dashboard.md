@@ -1,6 +1,6 @@
 # Horizon Zero Dawn: Review-Completion Dashboard
 
-Current checkpoint: childhood underground ruin, HZD-S02 closed
+Current checkpoint: A Gift from the Past, Find a Way out, HZD-S03 open
 
 ```text
 +------------------------------------------------------------------------+
@@ -10,7 +10,8 @@ Current checkpoint: childhood underground ruin, HZD-S02 closed
 | STORY COVERAGE  [>-------------------] ~1% | PROLOGUE | NORMAL / BLIND |
 | CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
 | AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
-| JOURNAL         [>-------------------] S01 + S02 OPENING DRAFTS        |
+| ASSET EVIDENCE  [##------------------] 1/10 INITIAL SLOTS ACCEPTED     |
+| JOURNAL         [>-------------------] S01 + S02 DRAFTS | S03 LIVE     |
 | FINAL CARD      [--------------------] LOCKED UNTIL CREDITS            |
 +------------------------------------------------------------------------+
 | REQUIRED FOR 100% REVIEW                                               |
@@ -19,7 +20,7 @@ Current checkpoint: childhood underground ruin, HZD-S02 closed
 | [>] Every session captured, structured, and synced                     |
 | [ ] 10/10 critical axes with evidence and counterevidence              |
 | [ ] Processed journal and spoiler audit                                |
-| [ ] Screenshot and visual-asset evidence set                           |
+| [>] Screenshot and visual-asset evidence set                           |
 | [ ] Final PLATER card and score                                        |
 | [ ] Adversarial completeness audit and publish readback                |
 +------------------------------------------------------------------------+

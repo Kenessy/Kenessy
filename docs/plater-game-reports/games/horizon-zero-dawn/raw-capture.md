@@ -114,6 +114,16 @@ szerintem ne a all achievement max legyen most a cél hanem a review teljessége
 
 Protocol correction: the main dashboard measures review completeness, not raw game-platform completion. The required finish line is a fully played and meaningfully narrated review run, complete critical coverage, processed journal, final review card, evidence assets, adversarial audit, and verified publish-ready state. New Game+, Ultra Hard, 79/79, and exhaustive cleanup remain optional after the review reaches 100%.
 
+## HZD-RAW-013 | 2026-08-20 10:54-10:56 Europe/Budapest | HZD-S03 | interaction / technical / world / atmosphere
+
+```text
+Majd itt lesz valamink, amit vível látom ki, meg be lehet kapcsolni. Ez ilyen Assassin's Creed-ben az eagle vision akar lenni, vagy mi ez? Itt mutat valamit. És igen, most látom, hogy ez a FOV nem a legjobb, úgyhogy ezt itt valahogy... ezt hol lehet állítani? Ja, hogy minimumon van a... akkor is rakom maxra. Maxon már kicsit több. Hm, elég fura, nem tudom mik vannak itt ilyen, mint ilyen mikorő számítógépes displayk akarnak ezek lenni. Mindenesetre ezt látom ezen a részen. Jó, meg van csinálva ez a pálya rész. Tetszik. Szóval ez valamilyen laboratórium feelinget kelt, amit már régóta hátrahagytak.
+```
+
+Interpretation boundary: `vível` and `mikorő számítógépes displayk` remain transcript-exact uncertain wording. Confirmed user signals are the Eagle Vision comparison, dissatisfaction with minimum FOV, a change to maximum FOV, uncertainty about the displayed old-world elements, and an explicit positive verdict on the abandoned-laboratory level design.
+
+Spoiler-free guidance returned: the Focus is functionally related to Eagle Vision but acts as an augmented-reality scanner rather than a simple highlight mode. Local profile readback at 10:56 confirmed `FieldOfView=100` with the documented range `70-100`, `MotionBlur=True`, and current fullscreen resolution `2560x1440`.
+
 ## Raw intake template
 
 ```text

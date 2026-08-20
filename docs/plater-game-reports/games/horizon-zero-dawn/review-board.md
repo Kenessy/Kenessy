@@ -17,17 +17,20 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 | Quest quality | Side content strengthens characters, world, or themes | Map filler and interchangeable errands | Untested |
 | Open-world friction | Exploration creates discovery and useful detours | Icon clearing, traversal friction, inventory busywork | Untested |
 | Difficulty fairness | Failure teaches, settings preserve flow, encounters allow preparation | Mob chaos, damage spikes, forced grind | Untested |
-| Presentation and technical comfort | Stable performance, readable UI, strong audio/visual identity | Stutter, camera discomfort, capture problems | Mixed opening signal |
+| Presentation and technical comfort | Stable performance, readable UI, strong audio/visual identity | Stutter, camera discomfort, capture problems | Opening positive / comfort mixed |
 | Completion shape | Cleanup remains legible and optional until mastery is chosen | Repetition or challenge modes poison the review run | Preflight only |
 | Summer immersion fit | Desire to return, long-session comfort, memorable world presence | Fatigue, boredom, obligation feeling | Untested |
 
-## Live evidence — HZD-S01 opening
+## Live evidence: HZD-S01 through HZD-S03 opening
 
 - World mystery: the nature-reclaimed old-world / tribal-humanity premise prompted an immediate clarification question. This is a positive curiosity signal, not yet a verdict on reveal quality.
 - Technical comfort: the first New Game load felt slow. Keep this provisional unless it recurs during ordinary loading or is joined by frame-pacing problems.
 - Difficulty: Normal is now confirmed, but no combat evidence exists yet.
 - Opening tone: the childhood cave/ruin sequence first felt `elég fura`, then became `egész érdekes` once the cave formations and forgotten laboratory-like architecture visibly merged. This supports productive uncanniness, but only within one short opening area.
 - Directed discovery: a spotlight-like cue isolated a corpse and an unidentified object. Taking it produced the strongest explicit positive reaction yet, `marha érdekes`; the next evidence must show whether that interest survives after the scripted pickup.
+- Focus and interface: the Focus immediately evoked Eagle Vision, while its projected display language remained strange and unexplained. The mechanism is interesting, but later sessions must show whether it rewards observation or merely highlights answers.
+- Level design: the abandoned cave-laboratory earned explicit praise, `Jó, meg van csinálva ez a pálya rész` and `Tetszik`. HZD-IMG-005 visually supports the contrast between purple projections, monumental old-world structure, rock, water, and vegetation.
+- Technical comfort: minimum FOV felt poor and maximum FOV improved it somewhat. Local readback confirms FOV 100, Motion Blur enabled, and 2560x1440 fullscreen; the resolution change from the earlier 3840x2160 preflight is not yet explained.
 
 ## Pre-run hypotheses
 

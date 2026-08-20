@@ -8,7 +8,7 @@ Status ladder:
 Pre-run -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
-Current status: **In Progress: HZD-S02 closed, childhood prologue continues**
+Current status: **In Progress: HZD-S03 open in A Gift from the Past**
 
 ## Exact session entry template
 
@@ -77,3 +77,16 @@ Axis delta: World Mystery +1 and Presentation +1 for a visually staged discovery
 Counterevidence: This is one directed pickup in the prologue; sustained environmental discovery and player-led exploration remain untested.
 Open question: Does the object turn into an active discovery tool, or was the interest mainly created by the scene's staging?
 Stop state: Voice capture ended immediately after taking the unidentified object from the corpse; exact save point and whether gameplay continued afterward are unknown.
+
+## HZD-S03 | 2026-08-20 | A Gift from the Past / Find a Way out / local Steam build 8040161
+
+Milestone: Daniel activated the Focus view, widened the FOV from minimum to maximum, and documented the abandoned laboratory with the first accepted screenshot.
+Session: open | Total captured: approximately 31 minutes plus current session | Mode: solo / blind
+Difficulty: Normal; no change reported
+Micro: Clarity 3 · Combat ? · Mystery 4 · Agency 2 · Fatigue ? · Desire 3
+Observation: The Focus initially read as an Eagle Vision-like mode, but the projected computer-like elements remained unexplained. The wider maximum FOV improved the view somewhat, and the cave-laboratory environment earned the explicit reactions `Jó, meg van csinálva ez a pálya rész` and `Tetszik`.
+Evidence refs: HZD-RAW-013, HZD-IMG-005, local graphics-profile readback at 2026-08-20 10:56 Europe/Budapest
+Axis delta: World Mystery +1 and Presentation +1 for the Focus-layered abandoned laboratory; Technical Comfort is mixed because FOV required correction and Motion Blur remains enabled.
+Counterevidence: The display language may become visual noise, and the environment is still a highly authored prologue space rather than evidence of sustained exploration quality.
+Open question: Does the Focus deepen observation and discovery, or become a routine highlight overlay?
+Stop state: Session open in `A Gift from the Past`, objective `Find a Way out`, with Focus view active.

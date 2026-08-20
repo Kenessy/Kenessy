@@ -1,7 +1,7 @@
 # Horizon Zero Dawn — Steam Completions Working Folder
 
-Status: **Playthrough in progress / HZD-S02 closed in the childhood underground ruin**
-Evidence horizon: **Steam-library snapshot and local preflight from 2026-08-19; live observations and protocol decisions through HZD-RAW-012**
+Status: **Playthrough in progress / HZD-S03 open in A Gift from the Past**
+Evidence horizon: **Steam-library snapshot and local preflight from 2026-08-19; live observations through HZD-RAW-013 and image evidence through HZD-IMG-005**
 Owner signal: **Complete Edition owned on Steam; 117 minutes recorded; 0/79 achievements in the snapshot**
 Primary lens: **World Mystery vs Lightweight Roleplay**
 Public score: **Locked until credits and evidence audit**
