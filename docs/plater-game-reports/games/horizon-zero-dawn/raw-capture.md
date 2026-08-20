@@ -84,6 +84,20 @@ Na, itt első megjegyzés, elég érdekes ez a föld alatti rész, itt egy barla
 
 Interpretation boundary: the game-relevant portion ends with the conditional positive reaction to seeing more areas like this. The trailing fragments may be background or off-game speech; they remain preserved here but are excluded from structured review evidence unless Daniel later connects them to the game.
 
+## HZD-RAW-010 | 2026-08-20 09:14 Europe/Budapest | HZD-S02 | world / atmosphere / interaction
+
+Source note: realtime transport split one observation across two handoffs and repeated part of the second segment. The two distinct user-input segments are retained once each below, in order; no missing word is reconstructed from guesswork.
+
+```text
+[segment A]
+Az egyik helyen, ahova bejöttünk, az egyik szobában, itt egy ilyen tipikus káderejszerű fényvilágít egy hulltesten rá, mintha csak pont az egy dolog van kivilágítva, és itt mondja, hogy van nála valami
+
+[segment B]
+Storage... Veszünk leróla, marha érdekes
+```
+
+Interpretation boundary: `káderejszerű` and `Storage` remain transcript-exact uncertain terms. Structured evidence is limited to the observed spotlight-like visual focus on a corpse, taking an object from it, and Daniel's explicit reaction that this was `marha érdekes`.
+
 ## Raw intake template
 
 ```text

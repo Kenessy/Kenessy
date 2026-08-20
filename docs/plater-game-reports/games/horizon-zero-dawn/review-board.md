@@ -10,7 +10,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 
 | Axis | What counts as positive evidence | What can falsify it | State |
 |---|---|---|---|
-| World mystery | Curiosity, coherent reveals, rewarding environmental/story clues | Predictable answers, exposition without payoff | Opening positive |
+| World mystery | Curiosity, coherent reveals, rewarding environmental/story clues | Predictable answers, exposition without payoff | Strengthening opening positive |
 | Aloy and characters | Emotional investment, memorable relationships, credible growth | Thin interactions, weak dialogue, detachment | Untested |
 | Machine hunting | Readable weaknesses, preparation, expressive tools, satisfying component removal | Repetitive kiting, stun-locks, ammo chores | Untested |
 | Roleplay and agency | Choices or quest responses that feel meaningfully authored by the player | Mostly cosmetic dialogue and fixed outcomes | Untested |
@@ -27,6 +27,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - Technical comfort: the first New Game load felt slow. Keep this provisional unless it recurs during ordinary loading or is joined by frame-pacing problems.
 - Difficulty: Normal is now confirmed, but no combat evidence exists yet.
 - Opening tone: the childhood cave/ruin sequence first felt `elég fura`, then became `egész érdekes` once the cave formations and forgotten laboratory-like architecture visibly merged. This supports productive uncanniness, but only within one short opening area.
+- Directed discovery: a spotlight-like cue isolated a corpse and an unidentified object. Taking it produced the strongest explicit positive reaction yet, `marha érdekes`; the next evidence must show whether that interest survives after the scripted pickup.
 
 ## Pre-run hypotheses
 

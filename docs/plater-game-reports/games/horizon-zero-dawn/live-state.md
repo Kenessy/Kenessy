@@ -1,10 +1,10 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 00:28 Europe/Budapest, voice session closed in the underground ruin**
-Current phase: **PLAYTHROUGH: OPENING / VOICE PAUSED**
-Current session: **HZD-S01 CLOSED**
-Next raw intake: **HZD-RAW-010**
-Next structured session: **HZD-S02 at the next active play capture**
+Last durable update: **2026-08-20 09:14 Europe/Budapest, object discovered on a lit corpse in the underground ruin**
+Current phase: **PLAYTHROUGH: CHILDHOOD UNDERGROUND RUIN**
+Current session: **HZD-S02 OPEN**
+Next raw intake: **HZD-RAW-011**
+Next structured session: **HZD-S03 after HZD-S02 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 
@@ -14,7 +14,7 @@ Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / t
 Scratch setup       [##########] READY
 Live preflight      [########--] LAUNCHED; CLIENT CHECKS OPEN
 Story / credits     [#---------] OPENING IN PROGRESS
-Review evidence     [##--------] 3 opening checkpoints
+Review evidence     [###-------] 4 opening checkpoints
 Mastery / extras    [----------] NOT STARTED
 ```
 
@@ -39,6 +39,7 @@ Setup readiness is not gameplay progress.
 - The childhood cave/ruin opening initially registered as `elég fura`; the later cave-to-laboratory reaction clarified that signal in a conditionally positive direction.
 - Daniel switched the live session to dictation mode: ordinary observations are recorded without spoken acknowledgements.
 - Within the same opening, the cave-to-laboratory transition became `egész érdekes`, with a conditional positive reaction to seeing more environments built from rock and old technology merging together.
+- A spotlight-like visual focus isolated a corpse and the object taken from it; the discovery produced the strongest explicit positive reaction so far, `marha érdekes`.
 
 ## Still unconfirmed
 
@@ -50,4 +51,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-At the next active capture, open `HZD-S02` from the childhood underground ruin and record the next substantive observation as `HZD-RAW-010`. Preserve silent dictation mode. Continue blind, verify whether slow loading recurs, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S02 silently from the object discovery in the childhood underground ruin. Record the next substantive observation as `HZD-RAW-011`. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
