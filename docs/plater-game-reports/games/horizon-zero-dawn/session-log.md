@@ -8,7 +8,7 @@ Status ladder:
 Pre-run -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
-Current status: **In Progress: HZD-S02 open in the childhood underground ruin**
+Current status: **In Progress: HZD-S02 closed, childhood prologue continues**
 
 ## Exact session entry template
 
@@ -68,12 +68,12 @@ Stop state: Voice capture ended in the childhood underground ruin; exact save po
 ## HZD-S02 | 2026-08-20 | childhood underground ruin / local Steam build 8040161
 
 Milestone: Daniel found and took an unidentified object from a corpse that the scene isolated with a spotlight-like visual cue.
-Session: open | Total captured: approximately 11 minutes plus current session | Mode: solo / blind
+Session: approximately 20 minutes of voice capture | Total captured: approximately 31 minutes | Mode: solo / blind
 Difficulty: Normal; no change reported
 Micro: Clarity 3 · Combat ? · Mystery 4 · Agency ? · Fatigue ? · Desire 3
 Observation: The room's lighting appeared to isolate one corpse and the object on it. Taking the object produced Daniel's strongest positive reaction so far, `marha érdekes`, strengthening the early mystery signal without yet establishing what the object is or does.
-Evidence refs: HZD-RAW-010
+Evidence refs: HZD-RAW-010 through HZD-RAW-012
 Axis delta: World Mystery +1 and Presentation +1 for a visually staged discovery that immediately increased interest.
 Counterevidence: This is one directed pickup in the prologue; sustained environmental discovery and player-led exploration remain untested.
 Open question: Does the object turn into an active discovery tool, or was the interest mainly created by the scene's staging?
-Stop state: Session open immediately after taking the unidentified object from the corpse.
+Stop state: Voice capture ended immediately after taking the unidentified object from the corpse; exact save point and whether gameplay continued afterward are unknown.

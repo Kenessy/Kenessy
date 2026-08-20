@@ -1,6 +1,6 @@
 # Horizon Zero Dawn: Review-Completion Dashboard
 
-Current checkpoint: childhood underground ruin, HZD-S02 open
+Current checkpoint: childhood underground ruin, HZD-S02 closed
 
 ```text
 +------------------------------------------------------------------------+
@@ -10,7 +10,7 @@ Current checkpoint: childhood underground ruin, HZD-S02 open
 | STORY COVERAGE  [>-------------------] ~1% | PROLOGUE | NORMAL / BLIND |
 | CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
 | AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
-| JOURNAL         [>-------------------] OPENING DRAFT | HZD-S02 LIVE    |
+| JOURNAL         [>-------------------] S01 + S02 OPENING DRAFTS        |
 | FINAL CARD      [--------------------] LOCKED UNTIL CREDITS            |
 +------------------------------------------------------------------------+
 | REQUIRED FOR 100% REVIEW                                               |

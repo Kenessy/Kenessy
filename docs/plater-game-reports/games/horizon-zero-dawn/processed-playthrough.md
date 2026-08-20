@@ -16,10 +16,16 @@ Az első erős benyomást nem egy harc, hanem két világ szó szerinti összen�
 
 Vázlatforrás: HZD-RAW-007, HZD-RAW-009 és HZD-S01. A harc, a karakterkötődés és a tartós felfedezés még nincs tesztelve.
 
+## Session 2: A fény által kijelölt test
+
+A következő rövid szakasz egyetlen testre és a rajta lévő ismeretlen tárgyra irányította a figyelmet. A fény szinte leválasztotta ezt az egy pontot a szobáról, ezért a felfedezés erősen rendezettnek tűnt, nem pedig teljesen játékos által vezetettnek (player-led). A tárgy elvétele után elhangzó `marha érdekes` ugyanakkor egyértelmű pozitív jel: a rom nemcsak látványként működött, hanem kíváncsiságot is termelt. A következő sessionnek azt kell megmutatnia, hogy ez a kíváncsiság fennmarad-e akkor is, amikor a játék már nem egyetlen megvilágított tárgyhoz terel.
+
+Vázlatforrás: HZD-RAW-010 és HZD-S02. A tárgy kiléte és funkciója nincs előreértelmezve.
+
 ## Session conversion queue
 
 - HZD-S01: provisional opening conversion complete
-- HZD-S02: pending
+- HZD-S02: provisional opening conversion complete
 - Credits synthesis: pending
 - Frozen Wilds synthesis: pending
 - Optional mastery appendix: deferred

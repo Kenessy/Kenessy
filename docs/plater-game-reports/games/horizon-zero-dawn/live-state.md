@@ -1,10 +1,10 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20, dashboard corrected to review completeness**
-Current phase: **PLAYTHROUGH: CHILDHOOD UNDERGROUND RUIN**
-Current session: **HZD-S02 OPEN**
+Last durable update: **2026-08-20 09:34 Europe/Budapest, HZD-S02 closed after the underground object discovery**
+Current phase: **PLAYTHROUGH: CHILDHOOD UNDERGROUND RUIN / VOICE PAUSED**
+Current session: **HZD-S02 CLOSED**
 Next raw intake: **HZD-RAW-013**
-Next structured session: **HZD-S03 after HZD-S02 closes**
+Next structured session: **HZD-S03 at the next active play capture**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 Dashboard mode: **REVIEW COMPLETION; re-render after every material progress change or explicit request**
@@ -55,4 +55,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue HZD-S02 silently from the object discovery in the childhood underground ruin. Record the next substantive observation as `HZD-RAW-013`. Re-render the review-completion dashboard after a material progress change. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+At the next active capture, open HZD-S03 immediately after the object discovery and record the next substantive observation as `HZD-RAW-013`. Preserve silent dictation mode and re-render the review-completion dashboard after a material progress change. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
