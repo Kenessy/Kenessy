@@ -8,7 +8,7 @@ Legend: `[ ]` pending · `[x]` verified complete · `[?]` conditional / live pre
 
 - [x] Verify current Steam install and build: `G:` library, build `8040161`, `StateFlags=4`.
 - [x] Verify Complete Edition identity and official Frozen Wilds inclusion.
-- [ ] Decide whether to restart or continue the existing 117-minute save.
+- [x] Start a clean New Game instead of continuing the existing 117-minute save.
 - [ ] Lock comfortable graphics, subtitle, accessibility, and capture settings.
 - [x] Re-read the current 79-achievement list without exposing story spoilers.
 - [?] Check for missable or route-sensitive achievements and record only spoiler-safe precautions.
@@ -47,6 +47,14 @@ First-run success does **not** require every collectible, every hunting-trial ma
 ## Current ceiling
 
 The 2026-08-19 snapshot indicates a **79-achievement ceiling**. The known route includes a New Game+ Ultra Hard clear, so full platform mastery is treated as at least a two-campaign project. This fact must be reverified live before the mastery route is locked.
+
+## Dashboard contract
+
+- `dashboard.md` is the compact player-facing view of this ledger.
+- Steam percentage is calculated only from a verified unlocked-achievement count. Its current value remains the last verified snapshot until Steam or the game confirms a change.
+- Story percentage is an explicitly marked estimate based on the currently observed story position. It is never presented as official completion.
+- Re-render the dashboard in the conversation after every material progress change and whenever Daniel explicitly asks for it.
+- The conversation cannot guarantee a physically pinned or sticky message. Re-rendering keeps the latest state visible without pretending the interface can pin it.
 
 ## Completion decision gate
 

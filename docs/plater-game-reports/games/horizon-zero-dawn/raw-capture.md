@@ -98,6 +98,14 @@ Storage... Veszünk leróla, marha érdekes
 
 Interpretation boundary: `káderejszerű` and `Storage` remain transcript-exact uncertain terms. Structured evidence is limited to the observed spotlight-like visual focus on a corpse, taking an object from it, and Daniel's explicit reaction that this was `marha érdekes`.
 
+## HZD-RAW-011 | 2026-08-20 | HZD-S02 | dashboard protocol
+
+```text
+okés majd a dasboardot is mutathatod a gamehez hogy legyen nonstop fent akár csak ASCII formában mindig - a completionist % os dolgot mondom mert már kezdődött a game xd
+```
+
+Protocol change: maintain a compact ASCII completionist dashboard in the repository and re-render it in the conversation after every material progress change or explicit dashboard request. Steam achievement percentage and estimated story position remain visibly separated so an estimate cannot masquerade as verified platform completion.
+
 ## Raw intake template
 
 ```text

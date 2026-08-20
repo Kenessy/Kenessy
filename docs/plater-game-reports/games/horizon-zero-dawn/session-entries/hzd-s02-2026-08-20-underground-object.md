@@ -8,7 +8,7 @@ Status: **OPEN**
 - Ending state: not yet
 - Difficulty: Normal; no change reported
 - Mode: solo / blind / story-first
-- Raw intake IDs: HZD-RAW-010
+- Raw intake IDs: HZD-RAW-010, HZD-RAW-011
 - Screenshot IDs: none yet
 - Remote sync: pending current checkpoint
 
@@ -17,6 +17,7 @@ Status: **OPEN**
 1. A spotlight-like beam appeared to isolate one corpse in the room.
 2. The game indicated that the corpse had an unidentified object.
 3. Daniel took the object and reacted that the discovery was `marha érdekes`.
+4. Daniel requested a persistent ASCII completionist dashboard now that the game has started.
 
 ## Confirmed observations
 

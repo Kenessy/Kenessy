@@ -1,12 +1,13 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 09:14 Europe/Budapest, object discovered on a lit corpse in the underground ruin**
+Last durable update: **2026-08-20 09:14 Europe/Budapest, live completionist dashboard enabled**
 Current phase: **PLAYTHROUGH: CHILDHOOD UNDERGROUND RUIN**
 Current session: **HZD-S02 OPEN**
-Next raw intake: **HZD-RAW-011**
+Next raw intake: **HZD-RAW-012**
 Next structured session: **HZD-S03 after HZD-S02 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
+Dashboard mode: **RE-RENDER after every material progress change or explicit request**
 
 ## Progress readback
 
@@ -40,6 +41,7 @@ Setup readiness is not gameplay progress.
 - Daniel switched the live session to dictation mode: ordinary observations are recorded without spoken acknowledgements.
 - Within the same opening, the cave-to-laboratory transition became `egész érdekes`, with a conditional positive reaction to seeing more environments built from rock and old technology merging together.
 - A spotlight-like visual focus isolated a corpse and the object taken from it; the discovery produced the strongest explicit positive reaction so far, `marha érdekes`.
+- A persistent ASCII completionist dashboard is now part of the live capture protocol. Verified achievement percentage and estimated story position are kept separate.
 
 ## Still unconfirmed
 
@@ -51,4 +53,4 @@ Setup readiness is not gameplay progress.
 
 ## Next legal action
 
-Continue HZD-S02 silently from the object discovery in the childhood underground ruin. Record the next substantive observation as `HZD-RAW-011`. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S02 silently from the object discovery in the childhood underground ruin. Record the next substantive observation as `HZD-RAW-012`. Re-render `dashboard.md` after a material progress change. Do not identify or explain the object beyond what Daniel has seen. Verify whether slow loading recurs and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
