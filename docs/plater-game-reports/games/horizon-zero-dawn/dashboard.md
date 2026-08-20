@@ -1,45 +1,46 @@
-# Horizon Zero Dawn: Live Completionist Dashboard
+# Horizon Zero Dawn: Review-Completion Dashboard
 
-Last durable game checkpoint: 2026-08-20 09:14 Europe/Budapest
+Current checkpoint: childhood underground ruin, HZD-S02 open
 
 ```text
-+-----------------------------------------------------------------+
-| HORIZON ZERO DAWN: LIVE COMPLETIONIST DASHBOARD                 |
-+-----------------------------------------------------------------+
-| RUN      Normal | blind | solo                                  |
-| CURRENT  Childhood underground ruin | unidentified object found |
-| JOURNAL  HZD-S01 closed + synced | HZD-S02 live                 |
-+-----------------------------------------------------------------+
-| STORY EST.     [>-------------------]  ~1%  OPENING / PROLOGUE  |
-| STEAM 100%     [--------------------]  0.0% 0/79 LAST VERIFIED  |
-| FROZEN WILDS   [--------------------]  0%   NOT STARTED         |
-| NEW GAME+      [--------------------]  0%   AFTER CREDITS       |
-| NG+ ULTRA HARD [--------------------]  0%   OPTIONAL MASTERY    |
-+-----------------------------------------------------------------+
-| [x] Clean New Game started on Normal                            |
-| [x] First voice session closed and remotely synced              |
-| [>] Second voice session and append-only journal active         |
-| [ ] Base-game credits                                           |
-| [ ] Frozen Wilds story                                          |
-| [ ] Post-credits achievement cleanup decision                   |
-| [ ] New Game+                                                   |
-| [ ] New Game+ Ultra Hard                                        |
-| [ ] 79/79 Steam achievements                                    |
-+-----------------------------------------------------------------+
-| BLOCKER RADAR                                                   |
-| [x] Co-op requirement: NONE                                     |
-| [!] Full 79/79: requires NG+ Ultra Hard, so >= 2 campaigns      |
-| [?] Spoiler-safe missable audit: OPEN                           |
-| [?] Cloud / screenshot / stable-performance checks: OPEN        |
-+-----------------------------------------------------------------+
++------------------------------------------------------------------------+
+| HORIZON ZERO DAWN: REVIEW-COMPLETION DASHBOARD                         |
++------------------------------------------------------------------------+
+| REVIEW COMPLETE [>-------------------] ~1% | OPENING EVIDENCE ONLY     |
+| STORY COVERAGE  [>-------------------] ~1% | PROLOGUE | NORMAL / BLIND |
+| CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
+| AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
+| JOURNAL         [>-------------------] OPENING DRAFT | HZD-S02 LIVE    |
+| FINAL CARD      [--------------------] LOCKED UNTIL CREDITS            |
++------------------------------------------------------------------------+
+| REQUIRED FOR 100% REVIEW                                               |
+| [>] Base story played and meaningfully narrated                        |
+| [ ] Frozen Wilds played and meaningfully narrated                      |
+| [>] Every session captured, structured, and synced                     |
+| [ ] 10/10 critical axes with evidence and counterevidence              |
+| [ ] Processed journal and spoiler audit                                |
+| [ ] Screenshot and visual-asset evidence set                           |
+| [ ] Final PLATER card and score                                        |
+| [ ] Adversarial completeness audit and publish readback                |
++------------------------------------------------------------------------+
+| CRITICAL AXES                                                          |
+| [>] World mystery / lore       [>] Presentation / technical            |
+| [ ] Aloy / characters          [ ] Machine hunting / combat            |
+| [ ] Roleplay / agency          [ ] Quest quality                       |
+| [ ] Open-world friction        [ ] Difficulty fairness                 |
+| [ ] Completion shape           [ ] Summer immersion / return desire    |
++------------------------------------------------------------------------+
+| OPTIONAL AFTER REVIEW: NG+ | ULTRA HARD | 79/79 | FULL COLLECTIBLES    |
+| These do not block or increase the main review-completion percentage.  |
++------------------------------------------------------------------------+
 ```
 
 ## Percentage contract
 
-- `STORY EST.` is deliberately approximate. The opening has begun, but no major story milestone has been completed, so `~1%` means only "at the very start".
-- `STEAM 100%` is the platform completion value: unlocked achievements divided by 79. `0/79` is the last verified snapshot from 2026-08-19, not a claim of live Steam synchronization.
-- The other lanes are route gates, not one combined mathematical percentage. This prevents setup work or journal activity from inflating game completion.
+The primary bar measures the review project: 35% base-game story and narration, 10% Frozen Wilds and narration, 25% verdict-ready critical axes, 10% processed journal and spoiler audit, 5% visual evidence, 7% final PLATER card and score, and 8% adversarial audit plus verified publish readback.
+
+The current rounded value is approximately 1%. Capture-to-date is separately 100% because every received play observation has been logged, but that coverage guard cannot inflate total review completion.
 
 ## Refresh rule
 
-Update this file and re-render the ASCII block after a material story milestone, achievement unlock, DLC start or completion, mastery decision, difficulty change, newly confirmed blocker, or explicit dashboard request.
+Update and re-render this block after a material story milestone, a new critical axis opens or becomes verdict-ready, a session closes, a journal or asset gate completes, the final card unlocks, publication state changes, or Daniel explicitly asks for the dashboard.

@@ -106,6 +106,14 @@ okés majd a dasboardot is mutathatod a gamehez hogy legyen nonstop fent akár c
 
 Protocol change: maintain a compact ASCII completionist dashboard in the repository and re-render it in the conversation after every material progress change or explicit dashboard request. Steam achievement percentage and estimated story position remain visibly separated so an estimate cannot masquerade as verified platform completion.
 
+## HZD-RAW-012 | 2026-08-20 | HZD-S02 | review-completion protocol
+
+```text
+szerintem ne a all achievement max legyen most a cél hanem a review teljessége. Azaz végigvinni a gamet és maradéktalanul befejezni a reviewt, amihez a new game plusz nem okvetlen main goal. Se all achievements, az majd utána esetleg. Itt oylan hogy pl: végignarrálva a main sztori, xy kritizálva etc? Egy review dashboard - jah igen completionist dashboard NEKÜNK minthogy ugy értettem már látom hogy értetted, completionist igen, de nem raw game completionist, hanem nekünk a review guyoknak completionist xd most egy harry potter watcher completionist az lenne aki folyton mérné mennyi és hogy néztük meg a harry potter filmeket xd igy gondolkodj erről mostantól
+```
+
+Protocol correction: the main dashboard measures review completeness, not raw game-platform completion. The required finish line is a fully played and meaningfully narrated review run, complete critical coverage, processed journal, final review card, evidence assets, adversarial audit, and verified publish-ready state. New Game+, Ultra Hard, 79/79, and exhaustive cleanup remain optional after the review reaches 100%.
+
 ## Raw intake template
 
 ```text

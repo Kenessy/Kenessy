@@ -8,7 +8,7 @@ Status: **OPEN**
 - Ending state: not yet
 - Difficulty: Normal; no change reported
 - Mode: solo / blind / story-first
-- Raw intake IDs: HZD-RAW-010, HZD-RAW-011
+- Raw intake IDs: HZD-RAW-010, HZD-RAW-011, HZD-RAW-012
 - Screenshot IDs: none yet
 - Remote sync: pending current checkpoint
 
@@ -18,6 +18,7 @@ Status: **OPEN**
 2. The game indicated that the corpse had an unidentified object.
 3. Daniel took the object and reacted that the discovery was `marha érdekes`.
 4. Daniel requested a persistent ASCII completionist dashboard now that the game has started.
+5. Daniel corrected the completion target: the primary percentage must measure review completeness, while New Game+, Ultra Hard, 79/79, and exhaustive cleanup remain optional post-review goals.
 
 ## Confirmed observations
 

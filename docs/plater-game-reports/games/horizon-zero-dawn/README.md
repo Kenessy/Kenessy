@@ -23,7 +23,7 @@ During voice play, Codex maintains the files rather than relying on conversation
 5. Publishable prose is derived later in `processed-playthrough.md` and must link back to raw/session evidence.
 6. Unknowns stay marked `?`; Codex does not fill gaps from memory or guides.
 7. At session close, the working folder is committed and synced. Long sessions may receive additional remote checkpoint commits.
-8. `dashboard.md` is re-rendered in the conversation after material progress changes, with verified Steam percentage separated from estimated story position.
+8. `dashboard.md` is re-rendered in the conversation after material progress changes. Its primary percentage measures review completeness: played and narrated scope, critical coverage, journal, assets, final card, audit, and publish readback. Steam mastery remains a separate optional appendix.
 
 Voice commentary can be completely natural. Useful signals include what just happened, what felt good or annoying, a choice made, a machine or quest that stood out, a difficulty spike, a technical issue, a screenshot moment, or simply whether the desire to continue rose or fell.
 
