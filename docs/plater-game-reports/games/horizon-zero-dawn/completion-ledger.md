@@ -40,11 +40,11 @@ First-run success does **not** require every collectible, every hunting-trial ma
 - [>] Processed playthrough completed through every closed session.
 - [ ] Final PLATER review card and adversarial audit completed.
 
-### Critical coverage: 0/10 verdict-ready, 2/10 opened
+### Critical coverage: 0/10 verdict-ready, 3/10 opened
 
 - [>] World mystery and lore.
 - [ ] Aloy and characters.
-- [ ] Machine hunting and combat.
+- [>] Machine hunting and combat.
 - [ ] Roleplay and agency.
 - [ ] Quest quality.
 - [ ] Open-world structure and friction.
@@ -79,7 +79,7 @@ The 2026-08-19 snapshot indicates a 79-achievement platform ceiling. The known r
 - 7%: final PLATER card and score completed after credits.
 - 8%: adversarial completeness audit, final sync, and publish readback passed.
 
-The current rounded value is approximately 1%. Only opening evidence exists, no critical axis is verdict-ready, and no final artifact is unlocked. Capture coverage can be 100% to date while total review completion remains near the start.
+The current rounded value is approximately 2%. Early story coverage, three provisionally processed sessions, and initial visual evidence exist, but no critical axis is verdict-ready and no final artifact is unlocked. Capture coverage can be 100% to date while total review completion remains near the start.
 
 ## Dashboard contract
 

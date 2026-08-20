@@ -8,7 +8,7 @@ Status ladder:
 Pre-run -> In Progress -> Provisional -> Stable -> Complete -> Revisit Needed
 ```
 
-Current status: **In Progress: HZD-S03 open in A Gift from the Past**
+Current status: **In Progress: HZD-S04 open in the first machine tutorial**
 
 ## Exact session entry template
 
@@ -81,7 +81,7 @@ Stop state: Voice capture ended immediately after taking the unidentified object
 ## HZD-S03 | 2026-08-20 | A Gift from the Past / Find a Way out / local Steam build 8040161
 
 Milestone: Daniel activated the Focus, corrected the FOV, opened the first Focus-guided door, and discovered the first cluster of corpse-associated audio and hologram records.
-Session: open | Total captured: approximately 31 minutes plus current session | Mode: solo / blind
+Session: duration unknown because voice checkpoints contain inactive gaps | Total captured: at least the earlier approximately 31 minutes plus HZD-S03 | Mode: solo / blind
 Difficulty: Normal; no change reported
 Micro: Clarity 2 · Combat ? · Mystery 4 · Agency 2 · Fatigue ? · Desire 3
 Observation: The cave-laboratory and first Focus-guided door remained positive, while the next branching section introduced a speech-like marker whose target was unclear and multiple corpse-associated recordings whose meaning did not yet cohere. Daniel repeatedly said he did not understand what happened, but he shared Aloy's question about why the people died and continued scanning, so confusion currently coexists with active curiosity.
@@ -89,4 +89,17 @@ Evidence refs: HZD-RAW-013 through HZD-RAW-015; HZD-IMG-005 and HZD-IMG-011; loc
 Axis delta: World Mystery strengthens because the fragmented testimony produced an explicit desire to understand the deaths. Presentation and Technical Comfort remains mixed: the environment and holographic records are compelling, but one marker failed to communicate its target and the information volume raised an early completion-friction concern. Roleplay and Agency remains untested.
 Counterevidence: The testimony may be deliberately incomplete and later assemble into a coherent narrative mosaic. Conversely, if comprehension depends on exhaustive optional scanning, the current curiosity could become clutter fatigue.
 Open question: Does the game assemble these fragments without requiring a datapoint sweep, and does the speech-like marker become readable through repetition?
-Stop state: Session open in `A Gift from the Past`, inside the branching corpse-filled ruin after the record Daniel identified as `Skyler`.
+Stop state: Session closed after Aloy emerged from the underground ruin and returned to Rost.
+
+## HZD-S04 | 2026-08-20 | first machine survival tutorial / local Steam build 8040161
+
+Milestone: The review moved from old-world exploration into medicine, map, stealth, machine distraction, looting, and crafting.
+Session: open | Total captured: prior duration plus current session, exact total unknown | Mode: solo / blind
+Difficulty: Normal; no change reported
+Micro: Clarity 3 · Combat 2 · Mystery 3 · Agency 2 · Fatigue ? · Desire 3
+Observation: The medicine pouch and map read clearly, and the map earned a positive visual response. The first Watcher-like encounter immediately raised stronger questions than the tutorial answered: Daniel challenged thermal detection, animal-shaped ground machines, likely radio or digital communication, and the absence of an obvious alert when one unit went offline.
+Evidence refs: HZD-RAW-016
+Axis delta: Machine Hunting and Combat opens with evidence for readable visibility, distraction, looting, and crafting, but with a strong negative world-logic challenge. Presentation gains a small map-readability positive. Difficulty Fairness remains untested because Daniel has not yet reported a player-controlled fight, failure, or retry.
+Counterevidence: The drone objection assumes these machines are optimized military systems, which the game has not established. The tutorial is teaching a local sensory model, while the machines' origin, intended function, sensing limits, and communication architecture remain unrevealed.
+Open question: Does later gameplay and lore earn the animal forms and local alert behavior, and does player-controlled hunting become tactically expressive rather than mechanically convenient?
+Stop state: Session open after the first rock-distraction and close-range machine-kill demonstration, with looting and crafting being introduced.

@@ -1,16 +1,16 @@
 # Horizon Zero Dawn: HZD-S03 Focus Laboratory
 
-Status: **OPEN**
+Status: **CLOSED**
 
 - Opened: 2026-08-20 10:54 Europe/Budapest
-- Closed: not yet
+- Closed: 2026-08-20 17:17 Europe/Budapest; the transition was reported after it occurred, so the exact in-game boundary time is unavailable
 - Starting state: immediately after taking the unidentified object in the childhood underground ruin
-- Ending state: not yet
+- Ending state: emerged from the underground ruin and returned to the adult guardian, identified spoiler-free as Rost
 - Difficulty: Normal; no change reported
 - Mode: solo / blind / story-first
 - Raw intake IDs: HZD-RAW-013 through HZD-RAW-015
 - Screenshot IDs: HZD-IMG-005, HZD-IMG-011
-- Remote sync: pending current checkpoint
+- Remote sync: closing checkpoint included in the 2026-08-20 remote sync
 
 ## Chronological checkpoints
 
@@ -64,4 +64,4 @@ Status: **OPEN**
 
 ## Next safe resume point
 
-Continue `A Gift from the Past` through the branching ruin. Listen to records encountered naturally without sweeping every corridor for completion, and test whether later context assembles the fragments clearly enough. Record whether the speech-like marker remains confusing and whether FOV 100 stays comfortable outside the ruin.
+Resume with HZD-S04 after the return to Rost. Preserve the unanswered testimony and interface questions, but do not carry the underground ruin forward as an open session.

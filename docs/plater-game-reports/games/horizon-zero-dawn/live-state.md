@@ -1,10 +1,10 @@
 # Horizon Zero Dawn — Live State
 
-Last durable update: **2026-08-20 16:55 Europe/Budapest, first audio and hologram testimony cluster discovered**
-Current phase: **PLAYTHROUGH: A GIFT FROM THE PAST / FIND A WAY OUT**
-Current session: **HZD-S03 OPEN**
-Next raw intake: **HZD-RAW-016**
-Next structured session: **HZD-S04 after HZD-S03 closes**
+Last durable update: **2026-08-20 17:17 Europe/Budapest, first machine survival tutorial and logic critique captured**
+Current phase: **PLAYTHROUGH: CHILDHOOD MACHINE SURVIVAL TUTORIAL**
+Current session: **HZD-S04 OPEN**
+Next raw intake: **HZD-RAW-017**
+Next structured session: **HZD-S05 after HZD-S04 closes**
 Verdict state: **LOCKED**
 Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
 Dashboard mode: **REVIEW COMPLETION; re-render after every material progress change or explicit request**
@@ -12,10 +12,10 @@ Dashboard mode: **REVIEW COMPLETION; re-render after every material progress cha
 ## Progress readback
 
 ```text
-Review completion   [>---------] ~1%  OPENING EVIDENCE ONLY
-Story coverage      [>---------] ~2%  PROLOGUE ESTIMATE
+Review completion   [>---------] ~2%  EARLY TUTORIAL EVIDENCE
+Story coverage      [>---------] ~3%  CHILDHOOD TUTORIAL ESTIMATE
 Capture to date     [##########] 100% OF RECEIVED COMMENTARY LOGGED
-Critical axes       [##--------] 2/10 OPENED; 0/10 VERDICT-READY
+Critical axes       [###-------] 3/10 OPENED; 0/10 VERDICT-READY
 Asset evidence      [#---------] 1/10 INITIAL SLOTS; 2 FILES ACCEPTED
 Final review card   [----------] LOCKED UNTIL CREDITS
 Optional mastery    [----------] OUTSIDE MAIN GOAL
@@ -35,7 +35,7 @@ Setup readiness is not gameplay progress.
 - The official Complete Edition content list includes The Frozen Wilds.
 - Steam currently lists 79 achievements, including New Game+ and New Game+ Ultra Hard completion.
 - A 2021-12-25 save set exists: ten autosaves, three populated quicksaves, and one populated manual save.
-- The current profile is configured for 3840x2160 fullscreen, DLSS Quality, Ultra presets, FOV 70, Motion Blur on, VSync off.
+- The preflight profile snapshot was configured for 3840x2160 fullscreen, DLSS Quality, Ultra presets, FOV 70, Motion Blur on, and VSync off; the later live profile changed.
 - Local hardware is an RTX 4070 Ti SUPER, Ryzen 9 3900X, and 64 GiB RAM; a stable 60 FPS benchmark remains the practical gate.
 - Daniel perceived the first load as slow; recurrence and cause are not yet known.
 - The opening's nature-reclaimed old-world / tribal-humanity premise prompted immediate curiosity and a clarification question.
@@ -54,6 +54,12 @@ Setup readiness is not gameplay progress.
 - The records raised specific questions about a community room, medication, personal regret, Machu Picchu, Owen, and why the people died. Daniel did not yet understand the causal picture, but continued investigating.
 - A speech-like marker did not clearly identify an interaction target. This is provisional interface friction, not yet a recurring fault.
 - The review route requires naturally encountered narrative records, not an exhaustive datapoint sweep.
+- HZD-S03 closed after the underground ruin, and its provisional processed-journal entry is complete.
+- The adult guardian is Rost; the Nora are a present-world tribe living in and guarding the region, not yet evidence of continuity with the old-world facility.
+- The medicine pouch restored health and produced the positive reaction `nice`; the map opened with `M` and looked good.
+- The first machine tutorial introduced a visibility indicator, a herd, gathering, rock distraction, a close-range kill demonstration, machine looting, and crafting.
+- Machine Hunting and Combat is now the third opened review axis. No player-controlled combat verdict or difficulty-fairness evidence exists yet.
+- Daniel raised a direct world-logic challenge concerning thermal sensing, ground machines versus aerial drones, likely radio or digital communication, and absent offline-unit reporting.
 
 ## Still unconfirmed
 
@@ -65,7 +71,9 @@ Setup readiness is not gameplay progress.
 - Complete the spoiler-safe missable audit after the first blind credits unless a pre-run warning proves necessary.
 - Determine whether the fragmented testimony assembles coherently without exhaustive scanning.
 - Determine whether the unclear speech-like marker recurs or becomes readable through repetition.
+- Determine whether the roll-control problem recurs and identify the exact input or camera issue if it does.
+- Determine whether machine purpose, sensing, communication, and herd behavior later answer the first world-logic challenge.
 
 ## Next legal action
 
-Continue HZD-S03 through the branching ruin and record the next substantive observation as `HZD-RAW-016`. Preserve silent dictation mode. Listen to records encountered naturally without sweeping the area for completion, and watch whether later context assembles the testimony. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.
+Continue HZD-S04 through the childhood machine tutorial and record the next substantive observation as `HZD-RAW-017`. Preserve silent dictation mode. Capture Daniel's first player-controlled machine attack, any roll-control recurrence, and evidence for or against the machines' sensor and network logic. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

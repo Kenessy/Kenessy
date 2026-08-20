@@ -1,6 +1,6 @@
 # Horizon Zero Dawn — Processed Playthrough Draft
 
-Status: **Live draft / opening session converted provisionally**
+Status: **Live draft / sessions 1-3 converted provisionally**
 
 This file becomes the readable illustrated journey. It is derived from `raw-capture.md`, `session-log.md`, and accepted image evidence; it is never the sole source of truth.
 
@@ -22,10 +22,22 @@ A következő rövid szakasz egyetlen testre és a rajta lévő ismeretlen tárg
 
 Vázlatforrás: HZD-RAW-010 és HZD-S02. A tárgy kiléte és funkciója nincs előreértelmezve.
 
+## Session 3: A Focus egyszerre szkenner, kulcs és archívum
+
+A rom hátralévő része három külön szerepet adott a Focusnak. Először Eagle Vision-szerű vizuális rétegként jelent meg, majd egy ajtó forgatási mintáját mutatta meg, végül régi audio- és hologramfelvételeket olvasott vissza. A legerősebb pozitívum továbbra is maga a helyszín maradt: a rég elhagyott laboratórium, a kő, a víz és a lila vetítések együtt `jól megcsinált` pályát adtak.
+
+A Focus kezelhetősége már vegyesebb képet mutatott. A minimum FOV rossznak érződött, a maximum javított rajta, egy beszédszerű ikon célpontja pedig nem volt egyértelmű. Az ajtó mintája könnyen követhető volt, de ettől még nyitva marad, hogy a későbbi interakciók valódi megfigyelést kérnek-e, vagy mindig megjelenítik a választ.
+
+A testekhez kapcsolódó töredékek nem adtak kész magyarázatot. Daniel többször jelezte, hogy nem érti, mi történt, ugyanakkor ugyanazt kérdezte, amit Aloy: miért haltak meg ezek az emberek? A zavar ezért még nem elutasítás, hanem aktív kíváncsiság. Negatívvá akkor válik, ha a történet csak kényszeres adatpont-kereséssel képes összeállni.
+
+Vázlatforrás: HZD-RAW-013-tól HZD-RAW-015-ig, HZD-IMG-005, HZD-IMG-011 és HZD-S03. A halálok, a gépek eredete és a felvételek teljes jelentése nincs előreértelmezve.
+
 ## Session conversion queue
 
 - HZD-S01: provisional opening conversion complete
 - HZD-S02: provisional opening conversion complete
+- HZD-S03: provisional Focus-laboratory conversion complete
+- HZD-S04: open; conversion pending session close
 - Credits synthesis: pending
 - Frozen Wilds synthesis: pending
 - Optional mastery appendix: deferred

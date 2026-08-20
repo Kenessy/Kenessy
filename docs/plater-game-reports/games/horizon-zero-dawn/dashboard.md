@@ -1,17 +1,17 @@
 # Horizon Zero Dawn: Review-Completion Dashboard
 
-Current checkpoint: A Gift from the Past, branching ruin and testimony records, HZD-S03 open
+Current checkpoint: childhood survival tutorial, first machine contact, HZD-S04 open
 
 ```text
 +------------------------------------------------------------------------+
 | HORIZON ZERO DAWN: REVIEW-COMPLETION DASHBOARD                         |
 +------------------------------------------------------------------------+
-| REVIEW COMPLETE [>-------------------] ~1% | OPENING EVIDENCE ONLY     |
-| STORY COVERAGE  [>-------------------] ~2% | PROLOGUE | NORMAL / BLIND |
+| REVIEW COMPLETE [>-------------------] ~2% | OPENING EVIDENCE ONLY     |
+| STORY COVERAGE  [>-------------------] ~3% | TUTORIAL | NORMAL / BLIND |
 | CAPTURE TO DATE [####################] 100% | RECEIVED NOTES ARE LOGGED|
-| AXIS COVERAGE   [####----------------] 2/10 OPENED | 0 VERDICT-READY   |
+| AXIS COVERAGE   [######--------------] 3/10 OPENED | 0 VERDICT-READY   |
 | ASSET EVIDENCE  [##------------------] 1/10 SLOTS | 2 FILES ACCEPTED   |
-| JOURNAL         [>-------------------] S01 + S02 DRAFTS | S03 LIVE     |
+| JOURNAL         [>-------------------] S01-S03 DRAFTS | S04 LIVE       |
 | FINAL CARD      [--------------------] LOCKED UNTIL CREDITS            |
 +------------------------------------------------------------------------+
 | REQUIRED FOR 100% REVIEW                                               |
@@ -26,7 +26,7 @@ Current checkpoint: A Gift from the Past, branching ruin and testimony records, 
 +------------------------------------------------------------------------+
 | CRITICAL AXES                                                          |
 | [>] World mystery / lore       [>] Presentation / technical            |
-| [ ] Aloy / characters          [ ] Machine hunting / combat            |
+| [ ] Aloy / characters          [>] Machine hunting / combat            |
 | [ ] Roleplay / agency          [ ] Quest quality                       |
 | [ ] Open-world friction        [ ] Difficulty fairness                 |
 | [ ] Completion shape           [ ] Summer immersion / return desire    |
@@ -40,7 +40,7 @@ Current checkpoint: A Gift from the Past, branching ruin and testimony records, 
 
 The primary bar measures the review project: 35% base-game story and narration, 10% Frozen Wilds and narration, 25% verdict-ready critical axes, 10% processed journal and spoiler audit, 5% visual evidence, 7% final PLATER card and score, and 8% adversarial audit plus verified publish readback.
 
-The current rounded value is approximately 1%. Capture-to-date is separately 100% because every received play observation has been logged, but that coverage guard cannot inflate total review completion.
+The current rounded value is approximately 2%. The early story estimate, three provisionally processed sessions, and initial visual evidence explain that value; no critical axis is verdict-ready. Capture-to-date is separately 100% because every received play observation has been logged, but that coverage guard cannot inflate total review completion.
 
 ## Refresh rule
 

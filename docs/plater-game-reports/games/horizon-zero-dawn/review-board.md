@@ -12,7 +12,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 |---|---|---|---|
 | World mystery | Curiosity, coherent reveals, rewarding environmental/story clues | Predictable answers, exposition without payoff | Strengthening opening positive |
 | Aloy and characters | Emotional investment, memorable relationships, credible growth | Thin interactions, weak dialogue, detachment | Untested |
-| Machine hunting | Readable weaknesses, preparation, expressive tools, satisfying component removal | Repetitive kiting, stun-locks, ammo chores | Untested |
+| Machine hunting | Readable weaknesses, preparation, expressive tools, satisfying component removal | Repetitive kiting, stun-locks, ammo chores | Opened: tutorial / logic challenged |
 | Roleplay and agency | Choices or quest responses that feel meaningfully authored by the player | Mostly cosmetic dialogue and fixed outcomes | Untested |
 | Quest quality | Side content strengthens characters, world, or themes | Map filler and interchangeable errands | Untested |
 | Open-world friction | Exploration creates discovery and useful detours | Icon clearing, traversal friction, inventory busywork | Untested |
@@ -21,7 +21,7 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 | Completion shape | Cleanup remains legible and optional until mastery is chosen | Repetition or challenge modes poison the review run | Preflight only |
 | Summer immersion fit | Desire to return, long-session comfort, memorable world presence | Fatigue, boredom, obligation feeling | Untested |
 
-## Live evidence: HZD-S01 through HZD-S03 opening
+## Live evidence: HZD-S01 through HZD-S04 opening
 
 - World mystery: the nature-reclaimed old-world / tribal-humanity premise prompted an immediate clarification question. This is a positive curiosity signal, not yet a verdict on reveal quality.
 - Technical comfort: the first New Game load felt slow. Keep this provisional unless it recurs during ordinary loading or is joined by frame-pacing problems.
@@ -34,6 +34,9 @@ Rule: scores remain blank until the relevant axis has repeated gameplay evidence
 - Focus-led interaction: the Focus highlighted moving rats and displayed a shape connected to a locked door. Daniel used the adjacent rotational control and the door opened, providing the first evidence that the Focus participates in navigation and interaction rather than only adding atmosphere. The counterevidence is immediate: the solution was displayed in a tutorial area, so mechanical depth remains unproven.
 - Fragmented testimony: the first corpse-associated audio and hologram records mentioned a community room, medication, personal regret, Machu Picchu, and Owen. Daniel did not understand the causal picture, but his repeated questions about why the people died show that the mystery is still pulling him forward. This becomes negative evidence if the story requires exhaustive optional scanning or never turns the fragments into a coherent answer.
 - Interface clarity: one speech-like marker appeared non-interactive and did not identify its source. Daniel recovered by scanning other bodies or nearby sources, but recurrence would turn this from a tutorial ambiguity into UI friction.
+- Survival interface: consuming medicine restored health and read immediately; the map opened with `M` and earned a positive visual reaction.
+- Machine-sensory logic: the first blue-eyed, camera-faced, raptor-like machine prompted immediate skepticism about thermal detection, aerial drones, radio or digital coordination, and offline-unit reporting. This is a valid worldbuilding falsifier, not a settled contradiction, because the machines' origin and intended role remain unknown.
+- First hunting grammar: the tutorial exposed visibility, plant and stone gathering, rock distraction, a close-range kill, looting, and crafting. It opens the Machine Hunting axis, but does not yet show Daniel's own combat expression or difficulty fairness.
 
 ## Pre-run hypotheses
 
@@ -49,8 +52,8 @@ The lost-world mystery will be the main narrative engine, closer to the archaeol
 
 Scanning, elemental tools, traps, stealth, and component targeting will make difficulty feel solvable rather than punitive.
 
-- Evidence for: game-system preflight only; no Daniel gameplay evidence.
-- Evidence against: Daniel specifically dislikes swarm-heavy difficulty spikes.
+- Evidence for: the visibility indicator, rock distraction, close-range kill demonstration, looting, and crafting introduced a readable preparation grammar without a retry wall.
+- Evidence against: Daniel specifically dislikes swarm-heavy difficulty spikes, and the first kill already looked implausibly isolated from any network-wide machine response.
 - Falsifier: repeated encounters collapse into unavoidable mob pressure or long retry walls even after preparation and setting adjustment.
 
 ### H3 — Roleplay gap
