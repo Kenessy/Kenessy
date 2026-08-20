@@ -45,6 +45,7 @@ Rule: images prove the experience; they do not exist only as decoration. Every a
 - What it proves: the Focus overlays purple projected elements across an abandoned laboratory structure that has merged with rock, water, vegetation, and wildlife. It supports Daniel's positive level-design reaction without identifying the old-world displays beyond what is visible.
 - Public candidate: yes, pending later caption and HUD decision
 - Integrity: source and preserved-file SHA-256 matched exactly at intake
+- Repository integrity correction: the first screenshot checkpoint was incorrectly processed by the repository's broad text-normalization rule and is not valid image evidence. A follow-up added `/docs/plater-game-reports/**/*.png binary`; the current committed Git blob now matches the raw working-file blob, and the preserved PNG still matches the source SHA-256 above. The intermediate checkpoint remains in history as invalid evidence rather than being hidden.
 
 ## Intake template
 
