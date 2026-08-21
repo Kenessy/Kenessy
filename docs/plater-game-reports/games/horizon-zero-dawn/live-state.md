@@ -1,0 +1,79 @@
+# Horizon Zero Dawn — Live State
+
+Last durable update: **2026-08-20 17:17 Europe/Budapest, first machine survival tutorial and logic critique captured**
+Current phase: **PLAYTHROUGH: CHILDHOOD MACHINE SURVIVAL TUTORIAL**
+Current session: **HZD-S04 OPEN**
+Next raw intake: **HZD-RAW-017**
+Next structured session: **HZD-S05 after HZD-S04 closes**
+Verdict state: **LOCKED**
+Voice response mode: **SILENT CAPTURE unless explicit question / urgent risk / time-sensitive decision**
+Dashboard mode: **REVIEW COMPLETION; re-render after every material progress change or explicit request**
+
+## Progress readback
+
+```text
+Review completion   [>---------] ~2%  EARLY TUTORIAL EVIDENCE
+Story coverage      [>---------] ~3%  CHILDHOOD TUTORIAL ESTIMATE
+Capture to date     [##########] 100% OF RECEIVED COMMENTARY LOGGED
+Critical axes       [###-------] 3/10 OPENED; 0/10 VERDICT-READY
+Asset evidence      [#---------] 1/10 INITIAL SLOTS; 2 FILES ACCEPTED
+Final review card   [----------] LOCKED UNTIL CREDITS
+Optional mastery    [----------] OUTSIDE MAIN GOAL
+```
+
+Setup readiness is not gameplay progress.
+
+## Confirmed now
+
+- The Complete Edition is present in the 2026-08-19 Steam-library snapshot.
+- The snapshot recorded 117 minutes and 0/79 Steam achievements.
+- The intended first run is solo, blind, story-first, and not Ultra Hard.
+- New Game has been started on Normal.
+- Voice-mode notes have a durable append-only destination.
+- Co-op is not part of the intended completion contract.
+- Local Steam manifest is present at the `G:` library with `StateFlags=4`, build `8040161`, and the Complete Edition app name.
+- The official Complete Edition content list includes The Frozen Wilds.
+- Steam currently lists 79 achievements, including New Game+ and New Game+ Ultra Hard completion.
+- A 2021-12-25 save set exists: ten autosaves, three populated quicksaves, and one populated manual save.
+- The preflight profile snapshot was configured for 3840x2160 fullscreen, DLSS Quality, Ultra presets, FOV 70, Motion Blur on, and VSync off; the later live profile changed.
+- Local hardware is an RTX 4070 Ti SUPER, Ryzen 9 3900X, and 64 GiB RAM; a stable 60 FPS benchmark remains the practical gate.
+- Daniel perceived the first load as slow; recurrence and cause are not yet known.
+- The opening's nature-reclaimed old-world / tribal-humanity premise prompted immediate curiosity and a clarification question.
+- The childhood cave/ruin opening initially registered as `elég fura`; the later cave-to-laboratory reaction clarified that signal in a conditionally positive direction.
+- Daniel switched the live session to dictation mode: ordinary observations are recorded without spoken acknowledgements.
+- Within the same opening, the cave-to-laboratory transition became `egész érdekes`, with a conditional positive reaction to seeing more environments built from rock and old technology merging together.
+- A spotlight-like visual focus isolated a corpse and the object taken from it; the discovery produced the strongest explicit positive reaction so far, `marha érdekes`.
+- A persistent ASCII completionist dashboard is now part of the live capture protocol. Verified achievement percentage and estimated story position are kept separate.
+- Dashboard correction: its primary percentage now measures the completeness of our review project. Steam achievements, New Game+, and Ultra Hard do not advance that percentage and remain optional after review completion.
+- The Focus view prompted an Eagle Vision comparison. Daniel likes the abandoned-laboratory level design, while the identity of its projected computer-like displays remains deliberately unresolved.
+- Daniel changed FOV from the minimum to the maximum. Local profile readback confirmed `FieldOfView=100`, the official configuration range `70-100`, `MotionBlur=True`, and current fullscreen resolution `2560x1440`.
+- HZD-IMG-005 is the first accepted screenshot evidence: a 2560x1440 Focus-view image from `A Gift from the Past`, preserved byte-identically in the review folder.
+- The Focus highlighted moving rats and displayed a shape connected to the first locked door. Daniel used the adjacent clockwise/counterclockwise control with that shape as reference, and the door opened without reported frustration.
+- HZD-IMG-011 is a second byte-identical 2560x1440 evidence file. It captures the clue state but not the narrated door-opening result, and it supplements the existing old-world mystery slot instead of inflating planned-slot coverage.
+- Beyond the first door, a branching corpse-filled ruin introduced audio and hologram records that Daniel accessed by scanning bodies or nearby data sources.
+- The records raised specific questions about a community room, medication, personal regret, Machu Picchu, Owen, and why the people died. Daniel did not yet understand the causal picture, but continued investigating.
+- A speech-like marker did not clearly identify an interaction target. This is provisional interface friction, not yet a recurring fault.
+- The review route requires naturally encountered narrative records, not an exhaustive datapoint sweep.
+- HZD-S03 closed after the underground ruin, and its provisional processed-journal entry is complete.
+- The adult guardian is Rost; the Nora are a present-world tribe living in and guarding the region, not yet evidence of continuity with the old-world facility.
+- The medicine pouch restored health and produced the positive reaction `nice`; the map opened with `M` and looked good.
+- The first machine tutorial introduced a visibility indicator, a herd, gathering, rock distraction, a close-range kill demonstration, machine looting, and crafting.
+- Machine Hunting and Combat is now the third opened review axis. No player-controlled combat verdict or difficulty-fairness evidence exists yet.
+- Daniel raised a direct world-logic challenge concerning thermal sensing, ground machines versus aerial drones, likely radio or digital communication, and absent offline-unit reporting.
+
+## Still unconfirmed
+
+- Confirm subtitles, dynamic/default HUD, and Steam overlay.
+- Run the built-in benchmark or verify stable 60 FPS during the opening.
+- Decide whether the current 2560x1440 resolution is intentional; the earlier preflight read 3840x2160.
+- Decide whether Motion Blur stays on; it remains enabled, while the recommendation is off for clarity and screenshots.
+- Confirm Steam Cloud status in the live client.
+- Complete the spoiler-safe missable audit after the first blind credits unless a pre-run warning proves necessary.
+- Determine whether the fragmented testimony assembles coherently without exhaustive scanning.
+- Determine whether the unclear speech-like marker recurs or becomes readable through repetition.
+- Determine whether the roll-control problem recurs and identify the exact input or camera issue if it does.
+- Determine whether machine purpose, sensing, communication, and herd behavior later answer the first world-logic challenge.
+
+## Next legal action
+
+Continue HZD-S04 through the childhood machine tutorial and record the next substantive observation as `HZD-RAW-017`. Preserve silent dictation mode. Capture Daniel's first player-controlled machine attack, any roll-control recurrence, and evidence for or against the machines' sensor and network logic. Keep FOV at 100 unless the wider view becomes distorted, consider disabling Motion Blur for clarity, confirm whether 2560x1440 is intentional, and create a new manual save at the first safe campfire without overwriting the 2021 `manualsave0` slot.

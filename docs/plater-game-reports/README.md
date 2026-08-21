@@ -12,6 +12,7 @@ Static PLATER verdict reports and working folders for Steam Completions review a
 ## Working / Draft Folders
 
 - [The Invincible](games/the-invincible/) — pre-run Steam Completions setup, raw capture, session log, review board, processed playthrough scaffold, AI decision dataset, and asset plan.
+- [Horizon Zero Dawn](games/horizon-zero-dawn/) — voice-mode scratch space, append-only raw capture, live session state, review evidence board, processed playthrough draft, completion ledger, and screenshot plan.
 
 ## Structure
 
